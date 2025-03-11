@@ -1,0 +1,41 @@
+{
+  "name": "toremock",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.8.0",
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.4.1",
+    "@stripe/react-stripe-js": "^3.3.0",
+    "@stripe/stripe-js": "^5.10.0",
+    "@types/bcryptjs": "^2.4.6",
+    "bcrypt": "^5.1.1",
+    "bcryptjs": "^3.0.2",
+    "framer-motion": "^12.4.10",
+    "next": "15.2.1",
+    "next-auth": "^4.24.11",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "stripe": "^17.7.0"
+  },
+  "devDependencies": {
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/bcrypt": "^5.0.2",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "15.2.1",
+    "prisma": "^6.4.1",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}
