@@ -139,7 +139,7 @@ export default function Home() {
                       <p className="text-sm text-gray-500">{testimonial.title}</p>
                     </div>
                   </div>
-                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
+                  <p className="text-gray-600 italic">&ldquo;{testimonial.quote}&rdquo;</p>
                 </motion.div>
               ))}
             </div>
