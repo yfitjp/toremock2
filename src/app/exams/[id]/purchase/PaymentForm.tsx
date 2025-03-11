@@ -53,10 +53,15 @@ export default function PaymentForm({ examId, price, clientSecret }: PaymentForm
       } else if (paymentIntent.status === 'succeeded') {
         setSucceeded(true);
         setMessage('支払いが完了しました');
-        router.push(`/exams/${examId}/purchase/success?examId=${examId}`);
       }
       */
-    } catch (error) {
+      
+      // デモ用に成功状態を設定
+      setTimeout(() => {
+        setSucceeded(true);
+      }, 1000);
+      
+    } catch (err) {
       setMessage('支払い処理中にエラーが発生しました');
     } finally {
       setLoading(false);

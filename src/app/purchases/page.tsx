@@ -21,25 +21,30 @@ export default function PurchasesPage() {
     // 模擬的なデータ取得
     // 実際のアプリケーションではAPIからデータを取得します
     setTimeout(() => {
-      setPurchases([
-        {
-          id: '1',
-          examId: '1',
-          examTitle: 'TOEIC® L&R 模試 Vol.1',
-          purchaseDate: '2023-05-15',
-          expiryDate: '2024-05-15',
-          status: 'active',
-        },
-        {
-          id: '2',
-          examId: '2',
-          examTitle: 'TOEIC® L&R 模試 Vol.2',
-          purchaseDate: '2023-04-10',
-          expiryDate: '2024-04-10',
-          status: 'active',
-        },
-      ]);
-      setLoading(false);
+      try {
+        setPurchases([
+          {
+            id: '1',
+            examId: '1',
+            examTitle: 'TOEIC® L&R 模試 Vol.1',
+            purchaseDate: '2023-05-15',
+            expiryDate: '2024-05-15',
+            status: 'active',
+          },
+          {
+            id: '2',
+            examId: '2',
+            examTitle: 'TOEIC® L&R 模試 Vol.2',
+            purchaseDate: '2023-04-10',
+            expiryDate: '2024-04-10',
+            status: 'active',
+          },
+        ]);
+      } catch (err) {
+        setErrorMessage('購入履歴の取得中にエラーが発生しました');
+      } finally {
+        setLoading(false);
+      }
     }, 500);
   }, []);
 

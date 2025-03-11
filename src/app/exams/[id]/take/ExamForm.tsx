@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface Question {
@@ -22,44 +22,8 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
-  // タイマー処理
-  useEffect(() => {
-    if (timeLeft <= 0 || isFinished) return;
-
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, [timeLeft, isFinished]);
-
-  // 時間切れの場合、自動的に提出
-  useEffect(() => {
-    if (timeLeft <= 0 && !isFinished) {
-      handleSubmit();
-    }
-  }, [timeLeft, isFinished]);
-
-  const handleAnswerSelect = (questionId: number, optionIndex: number) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionIndex,
-    }));
-  };
-
-  const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
-    }
-  };
-
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
-    }
-  };
-
-  const handleSubmit = async () => {
+  // handleSubmit関数をuseCallbackでメモ化
+  const handleSubmit = useCallback(async () => {
     if (isSubmitting) return;
 
     setIsSubmitting(true);
@@ -84,13 +48,50 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     } finally {
       setIsSubmitting(false);
     }
+  }, [answers, examId, isSubmitting, router]);
+
+  // タイマー処理
+  useEffect(() => {
+    if (timeLeft <= 0 || isFinished) return;
+
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => prev - 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [timeLeft, isFinished]);
+
+  // 時間切れの場合、自動的に提出
+  useEffect(() => {
+    if (timeLeft <= 0 && !isFinished) {
+      handleSubmit();
+    }
+  }, [timeLeft, isFinished, handleSubmit]);
+
+  const handleAnswerSelect = (questionId: number, optionIndex: number) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: optionIndex,
+    }));
+  };
+
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex((prev) => prev - 1);
+    }
   };
 
   // 模擬的なスコア計算（実際はサーバーサイドで計算）
   const calculateScore = () => {
     // 簡易的な採点（正解は常に最初の選択肢と仮定）
     const correctAnswers = Object.entries(answers).filter(
-      ([questionId, answer]) => answer === 0
+      ([_, answer]) => answer === 0
     ).length;
     
     return Math.round((correctAnswers / questions.length) * 100);

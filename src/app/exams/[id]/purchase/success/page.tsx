@@ -2,11 +2,10 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { useParams, useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 
 export default function PurchaseSuccessPage() {
   const params = useParams();
-  const searchParams = useSearchParams();
   const examId = params.id as string;
   const [exam, setExam] = useState<{ title: string } | null>(null);
   const [loading, setLoading] = useState(true);
