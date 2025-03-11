@@ -5,6 +5,16 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
+// 型定義を追加
+interface Purchase {
+  id: string;
+  examId: string;
+  examTitle: string;
+  purchaseDate: string;
+  expiryDate: string;
+  status: 'active' | 'expired';
+}
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -16,18 +26,9 @@ export async function GET() {
       );
     }
 
+    // ユーザーの取得
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
-      include: {
-        purchases: {
-          include: {
-            exam: true,
-          },
-          orderBy: {
-            createdAt: 'desc',
-          },
-        },
-      },
     });
 
     if (!user) {
@@ -37,11 +38,29 @@ export async function GET() {
       );
     }
 
-    return NextResponse.json({
-      purchases: user.purchases,
-    });
+    // 模擬的な購入データ
+    const purchases: Purchase[] = [
+      {
+        id: '1',
+        examId: '1',
+        examTitle: 'TOEIC® L&R 模試 Vol.1',
+        purchaseDate: '2023-05-15',
+        expiryDate: '2024-05-15',
+        status: 'active',
+      },
+      {
+        id: '2',
+        examId: '2',
+        examTitle: 'TOEIC® L&R 模試 Vol.2',
+        purchaseDate: '2023-04-10',
+        expiryDate: '2024-04-10',
+        status: 'active',
+      },
+    ];
+
+    return NextResponse.json(purchases);
   } catch (error) {
-    console.error('Purchases fetch error:', error);
+    console.error('Purchases error:', error);
     return NextResponse.json(
       { message: '購入履歴の取得中にエラーが発生しました。' },
       { status: 500 }

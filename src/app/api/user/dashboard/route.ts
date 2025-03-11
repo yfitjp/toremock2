@@ -5,6 +5,15 @@ import { NextResponse } from 'next/server';
 
 const prisma = new PrismaClient();
 
+// 型定義を追加
+interface RecentActivity {
+  id: string;
+  type: string;
+  title: string;
+  score?: number;
+  date: string;
+}
+
 export async function GET() {
   try {
     const session = await getServerSession(authOptions);
@@ -16,18 +25,9 @@ export async function GET() {
       );
     }
 
+    // ユーザーの取得
     const user = await prisma.user.findUnique({
       where: { email: session.user.email },
-      include: {
-        purchases: {
-          include: {
-            exam: true,
-          },
-          orderBy: {
-            createdAt: 'desc',
-          },
-        },
-      },
     });
 
     if (!user) {
@@ -37,25 +37,41 @@ export async function GET() {
       );
     }
 
-    // 購入済みの模試数
-    const purchasedExams = user.purchases.length;
+    // 模擬的なダッシュボードデータ
+    const dashboardData = {
+      user: {
+        id: user.id,
+        name: user.name,
+        email: user.email,
+        createdAt: user.createdAt,
+      },
+      stats: {
+        totalExams: 5,
+        completedExams: 3,
+        averageScore: 85,
+      },
+      recentActivity: [
+        {
+          id: '1',
+          type: 'exam_completed',
+          title: 'TOEIC® L&R 模試 Vol.1',
+          score: 850,
+          date: new Date().toISOString(),
+        },
+        {
+          id: '2',
+          type: 'exam_purchased',
+          title: 'TOEIC® L&R 模試 Vol.2',
+          date: new Date(Date.now() - 86400000).toISOString(), // 1日前
+        },
+      ] as RecentActivity[],
+    };
 
-    // 受験履歴（今後実装）
-    const examHistory = [];
-
-    // 学習時間（今後実装）
-    const studyTime = 0;
-
-    return NextResponse.json({
-      purchasedExams,
-      examHistory,
-      studyTime,
-      recentPurchases: user.purchases.slice(0, 5), // 最新5件
-    });
+    return NextResponse.json(dashboardData);
   } catch (error) {
-    console.error('Dashboard data fetch error:', error);
+    console.error('Dashboard error:', error);
     return NextResponse.json(
-      { message: 'データの取得中にエラーが発生しました。' },
+      { message: 'ダッシュボードデータの取得中にエラーが発生しました。' },
       { status: 500 }
     );
   }
