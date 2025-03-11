@@ -1,85 +1,146 @@
 'use client';
 
-import { useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import Link from 'next/link';
+
+interface Purchase {
+  id: string;
+  examId: string;
+  examTitle: string;
+  purchaseDate: string;
+  expiryDate: string;
+  status: 'active' | 'expired';
+}
 
 export default function PurchasesPage() {
-  const { data: session, status } = useSession();
-  const router = useRouter();
+  const [purchases, setPurchases] = useState<Purchase[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    if (status === 'unauthenticated') {
-      router.push('/auth/login');
-    }
-  }, [status, router]);
+    // 模擬的なデータ取得
+    // 実際のアプリケーションではAPIからデータを取得します
+    setTimeout(() => {
+      setPurchases([
+        {
+          id: '1',
+          examId: '1',
+          examTitle: 'TOEIC® L&R 模試 Vol.1',
+          purchaseDate: '2023-05-15',
+          expiryDate: '2024-05-15',
+          status: 'active',
+        },
+        {
+          id: '2',
+          examId: '2',
+          examTitle: 'TOEIC® L&R 模試 Vol.2',
+          purchaseDate: '2023-04-10',
+          expiryDate: '2024-04-10',
+          status: 'active',
+        },
+      ]);
+      setLoading(false);
+    }, 500);
+  }, []);
 
-  if (status === 'loading') {
+  if (loading) {
     return (
-      <main className="min-h-screen bg-gray-50 pt-24 pb-12">
-        <div className="max-w-6xl mx-auto px-4">
-          <div className="animate-pulse space-y-4">
-            <div className="h-8 bg-gray-200 rounded w-1/4"></div>
-            <div className="h-32 bg-gray-200 rounded"></div>
-          </div>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (errorMessage) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+          {errorMessage}
         </div>
-      </main>
+      </div>
+    );
+  }
+
+  if (purchases.length === 0) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold mb-6">購入履歴</h1>
+        <div className="bg-white shadow-md rounded-lg p-6 text-center">
+          <p className="text-gray-600 mb-4">購入した模試はありません。</p>
+          <Link
+            href="/exams"
+            className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+          >
+            模試を探す
+          </Link>
+        </div>
+      </div>
     );
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 pt-24 pb-12">
-      <div className="max-w-6xl mx-auto px-4">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">購入履歴</h1>
-          <p className="mt-2 text-gray-600">
-            これまでに購入した模試の一覧です。
-          </p>
-        </div>
-
-        {/* 購入履歴一覧 */}
-        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
-          <div className="divide-y divide-gray-200">
-            {/* 履歴がない場合のメッセージ */}
-            <div className="p-6 text-center text-gray-500">
-              購入履歴はありません。
-              <a href="/exams" className="text-blue-600 hover:text-blue-700 ml-2">
-                模試を探す
-              </a>
-            </div>
-
-            {/* 履歴の例（データがある場合に表示） */}
-            {/*
-            <div className="p-6">
-              <div className="flex justify-between items-start">
-                <div>
-                  <h3 className="text-lg font-semibold text-gray-900">
-                    TOEIC模擬試験 Vol.1
-                  </h3>
-                  <p className="mt-1 text-sm text-gray-500">
-                    購入日: 2024年3月10日
-                  </p>
-                  <p className="mt-1 text-sm text-gray-500">
-                    ステータス: <span className="text-green-600">完了</span>
-                  </p>
-                </div>
-                <div className="text-right">
-                  <p className="text-lg font-semibold text-gray-900">
-                    ¥2,800
-                  </p>
-                  <a
-                    href="/exams/1"
-                    className="mt-2 inline-block text-sm text-blue-600 hover:text-blue-700"
-                  >
-                    受験する →
-                  </a>
-                </div>
-              </div>
-            </div>
-            */}
-          </div>
+    <div className="container mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6">購入履歴</h1>
+      
+      <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="overflow-x-auto">
+          <table className="min-w-full divide-y divide-gray-200">
+            <thead className="bg-gray-50">
+              <tr>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  模試名
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  購入日
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  有効期限
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  ステータス
+                </th>
+                <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  アクション
+                </th>
+              </tr>
+            </thead>
+            <tbody className="bg-white divide-y divide-gray-200">
+              {purchases.map((purchase) => (
+                <tr key={purchase.id}>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm font-medium text-gray-900">{purchase.examTitle}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">{purchase.purchaseDate}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="text-sm text-gray-500">{purchase.expiryDate}</div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                      purchase.status === 'active' 
+                        ? 'bg-green-100 text-green-800' 
+                        : 'bg-red-100 text-red-800'
+                    }`}>
+                      {purchase.status === 'active' ? '有効' : '期限切れ'}
+                    </span>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                    {purchase.status === 'active' && (
+                      <Link
+                        href={`/exams/${purchase.examId}/take`}
+                        className="text-blue-600 hover:text-blue-900"
+                      >
+                        受験する
+                      </Link>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       </div>
-    </main>
+    </div>
   );
 } 

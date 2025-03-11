@@ -41,7 +41,13 @@ export async function POST(request: Request) {
     });
 
     // パスワードを除外したユーザー情報を返す
-    const { password: _, ...userWithoutPassword } = user;
+    const userWithoutPassword = {
+      id: user.id,
+      name: user.name,
+      email: user.email,
+      createdAt: user.createdAt,
+      updatedAt: user.updatedAt
+    };
 
     return NextResponse.json(
       { message: 'ユーザーが正常に登録されました', user: userWithoutPassword },

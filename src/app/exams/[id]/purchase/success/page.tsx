@@ -1,89 +1,85 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { CheckCircleIcon } from '@heroicons/react/24/solid';
+import { useParams, useSearchParams } from 'next/navigation';
 
 export default function PurchaseSuccessPage() {
-  const router = useRouter();
+  const params = useParams();
   const searchParams = useSearchParams();
-  const [examTitle, setExamTitle] = useState<string>('');
+  const examId = params.id as string;
+  const [exam, setExam] = useState<{ title: string } | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const examId = searchParams.get('examId');
-    if (!examId) {
-      router.push('/exams');
-      return;
-    }
-
-    // 模試情報を取得
-    const fetchExamDetails = async () => {
-      try {
-        const response = await fetch(`/api/exams/${examId}`);
-        if (!response.ok) throw new Error('模試情報の取得に失敗しました');
-        const data = await response.json();
-        setExamTitle(data.title);
-      } catch (error) {
-        console.error('Error fetching exam details:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchExamDetails();
-  }, [searchParams, router]);
+    // 模擬的なデータ取得
+    // 実際のアプリケーションではAPIからデータを取得します
+    setTimeout(() => {
+      setExam({
+        title: 'TOEIC® L&R 模試 Vol.1',
+      });
+      setLoading(false);
+    }, 500);
+  }, []);
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (!exam) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+          試験情報の取得に失敗しました。
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto">
-        <div className="bg-white shadow rounded-lg p-8">
-          <div className="text-center">
-            <CheckCircleIcon className="mx-auto h-16 w-16 text-green-500" />
-            <h2 className="mt-4 text-2xl font-bold text-gray-900">
-              開発中の機能です
-            </h2>
-            <p className="mt-2 text-gray-600">
-              決済機能は現在開発中です。<br />
-              後日実装予定です。
-            </p>
+    <div className="container mx-auto px-4 py-8">
+      <div className="bg-white shadow-md rounded-lg p-8 max-w-2xl mx-auto text-center">
+        <div className="mb-6">
+          <div className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100">
+            <svg
+              className="h-8 w-8 text-green-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M5 13l4 4L19 7"
+              />
+            </svg>
           </div>
-
-          <div className="mt-8 space-y-4">
-            <div className="bg-gray-50 rounded-lg p-4">
-              <h3 className="text-lg font-medium text-gray-900">現在利用可能な機能</h3>
-              <ul className="mt-2 space-y-2 text-gray-600">
-                <li>• 模試一覧の閲覧</li>
-                <li>• 模試の詳細表示</li>
-                <li>• ユーザー登録・ログイン</li>
-                <li>• マイページの閲覧</li>
-              </ul>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link
-                href="/dashboard"
-                className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-              >
-                マイページへ
-              </Link>
-              <Link
-                href="/exams"
-                className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-              >
-                模試一覧へ
-              </Link>
-            </div>
-          </div>
+        </div>
+        
+        <h1 className="text-2xl font-bold mb-4">購入が完了しました！</h1>
+        <p className="text-gray-600 mb-6">
+          {exam.title} の購入が完了しました。マイページから受験を開始できます。
+        </p>
+        
+        <div className="flex flex-col space-y-4 sm:flex-row sm:space-y-0 sm:space-x-4 justify-center">
+          <Link
+            href={`/exams/${examId}/take`}
+            className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+          >
+            今すぐ受験する
+          </Link>
+          <Link
+            href="/mypage"
+            className="inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+          >
+            マイページへ
+          </Link>
         </div>
       </div>
     </div>

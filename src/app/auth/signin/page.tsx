@@ -2,21 +2,25 @@
 
 import { useState } from 'react';
 import { signIn } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 
 export default function SignInPage() {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+
+  // 新規登録後のリダイレクトの場合、メッセージを表示
+  const registered = searchParams.get('registered');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
+    setErrorMessage('');
 
     try {
       const result = await signIn('credentials', {
@@ -26,14 +30,14 @@ export default function SignInPage() {
       });
 
       if (result?.error) {
-        setError('メールアドレスまたはパスワードが正しくありません');
+        setErrorMessage('メールアドレスまたはパスワードが正しくありません');
         setLoading(false);
         return;
       }
 
       router.push('/mypage');
     } catch (error) {
-      setError('ログイン中にエラーが発生しました');
+      setErrorMessage('ログイン中にエラーが発生しました');
       setLoading(false);
     }
   };
@@ -59,9 +63,15 @@ export default function SignInPage() {
           transition={{ duration: 0.5 }}
           className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10"
         >
-          {error && (
+          {registered && (
+            <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded mb-4">
+              アカウントが作成されました。ログインしてください。
+            </div>
+          )}
+
+          {errorMessage && (
             <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded mb-4">
-              {error}
+              {errorMessage}
             </div>
           )}
 

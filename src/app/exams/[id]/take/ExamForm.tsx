@@ -1,204 +1,205 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
 interface Question {
-  id: string;
-  content: string;
-  choices: string[];
-  order: number;
+  id: number;
+  text: string;
+  options: string[];
 }
 
 interface ExamFormProps {
   examId: string;
-  title: string;
   questions: Question[];
-  duration: number;
 }
 
-export default function ExamForm({ examId, title, questions, duration }: ExamFormProps) {
+export default function ExamForm({ examId, questions }: ExamFormProps) {
   const router = useRouter();
-  const [timeLeft, setTimeLeft] = useState(duration * 60); // 秒単位
-  const [answers, setAnswers] = useState<Record<string, number>>({});
-  const [notes, setNotes] = useState<Record<string, string>>({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const [timeLeft, setTimeLeft] = useState(60 * 60); // 60分（秒単位）
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isFinished, setIsFinished] = useState(false);
 
   // タイマー処理
   useEffect(() => {
-    if (timeLeft <= 0) {
-      handleSubmit();
-      return;
-    }
+    if (timeLeft <= 0 || isFinished) return;
 
     const timer = setInterval(() => {
       setTimeLeft((prev) => prev - 1);
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft]);
+  }, [timeLeft, isFinished]);
 
-  // 時間表示のフォーマット
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-  };
+  // 時間切れの場合、自動的に提出
+  useEffect(() => {
+    if (timeLeft <= 0 && !isFinished) {
+      handleSubmit();
+    }
+  }, [timeLeft, isFinished]);
 
-  // 解答の更新
-  const handleAnswerChange = (questionId: string, value: number) => {
+  const handleAnswerSelect = (questionId: number, optionIndex: number) => {
     setAnswers((prev) => ({
       ...prev,
-      [questionId]: value,
+      [questionId]: optionIndex,
     }));
   };
 
-  // メモの更新
-  const handleNoteChange = (questionId: string, value: string) => {
-    setNotes((prev) => ({
-      ...prev,
-      [questionId]: value,
-    }));
+  const handleNext = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex((prev) => prev + 1);
+    }
   };
 
-  // 解答の提出
+  const handlePrevious = () => {
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex((prev) => prev - 1);
+    }
+  };
+
   const handleSubmit = async () => {
     if (isSubmitting) return;
+
     setIsSubmitting(true);
-
     try {
-      const response = await fetch('/api/exams/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          examId,
-          answers,
-          notes,
-          timeSpent: duration * 60 - timeLeft,
-        }),
-      });
-
-      if (!response.ok) {
-        throw new Error('提出に失敗しました');
-      }
-
-      const result = await response.json();
-      router.push(`/exams/${examId}/result?attemptId=${result.attemptId}`);
-    } catch (error) {
-      console.error('Submit error:', error);
-      alert('解答の提出中にエラーが発生しました。もう一度お試しください。');
+      // 実際のアプリケーションではAPIを呼び出して回答を送信します
+      // const response = await fetch(`/api/exams/${examId}/submit`, {
+      //   method: 'POST',
+      //   headers: { 'Content-Type': 'application/json' },
+      //   body: JSON.stringify({ answers }),
+      // });
+      
+      // if (!response.ok) throw new Error('回答の送信に失敗しました');
+      
+      // 模擬的な処理（実際はAPIからのレスポンスを使用）
+      setTimeout(() => {
+        setIsFinished(true);
+        // 結果ページへリダイレクト
+        router.push(`/exams/${examId}/result?score=${calculateScore()}`);
+      }, 1000);
+    } catch (err) {
+      console.error('Error submitting answers:', err);
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // 試験終了の確認
-  const handleEndExam = () => {
-    if (window.confirm('試験を終了してよろしいですか？\n終了すると現在の解答が自動的に提出されます。')) {
-      handleSubmit();
-    }
+  // 模擬的なスコア計算（実際はサーバーサイドで計算）
+  const calculateScore = () => {
+    // 簡易的な採点（正解は常に最初の選択肢と仮定）
+    const correctAnswers = Object.entries(answers).filter(
+      ([questionId, answer]) => answer === 0
+    ).length;
+    
+    return Math.round((correctAnswers / questions.length) * 100);
   };
 
+  const formatTime = (seconds: number) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const currentQuestion = questions[currentQuestionIndex];
+
+  if (isFinished) {
+    return (
+      <div className="text-center p-8">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
+        <p className="mt-4 text-gray-600">結果を計算中...</p>
+      </div>
+    );
+  }
+
   return (
-    <main className="min-h-screen bg-gray-50">
-      {/* ヘッダー */}
-      <div className="fixed top-0 left-0 right-0 bg-white border-b z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div>
-              <h1 className="text-xl font-semibold text-gray-900">
-                {title}
-              </h1>
-              <p className="text-sm text-gray-500">
-                残り時間: <span id="timer">{formatTime(timeLeft)}</span>
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleEndExam}
-              disabled={isSubmitting}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 disabled:opacity-50"
-            >
-              試験を終了
-            </button>
-          </div>
+    <div className="bg-white shadow-md rounded-lg p-6">
+      <div className="flex justify-between items-center mb-6">
+        <div className="text-sm font-medium text-gray-500">
+          問題 {currentQuestionIndex + 1} / {questions.length}
+        </div>
+        <div className="text-sm font-medium text-gray-500">
+          残り時間: <span className={timeLeft < 300 ? 'text-red-500' : ''}>{formatTime(timeLeft)}</span>
         </div>
       </div>
 
-      {/* メインコンテンツ */}
-      <div className="pt-24 pb-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-white shadow-sm rounded-lg">
-            {/* 問題一覧 */}
-            <div className="divide-y divide-gray-200">
-              {questions.map((question, index) => (
-                <div key={question.id} className="p-6">
-                  <div className="mb-4">
-                    <h2 className="text-lg font-semibold text-gray-900">
-                      問題 {index + 1}
-                    </h2>
-                    <p className="mt-2 text-gray-700">{question.content}</p>
-                  </div>
-
-                  {/* 選択肢 */}
-                  <div className="space-y-3">
-                    {question.choices.map((choice, choiceIndex) => (
-                      <label key={choiceIndex} className="flex items-start">
-                        <div className="flex items-center h-5">
-                          <input
-                            type="radio"
-                            name={`question-${question.id}`}
-                            value={choiceIndex}
-                            checked={answers[question.id] === choiceIndex}
-                            onChange={() => handleAnswerChange(question.id, choiceIndex)}
-                            className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                          />
-                        </div>
-                        <div className="ml-3 text-sm">
-                          <span className="font-medium text-gray-700">
-                            {String.fromCharCode(65 + choiceIndex)}. {choice}
-                          </span>
-                        </div>
-                      </label>
-                    ))}
-                  </div>
-
-                  {/* メモ欄 */}
-                  <div className="mt-4">
-                    <label htmlFor={`note-${question.id}`} className="block text-sm font-medium text-gray-700">
-                      メモ
-                    </label>
-                    <textarea
-                      id={`note-${question.id}`}
-                      value={notes[question.id] || ''}
-                      onChange={(e) => handleNoteChange(question.id, e.target.value)}
-                      rows={2}
-                      className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                      placeholder="この問題に関するメモを書く..."
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* 送信ボタン */}
-            <div className="p-6 bg-gray-50 border-t">
-              <div className="flex justify-end">
-                <button
-                  type="button"
-                  onClick={handleSubmit}
-                  disabled={isSubmitting}
-                  className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+      <div className="mb-8">
+        <h2 className="text-lg font-medium text-gray-900 mb-4">{currentQuestion.text}</h2>
+        <div className="space-y-3">
+          {currentQuestion.options.map((option, index) => (
+            <div key={index} className="flex items-start">
+              <div className="flex items-center h-5">
+                <input
+                  id={`question-${currentQuestion.id}-option-${index}`}
+                  type="radio"
+                  name={`question-${currentQuestion.id}`}
+                  className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
+                  checked={answers[currentQuestion.id] === index}
+                  onChange={() => handleAnswerSelect(currentQuestion.id, index)}
+                />
+              </div>
+              <div className="ml-3 text-sm">
+                <label
+                  htmlFor={`question-${currentQuestion.id}-option-${index}`}
+                  className="font-medium text-gray-700"
                 >
-                  {isSubmitting ? '送信中...' : '解答を提出'}
-                </button>
+                  {option}
+                </label>
               </div>
             </div>
-          </div>
+          ))}
         </div>
       </div>
-    </main>
+
+      <div className="flex justify-between">
+        <button
+          type="button"
+          onClick={handlePrevious}
+          disabled={currentQuestionIndex === 0}
+          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+        >
+          前の問題
+        </button>
+        
+        {currentQuestionIndex < questions.length - 1 ? (
+          <button
+            type="button"
+            onClick={handleNext}
+            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+          >
+            次の問題
+          </button>
+        ) : (
+          <button
+            type="button"
+            onClick={handleSubmit}
+            disabled={isSubmitting}
+            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+          >
+            {isSubmitting ? '送信中...' : '回答を提出する'}
+          </button>
+        )}
+      </div>
+
+      <div className="mt-8">
+        <div className="flex flex-wrap gap-2">
+          {questions.map((q, index) => (
+            <button
+              key={q.id}
+              type="button"
+              onClick={() => setCurrentQuestionIndex(index)}
+              className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-medium ${
+                answers[q.id] !== undefined
+                  ? 'bg-blue-100 text-blue-800 border border-blue-300'
+                  : 'bg-gray-100 text-gray-800 border border-gray-300'
+              } ${currentQuestionIndex === index ? 'ring-2 ring-blue-500' : ''}`}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 } 

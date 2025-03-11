@@ -36,7 +36,13 @@ export async function POST(request: Request) {
     });
 
     // パスワードを除外したユーザー情報を返す
-    const { password: _, ...userWithoutPassword } = updatedUser;
+    const userWithoutPassword = {
+      id: updatedUser.id,
+      name: updatedUser.name,
+      email: updatedUser.email,
+      createdAt: updatedUser.createdAt,
+      updatedAt: updatedUser.updatedAt
+    };
 
     return NextResponse.json(
       { message: 'プロフィールが更新されました', user: userWithoutPassword },
