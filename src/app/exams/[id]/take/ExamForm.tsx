@@ -58,7 +58,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     } finally {
       setIsSubmitting(false);
     }
-  }, [answers, examId, isSubmitting, router, calculateScore]);
+  }, [examId, isSubmitting, router, calculateScore]);
 
   // タイマー処理
   useEffect(() => {
