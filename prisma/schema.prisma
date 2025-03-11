@@ -70,8 +70,9 @@ model Exam {
   description String
   duration    Int      @default(60) // 分単位
   price       Int      @default(0)  // 円単位
-  category    String   @default("TOEIC")
+  type        String   @default("TOEIC")
   difficulty  String   @default("中級")
+  isFree      Boolean  @default(false)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 

@@ -11,11 +11,11 @@ interface Exam {
   title: string;
   description: string;
   duration: number;
-  category: string;
-  difficulty: '初級' | '中級' | '上級';
-  isCompleted?: boolean;
-  score?: number;
+  difficulty: string;
+  type: string;
+  completed: boolean;
   isFree: boolean;
+  score?: number;
   completedAt?: string;
 }
 
@@ -25,10 +25,30 @@ const dummyExams: Exam[] = [
     title: 'TOEIC® L&R 模試 Vol.1',
     description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
     duration: 120,
-    category: 'TOEIC® L&R',
     difficulty: '中級',
-    isCompleted: false,
+    type: 'TOEIC® L&R',
+    completed: false,
     isFree: true
+  },
+  {
+    id: '2',
+    title: 'TOEIC® L&R 模試 Vol.2',
+    description: 'TOEIC® L&Rテストの模擬試験です。最新の出題傾向に対応しています。',
+    duration: 120,
+    difficulty: '中級',
+    type: 'TOEIC® L&R',
+    completed: true,
+    isFree: false
+  },
+  {
+    id: '3',
+    title: 'TOEIC® L&R 模試 Vol.3',
+    description: 'TOEIC® L&Rテストの模擬試験です。ビジネス場面に特化した問題が多く含まれています。',
+    duration: 120,
+    difficulty: '上級',
+    type: 'TOEIC® L&R',
+    completed: false,
+    isFree: false
   }
 ];
 
@@ -38,9 +58,9 @@ const purchasedExams: Exam[] = [
     title: 'TOEIC® L&R 模試 Vol.2',
     description: 'TOEIC® L&Rテストの模擬試験です。より実践的な問題に挑戦できます。',
     duration: 120,
-    category: 'TOEIC® L&R',
     difficulty: '上級',
-    isCompleted: false,
+    type: 'TOEIC® L&R',
+    completed: false,
     isFree: false
   }
 ];
@@ -51,9 +71,9 @@ const examHistory: Exam[] = [
     title: 'TOEIC® L&R 模試 Vol.1',
     description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
     duration: 120,
-    category: 'TOEIC® L&R',
     difficulty: '中級',
-    isCompleted: true,
+    type: 'TOEIC® L&R',
+    completed: true,
     score: 750,
     isFree: true,
     completedAt: '2024-03-15'
@@ -153,9 +173,9 @@ export default function MyPage() {
                           </div>
                           <p className="mt-2 text-sm text-gray-900">{exam.description}</p>
                           <div className="mt-4 flex items-center justify-between">
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                              {exam.category}
-                            </span>
+                            <div className="text-sm text-gray-500 mb-1">
+                              {exam.type}
+                            </div>
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                               {exam.difficulty}
                             </span>
@@ -164,7 +184,7 @@ export default function MyPage() {
                             所要時間: {exam.duration}分
                           </div>
                           <div className="mt-6">
-                            {exam.isCompleted ? (
+                            {exam.completed ? (
                               <div className="text-center">
                                 <p className="text-sm text-gray-900">スコア: {exam.score}点</p>
                                 <Link
@@ -205,9 +225,9 @@ export default function MyPage() {
                             <h3 className="text-lg font-medium text-gray-900">{exam.title}</h3>
                             <p className="mt-2 text-sm text-gray-900">{exam.description}</p>
                             <div className="mt-4 flex items-center justify-between">
-                              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                                {exam.category}
-                              </span>
+                              <div className="text-sm text-gray-500 mb-1">
+                                {exam.type}
+                              </div>
                               <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                                 {exam.difficulty}
                               </span>
@@ -216,7 +236,7 @@ export default function MyPage() {
                               所要時間: {exam.duration}分
                             </div>
                             <div className="mt-6">
-                              {exam.isCompleted ? (
+                              {exam.completed ? (
                                 <div className="text-center">
                                   <p className="text-sm text-gray-900">スコア: {exam.score}点</p>
                                   <Link
@@ -265,9 +285,9 @@ export default function MyPage() {
                             </div>
                           </div>
                           <div className="mt-4 flex items-center space-x-2">
-                            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                              {exam.category}
-                            </span>
+                            <div className="text-sm text-gray-500 mb-1">
+                              {exam.type}
+                            </div>
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                               {exam.difficulty}
                             </span>

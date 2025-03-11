@@ -9,8 +9,8 @@ interface Exam {
   description: string;
   duration: number;
   price: number;
-  category: string;
-  difficulty: '初級' | '中級' | '上級';
+  type: string;
+  difficulty: string;
 }
 
 const dummyExams: Exam[] = [
@@ -19,28 +19,28 @@ const dummyExams: Exam[] = [
     title: 'TOEIC® L&R 模試 Vol.1',
     description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
     duration: 120,
-    price: 3000,
-    category: 'TOEIC® L&R',
-    difficulty: '中級'
+    price: 2500,
+    type: 'TOEIC® L&R',
+    difficulty: '中級',
   },
   {
     id: '2',
     title: 'TOEIC® L&R 模試 Vol.2',
-    description: 'TOEIC® L&Rテストの模擬試験です。より実践的な問題に挑戦できます。',
+    description: 'TOEIC® L&Rテストの模擬試験です。最新の出題傾向に対応しています。',
     duration: 120,
-    price: 3000,
-    category: 'TOEIC® L&R',
-    difficulty: '上級'
+    price: 2500,
+    type: 'TOEIC® L&R',
+    difficulty: '中級',
   },
   {
     id: '3',
-    title: 'TOEIC® Speaking & Writing 模試',
-    description: 'TOEIC® S&Wテストの模擬試験です。スピーキングとライティングの練習ができます。',
+    title: 'TOEIC® S&W 模試 Vol.1',
+    description: 'TOEIC® S&Wテストの模擬試験です。スピーキングとライティングの実践的な問題に挑戦できます。',
     duration: 80,
-    price: 4000,
-    category: 'TOEIC® S&W',
-    difficulty: '中級'
-  }
+    price: 3000,
+    type: 'TOEIC® S&W',
+    difficulty: '中級',
+  },
 ];
 
 export default function ExamsPage() {
@@ -72,7 +72,7 @@ export default function ExamsPage() {
                         <p className="mt-2 text-sm text-gray-500">{exam.description}</p>
                         <div className="mt-4 flex items-center justify-between">
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
-                            {exam.category}
+                            {exam.type}
                           </span>
                           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                             {exam.difficulty}

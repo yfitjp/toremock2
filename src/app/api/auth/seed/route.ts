@@ -45,7 +45,6 @@ export async function GET() {
         description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
         price: 0,
         duration: 120,
-        questions: 200,
         type: 'TOEIC',
         difficulty: '中級',
         isFree: true,
