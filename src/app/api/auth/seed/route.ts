@@ -56,6 +56,7 @@ export async function GET() {
       data: {
         userId: user.id,
         examId: exam.id,
+        price: 0,
         status: 'completed',
       }
     });

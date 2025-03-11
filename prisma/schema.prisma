@@ -85,7 +85,8 @@ model Purchase {
   userId          String
   examId          String
   paymentIntentId String?
-  price           Int
+  price           Int      @default(0)
+  status          String   @default("pending")
   createdAt       DateTime @default(now())
 
   user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
