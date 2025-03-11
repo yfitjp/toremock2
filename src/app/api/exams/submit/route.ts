@@ -38,9 +38,8 @@ export async function POST(request: Request) {
     }
 
     // 模擬的な採点処理（実際のデータベースに合わせて修正が必要）
-    // 正解数のカウント（ここでは仮に全問正解とする）
-    const correctCount = Object.keys(answers).length;
-    const score = 100; // 仮のスコア
+    // 仮のスコア
+    const score = 100;
 
     // 受験記録の作成（実際のデータベースに合わせて修正が必要）
     const attempt = {
