@@ -22,6 +22,16 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
 
+  // 模擬的なスコア計算（実際はサーバーサイドで計算）
+  const calculateScore = useCallback(() => {
+    // 簡易的な採点（正解は常に最初の選択肢と仮定）
+    const correctAnswers = Object.entries(answers).filter(
+      ([, answer]) => answer === 0
+    ).length;
+    
+    return Math.round((correctAnswers / questions.length) * 100);
+  }, [answers, questions.length]);
+
   // handleSubmit関数をuseCallbackでメモ化
   const handleSubmit = useCallback(async () => {
     if (isSubmitting) return;
@@ -48,7 +58,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     } finally {
       setIsSubmitting(false);
     }
-  }, [answers, examId, isSubmitting, router]);
+  }, [answers, examId, isSubmitting, router, calculateScore]);
 
   // タイマー処理
   useEffect(() => {
@@ -85,16 +95,6 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((prev) => prev - 1);
     }
-  };
-
-  // 模擬的なスコア計算（実際はサーバーサイドで計算）
-  const calculateScore = () => {
-    // 簡易的な採点（正解は常に最初の選択肢と仮定）
-    const correctAnswers = Object.entries(answers).filter(
-      ([_, answer]) => answer === 0
-    ).length;
-    
-    return Math.round((correctAnswers / questions.length) * 100);
   };
 
   const formatTime = (seconds: number) => {

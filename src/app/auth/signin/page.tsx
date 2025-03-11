@@ -36,7 +36,7 @@ export default function SignInPage() {
       }
 
       router.push('/mypage');
-    } catch (err) {
+    } catch {
       setErrorMessage('ログイン中にエラーが発生しました');
       setLoading(false);
     }

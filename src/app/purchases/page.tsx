@@ -40,7 +40,7 @@ export default function PurchasesPage() {
             status: 'active',
           },
         ]);
-      } catch (err) {
+      } catch {
         setErrorMessage('購入履歴の取得中にエラーが発生しました');
       } finally {
         setLoading(false);

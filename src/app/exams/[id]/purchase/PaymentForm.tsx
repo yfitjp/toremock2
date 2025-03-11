@@ -61,7 +61,7 @@ export default function PaymentForm({ examId, price, clientSecret }: PaymentForm
         setSucceeded(true);
       }, 1000);
       
-    } catch (err) {
+    } catch {
       setMessage('支払い処理中にエラーが発生しました');
     } finally {
       setLoading(false);
