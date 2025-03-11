@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
@@ -10,9 +11,9 @@ export default function Home() {
   return (
     <div className="bg-white">
       {/* ヒーローセクション */}
-      <div className="relative overflow-hidden">
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-white">
         <div className="max-w-7xl mx-auto">
-          <div className="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+          <div className="relative z-10 pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
             <main className="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -52,6 +53,17 @@ export default function Home() {
             </main>
           </div>
         </div>
+        <div className="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+          <div className="h-56 w-full sm:h-72 md:h-96 lg:w-full lg:h-full bg-blue-100 flex items-center justify-center">
+            <Image
+              src="/images/toremock-logo.png"
+              alt="ToreMock Logo"
+              width={300}
+              height={300}
+              className="object-contain"
+            />
+          </div>
+        </div>
       </div>
 
       {/* 特徴セクション */}
@@ -63,6 +75,9 @@ export default function Home() {
             </h2>
             <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
               効率的な学習をサポート
+            </p>
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              ToreMockは、あなたの学習効率を最大化するために設計された模試プラットフォームです。
             </p>
           </div>
 
@@ -88,6 +103,127 @@ export default function Home() {
                 </motion.div>
               ))}
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 利用者の声セクション */}
+      <div className="bg-white py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center">
+            <h2 className="text-base text-blue-600 font-semibold tracking-wide uppercase">
+              利用者の声
+            </h2>
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              実際に使った人の感想
+            </p>
+          </div>
+          <div className="mt-10">
+            <div className="space-y-8 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+              {testimonials.map((testimonial, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                  className="bg-gray-50 p-6 rounded-lg shadow-sm"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-500">
+                      <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+                      </svg>
+                    </div>
+                    <div className="ml-3">
+                      <h3 className="text-lg font-medium text-gray-900">{testimonial.name}</h3>
+                      <p className="text-sm text-gray-500">{testimonial.title}</p>
+                    </div>
+                  </div>
+                  <p className="text-gray-600 italic">"{testimonial.quote}"</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* 料金プランセクション */}
+      <div className="bg-gray-50 py-16 sm:py-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="lg:text-center">
+            <h2 className="text-base text-blue-600 font-semibold tracking-wide uppercase">
+              料金プラン
+            </h2>
+            <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+              あなたに合ったプランを選択
+            </p>
+            <p className="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+              シンプルな料金体系で、必要な分だけ購入できます。
+            </p>
+          </div>
+          <div className="mt-10 space-y-8 sm:space-y-0 sm:grid sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+            >
+              <h3 className="text-xl font-medium text-gray-900">無料トライアル</h3>
+              <p className="mt-4 text-gray-500">
+                新規登録で1つの模試が無料で利用可能。機能を体験してみましょう。
+              </p>
+              <p className="mt-8">
+                <span className="text-4xl font-extrabold text-gray-900">¥0</span>
+              </p>
+              <Link
+                href="/auth/signup"
+                className="mt-8 block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                今すぐ始める
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 relative"
+            >
+              <div className="absolute top-0 right-0 bg-blue-600 text-white px-3 py-1 rounded-bl-lg rounded-tr-lg text-sm font-medium">
+                人気
+              </div>
+              <h3 className="text-xl font-medium text-gray-900">スタンダード</h3>
+              <p className="mt-4 text-gray-500">
+                個別に模試を購入。必要な分だけ選んで学習できます。
+              </p>
+              <p className="mt-8">
+                <span className="text-4xl font-extrabold text-gray-900">¥2,500</span>
+                <span className="text-base text-gray-500">〜 / 1模試</span>
+              </p>
+              <Link
+                href="/exams"
+                className="mt-8 block w-full bg-blue-600 text-white text-center py-2 px-4 rounded-md hover:bg-blue-700 transition-colors"
+              >
+                模試を見る
+              </Link>
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="bg-white p-6 rounded-lg shadow-sm border border-gray-200"
+            >
+              <h3 className="text-xl font-medium text-gray-900">プレミアム</h3>
+              <p className="mt-4 text-gray-500">
+                すべての模試にアクセス可能。集中的に学習したい方におすすめ。
+              </p>
+              <p className="mt-8">
+                <span className="text-4xl font-extrabold text-gray-900">¥9,800</span>
+                <span className="text-base text-gray-500">/ 月</span>
+              </p>
+              <span className="mt-8 block w-full bg-gray-300 text-gray-600 text-center py-2 px-4 rounded-md">
+                近日公開
+              </span>
+            </motion.div>
           </div>
         </div>
       </div>
@@ -118,7 +254,7 @@ export default function Home() {
 const features = [
   {
     name: '豊富な問題数',
-    description: '様々な難易度の問題を用意し、段階的な学習をサポートします。',
+    description: '様々な難易度の問題を用意し、段階的な学習をサポートします。実際のテスト形式に沿った問題構成で、本番さながらの環境で練習できます。',
     icon: (
       <svg
         className="h-6 w-6"
@@ -137,7 +273,7 @@ const features = [
   },
   {
     name: '詳細な解説',
-    description: '各問題に対して、理解を深めるための詳細な解説を提供します。',
+    description: '各問題に対して、理解を深めるための詳細な解説を提供します。単に答えを示すだけでなく、なぜその答えが正しいのかを理解できるよう、丁寧に説明しています。',
     icon: (
       <svg
         className="h-6 w-6"
@@ -156,7 +292,7 @@ const features = [
   },
   {
     name: '学習進捗管理',
-    description: '学習の進捗状況を可視化し、効率的な学習をサポートします。',
+    description: '学習の進捗状況を可視化し、効率的な学習をサポートします。過去の成績を分析し、弱点を把握することで、効果的な学習計画を立てることができます。',
     icon: (
       <svg
         className="h-6 w-6"
@@ -174,8 +310,8 @@ const features = [
     ),
   },
   {
-    name: 'カスタマイズ可能',
-    description: '自分の学習スタイルに合わせて、問題をカスタマイズできます。',
+    name: 'いつでもどこでも学習',
+    description: 'パソコン、タブレット、スマートフォンなど、様々なデバイスに対応しているため、いつでもどこでも学習を続けることができます。通勤・通学時間も有効活用できます。',
     icon: (
       <svg
         className="h-6 w-6"
@@ -187,15 +323,27 @@ const features = [
           strokeLinecap="round"
           strokeLinejoin="round"
           strokeWidth={2}
-          d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
-        />
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+          d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"
         />
       </svg>
     ),
+  },
+];
+
+const testimonials = [
+  {
+    name: '田中 健太',
+    title: 'TOEIC 900点取得',
+    quote: 'ToreMockの模試を活用して、効率的に学習することができました。特に詳細な解説が役立ち、弱点を克服することができました。',
+  },
+  {
+    name: '佐藤 美咲',
+    title: '英語講師',
+    quote: '生徒に勧めるのに最適なサービスです。実践的な問題と解説で、着実にスコアアップを実感できます。',
+  },
+  {
+    name: '鈴木 大輔',
+    title: '会社員',
+    quote: '忙しい仕事の合間に学習できるので、とても助かっています。スマホでいつでも学習できるのが最高です。',
   },
 ];
