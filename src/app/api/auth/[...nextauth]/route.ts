@@ -6,7 +6,10 @@ import bcrypt from "bcrypt";
 
 const prisma = new PrismaClient();
 
-const authOptions = {
+// ESLintルールを無効化
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
+export const authOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
