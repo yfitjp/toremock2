@@ -10,22 +10,23 @@ generator client {
 
 datasource db {
   provider = "sqlite"
-  url      = "file:./dev.db"
+  url      = env("DATABASE_URL")
 }
 
 model User {
   id            String    @id @default(cuid())
   name          String?
-  email         String    @unique
+  email         String?   @unique
   emailVerified DateTime?
-  password      String?
   image         String?
+  password      String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-  purchases     Purchase[]
+
   accounts      Account[]
   sessions      Session[]
-  examResults   ExamResult[]
+  purchases     Purchase[]
+  examAttempts  ExamAttempt[]
 }
 
 model Account {
@@ -41,7 +42,8 @@ model Account {
   scope              String?
   id_token           String?
   session_state      String?
-  user               User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -63,41 +65,41 @@ model VerificationToken {
 }
 
 model Exam {
-  id          String    @id @default(cuid())
+  id          String   @id @default(cuid())
   title       String
   description String
-  price       Int
-  duration    Int
-  questions   Int
-  type        String    // "TOEIC" | "TOEFL" | "IELTS"
-  difficulty  String?   // "初級" | "中級" | "上級"
-  isFree      Boolean   @default(false)
-  createdAt   DateTime  @default(now())
-  updatedAt   DateTime  @updatedAt
+  duration    Int      @default(60) // 分単位
+  price       Int      @default(0)  // 円単位
+  category    String   @default("TOEIC")
+  difficulty  String   @default("中級")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
   purchases   Purchase[]
-  examResults ExamResult[]
+  attempts    ExamAttempt[]
 }
 
 model Purchase {
+  id              String   @id @default(cuid())
+  userId          String
+  examId          String
+  paymentIntentId String?
+  price           Int
+  createdAt       DateTime @default(now())
+
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam            Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+}
+
+model ExamAttempt {
   id        String   @id @default(cuid())
   userId    String
   examId    String
-  status    String   // "pending" | "completed" | "cancelled"
+  score     Int
+  timeSpent Int      // 秒単位
+  answers   Json     // 回答データ
   createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  user      User     @relation(fields: [userId], references: [id])
-  exam      Exam     @relation(fields: [examId], references: [id])
-}
 
-model ExamResult {
-  id            String   @id @default(cuid())
-  userId        String
-  examId        String
-  score         Int
-  correctAnswers Int
-  totalQuestions Int
-  timeSpent     Int      // 分単位
-  completedAt   DateTime @default(now())
-  user          User     @relation(fields: [userId], references: [id])
-  exam          Exam     @relation(fields: [examId], references: [id])
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exam      Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
 }
