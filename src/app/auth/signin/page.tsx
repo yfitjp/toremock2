@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, Suspense } from 'react';
-import { signIn } from 'next-auth/react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { loginUser } from '@/app/lib/auth-firebase';
 
 function SignInForm() {
   const router = useRouter();
@@ -23,21 +23,27 @@ function SignInForm() {
     setErrorMessage('');
 
     try {
-      const result = await signIn('credentials', {
-        redirect: false,
-        email,
-        password,
-      });
-
-      if (result?.error) {
-        setErrorMessage('メールアドレスまたはパスワードが正しくありません');
-        setLoading(false);
-        return;
-      }
-
+      await loginUser(email, password);
       router.push('/mypage');
-    } catch {
-      setErrorMessage('ログイン中にエラーが発生しました');
+    } catch (error: any) {
+      console.error('ログインエラー:', error);
+      
+      // エラーコードに基づいてメッセージを表示
+      if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+        setErrorMessage('メールアドレスまたはパスワードが正しくありません');
+      } else if (error.code === 'auth/invalid-email') {
+        setErrorMessage('メールアドレスの形式が正しくありません');
+      } else if (error.code === 'auth/user-disabled') {
+        setErrorMessage('このアカウントは無効になっています');
+      } else if (error.code === 'auth/too-many-requests') {
+        setErrorMessage('ログイン試行回数が多すぎます。しばらく時間をおいてから再試行してください');
+      } else if (error.message) {
+        // エラーメッセージがある場合はそれを表示
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('ログイン中にエラーが発生しました');
+      }
+      
       setLoading(false);
     }
   };
@@ -109,6 +115,9 @@ function SignInForm() {
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  パスワードは6文字以上です
+                </p>
               </div>
             </div>
 

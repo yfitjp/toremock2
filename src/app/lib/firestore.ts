@@ -18,14 +18,15 @@ import {
 } from 'firebase/firestore';
 import { db } from './firebase';
 
-// コレクション名の定義
+// Firestoreのコレクション名を定義
 export const COLLECTIONS = {
   USERS: 'users',
   EXAMS: 'exams',
   PURCHASES: 'purchases',
-  EXAM_ATTEMPTS: 'examAttempts',
+  EXAM_ATTEMPTS: 'exam_attempts',
   QUESTIONS: 'questions',
-};
+  SUBSCRIPTIONS: 'subscriptions',
+} as const;
 
 // ドキュメントを取得する
 export const getDocument = async <T>(collectionName: string, docId: string): Promise<T | null> => {
@@ -131,30 +132,124 @@ export const formatTimestamp = (timestamp: Timestamp | null | undefined): string
   return timestamp.toDate().toLocaleString('ja-JP');
 };
 
-// 特定の条件に一致するドキュメントを取得する
+// コレクションからドキュメントをクエリする
 export const queryDocuments = async <T>(
   collectionName: string,
-  field: string,
-  operator: '==' | '!=' | '>' | '>=' | '<' | '<=',
-  value: any,
-  orderByField?: string,
-  orderDirection?: 'asc' | 'desc',
-  limitCount?: number
+  constraints: QueryConstraint[] = []
 ): Promise<T[]> => {
   try {
-    const constraints: QueryConstraint[] = [where(field, operator, value)];
-
-    if (orderByField) {
-      constraints.push(orderBy(orderByField, orderDirection || 'asc'));
+    console.log(`クエリ実行: ${collectionName}`, constraints);
+    const collectionRef = collection(db, collectionName);
+    let q;
+    if (constraints.length > 0) {
+      q = query(collectionRef, ...constraints);
+    } else {
+      q = query(collectionRef);
     }
-
-    if (limitCount) {
-      constraints.push(limit(limitCount));
-    }
-
-    return await getCollection<T>(collectionName, constraints);
+    const querySnapshot = await getDocs(q);
+    
+    const documents: T[] = [];
+    querySnapshot.forEach((doc) => {
+      documents.push({ id: doc.id, ...doc.data() } as T);
+    });
+    
+    console.log(`クエリ結果: ${documents.length}件のドキュメントを取得`, documents);
+    return documents;
   } catch (error) {
     console.error(`Error querying documents from ${collectionName}:`, error);
     throw error;
+  }
+};
+
+// 模試問題のインターフェース
+export interface Question {
+  id: string;
+  text: string;
+  options: string[];
+  correctAnswer: number;
+  explanation: string;
+  category: string;
+  difficulty: 'easy' | 'medium' | 'hard';
+}
+
+export interface ExamData {
+  id: string;
+  title: string;
+  description: string;
+  timeLimit: number; // 分単位
+  questions: Question[];
+  type: 'TOEIC' | 'TOEFL' | 'EIKEN';
+  difficulty: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
+  isFree: boolean;
+}
+
+// 模試データをFirestoreに追加する関数
+export const addExamData = async (examData: ExamData) => {
+  try {
+    const examRef = doc(db, 'exams', examData.id);
+    await setDoc(examRef, {
+      title: examData.title,
+      description: examData.description,
+      timeLimit: examData.timeLimit,
+      type: examData.type,
+      difficulty: examData.difficulty,
+      isFree: examData.isFree,
+      createdAt: new Date(),
+    });
+
+    // 問題データを別コレクションに保存
+    const questionsRef = collection(db, 'exams', examData.id, 'questions');
+    for (const question of examData.questions) {
+      await setDoc(doc(questionsRef, question.id), {
+        text: question.text,
+        options: question.options,
+        correctAnswer: question.correctAnswer,
+        explanation: question.explanation,
+        category: question.category,
+        difficulty: question.difficulty,
+      });
+    }
+
+    console.log('Exam data added successfully');
+    return true;
+  } catch (error) {
+    console.error('Error adding exam data:', error);
+    return false;
+  }
+};
+
+// 模試データを取得する関数
+export const getExamData = async (examId: string): Promise<ExamData | null> => {
+  try {
+    const examRef = doc(db, 'exams', examId);
+    const examDoc = await getDoc(examRef);
+
+    if (!examDoc.exists()) {
+      return null;
+    }
+
+    const examData = examDoc.data();
+    
+    // 問題データを取得
+    const questionsRef = collection(db, 'exams', examId, 'questions');
+    const questionsSnapshot = await getDocs(questionsRef);
+    const questions = questionsSnapshot.docs.map(doc => ({
+      id: doc.id,
+      ...doc.data()
+    })) as Question[];
+
+    return {
+      id: examId,
+      title: examData.title,
+      description: examData.description,
+      timeLimit: examData.timeLimit,
+      type: examData.type,
+      difficulty: examData.difficulty,
+      isFree: examData.isFree,
+      questions,
+    };
+  } catch (error) {
+    console.error('Error getting exam data:', error);
+    return null;
   }
 }; 

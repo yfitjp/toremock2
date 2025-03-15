@@ -1,17 +1,48 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useSession, signOut } from 'next-auth/react';
+import { useAuth } from '@/app/hooks/useAuth';
+import { logoutUser } from '@/app/lib/auth-firebase';
+import { hasActiveSubscription } from '@/app/lib/subscriptions';
 
 export default function Navbar() {
-  const { data: session, status } = useSession();
+  const { user, loading } = useAuth();
   const [isOpen, setIsOpen] = useState(false);
+  const [hasSubscription, setHasSubscription] = useState(false);
+  const [checkingSubscription, setCheckingSubscription] = useState(true);
+
+  useEffect(() => {
+    const checkSubscription = async () => {
+      if (user) {
+        try {
+          console.log('Navbar: サブスクリプション確認開始 - ユーザーID:', user.uid);
+          const hasSubscription = await hasActiveSubscription(user.uid);
+          console.log('Navbar: サブスクリプション状態:', hasSubscription);
+          setHasSubscription(hasSubscription);
+        } catch (error) {
+          console.error('サブスクリプション確認エラー:', error);
+        } finally {
+          setCheckingSubscription(false);
+        }
+      } else if (!loading) {
+        setCheckingSubscription(false);
+      }
+    };
+
+    checkSubscription();
+  }, [user, loading]);
 
   const handleSignOut = async (e: React.MouseEvent) => {
     e.preventDefault();
-    await signOut({ redirect: true, callbackUrl: '/' });
+    try {
+      await logoutUser();
+      // ホームページにリダイレクト
+      window.location.href = '/';
+    } catch (error) {
+      console.error('ログアウトエラー:', error);
+    }
   };
 
   return (
@@ -40,25 +71,40 @@ export default function Navbar() {
               >
                 模試一覧
               </Link>
-              {status === 'authenticated' && (
-                <Link
-                  href="/mypage"
-                  className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
-                >
-                  マイページ
-                </Link>
+              {user && (
+                <>
+                  <Link
+                    href="/mypage"
+                    className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                  >
+                    マイページ
+                  </Link>
+                  {!hasSubscription && (
+                    <Link
+                      href="/subscription"
+                      className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-colors"
+                    >
+                      プレミアムプラン
+                    </Link>
+                  )}
+                </>
               )}
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
-            {status === 'loading' ? (
+            {loading || checkingSubscription ? (
               <div className="text-gray-500 px-3 py-2 text-sm font-medium">
                 読み込み中...
               </div>
-            ) : status === 'authenticated' ? (
+            ) : user ? (
               <div className="flex items-center space-x-4">
+                {hasSubscription && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    プレミアム会員
+                  </span>
+                )}
                 <span className="text-gray-900 text-sm">
-                  {session.user?.name || session.user?.email}
+                  {user.displayName || user.email}
                 </span>
                 <button
                   onClick={handleSignOut}
@@ -105,19 +151,29 @@ export default function Navbar() {
           >
             模試一覧
           </Link>
-          {status === 'authenticated' && (
-            <Link
-              href="/mypage"
-              className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600"
-            >
-              マイページ
-            </Link>
+          {user && (
+            <>
+              <Link
+                href="/mypage"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600"
+              >
+                マイページ
+              </Link>
+              {!hasSubscription && (
+                <Link
+                  href="/subscription"
+                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600"
+                >
+                  プレミアムプラン
+                </Link>
+              )}
+            </>
           )}
-          {status === 'loading' ? (
+          {loading || checkingSubscription ? (
             <div className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500">
               読み込み中...
             </div>
-          ) : status === 'authenticated' ? (
+          ) : user ? (
             <button
               onClick={handleSignOut}
               className="w-full text-left block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600"

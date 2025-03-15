@@ -4,6 +4,7 @@ import { useState, Suspense } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import { registerUser } from '@/app/lib/auth-firebase';
 
 function SignUpForm() {
   const router = useRouter();
@@ -19,6 +20,13 @@ function SignUpForm() {
     setLoading(true);
     setError('');
 
+    // パスワードの長さチェック（クライアント側でも検証）
+    if (password.length < 6) {
+      setError('パスワードは6文字以上で入力してください');
+      setLoading(false);
+      return;
+    }
+
     if (password !== confirmPassword) {
       setError('パスワードが一致しません');
       setLoading(false);
@@ -26,31 +34,25 @@ function SignUpForm() {
     }
 
     try {
-      const response = await fetch('/api/auth/register', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-        }),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.message || 'アカウント作成に失敗しました');
-      }
-
+      await registerUser(email, password, name);
       router.push('/auth/signin?registered=true');
-    } catch (error) {
-      if (error instanceof Error) {
+    } catch (error: any) {
+      console.error('登録エラー:', error);
+      
+      // Firebase認証エラーメッセージの日本語化
+      if (error.code === 'auth/email-already-in-use') {
+        setError('このメールアドレスは既に使用されています');
+      } else if (error.code === 'auth/weak-password') {
+        setError('セキュリティのため、パスワードは6文字以上で設定してください');
+      } else if (error.code === 'auth/invalid-email') {
+        setError('メールアドレスの形式が正しくありません');
+      } else if (error.message) {
+        // エラーメッセージがある場合はそれを表示
         setError(error.message);
       } else {
         setError('アカウント作成中にエラーが発生しました');
       }
+      
       setLoading(false);
     }
   };
@@ -130,10 +132,14 @@ function SignUpForm() {
                   type="password"
                   autoComplete="new-password"
                   required
+                  minLength={6}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                 />
+                <p className="mt-1 text-xs text-gray-500">
+                  パスワードは6文字以上で入力してください
+                </p>
               </div>
             </div>
 
@@ -148,6 +154,7 @@ function SignUpForm() {
                   type="password"
                   autoComplete="new-password"
                   required
+                  minLength={6}
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"

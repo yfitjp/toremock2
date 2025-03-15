@@ -1,90 +1,205 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useParams, useRouter, useSearchParams } from 'next/navigation';
+import { useAuth } from '@/app/hooks/useAuth';
+import { getExam, getUserExamAttemptsByExam, ExamAttempt } from '@/app/lib/exams';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
-
-interface ExamResult {
-  score: number;
-  totalQuestions: number;
-  correctAnswers: number;
-  timeSpent: number;
-  feedback: string;
-}
 
 export default function ExamResultPage() {
+  const params = useParams();
+  const router = useRouter();
   const searchParams = useSearchParams();
+  const { user, loading: authLoading } = useAuth();
+  const examId = params.id as string;
   const score = searchParams.get('score');
-  const [result, setResult] = useState<ExamResult>({
-    score: score ? parseInt(score) : 0,
-    totalQuestions: 5,
-    correctAnswers: score ? Math.round(parseInt(score) / 20) : 0,
-    timeSpent: 120,
-    feedback: ''
-  });
+  
+  const [loading, setLoading] = useState(true);
+  const [exam, setExam] = useState<any>(null);
+  const [attempt, setAttempt] = useState<ExamAttempt | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // スコアに基づいてフィードバックを設定
-    if (result.score >= 800) {
-      setResult(prev => ({ ...prev, feedback: '素晴らしい結果です！TOEIC® L&Rテストで高得点を目指せる実力がついています。' }));
-    } else if (result.score >= 600) {
-      setResult(prev => ({ ...prev, feedback: '良い結果です。弱点を克服することで、さらにスコアを伸ばすことができます。' }));
-    } else {
-      setResult(prev => ({ ...prev, feedback: '基礎力を固めることで、スコアを大幅に向上させることができます。' }));
+    // 認証チェック
+    if (authLoading) return;
+
+    if (!user) {
+      // 未認証の場合はログインページにリダイレクト
+      router.push(`/auth/signin?callbackUrl=/exams/${examId}/result?score=${score}`);
+      return;
     }
-  }, [result.score]);
+
+    const fetchExamData = async () => {
+      try {
+        setLoading(true);
+        console.log('Fetching exam data for ID:', examId);
+        
+        // デフォルトの模試データ
+        let examData = {
+          id: 'default-free-exam',
+          title: 'TOEIC® L&R 模試 Vol.1',
+          description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
+          duration: 120,
+          price: 0,
+          type: 'TOEIC',
+          difficulty: '中級',
+          isFree: true,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        };
+        
+        // Firestoreから模試データを取得（エラー時はデフォルトデータを使用）
+        try {
+          const fetchedExam = await getExam(examId);
+          if (fetchedExam) {
+            examData = fetchedExam;
+            console.log('Fetched exam data:', fetchedExam);
+          }
+        } catch (err) {
+          console.error('Error fetching exam:', err);
+          // デフォルトデータを使用するのでエラーは無視
+        }
+        
+        setExam(examData);
+        
+        // ユーザーの回答履歴を取得
+        if (user && user.uid) {
+          try {
+            console.log('Fetching user attempt history for user:', user.uid, 'and exam:', examId);
+            const attempts = await getUserExamAttemptsByExam(user.uid, examId);
+            console.log('User attempts:', attempts);
+            
+            if (attempts && attempts.length > 0) {
+              // 最新の回答を使用
+              setAttempt(attempts[0]);
+              console.log('Using latest attempt:', attempts[0]);
+            } else {
+              console.log('No attempts found, using score from URL parameter');
+            }
+          } catch (err) {
+            console.error('Error fetching user attempts:', err);
+            // エラーがあっても続行
+          }
+        }
+        
+        setLoading(false);
+      } catch (err) {
+        console.error('Error in fetchExamData:', err);
+        setError('試験データの取得中にエラーが発生しました。');
+        setLoading(false);
+      }
+    };
+
+    fetchExamData();
+  }, [examId, router, authLoading, user, score]);
+
+  // スコアに基づいてフィードバックを生成
+  const getFeedback = (score: number) => {
+    if (score >= 90) return '素晴らしい結果です！高いレベルの理解を示しています。';
+    if (score >= 70) return '良い結果です。いくつかの分野でさらなる学習が必要かもしれません。';
+    if (score >= 50) return '基本的な理解はありますが、さらなる学習が必要です。';
+    return '基礎からの復習をお勧めします。';
+  };
+
+  if (authLoading || loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+          {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (!exam) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+          試験情報の取得に失敗しました。
+        </div>
+      </div>
+    );
+  }
+
+  // スコアの取得（優先順位: 1.回答データ 2.URLパラメータ 3.デフォルト値）
+  const scoreValue = attempt?.score !== undefined ? attempt.score : 
+                    parseInt(score || '0', 10);
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+    <div className="container mx-auto px-4 py-8">
       <div className="max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="bg-white shadow rounded-lg p-8"
-        >
-          <div className="text-center">
-            <h1 className="text-3xl font-bold text-gray-900 mb-8">模試結果</h1>
+        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+          <div className="bg-blue-600 px-6 py-4">
+            <h1 className="text-2xl font-bold text-white">模試結果</h1>
+          </div>
+          
+          <div className="p-6">
+            <h2 className="text-xl font-semibold mb-4">{exam.title}</h2>
             
-            <div className="mb-8">
-              <div className="text-6xl font-bold text-blue-600 mb-4">
-                {result.score}
+            <div className="mb-8 text-center">
+              <div className="inline-block rounded-full bg-blue-100 p-4 mb-4">
+                <div className="text-5xl font-bold text-blue-600">{scoreValue}<span className="text-2xl">点</span></div>
               </div>
-              <div className="text-xl text-gray-900">点</div>
+              
+              <p className="text-gray-600">{getFeedback(scoreValue)}</p>
             </div>
-
-            <div className="grid grid-cols-2 gap-4 mb-8">
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="text-sm text-gray-900 font-medium">正解数</div>
-                <div className="text-2xl font-bold text-gray-900">{result.correctAnswers}/{result.totalQuestions}</div>
+            
+            <div className="mb-6">
+              <h3 className="text-lg font-medium mb-2">試験情報</h3>
+              <div className="bg-gray-50 p-4 rounded-md">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-sm text-gray-500">カテゴリ</p>
+                    <p className="font-medium">{exam.type}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">難易度</p>
+                    <p className="font-medium">{exam.difficulty}</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">所要時間</p>
+                    <p className="font-medium">{exam.duration}分</p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">受験日</p>
+                    <p className="font-medium">
+                      {attempt?.createdAt ? 
+                        (typeof attempt.createdAt.toDate === 'function' ? 
+                          new Date(attempt.createdAt.toDate()).toLocaleDateString() : 
+                          attempt.createdAt instanceof Date ? 
+                            attempt.createdAt.toLocaleDateString() : 
+                            new Date().toLocaleDateString()) : 
+                        new Date().toLocaleDateString()}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <div className="bg-gray-50 p-4 rounded-lg">
-                <div className="text-sm text-gray-900 font-medium">所要時間</div>
-                <div className="text-2xl font-bold text-gray-900">{result.timeSpent}分</div>
-              </div>
             </div>
-
-            <div className="bg-blue-50 p-4 rounded-lg mb-8">
-              <p className="text-blue-900">{result.feedback}</p>
-            </div>
-
-            <div className="space-y-4">
+            
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
-                href="/mypage"
-                className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
+                href={`/exams/${examId}/take`}
+                className="px-4 py-2 bg-blue-600 text-white rounded-md text-center hover:bg-blue-700 transition-colors"
               >
-                マイページへ戻る
+                再受験する
               </Link>
               <Link
-                href="/exams"
-                className="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 text-base font-medium rounded-md text-gray-900 bg-white hover:bg-gray-50"
+                href="/mypage"
+                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md text-center hover:bg-gray-300 transition-colors"
               >
-                他の模試を受験する
+                マイページに戻る
               </Link>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   );

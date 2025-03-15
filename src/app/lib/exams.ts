@@ -1,4 +1,4 @@
-import { COLLECTIONS, getCollection, getDocument, addDocument, updateDocument, queryDocuments } from './firestore';
+import { COLLECTIONS, getCollection, getDocument, addDocument, updateDocument, queryDocuments, setDocument } from './firestore';
 import { where, orderBy, limit } from 'firebase/firestore';
 
 // 模試の型定義
@@ -11,8 +11,9 @@ export interface Exam {
   type: string;
   difficulty: string;
   isFree: boolean;
-  createdAt: any;
-  updatedAt: any;
+  questions?: Question[];
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 // 問題の型定義
@@ -40,13 +41,63 @@ export interface ExamAttempt {
   updatedAt: any;
 }
 
+// デフォルトの模試データ
+export const DEFAULT_EXAMS = [
+  {
+    id: 'toeic-exam-1',
+    title: 'TOEIC® L&R 模試 Vol.1',
+    description: 'TOEIC® L&Rテストの模擬試験です。リスニングとリーディングの両方をカバーしています。',
+    duration: 120,
+    price: 0,
+    type: 'TOEIC',
+    difficulty: '中級',
+    isFree: true,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  },
+  {
+    id: 'toeic-exam-2',
+    title: 'TOEIC® L&R 模試 Vol.2',
+    description: 'TOEIC® L&Rテストの模擬試験です。ビジネス英語に焦点を当てています。',
+    duration: 120,
+    price: 1200,
+    type: 'TOEIC',
+    difficulty: '上級',
+    isFree: false,
+    createdAt: new Date(),
+    updatedAt: new Date()
+  }
+];
+
 // すべての模試を取得
 export const getAllExams = async (): Promise<Exam[]> => {
   try {
-    return await getCollection<Exam>(COLLECTIONS.EXAMS, [orderBy('createdAt', 'desc')]);
+    // Firestoreから模試データを取得
+    const exams = await getCollection<Exam>(COLLECTIONS.EXAMS, [orderBy('createdAt', 'desc')]);
+    
+    // 重複を排除するためにMapを使用
+    const uniqueExamsMap = new Map<string, Exam>();
+    
+    // Firestoreから取得した模試を追加
+    exams.forEach(exam => {
+      if (!uniqueExamsMap.has(exam.id)) {
+        uniqueExamsMap.set(exam.id, exam);
+      }
+    });
+    
+    // Firestoreに模試がない場合はデフォルトの模試を使用
+    if (uniqueExamsMap.size === 0) {
+      DEFAULT_EXAMS.forEach(exam => {
+        uniqueExamsMap.set(exam.id, exam);
+      });
+    }
+    
+    // 結果を配列に変換して返す
+    return Array.from(uniqueExamsMap.values());
   } catch (error) {
     console.error('Error getting all exams:', error);
-    throw error;
+    // エラーが発生した場合はデフォルトの模試を返す
+    return DEFAULT_EXAMS;
   }
 };
 
@@ -63,17 +114,33 @@ export const getExam = async (examId: string): Promise<Exam | null> => {
 // 無料の模試を取得
 export const getFreeExams = async (): Promise<Exam[]> => {
   try {
-    return await queryDocuments<Exam>(
+    const exams = await queryDocuments<Exam>(
       COLLECTIONS.EXAMS,
-      'isFree',
-      '==',
-      true,
-      'createdAt',
-      'desc'
+      [where('isFree', '==', true)]
     );
+    
+    // 重複を排除するためにMapを使用
+    const uniqueExamsMap = new Map<string, Exam>();
+    
+    exams.forEach(exam => {
+      if (!uniqueExamsMap.has(exam.id)) {
+        uniqueExamsMap.set(exam.id, exam);
+      }
+    });
+    
+    // Firestoreに模試がない場合はデフォルトの模試を使用
+    if (uniqueExamsMap.size === 0) {
+      DEFAULT_EXAMS.forEach(exam => {
+        uniqueExamsMap.set(exam.id, exam);
+      });
+    }
+    
+    // 結果を配列に変換して返す
+    return Array.from(uniqueExamsMap.values());
   } catch (error) {
     console.error('Error getting free exams:', error);
-    throw error;
+    // エラーが発生した場合はデフォルトの無料模試を返す
+    return DEFAULT_EXAMS.filter(exam => exam.isFree);
   }
 };
 
@@ -82,11 +149,7 @@ export const getExamsByType = async (type: string): Promise<Exam[]> => {
   try {
     return await queryDocuments<Exam>(
       COLLECTIONS.EXAMS,
-      'type',
-      '==',
-      type,
-      'createdAt',
-      'desc'
+      [where('type', '==', type), orderBy('createdAt', 'desc')]
     );
   } catch (error) {
     console.error(`Error getting exams of type ${type}:`, error);
@@ -99,11 +162,7 @@ export const getExamQuestions = async (examId: string): Promise<Question[]> => {
   try {
     return await queryDocuments<Question>(
       COLLECTIONS.QUESTIONS,
-      'examId',
-      '==',
-      examId,
-      'order',
-      'asc'
+      [where('examId', '==', examId), orderBy('order', 'asc')]
     );
   } catch (error) {
     console.error(`Error getting questions for exam ${examId}:`, error);
@@ -114,26 +173,47 @@ export const getExamQuestions = async (examId: string): Promise<Question[]> => {
 // 模試の回答結果を保存
 export const saveExamAttempt = async (attemptData: Omit<ExamAttempt, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
   try {
-    return await addDocument<Omit<ExamAttempt, 'id' | 'createdAt' | 'updatedAt'>>(
+    console.log('Saving exam attempt to Firestore:', {
+      collection: COLLECTIONS.EXAM_ATTEMPTS,
+      data: attemptData
+    });
+    
+    // examIdが文字列であることを確認
+    if (typeof attemptData.examId !== 'string') {
+      console.error('Invalid examId format:', attemptData.examId);
+      throw new Error('Invalid examId format');
+    }
+    
+    // userIdが文字列であることを確認
+    if (typeof attemptData.userId !== 'string') {
+      console.error('Invalid userId format:', attemptData.userId);
+      throw new Error('Invalid userId format');
+    }
+    
+    // 回答データが存在することを確認
+    if (!attemptData.answers || Object.keys(attemptData.answers).length === 0) {
+      console.warn('No answers provided in attempt data');
+    }
+    
+    const docId = await addDocument<Omit<ExamAttempt, 'id' | 'createdAt' | 'updatedAt'>>(
       COLLECTIONS.EXAM_ATTEMPTS,
       attemptData
     );
+    
+    console.log('Exam attempt saved with document ID:', docId);
+    return docId;
   } catch (error) {
     console.error('Error saving exam attempt:', error);
     throw error;
   }
 };
 
-// ユーザーの模試回答履歴を取得
+// ユーザーの模試受験履歴を取得
 export const getUserExamAttempts = async (userId: string): Promise<ExamAttempt[]> => {
   try {
     return await queryDocuments<ExamAttempt>(
       COLLECTIONS.EXAM_ATTEMPTS,
-      'userId',
-      '==',
-      userId,
-      'createdAt',
-      'desc'
+      [where('userId', '==', userId), orderBy('createdAt', 'desc')]
     );
   } catch (error) {
     console.error(`Error getting exam attempts for user ${userId}:`, error);

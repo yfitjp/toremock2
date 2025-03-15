@@ -1,61 +1,125 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import ExamForm from './ExamForm';
+import { useAuth } from '@/app/hooks/useAuth';
+import { getExamData } from '@/app/lib/firestore';
 
-// 模擬的な問題データ
-const dummyQuestions = [
-  {
-    id: 1,
-    text: 'Which of the following is NOT a valid JavaScript data type?',
-    options: ['Float', 'Boolean', 'String', 'Object'],
-  },
-  {
-    id: 2,
-    text: 'What does the "DOM" stand for in web development?',
-    options: [
-      'Document Object Model',
-      'Data Object Model',
-      'Document Oriented Model',
-      'Digital Object Model',
-    ],
-  },
-  {
-    id: 3,
-    text: 'Which HTML tag is used to create a hyperlink?',
-    options: ['<a>', '<link>', '<href>', '<url>'],
-  },
-  {
-    id: 4,
-    text: 'In CSS, what property is used to change the text color?',
-    options: ['color', 'text-color', 'font-color', 'text-style'],
-  },
-  {
-    id: 5,
-    text: 'Which of the following is a JavaScript framework?',
-    options: ['React', 'HTML', 'CSS', 'SQL'],
-  },
-];
+// ダミーの問題データ（Firestoreからデータが取得できない場合のフォールバック）
+const dummyExam = {
+  id: 'default-free-exam',
+  title: 'TOEIC® L&R 模試 Vol.1',
+  questions: [
+    {
+      id: '1',
+      text: '問題1: "The company is looking for a new marketing director" の意味として最も適切なものを選びなさい。',
+      options: [
+        '会社は新しいマーケティングディレクターを探している。',
+        '会社は新しいマーケティング戦略を検討している。',
+        'マーケティングディレクターは会社を探している。',
+        '新しいマーケティングディレクターが会社を見ている。'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '2',
+      text: '問題2: "Please submit your report by Friday" の意味として最も適切なものを選びなさい。',
+      options: [
+        '金曜日までにレポートを提出してください。',
+        '金曜日にレポートを受け取ってください。',
+        'レポートは金曜日に作成されました。',
+        'レポートを金曜日に確認します。'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '3',
+      text: '問題3: "The meeting has been postponed until next week" の意味として最も適切なものを選びなさい。',
+      options: [
+        '会議は来週まで延期されました。',
+        '会議は来週から始まります。',
+        '来週の会議は中止されました。',
+        '会議は来週も続きます。'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '4',
+      text: '問題4: "She has been working for this company for ten years" の意味として最も適切なものを選びなさい。',
+      options: [
+        '彼女はこの会社で10年間働いています。',
+        '彼女はこの会社で10年後に働く予定です。',
+        '彼女は10年前にこの会社で働いていました。',
+        '彼女は10年間この会社を経営しています。'
+      ],
+      correctAnswer: 0
+    },
+    {
+      id: '5',
+      text: '問題5: "The new product will be launched next month" の意味として最も適切なものを選びなさい。',
+      options: [
+        '新製品は来月発売される予定です。',
+        '新製品は来月製造される予定です。',
+        '来月は新製品の宣伝を行います。',
+        '新製品の開発は来月から始まります。'
+      ],
+      correctAnswer: 0
+    }
+  ]
+};
 
-export default function TakeExamPage() {
-  const params = useParams();
-  const examId = params.id as string;
-  const [loading, setLoading] = useState(true);
-  const [exam, setExam] = useState<{ title: string } | null>(null);
+export default function ExamPage({ params }: { params: { id: string } }) {
+  const router = useRouter();
+  const { user, loading } = useAuth();
+  const [isAuthorized, setIsAuthorized] = useState(false);
+  const [examData, setExamData] = useState<any>(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    // 模擬的なデータ取得
-    // 実際のアプリケーションではAPIからデータを取得します
-    setTimeout(() => {
-      setExam({
-        title: 'TOEIC® L&R 模試 Vol.1',
-      });
-      setLoading(false);
-    }, 500);
-  }, []);
+    // 認証状態の確認
+    if (!loading) {
+      if (!user) {
+        // 未ログインの場合はログインページにリダイレクト
+        router.push('/auth/signin');
+      } else {
+        // ログイン済みの場合は権限チェック（ここでは簡易的に全ユーザーに権限を付与）
+        setIsAuthorized(true);
+      }
+    }
+  }, [user, loading, router]);
 
-  if (loading) {
+  useEffect(() => {
+    const fetchExamData = async () => {
+      if (!params.id) return;
+      
+      try {
+        setIsLoading(true);
+        const data = await getExamData(params.id);
+        
+        if (data) {
+          console.log('Fetched exam data:', data);
+          setExamData(data);
+        } else {
+          console.warn('Exam data not found, using dummy data');
+          setExamData(dummyExam);
+        }
+      } catch (err) {
+        console.error('Error fetching exam data:', err);
+        setError('模試データの取得中にエラーが発生しました。');
+        setExamData(dummyExam);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (isAuthorized) {
+      fetchExamData();
+    }
+  }, [params.id, isAuthorized]);
+
+  if (loading || isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -63,11 +127,21 @@ export default function TakeExamPage() {
     );
   }
 
-  if (!exam) {
+  if (!isAuthorized) {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
-          試験情報の取得に失敗しました。
+          この模試を受験する権限がありません。
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
+          {error}
         </div>
       </div>
     );
@@ -75,14 +149,12 @@ export default function TakeExamPage() {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <div className="mb-6">
-        <h1 className="text-2xl font-bold mb-2">{exam.title}</h1>
-        <p className="text-gray-600">
-          以下の問題に回答してください。時間内に全ての問題を解答するようにしてください。
-        </p>
-      </div>
+      <h1 className="text-3xl font-bold mb-2">{examData?.title || 'テスト'}</h1>
+      <p className="text-gray-600 dark:text-gray-300 mb-8">
+        以下の問題に回答してください。制限時間は{examData?.timeLimit || 60}分です。
+      </p>
       
-      <ExamForm examId={examId} questions={dummyQuestions} />
+      <ExamForm examId={params.id} questions={examData?.questions || dummyExam.questions} />
     </div>
   );
 } 

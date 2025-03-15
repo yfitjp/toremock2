@@ -1,12 +1,15 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import { useAuth } from '@/app/hooks/useAuth';
+import { addDocument } from '@/app/lib/firestore';
 
 interface Question {
-  id: number;
+  id: string;
   text: string;
   options: string[];
+  correctAnswer?: number;
 }
 
 interface ExamFormProps {
@@ -16,185 +19,199 @@ interface ExamFormProps {
 
 export default function ExamForm({ examId, questions }: ExamFormProps) {
   const router = useRouter();
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [answers, setAnswers] = useState<Record<number, number>>({});
+  const { user } = useAuth();
+  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [currentQuestion, setCurrentQuestion] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60分（秒単位）
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isFinished, setIsFinished] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  // 模擬的なスコア計算（実際はサーバーサイドで計算）
-  const calculateScore = useCallback(() => {
-    // 簡易的な採点（正解は常に最初の選択肢と仮定）
-    const correctAnswers = Object.entries(answers).filter(
-      ([, answer]) => answer === 0
-    ).length;
-    
-    return Math.round((correctAnswers / questions.length) * 100);
-  }, [answers, questions.length]);
-
-  // handleSubmit関数をuseCallbackでメモ化
-  const handleSubmit = useCallback(async () => {
-    if (isSubmitting) return;
-
-    setIsSubmitting(true);
-    try {
-      // 実際のアプリケーションではAPIを呼び出して回答を送信します
-      // const response = await fetch(`/api/exams/${examId}/submit`, {
-      //   method: 'POST',
-      //   headers: { 'Content-Type': 'application/json' },
-      //   body: JSON.stringify({ answers }),
-      // });
-      
-      // if (!response.ok) throw new Error('回答の送信に失敗しました');
-      
-      // 模擬的な処理（実際はAPIからのレスポンスを使用）
-      setTimeout(() => {
-        setIsFinished(true);
-        // 結果ページへリダイレクト
-        router.push(`/exams/${examId}/result?score=${calculateScore()}`);
-      }, 1000);
-    } catch (err) {
-      console.error('Error submitting answers:', err);
-    } finally {
-      setIsSubmitting(false);
-    }
-  }, [examId, isSubmitting, router, calculateScore]);
-
-  // タイマー処理
+  // 残り時間のカウントダウン
   useEffect(() => {
-    if (timeLeft <= 0 || isFinished) return;
-
     const timer = setInterval(() => {
-      setTimeLeft((prev) => prev - 1);
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          handleSubmit();
+          return 0;
+        }
+        return prev - 1;
+      });
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [timeLeft, isFinished]);
+  }, []);
 
-  // 時間切れの場合、自動的に提出
-  useEffect(() => {
-    if (timeLeft <= 0 && !isFinished) {
-      handleSubmit();
-    }
-  }, [timeLeft, isFinished, handleSubmit]);
-
-  const handleAnswerSelect = (questionId: number, optionIndex: number) => {
+  // 回答の選択
+  const handleAnswerSelect = (questionId: string, optionIndex: number) => {
     setAnswers((prev) => ({
       ...prev,
       [questionId]: optionIndex,
     }));
   };
 
+  // 次の問題へ
   const handleNext = () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+    if (currentQuestion < questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
     }
   };
 
-  const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
+  // 前の問題へ
+  const handlePrev = () => {
+    if (currentQuestion > 0) {
+      setCurrentQuestion(currentQuestion - 1);
     }
   };
 
+  // 回答の提出
+  const handleSubmit = async () => {
+    if (!user) {
+      setError('ログインが必要です。');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      setError(null);
+
+      // 正解数を計算
+      let correctCount = 0;
+      const totalQuestions = questions.length;
+      
+      for (const question of questions) {
+        if (question.correctAnswer !== undefined && answers[question.id] === question.correctAnswer) {
+          correctCount++;
+        }
+      }
+      
+      // スコアを計算（100点満点）
+      const score = Math.round((correctCount / totalQuestions) * 100);
+      
+      // 回答データをFirestoreに保存
+      await addDocument('exam_attempts', {
+        userId: user.uid,
+        examId: examId,
+        answers: answers,
+        score: score,
+        completedAt: new Date(),
+      });
+
+      // 結果ページへリダイレクト
+      router.push(`/exams/${examId}/result?score=${score}`);
+    } catch (err) {
+      console.error('Error submitting exam:', err);
+      setError('回答の提出中にエラーが発生しました。もう一度お試しください。');
+      setIsSubmitting(false);
+    }
+  };
+
+  // 残り時間のフォーマット
   const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
   };
 
-  const currentQuestion = questions[currentQuestionIndex];
+  // 現在の問題
+  const currentQuestionData = questions[currentQuestion];
 
-  if (isFinished) {
-    return (
-      <div className="text-center p-8">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500 mx-auto"></div>
-        <p className="mt-4 text-gray-600">結果を計算中...</p>
-      </div>
-    );
+  if (!currentQuestionData) {
+    return <div>問題が見つかりません。</div>;
   }
 
   return (
-    <div className="bg-white shadow-md rounded-lg p-6">
+    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-6">
-        <div className="text-sm font-medium text-gray-500">
-          問題 {currentQuestionIndex + 1} / {questions.length}
+        <div className="text-lg font-medium">
+          問題 {currentQuestion + 1} / {questions.length}
         </div>
-        <div className="text-sm font-medium text-gray-500">
-          残り時間: <span className={timeLeft < 300 ? 'text-red-500' : ''}>{formatTime(timeLeft)}</span>
+        <div className="text-lg font-medium text-red-600 dark:text-red-400">
+          残り時間: {formatTime(timeLeft)}
         </div>
       </div>
 
       <div className="mb-8">
-        <h2 className="text-lg font-medium text-gray-900 mb-4">{currentQuestion.text}</h2>
+        <h2 className="text-xl font-semibold mb-4 dark:text-white">{currentQuestionData.text}</h2>
         <div className="space-y-3">
-          {currentQuestion.options.map((option, index) => (
-            <div key={index} className="flex items-start">
-              <div className="flex items-center h-5">
+          {currentQuestionData.options.map((option, index) => (
+            <div
+              key={index}
+              className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                answers[currentQuestionData.id] === index
+                  ? 'bg-blue-100 dark:bg-blue-900 border-blue-500'
+                  : 'hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-200 dark:border-gray-700'
+              }`}
+              onClick={() => handleAnswerSelect(currentQuestionData.id, index)}
+            >
+              <label className="flex items-start cursor-pointer">
                 <input
-                  id={`question-${currentQuestion.id}-option-${index}`}
                   type="radio"
-                  name={`question-${currentQuestion.id}`}
-                  className="h-4 w-4 text-blue-600 border-gray-300 focus:ring-blue-500"
-                  checked={answers[currentQuestion.id] === index}
-                  onChange={() => handleAnswerSelect(currentQuestion.id, index)}
+                  className="mt-1 mr-2"
+                  checked={answers[currentQuestionData.id] === index}
+                  onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
                 />
-              </div>
-              <div className="ml-3 text-sm">
-                <label
-                  htmlFor={`question-${currentQuestion.id}-option-${index}`}
-                  className="font-medium text-gray-700"
-                >
-                  {option}
-                </label>
-              </div>
+                <span className="dark:text-gray-200">{option}</span>
+              </label>
             </div>
           ))}
         </div>
       </div>
 
+      {error && (
+        <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-200 p-3 rounded-md mb-4">
+          {error}
+        </div>
+      )}
+
       <div className="flex justify-between">
         <button
-          type="button"
-          onClick={handlePrevious}
-          disabled={currentQuestionIndex === 0}
-          className="px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50"
+          onClick={handlePrev}
+          disabled={currentQuestion === 0}
+          className={`px-4 py-2 rounded-md ${
+            currentQuestion === 0
+              ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              : 'bg-blue-600 text-white hover:bg-blue-700'
+          }`}
         >
           前の問題
         </button>
-        
-        {currentQuestionIndex < questions.length - 1 ? (
+
+        {currentQuestion < questions.length - 1 ? (
           <button
-            type="button"
             onClick={handleNext}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
             次の問題
           </button>
         ) : (
           <button
-            type="button"
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 disabled:opacity-50"
+            className={`px-4 py-2 rounded-md ${
+              isSubmitting
+                ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                : 'bg-green-600 text-white hover:bg-green-700'
+            }`}
           >
-            {isSubmitting ? '送信中...' : '回答を提出する'}
+            {isSubmitting ? '提出中...' : '回答を提出する'}
           </button>
         )}
       </div>
 
       <div className="mt-8">
         <div className="flex flex-wrap gap-2">
-          {questions.map((q, index) => (
+          {questions.map((_, index) => (
             <button
-              key={q.id}
-              type="button"
-              onClick={() => setCurrentQuestionIndex(index)}
-              className={`w-8 h-8 flex items-center justify-center rounded-full text-xs font-medium ${
-                answers[q.id] !== undefined
-                  ? 'bg-blue-100 text-blue-800 border border-blue-300'
-                  : 'bg-gray-100 text-gray-800 border border-gray-300'
-              } ${currentQuestionIndex === index ? 'ring-2 ring-blue-500' : ''}`}
+              key={index}
+              onClick={() => setCurrentQuestion(index)}
+              className={`w-8 h-8 flex items-center justify-center rounded-full ${
+                answers[questions[index].id] !== undefined
+                  ? 'bg-green-500 text-white'
+                  : currentQuestion === index
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+              }`}
             >
               {index + 1}
             </button>
