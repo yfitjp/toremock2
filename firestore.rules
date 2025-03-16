@@ -1,0 +1,46 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // ユーザーが認証されているかチェック
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // リクエストユーザーが指定されたユーザーIDと一致するかチェック
+    function isUserAuthenticated(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // 模試コレクション
+    match /exams/{examId} {
+      allow read: if true; // 模試一覧は誰でも閲覧可能
+      allow write: if false; // 管理者のみが作成可能（後で管理者用のルールを追加）
+      
+      // 問題コレクション
+      match /questions/{questionId} {
+        allow read: if true; // 問題は誰でも閲覧可能
+        allow write: if false; // 管理者のみが作成可能
+      }
+    }
+
+    // 回答履歴コレクション
+    match /exam_attempts/{attemptId} {
+      allow read: if isUserAuthenticated(resource.data.userId);
+      allow create: if isUserAuthenticated(request.resource.data.userId);
+      allow update, delete: if false; // 回答は作成のみ可能
+    }
+
+    // サブスクリプションコレクション
+    match /subscriptions/{subscriptionId} {
+      allow read: if isUserAuthenticated(resource.data.userId);
+      allow write: if false; // サーバーサイドでのみ更新可能
+    }
+
+    // 購入履歴コレクション
+    match /purchases/{purchaseId} {
+      allow read: if isUserAuthenticated(resource.data.userId);
+      allow write: if false; // サーバーサイドでのみ更新可能
+    }
+  }
+} 

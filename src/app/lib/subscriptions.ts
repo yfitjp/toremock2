@@ -28,7 +28,7 @@ export const SUBSCRIPTION_PLANS = {
     id: 'premium',
     name: 'プレミアムプラン',
     description: 'すべての模試にアクセス可能',
-    price: 4980,
+    price: 1980,
     features: [
       'すべての模試にアクセス可能',
       '新しい模試が追加されたら即時アクセス可能',
