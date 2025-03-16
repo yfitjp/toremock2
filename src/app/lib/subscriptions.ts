@@ -6,7 +6,7 @@ import {
   queryDocuments,
   addDocument
 } from './firestore';
-import { where, orderBy } from 'firebase/firestore';
+import { where, orderBy, limit } from 'firebase/firestore';
 
 // サブスクリプションの型定義
 export interface Subscription {
@@ -109,9 +109,9 @@ export const getUserActiveSubscription = async (userId: string): Promise<Subscri
       [
         where('userId', '==', userId),
         where('status', '==', 'active'),
-        orderBy('createdAt', 'desc')
-      ],
-      1
+        orderBy('createdAt', 'desc'),
+        limit(1)
+      ]
     );
 
     return subscriptions.length > 0 ? subscriptions[0] : null;
