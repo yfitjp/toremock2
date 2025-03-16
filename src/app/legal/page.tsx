@@ -16,28 +16,23 @@ export default function LegalPage() {
           
           <div className="space-y-6">
             <section>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">事業者の名称</h2>
-              <p className="text-gray-900">株式会社ToreMock</p>
-            </section>
-
-            <section>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">代表者名</h2>
-              <p className="text-gray-900">代表取締役 山田 太郎</p>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">事業者名</h2>
+              <p className="text-gray-900">藤井佑成</p>
             </section>
 
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">所在地</h2>
               <p className="text-gray-900">
-                〒100-0001<br />
-                東京都千代田区千代田1-1-1
+                〒274-0077<br />
+                千葉県船橋市薬園台6-8-2
               </p>
             </section>
 
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">連絡先</h2>
               <p className="text-gray-900">
-                メールアドレス：contact@toremock.com<br />
-                電話番号：03-1234-5678<br />
+                メールアドレス：fujiiyousay@gmail.com<br />
+                電話番号：080-4686-0794<br />
                 受付時間：平日 9:00-18:00
               </p>
             </section>
