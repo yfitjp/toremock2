@@ -16,10 +16,24 @@ const nextConfig = {
         zlib: false,
       };
     }
+
+    // undiciモジュールをトランスパイルから除外
+    config.module = {
+      ...config.module,
+      exprContextCritical: false,
+      rules: [
+        ...config.module.rules,
+        {
+          test: /node_modules\/@firebase\/.*\/dist\/.*\.js$/,
+          use: ['next-swc-loader'],
+        },
+      ],
+    };
+
     return config;
   },
   experimental: {
-    serverComponentsExternalPackages: ['undici'],
+    serverComponentsExternalPackages: ['@firebase/storage', '@firebase/auth', 'firebase', 'firebase-admin'],
   },
 };
 
