@@ -17,24 +17,27 @@ const nextConfig = {
       };
     }
 
-    // undiciモジュールをトランスパイルから除外
-    config.module = {
-      ...config.module,
-      exprContextCritical: false,
-      rules: [
-        ...config.module.rules,
-        {
-          test: /node_modules\/@firebase\/.*\/dist\/.*\.js$/,
-          use: ['next-swc-loader'],
-        },
-      ],
-    };
+    // Firebaseモジュールの処理を設定
+    config.module.rules.push({
+      test: /\.m?js$/,
+      type: 'javascript/auto',
+      resolve: {
+        fullySpecified: false,
+      },
+    });
 
     return config;
   },
-  experimental: {
-    serverComponentsExternalPackages: ['@firebase/storage', '@firebase/auth', 'firebase', 'firebase-admin'],
-  },
+  transpilePackages: [
+    'firebase',
+    '@firebase/app',
+    '@firebase/auth',
+    '@firebase/firestore',
+    '@firebase/storage',
+    '@firebase/util',
+    '@firebase/component',
+    '@firebase/logger',
+  ],
 };
 
 module.exports = nextConfig; 
