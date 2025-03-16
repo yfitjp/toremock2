@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/app/hooks/useAuth';
-import { getExam, getUserExamAttemptsByExam, ExamAttempt } from '@/app/lib/exams';
+import { getExam, getUserExamAttemptsByExam, ExamAttempt, Exam } from '@/app/lib/exams';
 import Link from 'next/link';
 
 export default function ExamResultPage() {
@@ -15,7 +15,7 @@ export default function ExamResultPage() {
   const score = searchParams.get('score');
   
   const [loading, setLoading] = useState(true);
-  const [exam, setExam] = useState<any>(null);
+  const [exam, setExam] = useState<Exam | null>(null);
   const [attempt, setAttempt] = useState<ExamAttempt | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,7 +35,7 @@ export default function ExamResultPage() {
         console.log('Fetching exam data for ID:', examId);
         
         // デフォルトの模試データ
-        let examData = {
+        let examData: Exam = {
           id: 'default-free-exam',
           title: 'TOEIC® L&R 模試 Vol.1',
           description: 'TOEIC® L&Rテストの模擬試験です。本番さながらの環境で受験できます。',
@@ -52,7 +52,11 @@ export default function ExamResultPage() {
         try {
           const fetchedExam = await getExam(examId);
           if (fetchedExam) {
-            examData = fetchedExam;
+            examData = {
+              ...fetchedExam,
+              createdAt: fetchedExam.createdAt || new Date(),
+              updatedAt: fetchedExam.updatedAt || new Date()
+            };
             console.log('Fetched exam data:', fetchedExam);
           }
         } catch (err) {
