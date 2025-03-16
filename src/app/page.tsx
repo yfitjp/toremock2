@@ -311,7 +311,7 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-white">プレミアムプラン</h3>
                 <p className="mt-4 text-blue-100">本気で英語力を伸ばしたい方に</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-white">¥4,980</span>
+                  <span className="text-4xl font-extrabold text-white">¥1,980</span>
                   <span className="text-base font-medium text-blue-100">/月</span>
                 </p>
                 <ul className="mt-8 space-y-4">

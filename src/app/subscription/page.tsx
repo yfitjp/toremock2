@@ -213,7 +213,7 @@ export default function SubscriptionPage() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="ml-3 text-gray-500 dark:text-gray-400">有料模試は個別購入（¥1,500/模試）</span>
+                  <span className="ml-3 text-gray-500 dark:text-gray-400">有料模試は個別購入（￥490～/模試）</span>
                 </li>
               </ul>
             </div>
