@@ -12,8 +12,8 @@ const getStripeConfig = () => {
 
   return {
     secretKey: process.env.STRIPE_SECRET_KEY,
-    apiVersion: '2025-02-24.acacia' as const,
-    typescript: true,
+    apiVersion: '2023-10-16' as const,
+    typescript: true as const,
   };
 };
 
