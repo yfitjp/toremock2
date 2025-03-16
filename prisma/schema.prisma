@@ -99,7 +99,7 @@ model ExamAttempt {
   examId    String
   score     Int
   timeSpent Int      // 秒単位
-  answers   Json     // 回答データ
+  answers   String   // 回答データ（JSON文字列として保存）
   createdAt DateTime @default(now())
 
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
