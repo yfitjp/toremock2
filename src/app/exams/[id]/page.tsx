@@ -56,64 +56,58 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
   }, [params.id, user]);
 
   const handlePurchase = async () => {
-    if (!user) {
-      showToast('ログインが必要です', 'error');
-      return;
-    }
-
     try {
-      const idToken = await user.getIdToken();
+      setIsLoading(true);
+      const idToken = await user?.getIdToken();
       if (!idToken) {
         throw new Error('認証トークンの取得に失敗しました');
       }
 
-      console.log('購入リクエスト開始:', {
-        examId: params.id,
-        userId: user.uid
-      });
-
       const response = await fetch(`/api/exams/${params.id}/purchase`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${idToken}`,
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
         },
       });
 
       if (!response.ok) {
         const errorText = await response.text();
-        console.error('購入APIエラー:', {
+        console.error('Purchase API Error:', {
           status: response.status,
           statusText: response.statusText,
-          error: errorText,
-          headers: Object.fromEntries(response.headers.entries())
+          error: errorText
         });
         throw new Error(errorText || '決済セッションの作成に失敗しました');
       }
 
-      const { sessionId } = await response.json();
-      if (!sessionId) {
-        throw new Error('セッションIDの取得に失敗しました');
+      const data = await response.json();
+      if (!data.sessionId) {
+        throw new Error('セッションIDが取得できませんでした');
       }
 
-      console.log('セッションID取得成功:', { sessionId });
-
+      // Stripeのチェックアウトページにリダイレクト
       const stripe = await stripePromise;
       if (!stripe) {
         throw new Error('Stripeの初期化に失敗しました');
       }
 
       const { error } = await stripe.redirectToCheckout({
-        sessionId,
+        sessionId: data.sessionId,
       });
 
       if (error) {
-        console.error('Stripeリダイレクトエラー:', error);
-        throw error;
+        console.error('Stripe redirect error:', error);
+        throw new Error(error.message);
       }
     } catch (error) {
-      console.error('購入処理エラー:', error);
-      showToast(error instanceof Error ? error.message : '購入処理に失敗しました', 'error');
+      console.error('Purchase error:', error);
+      showToast(
+        error instanceof Error ? error.message : '決済セッションの作成に失敗しました',
+        'error'
+      );
+    } finally {
+      setIsLoading(false);
     }
   };
 

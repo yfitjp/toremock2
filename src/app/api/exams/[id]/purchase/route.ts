@@ -138,8 +138,16 @@ export async function POST(
     // エラーオブジェクトの型チェック
     if (error && typeof error === 'object' && 'code' in error && error.code === 13) {
       return new NextResponse(
-        'データベース接続エラーが発生しました。しばらく待ってから再度お試しください。',
-        { status: 503 }
+        JSON.stringify({
+          error: 'データベース接続エラー',
+          message: 'データベース接続エラーが発生しました。しばらく待ってから再度お試しください。'
+        }),
+        { 
+          status: 503,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
     }
     
@@ -152,8 +160,17 @@ export async function POST(
         raw: error.raw
       });
       return new NextResponse(
-        `Stripeエラー: ${error.message}`,
-        { status: 400 }
+        JSON.stringify({
+          error: 'Stripeエラー',
+          message: error.message,
+          code: error.code
+        }),
+        { 
+          status: 400,
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        }
       );
     }
     
@@ -165,8 +182,16 @@ export async function POST(
     });
     
     return new NextResponse(
-      error instanceof Error ? error.message : '内部サーバーエラー',
-      { status: 500 }
+      JSON.stringify({
+        error: '内部サーバーエラー',
+        message: error instanceof Error ? error.message : '内部サーバーエラーが発生しました'
+      }),
+      { 
+        status: 500,
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }
     );
   }
 } 
