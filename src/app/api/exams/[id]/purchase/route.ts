@@ -135,7 +135,8 @@ export async function POST(
   } catch (error) {
     console.error('模試購入エラー:', error);
     
-    if (error.code === 13 || error.message.includes('INTERNAL')) {
+    // エラーオブジェクトの型チェック
+    if (error && typeof error === 'object' && 'code' in error && error.code === 13) {
       return new NextResponse(
         'データベース接続エラーが発生しました。しばらく待ってから再度お試しください。',
         { status: 503 }
