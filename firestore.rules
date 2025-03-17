@@ -12,35 +12,51 @@ service cloud.firestore {
       return isAuthenticated() && request.auth.uid == userId;
     }
 
+    // 管理者権限チェック
+    function isAdmin() {
+      return isAuthenticated() && 
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    // ユーザーコレクション
+    match /users/{userId} {
+      allow read: if isUserAuthenticated(userId) || isAdmin();
+      allow write: if isUserAuthenticated(userId) || isAdmin();
+    }
+
     // 模試コレクション
     match /exams/{examId} {
       allow read: if true; // 模試一覧は誰でも閲覧可能
-      allow write: if false; // 管理者のみが作成可能（後で管理者用のルールを追加）
+      allow write: if isAdmin(); // 管理者のみが作成可能
       
       // 問題コレクション
       match /questions/{questionId} {
         allow read: if true; // 問題は誰でも閲覧可能
-        allow write: if false; // 管理者のみが作成可能
+        allow write: if isAdmin(); // 管理者のみが作成可能
       }
     }
 
     // 回答履歴コレクション
     match /exam_attempts/{attemptId} {
-      allow read: if isUserAuthenticated(resource.data.userId);
+      allow read: if isUserAuthenticated(resource.data.userId) || isAdmin();
       allow create: if isUserAuthenticated(request.resource.data.userId);
       allow update, delete: if false; // 回答は作成のみ可能
     }
 
     // サブスクリプションコレクション
     match /subscriptions/{subscriptionId} {
-      allow read: if isUserAuthenticated(resource.data.userId);
-      allow write: if false; // サーバーサイドでのみ更新可能
+      allow read: if isUserAuthenticated(resource.data.userId) || isAdmin();
+      allow create: if isUserAuthenticated(request.resource.data.userId);
+      allow update: if isAdmin(); // 管理者のみが更新可能
+      allow delete: if false;
     }
 
     // 購入履歴コレクション
     match /purchases/{purchaseId} {
-      allow read: if isUserAuthenticated(resource.data.userId);
-      allow write: if false; // サーバーサイドでのみ更新可能
+      allow read: if isUserAuthenticated(resource.data.userId) || isAdmin();
+      allow create: if isUserAuthenticated(request.resource.data.userId);
+      allow update: if isAdmin(); // 管理者のみが更新可能
+      allow delete: if false;
     }
   }
 } 

@@ -5,6 +5,7 @@ import { STRIPE_EVENTS } from '@/app/lib/stripe-config';
 import { createOrUpdateSubscription } from '@/app/lib/subscriptions';
 import { updatePurchaseStatus, getPurchaseByPaymentIntent } from '@/app/lib/purchases';
 import Stripe from 'stripe';
+import { db } from '@/app/lib/firebase-admin';
 
 export async function POST(req: Request) {
   try {
@@ -100,37 +101,42 @@ export async function POST(req: Request) {
 
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
-        console.log('Processing checkout session completed:', session.id);
-        
-        if (session.payment_status === 'paid' && session.payment_intent) {
-          const paymentIntentId = typeof session.payment_intent === 'string'
-            ? session.payment_intent
-            : session.payment_intent.id;
+        const { userId, examId } = session.metadata!;
 
-          // payment_intentを取得してメタデータを確認
-          const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
-          const { purchaseId } = paymentIntent.metadata;
+        // 購入履歴の更新
+        const purchaseQuery = await db.collection('purchases')
+          .where('stripeSessionId', '==', session.id)
+          .get();
 
-          if (purchaseId) {
-            console.log('Updating purchase status to completed:', purchaseId);
-            await updatePurchaseStatus(purchaseId, 'completed', paymentIntentId);
-          } else {
-            console.log('No purchaseId found in payment intent metadata:', paymentIntentId);
-          }
+        if (!purchaseQuery.empty) {
+          const purchaseDoc = purchaseQuery.docs[0];
+          await purchaseDoc.ref.update({
+            status: 'completed',
+            stripePaymentIntentId: session.payment_intent as string,
+            updatedAt: new Date(),
+          });
         }
+
         break;
       }
 
       case 'payment_intent.payment_failed': {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const { purchaseId } = paymentIntent.metadata;
-        
-        if (purchaseId) {
-          console.log('Updating purchase status to failed:', purchaseId);
-          await updatePurchaseStatus(purchaseId, 'failed', paymentIntent.id);
-        } else {
-          console.log('No purchaseId found in payment intent metadata:', paymentIntent.id);
+        const sessionId = paymentIntent.metadata.sessionId;
+
+        // 購入履歴の更新
+        const purchaseQuery = await db.collection('purchases')
+          .where('stripeSessionId', '==', sessionId)
+          .get();
+
+        if (!purchaseQuery.empty) {
+          const purchaseDoc = purchaseQuery.docs[0];
+          await purchaseDoc.ref.update({
+            status: 'failed',
+            updatedAt: new Date(),
+          });
         }
+
         break;
       }
     }

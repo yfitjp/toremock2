@@ -1,5 +1,6 @@
 import { initializeApp, getApps, cert } from 'firebase-admin/app';
 import { getAuth } from 'firebase-admin/auth';
+import { getFirestore } from 'firebase-admin/firestore';
 
 // 環境変数のバリデーション
 const validateEnvVariables = () => {
@@ -48,4 +49,6 @@ if (!apps.length) {
   }
 }
 
-export const adminAuth = getAuth(); 
+// 認証とFirestoreのインスタンスをエクスポート
+export const auth = getAuth();
+export const db = getFirestore(); 
