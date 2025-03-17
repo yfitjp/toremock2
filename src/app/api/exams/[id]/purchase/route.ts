@@ -56,19 +56,21 @@ export async function POST(
       return new NextResponse('API URLの設定が不正です', { status: 500 });
     }
 
+    // セッション作成前のログ
+    console.log('Stripeセッション作成開始:', {
+      userId,
+      examId: params.id,
+      price: examData.price,
+      title: examData.title,
+      email: decodedToken.email
+    });
+
     // Stripeセッションの作成
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
       line_items: [
         {
-          price_data: {
-            currency: 'jpy',
-            product_data: {
-              name: examData.title,
-              description: examData.description,
-            },
-            unit_amount: examData.price,
-          },
+          price: examData.stripePriceId,
           quantity: 1,
         },
       ],
@@ -90,6 +92,12 @@ export async function POST(
           request_three_d_secure: 'automatic',
         },
       },
+    });
+
+    // セッション作成成功のログ
+    console.log('Stripeセッション作成成功:', {
+      sessionId: session.id,
+      url: session.url
     });
 
     // 購入履歴の作成
@@ -114,13 +122,21 @@ export async function POST(
         type: error.type,
         code: error.code,
         message: error.message,
-        stack: error.stack
+        stack: error.stack,
+        raw: error.raw
       });
       return new NextResponse(
         `Stripeエラー: ${error.message}`,
         { status: 400 }
       );
     }
+    
+    // その他のエラーの詳細をログ出力
+    console.error('その他のエラー:', {
+      name: error instanceof Error ? error.name : 'Unknown',
+      message: error instanceof Error ? error.message : 'Unknown error',
+      stack: error instanceof Error ? error.stack : undefined
+    });
     
     return new NextResponse(
       error instanceof Error ? error.message : '内部サーバーエラー',

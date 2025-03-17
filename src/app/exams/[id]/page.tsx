@@ -67,6 +67,11 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
         throw new Error('認証トークンの取得に失敗しました');
       }
 
+      console.log('購入リクエスト開始:', {
+        examId: params.id,
+        userId: user.uid
+      });
+
       const response = await fetch(`/api/exams/${params.id}/purchase`, {
         method: 'POST',
         headers: {
@@ -80,7 +85,8 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
         console.error('購入APIエラー:', {
           status: response.status,
           statusText: response.statusText,
-          error: errorText
+          error: errorText,
+          headers: Object.fromEntries(response.headers.entries())
         });
         throw new Error(errorText || '決済セッションの作成に失敗しました');
       }
@@ -89,6 +95,8 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
       if (!sessionId) {
         throw new Error('セッションIDの取得に失敗しました');
       }
+
+      console.log('セッションID取得成功:', { sessionId });
 
       const stripe = await stripePromise;
       if (!stripe) {
