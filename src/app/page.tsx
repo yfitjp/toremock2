@@ -37,8 +37,8 @@ export default function Home() {
                   className="text-left lg:w-1/2"
                 >
                   <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                    <span className="block">英語力を測定するなら</span>
-                    <span className="block text-blue-600">TOREMOCK</span>
+                    <span className="block">トレモックであなたの英語学習を</span>
+                    <span className="block text-blue-600">次のレベルへ</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl">
                     TOEIC®、TOEFL®、英検®などの模擬試験を手軽にオンラインで受験できるプラットフォームです。
@@ -88,7 +88,7 @@ export default function Home() {
                       <div className="relative rounded-lg shadow-lg overflow-hidden bg-white p-5">
                         <div className="bg-blue-50 p-4 rounded-lg mb-4">
                           <h3 className="text-lg font-semibold text-blue-800 mb-2">今すぐ無料で模試を体験</h3>
-                          <p className="text-sm text-blue-600">アカウント登録なしで受験できる無料模試をご用意しています</p>
+                          <p className="text-sm text-blue-600">無料で受験可能な模試を多数ご用意しています</p>
                         </div>
                         <div className="flex justify-center">
                           <Link
@@ -122,7 +122,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">特徴</h2>
               <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
-                TOREMOCKが選ばれる理由
+                ToreMockが選ばれる理由
               </p>
               <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500 dark:text-gray-300">
                 本番さながらの環境で実力を試し、詳細な分析で弱点を克服できます
