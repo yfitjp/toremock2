@@ -35,6 +35,16 @@ export async function POST(
       return new NextResponse('模試データが不正です', { status: 400 });
     }
 
+    // Stripeの商品IDと価格IDの確認
+    if (!examData.stripeProductId || !examData.stripePriceId) {
+      console.error('Stripeの商品IDまたは価格IDが設定されていません:', {
+        examId: params.id,
+        stripeProductId: examData.stripeProductId,
+        stripePriceId: examData.stripePriceId
+      });
+      return new NextResponse('Stripeの商品設定が不正です', { status: 400 });
+    }
+
     // 既に購入済みかチェック
     const existingPurchase = await db.collection('purchases')
       .where('userId', '==', userId)
@@ -60,7 +70,8 @@ export async function POST(
     console.log('Stripeセッション作成開始:', {
       userId,
       examId: params.id,
-      price: examData.price,
+      stripeProductId: examData.stripeProductId,
+      stripePriceId: examData.stripePriceId,
       title: examData.title,
       email: decodedToken.email
     });
@@ -80,6 +91,8 @@ export async function POST(
       metadata: {
         userId,
         examId: params.id,
+        productId: examData.stripeProductId,
+        priceId: examData.stripePriceId,
       },
       payment_method_collection: 'always',
       allow_promotion_codes: true,
@@ -109,6 +122,8 @@ export async function POST(
       status: 'pending',
       stripeSessionId: session.id,
       stripePaymentIntentId: '',
+      stripeProductId: examData.stripeProductId,
+      stripePriceId: examData.stripePriceId,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
