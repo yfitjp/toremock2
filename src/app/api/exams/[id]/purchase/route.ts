@@ -74,7 +74,6 @@ export async function POST(
       customer_creation: 'always',
       customer_email: decodedToken.email,
       locale: 'ja',
-      // テストモードの設定
       payment_method_options: {
         card: {
           request_three_d_secure: 'automatic',
@@ -98,6 +97,14 @@ export async function POST(
     return NextResponse.json({ sessionId: session.id });
   } catch (error) {
     console.error('模試購入エラー:', error);
+    
+    if (error instanceof Stripe.errors.StripeError) {
+      return new NextResponse(
+        `Stripeエラー: ${error.message}`,
+        { status: 400 }
+      );
+    }
+    
     return new NextResponse(
       error instanceof Error ? error.message : '内部サーバーエラー',
       { status: 500 }

@@ -6,8 +6,8 @@ import { useAuth } from '@/app/contexts/AuthContext';
 import { loadStripe } from '@stripe/stripe-js';
 import { useToast } from '@/app/hooks/useToast';
 
-// Stripeの初期化（テストモード）
-const stripePromise = loadStripe('pk_test_51R0zVlRp7q8hSOKpqJ3w3edEjop6iKFUsDgA4JBGg25YQNIiMpo3lo1vyOQMH3s6LjBSDuiMemR9sTVBIc8bioDY00eRIjORKG');
+// Stripeの初期化
+const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 export default function ExamDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
