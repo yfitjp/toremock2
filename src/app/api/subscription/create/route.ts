@@ -1,8 +1,7 @@
 import { NextResponse } from 'next/server';
 import { stripe } from '@/app/lib/stripe-server';
 import { STRIPE_PREMIUM_PRICE_ID } from '@/app/lib/stripe-config';
-import { adminAuth } from '@/app/lib/firebase-admin';
-import { createOrUpdateSubscription } from '@/app/lib/subscriptions';
+import { auth, db } from '@/app/lib/firebase-admin';
 
 export async function POST(req: Request) {
   try {
@@ -14,12 +13,12 @@ export async function POST(req: Request) {
     }
 
     const idToken = authHeader.split('Bearer ')[1];
-    const decodedToken = await adminAuth.verifyIdToken(idToken);
+    const decodedToken = await auth.verifyIdToken(idToken);
     const userId = decodedToken.uid;
 
     if (!STRIPE_PREMIUM_PRICE_ID) {
       console.error('STRIPE_PREMIUM_PRICE_ID が設定されていません');
-      throw new Error('STRIPE_PREMIUM_PRICE_ID が設定されていません');
+      return new NextResponse('STRIPE_PREMIUM_PRICE_ID が設定されていません', { status: 500 });
     }
 
     // Stripeの顧客を作成または取得
@@ -42,7 +41,7 @@ export async function POST(req: Request) {
       }
     } catch (error) {
       console.error('顧客の作成/取得に失敗しました:', error);
-      throw new Error('顧客の作成に失敗しました');
+      return new NextResponse('顧客の作成に失敗しました', { status: 500 });
     }
 
     // サブスクリプションを作成
@@ -64,7 +63,7 @@ export async function POST(req: Request) {
       const payment_intent = invoice.payment_intent as any;
 
       // Firestoreにサブスクリプション情報を保存
-      await createOrUpdateSubscription(subscription.id, {
+      await db.collection('subscriptions').doc(subscription.id).set({
         userId: userId,
         status: subscription.status,
         currentPeriodEnd: subscription.current_period_end,
@@ -72,6 +71,10 @@ export async function POST(req: Request) {
         plan: 'premium',
         startDate: new Date(subscription.start_date * 1000),
         endDate: new Date(subscription.current_period_end * 1000),
+        stripeCustomerId: customer.id,
+        stripeSubscriptionId: subscription.id,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
 
       console.log('サブスクリプションを作成しました:', subscription.id);
@@ -82,10 +85,13 @@ export async function POST(req: Request) {
       });
     } catch (error) {
       console.error('サブスクリプションの作成に失敗しました:', error);
-      throw new Error('サブスクリプションの作成に失敗しました');
+      return new NextResponse('サブスクリプションの作成に失敗しました', { status: 500 });
     }
   } catch (error: any) {
     console.error('エラーが発生しました:', error);
-    return new NextResponse(error.message, { status: 500 });
+    return new NextResponse(
+      error instanceof Error ? error.message : '内部サーバーエラー',
+      { status: 500 }
+    );
   }
 } 
