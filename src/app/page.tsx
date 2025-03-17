@@ -37,7 +37,7 @@ export default function Home() {
                   className="text-left lg:w-1/2"
                 >
                   <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-                    <span className="block">トレモックで英語学習を</span>
+                    <span className="block">トレモックで英語力を</span>
                     <span className="block text-blue-600">次のレベルへ</span>
                   </h1>
                   <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl">

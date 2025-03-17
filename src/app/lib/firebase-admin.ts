@@ -22,23 +22,16 @@ const validateEnvVariables = () => {
   }
 };
 
-// Firebase Admin SDKの初期化
-const apps = getApps();
-
-if (!apps.length) {
+// 既存のアプリがない場合のみ初期化
+if (!getApps().length) {
   try {
     validateEnvVariables();
     
-    const privateKey = process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n');
-    if (!privateKey) {
-      throw new Error('FIREBASE_PRIVATE_KEY is not properly formatted');
-    }
-
     initializeApp({
       credential: cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
         clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: privateKey,
+        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
       }),
     });
     
@@ -51,4 +44,10 @@ if (!apps.length) {
 
 // 認証とFirestoreのインスタンスをエクスポート
 export const auth = getAuth();
-export const db = getFirestore(); 
+const db = getFirestore();
+db.settings({
+  ignoreUndefinedProperties: true,
+  timestampsInSnapshots: true
+});
+
+export { db }; 

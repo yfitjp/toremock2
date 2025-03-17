@@ -24,7 +24,10 @@ export async function POST(
 
     // 模試の存在確認
     const examRef = db.collection('exams').doc(params.id);
-    const examDoc = await examRef.get();
+    const examDoc = await examRef.get().catch(error => {
+      console.error('Firestore読み取りエラー:', error);
+      throw new Error('データベースの接続に失敗しました');
+    });
     
     if (!examDoc.exists) {
       return new NextResponse('模試が見つかりません', { status: 404 });
@@ -131,6 +134,13 @@ export async function POST(
     return NextResponse.json({ sessionId: session.id });
   } catch (error) {
     console.error('模試購入エラー:', error);
+    
+    if (error.code === 13 || error.message.includes('INTERNAL')) {
+      return new NextResponse(
+        'データベース接続エラーが発生しました。しばらく待ってから再度お試しください。',
+        { status: 503 }
+      );
+    }
     
     if (error instanceof Stripe.errors.StripeError) {
       console.error('Stripeエラーの詳細:', {
