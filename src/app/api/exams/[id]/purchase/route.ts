@@ -68,6 +68,18 @@ export async function POST(
         userId,
         examId: params.id,
       },
+      payment_method_collection: 'always',
+      allow_promotion_codes: true,
+      billing_address_collection: 'required',
+      customer_creation: 'always',
+      customer_email: decodedToken.email,
+      locale: 'ja',
+      // テストモードの設定
+      payment_method_options: {
+        card: {
+          request_three_d_secure: 'automatic',
+        },
+      },
     });
 
     // 購入履歴の作成
