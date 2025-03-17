@@ -22,13 +22,14 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
       try {
         const response = await fetch(`/api/exams/${params.id}`);
         if (!response.ok) {
-          throw new Error('模試の取得に失敗しました');
+          const errorText = await response.text();
+          throw new Error(errorText || '模試の取得に失敗しました');
         }
         const data = await response.json();
         setExam(data);
       } catch (error) {
         console.error('模試取得エラー:', error);
-        showToast('模試の取得に失敗しました', 'error');
+        showToast(error instanceof Error ? error.message : '模試の取得に失敗しました', 'error');
       } finally {
         setIsLoading(false);
       }
@@ -40,7 +41,8 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
       try {
         const response = await fetch(`/api/exams/${params.id}/purchase/status`);
         if (!response.ok) {
-          throw new Error('購入状態の取得に失敗しました');
+          const errorText = await response.text();
+          throw new Error(errorText || '購入状態の取得に失敗しました');
         }
         const data = await response.json();
         setPurchaseStatus(data.status);
@@ -60,21 +62,35 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
     }
 
     try {
+      const idToken = await user.getIdToken();
+      if (!idToken) {
+        throw new Error('認証トークンの取得に失敗しました');
+      }
+
       const response = await fetch(`/api/exams/${params.id}/purchase`, {
         method: 'POST',
         headers: {
-          'Authorization': `Bearer ${await user.getIdToken()}`,
+          'Authorization': `Bearer ${idToken}`,
+          'Content-Type': 'application/json',
         },
       });
 
       if (!response.ok) {
-        const error = await response.text();
-        throw new Error(error);
+        const errorText = await response.text();
+        console.error('購入APIエラー:', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorText
+        });
+        throw new Error(errorText || '決済セッションの作成に失敗しました');
       }
 
       const { sessionId } = await response.json();
-      const stripe = await stripePromise;
+      if (!sessionId) {
+        throw new Error('セッションIDの取得に失敗しました');
+      }
 
+      const stripe = await stripePromise;
       if (!stripe) {
         throw new Error('Stripeの初期化に失敗しました');
       }
@@ -84,6 +100,7 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
       });
 
       if (error) {
+        console.error('Stripeリダイレクトエラー:', error);
         throw error;
       }
     } catch (error) {

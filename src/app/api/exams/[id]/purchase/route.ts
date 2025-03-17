@@ -45,6 +45,17 @@ export async function POST(
       return new NextResponse('この模試は既に購入済みです', { status: 400 });
     }
 
+    // 環境変数の確認
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('STRIPE_SECRET_KEY is not set');
+      return new NextResponse('Stripeの設定が不正です', { status: 500 });
+    }
+
+    if (!process.env.NEXT_PUBLIC_API_URL) {
+      console.error('NEXT_PUBLIC_API_URL is not set');
+      return new NextResponse('API URLの設定が不正です', { status: 500 });
+    }
+
     // Stripeセッションの作成
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -99,6 +110,12 @@ export async function POST(
     console.error('模試購入エラー:', error);
     
     if (error instanceof Stripe.errors.StripeError) {
+      console.error('Stripeエラーの詳細:', {
+        type: error.type,
+        code: error.code,
+        message: error.message,
+        stack: error.stack
+      });
       return new NextResponse(
         `Stripeエラー: ${error.message}`,
         { status: 400 }
