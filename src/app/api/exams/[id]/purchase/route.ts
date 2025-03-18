@@ -1,11 +1,8 @@
 import { NextResponse } from 'next/server';
 import { auth } from '@/app/lib/firebase-admin';
 import { db } from '@/app/lib/firebase-admin';
-import Stripe from 'stripe';
-
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia',
-});
+import { stripe } from '@/app/lib/stripe-server';
+import type Stripe from 'stripe';
 
 export async function POST(
   req: Request,
@@ -188,27 +185,28 @@ export async function POST(
       );
     }
     
-    if (error instanceof Stripe.errors.StripeError) {
-      console.error('Stripeエラーの詳細:', {
-        type: error.type,
-        code: error.code,
-        message: error.message,
-        stack: error.stack,
-        raw: error.raw
-      });
-      return new NextResponse(
-        JSON.stringify({
-          error: 'Stripeエラー',
+    if (error instanceof Error) {
+      if ('type' in error && typeof error.type === 'string') {
+        // Stripeエラーの処理
+        console.error('Stripeエラーの詳細:', {
+          type: error.type,
+          code: 'code' in error ? error.code : undefined,
           message: error.message,
-          code: error.code
-        }),
-        { 
-          status: 400,
-          headers: {
-            'Content-Type': 'application/json'
+          stack: error.stack,
+        });
+        return new NextResponse(
+          JSON.stringify({
+            error: 'Stripeエラー',
+            message: error.message,
+          }),
+          { 
+            status: 400,
+            headers: {
+              'Content-Type': 'application/json'
+            }
           }
-        }
-      );
+        );
+      }
     }
     
     // その他のエラーの詳細をログ出力

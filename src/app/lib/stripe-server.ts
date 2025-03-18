@@ -1,16 +1,19 @@
 import Stripe from 'stripe';
-import { stripeConfig } from './stripe-server-config';
 
-if (typeof window !== 'undefined') {
-  throw new Error('このモジュールはサーバーサイドでのみ使用できます');
+if (!process.env.STRIPE_SECRET_KEY) {
+  throw new Error('STRIPE_SECRET_KEY is not set');
 }
 
-if (!stripeConfig) {
-  throw new Error('Stripe設定が見つかりません');
-}
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: '2023-10-16', // 型定義の制約により、一時的にこのバージョンを使用
+  typescript: true,
+});
 
-// サーバーサイドでのStripeインスタンスを作成
-export const stripe = new Stripe(stripeConfig.secretKey, {
-  apiVersion: stripeConfig.apiVersion,
-  typescript: stripeConfig.typescript,
-}); 
+// APIバージョンの型定義を拡張
+declare module 'stripe' {
+  namespace Stripe {
+    interface StripeConfig {
+      apiVersion: '2023-10-16' | '2023-12-14' | '2024-01-01' | '2025-02-24.acacia';
+    }
+  }
+} 
