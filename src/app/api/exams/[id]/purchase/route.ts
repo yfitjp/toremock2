@@ -4,7 +4,7 @@ import { db } from '@/app/lib/firebase-admin';
 import Stripe from 'stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16',
+  apiVersion: '2025-02-24.acacia',
 });
 
 export async function POST(
@@ -79,8 +79,33 @@ export async function POST(
       email: decodedToken.email
     });
 
+    // 既存の顧客を検索または新規作成
+    let customer;
+    try {
+      const customers = await stripe.customers.search({
+        query: `metadata['userId']:'${userId}'`,
+      });
+
+      if (customers.data.length > 0) {
+        customer = customers.data[0];
+        console.log('既存の顧客を取得しました:', customer.id);
+      } else {
+        customer = await stripe.customers.create({
+          email: decodedToken.email,
+          metadata: {
+            userId: userId,
+          },
+        });
+        console.log('新しい顧客を作成しました:', customer.id);
+      }
+    } catch (error) {
+      console.error('顧客の作成/取得に失敗しました:', error);
+      return new NextResponse('顧客の作成に失敗しました', { status: 500 });
+    }
+
     // Stripeセッションの作成
     const session = await stripe.checkout.sessions.create({
+      customer: customer.id,
       payment_method_types: ['card'],
       line_items: [
         {
@@ -100,9 +125,16 @@ export async function POST(
       payment_method_collection: 'always',
       allow_promotion_codes: true,
       billing_address_collection: 'required',
-      customer_creation: 'always',
       customer_email: decodedToken.email,
       locale: 'ja',
+      payment_intent_data: {
+        metadata: {
+          userId,
+          examId: params.id,
+          productId: examData.stripeProductId,
+          priceId: examData.stripePriceId,
+        },
+      },
       payment_method_options: {
         card: {
           request_three_d_secure: 'automatic',
@@ -113,7 +145,8 @@ export async function POST(
     // セッション作成成功のログ
     console.log('Stripeセッション作成成功:', {
       sessionId: session.id,
-      url: session.url
+      url: session.url,
+      customerId: customer.id
     });
 
     // 購入履歴の作成
@@ -124,6 +157,7 @@ export async function POST(
       price: examData.price,
       status: 'pending',
       stripeSessionId: session.id,
+      stripeCustomerId: customer.id,
       stripePaymentIntentId: '',
       stripeProductId: examData.stripeProductId,
       stripePriceId: examData.stripePriceId,
@@ -131,7 +165,10 @@ export async function POST(
       updatedAt: new Date(),
     });
 
-    return NextResponse.json({ sessionId: session.id });
+    return NextResponse.json({ 
+      sessionId: session.id,
+      customerId: customer.id 
+    });
   } catch (error) {
     console.error('模試購入エラー:', error);
     
