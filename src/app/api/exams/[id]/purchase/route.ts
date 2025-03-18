@@ -35,12 +35,15 @@ export async function POST(
       return new NextResponse('模試データが不正です', { status: 400 });
     }
 
-    // Stripeの商品IDと価格IDの確認
-    if (!examData.stripeProductId || !examData.stripePriceId) {
-      console.error('Stripeの商品IDまたは価格IDが設定されていません:', {
+    // 環境変数からStripeの商品IDと価格IDを取得
+    const stripeProductId = process.env.STRIPE_TOEIC_2_PRODUCT_ID;
+    const stripePriceId = process.env.STRIPE_TOEIC_2_PRICE_ID;
+
+    if (!stripeProductId || !stripePriceId) {
+      console.error('Stripeの商品IDまたは価格IDが環境変数に設定されていません:', {
         examId: params.id,
-        stripeProductId: examData.stripeProductId,
-        stripePriceId: examData.stripePriceId
+        stripeProductId,
+        stripePriceId
       });
       return new NextResponse('Stripeの商品設定が不正です', { status: 400 });
     }
@@ -70,9 +73,10 @@ export async function POST(
     console.log('Stripeセッション作成開始:', {
       userId,
       examId: params.id,
-      stripeProductId: examData.stripeProductId,
-      stripePriceId: examData.stripePriceId,
+      stripeProductId,
+      stripePriceId,
       title: examData.title,
+      price: examData.price,
       email: decodedToken.email
     });
 
@@ -106,7 +110,7 @@ export async function POST(
       payment_method_types: ['card'],
       line_items: [
         {
-          price: examData.stripePriceId,
+          price: stripePriceId,
           quantity: 1,
         },
       ],
@@ -116,8 +120,8 @@ export async function POST(
       metadata: {
         userId,
         examId: params.id,
-        productId: examData.stripeProductId,
-        priceId: examData.stripePriceId,
+        productId: stripeProductId,
+        priceId: stripePriceId,
       },
       payment_method_collection: 'always',
       allow_promotion_codes: true,
@@ -128,8 +132,8 @@ export async function POST(
         metadata: {
           userId,
           examId: params.id,
-          productId: examData.stripeProductId,
-          priceId: examData.stripePriceId,
+          productId: stripeProductId,
+          priceId: stripePriceId,
         },
       },
       payment_method_options: {
@@ -156,8 +160,8 @@ export async function POST(
       stripeSessionId: session.id,
       stripeCustomerId: customer.id,
       stripePaymentIntentId: '',
-      stripeProductId: examData.stripeProductId,
-      stripePriceId: examData.stripePriceId,
+      stripeProductId: stripeProductId,
+      stripePriceId: stripePriceId,
       createdAt: new Date(),
       updatedAt: new Date(),
     });
