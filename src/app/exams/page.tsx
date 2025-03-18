@@ -23,11 +23,17 @@ export default function ExamsPage() {
       try {
         setLoading(true);
         const examData = await getAllExams();
-        setExams(examData);
-        setError(null);
+        if (!examData || examData.length === 0) {
+          setError('現在利用可能な模試はありません。');
+          setExams([]);
+        } else {
+          setExams(examData);
+          setError(null);
+        }
       } catch (err) {
         console.error('Error fetching exams:', err);
-        setError('模試データの取得中にエラーが発生しました。');
+        setError('模試データの取得中にエラーが発生しました。しばらく待ってから再度お試しください。');
+        setExams([]);
       } finally {
         setLoading(false);
       }

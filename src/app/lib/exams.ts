@@ -41,73 +41,36 @@ export interface ExamAttempt {
   updatedAt: any;
 }
 
-// デフォルトの模試データ
-export const DEFAULT_EXAMS = [
-  {
-    id: 'toeic-exam-1',
-    title: 'TOEIC® L&R 模試 Vol.1',
-    description: 'TOEIC® L&Rテストの模擬試験です。リスニングとリーディングの両方をカバーしています。',
-    duration: 120,
-    price: 0,
-    type: 'TOEIC',
-    difficulty: '中級',
-    isFree: true,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  },
-  {
-    id: 'toeic-exam-2',
-    title: 'TOEIC® L&R 模試 Vol.2',
-    description: 'TOEIC® L&Rテストの模擬試験です。ビジネス英語に焦点を当てています。',
-    duration: 120,
-    price: 1200,
-    type: 'TOEIC',
-    difficulty: '上級',
-    isFree: false,
-    createdAt: new Date(),
-    updatedAt: new Date()
-  }
-];
-
 // すべての模試を取得
 export const getAllExams = async (): Promise<Exam[]> => {
   try {
     // Firestoreから模試データを取得
     const exams = await getCollection<Exam>(COLLECTIONS.EXAMS, [orderBy('createdAt', 'desc')]);
     
-    // 重複を排除するためにMapを使用
-    const uniqueExamsMap = new Map<string, Exam>();
-    
-    // Firestoreから取得した模試を追加
-    exams.forEach(exam => {
-      if (!uniqueExamsMap.has(exam.id)) {
-        uniqueExamsMap.set(exam.id, exam);
-      }
-    });
-    
-    // Firestoreに模試がない場合はデフォルトの模試を使用
-    if (uniqueExamsMap.size === 0) {
-      DEFAULT_EXAMS.forEach(exam => {
-        uniqueExamsMap.set(exam.id, exam);
-      });
+    if (!exams || exams.length === 0) {
+      console.warn('No exams found in Firestore');
+      return [];
     }
     
-    // 結果を配列に変換して返す
-    return Array.from(uniqueExamsMap.values());
+    return exams;
   } catch (error) {
     console.error('Error getting all exams:', error);
-    // エラーが発生した場合はデフォルトの模試を返す
-    return DEFAULT_EXAMS;
+    throw new Error('模試データの取得に失敗しました');
   }
 };
 
 // 特定の模試を取得
 export const getExam = async (examId: string): Promise<Exam | null> => {
   try {
-    return await getDocument<Exam>(COLLECTIONS.EXAMS, examId);
+    const exam = await getDocument<Exam>(COLLECTIONS.EXAMS, examId);
+    if (!exam) {
+      console.warn(`No exam found with ID ${examId}`);
+      return null;
+    }
+    return exam;
   } catch (error) {
     console.error(`Error getting exam with ID ${examId}:`, error);
-    throw error;
+    throw new Error('模試データの取得に失敗しました');
   }
 };
 
@@ -119,28 +82,15 @@ export const getFreeExams = async (): Promise<Exam[]> => {
       [where('isFree', '==', true)]
     );
     
-    // 重複を排除するためにMapを使用
-    const uniqueExamsMap = new Map<string, Exam>();
-    
-    exams.forEach(exam => {
-      if (!uniqueExamsMap.has(exam.id)) {
-        uniqueExamsMap.set(exam.id, exam);
-      }
-    });
-    
-    // Firestoreに模試がない場合はデフォルトの模試を使用
-    if (uniqueExamsMap.size === 0) {
-      DEFAULT_EXAMS.forEach(exam => {
-        uniqueExamsMap.set(exam.id, exam);
-      });
+    if (!exams || exams.length === 0) {
+      console.warn('No free exams found in Firestore');
+      return [];
     }
     
-    // 結果を配列に変換して返す
-    return Array.from(uniqueExamsMap.values());
+    return exams;
   } catch (error) {
     console.error('Error getting free exams:', error);
-    // エラーが発生した場合はデフォルトの無料模試を返す
-    return DEFAULT_EXAMS.filter(exam => exam.isFree);
+    throw new Error('無料模試データの取得に失敗しました');
   }
 };
 
