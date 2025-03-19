@@ -71,23 +71,13 @@ export default function Navbar() {
               >
                 模試一覧
               </Link>
-              {user && (
-                <>
-                  <Link
-                    href="/mypage"
-                    className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
-                  >
-                    マイページ
-                  </Link>
-                  {!hasSubscription && (
-                    <Link
-                      href="/subscription"
-                      className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
-                    >
-                      プレミアムプラン
-                    </Link>
-                  )}
-                </>
+              {user && !hasSubscription && (
+                <Link
+                  href="/subscription"
+                  className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
+                >
+                  プレミアムプラン
+                </Link>
               )}
             </div>
           </div>
@@ -103,9 +93,12 @@ export default function Navbar() {
                     プレミアム会員
                   </span>
                 )}
-                <span className="text-gray-900 text-sm">
-                  {user.displayName || user.email}
-                </span>
+                <Link
+                  href="/mypage"
+                  className="bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105"
+                >
+                  マイページ
+                </Link>
                 <button
                   onClick={handleSignOut}
                   className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100"
