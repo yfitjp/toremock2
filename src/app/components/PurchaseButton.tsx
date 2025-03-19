@@ -1,10 +1,6 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { loadStripe } from '@stripe/stripe-js';
 import { useAuth } from '@/app/hooks/useAuth';
-
-// Stripeの初期化
-const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface PurchaseButtonProps {
   examId: string;
@@ -27,38 +23,12 @@ export default function PurchaseButton({ examId, price = 0, isDisabled = false }
     try {
       setIsLoading(true);
       setError(null);
-
-      // IDトークンを取得
-      const idToken = await user.getIdToken();
-
-      // 決済セッションを作成
-      const response = await fetch(`/api/exams/${examId}/purchase`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({ examId }),
-      });
-
-      if (!response.ok) {
-        throw new Error('決済セッションの作成に失敗しました');
-      }
-
-      const { sessionId } = await response.json();
-
-      // Stripeのチェックアウトページにリダイレクト
-      const stripe = await stripePromise;
-      if (stripe) {
-        const { error } = await stripe.redirectToCheckout({ sessionId });
-        if (error) {
-          throw error;
-        }
-      }
+      
+      // チェックアウトページにリダイレクト
+      router.push(`/exams/${examId}/checkout`);
     } catch (err: any) {
       console.error('Purchase error:', err);
       setError(err.message || '購入処理中にエラーが発生しました');
-    } finally {
       setIsLoading(false);
     }
   };
