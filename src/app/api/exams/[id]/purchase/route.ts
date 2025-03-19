@@ -123,7 +123,6 @@ export async function POST(
         productId: stripeProductId,
         priceId: stripePriceId,
       },
-      payment_method_collection: 'always',
       allow_promotion_codes: true,
       billing_address_collection: 'required',
       locale: 'ja',
