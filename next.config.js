@@ -28,6 +28,9 @@ const nextConfig = {
 
     return config;
   },
+  images: {
+    domains: ['firebasestorage.googleapis.com'],
+  },
   transpilePackages: [
     'firebase',
     '@firebase/app',

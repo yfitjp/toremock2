@@ -199,6 +199,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
                 fill
                 style={{ objectFit: 'contain' }}
                 className="rounded-lg"
+                unoptimized
               />
             </div>
           </div>
