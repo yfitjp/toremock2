@@ -72,14 +72,14 @@ export default function ExamCheckoutPage({ params }: { params: { id: string } })
 
   if (authLoading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="max-w-2xl mx-auto">
           <motion.div
@@ -87,16 +87,16 @@ export default function ExamCheckoutPage({ params }: { params: { id: string } })
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
           >
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white text-center">
+            <h1 className="text-3xl font-extrabold text-gray-900 text-center">
               模試を購入
             </h1>
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 text-center">
+            <p className="mt-4 text-lg text-gray-500 text-center">
               あなたの実力を測定するための模試を購入します。
             </p>
 
             <div className="mt-8">
               {error ? (
-                <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-200 px-4 py-3 rounded">
+                <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded">
                   {error}
                 </div>
               ) : clientSecret && paymentIntentId && examData ? (
@@ -115,7 +115,7 @@ export default function ExamCheckoutPage({ params }: { params: { id: string } })
               )}
             </div>
 
-            <div className="mt-4 text-xs text-gray-500 dark:text-gray-400 text-center">
+            <div className="mt-4 text-xs text-gray-500 text-center">
               購入すると、<a href="/terms" className="text-blue-600 hover:text-blue-500">利用規約</a>と
               <a href="/privacy" className="text-blue-600 hover:text-blue-500">プライバシーポリシー</a>に同意したことになります。
             </div>
