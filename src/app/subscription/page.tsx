@@ -300,7 +300,7 @@ export default function SubscriptionPage() {
 
         <div className="mt-12 text-center">
           <p className="text-base text-gray-500 dark:text-gray-400">
-            ご不明な点がございましたら、<a href="mailto:support@toremock.com" className="text-blue-600 hover:text-blue-500">サポート</a>までお問い合わせください。
+            ご不明な点がございましたら、<a href="/contact" className="text-blue-600 hover:text-blue-500">サポート</a>までお問い合わせください。
           </p>
         </div>
       </div>

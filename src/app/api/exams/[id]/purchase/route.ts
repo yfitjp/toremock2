@@ -126,7 +126,6 @@ export async function POST(
       payment_method_collection: 'always',
       allow_promotion_codes: true,
       billing_address_collection: 'required',
-      customer_email: decodedToken.email,
       locale: 'ja',
       payment_intent_data: {
         metadata: {
