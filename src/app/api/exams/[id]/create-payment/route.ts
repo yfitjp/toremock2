@@ -55,7 +55,22 @@ export async function POST(
       .get();
 
     if (!existingPurchase.empty) {
-      return new NextResponse('この模試は既に購入済みです', { status: 400 });
+      // 購入レコードの状態を確認
+      const purchaseDoc = existingPurchase.docs[0];
+      const purchaseData = purchaseDoc.data();
+      
+      if (purchaseData.status === 'completed') {
+        return new NextResponse('この模試は既に購入済みです', { status: 400 });
+      }
+      
+      // pendingの場合は古い購入レコードを削除（または非アクティブにマーク）
+      if (purchaseData.status === 'pending') {
+        console.log('古いpending状態の購入レコードを削除します:', purchaseDoc.id);
+        await db.collection('purchases').doc(purchaseDoc.id).update({
+          status: 'abandoned',
+          updatedAt: new Date()
+        });
+      }
     }
 
     // 環境変数の確認

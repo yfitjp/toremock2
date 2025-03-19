@@ -66,12 +66,34 @@ export async function POST(req: Request) {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
         console.log('Processing payment intent succeeded:', paymentIntent.id);
         
-        const { purchaseId } = paymentIntent.metadata;
-        if (purchaseId) {
+        const { purchaseId, examId, userId, type } = paymentIntent.metadata;
+        
+        // 購入関連のPaymentIntentの場合
+        if (type === 'exam_purchase' && examId && userId) {
+          console.log('Processing exam purchase payment:', paymentIntent.id, 'for exam:', examId);
+          
+          // PaymentIntentに関連するpurchaseレコードを検索
+          const purchaseQuery = await db.collection('purchases')
+            .where('paymentIntentId', '==', paymentIntent.id)
+            .get();
+          
+          if (!purchaseQuery.empty) {
+            const purchaseDoc = purchaseQuery.docs[0];
+            console.log('Updating purchase status to completed:', purchaseDoc.id);
+            await purchaseDoc.ref.update({
+              status: 'completed',
+              updatedAt: new Date(),
+            });
+          } else {
+            console.log('No purchase record found for payment intent:', paymentIntent.id);
+          }
+        }
+        // 従来の処理
+        else if (purchaseId) {
           console.log('Updating purchase status to completed:', purchaseId);
           await updatePurchaseStatus(purchaseId, 'completed', paymentIntent.id);
         } else {
-          console.log('No purchaseId found in payment intent metadata:', paymentIntent.id);
+          console.log('No purchaseId or exam purchase metadata found in payment intent:', paymentIntent.id);
         }
         break;
       }

@@ -134,7 +134,7 @@ export default function ExamsPage() {
                     <span>タイプ: {exam.type}</span>
                   </div>
 
-                  {exam.isFree || purchasedExams.has(exam.id) ? (
+                  {exam.isFree || purchasedExams.has(exam.id) || hasSubscription ? (
                     <Link
                       href={`/exams/${exam.id}/take`}
                       className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
@@ -147,6 +147,12 @@ export default function ExamsPage() {
                       price={exam.price}
                       isDisabled={!user || purchasedExams.has(exam.id)}
                     />
+                  )}
+
+                  {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
+                    <p className="mt-2 text-xs text-green-600 dark:text-green-400 text-center">
+                      プレミアム会員特典：無料でアクセス可能
+                    </p>
                   )}
 
                   {!user && !exam.isFree && (
