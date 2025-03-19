@@ -86,14 +86,14 @@ export default function PurchaseHistory() {
     return (
       <div className="flex flex-col items-center justify-center py-12">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
-        <p className="mt-4 text-gray-500 dark:text-gray-400">購入履歴を読み込み中...</p>
+        <p className="mt-4 text-gray-500">購入履歴を読み込み中...</p>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-200 p-4 rounded-md">
+      <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
         <div className="flex items-center">
           <svg className="h-5 w-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clipRule="evenodd" />
@@ -110,8 +110,8 @@ export default function PurchaseHistory() {
         <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
         </svg>
-        <h3 className="mt-2 text-sm font-medium text-gray-900 dark:text-gray-100">購入履歴なし</h3>
-        <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">
+        <h3 className="mt-2 text-sm font-medium text-gray-900">購入履歴なし</h3>
+        <p className="mt-1 text-sm text-gray-500">
           まだ模試を購入していません
         </p>
         <div className="mt-6">
@@ -136,13 +136,22 @@ export default function PurchaseHistory() {
         {purchases.map((purchase) => (
           <div
             key={purchase.id}
-            className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700"
+            className={`bg-white shadow-md rounded-lg overflow-hidden border ${
+              purchase.status === 'completed' ? 'border-green-200' : 'border-gray-200'
+            }`}
           >
             <div className="p-4">
-              <h3 className="font-medium text-gray-900 dark:text-white mb-2">
-                {purchase.examTitle}
-              </h3>
-              <div className="text-sm space-y-2 text-gray-500 dark:text-gray-400 mb-4">
+              <div className="flex justify-between items-start mb-2">
+                <h3 className="font-medium text-gray-900">
+                  {purchase.examTitle}
+                </h3>
+                {purchase.status === 'completed' && (
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                    購入済み
+                  </span>
+                )}
+              </div>
+              <div className="text-sm space-y-2 text-gray-500 mb-4">
                 <p className="flex items-center">
                   <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
@@ -153,7 +162,9 @@ export default function PurchaseHistory() {
                   <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
                   </svg>
-                  {purchaseStatusMap[purchase.status as keyof typeof purchaseStatusMap] || '不明'}
+                  <span className={purchase.status === 'completed' ? 'text-green-600 font-medium' : ''}>
+                    {purchaseStatusMap[purchase.status as keyof typeof purchaseStatusMap] || '不明'}
+                  </span>
                 </p>
                 <p className="flex items-center">
                   <svg className="h-4 w-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -169,6 +180,11 @@ export default function PurchaseHistory() {
                 >
                   受験する
                 </Link>
+              )}
+              {purchase.status === 'pending' && (
+                <div className="flex items-center justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-500 bg-gray-50 cursor-not-allowed">
+                  決済処理中...
+                </div>
               )}
             </div>
           </div>

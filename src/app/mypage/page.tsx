@@ -43,12 +43,12 @@ export default function MyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            className="bg-white shadow-md rounded-lg p-6"
           >
             <h2 className="text-xl font-semibold mb-4">アカウント情報</h2>
             <div className="space-y-2">
               <p>
-                <span className="text-gray-500 dark:text-gray-400">メールアドレス: </span>
+                <span className="text-gray-500">メールアドレス: </span>
                 {user.email}
               </p>
             </div>
@@ -58,7 +58,7 @@ export default function MyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            className="bg-white shadow-md rounded-lg p-6"
           >
             <SubscriptionStatus />
           </motion.section>
@@ -67,7 +67,7 @@ export default function MyPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6"
+            className="bg-white shadow-md rounded-lg p-6"
           >
             <PurchaseHistory />
           </motion.section>

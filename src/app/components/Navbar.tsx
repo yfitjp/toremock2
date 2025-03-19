@@ -46,7 +46,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="bg-white dark:bg-gray-900 shadow-lg transition-colors duration-200">
+    <nav className="bg-white shadow-lg transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex">
@@ -59,7 +59,7 @@ export default function Navbar() {
                   height={40}
                   className="mr-2 transform group-hover:scale-105 transition-transform duration-200"
                 />
-                <span className="text-2xl font-bold text-blue-600 dark:text-blue-400 group-hover:text-blue-700 dark:group-hover:text-blue-300 transition-colors duration-200">
+                <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
                   ToreMock
                 </span>
               </Link>
@@ -67,7 +67,7 @@ export default function Navbar() {
             <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
               <Link
                 href="/exams"
-                className="border-transparent text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
+                className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
               >
                 模試一覧
               </Link>
@@ -75,14 +75,14 @@ export default function Navbar() {
                 <>
                   <Link
                     href="/mypage"
-                    className="border-transparent text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
+                    className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
                   >
                     マイページ
                   </Link>
                   {!hasSubscription && (
                     <Link
                       href="/subscription"
-                      className="border-transparent text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
+                      className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
                     >
                       プレミアムプラン
                     </Link>
@@ -93,22 +93,22 @@ export default function Navbar() {
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
             {loading || checkingSubscription ? (
-              <div className="text-gray-500 dark:text-gray-400 px-3 py-2 text-sm font-medium animate-pulse">
+              <div className="text-gray-500 px-3 py-2 text-sm font-medium animate-pulse">
                 読み込み中...
               </div>
             ) : user ? (
               <div className="flex items-center space-x-4">
                 {hasSubscription && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-100 transform hover:scale-105 transition-transform duration-200">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 transform hover:scale-105 transition-transform duration-200">
                     プレミアム会員
                   </span>
                 )}
-                <span className="text-gray-900 dark:text-gray-100 text-sm">
+                <span className="text-gray-900 text-sm">
                   {user.displayName || user.email}
                 </span>
                 <button
                   onClick={handleSignOut}
-                  className="text-gray-900 dark:text-gray-100 hover:text-blue-600 dark:hover:text-blue-400 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100 dark:hover:bg-gray-800"
+                  className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100"
                 >
                   ログアウト
                 </button>
@@ -116,7 +116,7 @@ export default function Navbar() {
             ) : (
               <Link
                 href="/auth/signin"
-                className="bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg"
+                className="bg-blue-600 text-white hover:bg-blue-700 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105 hover:shadow-lg"
               >
                 ログイン
               </Link>
@@ -125,7 +125,7 @@ export default function Navbar() {
           <div className="-mr-2 flex items-center sm:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 dark:text-gray-300 hover:text-gray-500 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-200"
+              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500 transition-colors duration-200"
             >
               <span className="sr-only">メニューを開く</span>
               {!isOpen ? (
@@ -151,7 +151,7 @@ export default function Navbar() {
         <div className="pt-2 pb-3 space-y-1">
           <Link
             href="/exams"
-            className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+            className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
           >
             模試一覧
           </Link>
@@ -159,14 +159,14 @@ export default function Navbar() {
             <>
               <Link
                 href="/mypage"
-                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
               >
                 マイページ
               </Link>
               {!hasSubscription && (
                 <Link
                   href="/subscription"
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
                 >
                   プレミアムプラン
                 </Link>
@@ -174,20 +174,20 @@ export default function Navbar() {
             </>
           )}
           {loading || checkingSubscription ? (
-            <div className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 dark:text-gray-400 animate-pulse">
+            <div className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 animate-pulse">
               読み込み中...
             </div>
           ) : user ? (
             <button
               onClick={handleSignOut}
-              className="w-full text-left block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 dark:text-gray-100 hover:bg-gray-50 dark:hover:bg-gray-800 hover:border-blue-500 hover:text-blue-600 dark:hover:text-blue-400 transition-all duration-200"
+              className="w-full text-left block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
             >
               ログアウト
             </button>
           ) : (
             <Link
               href="/auth/signin"
-              className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-blue-500 text-blue-600 dark:text-blue-400 bg-blue-50 dark:bg-blue-900/50 hover:bg-blue-100 dark:hover:bg-blue-900 transition-all duration-200"
+              className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-blue-500 text-blue-600 bg-blue-50 hover:bg-blue-100 transition-all duration-200"
             >
               ログイン
             </Link>

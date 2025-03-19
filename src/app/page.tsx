@@ -19,9 +19,9 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900">
+    <div className="bg-white">
       {/* ヒーローセクション */}
-      <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900 dark:to-indigo-900">
+      <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="absolute inset-0 z-0 opacity-20">
           <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         </div>
@@ -40,7 +40,7 @@ export default function Home() {
                     <span className="block">トレモックで英語力を</span>
                     <span className="block text-blue-600">次のレベルへ</span>
                   </h1>
-                  <p className="mt-3 text-base text-gray-500 dark:text-gray-300 sm:text-lg md:mt-5 md:text-xl">
+                  <p className="mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl">
                     TOEIC®、TOEFL®、英検®などの模擬試験を手軽にオンラインで受験できるプラットフォームです。
                     豊富な問題数と詳細な解説で、効率的な学習をサポートします。
                   </p>
@@ -112,7 +112,7 @@ export default function Home() {
       </div>
 
       {/* 特徴セクション */}
-      <div className="py-16 dark:bg-gray-900">
+      <div className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -124,7 +124,7 @@ export default function Home() {
               <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
                 ToreMockが選ばれる理由
               </p>
-              <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500 dark:text-gray-300">
+              <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                 本番さながらの環境で実力を試し、詳細な分析で弱点を克服できます
               </p>
             </div>
@@ -133,15 +133,15 @@ export default function Home() {
               <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
                 <motion.div 
                   whileHover={{ y: -5 }}
-                  className="relative bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300"
+                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
                 >
                   <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 mt-2">本番さながらの環境</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">本番さながらの環境</h3>
+                  <p className="text-gray-600">
                     実際の試験と同じ形式、同じ時間配分で模擬試験を受けることができます。
                     本番の雰囲気を体験し、試験に慣れることができます。
                   </p>
@@ -149,15 +149,15 @@ export default function Home() {
 
                 <motion.div 
                   whileHover={{ y: -5 }}
-                  className="relative bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300"
+                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
                 >
                   <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 mt-2">詳細な分析</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">詳細な分析</h3>
+                  <p className="text-gray-600">
                     試験結果を詳細に分析し、あなたの強みと弱みを明確にします。
                     効率的な学習計画を立てるのに役立ちます。
                   </p>
@@ -165,15 +165,15 @@ export default function Home() {
 
                 <motion.div 
                   whileHover={{ y: -5 }}
-                  className="relative bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md border border-gray-100 dark:border-gray-700 transition-all duration-300"
+                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
                 >
                   <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
                     </svg>
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4 mt-2">豊富な問題</h3>
-                  <p className="text-gray-600 dark:text-gray-300">
+                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">豊富な問題</h3>
+                  <p className="text-gray-600">
                     TOEIC®、TOEFL®、英検®など、様々な試験の模擬問題を用意しています。
                     定期的に新しい問題が追加されます。
                   </p>
@@ -224,7 +224,7 @@ export default function Home() {
       </div>
 
       {/* 料金プランセクション */}
-      <div className="py-16 bg-gray-50 dark:bg-gray-800">
+      <div className="py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -233,10 +233,10 @@ export default function Home() {
             className="text-center"
           >
             <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">料金プラン</h2>
-            <p className="mt-2 text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+            <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               英語学習を加速させる最適なプラン
             </p>
-            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500 dark:text-gray-300">
+            <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
               まずは無料プランで体験、実力が伸びを実感したらプレミアムへ
             </p>
           </motion.div>
@@ -245,47 +245,47 @@ export default function Home() {
             {/* 無料プラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-xl overflow-hidden border border-gray-100 dark:border-gray-700"
+              className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
             >
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white">無料プラン</h3>
-                <p className="mt-4 text-gray-500 dark:text-gray-300">英語学習の第一歩に最適</p>
+                <h3 className="text-2xl font-bold text-gray-900">無料プラン</h3>
+                <p className="mt-4 text-gray-500">英語学習の第一歩に最適</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-gray-900 dark:text-white">¥0</span>
-                  <span className="text-base font-medium text-gray-500 dark:text-gray-300">/月</span>
+                  <span className="text-4xl font-extrabold text-gray-900">¥0</span>
+                  <span className="text-base font-medium text-gray-500">/月</span>
                 </p>
                 <ul className="mt-8 space-y-4">
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-gray-700 dark:text-gray-300">基本的な模試にアクセス</span>
+                    <span className="ml-3 text-gray-700">基本的な模試にアクセス</span>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-gray-700 dark:text-gray-300">基本的な解説と採点</span>
+                    <span className="ml-3 text-gray-700">基本的な解説と採点</span>
                   </li>
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-gray-700 dark:text-gray-300">学習進捗の記録</span>
+                    <span className="ml-3 text-gray-700">学習進捗の記録</span>
                   </li>
                 </ul>
                 <div className="mt-8">
                   {!user ? (
                     <Link
                       href="/auth/signup"
-                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700 transition-colors duration-300"
+                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
                     >
                       無料で始める
                     </Link>
                   ) : (
                     <Link
                       href="/exams"
-                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 dark:bg-gray-800 dark:text-blue-400 dark:hover:bg-gray-700 transition-colors duration-300"
+                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
                     >
                       模試一覧を見る
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -364,7 +364,7 @@ export default function Home() {
       </div>
 
       {/* 利用者の声セクション */}
-      <div className="py-16 bg-white dark:bg-gray-900 overflow-hidden">
+      <div className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -381,7 +381,7 @@ export default function Home() {
           <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <motion.div
               whileHover={{ y: -5 }}
-              className="bg-blue-50 dark:bg-blue-900 rounded-xl p-8 relative"
+              className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -389,11 +389,11 @@ export default function Home() {
                 </svg>
               </div>
               <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                <div className="text-lg leading-relaxed text-gray-700">
                   "TOREMOCKのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900 dark:text-white">田中 美咲</div>
+                  <div className="font-medium text-gray-900">田中 美咲</div>
                   <div className="text-blue-600">TOEIC 950点達成</div>
                 </div>
               </div>
@@ -401,7 +401,7 @@ export default function Home() {
 
             <motion.div
               whileHover={{ y: -5 }}
-              className="bg-blue-50 dark:bg-blue-900 rounded-xl p-8 relative"
+              className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -409,11 +409,11 @@ export default function Home() {
                 </svg>
               </div>
               <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                <div className="text-lg leading-relaxed text-gray-700">
                   "AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900 dark:text-white">山田 健一</div>
+                  <div className="font-medium text-gray-900">山田 健一</div>
                   <div className="text-blue-600">英検1級合格</div>
                 </div>
               </div>
@@ -421,7 +421,7 @@ export default function Home() {
 
             <motion.div
               whileHover={{ y: -5 }}
-              className="bg-blue-50 dark:bg-blue-900 rounded-xl p-8 relative"
+              className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
                 <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
@@ -429,11 +429,11 @@ export default function Home() {
                 </svg>
               </div>
               <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
+                <div className="text-lg leading-relaxed text-gray-700">
                   "本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900 dark:text-white">佐藤 優子</div>
+                  <div className="font-medium text-gray-900">佐藤 優子</div>
                   <div className="text-blue-600">TOEFL 110点達成</div>
                 </div>
               </div>

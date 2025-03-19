@@ -40,7 +40,7 @@ export default function SubscriptionPage() {
 
   if (loading || checkingSubscription) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     );
@@ -48,13 +48,13 @@ export default function SubscriptionPage() {
 
   if (!user) {
     return (
-      <div className="bg-white dark:bg-gray-900 min-h-screen">
+      <div className="bg-white min-h-screen">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
           <div className="text-center">
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
               サブスクリプションプラン
             </h1>
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-lg text-gray-500">
               サブスクリプションを購入するにはログインが必要です。
             </p>
             <div className="mt-8">
@@ -72,18 +72,18 @@ export default function SubscriptionPage() {
   }
 
   return (
-    <div className="bg-white dark:bg-gray-900 min-h-screen">
+    <div className="bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white sm:text-4xl">
+          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
             サブスクリプションプラン
           </h1>
           {hasSubscription ? (
-            <p className="mt-4 text-lg text-green-600 dark:text-green-400">
+            <p className="mt-4 text-lg text-green-600">
               現在プレミアムプランをご利用中です。すべての模試にアクセスできます。
             </p>
           ) : (
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-lg text-gray-500">
               プレミアムプランに登録して、すべての模試にアクセスしましょう。
             </p>
           )}
@@ -94,21 +94,21 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mt-8 bg-green-50 dark:bg-green-900 border border-green-200 dark:border-green-700 rounded-lg p-6 max-w-3xl mx-auto"
+            className="mt-8 bg-green-50 border border-green-200 rounded-lg p-6 max-w-3xl mx-auto"
           >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-xl font-semibold text-green-800 dark:text-green-200">現在のプラン: {SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
-                <p className="mt-2 text-green-700 dark:text-green-300">
+                <h3 className="text-xl font-semibold text-green-800">現在のプラン: {SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                <p className="mt-2 text-green-700">
                   次回更新日: {new Date().setMonth(new Date().getMonth() + 1) ? new Date(new Date().setMonth(new Date().getMonth() + 1)).toLocaleDateString('ja-JP') : '不明'}
                 </p>
               </div>
-              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200">
+              <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-green-100 text-green-800">
                 アクティブ
               </span>
             </div>
-            <div className="mt-4 border-t border-green-200 dark:border-green-700 pt-4">
-              <p className="text-green-700 dark:text-green-300">
+            <div className="mt-4 border-t border-green-200 pt-4">
+              <p className="text-green-700">
                 プレミアムプランでは以下の特典をお楽しみいただけます：
               </p>
               <ul className="mt-2 space-y-2">
@@ -126,7 +126,7 @@ export default function SubscriptionPage() {
                         clipRule="evenodd"
                       />
                     </svg>
-                    <span className="ml-2 text-green-700 dark:text-green-300">{feature}</span>
+                    <span className="ml-2 text-green-700">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -148,15 +148,15 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="relative p-8 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm flex flex-col"
+            className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col"
           >
             <div className="flex-1">
-              <h3 className="text-xl font-semibold text-gray-900 dark:text-white">通常プラン</h3>
-              <p className="mt-4 flex items-baseline text-gray-900 dark:text-white">
+              <h3 className="text-xl font-semibold text-gray-900">通常プラン</h3>
+              <p className="mt-4 flex items-baseline text-gray-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥0</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
-              <p className="mt-6 text-gray-500 dark:text-gray-400">
+              <p className="mt-6 text-gray-500">
                 無料で基本的な模試にアクセスできます。有料模試は個別に購入が必要です。
               </p>
 
@@ -177,7 +177,7 @@ export default function SubscriptionPage() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="ml-3 text-gray-500 dark:text-gray-400">無料模試へのアクセス</span>
+                  <span className="ml-3 text-gray-500">無料模試へのアクセス</span>
                 </li>
                 <li className="flex">
                   <svg
@@ -195,7 +195,7 @@ export default function SubscriptionPage() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="ml-3 text-gray-500 dark:text-gray-400">基本的な解説</span>
+                  <span className="ml-3 text-gray-500">基本的な解説</span>
                 </li>
                 <li className="flex">
                   <svg
@@ -213,14 +213,14 @@ export default function SubscriptionPage() {
                       d="M5 13l4 4L19 7"
                     />
                   </svg>
-                  <span className="ml-3 text-gray-500 dark:text-gray-400">有料模試は個別購入（￥490～/模試）</span>
+                  <span className="ml-3 text-gray-500">有料模試は個別購入（￥490～/模試）</span>
                 </li>
               </ul>
             </div>
 
             <Link
               href="/exams"
-              className="mt-8 block w-full bg-gray-100 dark:bg-gray-700 border border-transparent rounded-md py-3 px-6 text-center font-medium text-gray-900 dark:text-white hover:bg-gray-200 dark:hover:bg-gray-600"
+              className="mt-8 block w-full bg-gray-100 border border-transparent rounded-md py-3 px-6 text-center font-medium text-gray-900 hover:bg-gray-200"
             >
               模試一覧を見る
             </Link>
@@ -248,7 +248,7 @@ export default function SubscriptionPage() {
                 {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                   <li key={index} className="flex">
                     <svg
-                      className="flex-shrink-0 w-6 h-6 text-white"
+                      className="flex-shrink-0 w-6 h-6 text-blue-200"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -268,40 +268,22 @@ export default function SubscriptionPage() {
               </ul>
             </div>
 
-            <div className="mt-8">
-              {!user ? (
-                <Link
-                  href="/auth/signin"
-                  className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors duration-300"
-                >
-                  ログインして始める
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              ) : hasSubscription ? (
-                <div className="w-full text-center px-6 py-3 border border-white text-white rounded-md bg-blue-700">
-                  現在ご利用中です
-                </div>
-              ) : (
-                <Link
-                  href="/subscription/checkout"
-                  className="w-full inline-flex justify-center items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-blue-50 transition-colors duration-300"
-                >
-                  プレミアムを始める
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
-                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-                  </svg>
-                </Link>
-              )}
-            </div>
+            <Link
+              href={hasSubscription ? "#" : "/api/create-checkout-session"}
+              className={`mt-8 block w-full px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-center transition-all duration-300 ${
+                hasSubscription
+                  ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                  : "bg-white text-blue-600 hover:bg-blue-50"
+              }`}
+              onClick={(e) => {
+                if (hasSubscription) {
+                  e.preventDefault();
+                }
+              }}
+            >
+              {hasSubscription ? "すでに登録済み" : "プランに登録する"}
+            </Link>
           </motion.div>
-        </div>
-
-        <div className="mt-12 text-center">
-          <p className="text-base text-gray-500 dark:text-gray-400">
-            ご不明な点がございましたら、<a href="/contact" className="text-blue-600 hover:text-blue-500">サポート</a>までお問い合わせください。
-          </p>
         </div>
       </div>
     </div>

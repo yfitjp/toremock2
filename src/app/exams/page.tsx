@@ -108,7 +108,7 @@ export default function ExamsPage() {
             {exams.map((exam) => (
               <div
                 key={exam.id}
-                className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden"
+                className="bg-white shadow-md rounded-lg overflow-hidden"
               >
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-4">
@@ -127,17 +127,31 @@ export default function ExamsPage() {
                     </div>
                   </div>
 
-                  <p className="text-gray-600 dark:text-gray-300 mb-4">{exam.description}</p>
+                  <p className="text-gray-600 mb-4">{exam.description}</p>
 
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400 mb-6">
+                  <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
                     <span>所要時間: {exam.duration}分</span>
                     <span>タイプ: {exam.type}</span>
                   </div>
 
-                  {exam.isFree || purchasedExams.has(exam.id) || hasSubscription ? (
+                  {exam.isFree ? (
                     <Link
                       href={`/exams/${exam.id}/take`}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+                    >
+                      無料で受験する
+                    </Link>
+                  ) : purchasedExams.has(exam.id) ? (
+                    <Link
+                      href={`/exams/${exam.id}/take`}
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 transition-colors"
+                    >
+                      受験する（購入済み）
+                    </Link>
+                  ) : hasSubscription ? (
+                    <Link
+                      href={`/exams/${exam.id}/take`}
+                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                     >
                       受験する
                     </Link>
@@ -150,13 +164,13 @@ export default function ExamsPage() {
                   )}
 
                   {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
-                    <p className="mt-2 text-xs text-green-600 dark:text-green-400 text-center">
+                    <p className="mt-2 text-xs text-green-600 text-center">
                       プレミアム会員特典：無料でアクセス可能
                     </p>
                   )}
 
                   {!user && !exam.isFree && (
-                    <p className="mt-2 text-sm text-gray-500 dark:text-gray-400 text-center">
+                    <p className="mt-2 text-sm text-gray-500 text-center">
                       購入するには
                       <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
                         ログイン
