@@ -42,7 +42,6 @@ export default function ExamResultPage() {
           duration: 120,
           price: 0,
           type: 'TOEIC',
-          difficulty: '中級',
           isFree: true,
           createdAt: new Date(),
           updatedAt: new Date()
@@ -163,10 +162,6 @@ export default function ExamResultPage() {
                   <div>
                     <p className="text-sm text-gray-500">カテゴリ</p>
                     <p className="font-medium">{exam.type}</p>
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-500">難易度</p>
-                    <p className="font-medium">{exam.difficulty}</p>
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">所要時間</p>

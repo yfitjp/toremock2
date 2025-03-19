@@ -57,7 +57,8 @@ export async function GET(
         question: hasPurchased ? q.question : '購入後に表示されます',
         options: hasPurchased ? q.options : [],
         correctAnswer: hasPurchased ? q.correctAnswer : null,
-        explanation: hasPurchased ? q.explanation : null,
+        sectionType: hasPurchased ? q.sectionType : null,
+        questionType: hasPurchased ? q.questionType : null,
       })),
     };
 

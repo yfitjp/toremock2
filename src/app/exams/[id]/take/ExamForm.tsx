@@ -1,15 +1,20 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
 import { addDocument } from '@/app/lib/firestore';
 
 interface Question {
   id: string;
-  text: string;
+  content?: string;
   options: string[];
   correctAnswer?: number;
+  imageUrl?: string;
+  audioUrl?: string;
+  questionType?: 'multiple-choice' | 'text-input' | 'speaking' | 'writing';
+  sectionType?: 'reading' | 'listening' | 'writing' | 'speaking';
 }
 
 interface ExamFormProps {
@@ -20,11 +25,13 @@ interface ExamFormProps {
 export default function ExamForm({ examId, questions }: ExamFormProps) {
   const router = useRouter();
   const { user } = useAuth();
-  const [answers, setAnswers] = useState<Record<string, number>>({});
+  const [answers, setAnswers] = useState<Record<string, number | string>>({});
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [timeLeft, setTimeLeft] = useState(60 * 60); // 60分（秒単位）
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   // 残り時間のカウントダウン
   useEffect(() => {
@@ -42,7 +49,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     return () => clearInterval(timer);
   }, []);
 
-  // 回答の選択
+  // 回答の選択（選択肢タイプ）
   const handleAnswerSelect = (questionId: string, optionIndex: number) => {
     setAnswers((prev) => ({
       ...prev,
@@ -50,8 +57,35 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     }));
   };
 
+  // テキスト回答の変更（テキスト入力タイプ）
+  const handleTextInputChange = (questionId: string, text: string) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [questionId]: text,
+    }));
+  };
+
+  // 音声の再生
+  const handlePlayAudio = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
   // 次の問題へ
   const handleNext = () => {
+    // 音声を停止
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+    
     if (currentQuestion < questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     }
@@ -59,6 +93,13 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
 
   // 前の問題へ
   const handlePrev = () => {
+    // 音声を停止
+    if (audioRef.current) {
+      audioRef.current.pause();
+      audioRef.current.currentTime = 0;
+      setIsPlaying(false);
+    }
+    
     if (currentQuestion > 0) {
       setCurrentQuestion(currentQuestion - 1);
     }
@@ -75,18 +116,25 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
       setIsSubmitting(true);
       setError(null);
 
-      // 正解数を計算
+      // 正解数を計算（選択問題のみ）
       let correctCount = 0;
-      const totalQuestions = questions.length;
+      let totalMultipleChoiceQuestions = 0;
       
       for (const question of questions) {
-        if (question.correctAnswer !== undefined && answers[question.id] === question.correctAnswer) {
-          correctCount++;
+        if (question.questionType === 'multiple-choice' || question.questionType === undefined) {
+          totalMultipleChoiceQuestions++;
+          if (question.correctAnswer !== undefined && 
+              typeof answers[question.id] === 'number' && 
+              answers[question.id] === question.correctAnswer) {
+            correctCount++;
+          }
         }
       }
       
-      // スコアを計算（100点満点）
-      const score = Math.round((correctCount / totalQuestions) * 100);
+      // スコアを計算（100点満点）- 選択問題のみ
+      const score = totalMultipleChoiceQuestions > 0 
+        ? Math.round((correctCount / totalMultipleChoiceQuestions) * 100)
+        : 0;
       
       // 回答データをFirestoreに保存
       await addDocument('exam_attempts', {
@@ -120,46 +168,131 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
     return <div>問題が見つかりません。</div>;
   }
 
+  // 問題タイプの判定（デフォルトは選択肢問題）
+  const questionType = currentQuestionData.questionType || 'multiple-choice';
+  const sectionType = currentQuestionData.sectionType || 'reading';
+  
+  // 問題テキストを取得
+  const questionText = currentQuestionData.content || '';
+
   return (
-    <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg p-6">
+    <div className="bg-white shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-medium">
           問題 {currentQuestion + 1} / {questions.length}
         </div>
-        <div className="text-lg font-medium text-red-600 dark:text-red-400">
+        <div className="text-lg font-medium text-red-600">
           残り時間: {formatTime(timeLeft)}
         </div>
       </div>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4 dark:text-white">{currentQuestionData.text}</h2>
-        <div className="space-y-3">
-          {currentQuestionData.options.map((option, index) => (
-            <div
-              key={index}
-              className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                answers[currentQuestionData.id] === index
-                  ? 'bg-blue-100 dark:bg-blue-900 border-blue-500'
-                  : 'hover:bg-gray-50 dark:hover:bg-gray-700 border-gray-200 dark:border-gray-700'
-              }`}
-              onClick={() => handleAnswerSelect(currentQuestionData.id, index)}
-            >
-              <label className="flex items-start cursor-pointer">
-                <input
-                  type="radio"
-                  className="mt-1 mr-2"
-                  checked={answers[currentQuestionData.id] === index}
-                  onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
-                />
-                <span className="dark:text-gray-200">{option}</span>
-              </label>
+        <h2 className="text-xl font-semibold mb-4">{questionText}</h2>
+        
+        {/* 問題画像の表示 */}
+        {currentQuestionData.imageUrl && (
+          <div className="mb-6">
+            <div className="relative w-full h-60 md:h-80 overflow-hidden rounded-lg border border-gray-200">
+              <Image 
+                src={currentQuestionData.imageUrl} 
+                alt="問題画像" 
+                fill
+                style={{ objectFit: 'contain' }}
+                className="rounded-lg"
+              />
             </div>
-          ))}
-        </div>
+          </div>
+        )}
+        
+        {/* リスニング問題の音声プレーヤー */}
+        {currentQuestionData.audioUrl && (
+          <div className="mb-6">
+            <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
+              <button
+                onClick={handlePlayAudio}
+                className="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition-colors"
+              >
+                {isPlaying ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                )}
+              </button>
+              <audio ref={audioRef} src={currentQuestionData.audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+              <div className="ml-4 text-gray-600">
+                音声を{isPlaying ? '停止' : '再生'}する
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 問題タイプに応じた回答フォーム */}
+        {questionType === 'multiple-choice' && (
+          <div className="space-y-3">
+            {currentQuestionData.options.map((option, index) => (
+              <div
+                key={index}
+                className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                  answers[currentQuestionData.id] === index
+                    ? 'bg-blue-100 border-blue-500'
+                    : 'hover:bg-gray-50 border-gray-200'
+                }`}
+                onClick={() => handleAnswerSelect(currentQuestionData.id, index)}
+              >
+                <label className="flex items-start cursor-pointer">
+                  <input
+                    type="radio"
+                    className="mt-1 mr-2"
+                    checked={answers[currentQuestionData.id] === index}
+                    onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
+                  />
+                  <span>{option}</span>
+                </label>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* テキスト入力問題（Writing問題など） */}
+        {questionType === 'text-input' && (
+          <div className="space-y-3">
+            <textarea
+              value={answers[currentQuestionData.id] as string || ''}
+              onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
+              className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="ここに回答を入力してください..."
+            />
+          </div>
+        )}
+
+        {/* Writing問題（エッセイなど） */}
+        {questionType === 'writing' && (
+          <div className="space-y-3">
+            <div className="p-3 bg-gray-50 rounded-lg mb-3">
+              <p className="text-gray-700">以下のテーマについて、200-300語程度の英文を作成してください。</p>
+            </div>
+            <textarea
+              value={answers[currentQuestionData.id] as string || ''}
+              onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
+              className="w-full h-60 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+              placeholder="ここに回答を入力してください..."
+            />
+            <div className="text-right text-gray-500 text-sm">
+              {typeof answers[currentQuestionData.id] === 'string' 
+                ? (answers[currentQuestionData.id] as string).length 
+                : 0} 文字
+            </div>
+          </div>
+        )}
       </div>
 
       {error && (
-        <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 text-red-700 dark:text-red-200 p-3 rounded-md mb-4">
+        <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-md mb-4">
           {error}
         </div>
       )}
@@ -170,7 +303,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
           disabled={currentQuestion === 0}
           className={`px-4 py-2 rounded-md ${
             currentQuestion === 0
-              ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
               : 'bg-blue-600 text-white hover:bg-blue-700'
           }`}
         >
@@ -190,7 +323,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
             disabled={isSubmitting}
             className={`px-4 py-2 rounded-md ${
               isSubmitting
-                ? 'bg-gray-200 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed'
+                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
                 : 'bg-green-600 text-white hover:bg-green-700'
             }`}
           >
@@ -210,7 +343,7 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
                   ? 'bg-green-500 text-white'
                   : currentQuestion === index
                   ? 'bg-blue-600 text-white'
-                  : 'bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300'
+                  : 'bg-gray-200 text-gray-700'
               }`}
             >
               {index + 1}

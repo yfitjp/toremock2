@@ -9,7 +9,6 @@ export interface Exam {
   duration: number;
   price: number;
   type: string;
-  difficulty: string;
   isFree: boolean;
   questions?: Question[];
   createdAt?: Date;
@@ -23,8 +22,9 @@ export interface Question {
   content: string;
   options: string[];
   correctAnswer: number;
-  explanation: string;
   order: number;
+  sectionType?: 'reading' | 'listening' | 'writing' | 'speaking'; // セクションタイプ
+  questionType?: 'multiple-choice' | 'text-input' | 'speaking' | 'writing'; // 問題タイプ
   createdAt: any;
   updatedAt: any;
 }

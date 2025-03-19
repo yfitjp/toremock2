@@ -164,49 +164,55 @@ export const queryDocuments = async <T>(
 // 模試問題のインターフェース
 export interface Question {
   id: string;
-  text: string;
+  content: string;
   options: string[];
   correctAnswer: number;
-  explanation: string;
-  category: string;
-  difficulty: 'easy' | 'medium' | 'hard';
+  category?: string;
+  difficulty?: string;
+  sectionType?: 'reading' | 'listening' | 'writing' | 'speaking'; // セクションタイプ
+  questionType?: 'multiple-choice' | 'text-input' | 'speaking' | 'writing'; // 問題タイプ
+  imageUrl?: string; // 問題画像のURL
+  audioUrl?: string; // 音声ファイルのURL
 }
 
 export interface ExamData {
   id: string;
   title: string;
   description: string;
-  timeLimit: number; // 分単位
+  duration: number; // 分単位
   questions: Question[];
   type: 'TOEIC' | 'TOEFL' | 'EIKEN';
-  difficulty: 'N5' | 'N4' | 'N3' | 'N2' | 'N1';
   isFree: boolean;
 }
 
 // 模試データをFirestoreに追加する関数
 export const addExamData = async (examData: ExamData) => {
   try {
+    // 模試の基本情報を保存
     const examRef = doc(db, 'exams', examData.id);
     await setDoc(examRef, {
       title: examData.title,
       description: examData.description,
-      timeLimit: examData.timeLimit,
+      duration: examData.duration,
       type: examData.type,
-      difficulty: examData.difficulty,
       isFree: examData.isFree,
       createdAt: new Date(),
     });
 
-    // 問題データを別コレクションに保存
-    const questionsRef = collection(db, 'exams', examData.id, 'questions');
+    // 問題データを別コレクション（トップレベル）に保存
     for (const question of examData.questions) {
-      await setDoc(doc(questionsRef, question.id), {
-        text: question.text,
+      await setDoc(doc(db, 'questions', question.id), {
+        examId: examData.id, // 問題が属する模試のIDを保存
+        content: question.content,
         options: question.options,
         correctAnswer: question.correctAnswer,
-        explanation: question.explanation,
         category: question.category,
         difficulty: question.difficulty,
+        sectionType: question.sectionType || 'reading', // デフォルト値の設定
+        questionType: question.questionType || 'multiple-choice', // デフォルト値の設定
+        order: examData.questions.indexOf(question) + 1, // 問題の順序を保存
+        createdAt: new Date(),
+        updatedAt: new Date(),
       });
     }
 
@@ -230,9 +236,14 @@ export const getExamData = async (examId: string): Promise<ExamData | null> => {
 
     const examData = examDoc.data();
     
-    // 問題データを取得
-    const questionsRef = collection(db, 'exams', examId, 'questions');
-    const questionsSnapshot = await getDocs(questionsRef);
+    // 問題データを取得（トップレベルコレクションから）
+    const questionsQuery = query(
+      collection(db, 'questions'),
+      where('examId', '==', examId),
+      orderBy('order', 'asc')
+    );
+    
+    const questionsSnapshot = await getDocs(questionsQuery);
     const questions = questionsSnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
@@ -242,9 +253,8 @@ export const getExamData = async (examId: string): Promise<ExamData | null> => {
       id: examId,
       title: examData.title,
       description: examData.description,
-      timeLimit: examData.timeLimit,
+      duration: examData.duration,
       type: examData.type,
-      difficulty: examData.difficulty,
       isFree: examData.isFree,
       questions,
     };
@@ -252,4 +262,15 @@ export const getExamData = async (examId: string): Promise<ExamData | null> => {
     console.error('Error getting exam data:', error);
     return null;
   }
-}; 
+};
+
+export interface ExamQuestion {
+  id: string;
+  content: string;
+  options: string[];
+  correctAnswer: number;
+  category?: string;
+  difficulty?: string;
+  imageUrl?: string;
+  audioUrl?: string;
+} 
