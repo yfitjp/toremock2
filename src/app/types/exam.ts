@@ -12,6 +12,7 @@ export interface Exam {
   title: string;
   description: string;
   price: number;
+  type: string;
   questions: Question[];
   createdAt: Date;
   updatedAt: Date;

@@ -35,17 +35,39 @@ export async function POST(
       return new NextResponse('模試データが不正です', { status: 400 });
     }
 
-    // 環境変数からStripeの商品IDと価格IDを取得
-    const stripeProductId = process.env.STRIPE_TOEIC_2_PRODUCT_ID;
-    const stripePriceId = process.env.STRIPE_TOEIC_2_PRICE_ID;
+    // 模試のタイプに基づいて環境変数から商品IDと価格IDを取得
+    let stripeProductId;
+    let stripePriceId;
+    
+    // 模試のタイプに応じて対応する環境変数を設定
+    switch(examData.type) {
+      case 'TOEIC':
+        stripeProductId = process.env.STRIPE_TOEIC_PRODUCT_ID;
+        stripePriceId = process.env.STRIPE_TOEIC_PRICE_ID;
+        break;
+      case 'TOEFL':
+        stripeProductId = process.env.STRIPE_TOEFL_PRODUCT_ID;
+        stripePriceId = process.env.STRIPE_TOEFL_PRICE_ID;
+        break;
+      case 'EIKEN':
+        stripeProductId = process.env.STRIPE_EIKEN_PRODUCT_ID;
+        stripePriceId = process.env.STRIPE_EIKEN_PRICE_ID;
+        break;
+      default:
+        // デフォルトの商品がある場合はそれを使用
+        stripeProductId = process.env.STRIPE_DEFAULT_PRODUCT_ID;
+        stripePriceId = process.env.STRIPE_DEFAULT_PRICE_ID;
+        break;
+    }
 
     if (!stripeProductId || !stripePriceId) {
       console.error('Stripeの商品IDまたは価格IDが環境変数に設定されていません:', {
         examId: params.id,
+        examType: examData.type,
         stripeProductId,
         stripePriceId
       });
-      return new NextResponse('Stripeの商品設定が不正です', { status: 400 });
+      return new NextResponse('この模試タイプのStripe商品設定が不正です', { status: 400 });
     }
 
     // 既に購入済みかチェック
@@ -73,6 +95,7 @@ export async function POST(
     console.log('Stripeセッション作成開始:', {
       userId,
       examId: params.id,
+      examType: examData.type,
       stripeProductId,
       stripePriceId,
       title: examData.title,
@@ -115,11 +138,12 @@ export async function POST(
         },
       ],
       mode: 'payment',
-      success_url: `${process.env.NEXT_PUBLIC_API_URL}/exams/${params.id}?success=true`,
+      success_url: `${process.env.NEXT_PUBLIC_API_URL}/exams/${params.id}/purchase/success`,
       cancel_url: `${process.env.NEXT_PUBLIC_API_URL}/exams/${params.id}?canceled=true`,
       metadata: {
         userId,
         examId: params.id,
+        examType: examData.type,
         productId: stripeProductId,
         priceId: stripePriceId,
       },
@@ -130,6 +154,7 @@ export async function POST(
         metadata: {
           userId,
           examId: params.id,
+          examType: examData.type,
           productId: stripeProductId,
           priceId: stripePriceId,
         },
@@ -153,6 +178,7 @@ export async function POST(
       userId,
       examId: params.id,
       examTitle: examData.title,
+      examType: examData.type,
       price: examData.price,
       status: 'pending',
       stripeSessionId: session.id,
