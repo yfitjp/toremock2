@@ -168,7 +168,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   }[examData.type || 'TOEIC'] || '模試';
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
       <div className="bg-white shadow-md rounded-lg p-6 mb-8">
         <h1 className="text-3xl font-bold mb-2">{examData.title || '模試'}</h1>
         <div className="flex items-center mb-2">
@@ -196,7 +196,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       </div>
       
       {examData.questions && examData.questions.length > 0 && (
-        <ExamForm examId={params.id} questions={examData.questions} />
+        <ExamForm examId={params.id} questions={examData.questions} examType={examData.type} />
       )}
     </div>
   );

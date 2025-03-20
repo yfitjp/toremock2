@@ -20,9 +20,10 @@ interface Question {
 interface ExamFormProps {
   examId: string;
   questions: Question[];
+  examType?: string; // 模試タイプ（TOEIC, TOEFL, EIKENなど）
 }
 
-export default function ExamForm({ examId, questions }: ExamFormProps) {
+export default function ExamForm({ examId, questions, examType }: ExamFormProps) {
   const router = useRouter();
   const { user } = useAuth();
   const [answers, setAnswers] = useState<Record<string, number | string>>({});
@@ -172,9 +173,13 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
   const questionType = currentQuestionData.questionType || 'multiple-choice';
   const sectionType = currentQuestionData.sectionType || 'reading';
   
+  // TOEFLのReadingセクションかどうかを判定
+  const isToeflReading = examType === 'TOEFL' && sectionType === 'reading';
+  
   // デバッグ: 画像URLがあれば出力
   if (currentQuestionData.imageUrl) {
     console.log('問題画像URL:', currentQuestionData.imageUrl);
+    console.log('模試タイプ:', examType, '/ セクション:', sectionType);
   }
   
   // 問題テキストを取得
@@ -197,18 +202,22 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
         <div className="flex flex-col md:flex-row md:space-x-6">
           {/* 問題画像の表示 */}
           {currentQuestionData.imageUrl && (
-            <div className="mb-6 md:mb-0 md:w-2/5">
-              <div className="relative w-full aspect-[5/9] overflow-hidden rounded-lg border border-gray-200">
+            <div className="mb-6 md:mb-0 md:w-3/5">
+              <div className={`relative w-full ${
+                isToeflReading 
+                  ? 'max-h-[80vh] overflow-y-auto' 
+                  : 'aspect-[5/9] max-h-[70vh] overflow-auto'
+              } rounded-lg border border-gray-200`}>
                 <img 
                   src={currentQuestionData.imageUrl} 
                   alt="問題画像" 
-                  className="w-full h-full object-contain rounded-lg"
+                  className={`w-full ${isToeflReading ? 'h-auto' : 'object-contain'}`}
                 />
               </div>
             </div>
           )}
           
-          <div className="md:w-3/5">
+          <div className="md:w-2/5">
             <h2 className="text-xl font-semibold mb-4 hidden md:block">{questionText}</h2>
             
             {/* リスニング問題の音声プレーヤー */}
