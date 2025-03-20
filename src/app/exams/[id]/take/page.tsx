@@ -73,18 +73,36 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           return;
         }
         
+        // デバッグ用: 取得した問題データをログ出力
+        console.log('取得した問題データ:', questions);
+        
         // 全データを組み合わせて設定（型を合わせるための変換）
-        const formattedQuestions: ExamQuestion[] = questions.map((q, index) => ({
-          id: q.id,
-          content: q.content || '',  // Firestoreから取得したQuestionはcontentフィールドを持つ
-          questionNumber: index + 1,  // 問題番号を設定
-          options: q.options || [],
-          correctAnswer: q.correctAnswer,
-          // 以下のフィールドはFirestoreのQuestionから取得、または仮のデフォルト値を設定
-          questionType: q.questionType || 'multiple-choice', 
-          sectionType: q.sectionType || 'reading'
-          // 現在のFirestore設計ではimageUrlとaudioUrlは含まれていない
-        }));
+        const formattedQuestions: ExamQuestion[] = questions.map((q, index) => {
+          // デバッグ用: 各問題のimageUrlをログ出力
+          if (q.imageUrl) {
+            console.log(`問題${index+1} 画像URL:`, q.imageUrl);
+          }
+          
+          // Firebase Storage URLの修正
+          let imageUrl = q.imageUrl;
+          if (imageUrl && imageUrl.startsWith('https://firebasestorage.googleapis.com')) {
+            // そのままでOK、既に正しい形式
+            console.log('Firebase Storage URL確認済み:', imageUrl);
+          }
+          
+          return {
+            id: q.id,
+            content: q.content || '',  // Firestoreから取得したQuestionはcontentフィールドを持つ
+            questionNumber: index + 1,  // 問題番号を設定
+            options: q.options || [],
+            correctAnswer: q.correctAnswer,
+            // 以下のフィールドはFirestoreのQuestionから取得、または仮のデフォルト値を設定
+            questionType: q.questionType || 'multiple-choice', 
+            sectionType: q.sectionType || 'reading',
+            imageUrl: imageUrl,  // 修正したimageURLを設定
+            audioUrl: q.audioUrl   // audioUrlを明示的に設定
+          };
+        });
         
         setExamData({
           ...examInfo,

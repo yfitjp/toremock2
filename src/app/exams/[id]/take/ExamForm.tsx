@@ -172,6 +172,11 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
   const questionType = currentQuestionData.questionType || 'multiple-choice';
   const sectionType = currentQuestionData.sectionType || 'reading';
   
+  // デバッグ: 画像URLがあれば出力
+  if (currentQuestionData.imageUrl) {
+    console.log('問題画像URL:', currentQuestionData.imageUrl);
+  }
+  
   // 問題テキストを取得
   const questionText = currentQuestionData.content || '';
 
@@ -193,13 +198,10 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
         {currentQuestionData.imageUrl && (
           <div className="mb-6">
             <div className="relative w-full h-60 md:h-80 overflow-hidden rounded-lg border border-gray-200">
-              <Image 
+              <img 
                 src={currentQuestionData.imageUrl} 
                 alt="問題画像" 
-                fill
-                style={{ objectFit: 'contain' }}
-                className="rounded-lg"
-                unoptimized
+                className="w-full h-full object-contain rounded-lg"
               />
             </div>
           </div>

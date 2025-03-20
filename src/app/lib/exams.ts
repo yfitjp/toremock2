@@ -25,6 +25,8 @@ export interface Question {
   order: number;
   sectionType?: 'reading' | 'listening' | 'writing' | 'speaking'; // セクションタイプ
   questionType?: 'multiple-choice' | 'text-input' | 'speaking' | 'writing'; // 問題タイプ
+  imageUrl?: string; // 問題画像のURL
+  audioUrl?: string; // 音声ファイルのURL
   createdAt: any;
   updatedAt: any;
 }
