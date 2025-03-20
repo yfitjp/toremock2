@@ -192,106 +192,112 @@ export default function ExamForm({ examId, questions }: ExamFormProps) {
       </div>
 
       <div className="mb-8">
-        <h2 className="text-xl font-semibold mb-4">{questionText}</h2>
+        <h2 className="text-xl font-semibold mb-4 md:hidden">{questionText}</h2>
         
-        {/* 問題画像の表示 */}
-        {currentQuestionData.imageUrl && (
-          <div className="mb-6">
-            <div className="relative w-full h-60 md:h-80 overflow-hidden rounded-lg border border-gray-200">
-              <img 
-                src={currentQuestionData.imageUrl} 
-                alt="問題画像" 
-                className="w-full h-full object-contain rounded-lg"
-              />
-            </div>
-          </div>
-        )}
-        
-        {/* リスニング問題の音声プレーヤー */}
-        {currentQuestionData.audioUrl && (
-          <div className="mb-6">
-            <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
-              <button
-                onClick={handlePlayAudio}
-                className="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition-colors"
-              >
-                {isPlaying ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                )}
-              </button>
-              <audio ref={audioRef} src={currentQuestionData.audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
-              <div className="ml-4 text-gray-600">
-                音声を{isPlaying ? '停止' : '再生'}する
+        <div className="flex flex-col md:flex-row md:space-x-6">
+          {/* 問題画像の表示 */}
+          {currentQuestionData.imageUrl && (
+            <div className="mb-6 md:mb-0 md:w-2/5">
+              <div className="relative w-full aspect-[5/9] overflow-hidden rounded-lg border border-gray-200">
+                <img 
+                  src={currentQuestionData.imageUrl} 
+                  alt="問題画像" 
+                  className="w-full h-full object-contain rounded-lg"
+                />
               </div>
             </div>
-          </div>
-        )}
-
-        {/* 問題タイプに応じた回答フォーム */}
-        {questionType === 'multiple-choice' && (
-          <div className="space-y-3">
-            {currentQuestionData.options.map((option, index) => (
-              <div
-                key={index}
-                className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                  answers[currentQuestionData.id] === index
-                    ? 'bg-blue-100 border-blue-500'
-                    : 'hover:bg-gray-50 border-gray-200'
-                }`}
-                onClick={() => handleAnswerSelect(currentQuestionData.id, index)}
-              >
-                <label className="flex items-start cursor-pointer">
-                  <input
-                    type="radio"
-                    className="mt-1 mr-2"
-                    checked={answers[currentQuestionData.id] === index}
-                    onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
-                  />
-                  <span>{option}</span>
-                </label>
+          )}
+          
+          <div className="md:w-3/5">
+            <h2 className="text-xl font-semibold mb-4 hidden md:block">{questionText}</h2>
+            
+            {/* リスニング問題の音声プレーヤー */}
+            {currentQuestionData.audioUrl && (
+              <div className="mb-6">
+                <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
+                  <button
+                    onClick={handlePlayAudio}
+                    className="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition-colors"
+                  >
+                    {isPlaying ? (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    ) : (
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                    )}
+                  </button>
+                  <audio ref={audioRef} src={currentQuestionData.audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+                  <div className="ml-4 text-gray-600">
+                    音声を{isPlaying ? '停止' : '再生'}する
+                  </div>
+                </div>
               </div>
-            ))}
-          </div>
-        )}
+            )}
 
-        {/* テキスト入力問題（Writing問題など） */}
-        {questionType === 'text-input' && (
-          <div className="space-y-3">
-            <textarea
-              value={answers[currentQuestionData.id] as string || ''}
-              onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
-              className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="ここに回答を入力してください..."
-            />
-          </div>
-        )}
+            {/* 問題タイプに応じた回答フォーム */}
+            {questionType === 'multiple-choice' && (
+              <div className="space-y-3">
+                {currentQuestionData.options.map((option, index) => (
+                  <div
+                    key={index}
+                    className={`p-3 border rounded-lg cursor-pointer transition-colors ${
+                      answers[currentQuestionData.id] === index
+                        ? 'bg-blue-100 border-blue-500'
+                        : 'hover:bg-gray-50 border-gray-200'
+                    }`}
+                    onClick={() => handleAnswerSelect(currentQuestionData.id, index)}
+                  >
+                    <label className="flex items-start cursor-pointer">
+                      <input
+                        type="radio"
+                        className="mt-1 mr-2"
+                        checked={answers[currentQuestionData.id] === index}
+                        onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
+                      />
+                      <span>{option}</span>
+                    </label>
+                  </div>
+                ))}
+              </div>
+            )}
 
-        {/* Writing問題（エッセイなど） */}
-        {questionType === 'writing' && (
-          <div className="space-y-3">
-            <div className="p-3 bg-gray-50 rounded-lg mb-3">
-              <p className="text-gray-700">以下のテーマについて、200-300語程度の英文を作成してください。</p>
-            </div>
-            <textarea
-              value={answers[currentQuestionData.id] as string || ''}
-              onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
-              className="w-full h-60 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="ここに回答を入力してください..."
-            />
-            <div className="text-right text-gray-500 text-sm">
-              {typeof answers[currentQuestionData.id] === 'string' 
-                ? (answers[currentQuestionData.id] as string).length 
-                : 0} 文字
-            </div>
+            {/* テキスト入力問題（Writing問題など） */}
+            {questionType === 'text-input' && (
+              <div className="space-y-3">
+                <textarea
+                  value={answers[currentQuestionData.id] as string || ''}
+                  onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
+                  className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="ここに回答を入力してください..."
+                />
+              </div>
+            )}
+
+            {/* Writing問題（エッセイなど） */}
+            {questionType === 'writing' && (
+              <div className="space-y-3">
+                <div className="p-3 bg-gray-50 rounded-lg mb-3">
+                  <p className="text-gray-700">以下のテーマについて、200-300語程度の英文を作成してください。</p>
+                </div>
+                <textarea
+                  value={answers[currentQuestionData.id] as string || ''}
+                  onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
+                  className="w-full h-60 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="ここに回答を入力してください..."
+                />
+                <div className="text-right text-gray-500 text-sm">
+                  {typeof answers[currentQuestionData.id] === 'string' 
+                    ? (answers[currentQuestionData.id] as string).length 
+                    : 0} 文字
+                </div>
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
 
       {error && (
