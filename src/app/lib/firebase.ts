@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
-import { getAuth } from 'firebase/auth';
+import { getAuth, setPersistence, browserLocalPersistence } from 'firebase/auth';
 import { getStorage } from 'firebase/storage';
 
 // Firebase設定の環境変数をログに出力（デバッグ用）
@@ -29,6 +29,13 @@ const firebaseConfig = {
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
 const auth = getAuth(app);
+
+// 認証状態の永続化を設定
+setPersistence(auth, browserLocalPersistence)
+  .catch((error) => {
+    console.error('認証状態の永続化設定に失敗しました:', error);
+  });
+
 const storage = getStorage(app);
 
 export { app, db, auth, storage }; 

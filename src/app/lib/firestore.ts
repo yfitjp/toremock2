@@ -15,6 +15,7 @@ import {
   addDoc,
   serverTimestamp,
   Timestamp,
+  enableIndexedDbPersistence,
 } from 'firebase/firestore';
 import { db } from './firebase';
 
@@ -27,6 +28,19 @@ export const COLLECTIONS = {
   QUESTIONS: 'questions',
   SUBSCRIPTIONS: 'subscriptions',
 } as const;
+
+// オフライン永続化を有効化
+enableIndexedDbPersistence(db).catch((err) => {
+  if (err.code === 'failed-precondition') {
+    // 複数のタブが開いている場合
+    console.warn('複数のタブが開いているため、オフライン永続化を有効化できません');
+  } else if (err.code === 'unimplemented') {
+    // ブラウザが対応していない場合
+    console.warn('このブラウザはオフライン永続化に対応していません');
+  } else {
+    console.error('オフライン永続化の設定に失敗しました:', err);
+  }
+});
 
 // ドキュメントを取得する
 export const getDocument = async <T>(collectionName: string, docId: string): Promise<T | null> => {

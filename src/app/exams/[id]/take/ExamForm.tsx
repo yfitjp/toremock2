@@ -206,7 +206,7 @@ export default function ExamForm({ examId, questions, examType }: ExamFormProps)
               <div className={`relative w-full ${
                 isToeflReading 
                   ? 'max-h-[80vh] overflow-y-auto' 
-                  : 'aspect-[5/9] max-h-[70vh] overflow-auto'
+                  : 'aspect-[5/7] max-h-[70vh] overflow-auto'
               } rounded-lg border border-gray-200`}>
                 <img 
                   src={currentQuestionData.imageUrl} 
