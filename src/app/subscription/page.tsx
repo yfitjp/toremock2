@@ -147,14 +147,34 @@ export default function SubscriptionPage() {
       console.log('サブスクリプション開始 - ユーザーID:', user.uid);
       console.log('使用する価格ID:', priceId);
       
-      // チェックアウトセッションを作成
-      const sessionId = await createCheckoutSession(
-        user.uid,
-        priceId
-      );
+      // 認証トークンを取得
+      const token = await user.getIdToken();
+      
+      // 支払いインテントを作成
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          userId: user.uid,
+          priceId,
+        }),
+      });
 
-      console.log('セッションID取得成功:', sessionId);
-      setClientSecret(sessionId);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || '支払いインテントの作成に失敗しました');
+      }
+
+      if (!data.clientSecret) {
+        throw new Error('クライアントシークレットが取得できませんでした');
+      }
+
+      console.log('クライアントシークレット取得成功');
+      setClientSecret(data.clientSecret);
     } catch (error) {
       console.error('Subscription error:', error);
       alert(error instanceof Error ? error.message : 'サブスクリプションの処理中にエラーが発生しました。');

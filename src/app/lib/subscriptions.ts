@@ -8,8 +8,14 @@ import {
 } from './firestore';
 import { where, orderBy, limit } from 'firebase/firestore';
 import { auth } from './firebase';
-import { doc, getDoc } from 'firebase/firestore';
+import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
+import { getAuth } from 'firebase/auth';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-02-24.acacia',
+});
 
 // サブスクリプションの型定義
 export interface Subscription {
@@ -40,12 +46,13 @@ export const SUBSCRIPTION_PLANS = {
   PREMIUM: {
     name: 'プレミアムプラン',
     price: 1980,
-    description: 'すべての模試にアクセスでき、詳細な解説や学習分析機能が利用できます。',
+    description: 'すべての模試にアクセスでき、詳細な解説も利用できます。',
     features: [
-      'すべての模試へのアクセス',
-      '詳細な解説と学習分析',
+      'すべての模試にアクセス可能',
+      '詳細な解説付き',
+      '音声付きリスニング問題',
+      'スコア分析と学習アドバイス',
       '優先サポート',
-      '新機能の早期アクセス',
     ],
   },
 };
@@ -168,54 +175,51 @@ export const isUserSubscribed = async (userId: string): Promise<boolean> => {
   return await hasActiveSubscription(userId);
 };
 
-// Stripeのチェックアウトセッションを作成
-export const createCheckoutSession = async (userId: string, priceId: string): Promise<string> => {
+// 支払いインテントを作成する関数
+export async function createPaymentIntent(userId: string, priceId: string) {
   try {
-    // パラメータの検証
-    if (!userId) {
-      throw new Error('ユーザーIDが指定されていません');
-    }
-    if (!priceId) {
-      throw new Error('価格IDが指定されていません');
-    }
-
-    // ユーザーの認証トークンを取得
-    const token = await auth.currentUser?.getIdToken();
-    if (!token) {
-      throw new Error('認証トークンが取得できません');
-    }
-
-    console.log('チェックアウトセッション作成開始 - ユーザーID:', userId);
-    console.log('使用する価格ID:', priceId);
-
-    // APIエンドポイントにリクエストを送信
-    const response = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
+    // 支払いインテントを作成
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: SUBSCRIPTION_PLANS.PREMIUM.price,
+      currency: 'jpy',
+      automatic_payment_methods: {
+        enabled: true,
       },
-      body: JSON.stringify({
-        priceId,
+      metadata: {
         userId,
-      }),
+        priceId,
+      },
     });
 
-    const responseData = await response.json();
-
-    if (!response.ok) {
-      console.error('チェックアウトセッション作成エラー:', responseData);
-      throw new Error(responseData.error || 'チェックアウトセッションの作成に失敗しました');
-    }
-
-    if (!responseData.sessionId) {
-      throw new Error('セッションIDが取得できませんでした');
-    }
-
-    console.log('チェックアウトセッション作成成功 - セッションID:', responseData.sessionId);
-    return responseData.sessionId;
+    return paymentIntent.client_secret;
   } catch (error) {
-    console.error('チェックアウトセッション作成エラー:', error);
+    console.error('Payment intent creation error:', error);
     throw error;
   }
-}; 
+}
+
+// チェックアウトセッションを作成する関数
+export async function createCheckoutSession(userId: string, priceId: string) {
+  try {
+    // 支払いインテントを作成
+    const clientSecret = await createPaymentIntent(userId, priceId);
+    return clientSecret;
+  } catch (error) {
+    console.error('Checkout session creation error:', error);
+    throw error;
+  }
+}
+
+// サブスクリプションを更新する関数
+export async function updateSubscriptionStatus(userId: string, status: 'active' | 'inactive') {
+  try {
+    const userRef = doc(db, 'users', userId);
+    await updateDoc(userRef, {
+      subscriptionStatus: status,
+      updatedAt: new Date(),
+    });
+  } catch (error) {
+    console.error('Subscription update error:', error);
+    throw error;
+  }
+} 

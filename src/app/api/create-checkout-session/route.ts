@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { auth } from '@/app/lib/firebase-admin';
+import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-02-24.acacia',
@@ -8,70 +9,62 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function POST(request: Request) {
   try {
-    // リクエストボディからデータを取得
+    // リクエストボディを取得
     const body = await request.json();
-    const { priceId, userId } = body;
+    const { userId, priceId } = body;
 
-    if (!priceId || !userId) {
+    // パラメータの検証
+    if (!userId) {
       return NextResponse.json(
-        { error: '必要なパラメータが不足しています' },
+        { error: 'ユーザーIDが指定されていません' },
+        { status: 400 }
+      );
+    }
+    if (!priceId) {
+      return NextResponse.json(
+        { error: '価格IDが指定されていません' },
         { status: 400 }
       );
     }
 
-    // Firebase Admin SDKでトークンを検証
+    // 認証トークンを取得
     const authHeader = request.headers.get('Authorization');
     if (!authHeader?.startsWith('Bearer ')) {
       return NextResponse.json(
-        { error: '認証が必要です' },
+        { error: '認証トークンが指定されていません' },
         { status: 401 }
       );
     }
 
     const token = authHeader.split('Bearer ')[1];
     try {
-      const decodedToken = await auth.verifyIdToken(token);
-      if (decodedToken.uid !== userId) {
-        return NextResponse.json(
-          { error: 'ユーザーIDが一致しません' },
-          { status: 403 }
-        );
-      }
+      await auth.verifyIdToken(token);
     } catch (error) {
-      console.error('トークン検証エラー:', error);
+      console.error('認証エラー:', error);
       return NextResponse.json(
-        { error: '無効なトークンです' },
+        { error: '認証に失敗しました' },
         { status: 401 }
       );
     }
 
-    // Stripeのチェックアウトセッションを作成
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_API_URL}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_API_URL}/subscription`,
-      client_reference_id: userId,
+    // 支払いインテントを作成
+    const paymentIntent = await stripe.paymentIntents.create({
+      amount: SUBSCRIPTION_PLANS.PREMIUM.price,
+      currency: 'jpy',
+      automatic_payment_methods: {
+        enabled: true,
+      },
       metadata: {
-        userId: userId,
+        userId,
+        priceId,
       },
     });
 
-    if (!session?.id) {
-      throw new Error('セッションIDが取得できませんでした');
-    }
-
-    return NextResponse.json({ sessionId: session.id });
+    return NextResponse.json({ clientSecret: paymentIntent.client_secret });
   } catch (error) {
-    console.error('Stripeセッション作成エラー:', error);
+    console.error('Payment intent creation error:', error);
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : '決済セッションの作成に失敗しました' },
+      { error: '支払いインテントの作成に失敗しました' },
       { status: 500 }
     );
   }
