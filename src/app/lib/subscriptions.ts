@@ -7,6 +7,7 @@ import {
   addDocument
 } from './firestore';
 import { where, orderBy, limit } from 'firebase/firestore';
+import { auth } from './firebase';
 
 // サブスクリプションの型定義
 export interface Subscription {
@@ -164,4 +165,39 @@ export const cancelSubscription = async (subscriptionId: string): Promise<void> 
 
 export const isUserSubscribed = async (userId: string): Promise<boolean> => {
   return await hasActiveSubscription(userId);
+};
+
+// Stripeのチェックアウトセッションを作成
+export const createCheckoutSession = async (userId: string, priceId: string): Promise<string> => {
+  try {
+    // ユーザーの認証トークンを取得
+    const token = await auth.currentUser?.getIdToken();
+    if (!token) {
+      throw new Error('認証トークンが取得できません');
+    }
+
+    // APIエンドポイントにリクエストを送信
+    const response = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        priceId,
+        userId,
+      }),
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message || 'チェックアウトセッションの作成に失敗しました');
+    }
+
+    const { sessionId } = await response.json();
+    return sessionId;
+  } catch (error) {
+    console.error('Error creating checkout session:', error);
+    throw error;
+  }
 }; 
