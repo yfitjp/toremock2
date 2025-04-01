@@ -49,11 +49,22 @@ export default function SubscriptionPage() {
     try {
       setIsProcessing(true);
       
+      // 環境変数からpriceIdを取得
+      const priceId = process.env.STRIPE_PREMIUM_PRICE_ID;
+      if (!priceId) {
+        throw new Error('Stripeの価格IDが設定されていません');
+      }
+
+      console.log('サブスクリプション開始 - ユーザーID:', user.uid);
+      console.log('使用する価格ID:', priceId);
+      
       // チェックアウトセッションを作成
       const sessionId = await createCheckoutSession(
         user.uid,
-        process.env.NEXT_PUBLIC_STRIPE_PRICE_ID!
+        priceId
       );
+
+      console.log('セッションID取得成功:', sessionId);
 
       // Stripeのチェックアウトページにリダイレクト
       const stripe = await stripePromise;
@@ -68,7 +79,7 @@ export default function SubscriptionPage() {
       }
     } catch (error) {
       console.error('Subscription error:', error);
-      alert('サブスクリプションの処理中にエラーが発生しました。');
+      alert(error instanceof Error ? error.message : 'サブスクリプションの処理中にエラーが発生しました。');
     } finally {
       setIsProcessing(false);
     }

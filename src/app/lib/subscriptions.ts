@@ -170,11 +170,22 @@ export const isUserSubscribed = async (userId: string): Promise<boolean> => {
 // Stripeのチェックアウトセッションを作成
 export const createCheckoutSession = async (userId: string, priceId: string): Promise<string> => {
   try {
+    // パラメータの検証
+    if (!userId) {
+      throw new Error('ユーザーIDが指定されていません');
+    }
+    if (!priceId) {
+      throw new Error('価格IDが指定されていません');
+    }
+
     // ユーザーの認証トークンを取得
     const token = await auth.currentUser?.getIdToken();
     if (!token) {
       throw new Error('認証トークンが取得できません');
     }
+
+    console.log('チェックアウトセッション作成開始 - ユーザーID:', userId);
+    console.log('使用する価格ID:', priceId);
 
     // APIエンドポイントにリクエストを送信
     const response = await fetch('/api/create-checkout-session', {
@@ -189,18 +200,19 @@ export const createCheckoutSession = async (userId: string, priceId: string): Pr
       }),
     });
 
+    const responseData = await response.json();
+
     if (!response.ok) {
-      const errorData = await response.json();
-      console.error('チェックアウトセッション作成エラー:', errorData);
-      throw new Error(errorData.error || 'チェックアウトセッションの作成に失敗しました');
+      console.error('チェックアウトセッション作成エラー:', responseData);
+      throw new Error(responseData.error || 'チェックアウトセッションの作成に失敗しました');
     }
 
-    const { sessionId } = await response.json();
-    if (!sessionId) {
+    if (!responseData.sessionId) {
       throw new Error('セッションIDが取得できませんでした');
     }
 
-    return sessionId;
+    console.log('チェックアウトセッション作成成功 - セッションID:', responseData.sessionId);
+    return responseData.sessionId;
   } catch (error) {
     console.error('チェックアウトセッション作成エラー:', error);
     throw error;
