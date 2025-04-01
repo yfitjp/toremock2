@@ -59,21 +59,29 @@ export async function POST(request: Request) {
         priceId,
         type: 'subscription',
       },
+      // 支払い成功後のリダイレクト先とWebhook
+      receipt_email: body.email,
+      description: `${SUBSCRIPTION_PLANS.PREMIUM.name} サブスクリプション`,
+      // 成功時の処理方法
+      confirm: false,
     });
 
     if (!paymentIntent.client_secret) {
       throw new Error('クライアントシークレットの取得に失敗しました');
     }
 
+    console.log(`支払いインテント作成成功: ${paymentIntent.id}`);
+
     return NextResponse.json({ 
       clientSecret: paymentIntent.client_secret,
       amount: SUBSCRIPTION_PLANS.PREMIUM.price,
-      currency: 'jpy'
+      currency: 'jpy',
+      paymentIntentId: paymentIntent.id
     });
   } catch (error) {
     console.error('Payment intent creation error:', error);
     return NextResponse.json(
-      { error: '支払いインテントの作成に失敗しました' },
+      { error: error instanceof Error ? error.message : '支払いインテントの作成に失敗しました' },
       { status: 500 }
     );
   }

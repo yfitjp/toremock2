@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/app/hooks/useAuth';
-import { SUBSCRIPTION_PLANS, createCheckoutSession } from '@/app/lib/subscriptions';
+import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
@@ -15,36 +15,85 @@ import { CardElement } from '@stripe/react-stripe-js';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 // 決済フォームコンポーネント
-function CheckoutForm({ priceId, onSuccess }: { priceId: string; onSuccess: () => void }) {
+function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<string | null>(null);
   const [processing, setProcessing] = useState(false);
+  const [paymentMessage, setPaymentMessage] = useState('');
+
+  useEffect(() => {
+    if (!stripe) {
+      return;
+    }
+
+    const clientSecret = new URLSearchParams(window.location.search).get(
+      'payment_intent_client_secret'
+    );
+
+    if (!clientSecret) {
+      return;
+    }
+
+    stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+      switch (paymentIntent?.status) {
+        case 'succeeded':
+          setPaymentMessage('お支払いが完了しました。');
+          onSuccess();
+          break;
+        case 'processing':
+          setPaymentMessage('お支払いを処理中です。');
+          break;
+        case 'requires_payment_method':
+          setPaymentMessage('お支払いに失敗しました。再度お試しください。');
+          break;
+        default:
+          setPaymentMessage('エラーが発生しました。');
+          break;
+      }
+    });
+  }, [stripe, onSuccess]);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     if (!stripe || !elements) {
+      // Stripe.js がまだ読み込まれていない場合
+      setError('決済処理の準備ができていません。しばらくしてから再度お試しください。');
       return;
     }
 
     setProcessing(true);
+    setError(null);
 
     try {
-      const { error: submitError } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: `${window.location.origin}/subscription/success`,
-        },
-      });
+      const cardElement = elements.getElement(CardElement);
+      
+      if (!cardElement) {
+        throw new Error('カード情報の入力フォームが見つかりません');
+      }
+
+      const { error: submitError, paymentIntent } = await stripe.confirmCardPayment(
+        '', // クライアントシークレットはElementsの初期化時に設定されているため空でOK
+        {
+          payment_method: {
+            card: cardElement,
+          },
+        }
+      );
 
       if (submitError) {
+        console.error('決済エラー:', submitError);
         setError(submitError.message || '決済処理中にエラーが発生しました。');
-      } else {
+      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
+        console.log('決済成功:', paymentIntent);
         onSuccess();
+      } else {
+        setError('決済処理中に問題が発生しました。再度お試しください。');
       }
     } catch (err) {
-      setError('決済処理中にエラーが発生しました。');
+      console.error('決済エラー:', err);
+      setError('決済処理中にエラーが発生しました。再度お試しください。');
     } finally {
       setProcessing(false);
     }
@@ -87,6 +136,12 @@ function CheckoutForm({ priceId, onSuccess }: { priceId: string; onSuccess: () =
         </div>
       )}
 
+      {paymentMessage && (
+        <div className="bg-blue-50 border border-blue-200 text-blue-700 px-4 py-3 rounded-md">
+          {paymentMessage}
+        </div>
+      )}
+
       <button
         type="submit"
         disabled={!stripe || processing}
@@ -107,6 +162,7 @@ export default function SubscriptionPage() {
   const [checkingSubscription, setCheckingSubscription] = useState<boolean>(true);
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
+  const [paymentAmount, setPaymentAmount] = useState<number>(0);
 
   useEffect(() => {
     const checkSubscription = async () => {
@@ -175,6 +231,7 @@ export default function SubscriptionPage() {
 
       console.log('クライアントシークレット取得成功');
       setClientSecret(data.clientSecret);
+      setPaymentAmount(data.amount || SUBSCRIPTION_PLANS.PREMIUM.price);
     } catch (error) {
       console.error('Subscription error:', error);
       alert(error instanceof Error ? error.message : 'サブスクリプションの処理中にエラーが発生しました。');
@@ -184,6 +241,7 @@ export default function SubscriptionPage() {
   };
 
   const handleSuccess = () => {
+    // ユーザーのサブスクリプション状態を更新するロジックを追加することも検討
     router.push('/subscription/success');
   };
 
@@ -419,8 +477,16 @@ export default function SubscriptionPage() {
 
             {clientSecret ? (
               <div className="mt-8">
-                <Elements stripe={stripePromise} options={{ clientSecret }}>
-                  <CheckoutForm priceId={process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID!} onSuccess={handleSuccess} />
+                <Elements stripe={stripePromise} options={{ 
+                  clientSecret,
+                  appearance: {
+                    theme: 'stripe',
+                    variables: {
+                      colorPrimary: '#0070f3',
+                    },
+                  },
+                }}>
+                  <CheckoutForm onSuccess={handleSuccess} />
                 </Elements>
               </div>
             ) : (
