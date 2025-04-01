@@ -190,14 +190,19 @@ export const createCheckoutSession = async (userId: string, priceId: string): Pr
     });
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message || 'チェックアウトセッションの作成に失敗しました');
+      const errorData = await response.json();
+      console.error('チェックアウトセッション作成エラー:', errorData);
+      throw new Error(errorData.error || 'チェックアウトセッションの作成に失敗しました');
     }
 
     const { sessionId } = await response.json();
+    if (!sessionId) {
+      throw new Error('セッションIDが取得できませんでした');
+    }
+
     return sessionId;
   } catch (error) {
-    console.error('Error creating checkout session:', error);
+    console.error('チェックアウトセッション作成エラー:', error);
     throw error;
   }
 }; 
