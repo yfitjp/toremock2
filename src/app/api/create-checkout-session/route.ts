@@ -57,10 +57,19 @@ export async function POST(request: Request) {
       metadata: {
         userId,
         priceId,
+        type: 'subscription',
       },
     });
 
-    return NextResponse.json({ clientSecret: paymentIntent.client_secret });
+    if (!paymentIntent.client_secret) {
+      throw new Error('クライアントシークレットの取得に失敗しました');
+    }
+
+    return NextResponse.json({ 
+      clientSecret: paymentIntent.client_secret,
+      amount: SUBSCRIPTION_PLANS.PREMIUM.price,
+      currency: 'jpy'
+    });
   } catch (error) {
     console.error('Payment intent creation error:', error);
     return NextResponse.json(

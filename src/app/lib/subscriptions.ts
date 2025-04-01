@@ -13,9 +13,10 @@ import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import Stripe from 'stripe';
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+// サーバーサイドでのみStripeを初期化
+const stripe = typeof window === 'undefined' ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-02-24.acacia',
-});
+}) : null;
 
 // サブスクリプションの型定義
 export interface Subscription {
@@ -46,13 +47,14 @@ export const SUBSCRIPTION_PLANS = {
   PREMIUM: {
     name: 'プレミアムプラン',
     price: 1980,
-    description: 'すべての模試にアクセスでき、詳細な解説も利用できます。',
+    description: 'すべての模試にアクセスでき、詳細な解説や学習分析機能が利用できます。',
     features: [
-      'すべての模試にアクセス可能',
-      '詳細な解説付き',
+      'すべての模試へのアクセス',
+      '詳細な解説と学習分析',
       '音声付きリスニング問題',
       'スコア分析と学習アドバイス',
       '優先サポート',
+      '新機能の早期アクセス',
     ],
   },
 };
@@ -177,8 +179,9 @@ export const isUserSubscribed = async (userId: string): Promise<boolean> => {
 
 // 支払いインテントを作成する関数
 export async function createPaymentIntent(userId: string, priceId: string) {
+  if (!stripe) throw new Error('Stripeが初期化されていません');
+
   try {
-    // 支払いインテントを作成
     const paymentIntent = await stripe.paymentIntents.create({
       amount: SUBSCRIPTION_PLANS.PREMIUM.price,
       currency: 'jpy',
@@ -200,8 +203,9 @@ export async function createPaymentIntent(userId: string, priceId: string) {
 
 // チェックアウトセッションを作成する関数
 export async function createCheckoutSession(userId: string, priceId: string) {
+  if (!stripe) throw new Error('Stripeが初期化されていません');
+
   try {
-    // 支払いインテントを作成
     const clientSecret = await createPaymentIntent(userId, priceId);
     return clientSecret;
   } catch (error) {
