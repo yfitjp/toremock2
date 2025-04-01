@@ -11,7 +11,7 @@ export async function POST(request: Request) {
   try {
     // リクエストボディを取得
     const body = await request.json();
-    const { userId, priceId } = body;
+    const { userId, priceId, email } = body;
 
     // パラメータの検証
     if (!userId) {
@@ -60,7 +60,7 @@ export async function POST(request: Request) {
         type: 'subscription',
       },
       // 支払い成功後のリダイレクト先とWebhook
-      receipt_email: body.email,
+      receipt_email: email,
       description: `${SUBSCRIPTION_PLANS.PREMIUM.name} サブスクリプション`,
       // 成功時の処理方法
       confirm: false,

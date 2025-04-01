@@ -17,9 +17,12 @@ export default function LegalPage() {
           <div className="space-y-6">
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">事業者名</h2>
+              <p className="text-gray-900">合同会社YFIT</p>
+            </section>
+            <section>
+              <h2 className="text-xl font-bold text-gray-900 mb-4">代表者</h2>
               <p className="text-gray-900">藤井佑成</p>
             </section>
-
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">所在地</h2>
               <p className="text-gray-900">

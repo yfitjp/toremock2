@@ -9,7 +9,6 @@ import { hasActiveSubscription } from '@/app/lib/subscriptions';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
-import { CardElement } from '@stripe/react-stripe-js';
 
 // Stripeの公開キーを設定
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -67,29 +66,21 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
     setError(null);
 
     try {
-      const cardElement = elements.getElement(CardElement);
-      
-      if (!cardElement) {
-        throw new Error('カード情報の入力フォームが見つかりません');
-      }
+      const { error } = await stripe.confirmPayment({
+        elements,
+        confirmParams: {
+          return_url: `${window.location.origin}/subscription/success`,
+        },
+        redirect: 'if_required'
+      });
 
-      const { error: submitError, paymentIntent } = await stripe.confirmCardPayment(
-        '', // クライアントシークレットはElementsの初期化時に設定されているため空でOK
-        {
-          payment_method: {
-            card: cardElement,
-          },
-        }
-      );
-
-      if (submitError) {
-        console.error('決済エラー:', submitError);
-        setError(submitError.message || '決済処理中にエラーが発生しました。');
-      } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-        console.log('決済成功:', paymentIntent);
-        onSuccess();
+      if (error) {
+        console.error('決済エラー:', error);
+        setError(error.message || '決済処理中にエラーが発生しました。');
       } else {
-        setError('決済処理中に問題が発生しました。再度お試しください。');
+        // 決済が完了した場合
+        console.log('決済が完了しました');
+        onSuccess();
       }
     } catch (err) {
       console.error('決済エラー:', err);
@@ -105,27 +96,7 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
         <h3 className="text-lg font-medium text-gray-900 mb-4">支払い情報</h3>
         <div className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              カード情報
-            </label>
-            <div className="p-3 border border-gray-300 rounded-md">
-              <CardElement
-                options={{
-                  style: {
-                    base: {
-                      fontSize: '16px',
-                      color: '#424770',
-                      '::placeholder': {
-                        color: '#aab7c4',
-                      },
-                    },
-                    invalid: {
-                      color: '#9e2146',
-                    },
-                  },
-                }}
-              />
-            </div>
+            <PaymentElement />
           </div>
         </div>
       </div>
@@ -216,6 +187,7 @@ export default function SubscriptionPage() {
         body: JSON.stringify({
           userId: user.uid,
           priceId,
+          email: user.email
         }),
       });
 
