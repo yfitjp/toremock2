@@ -50,7 +50,7 @@ export default function SubscriptionPage() {
       setIsProcessing(true);
       
       // 環境変数からpriceIdを取得
-      const priceId = process.env.STRIPE_PREMIUM_PRICE_ID;
+      const priceId = process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID;
       if (!priceId) {
         throw new Error('Stripeの価格IDが設定されていません');
       }

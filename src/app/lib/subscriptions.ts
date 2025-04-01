@@ -8,6 +8,8 @@ import {
 } from './firestore';
 import { where, orderBy, limit } from 'firebase/firestore';
 import { auth } from './firebase';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from './firebase';
 
 // サブスクリプションの型定義
 export interface Subscription {
@@ -25,18 +27,27 @@ export interface Subscription {
 
 // サブスクリプションプランの定義
 export const SUBSCRIPTION_PLANS = {
-  PREMIUM: {
-    id: 'premium',
-    name: 'プレミアムプラン',
-    description: 'すべての模試にアクセス可能',
-    price: 1980,
+  FREE: {
+    name: '通常プラン',
+    price: 0,
+    description: '無料で基本的な模試にアクセスできます。有料模試は個別に購入が必要です。',
     features: [
-      'すべての模試にアクセス可能',
-      '新しい模試が追加されたら即時アクセス可能',
-      '詳細な解説と学習アドバイス',
-      '成績分析と学習進捗の追跡'
-    ]
-  }
+      '無料模試へのアクセス',
+      '基本的な解説',
+      '有料模試は個別購入（￥490～/模試）',
+    ],
+  },
+  PREMIUM: {
+    name: 'プレミアムプラン',
+    price: 980,
+    description: 'すべての模試にアクセスでき、詳細な解説や学習分析機能が利用できます。',
+    features: [
+      'すべての模試へのアクセス',
+      '詳細な解説と学習分析',
+      '優先サポート',
+      '新機能の早期アクセス',
+    ],
+  },
 };
 
 // サブスクリプションを作成または更新
@@ -122,31 +133,21 @@ export const getUserActiveSubscription = async (userId: string): Promise<Subscri
   }
 };
 
-// ユーザーがアクティブなサブスクリプションを持っているか確認
+// サブスクリプションの状態を確認
 export const hasActiveSubscription = async (userId: string): Promise<boolean> => {
   try {
-    console.log('サブスクリプションチェック開始 - ユーザーID:', userId);
+    const userRef = doc(db, 'users', userId);
+    const userDoc = await getDoc(userRef);
     
-    const subscription = await getUserActiveSubscription(userId);
-    console.log('取得したサブスクリプション:', subscription);
-    
-    if (!subscription || !subscription.currentPeriodEnd) {
-      console.log('サブスクリプションが見つかりません');
+    if (!userDoc.exists()) {
       return false;
     }
 
-    const currentDate = new Date();
-    const periodEnd = new Date(subscription.currentPeriodEnd * 1000);
-
-    console.log('現在の日時:', currentDate);
-    console.log('現在の課金期間終了日:', periodEnd);
-    
-    const result = periodEnd > currentDate && subscription.status === 'active';
-    console.log('サブスクリプション判定結果:', result);
-    return result;
+    const userData = userDoc.data();
+    return userData?.subscriptionStatus === 'active';
   } catch (error) {
-    console.error(`Error checking if user ${userId} has active subscription:`, error);
-    throw error;
+    console.error('サブスクリプション状態確認エラー:', error);
+    return false;
   }
 };
 
