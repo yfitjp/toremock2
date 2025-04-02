@@ -12,7 +12,6 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 import { db } from './firebase';
 import { getAuth } from 'firebase/auth';
 import Stripe from 'stripe';
-import { db as adminDb } from './firebase-admin';
 
 // サーバーサイドでのみStripeを初期化
 const stripe = typeof window === 'undefined' ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -154,7 +153,7 @@ export const hasActiveSubscription = async (userId: string): Promise<boolean> =>
     }
 
     const userData = userDoc.data();
-    return userData?.subscriptionStatus === 'active';
+    return userData?.subscriptions?.premium?.status === 'active';
   } catch (error) {
     console.error('サブスクリプション状態確認エラー:', error);
     return false;
@@ -192,6 +191,7 @@ export async function createPaymentIntent(userId: string, priceId: string) {
       metadata: {
         userId,
         priceId,
+        type: 'subscription'
       },
     });
 
@@ -211,37 +211,6 @@ export async function createCheckoutSession(userId: string, priceId: string) {
     return clientSecret;
   } catch (error) {
     console.error('Checkout session creation error:', error);
-    throw error;
-  }
-}
-
-// サブスクリプションを更新する関数
-export async function updateSubscriptionStatus(userId: string, status: 'active' | 'inactive') {
-  try {
-    const userRef = adminDb.collection('users').doc(userId);
-    const userDoc = await userRef.get();
-
-    if (!userDoc.exists) {
-      throw new Error('ユーザーが見つかりません');
-    }
-
-    const userData = userDoc.data();
-    const currentSubscriptions = userData?.subscriptions || {};
-
-    // サブスクリプション状態を更新
-    await userRef.update({
-      subscriptions: {
-        ...currentSubscriptions,
-        premium: {
-          status,
-          updatedAt: new Date().toISOString(),
-        },
-      },
-    });
-
-    console.log(`サブスクリプション状態を更新しました - ユーザーID: ${userId}, 状態: ${status}`);
-  } catch (error) {
-    console.error('サブスクリプション状態の更新エラー:', error);
     throw error;
   }
 } 
