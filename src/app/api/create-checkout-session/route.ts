@@ -39,6 +39,7 @@ export async function POST(request: Request) {
     const token = authHeader.split('Bearer ')[1];
     try {
       await auth.verifyIdToken(token);
+      console.log('認証成功: トークン検証OK');
     } catch (error) {
       console.error('認証エラー:', error);
       return NextResponse.json(
@@ -48,6 +49,7 @@ export async function POST(request: Request) {
     }
 
     // 支払いインテントを作成
+    console.log('支払いインテント作成開始:', {userId, priceId, type: 'subscription'});
     const paymentIntent = await stripe.paymentIntents.create({
       amount: SUBSCRIPTION_PLANS.PREMIUM.price,
       currency: 'jpy',
