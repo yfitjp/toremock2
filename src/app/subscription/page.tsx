@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/app/hooks/useAuth';
 import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
@@ -9,6 +9,9 @@ import { hasActiveSubscription } from '@/app/lib/subscriptions';
 import Link from 'next/link';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-stripe-js';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { db } from '@/app/lib/firebase';
+import { auth } from '@/app/lib/firebase';
 
 // Stripeの公開キーを設定
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -212,8 +215,35 @@ export default function SubscriptionPage() {
     }
   };
 
-  const handleSuccess = () => {
-    // ユーザーのサブスクリプション状態を更新するロジックを追加することも検討
+  const handleSuccess = async () => {
+    try {
+      if (!auth.currentUser?.uid) {
+        console.error('認証されていないユーザー');
+        router.push('/subscription/success');
+        return;
+      }
+
+      // ユーザーのサブスクリプション状態を確認
+      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userDoc = await getDoc(userRef);
+      
+      if (userDoc.exists()) {
+        // サブスクリプション状態を更新
+        await updateDoc(userRef, {
+          subscriptions: {
+            premium: {
+              status: 'active',
+              updatedAt: new Date().toISOString(),
+            }
+          },
+          subscriptionStatus: 'active',
+          updatedAt: new Date().toISOString(),
+        });
+        console.log('クライアント側: サブスクリプション状態を更新しました');
+      }
+    } catch (error) {
+      console.error('サブスクリプション状態更新エラー:', error);
+    }
     router.push('/subscription/success');
   };
 
