@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { useAuth } from './hooks/useAuth';
 import { useEffect, useState } from 'react';
+import { SUBSCRIPTION_PLANS } from './lib/subscriptions';
 
 export default function Home() {
   const { user } = useAuth();
@@ -241,7 +242,7 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8">
+          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 sm:gap-8">
             {/* 無料プラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
@@ -356,6 +357,57 @@ export default function Home() {
                       <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
                     </svg>
                   </Link>
+                </div>
+              </div>
+            </motion.div>
+            
+            {/* エリートプラン */}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
+              className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
+            >
+              <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-20 -translate-y-20">
+                <div className="absolute transform rotate-45 bg-amber-500 text-center text-white font-semibold py-1 left-[-40px] top-[32px] w-[190px]">
+                  受付停止中
+                </div>
+              </div>
+              <div className="p-8">
+                <div className="flex items-center">
+                  <h3 className="text-2xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                  <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
+                </div>
+                <p className="mt-4 text-amber-700">最高レベルの学習体験を提供</p>
+                <p className="mt-8">
+                  <span className="text-4xl font-extrabold text-amber-900">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
+                  <span className="text-base font-medium text-amber-700">/月</span>
+                </p>
+                <ul className="mt-8 space-y-4">
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="ml-3 text-amber-700">プレミアムプランのすべての機能</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="ml-3 text-amber-700">プロ講師による個別指導（月2回）</span>
+                  </li>
+                  <li className="flex items-center">
+                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                    </svg>
+                    <span className="ml-3 text-amber-700">AIによる発音・スピーキング評価</span>
+                  </li>
+                </ul>
+                <div className="mt-8">
+                  <div
+                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-amber-300 rounded-md text-amber-700 bg-white opacity-70 cursor-not-allowed"
+                  >
+                    ご応募多数につき受付停止中
+                  </div>
+                  <p className="mt-2 text-xs text-amber-600 text-center">※エリートプランは定員に達したため現在新規受付を停止しております</p>
                 </div>
               </div>
             </motion.div>

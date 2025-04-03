@@ -435,75 +435,6 @@ export default function SubscriptionPage() {
             </Link>
           </motion.div>
 
-          {/* エリートプラン */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="relative p-8 bg-gradient-to-b from-amber-50 to-amber-100 border border-amber-200 rounded-2xl shadow-md flex flex-col transform"
-          >
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-amber-500 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-              定員に達しました
-            </div>
-            <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-300 to-amber-600 opacity-20 rounded-full"></div>
-            <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-gradient-to-br from-amber-400 to-amber-700 opacity-10 rounded-full"></div>
-            <div className="flex-1 relative">
-              <div className="flex items-center">
-                <div className="w-8 h-8 mr-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-amber-600">
-                    <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
-                  </svg>
-                </div>
-                <h3 className="text-xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
-                <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
-              </div>
-              <p className="mt-4 flex items-baseline text-amber-900">
-                <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
-                <span className="ml-1 text-xl font-semibold">/月</span>
-              </p>
-              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-                {SUBSCRIPTION_PLANS.ELITE.availabilityStatus}
-              </div>
-              <p className="mt-6 text-amber-800">
-                {SUBSCRIPTION_PLANS.ELITE.description}
-              </p>
-
-              <ul role="list" className="mt-6 space-y-4">
-                {SUBSCRIPTION_PLANS.ELITE.features.map((feature, index) => (
-                  <li key={index} className="flex">
-                    <svg
-                      className="flex-shrink-0 w-6 h-6 text-amber-500"
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      aria-hidden="true"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth="2"
-                        d="M5 13l4 4L19 7"
-                      />
-                    </svg>
-                    <span className="ml-3 text-amber-700">{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <button
-              disabled={true}
-              className="mt-8 block w-full px-6 py-3 border border-amber-300 rounded-md shadow-sm text-base font-medium text-center bg-white text-amber-700 opacity-60 cursor-not-allowed"
-            >
-              ご応募多数につき受付停止中
-            </button>
-            <p className="mt-2 text-xs text-amber-600 text-center">※エリートプランは定員に達したため現在新規受付を停止しております。再開をお待ちの方は、まずはプレミアムプランをお試しください。</p>
-          </motion.div>
-
           {/* プレミアムプラン */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -590,6 +521,75 @@ export default function SubscriptionPage() {
                 {isProcessing ? '処理中...' : hasSubscription ? "すでに登録済み" : "プランに登録する"}
               </button>
             )}
+          </motion.div>
+
+          {/* エリートプラン */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative p-8 bg-gradient-to-b from-amber-50 to-amber-100 border border-amber-200 rounded-2xl shadow-md flex flex-col transform"
+          >
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-amber-500 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+              定員に達しました
+            </div>
+            <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-300 to-amber-600 opacity-20 rounded-full"></div>
+            <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-gradient-to-br from-amber-400 to-amber-700 opacity-10 rounded-full"></div>
+            <div className="flex-1 relative">
+              <div className="flex items-center">
+                <div className="w-8 h-8 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-amber-600">
+                    <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
+              </div>
+              <p className="mt-4 flex items-baseline text-amber-900">
+                <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
+                <span className="ml-1 text-xl font-semibold">/月</span>
+              </p>
+              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                {SUBSCRIPTION_PLANS.ELITE.availabilityStatus}
+              </div>
+              <p className="mt-6 text-amber-800">
+                {SUBSCRIPTION_PLANS.ELITE.description}
+              </p>
+
+              <ul role="list" className="mt-6 space-y-4">
+                {SUBSCRIPTION_PLANS.ELITE.features.map((feature, index) => (
+                  <li key={index} className="flex">
+                    <svg
+                      className="flex-shrink-0 w-6 h-6 text-amber-500"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="ml-3 text-amber-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              disabled={true}
+              className="mt-8 block w-full px-6 py-3 border border-amber-300 rounded-md shadow-sm text-base font-medium text-center bg-white text-amber-700 opacity-60 cursor-not-allowed"
+            >
+              ご応募多数につき受付停止中
+            </button>
+            <p className="mt-2 text-xs text-amber-600 text-center">※エリートプランは定員に達したため現在新規受付を停止しております。再開をお待ちの方は、まずはプレミアムプランをお試しください。</p>
           </motion.div>
         </div>
       </div>
