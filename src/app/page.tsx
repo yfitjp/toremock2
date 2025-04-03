@@ -123,7 +123,7 @@ export default function Home() {
             <div className="text-center mb-12">
               <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">特徴</h2>
               <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
-                ToreMockが選ばれる理由
+                トレモックが選ばれる理由
               </p>
               <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
                 本番さながらの環境で実力を試し、詳細な分析で弱点を克服できます
@@ -445,7 +445,7 @@ export default function Home() {
                   "TOREMOCKのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">田中 美咲</div>
+                  <div className="font-medium text-gray-900">20代 女性</div>
                   <div className="text-blue-600">TOEIC 950点達成</div>
                 </div>
               </div>
@@ -465,7 +465,7 @@ export default function Home() {
                   "AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">山田 健一</div>
+                  <div className="font-medium text-gray-900">40代 男性</div>
                   <div className="text-blue-600">英検1級合格</div>
                 </div>
               </div>
@@ -485,7 +485,7 @@ export default function Home() {
                   "本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">佐藤 優子</div>
+                  <div className="font-medium text-gray-900">10代 女性</div>
                   <div className="text-blue-600">TOEFL 110点達成</div>
                 </div>
               </div>

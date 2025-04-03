@@ -72,11 +72,11 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">7. お問い合わせ窓口</h2>
               <p className="text-gray-900">
-                個人情報の取り扱いに関するお問い合わせは、以下の窓口までご連絡ください：
+                個人情報の取り扱いに関するお問い合わせは、お問い合わせフォームまたは以下の窓口までご連絡ください：
               </p>
               <div className="mt-2 text-gray-900">
                 <p>ToreMock カスタマーサポート</p>
-                <p>メール：support@toremock.com</p>
+                <p>メール：contact.yfit@gmail.com</p>
               </div>
             </section>
 
@@ -89,7 +89,7 @@ export default function PrivacyPolicyPage() {
             </section>
 
             <div className="text-right text-sm text-gray-500 mt-8">
-              最終更新日：2024年3月10日
+              最終更新日：2025年4月15日
             </div>
           </div>
         </motion.div>
