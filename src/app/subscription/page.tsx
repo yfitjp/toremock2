@@ -351,7 +351,7 @@ export default function SubscriptionPage() {
           </motion.div>
         ) : null}
 
-        <div className={`mt-12 ${hasSubscription ? 'opacity-60' : ''} space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8`}>
+        <div className={`mt-12 ${hasSubscription ? 'opacity-60' : ''} space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8`}>
           {/* 通常プラン */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -435,25 +435,111 @@ export default function SubscriptionPage() {
             </Link>
           </motion.div>
 
+          {/* エリートプラン */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="relative p-8 bg-gradient-to-b from-amber-50 to-amber-100 border border-amber-200 rounded-2xl shadow-md flex flex-col transform"
+          >
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-amber-500 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
+              定員に達しました
+            </div>
+            <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-300 to-amber-600 opacity-20 rounded-full"></div>
+            <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-gradient-to-br from-amber-400 to-amber-700 opacity-10 rounded-full"></div>
+            <div className="flex-1 relative">
+              <div className="flex items-center">
+                <div className="w-8 h-8 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-amber-600">
+                    <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h3 className="text-xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
+              </div>
+              <p className="mt-4 flex items-baseline text-amber-900">
+                <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
+                <span className="ml-1 text-xl font-semibold">/月</span>
+              </p>
+              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+                </svg>
+                {SUBSCRIPTION_PLANS.ELITE.availabilityStatus}
+              </div>
+              <p className="mt-6 text-amber-800">
+                {SUBSCRIPTION_PLANS.ELITE.description}
+              </p>
+
+              <ul role="list" className="mt-6 space-y-4">
+                {SUBSCRIPTION_PLANS.ELITE.features.map((feature, index) => (
+                  <li key={index} className="flex">
+                    <svg
+                      className="flex-shrink-0 w-6 h-6 text-amber-500"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="ml-3 text-amber-700">{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <button
+              disabled={true}
+              className="mt-8 block w-full px-6 py-3 border border-amber-300 rounded-md shadow-sm text-base font-medium text-center bg-white text-amber-700 opacity-60 cursor-not-allowed"
+            >
+              ご応募多数につき受付停止中
+            </button>
+            <p className="mt-2 text-xs text-amber-600 text-center">※エリートプランは定員に達したため現在新規受付を停止しております。再開をお待ちの方は、まずはプレミアムプランをお試しください。</p>
+          </motion.div>
+
           {/* プレミアムプラン */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative p-8 bg-blue-600 rounded-2xl shadow-sm flex flex-col"
+            className="relative p-8 bg-blue-600 rounded-2xl shadow-lg flex flex-col transform scale-105 z-10 border-2 border-blue-300"
+            whileHover={{ scale: 1.07, transition: { duration: 0.2 } }}
           >
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-gray-900">
-              おすすめ
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
+              一番おすすめ
             </div>
+            <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
             <div className="flex-1">
-              <h3 className="text-xl font-semibold text-white">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+              <div className="flex items-center">
+                <div className="w-8 h-8 mr-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-blue-200">
+                    <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <h3 className="text-2xl font-bold text-white">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+              </div>
+              <div className="mt-2 bg-blue-500 px-3 py-1 rounded-full inline-block">
+                <span className="text-xs font-medium text-white">人気No.1</span>
+              </div>
               <p className="mt-4 flex items-baseline text-white">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
-              <p className="mt-6 text-blue-100">{SUBSCRIPTION_PLANS.PREMIUM.description}</p>
+              <div className="mt-1">
+                <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより67%お得！</span>
+              </div>
+              <p className="mt-6 text-blue-100">
+                {SUBSCRIPTION_PLANS.PREMIUM.description} エリートプランと同様の高品質な学習体験を、よりリーズナブルな価格でご提供します。
+              </p>
 
-              <ul role="list" className="mt-6 space-y-6">
+              <ul role="list" className="mt-6 space-y-4">
                 {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                   <li key={index} className="flex">
                     <svg
