@@ -360,7 +360,7 @@ export default function SubscriptionPage() {
             className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col"
           >
             <div className="flex-1">
-              <h3 className="text-xl font-semibold text-gray-900">通常プラン</h3>
+              <h3 className="text-xl font-semibold text-gray-900">無料プラン</h3>
               <p className="mt-4 flex items-baseline text-gray-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥0</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>

@@ -442,7 +442,7 @@ export default function Home() {
               </div>
               <div className="relative">
                 <div className="text-lg leading-relaxed text-gray-700">
-                  "TOREMOCKのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
+                  "ToreMockのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">20代 女性</div>
