@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+// import Navbar from './components/Navbar'; // LayoutSwitcher内で使用するため不要
+// import Footer from './components/Footer'; // LayoutSwitcher内で使用するため不要
 import { AuthProvider } from './contexts/AuthContext';
 import { ToastProvider } from './components/ToastProvider';
+import LayoutSwitcher from "./components/LayoutSwitcher"; // LayoutSwitcherをインポート
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,13 +24,10 @@ export default function RootLayout({
       <body className={inter.className}>
         <AuthProvider>
           <ToastProvider>
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            {/* LayoutSwitcherでラップする */}
+            <LayoutSwitcher>
+              {children}
+            </LayoutSwitcher>
           </ToastProvider>
         </AuthProvider>
       </body>
