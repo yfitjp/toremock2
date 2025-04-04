@@ -16,37 +16,37 @@ const EXAM_TYPES = ['TOEIC', 'TOEFL', 'EIKEN'];
 // 試験タイプに応じた色とアイコンの設定
 const TYPE_STYLES = {
   'TOEIC': {
-    color: 'rose',
+    color: 'blue',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path fillRule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clipRule="evenodd" />
       </svg>
     ),
-    bgGradient: 'from-rose-50 to-red-100',
-    border: 'border-rose-200',
-    header: 'bg-rose-600'
+    bgGradient: 'from-blue-50 to-blue-100',
+    border: 'border-blue-200',
+    header: 'bg-blue-600'
   },
   'TOEFL': {
-    color: 'amber',
+    color: 'sky',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
       </svg>
     ),
-    bgGradient: 'from-amber-50 to-yellow-100',
-    border: 'border-amber-200',
-    header: 'bg-amber-600'
+    bgGradient: 'from-sky-50 to-sky-100',
+    border: 'border-sky-200',
+    header: 'bg-sky-500'
   },
   'EIKEN': {
-    color: 'orange',
+    color: 'indigo',
     icon: (
       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
         <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
       </svg>
     ),
-    bgGradient: 'from-orange-50 to-orange-100',
-    border: 'border-orange-200',
-    header: 'bg-orange-600'
+    bgGradient: 'from-indigo-50 to-indigo-100',
+    border: 'border-indigo-200',
+    header: 'bg-indigo-600'
   }
 };
 
