@@ -441,10 +441,9 @@ export default function SubscriptionPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="relative p-8 bg-blue-600 rounded-2xl shadow-lg flex flex-col transform scale-105 z-10 border-2 border-blue-300"
-            whileHover={{ scale: 1.07, transition: { duration: 0.2 } }}
           >
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
-              一番おすすめ
+              おすすめ
             </div>
             <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
             <div className="flex-1">
@@ -533,8 +532,6 @@ export default function SubscriptionPage() {
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-amber-500 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
               定員に達しました
             </div>
-            <div className="absolute -top-4 -left-4 w-24 h-24 bg-gradient-to-br from-amber-300 to-amber-600 opacity-20 rounded-full"></div>
-            <div className="absolute -bottom-8 -right-8 w-28 h-28 bg-gradient-to-br from-amber-400 to-amber-700 opacity-10 rounded-full"></div>
             <div className="flex-1 relative">
               <div className="flex items-center">
                 <div className="w-8 h-8 mr-2">
