@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
+import Image from "next/image";
 
 // Toremockとは異なるフォントを使用
 const notoSans = Noto_Sans_JP({ 
@@ -67,7 +68,13 @@ export default function ArticlesLayout({
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                 <div className="flex items-center">
                   <Link href="/articles" className="flex items-center no-underline">
-                    <div className="bg-slate-800 text-white font-bold h-10 w-10 rounded-lg flex items-center justify-center mr-3">E</div>
+                    <Image 
+                      src="/articles-logo.png" 
+                      alt="英語テスト情報局 ロゴ" 
+                      width={36} 
+                      height={36} 
+                      className="mr-3"
+                    />
                     <h1 className="text-2xl font-bold text-slate-800">英語テスト<span className="text-slate-500">情報局</span></h1>
                   </Link>
                 </div>
@@ -168,7 +175,13 @@ export default function ArticlesLayout({
               <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div className="col-span-1 md:col-span-2">
                   <div className="flex items-center mb-4">
-                    <div className="bg-white text-slate-800 font-bold h-10 w-10 rounded-lg flex items-center justify-center mr-3">E</div>
+                    <Image 
+                      src="/articles-logo.png" 
+                      alt="英語テスト情報局 ロゴ" 
+                      width={36} 
+                      height={36} 
+                      className="mr-3"
+                    />
                     <h3 className="text-xl font-bold">英語テスト情報局</h3>
                   </div>
                   <p className="text-slate-300 text-sm mb-6">
