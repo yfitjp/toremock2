@@ -17,9 +17,9 @@ export default function Navbar() {
     const checkSubscription = async () => {
       if (user) {
         try {
-          console.log('Navbar: サブスクリプション確認開始 - ユーザーID:', user.uid);
+          // console.log('Navbar: サブスクリプション確認開始 - ユーザーID:', user.uid);
           const hasSubscription = await hasActiveSubscription(user.uid);
-          console.log('Navbar: サブスクリプション状態:', hasSubscription);
+          // console.log('Navbar: サブスクリプション状態:', hasSubscription);
           setHasSubscription(hasSubscription);
         } catch (error) {
           console.error('サブスクリプション確認エラー:', error);

@@ -178,8 +178,8 @@ export default function ExamForm({ examId, questions, examType }: ExamFormProps)
   
   // デバッグ: 画像URLがあれば出力
   if (currentQuestionData.imageUrl) {
-    console.log('問題画像URL:', currentQuestionData.imageUrl);
-    console.log('模試タイプ:', examType, '/ セクション:', sectionType);
+    // console.log('問題画像URL:', currentQuestionData.imageUrl);
+    // console.log('模試タイプ:', examType, '/ セクション:', sectionType);
   }
   
   // 問題テキストを取得

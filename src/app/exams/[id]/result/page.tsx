@@ -32,7 +32,7 @@ export default function ExamResultPage() {
     const fetchExamData = async () => {
       try {
         setLoading(true);
-        console.log('Fetching exam data for ID:', examId);
+        // console.log('Fetching exam data for ID:', examId);
         
         // デフォルトの模試データ
         let examData: Exam = {
@@ -56,7 +56,7 @@ export default function ExamResultPage() {
               createdAt: fetchedExam.createdAt || new Date(),
               updatedAt: fetchedExam.updatedAt || new Date()
             };
-            console.log('Fetched exam data:', fetchedExam);
+            // console.log('Fetched exam data:', fetchedExam);
           }
         } catch (err) {
           console.error('Error fetching exam:', err);

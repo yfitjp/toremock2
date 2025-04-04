@@ -80,7 +80,7 @@ export default function TermsPage() {
             </section>
 
             <div className="text-right text-sm text-gray-500 mt-8">
-              最終更新日：2024年5月11日
+              最終更新日：2025年5月11日
             </div>
           </div>
         </motion.div>
