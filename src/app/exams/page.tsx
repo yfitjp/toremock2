@@ -177,21 +177,21 @@ export default function ExamsPage() {
           {exam.isFree ? (
             <Link
               href={`/exams/${exam.id}/take`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               無料で受験する
             </Link>
           ) : purchasedExams.has(exam.id) ? (
             <Link
               href={`/exams/${exam.id}/take`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               受験する（購入済み）
             </Link>
           ) : hasSubscription ? (
             <Link
               href={`/exams/${exam.id}/take`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-orange-600 hover:bg-orange-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-orange-500 transition-colors"
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               受験する
             </Link>
@@ -204,7 +204,7 @@ export default function ExamsPage() {
           )}
 
           {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
-            <p className="mt-2 text-xs text-orange-600 text-center">
+            <p className="mt-2 text-xs text-green-600 text-center">
               プレミアム会員特典：無料でアクセス可能
             </p>
           )}
@@ -233,8 +233,8 @@ export default function ExamsPage() {
 
   return (
     <div className="bg-gray-50 min-h-screen pb-12">
-      <div className="bg-gradient-to-r from-orange-600 to-red-700 text-white py-12">
-        <div className="container mx-auto px-4">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+      <div className="container mx-auto px-4">
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -247,7 +247,7 @@ export default function ExamsPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-orange-100 max-w-3xl"
+            className="text-blue-100 max-w-3xl"
           >
             TOEIC®、TOEFL®、英検®など、様々な試験の模擬試験を提供しています。
             模試を通じて自分の弱点を把握し、効率的に学習を進めましょう。
@@ -266,8 +266,8 @@ export default function ExamsPage() {
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 rounded-md whitespace-nowrap mr-2 transition-colors ${
               activeTab === 'all' 
-                ? 'bg-red-600 text-white' 
-                : 'bg-red-50 text-red-700 hover:bg-red-100'
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             <span className="flex items-center">
@@ -346,7 +346,7 @@ export default function ExamsPage() {
                       <p className="text-gray-500">現在、{activeTab}の模試はありません。</p>
                       <button
                         onClick={() => setActiveTab('all')}
-                        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-red-700 bg-red-100 hover:bg-red-200"
+                        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
                       >
                         すべての模試を見る
                       </button>
