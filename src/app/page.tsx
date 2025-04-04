@@ -446,7 +446,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">20代 女性</div>
-                  <div className="text-blue-600">TOEIC 950点達成</div>
+                  <div className="text-blue-600">TOEIC® 870点達成</div>
                 </div>
               </div>
             </motion.div>
@@ -466,7 +466,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">40代 男性</div>
-                  <div className="text-blue-600">英検1級合格</div>
+                  <div className="text-blue-600">英検®1級合格</div>
                 </div>
               </div>
             </motion.div>
@@ -486,7 +486,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">10代 女性</div>
-                  <div className="text-blue-600">TOEFL 110点達成</div>
+                  <div className="text-blue-600">TOEFL® 112点達成</div>
                 </div>
               </div>
             </motion.div>
