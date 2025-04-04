@@ -31,8 +31,7 @@ export default function LegalPage() {
               <h2 className="text-xl font-bold text-gray-900 mb-4">連絡先</h2>
               <p className="text-gray-900">
                 メールアドレス：contact.yfit@gmail.com<br />
-                電話番号：080-4686-0794<br />
-                受付時間：平日 9:00-18:00
+                受付時間：平日 8:00-20:00
               </p>
             </section>
 

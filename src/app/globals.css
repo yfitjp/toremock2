@@ -3,27 +3,212 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
 }
 
-/* ダークモード設定を無効化 */
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #171717;
-    --foreground: #ffffff;
+/* モバイル向けのレスポンシブスタイル */
+@media (max-width: 768px) {
+  h1 {
+    font-size: 1.75rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.5rem !important;
   }
-} */
+  
+  h2 {
+    font-size: 1.5rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  h3 {
+    font-size: 1.25rem !important;
+    line-height: 1.2 !important;
+    margin-bottom: 0.5rem !important;
+  }
+  
+  p {
+    font-size: 0.9rem !important;
+    line-height: 1.4 !important;
+    margin-bottom: 0.75rem !important;
+  }
+  
+  .py-16 {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  .py-12 {
+    padding-top: 1.5rem !important;
+    padding-bottom: 1.5rem !important;
+  }
+  
+  .py-8 {
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+  }
+  
+  .mt-16, .my-16 {
+    margin-top: 2rem !important;
+  }
+  
+  .mb-16, .my-16 {
+    margin-bottom: 2rem !important;
+  }
+  
+  .mt-12, .my-12 {
+    margin-top: 1.5rem !important;
+  }
+  
+  .mb-12, .my-12 {
+    margin-bottom: 1.5rem !important;
+  }
+  
+  .mt-8, .my-8 {
+    margin-top: 1rem !important;
+  }
+  
+  .mb-8, .my-8 {
+    margin-bottom: 1rem !important;
+  }
+  
+  .px-6 {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  .px-8 {
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+  }
+  
+  .p-8 {
+    padding: 1.25rem !important;
+  }
+  
+  .text-5xl {
+    font-size: 2.5rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 2rem !important;
+  }
+  
+  .text-3xl {
+    font-size: 1.5rem !important;
+  }
+  
+  .text-2xl {
+    font-size: 1.25rem !important;
+  }
+  
+  .text-xl {
+    font-size: 1.1rem !important;
+  }
+  
+  .space-y-6 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.75rem * calc(1 - var(--tw-space-y-reverse))) !important;
+    margin-bottom: calc(0.75rem * var(--tw-space-y-reverse)) !important;
+  }
+  
+  .space-y-4 > :not([hidden]) ~ :not([hidden]) {
+    --tw-space-y-reverse: 0;
+    margin-top: calc(0.5rem * calc(1 - var(--tw-space-y-reverse))) !important;
+    margin-bottom: calc(0.5rem * var(--tw-space-y-reverse)) !important;
+  }
+  
+  /* カードとコンポーネントのサイズ調整 */
+  .rounded-2xl {
+    border-radius: 0.75rem !important;
+  }
+  
+  .rounded-xl {
+    border-radius: 0.5rem !important;
+  }
+  
+  .shadow-xl, .shadow-lg {
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+  }
+  
+  /* グリッドとギャップの調整 */
+  .gap-8 {
+    gap: 1rem !important;
+  }
+  
+  .gap-6 {
+    gap: 0.75rem !important;
+  }
+  
+  /* ボタンとフォーム要素 */
+  button, .button, a.inline-flex, a.flex {
+    padding: 0.5rem 1rem !important;
+    font-size: 0.9rem !important;
+  }
+  
+  /* 特定のセクションの調整 */
+  .relative.overflow-hidden.bg-gradient-to-r {
+    padding-top: 2rem !important;
+    padding-bottom: 2rem !important;
+  }
+  
+  /* ナビゲーションバーの高さ調整 */
+  nav .h-16 {
+    height: 3.5rem !important;
+  }
+  
+  /* アイコンサイズの調整 */
+  .h-6, .w-6 {
+    height: 1.25rem !important;
+    width: 1.25rem !important;
+  }
+}
+
+/* モバイル(小)向けのさらなる最適化 */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.35rem !important;
+  }
+  
+  h3 {
+    font-size: 1.15rem !important;
+  }
+  
+  p {
+    font-size: 0.85rem !important;
+  }
+  
+  .px-4 {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+  }
+  
+  .p-8, .p-6 {
+    padding: 1rem !important;
+  }
+  
+  .text-5xl {
+    font-size: 2.25rem !important;
+  }
+  
+  .text-4xl {
+    font-size: 1.75rem !important;
+  }
+}

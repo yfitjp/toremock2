@@ -48,7 +48,7 @@ export default function Navbar() {
   return (
     <nav className="bg-white shadow-lg transition-colors duration-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+        <div className="flex justify-between h-16 sm:h-16 h-14">
           <div className="flex">
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center group">
@@ -57,9 +57,9 @@ export default function Navbar() {
                   alt="ToreMock Logo"
                   width={40}
                   height={40}
-                  className="mr-2 transform group-hover:scale-105 transition-transform duration-200"
+                  className="mr-2 transform group-hover:scale-105 transition-transform duration-200 sm:w-10 sm:h-10 w-8 h-8"
                 />
-                <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-200">
+                <span className="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-200 sm:text-2xl text-xl">
                   ToreMock
                 </span>
               </Link>
@@ -138,7 +138,7 @@ export default function Navbar() {
       {/* モバイルメニュー */}
       <div 
         className={`sm:hidden transition-all duration-200 ease-in-out transform ${
-          isOpen ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0 pointer-events-none'
+          isOpen ? 'translate-y-0 opacity-100 max-h-screen' : 'translate-y-0 opacity-0 pointer-events-none max-h-0 overflow-hidden'
         }`}
       >
         <div className="pt-2 pb-3 space-y-1">

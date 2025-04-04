@@ -10,7 +10,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ToreMock - オンライン模擬試験プラットフォーム",
-  description: "高品質なオンライン模擬試験を提供するプラットフォーム",
+  description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム",
 };
 
 export default function RootLayout({
