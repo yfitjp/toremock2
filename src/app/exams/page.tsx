@@ -1,14 +1,54 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { getAllExams, Exam } from '@/app/lib/exams';
+import { getAllExams, Exam, getExamsByType } from '@/app/lib/exams';
 import { formatTimestamp } from '@/app/lib/firestore';
 import { useAuth } from '@/app/hooks/useAuth';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
 import { checkExamPurchase } from '@/app/lib/purchases';
 import PurchaseButton from '@/app/components/PurchaseButton';
+
+// 試験タイプのリスト
+const EXAM_TYPES = ['TOEIC', 'TOEFL', 'EIKEN'];
+
+// 試験タイプに応じた色とアイコンの設定
+const TYPE_STYLES = {
+  'TOEIC': {
+    color: 'blue',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
+      </svg>
+    ),
+    bgGradient: 'from-blue-50 to-indigo-100',
+    border: 'border-blue-200',
+    header: 'bg-blue-600'
+  },
+  'TOEFL': {
+    color: 'green',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M3 6a3 3 0 013-3h10a1 1 0 01.8 1.6L14.25 8l2.55 3.4A1 1 0 0116 13H6a1 1 0 00-1 1v3a1 1 0 11-2 0V6z" clipRule="evenodd" />
+      </svg>
+    ),
+    bgGradient: 'from-green-50 to-emerald-100',
+    border: 'border-green-200',
+    header: 'bg-green-600'
+  },
+  'EIKEN': {
+    color: 'amber',
+    icon: (
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+      </svg>
+    ),
+    bgGradient: 'from-amber-50 to-orange-100',
+    border: 'border-amber-200',
+    header: 'bg-amber-600'
+  }
+};
 
 export default function ExamsPage() {
   const { user, loading: authLoading } = useAuth();
@@ -17,6 +57,8 @@ export default function ExamsPage() {
   const [error, setError] = useState<string | null>(null);
   const [hasSubscription, setHasSubscription] = useState(false);
   const [purchasedExams, setPurchasedExams] = useState<Set<string>>(new Set());
+  const [activeTab, setActiveTab] = useState<string>('all');
+  const [examsByType, setExamsByType] = useState<Record<string, Exam[]>>({});
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -28,6 +70,14 @@ export default function ExamsPage() {
           setExams([]);
         } else {
           setExams(examData);
+          
+          // 試験タイプごとに分類
+          const typeMap: Record<string, Exam[]> = { 'all': examData };
+          EXAM_TYPES.forEach(type => {
+            typeMap[type] = examData.filter(exam => exam.type === type);
+          });
+          setExamsByType(typeMap);
+          
           setError(null);
         }
       } catch (err) {
@@ -82,6 +132,97 @@ export default function ExamsPage() {
     }
   }, [user, authLoading, exams]);
 
+  const renderExamCard = (exam: Exam) => {
+    const typeStyle = TYPE_STYLES[exam.type as keyof typeof TYPE_STYLES] || TYPE_STYLES['TOEIC'];
+    
+    return (
+      <motion.div
+        key={exam.id}
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        exit={{ opacity: 0, y: -20 }}
+        transition={{ duration: 0.4 }}
+        className={`bg-white shadow-md rounded-lg overflow-hidden border ${typeStyle.border}`}
+      >
+        <div className={`p-2 ${typeStyle.header} text-white flex items-center`}>
+          <div className="mr-2">
+            {typeStyle.icon}
+          </div>
+          <span className="font-medium">{exam.type}</span>
+          {exam.isFree && (
+            <span className="ml-auto bg-white text-green-600 text-xs px-2 py-1 rounded-full font-medium">無料</span>
+          )}
+        </div>
+        <div className="p-6">
+          <h2 className="text-xl font-semibold mb-3">{exam.title}</h2>
+          <p className="text-gray-600 mb-4 text-sm">{exam.description}</p>
+
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
+            <div className="flex items-center">
+              <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <span>{exam.duration}分</span>
+            </div>
+            {!exam.isFree && (
+              <div className="flex items-center">
+                <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span>¥{exam.price.toLocaleString()}</span>
+              </div>
+            )}
+          </div>
+
+          {exam.isFree ? (
+            <Link
+              href={`/exams/${exam.id}/take`}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+            >
+              無料で受験する
+            </Link>
+          ) : purchasedExams.has(exam.id) ? (
+            <Link
+              href={`/exams/${exam.id}/take`}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+            >
+              受験する（購入済み）
+            </Link>
+          ) : hasSubscription ? (
+            <Link
+              href={`/exams/${exam.id}/take`}
+              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+            >
+              受験する
+            </Link>
+          ) : (
+            <PurchaseButton
+              examId={exam.id}
+              price={exam.price}
+              isDisabled={!user || purchasedExams.has(exam.id)}
+            />
+          )}
+
+          {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
+            <p className="mt-2 text-xs text-green-600 text-center">
+              プレミアム会員特典：無料でアクセス可能
+            </p>
+          )}
+
+          {!user && !exam.isFree && (
+            <p className="mt-2 text-sm text-gray-500 text-center">
+              購入するには
+              <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
+                ログイン
+              </Link>
+              が必要です
+            </p>
+          )}
+        </div>
+      </motion.div>
+    );
+  };
+
   if (loading || authLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen">
@@ -91,92 +232,124 @@ export default function ExamsPage() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        <h1 className="text-3xl font-bold mb-8">模試一覧</h1>
+    <div className="bg-gray-50 min-h-screen pb-12">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+        <div className="container mx-auto px-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold mb-4"
+          >
+            模試一覧
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-blue-100 max-w-3xl"
+          >
+            TOEIC®、TOEFL®、英検®など、様々な試験の模擬試験を提供しています。
+            模試を通じて自分の弱点を把握し、効率的に学習を進めましょう。
+          </motion.p>
+        </div>
+      </div>
+
+      <div className="container mx-auto px-4 -mt-6">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="bg-white rounded-lg shadow-md p-4 mb-8 flex overflow-x-auto"
+        >
+          <button
+            onClick={() => setActiveTab('all')}
+            className={`px-4 py-2 rounded-md whitespace-nowrap mr-2 transition-colors ${
+              activeTab === 'all' 
+                ? 'bg-blue-600 text-white' 
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+            }`}
+          >
+            すべての模試
+          </button>
+          {EXAM_TYPES.map(type => {
+            const style = TYPE_STYLES[type as keyof typeof TYPE_STYLES];
+            return (
+              <button
+                key={type}
+                onClick={() => setActiveTab(type)}
+                className={`px-4 py-2 rounded-md flex items-center whitespace-nowrap mr-2 transition-colors ${
+                  activeTab === type 
+                    ? `bg-${style.color}-600 text-white` 
+                    : `bg-${style.color}-50 text-${style.color}-700 hover:bg-${style.color}-100`
+                }`}
+              >
+                <span className="mr-2">{style.icon}</span>
+                <span>{type}</span>
+                <span className="ml-2 bg-white bg-opacity-20 text-xs px-2 py-0.5 rounded-full">
+                  {examsByType[type]?.length || 0}
+                </span>
+              </button>
+            );
+          })}
+        </motion.div>
 
         {error ? (
           <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
             {error}
           </div>
         ) : (
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {exams.map((exam) => (
-              <div
-                key={exam.id}
-                className="bg-white shadow-md rounded-lg overflow-hidden"
-              >
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-4">
-                    <h2 className="text-xl font-semibold">{exam.title}</h2>
-                    <div className="flex space-x-2">
-                      {exam.isFree && (
-                        <span className="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">無料</span>
-                      )}
+          <>
+            <AnimatePresence mode="wait">
+              {activeTab === 'all' ? (
+                <motion.div
+                  key="all-exams"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h2 className="text-2xl font-bold mb-6">すべての模試</h2>
+                  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {exams.map(renderExamCard)}
+                  </div>
+                </motion.div>
+              ) : (
+                <motion.div
+                  key={`${activeTab}-exams`}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <div className="flex items-center mb-6">
+                    <h2 className="text-2xl font-bold">{activeTab}模試</h2>
+                    <span className="ml-3 text-sm text-gray-500">
+                      {examsByType[activeTab]?.length || 0}件の模試が見つかりました
+                    </span>
+                  </div>
+                  
+                  {examsByType[activeTab]?.length > 0 ? (
+                    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                      {examsByType[activeTab].map(renderExamCard)}
                     </div>
-                  </div>
-
-                  <p className="text-gray-600 mb-4">{exam.description}</p>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
-                    <span>所要時間: {exam.duration}分</span>
-                    <span>タイプ: {exam.type}</span>
-                  </div>
-
-                  {exam.isFree ? (
-                    <Link
-                      href={`/exams/${exam.id}/take`}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-                    >
-                      無料で受験する
-                    </Link>
-                  ) : purchasedExams.has(exam.id) ? (
-                    <Link
-                      href={`/exams/${exam.id}/take`}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-                    >
-                      受験する（購入済み）
-                    </Link>
-                  ) : hasSubscription ? (
-                    <Link
-                      href={`/exams/${exam.id}/take`}
-                      className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-                    >
-                      受験する
-                    </Link>
                   ) : (
-                    <PurchaseButton
-                      examId={exam.id}
-                      price={exam.price}
-                      isDisabled={!user || purchasedExams.has(exam.id)}
-                    />
+                    <div className="bg-gray-50 rounded-lg p-8 text-center">
+                      <p className="text-gray-500">現在、{activeTab}の模試はありません。</p>
+                      <button
+                        onClick={() => setActiveTab('all')}
+                        className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-indigo-700 bg-indigo-100 hover:bg-indigo-200"
+                      >
+                        すべての模試を見る
+                      </button>
+                    </div>
                   )}
-
-                  {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
-                    <p className="mt-2 text-xs text-green-600 text-center">
-                      プレミアム会員特典：無料でアクセス可能
-                    </p>
-                  )}
-
-                  {!user && !exam.isFree && (
-                    <p className="mt-2 text-sm text-gray-500 text-center">
-                      購入するには
-                      <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
-                        ログイン
-                      </Link>
-                      が必要です
-                    </p>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </>
         )}
-      </motion.div>
+      </div>
     </div>
   );
 } 
