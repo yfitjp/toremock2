@@ -37,20 +37,20 @@ export default function Home() {
                   transition={{ duration: 0.7 }}
                   className="text-left lg:w-1/2"
                 >
-                  <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl sm:mb-4 mb-2">
+                  <h1 className="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
                     <span className="block">トレモックで英語力を</span>
                     <span className="block text-blue-600">次のレベルへ</span>
                   </h1>
-                  <p className="mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl sm:mb-6 mb-4">
+                  <p className="mt-3 text-base text-gray-500 sm:text-lg md:mt-5 md:text-xl">
                     TOEIC®、TOEFL®、英検®などの模擬試験を手軽にオンラインで受験できるプラットフォームです。
                     豊富な問題数と詳細な解説で、効率的な学習をサポートします。
                   </p>
 
-                  <div className="mt-8 sm:mt-8 mt-4 sm:flex">
+                  <div className="mt-8 sm:flex">
                     <div className="rounded-md shadow">
                       <Link
                         href="/exams"
-                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10 sm:py-3 py-2 transition-all duration-300 transform hover:scale-105"
+                        className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105"
                       >
                         模試を探す
                       </Link>
@@ -59,14 +59,14 @@ export default function Home() {
                       {user ? (
                         <Link
                           href="/mypage"
-                          className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 sm:py-3 py-2 transition-all duration-300 transform hover:scale-105 shadow"
+                          className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow"
                         >
                           マイページ
                         </Link>
                       ) : (
                         <Link
                           href="/auth/signin"
-                          className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 sm:py-3 py-2 transition-all duration-300 transform hover:scale-105 shadow"
+                          className="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10 transition-all duration-300 transform hover:scale-105 shadow"
                         >
                           ログイン
                         </Link>
@@ -82,22 +82,22 @@ export default function Home() {
                   className="mt-12 lg:mt-0 lg:w-1/2"
                 >
                   <div className="relative mx-auto w-full max-w-lg">
-                    <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob sm:w-72 sm:h-72 w-56 h-56"></div>
-                    <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000 sm:w-72 sm:h-72 w-56 h-56"></div>
-                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000 sm:w-72 sm:h-72 w-56 h-56"></div>
+                    <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
+                    <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                    <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
                     <div className="relative">
-                      <div className="relative rounded-lg shadow-lg overflow-hidden bg-white p-5 sm:p-5 p-3">
-                        <div className="bg-blue-50 p-4 rounded-lg mb-4 sm:p-4 p-3 sm:mb-4 mb-2">
-                          <h3 className="text-lg font-semibold text-blue-800 mb-2 sm:text-lg text-base sm:mb-2 mb-1">今すぐ無料で模試を体験</h3>
-                          <p className="text-sm text-blue-600 sm:text-sm text-xs">無料で受験可能な模試を多数ご用意しています</p>
+                      <div className="relative rounded-lg shadow-lg overflow-hidden bg-white p-5">
+                        <div className="bg-blue-50 p-4 rounded-lg mb-4">
+                          <h3 className="text-lg font-semibold text-blue-800 mb-2">今すぐ無料で模試を体験</h3>
+                          <p className="text-sm text-blue-600">無料で受験可能な模試を多数ご用意しています</p>
                         </div>
                         <div className="flex justify-center">
                           <Link
                             href="/exams"
-                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105 sm:px-6 sm:py-3 px-4 py-2 sm:text-base text-sm"
+                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
                           >
                             無料模試を受ける
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2 sm:h-5 sm:w-5 h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </Link>
