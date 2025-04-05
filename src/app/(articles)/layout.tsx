@@ -1,8 +1,11 @@
+'use client';
+
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "../globals.css";
 import Link from "next/link";
 import Image from "next/image";
+import { useState } from "react";
 
 // Toremockとは異なるフォントを使用
 const notoSans = Noto_Sans_JP({ 
@@ -28,7 +31,12 @@ export default function ArticlesLayout({
   children: React.ReactNode;
 }>) {
   const currentYear = new Date().getFullYear();
-  
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
   return (
     <html lang="ja">
       <head>
@@ -63,10 +71,10 @@ export default function ArticlesLayout({
           </div>
           
           {/* メインヘッダー */}
-          <header className="bg-white shadow-md border-b border-slate-200 sticky top-0 z-10">
+          <header className="bg-white shadow-md border-b border-slate-200 sticky top-0 z-20">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
               <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
-                <div className="flex items-center">
+                <div className="flex items-center justify-between">
                   <Link href="/articles" className="flex items-center no-underline">
                     <Image 
                       src="/articles-logo.png" 
@@ -77,6 +85,24 @@ export default function ArticlesLayout({
                     />
                     <h1 className="text-2xl font-bold text-slate-800">英語テスト<span className="text-slate-500">情報局</span></h1>
                   </Link>
+                  <div className="md:hidden">
+                    <button 
+                      onClick={toggleMobileMenu}
+                      className="p-2 rounded-md text-slate-500 hover:text-slate-700 hover:bg-slate-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-slate-500"
+                      aria-label="メニューを開閉する"
+                      aria-expanded={isMobileMenuOpen}
+                    >
+                      {isMobileMenuOpen ? (
+                        <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                      ) : (
+                        <svg className="h-6 w-6" stroke="currentColor" fill="none" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                      )}
+                    </button>
+                  </div>
                 </div>
                 
                 {/* 検索ボックス */}
@@ -109,7 +135,7 @@ export default function ArticlesLayout({
             </div>
             
             {/* ナビゲーション */}
-            <nav className="bg-slate-800 text-white">
+            <nav className="hidden md:block bg-slate-800 text-white">
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between">
                   <div className="flex space-x-1">
@@ -119,17 +145,31 @@ export default function ArticlesLayout({
                     <Link href="/articles?category=英語試験" className="py-3 px-4 hover:bg-slate-700 rounded-md transition-colors">英検・その他</Link>
                     <Link href="/articles?category=学習法" className="py-3 px-4 hover:bg-slate-700 rounded-md transition-colors">学習法</Link>
                   </div>
-                  <div className="md:hidden flex items-center">
-                    <Link 
-                      href="/" 
-                      className="py-2 px-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
-                    >
-                      模試サイト
-                    </Link>
-                  </div>
                 </div>
               </div>
             </nav>
+
+            {/* モバイルメニュー */}
+            {isMobileMenuOpen && (
+              <nav className="md:hidden bg-slate-800 text-white absolute top-full left-0 right-0 shadow-lg z-10">
+                <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                  <Link href="/articles" className="block py-2 px-3 hover:bg-slate-700 rounded-md transition-colors" onClick={toggleMobileMenu}>ホーム</Link>
+                  <Link href="/articles?category=TOEIC" className="block py-2 px-3 hover:bg-slate-700 rounded-md transition-colors" onClick={toggleMobileMenu}>TOEIC</Link>
+                  <Link href="/articles?category=TOEFL" className="block py-2 px-3 hover:bg-slate-700 rounded-md transition-colors" onClick={toggleMobileMenu}>TOEFL</Link>
+                  <Link href="/articles?category=英語試験" className="block py-2 px-3 hover:bg-slate-700 rounded-md transition-colors" onClick={toggleMobileMenu}>英検・その他</Link>
+                  <Link href="/articles?category=学習法" className="block py-2 px-3 hover:bg-slate-700 rounded-md transition-colors" onClick={toggleMobileMenu}>学習法</Link>
+                  <div className="border-t border-slate-700 pt-3 mt-2">
+                    <Link 
+                      href="/" 
+                      className="block w-full text-center py-2 px-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
+                      onClick={toggleMobileMenu}
+                    >
+                      模試サイトを見る
+                    </Link>
+                  </div>
+                </div>
+              </nav>
+            )}
           </header>
           
           {/* パンくずリスト */}
@@ -176,7 +216,7 @@ export default function ArticlesLayout({
                 <div className="col-span-1 md:col-span-2">
                   <div className="flex items-center mb-4">
                     <Image 
-                      src="/articles-logo.png" 
+                      src="/articles-nottrans-logo.png" 
                       alt="英語テスト情報局 ロゴ" 
                       width={36} 
                       height={36} 
