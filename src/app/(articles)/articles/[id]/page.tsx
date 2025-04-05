@@ -1,15 +1,28 @@
 // 'use client'; // サーバーコンポーネントにするため削除
 
-import React from 'react'; // useEffect, useState は不要
+import React from 'react';
 import Link from 'next/link';
-import { notFound } from 'next/navigation'; // useParams は不要
+import { notFound } from 'next/navigation';
 import Image from 'next/image';
 import TableOfContents from '../../components/TableOfContents';
-import ShareButtons from '../../components/ShareButtons'; // ShareButtonsをインポート
-import { getArticleData, getSortedArticlesData } from '../../lib/articles'; // データ取得関数をインポート
+import ShareButtons from '../../components/ShareButtons';
+// import { getArticleData, getSortedArticlesData } from '../../lib/articles'; // Markdownヘルパーを削除
+import { articleData, getSortedArticlesData, ArticleData, CategoryKey } from '../../lib/article-data'; // ハードコードされたデータをインポート
 
-// カテゴリ情報 (サーバーコンポーネントでも使用可能)
-const categoryInfo: Record<string, { description: string; icon: JSX.Element }> = {
+// 記事本文コンポーネントをインポート
+import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
+import ToeflSpeakingServicesContent from '../../components/article-contents/ToeflSpeakingServicesContent';
+import ToeicBeginnersGuideContent from '../../components/article-contents/ToeicBeginnersGuideContent';
+
+// 記事IDと本文コンポーネントのマッピング
+const articleContentComponents: Record<string, React.ComponentType> = {
+  'toeic-mocktest-comparison': ToeicMocktestComparisonContent,
+  'toefl-speaking-services': ToeflSpeakingServicesContent,
+  'toeic-beginners-guide': ToeicBeginnersGuideContent,
+};
+
+// カテゴリ情報 (変更なし)
+const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element }> = {
   'TOEIC': {
     description: 'TOEIC試験対策や学習方法、効率的なスコアアップ戦略などを紹介します。',
     icon: (
@@ -44,21 +57,22 @@ const categoryInfo: Record<string, { description: string; icon: JSX.Element }> =
   }
 };
 
-// 関連記事生成関数 (サーバーサイドで実行)
-function getRelatedArticles(currentId: string, currentCategory: string, currentTags: string[]) {
+// 関連記事生成関数 (ハードコードデータを使用)
+function getRelatedArticles(currentId: string, currentCategory: CategoryKey, currentTags: string[]): ArticleData[] {
   const allArticles = getSortedArticlesData(); // すべての記事メタデータを取得
   return allArticles
     .filter(article => article.id !== currentId) // 自分自身を除外
-    .filter(article => 
+    .filter(article =>
       article.category === currentCategory || // 同じカテゴリ
       (article.tags && currentTags && article.tags.some(tag => currentTags.includes(tag))) // タグが一部一致
     )
     .slice(0, 3); // 関連記事を3つまで表示
 }
 
-// 動的メタデータ生成 (サーバーサイド)
+// 動的メタデータ生成 (ハードコードデータを使用)
 export async function generateMetadata({ params }: { params: { id: string } }) {
-  const article = await getArticleData(params.id);
+  // const article = await getArticleData(params.id); // Markdownヘルパーを削除
+  const article = articleData[params.id]; // ハードコードデータから取得
   if (!article) {
     return { title: '記事が見つかりません' };
   }
@@ -70,14 +84,16 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 
 // ページコンポーネント (サーバーコンポーネント)
 export default async function ArticleDetail({ params }: { params: { id: string } }) {
-  const article = await getArticleData(params.id);
+  // const article = await getArticleData(params.id); // Markdownヘルパーを削除
+  const article = articleData[params.id]; // ハードコードデータから取得
+  const ArticleContent = articleContentComponents[params.id]; // 対応する本文コンポーネントを取得
 
-  if (!article) {
-    notFound(); // データがなければ404
+  if (!article || !ArticleContent) { // データまたはコンポーネントがなければ404
+    notFound();
   }
 
   const relatedArticles = getRelatedArticles(article.id, article.category, article.tags);
-  
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-8 gap-y-12">
@@ -88,11 +104,11 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             {/* カテゴリ、日付、時間 */}
             <div className="flex items-center text-sm text-slate-500 mb-4">
               <Link href={`/articles?category=${article.category}`} className="flex items-center text-slate-700 hover:text-slate-900">
-                {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>} {/* アイコンがない場合 */}
+                {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>}
                 <span className="font-medium ml-1">{article.category}</span>
               </Link>
               <span className="mx-2">•</span>
-              <time dateTime={article.date}>{new Date(article.date).toLocaleDateString('ja-JP')}</time> {/* 日付フォーマット */}
+              <time dateTime={article.date}>{new Date(article.date).toLocaleDateString('ja-JP')}</time>
               <span className="mx-2">•</span>
               <div className="flex items-center">
                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -119,7 +135,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             {/* メイン画像 */}
             <div className="relative aspect-video bg-slate-200 rounded-xl mb-8 overflow-hidden">
               <Image 
-                src={article.imageSrc || '/images/placeholder.jpg'} // 画像がない場合のフォールバック
+                src={article.imageSrc || '/images/placeholder.jpg'}
                 alt={article.title}
                 fill 
                 sizes="(max-width: 1024px) 100vw, 800px"
@@ -129,12 +145,15 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             </div>
           </div>
           
-          {/* 記事本文エリア */}
-          <div 
+          {/* 記事本文エリア (コンポーネントをレンダリング) */}
+          {/* <div
             className="prose prose-lg max-w-none mb-12"
-            id="article-content" 
-            dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLをレンダリング
-          />
+            id="article-content"
+            dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLレンダリングを削除
+          /> */}
+          <div id="article-content" className="mb-12">
+            <ArticleContent /> {/* ハードコードされた本文コンポーネントをレンダリング */}
+          </div>
           
           {/* CTA セクション */}
           <div className="bg-gradient-to-r from-slate-700 to-slate-900 rounded-xl p-6 md:p-8 shadow-lg text-white mb-12">
@@ -194,7 +213,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
                               <Image src={relArticle.imageSrc} alt={relArticle.title} fill className="object-cover" sizes="64px"/>
                             ) : (
                               <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                                {categoryInfo[relArticle.category]?.icon || <span className="text-2xl">📄</span>}
+                                {categoryInfo[relArticle.category as CategoryKey]?.icon || <span className="text-2xl">📄</span>}
                               </div>
                             )}
                           </div>
