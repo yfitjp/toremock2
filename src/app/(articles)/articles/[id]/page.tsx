@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useParams, notFound } from 'next/navigation';
 import Image from 'next/image';
+import TableOfContents from '../../components/TableOfContents';
 
 // 記事データ型定義
 type CategoryKey = 'TOEIC' | 'TOEFL' | '英語試験' | '学習法';
@@ -124,14 +125,21 @@ export default function ArticleDetail() {
   if (!article) {
     return (
       <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="animate-pulse flex flex-col space-y-4">
-          <div className="h-8 bg-slate-200 rounded w-3/4"></div>
-          <div className="h-4 bg-slate-200 rounded w-1/2"></div>
-          <div className="h-64 bg-slate-200 rounded"></div>
-          <div className="space-y-2">
-            <div className="h-4 bg-slate-200 rounded"></div>
-            <div className="h-4 bg-slate-200 rounded"></div>
-            <div className="h-4 bg-slate-200 rounded"></div>
+        <div className="animate-pulse grid grid-cols-1 lg:grid-cols-12 gap-8">
+          <div className="lg:col-span-8 space-y-4">
+            <div className="h-8 bg-slate-200 rounded w-3/4"></div>
+            <div className="h-4 bg-slate-200 rounded w-1/2"></div>
+            <div className="h-64 bg-slate-200 rounded"></div>
+            <div className="space-y-2">
+              <div className="h-4 bg-slate-200 rounded"></div>
+              <div className="h-4 bg-slate-200 rounded"></div>
+              <div className="h-4 bg-slate-200 rounded"></div>
+            </div>
+          </div>
+          <div className="lg:col-span-4 space-y-4">
+            <div className="h-32 bg-slate-200 rounded"></div>
+            <div className="h-24 bg-slate-200 rounded"></div>
+            <div className="h-24 bg-slate-200 rounded"></div>
           </div>
         </div>
       </div>
@@ -140,9 +148,9 @@ export default function ArticleDetail() {
   
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-8 gap-y-12">
         {/* メインコンテンツエリア */}
-        <div className="lg:col-span-8">
+        <div className="lg:col-span-8 order-last lg:order-first">
           {/* 記事ヘッダー */}
           <div className="mb-8">
             <div className="flex items-center text-sm text-slate-500 mb-4">
@@ -161,7 +169,7 @@ export default function ArticleDetail() {
               </div>
             </div>
             
-            <h1 className="text-3xl font-bold text-slate-900 mb-6">{article.title}</h1>
+            <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">{article.title}</h1>
             
             {/* タグ */}
             <div className="flex flex-wrap gap-2 mb-6">
@@ -172,101 +180,72 @@ export default function ArticleDetail() {
               ))}
             </div>
             
-            {/* サムネイル画像プレースホルダー */}
-            <div className="relative h-64 sm:h-80 bg-slate-200 rounded-xl mb-8 overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-slate-400" style={{ transform: 'scale(2)' }}>
-                  {categoryInfo[article.category].icon}
-                </div>
-              </div>
+            {/* メイン画像 */}
+            <div className="relative aspect-video bg-slate-200 rounded-xl mb-8 overflow-hidden">
+              <Image 
+                src={article.imageSrc} 
+                alt={article.title}
+                fill 
+                sizes="(max-width: 1024px) 100vw, 800px"
+                className="object-cover" 
+                priority
+              />
             </div>
           </div>
           
           {/* 記事本文 */}
-          <div className="prose max-w-none mb-12">
-            <p className="lead text-lg text-slate-700 mb-6">
+          <div className="prose prose-lg max-w-none mb-12">
+            <p className="lead">
               {article.description}
             </p>
             
             {article.id === 'toeic-mocktest-comparison' && (
               <>
-                <p className="mb-6">
+                <p>
                   TOEIC対策には実践的な模擬試験が欠かせませんが、模試を繰り返し受けるとなると費用も馬鹿になりません。
                   本記事では、コストパフォーマンスに優れたTOEIC模試サービスを徹底比較し、あなたに最適なサービスを見つける手助けをします。
                 </p>
                 
-                <h2 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">TOEIC模試のメリットと選び方</h2>
-                
-                <p className="mb-4">
+                <h2 id="section1">TOEIC模試のメリットと選び方</h2>
+                <p>
                   TOEIC模試を定期的に受けることには、以下のようなメリットがあります：
                 </p>
-                
-                <ul className="list-disc pl-6 mb-6">
-                  <li className="mb-2">本番と同じ形式・時間配分で実践的な演習ができる</li>
-                  <li className="mb-2">自分の現在のレベルを客観的に把握できる</li>
-                  <li className="mb-2">弱点を分析して効率的な学習計画が立てられる</li>
-                  <li className="mb-2">本番の緊張感に慣れることができる</li>
+                <ul>
+                  <li>本番と同じ形式・時間配分で実践的な演習ができる</li>
+                  <li>自分の現在のレベルを客観的に把握できる</li>
+                  <li>弱点を分析して効率的な学習計画が立てられる</li>
+                  <li>本番の緊張感に慣れることができる</li>
                 </ul>
                 
-                <div className="bg-slate-50 border-l-4 border-green-500 p-4 my-6">
-                  <p className="text-slate-700">
-                    <strong>ポイント：</strong> 模試は単に受けるだけでなく、結果をしっかり分析して次の学習に活かすことが重要です。
-                    解答解説をしっかり読み、間違えた問題の理由を理解しましょう。
-                  </p>
+                <div className="alert alert-info">
+                  <strong>ポイント：</strong> 模試は単に受けるだけでなく、結果をしっかり分析して次の学習に活かすことが重要です。
+                  解答解説をしっかり読み、間違えた問題の理由を理解しましょう。
                 </div>
+
+                <h3 id="subsection1">選び方のポイント</h3>
+                <p>模試を選ぶ際には、料金、問題の質、解説の詳しさ、受験形式（オンライン/オフライン）などを考慮しましょう。</p>
                 
-                <h2 className="text-2xl font-semibold text-slate-800 mt-8 mb-4">おすすめの模試サービス比較</h2>
+                <h2 id="section2">おすすめの模試サービス比較</h2>
                 
                 {/* ToreMockの紹介 */}
-                <div className="bg-white rounded-xl border border-slate-200 shadow-md overflow-hidden mb-8">
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold text-slate-800 mb-3">ToreMock</h3>
-                    <div className="flex items-center mb-4">
-                      <span className="text-amber-500 flex">
-                        {'★★★★★'.split('').map((_, i) => (
-                          <span key={i}>★</span>
-                        ))}
-                      </span>
-                      <span className="ml-2 text-slate-600">4.8/5.0</span>
+                <div className="card">
+                  <div className="card-body">
+                    <h4 className="card-title">ToreMock</h4>
+                    <div className="rating">★★★★★ 4.8/5.0</div>
+                    <p>コストパフォーマンスに優れた模試サービス。無料プランから利用でき、プレミアム会員なら月額制で全ての模試に無制限アクセス可能。解説が非常に分かりやすく、初心者にもおすすめです。</p>
+                    <div className="grid md:grid-cols-2 gap-4 mb-3">
+                       <div>
+                         <h5>主な特徴</h5>
+                         <ul><li>本番形式</li><li>詳細分析</li><li>全パート対応</li><li>プレミアム無制限</li></ul>
+                       </div>
+                       <div>
+                         <h5>メリット</h5>
+                         <ul><li>低価格</li><li>オンライン</li><li>丁寧な解説</li></ul>
+                         <h5>デメリット</h5>
+                         <ul><li>問題数発展途上</li></ul>
+                       </div>
                     </div>
-                    <p className="text-slate-700 mb-4">
-                      コストパフォーマンスに優れた模試サービス。無料プランから利用でき、プレミアム会員なら月額制で
-                      全ての模試に無制限アクセス可能。解説が非常に分かりやすく、初心者にもおすすめです。
-                    </p>
-                    <div className="grid md:grid-cols-2 gap-4 mb-6">
-                      <div>
-                        <h4 className="font-medium text-slate-800 mb-2">主な特徴</h4>
-                        <ul className="list-disc pl-5 text-slate-700 space-y-1">
-                          <li>本番と同じ形式の問題</li>
-                          <li>詳細な分析レポート</li>
-                          <li>リスニング・リーディング両方対応</li>
-                          <li>プレミアム会員なら全ての模試に無制限アクセス可能</li>
-                        </ul>
-                      </div>
-                      <div>
-                        <div className="mb-3">
-                          <h4 className="font-medium text-green-700 mb-2">メリット</h4>
-                          <ul className="list-disc pl-5 text-slate-700 space-y-1">
-                            <li>業界最安値の価格設定</li>
-                            <li>オンライン専用で時間や場所を選ばない</li>
-                            <li>解説が非常に分かりやすい</li>
-                          </ul>
-                        </div>
-                        <div>
-                          <h4 className="font-medium text-red-700 mb-2">デメリット</h4>
-                          <ul className="list-disc pl-5 text-slate-700 space-y-1">
-                            <li>新規サービスのため問題数が他社より少ない（随時追加中）</li>
-                          </ul>
-                        </div>
-                      </div>
-                    </div>
-                    <Link href="/" 
-                      className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                      ToreMockを試してみる
-                      <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                      </svg>
-                    </Link>
+                    <Link href="/" className="btn btn-primary">ToreMockを試してみる</Link>
                   </div>
                 </div>
               </>
@@ -295,89 +274,102 @@ export default function ArticleDetail() {
         </div>
 
         {/* サイドバーエリア */}
-        <aside className="lg:col-span-4 space-y-8">
-          {/* 関連記事 */}
-          <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
-            <ul className="space-y-4">
-              {relatedArticles.map(relArticle => (
-                <li key={relArticle.id}>
-                  <Link href={`/articles/${relArticle.id}`} className="group block">
-                    <div className="flex items-start space-x-3">
-                      <div className="relative h-16 w-16 bg-slate-200 rounded-lg overflow-hidden flex-shrink-0">
-                        <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                          {categoryInfo[relArticle.category].icon}
+        <aside className="lg:col-span-4 order-first lg:order-last">
+          <div className="sticky top-24 space-y-8">
+            
+            {/* 目次 */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <TableOfContents />
+            </div>
+
+            {/* 著者情報 (プレースホルダー) */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">この記事を書いた人</h3>
+              <div className="flex items-center space-x-4">
+                <div className="relative h-12 w-12 bg-slate-300 rounded-full overflow-hidden">
+                  <svg className="absolute inset-0 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
+                </div>
+                <div>
+                  <h4 className="font-medium text-slate-800">英語テスト情報局 編集部</h4>
+                  <p className="text-sm text-slate-500">最新の英語テスト情報をお届けします。</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 関連記事 */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
+              {relatedArticles.length > 0 ? (
+                <ul className="space-y-4">
+                  {relatedArticles.map(relArticle => (
+                    <li key={relArticle.id}>
+                      <Link href={`/articles/${relArticle.id}`} className="group block">
+                        <div className="flex items-start space-x-3">
+                          <div className="relative h-16 w-16 bg-slate-200 rounded-lg overflow-hidden flex-shrink-0">
+                            <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                              {categoryInfo[relArticle.category].icon}
+                            </div>
+                          </div>
+                          <div>
+                            <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
+                            <h4 className="text-sm font-medium text-slate-800 group-hover:text-green-600 transition-colors line-clamp-2">
+                              {relArticle.title}
+                            </h4>
+                          </div>
                         </div>
-                      </div>
-                      <div>
-                        <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
-                        <h4 className="text-sm font-medium text-slate-800 group-hover:text-green-600 transition-colors line-clamp-2">
-                          {relArticle.title}
-                        </h4>
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-              {relatedArticles.length === 0 && (
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              ) : (
                 <p className="text-sm text-slate-500">関連記事はありません。</p>
               )}
-            </ul>
-          </div>
+            </div>
 
-          {/* 関連模試へのリンク */}
-          <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
-            <div className="flex items-center space-x-3 mb-4">
-              <div className="text-green-600 scale-150">
-                {categoryInfo[article.category].icon}
+            {/* 関連模試へのリンク */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="text-green-600 scale-150">
+                  {categoryInfo[article.category].icon}
+                </div>
+                <p className="text-sm text-slate-700">
+                  この記事のカテゴリ「{article.category}」に関連する模試に挑戦しませんか？
+                </p>
               </div>
-              <p className="text-sm text-slate-700">
-                この記事のカテゴリ「{article.category}」に関連する模試に挑戦しませんか？
-              </p>
+              <Link 
+                href={`/?category=${article.category}`} 
+                className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+              >
+                {article.category} の模試を見る
+              </Link>
             </div>
-            <Link 
-              href={`/?category=${article.category}`} 
-              className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
-            >
-              {article.category} の模試を見る
-            </Link>
-          </div>
 
-          {/* シェアボタン */}
-          <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">記事をシェア</h3>
-            <div className="flex space-x-3">
-              {/* Twitter */} 
-              <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`} 
-                 target="_blank" rel="noopener noreferrer" 
-                 className="flex items-center justify-center w-10 h-10 rounded-full bg-sky-500 hover:bg-sky-600 text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                </svg>
-              </a>
-              {/* Facebook */}
-              <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
-                 target="_blank" rel="noopener noreferrer" 
-                 className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors">
-                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                </svg>
-              </a>
-              {/* 他のSNSボタンも追加可能 */}
+            {/* シェアボタン */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">記事をシェア</h3>
+              <div className="flex space-x-3">
+                {/* Twitter */} 
+                <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`} 
+                   target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center justify-center w-10 h-10 rounded-full bg-sky-500 hover:bg-sky-600 text-white transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+                  </svg>
+                </a>
+                {/* Facebook */}
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
+                   target="_blank" rel="noopener noreferrer" 
+                   className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors">
+                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
+                  </svg>
+                </a>
+                {/* 他のSNSボタンも追加可能 */}
+              </div>
             </div>
-          </div>
 
-          {/* 目次 (将来的な実装) */}
-          {/* 
-          <div className="sticky top-24 bg-white p-6 rounded-lg shadow-md border border-slate-200">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">目次</h3>
-            <ul className="space-y-2 text-sm text-slate-600">
-              <li><a href="#section1" className="hover:text-green-600">セクション1</a></li>
-              <li><a href="#section2" className="hover:text-green-600">セクション2</a></li>
-            </ul>
           </div>
-          */}
         </aside>
       </div>
     </div>
