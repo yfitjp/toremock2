@@ -1,67 +1,15 @@
-'use client';
+// 'use client'; // サーバーコンポーネントにするため削除
 
-import React, { useEffect, useState } from 'react';
+import React from 'react'; // useEffect, useState は不要
 import Link from 'next/link';
-import { useParams, notFound } from 'next/navigation';
+import { notFound } from 'next/navigation'; // useParams は不要
 import Image from 'next/image';
 import TableOfContents from '../../components/TableOfContents';
+import ShareButtons from '../../components/ShareButtons'; // ShareButtonsをインポート
+import { getArticleData, getSortedArticlesData } from '../../lib/articles'; // データ取得関数をインポート
 
-// 記事データ型定義
-type CategoryKey = 'TOEIC' | 'TOEFL' | '英語試験' | '学習法';
-
-type Article = {
-  id: string;
-  title: string;
-  description: string;
-  category: CategoryKey;
-  date: string;
-  readTime: string;
-  imageSrc: string;
-  tags: string[];
-  featured?: boolean;
-  popular?: boolean;
-  comingSoon?: boolean;
-};
-
-// 記事データ
-const articles: Record<string, Article> = {
-  'toeic-mocktest-comparison': {
-    id: 'toeic-mocktest-comparison',
-    title: 'TOEIC模試を安く受けたい！人気サイトの料金と特徴を徹底比較',
-    description: 'コスパ最強のTOEIC模試サービスを比較。高品質で低価格の模試はどれ？料金、特徴、メリットを詳しく解説します。',
-    category: 'TOEIC',
-    date: '2023年4月1日',
-    readTime: '8分',
-    imageSrc: '/images/toeic-comparison.jpg',
-    tags: ['TOEIC', '模試', '比較'],
-    featured: true
-  },
-  'toefl-speaking-services': {
-    id: 'toefl-speaking-services',
-    title: 'TOEFLスピーキング対策どこでする？安くて質の高いサービスはコレ',
-    description: 'TOEFLスピーキングを効率的に対策するためのサービスを比較。コストパフォーマンスに優れたサービスを見つけましょう。',
-    category: 'TOEFL',
-    date: '2023年4月5日',
-    readTime: '10分',
-    imageSrc: '/images/toefl-speaking.jpg',
-    tags: ['TOEFL', 'スピーキング', 'オンライン学習'],
-    popular: true
-  },
-  'toeic-beginners-guide': {
-    id: 'toeic-beginners-guide',
-    title: 'TOEIC初心者向け勉強法5選！料金と使いやすさで選ぶなら？',
-    description: 'TOEIC初心者におすすめの勉強法を紹介。自分に合った方法で効率的にスコアアップを目指しましょう。',
-    category: 'TOEIC',
-    date: '2023年4月10日',
-    readTime: '12分',
-    imageSrc: '/images/toeic-beginners.jpg',
-    tags: ['TOEIC', '初心者', '勉強法'],
-    popular: true
-  }
-};
-
-// カテゴリー情報
-const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element }> = {
+// カテゴリ情報 (サーバーコンポーネントでも使用可能)
+const categoryInfo: Record<string, { description: string; icon: JSX.Element }> = {
   'TOEIC': {
     description: 'TOEIC試験対策や学習方法、効率的なスコアアップ戦略などを紹介します。',
     icon: (
@@ -96,55 +44,39 @@ const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element
   }
 };
 
-// 関連記事生成関数
-const getRelatedArticles = (current: Article): Article[] => {
-  return Object.values(articles)
-    .filter(article => article.id !== current.id)
+// 関連記事生成関数 (サーバーサイドで実行)
+function getRelatedArticles(currentId: string, currentCategory: string, currentTags: string[]) {
+  const allArticles = getSortedArticlesData(); // すべての記事メタデータを取得
+  return allArticles
+    .filter(article => article.id !== currentId) // 自分自身を除外
     .filter(article => 
-      article.category === current.category || 
-      article.tags.some(tag => current.tags.includes(tag))
+      article.category === currentCategory || // 同じカテゴリ
+      (article.tags && currentTags && article.tags.some(tag => currentTags.includes(tag))) // タグが一部一致
     )
-    .slice(0, 2);
-};
+    .slice(0, 3); // 関連記事を3つまで表示
+}
 
-export default function ArticleDetail() {
-  const params = useParams<{ id: string }>();
-  const [article, setArticle] = useState<Article | null>(null);
-  const [relatedArticles, setRelatedArticles] = useState<Article[]>([]);
-  
-  useEffect(() => {
-    const currentArticle = articles[params.id];
-    if (!currentArticle) {
-      notFound();
-      return;
-    }
-    setArticle(currentArticle);
-    setRelatedArticles(getRelatedArticles(currentArticle));
-  }, [params.id]);
-  
+// 動的メタデータ生成 (サーバーサイド)
+export async function generateMetadata({ params }: { params: { id: string } }) {
+  const article = await getArticleData(params.id);
   if (!article) {
-    return (
-      <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <div className="animate-pulse grid grid-cols-1 lg:grid-cols-12 gap-8">
-          <div className="lg:col-span-8 space-y-4">
-            <div className="h-8 bg-slate-200 rounded w-3/4"></div>
-            <div className="h-4 bg-slate-200 rounded w-1/2"></div>
-            <div className="h-64 bg-slate-200 rounded"></div>
-            <div className="space-y-2">
-              <div className="h-4 bg-slate-200 rounded"></div>
-              <div className="h-4 bg-slate-200 rounded"></div>
-              <div className="h-4 bg-slate-200 rounded"></div>
-            </div>
-          </div>
-          <div className="lg:col-span-4 space-y-4">
-            <div className="h-32 bg-slate-200 rounded"></div>
-            <div className="h-24 bg-slate-200 rounded"></div>
-            <div className="h-24 bg-slate-200 rounded"></div>
-          </div>
-        </div>
-      </div>
-    );
+    return { title: '記事が見つかりません' };
   }
+  return {
+    title: `${article.title} | 英語テスト情報局`,
+    description: article.description,
+  };
+}
+
+// ページコンポーネント (サーバーコンポーネント)
+export default async function ArticleDetail({ params }: { params: { id: string } }) {
+  const article = await getArticleData(params.id);
+
+  if (!article) {
+    notFound(); // データがなければ404
+  }
+
+  const relatedArticles = getRelatedArticles(article.id, article.category, article.tags);
   
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
@@ -153,13 +85,14 @@ export default function ArticleDetail() {
         <div className="lg:col-span-8 order-last lg:order-first">
           {/* 記事ヘッダー */}
           <div className="mb-8">
+            {/* カテゴリ、日付、時間 */}
             <div className="flex items-center text-sm text-slate-500 mb-4">
               <Link href={`/articles?category=${article.category}`} className="flex items-center text-slate-700 hover:text-slate-900">
-                {categoryInfo[article.category].icon}
+                {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>} {/* アイコンがない場合 */}
                 <span className="font-medium ml-1">{article.category}</span>
               </Link>
               <span className="mx-2">•</span>
-              <time dateTime={article.date}>{article.date}</time>
+              <time dateTime={article.date}>{new Date(article.date).toLocaleDateString('ja-JP')}</time> {/* 日付フォーマット */}
               <span className="mx-2">•</span>
               <div className="flex items-center">
                 <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
@@ -169,21 +102,24 @@ export default function ArticleDetail() {
               </div>
             </div>
             
+            {/* タイトル */}
             <h1 className="text-3xl lg:text-4xl font-bold text-slate-900 mb-6">{article.title}</h1>
             
             {/* タグ */}
-            <div className="flex flex-wrap gap-2 mb-6">
-              {article.tags.map(tag => (
-                <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full">
-                  #{tag}
-                </span>
-              ))}
-            </div>
+            {article.tags && article.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-6">
+                {article.tags.map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-slate-100 text-slate-700 text-sm rounded-full">
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
             
             {/* メイン画像 */}
             <div className="relative aspect-video bg-slate-200 rounded-xl mb-8 overflow-hidden">
               <Image 
-                src={article.imageSrc} 
+                src={article.imageSrc || '/images/placeholder.jpg'} // 画像がない場合のフォールバック
                 alt={article.title}
                 fill 
                 sizes="(max-width: 1024px) 100vw, 800px"
@@ -193,64 +129,12 @@ export default function ArticleDetail() {
             </div>
           </div>
           
-          {/* 記事本文 */}
-          <div className="prose prose-lg max-w-none mb-12">
-            <p className="lead">
-              {article.description}
-            </p>
-            
-            {article.id === 'toeic-mocktest-comparison' && (
-              <>
-                <p>
-                  TOEIC対策には実践的な模擬試験が欠かせませんが、模試を繰り返し受けるとなると費用も馬鹿になりません。
-                  本記事では、コストパフォーマンスに優れたTOEIC模試サービスを徹底比較し、あなたに最適なサービスを見つける手助けをします。
-                </p>
-                
-                <h2 id="section1">TOEIC模試のメリットと選び方</h2>
-                <p>
-                  TOEIC模試を定期的に受けることには、以下のようなメリットがあります：
-                </p>
-                <ul>
-                  <li>本番と同じ形式・時間配分で実践的な演習ができる</li>
-                  <li>自分の現在のレベルを客観的に把握できる</li>
-                  <li>弱点を分析して効率的な学習計画が立てられる</li>
-                  <li>本番の緊張感に慣れることができる</li>
-                </ul>
-                
-                <div className="alert alert-info">
-                  <strong>ポイント：</strong> 模試は単に受けるだけでなく、結果をしっかり分析して次の学習に活かすことが重要です。
-                  解答解説をしっかり読み、間違えた問題の理由を理解しましょう。
-                </div>
-
-                <h3 id="subsection1">選び方のポイント</h3>
-                <p>模試を選ぶ際には、料金、問題の質、解説の詳しさ、受験形式（オンライン/オフライン）などを考慮しましょう。</p>
-                
-                <h2 id="section2">おすすめの模試サービス比較</h2>
-                
-                {/* ToreMockの紹介 */}
-                <div className="card">
-                  <div className="card-body">
-                    <h4 className="card-title">ToreMock</h4>
-                    <div className="rating">★★★★★ 4.8/5.0</div>
-                    <p>コストパフォーマンスに優れた模試サービス。無料プランから利用でき、プレミアム会員なら月額制で全ての模試に無制限アクセス可能。解説が非常に分かりやすく、初心者にもおすすめです。</p>
-                    <div className="grid md:grid-cols-2 gap-4 mb-3">
-                       <div>
-                         <h5>主な特徴</h5>
-                         <ul><li>本番形式</li><li>詳細分析</li><li>全パート対応</li><li>プレミアム無制限</li></ul>
-                       </div>
-                       <div>
-                         <h5>メリット</h5>
-                         <ul><li>低価格</li><li>オンライン</li><li>丁寧な解説</li></ul>
-                         <h5>デメリット</h5>
-                         <ul><li>問題数発展途上</li></ul>
-                       </div>
-                    </div>
-                    <Link href="/" className="btn btn-primary">ToreMockを試してみる</Link>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+          {/* 記事本文エリア */}
+          <div 
+            className="prose prose-lg max-w-none mb-12"
+            id="article-content" 
+            dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLをレンダリング
+          />
           
           {/* CTA セクション */}
           <div className="bg-gradient-to-r from-slate-700 to-slate-900 rounded-xl p-6 md:p-8 shadow-lg text-white mb-12">
@@ -276,13 +160,13 @@ export default function ArticleDetail() {
         {/* サイドバーエリア */}
         <aside className="lg:col-span-4 order-first lg:order-last">
           <div className="sticky top-24 space-y-8">
-            
             {/* 目次 */}
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              <TableOfContents />
+              {/* TODO: TableOfContents に本文コンテンツを渡して目次を生成できるようにする */}
+              <TableOfContents /> 
             </div>
 
-            {/* 著者情報 (プレースホルダー) */}
+            {/* 著者情報 */}
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">この記事を書いた人</h3>
               <div className="flex items-center space-x-4">
@@ -297,18 +181,22 @@ export default function ArticleDetail() {
             </div>
 
             {/* 関連記事 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
-              {relatedArticles.length > 0 ? (
+            {relatedArticles.length > 0 && (
+              <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
                 <ul className="space-y-4">
                   {relatedArticles.map(relArticle => (
                     <li key={relArticle.id}>
                       <Link href={`/articles/${relArticle.id}`} className="group block">
                         <div className="flex items-start space-x-3">
                           <div className="relative h-16 w-16 bg-slate-200 rounded-lg overflow-hidden flex-shrink-0">
-                            <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                              {categoryInfo[relArticle.category].icon}
-                            </div>
+                            {relArticle.imageSrc ? (
+                              <Image src={relArticle.imageSrc} alt={relArticle.title} fill className="object-cover" sizes="64px"/>
+                            ) : (
+                              <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                                {categoryInfo[relArticle.category]?.icon || <span className="text-2xl">📄</span>}
+                              </div>
+                            )}
                           </div>
                           <div>
                             <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
@@ -321,17 +209,15 @@ export default function ArticleDetail() {
                     </li>
                   ))}
                 </ul>
-              ) : (
-                <p className="text-sm text-slate-500">関連記事はありません。</p>
-              )}
-            </div>
+              </div>
+            )}
 
             {/* 関連模試へのリンク */}
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
               <div className="flex items-center space-x-3 mb-4">
                 <div className="text-green-600 scale-150">
-                  {categoryInfo[article.category].icon}
+                  {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>}
                 </div>
                 <p className="text-sm text-slate-700">
                   この記事のカテゴリ「{article.category}」に関連する模試に挑戦しませんか？
@@ -346,28 +232,7 @@ export default function ArticleDetail() {
             </div>
 
             {/* シェアボタン */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">記事をシェア</h3>
-              <div className="flex space-x-3">
-                {/* Twitter */} 
-                <a href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(window.location.href)}&text=${encodeURIComponent(article.title)}`} 
-                   target="_blank" rel="noopener noreferrer" 
-                   className="flex items-center justify-center w-10 h-10 rounded-full bg-sky-500 hover:bg-sky-600 text-white transition-colors">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
-                  </svg>
-                </a>
-                {/* Facebook */}
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`} 
-                   target="_blank" rel="noopener noreferrer" 
-                   className="flex items-center justify-center w-10 h-10 rounded-full bg-blue-600 hover:bg-blue-700 text-white transition-colors">
-                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/>
-                  </svg>
-                </a>
-                {/* 他のSNSボタンも追加可能 */}
-              </div>
-            </div>
+            <ShareButtons title={article.title} />
 
           </div>
         </aside>
