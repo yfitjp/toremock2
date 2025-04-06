@@ -440,7 +440,7 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative p-8 bg-blue-600 rounded-2xl shadow-lg flex flex-col transform scale-105 z-10 border-2 border-blue-300"
+            className="relative p-8 bg-gradient-to-b from-blue-400 to-blue-600 rounded-2xl shadow-lg flex flex-col z-10 border-2 border-blue-300"
           >
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
               おすすめ
@@ -449,23 +449,23 @@ export default function SubscriptionPage() {
             <div className="flex-1">
               <div className="flex items-center">
                 <div className="w-8 h-8 mr-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-blue-200">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-blue-900">
                     <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-white">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                <h3 className="text-2xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
               </div>
-              <div className="mt-2 bg-blue-500 px-3 py-1 rounded-full inline-block">
+              <div className="mt-2 bg-blue-700 px-3 py-1 rounded-full inline-block">
                 <span className="text-xs font-medium text-white">人気No.1</span>
               </div>
-              <p className="mt-4 flex items-baseline text-white">
+              <p className="mt-4 flex items-baseline text-blue-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
               <div className="mt-1">
                 <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより67%お得！</span>
               </div>
-              <p className="mt-6 text-blue-100">
+              <p className="mt-6 text-blue-900">
                 {SUBSCRIPTION_PLANS.PREMIUM.description} エリートプランと同様の高品質な学習体験を、よりリーズナブルな価格でご提供します。
               </p>
 
@@ -473,7 +473,7 @@ export default function SubscriptionPage() {
                 {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                   <li key={index} className="flex">
                     <svg
-                      className="flex-shrink-0 w-6 h-6 text-blue-200"
+                      className="flex-shrink-0 w-6 h-6 text-blue-900"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -487,7 +487,7 @@ export default function SubscriptionPage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="ml-3 text-blue-100">{feature}</span>
+                    <span className="ml-3 text-blue-900">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -529,9 +529,6 @@ export default function SubscriptionPage() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="relative p-8 bg-gradient-to-b from-amber-50 to-amber-100 border border-amber-200 rounded-2xl shadow-md flex flex-col transform"
           >
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-amber-500 rounded-full px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white">
-              定員に達しました
-            </div>
             <div className="flex-1 relative">
               <div className="flex items-center">
                 <div className="w-8 h-8 mr-2">
@@ -546,12 +543,6 @@ export default function SubscriptionPage() {
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
-              <div className="mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 text-amber-800 border border-amber-200">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                </svg>
-                {SUBSCRIPTION_PLANS.ELITE.availabilityStatus}
-              </div>
               <p className="mt-6 text-amber-800">
                 {SUBSCRIPTION_PLANS.ELITE.description}
               </p>
