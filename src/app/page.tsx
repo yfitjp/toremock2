@@ -542,10 +542,7 @@ export default function Home() {
               className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
             >
               <div className="p-8">
-                <div className="flex items-center">
-                  <h3 className="text-2xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
-                  <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
-                </div>
+                <h3 className="text-2xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
                 <p className="mt-4 text-amber-700">最高レベルの学習体験を提供</p>
                 <p className="mt-8">
                   <span className="text-4xl font-extrabold text-amber-900">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
