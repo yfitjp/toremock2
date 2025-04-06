@@ -364,7 +364,7 @@ export default function SubscriptionPage() {
                   <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
                 </svg>
               </div>
-              <h3 className="text-2xl font-semibold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
+              <h3 className="text-3xl font-semibold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
             </div>
               <p className="mt-4 flex items-baseline text-gray-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥0</span>
@@ -410,7 +410,6 @@ export default function SubscriptionPage() {
           <motion.div
             className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
           >
-            <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
             <div className="flex-1">
               <div className="flex items-center">
                 <div className="w-8 h-8 mr-2">
@@ -418,7 +417,7 @@ export default function SubscriptionPage() {
                     <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                <h3 className="text-3xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
                 <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
               </div>
               <p className="mt-4 flex items-baseline text-blue-900">
@@ -496,7 +495,7 @@ export default function SubscriptionPage() {
                     <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-2xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                <h3 className="text-3xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
               </div>
               <p className="mt-4 flex items-baseline text-amber-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
