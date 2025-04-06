@@ -477,50 +477,50 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative bg-blue-600 rounded-2xl shadow-xl overflow-hidden transform"
+              className="relative bg-gradient-to-b from-blue-200 to-blue-400 rounded-2xl shadow-xl overflow-hidden transform"
             >
               <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-20 -translate-y-20">
-                <div className="absolute transform rotate-45 bg-blue-800 text-center text-white font-semibold py-1 left-[-40px] top-[32px] w-[170px]">
+                <div className="absolute transform rotate-45 bg-blue-600 text-center text-white font-semibold py-1 left-[-40px] top-[32px] w-[170px]">
                   人気
                 </div>
               </div>
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-white">プレミアムプラン</h3>
-                <p className="mt-4 text-blue-100">本気で英語力を伸ばしたい方に</p>
+                <h3 className="text-2xl font-bold text-blue-900">プレミアムプラン</h3>
+                <p className="mt-4 text-blue-900">本気で英語力を伸ばしたい方に</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-white">¥1,980</span>
-                  <span className="text-base font-medium text-blue-100">/月</span>
+                  <span className="text-4xl font-extrabold text-blue-900">¥1,980</span>
+                  <span className="text-base font-medium text-blue-900">/月</span>
                 </p>
                 <ul className="mt-8 space-y-4">
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-white">すべての模試に無制限アクセス</span>
+                    <span className="ml-3 text-blue-900">すべての模試に無制限アクセス</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-white">AI搭載の詳細な解説</span>
+                    <span className="ml-3 text-blue-900">AI搭載の詳細な解説</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-white">パーソナライズされた学習プラン</span>
+                    <span className="ml-3 text-blue-900">パーソナライズされた学習プラン</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-white">進捗分析レポート</span>
+                    <span className="ml-3 text-blue-900">進捗分析レポート</span>
                   </li>
                   <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-300" fill="currentColor" viewBox="0 0 20 20">
+                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                     </svg>
-                    <span className="ml-3 text-white">新規模試の優先アクセス</span>
+                    <span className="ml-3 text-blue-900">新規模試の優先アクセス</span>
                   </li>
                 </ul>
                 <div className="mt-8">
