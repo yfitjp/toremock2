@@ -477,7 +477,7 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl overflow-hidden transform"
+              className="relative z-30 bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl transform"
             >
               <div className="p-8">
                 <h3 className="text-2xl font-bold text-blue-900">プレミアムプラン</h3>
