@@ -192,6 +192,8 @@ export async function createPaymentIntent(userId: string, priceId: string) {
   if (!stripe) throw new Error('Stripeが初期化されていません');
 
   try {
+    console.log(`支払いインテント作成開始: userId=${userId}, priceId=${priceId}`);
+    
     const paymentIntent = await stripe.paymentIntents.create({
       amount: SUBSCRIPTION_PLANS.PREMIUM.price,
       currency: 'jpy',
@@ -205,6 +207,7 @@ export async function createPaymentIntent(userId: string, priceId: string) {
       },
     });
 
+    console.log(`支払いインテント作成成功: ${paymentIntent.id}, metadata:`, paymentIntent.metadata);
     return paymentIntent.client_secret;
   } catch (error) {
     console.error('Payment intent creation error:', error);

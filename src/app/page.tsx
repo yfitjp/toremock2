@@ -412,7 +412,7 @@ export default function Home() {
               英語学習を加速させる最適なプラン
             </p>
             <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-              まずは無料プランで体験、実力が伸びを実感したらプレミアム、エリートへ
+              まずは無料プランで体験、伸びを実感したらプレミアム、エリートへ
             </p>
           </motion.div>
 

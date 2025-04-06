@@ -1,44 +1,52 @@
 import * as admin from 'firebase-admin';
 
-// 環境変数のバリデーション
-const validateEnvVariables = () => {
-  const requiredEnvVars = {
-    NEXT_PUBLIC_FIREBASE_PROJECT_ID: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-    FIREBASE_CLIENT_EMAIL: process.env.FIREBASE_CLIENT_EMAIL,
-    FIREBASE_PRIVATE_KEY: process.env.FIREBASE_PRIVATE_KEY,
-  };
+// Firebase Admin SDKの初期化
+function initFirebaseAdmin() {
+  // 環境変数のチェック
+  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+  const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
+  const privateKey = process.env.FIREBASE_PRIVATE_KEY;
 
-  const missingVars = Object.entries(requiredEnvVars)
-    .filter(([_, value]) => !value)
-    .map(([key]) => key);
-
-  if (missingVars.length > 0) {
-    throw new Error(
-      `Missing required environment variables: ${missingVars.join(', ')}. ` +
-      'Please set these variables in your environment or .env file.'
-    );
-  }
-};
-
-// すでに初期化されているかどうかを確認
-if (!admin.apps.length) {
-  try {
-    validateEnvVariables();
-    
-    admin.initializeApp({
-      credential: admin.credential.cert({
-        projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
-        clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
-        privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
-      }),
+  // 環境変数の存在確認
+  if (!projectId || !clientEmail || !privateKey) {
+    console.error('Firebase Admin初期化に必要な環境変数が設定されていません:', {
+      projectId: !!projectId,
+      clientEmail: !!clientEmail,
+      privateKey: !!privateKey,
     });
-    
-    console.log('Firebase Admin初期化成功');
-  } catch (error) {
-    console.error('Firebase Admin初期化エラー:', error);
+    throw new Error('Firebase Admin初期化に必要な環境変数が不足しています');
   }
+
+  // Firebase Admin SDKの初期化
+  if (!admin.apps.length) {
+    try {
+      admin.initializeApp({
+        credential: admin.credential.cert({
+          projectId,
+          clientEmail,
+          // 改行コードの処理
+          privateKey: privateKey.replace(/\\n/g, '\n'),
+        }),
+      });
+      console.log('Firebase Admin初期化成功:', {
+        projectId,
+        clientEmail: clientEmail.substring(0, 5) + '...',
+      });
+    } catch (error) {
+      console.error('Firebase Admin初期化エラー:', error);
+      throw new Error('Firebase Admin SDKの初期化に失敗しました');
+    }
+  } else {
+    console.log('Firebase Admin SDKは既に初期化されています');
+  }
+
+  return admin;
 }
 
-export const db = admin.firestore();
-export const auth = admin.auth();
-export default admin; 
+// 初期化を実行
+const adminApp = initFirebaseAdmin();
+
+// Firestoreとアドミン認証をエクスポート
+export const db = adminApp.firestore();
+export const auth = adminApp.auth();
+export default adminApp; 

@@ -17,7 +17,7 @@ import { auth } from '@/app/lib/firebase';
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 // 決済フォームコンポーネント
-function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
+function CheckoutForm({ onSuccess }: { onSuccess: (result: any) => void }) {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState<string | null>(null);
@@ -41,7 +41,7 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
       switch (paymentIntent?.status) {
         case 'succeeded':
           setPaymentMessage('お支払いが完了しました。');
-          onSuccess();
+          onSuccess({ paymentIntent });
           break;
         case 'processing':
           setPaymentMessage('お支払いを処理中です。');
@@ -69,7 +69,7 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
     setError(null);
 
     try {
-      const { error } = await stripe.confirmPayment({
+      const result = await stripe.confirmPayment({
         elements,
         confirmParams: {
           return_url: `${window.location.origin}/subscription/success`,
@@ -77,17 +77,19 @@ function CheckoutForm({ onSuccess }: { onSuccess: () => void }) {
         redirect: 'if_required'
       });
 
-      if (error) {
-        console.error('決済エラー:', error);
-        setError(error.message || '決済処理中にエラーが発生しました。');
+      if (result.error) {
+        console.error('決済エラー:', result.error);
+        setError(result.error.message || '決済処理中にエラーが発生しました。');
+        onSuccess(result);
       } else {
         // 決済が完了した場合
         console.log('決済が完了しました');
-        onSuccess();
+        onSuccess(result);
       }
     } catch (err) {
       console.error('決済エラー:', err);
       setError('決済処理中にエラーが発生しました。再度お試しください。');
+      onSuccess({ error: err });
     } finally {
       setProcessing(false);
     }
@@ -137,6 +139,9 @@ export default function SubscriptionPage() {
   const [isProcessing, setIsProcessing] = useState<boolean>(false);
   const [clientSecret, setClientSecret] = useState<string | null>(null);
   const [paymentAmount, setPaymentAmount] = useState<number>(0);
+  const [paymentMessage, setPaymentMessage] = useState('');
+  const [paymentError, setPaymentError] = useState<string | null>(null);
+  const [paymentProcessing, setPaymentProcessing] = useState(false);
 
   useEffect(() => {
     const checkSubscription = async () => {
@@ -180,7 +185,7 @@ export default function SubscriptionPage() {
       // 認証トークンを取得
       const token = await user.getIdToken();
       
-      // 支払いインテントを作成
+      // チェックアウトセッションを作成
       const response = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: {
@@ -197,40 +202,51 @@ export default function SubscriptionPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || '支払いインテントの作成に失敗しました');
+        throw new Error(data.error || 'チェックアウトセッションの作成に失敗しました');
       }
 
-      if (!data.clientSecret) {
-        throw new Error('クライアントシークレットが取得できませんでした');
+      // 新しいAPIレスポンス形式に対応
+      if (data.sessionUrl) {
+        // Stripeのチェックアウトページに直接リダイレクト
+        console.log('チェックアウトセッション作成成功 - リダイレクト中');
+        window.location.href = data.sessionUrl;
+        return;
+      } else if (data.clientSecret) {
+        // 従来の支払いインテント方式の場合（後方互換性のため）
+        console.log('クライアントシークレット取得成功');
+        setClientSecret(data.clientSecret);
+        setPaymentAmount(data.amount || SUBSCRIPTION_PLANS.PREMIUM.price);
+      } else {
+        throw new Error('チェックアウト情報が取得できませんでした');
       }
-
-      console.log('クライアントシークレット取得成功');
-      setClientSecret(data.clientSecret);
-      setPaymentAmount(data.amount || SUBSCRIPTION_PLANS.PREMIUM.price);
     } catch (error) {
-      console.error('Subscription error:', error);
+      console.error('サブスクリプションエラー:', error);
       alert(error instanceof Error ? error.message : 'サブスクリプションの処理中にエラーが発生しました。');
     } finally {
       setIsProcessing(false);
     }
   };
 
-  const handleSuccess = async () => {
-    try {
-      if (!auth.currentUser?.uid) {
-        console.error('認証されていないユーザー');
-        router.push('/subscription/success');
-        return;
-      }
+  const handlePaymentSuccess = async () => {
+    if (!user?.uid) {
+      console.error('認証されていないユーザー');
+      return;
+    }
 
+    try {
+      console.log(`クライアント側: サブスクリプション更新開始 - ユーザーID: ${user.uid}`);
       // ユーザーのサブスクリプション状態を確認
-      const userRef = doc(db, 'users', auth.currentUser.uid);
+      const userRef = doc(db, 'users', user.uid);
       const userDoc = await getDoc(userRef);
       
       if (userDoc.exists()) {
+        const userData = userDoc.data();
+        console.log('現在のユーザーデータ:', userData);
+
         // サブスクリプション状態を更新
-        await updateDoc(userRef, {
+        const updateData = {
           subscriptions: {
+            ...(userData.subscriptions || {}),
             premium: {
               status: 'active',
               updatedAt: new Date().toISOString(),
@@ -238,13 +254,39 @@ export default function SubscriptionPage() {
           },
           subscriptionStatus: 'active',
           updatedAt: new Date().toISOString(),
-        });
+        };
+
+        console.log('更新データ:', updateData);
+        await updateDoc(userRef, updateData);
         console.log('クライアント側: サブスクリプション状態を更新しました');
+
+        // 更新後のデータを確認
+        const updatedDoc = await getDoc(userRef);
+        console.log('更新後のユーザーデータ:', updatedDoc.data());
+      } else {
+        console.error('ユーザードキュメントが存在しません');
       }
     } catch (error) {
       console.error('サブスクリプション状態更新エラー:', error);
     }
+    
+    // 成功ページへリダイレクト
     router.push('/subscription/success');
+  };
+
+  const handlePaymentIntent = async (result: any) => {
+    if (result.error) {
+      // エラー処理
+      setPaymentError(result.error.message);
+      setPaymentProcessing(false);
+    } else {
+      // 支払いが成功した場合
+      setPaymentMessage('決済が完了しました！');
+      setPaymentProcessing(false);
+      
+      // サブスクリプション状態を更新
+      await handlePaymentSuccess();
+    }
   };
 
   if (loading || checkingSubscription) {
@@ -400,7 +442,7 @@ export default function SubscriptionPage() {
 
             <Link
               href="/exams"
-              className="mt-8 block w-full bg-gray-100 border border-transparent rounded-md py-3 px-6 text-center font-medium text-gray-900 hover:bg-gray-200"
+              className="mt-8 block w-full bg-gray-100 border border-transparent rounded-md py-3 px-6 text-center font-bold text-gray-900 hover:bg-gray-200"
             >
               模試一覧を見る
             </Link>
@@ -466,14 +508,14 @@ export default function SubscriptionPage() {
                     },
                   },
                 }}>
-                  <CheckoutForm onSuccess={handleSuccess} />
+                  <CheckoutForm onSuccess={handlePaymentIntent} />
                 </Elements>
               </div>
             ) : (
               <button
                 onClick={handleSubscribe}
                 disabled={isProcessing || hasSubscription}
-                className={`mt-8 block w-full px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-medium text-center transition-all duration-300 ${
+                className={`mt-8 block w-full px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-bold text-center transition-all duration-300 ${
                   hasSubscription
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                     : "bg-white text-blue-600 hover:bg-blue-50"

@@ -6,6 +6,7 @@ import { motion } from 'framer-motion';
 import { useAuth } from '@/app/hooks/useAuth';
 import PurchaseHistory from '@/app/components/PurchaseHistory';
 import SubscriptionStatus from '@/app/components/SubscriptionStatus';
+import SubscriptionManagement from '@/app/components/SubscriptionManagement';
 
 export default function MyPage() {
   const router = useRouter();
@@ -61,6 +62,9 @@ export default function MyPage() {
             className="bg-white shadow-md rounded-lg p-6"
           >
             <SubscriptionStatus />
+            <div className="mt-6 pt-6 border-t border-gray-200">
+              <SubscriptionManagement />
+            </div>
           </motion.section>
 
           <motion.section
