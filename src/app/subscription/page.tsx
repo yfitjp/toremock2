@@ -408,7 +408,7 @@ export default function SubscriptionPage() {
 
           {/* プレミアムプラン */}
           <motion.div
-            className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
+            className="relative p-8 bg-gradient-to-b from-blue-50 to-blue-100 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="flex-1">
               <div className="flex items-center">

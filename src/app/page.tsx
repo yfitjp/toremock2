@@ -412,7 +412,7 @@ export default function Home() {
               英語学習を加速させる最適なプラン
             </p>
             <p className="mt-4 max-w-2xl mx-auto text-xl text-gray-500">
-              まずは無料プランで体験、実力が伸びを実感したらプレミアムへ
+              まずは無料プランで体験、実力が伸びを実感したらプレミアム、エリートへ
             </p>
           </motion.div>
 
@@ -424,44 +424,35 @@ export default function Home() {
               className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200"
             >
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900">無料プラン</h3>
+                <h3 className="text-2xl font-bold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
                 <p className="mt-4 text-gray-500">英語学習の第一歩に最適</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-gray-900">¥0</span>
+                  <span className="text-4xl font-extrabold text-gray-900">¥{SUBSCRIPTION_PLANS.FREE.price.toLocaleString()}</span>
                   <span className="text-base font-medium text-gray-500">/月</span>
                 </p>
+
                 <ul className="mt-8 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-gray-700">基本的な模試にアクセス</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-gray-700">基本的な解説と採点</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-gray-700">学習進捗の記録</span>
-                  </li>
+                  {SUBSCRIPTION_PLANS.FREE.features.map((feature, index) => (
+                    <li key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="ml-3 text-gray-700">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="mt-8">
                   {!user ? (
                     <Link
                       href="/auth/signup"
-                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
+                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
                     >
                       無料で始める
                     </Link>
                   ) : (
                     <Link
                       href="/exams"
-                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
+                      className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md text-blue-600 bg-blue-50 hover:bg-blue-100 transition-colors duration-300"
                     >
                       模試一覧を見る
                       <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -477,54 +468,32 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl transform border border-blue-200"
+              className="relative bg-gradient-to-b from-blue-50 to-blue-100 rounded-2xl shadow-xl transform border border-blue-200"
             >
               <div className="p-8">
                 <div className="flex items-center">
-                  <h3 className="text-2xl font-bold text-blue-900">プレミアムプラン</h3>
+                  <h3 className="text-2xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
                   <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
                 </div>
                 <p className="mt-4 text-blue-900">本気で英語力を伸ばしたい方に</p>
                 <p className="mt-8">
-                  <span className="text-4xl font-extrabold text-blue-900">¥1,980</span>
+                  <span className="text-4xl font-extrabold text-blue-900">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                   <span className="text-base font-medium text-blue-900">/月</span>
                 </p>
                 <ul className="mt-8 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-blue-900">すべての模試に無制限アクセス</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-blue-900">AI搭載の詳細な解説</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-blue-900">パーソナライズされた学習プラン</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-blue-900">進捗分析レポート</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-blue-900">新規模試の優先アクセス</span>
-                  </li>
+                  {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
+                    <li key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="ml-3 text-blue-900">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="mt-8">
                   <Link
                     href="/subscription"
-                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors duration-300"
+                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors duration-300"
                   >
                     プレミアムを始める
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
@@ -549,24 +518,14 @@ export default function Home() {
                   <span className="text-base font-medium text-amber-700">/月</span>
                 </p>
                 <ul className="mt-8 space-y-4">
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-amber-700">プレミアムプランのすべての機能</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-amber-700">プロ講師による個別指導（月2回）</span>
-                  </li>
-                  <li className="flex items-center">
-                    <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                    </svg>
-                    <span className="ml-3 text-amber-700">AIによる発音・スピーキング評価</span>
-                  </li>
+                  {SUBSCRIPTION_PLANS.ELITE.features.map((feature, index) => (
+                    <li key={index} className="flex items-center">
+                      <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
+                      </svg>
+                      <span className="ml-3 text-amber-700">{feature}</span>
+                    </li>
+                  ))}
                 </ul>
                 <div className="mt-8">
                   <div
