@@ -35,7 +35,7 @@ export interface Subscription {
 // サブスクリプションプランの定義
 export const SUBSCRIPTION_PLANS = {
   FREE: {
-    name: '通常プラン',
+    name: 'Free',
     price: 0,
     description: '無料で基本的な模試にアクセスできます。有料模試は個別に購入が必要です。',
     features: [
@@ -46,7 +46,7 @@ export const SUBSCRIPTION_PLANS = {
     ],
   },
   PREMIUM: {
-    name: 'プレミアムプラン',
+    name: 'Premium',
     price: 1980,
     description: 'すべての模試にアクセスでき、詳細な解説や学習分析機能が利用できます。',
     features: [
@@ -56,7 +56,7 @@ export const SUBSCRIPTION_PLANS = {
     ],
   },
   ELITE: {
-    name: 'エリートプラン',
+    name: 'Elite',
     price: 5980,
     description: '最高レベルの学習体験を提供する特別なプランです。',
     features: [

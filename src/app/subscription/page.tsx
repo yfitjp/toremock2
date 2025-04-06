@@ -364,7 +364,7 @@ export default function SubscriptionPage() {
                   <path d="M12.971 1.816A5.23 5.23 0 0114.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 013.434 1.279 9.768 9.768 0 00-6.963-6.963z" />
                 </svg>
               </div>
-              <h3 className="text-xl font-semibold text-gray-900">無料プラン</h3>
+              <h3 className="text-2xl font-semibold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
             </div>
               <p className="mt-4 flex items-baseline text-gray-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥0</span>
@@ -374,61 +374,27 @@ export default function SubscriptionPage() {
                 無料で基本的な模試にアクセスできます。有料模試は個別に購入が必要です。
               </p>
 
-              <ul role="list" className="mt-6 space-y-6">
-                <li className="flex">
-                  <svg
-                    className="flex-shrink-0 w-6 h-6 text-green-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="ml-3 text-gray-500">無料模試へのアクセス</span>
-                </li>
-                <li className="flex">
-                  <svg
-                    className="flex-shrink-0 w-6 h-6 text-green-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="ml-3 text-gray-500">基本的な解説</span>
-                </li>
-                <li className="flex">
-                  <svg
-                    className="flex-shrink-0 w-6 h-6 text-green-500"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M5 13l4 4L19 7"
-                    />
-                  </svg>
-                  <span className="ml-3 text-gray-500">有料模試は個別購入（￥490～/模試）</span>
-                </li>
+              <ul role="list" className="mt-6 space-y-4">
+                {SUBSCRIPTION_PLANS.FREE.features.map((feature, index) => (
+                  <li key={index} className="flex">
+                    <svg
+                      className="flex-shrink-0 w-6 h-6 text-gray-900"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="ml-3 text-gray-900">{feature}</span>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -530,7 +496,7 @@ export default function SubscriptionPage() {
                     <path fillRule="evenodd" d="M12 1.5a5.25 5.25 0 00-5.25 5.25v3a3 3 0 00-3 3v6.75a3 3 0 003 3h10.5a3 3 0 003-3v-6.75a3 3 0 00-3-3v-3c0-2.9-2.35-5.25-5.25-5.25zm3.75 8.25v-3a3.75 3.75 0 10-7.5 0v3h7.5z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                <h3 className="text-2xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
               </div>
               <p className="mt-4 flex items-baseline text-amber-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
