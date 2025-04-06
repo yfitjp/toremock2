@@ -27,7 +27,7 @@ const ToeicBeginnersGuideContent = () => {
       {/* 画像の例 */}
       <div className="relative aspect-video my-8 bg-slate-100 rounded-lg overflow-hidden">
         <Image
-          src="/images/toeic-beginners.jpg" // このパスは実際の画像パスに置き換えてください
+          src="/images/toeic-beginners.jpg"
           alt="TOEIC初心者向け勉強イメージ"
           fill
           className="object-cover"
