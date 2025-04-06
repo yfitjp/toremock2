@@ -95,7 +95,7 @@ export async function POST(request: Request) {
     console.log(`Stripe顧客情報取得成功 - ID: ${customer.id}`);
     
     // ポータルセッションの設定
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || new URL(request.url).origin;
     const returnUrl = `${baseUrl}/mypage`;
     
     // 顧客ポータルセッションの作成

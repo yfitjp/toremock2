@@ -100,8 +100,8 @@ export async function POST(request: Request) {
         },
       ],
       mode: 'subscription',
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/subscription`,
+      success_url: `${process.env.NEXT_PUBLIC_BASE_URL || new URL(request.url).origin}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL || new URL(request.url).origin}/subscription`,
       metadata: {
         userId: userId,
         type: 'subscription',
