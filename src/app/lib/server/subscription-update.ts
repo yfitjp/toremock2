@@ -24,17 +24,54 @@ export async function updateSubscriptionStatus(userId: string, status: 'active' 
     // ユーザードキュメントへの参照
     const userRef = adminDb.collection('users').doc(userId);
     
+    // ユーザードキュメントの存在を確認
+    const userDoc = await userRef.get();
+    
+    // ユーザードキュメントが存在しない場合は新規作成
+    if (!userDoc.exists) {
+      console.log(`[サーバー] ユーザードキュメントが存在しないため作成します - ユーザーID: ${userId}`);
+      
+      // 基本的なユーザー情報を設定
+      const now = new Date().toISOString();
+      const initialUserData = {
+        uid: userId,
+        subscriptionStatus: status,
+        subscriptions: {
+          premium: {
+            status,
+            startDate: now,
+            updatedAt: now
+          }
+        },
+        createdAt: now,
+        updatedAt: now
+      };
+      
+      try {
+        // ユーザードキュメントを作成
+        await userRef.set(initialUserData);
+        console.log(`[サーバー] ユーザードキュメント作成成功 - ユーザーID: ${userId}`);
+        return true;
+      } catch (error) {
+        console.error(`[サーバー] ユーザードキュメント作成エラー - ユーザーID: ${userId}:`, error);
+        throw error;
+      }
+    }
+    
+    // ユーザードキュメントが存在する場合は更新
+    console.log(`[サーバー] 既存ユーザードキュメント更新 - ユーザーID: ${userId}`);
+    
     // トランザクションを使用して安全に更新
     const result = await adminDb.runTransaction(async (transaction) => {
-      // ユーザードキュメントを取得
-      const userDoc = await transaction.get(userRef);
+      // トランザクション内でユーザードキュメントを再取得
+      const latestUserDoc = await transaction.get(userRef);
       
-      if (!userDoc.exists) {
-        console.error(`ユーザーが見つかりません - ユーザーID: ${userId}`);
+      if (!latestUserDoc.exists) {
+        console.error(`[サーバー] トランザクション内でユーザードキュメントが見つかりません - ユーザーID: ${userId}`);
         throw new Error('ユーザーが見つかりません');
       }
       
-      const userData = userDoc.data();
+      const userData = latestUserDoc.data() || {};
       console.log(`[サーバー] 現在のユーザーデータ:`, JSON.stringify({
         uid: userId,
         email: userData?.email,
@@ -54,8 +91,10 @@ export async function updateSubscriptionStatus(userId: string, status: 'active' 
           premium: {
             status,
             updatedAt: now,
-            // 有効化の場合は開始日も設定
-            ...(status === 'active' && {startDate: now}),
+            // 有効化の場合は開始日も設定 (既存の開始日があれば保持)
+            ...(status === 'active' && {
+              startDate: currentSubscriptions?.premium?.startDate || now
+            }),
           }
         },
         // トップレベルのフィールドも更新
@@ -74,13 +113,18 @@ export async function updateSubscriptionStatus(userId: string, status: 'active' 
     console.log(`[サーバー] サブスクリプション状態更新成功 - ユーザーID: ${userId}`);
     
     // 更新後のデータを確認
-    const updatedDoc = await userRef.get();
-    if (updatedDoc.exists) {
-      const updatedData = updatedDoc.data();
-      console.log(`[サーバー] 更新後のサブスクリプション状態:`, 
-        updatedData?.subscriptionStatus,
-        updatedData?.subscriptions?.premium?.status
-      );
+    try {
+      const updatedDoc = await userRef.get();
+      if (updatedDoc.exists) {
+        const updatedData = updatedDoc.data();
+        console.log(`[サーバー] 更新後のサブスクリプション状態:`, 
+          updatedData?.subscriptionStatus,
+          updatedData?.subscriptions?.premium?.status
+        );
+      }
+    } catch (error) {
+      // 確認のためのエラーは致命的ではないのでスローしない
+      console.error(`[サーバー] 更新後の確認エラー - ユーザーID: ${userId}:`, error);
     }
     
     return result;

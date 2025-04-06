@@ -7,6 +7,7 @@ import { useAuth } from '@/app/hooks/useAuth';
 import PurchaseHistory from '@/app/components/PurchaseHistory';
 import SubscriptionStatus from '@/app/components/SubscriptionStatus';
 import SubscriptionManagement from '@/app/components/SubscriptionManagement';
+import SubscriptionDebugTools from '@/app/components/SubscriptionDebugTools';
 
 export default function MyPage() {
   const router = useRouter();
@@ -65,6 +66,9 @@ export default function MyPage() {
             <div className="mt-6 pt-6 border-t border-gray-200">
               <SubscriptionManagement />
             </div>
+            
+            {/* デバッグツール */}
+            <SubscriptionDebugTools />
           </motion.section>
 
           <motion.section
