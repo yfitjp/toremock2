@@ -440,7 +440,7 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative p-8 bg-gradient-to-b from-blue-200 to-blue-400 rounded-2xl shadow-lg flex flex-col z-10 border-2 border-blue-300"
+            className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-lg flex flex-col z-10 border-2 border-blue-300"
           >
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
               おすすめ
