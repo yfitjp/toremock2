@@ -6,6 +6,8 @@ import { motion } from 'framer-motion';
 import { useAuth } from './hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { SUBSCRIPTION_PLANS } from './lib/subscriptions';
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { BookOpenCheck, CheckSquare, Presentation } from 'lucide-react';
 
 export default function Home() {
   const { user } = useAuth();
@@ -113,75 +115,237 @@ export default function Home() {
       </div>
 
       {/* 特徴セクション */}
-      <div className="py-16 bg-white">
+      <div className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="text-center mb-12">
+            <div className="text-center mb-16">
               <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">特徴</h2>
               <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
                 トレモックが選ばれる理由
               </p>
-              <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
-                本番さながらの環境で実力を試し、詳細な分析で弱点を克服できます
+              <p className="max-w-2xl mt-5 mx-auto text-xl text-gray-500">
+                本番さながらの環境で実力を試し、詳細な分析と豊富な問題であなたの英語学習を加速させます。
               </p>
             </div>
 
-            <div className="mt-10">
-              <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-                <motion.div 
-                  whileHover={{ y: -5 }}
-                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
-                >
-                  <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">本番さながらの環境</h3>
-                  <p className="text-gray-600">
-                    実際の試験と同じ形式、同じ時間配分で模擬試験を受けることができます。
-                    本番の雰囲気を体験し、試験に慣れることができます。
-                  </p>
-                </motion.div>
+            <div className="mt-10 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3">
 
-                <motion.div 
-                  whileHover={{ y: -5 }}
-                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
-                >
-                  <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">詳細な分析</h3>
-                  <p className="text-gray-600">
-                    試験結果を詳細に分析し、あなたの強みと弱みを明確にします。
-                    効率的な学習計画を立てるのに役立ちます。
-                  </p>
-                </motion.div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
+                   <Presentation size={40} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">本番さながらの環境</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  実際の試験と同じ形式、時間配分で模試を受験できます。リスニング音声の再生速度調整や、リーディングの時間計測など、本番を意識した機能が充実。試験当日の緊張感を和らげ、実力を最大限に発揮できるようサポートします。
+                </p>
+              </motion.div>
 
-                <motion.div 
-                  whileHover={{ y: -5 }}
-                  className="relative bg-white p-6 rounded-xl shadow-md border border-gray-100 transition-all duration-300"
-                >
-                  <div className="absolute -top-4 -left-4 bg-blue-600 rounded-lg p-3 shadow-lg">
-                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-                    </svg>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4 mt-2">豊富な問題</h3>
-                  <p className="text-gray-600">
-                    TOEIC®、TOEFL®、英検®など、様々な試験の模擬問題を用意しています。
-                    定期的に新しい問題が追加されます。
-                  </p>
-                </motion.div>
-              </div>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
+                   <CheckSquare size={40} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">AIによる詳細分析</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  解答結果をAIが瞬時に分析。セクションごとの正答率だけでなく、問題タイプ別の理解度や弱点分野を可視化します。苦手な問題傾向を把握し、復習すべきポイントを明確にすることで、効率的なスコアアップを実現します。（プレミアムプラン以上）
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="flex flex-col items-center text-center"
+              >
+                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
+                   <BookOpenCheck size={40} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">質の高い豊富な問題</h3>
+                <p className="text-gray-600 leading-relaxed">
+                  TOEIC® L&R TEST、TOEFL iBT®、英検®（準1級・1級）に対応した最新傾向の模試を多数用意。経験豊富な専門家チームが作成・監修した質の高い問題で、実践的な演習が可能です。定期的に新しい模試も追加され、常に新鮮な気持ちで学習に取り組めます。
+                </p>
+              </motion.div>
+
             </div>
           </motion.div>
+        </div>
+      </div>
+
+      {/* 学習の流れセクション */}
+      <div className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">学習の流れ</h2>
+            <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
+              3ステップで簡単スタート
+            </p>
+            <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+              トレモックで効率的に英語力を向上させるための簡単なステップをご紹介します。
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+            {/* Step 1 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="text-center"
+            >
+              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">模試を選択して受験</h3>
+              <p className="text-gray-600 leading-relaxed">
+                豊富なラインナップから、目標とする試験やレベルに合った模試を選びます。本番と同じ形式で、集中して問題に取り組みましょう。
+              </p>
+              <div className="mt-4 h-24 flex justify-center items-center">
+                 <p className="text-gray-400 italic">（模試選択イメージ）</p>
+              </div>
+            </motion.div>
+
+            {/* Step 2 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-center"
+            >
+              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">結果分析と弱点把握</h3>
+              <p className="text-gray-600 leading-relaxed">
+                受験後すぐに結果が表示され、AIによる詳細な分析レポートを確認できます。自分の強みと弱点を正確に把握しましょう。
+              </p>
+               <div className="mt-4 h-24 flex justify-center items-center">
+                 <p className="text-gray-400 italic">（結果分析イメージ）</p>
+              </div>
+            </motion.div>
+
+            {/* Step 3 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="text-center"
+            >
+              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">3</div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">復習と反復学習</h3>
+              <p className="text-gray-600 leading-relaxed">
+                分析結果をもとに、間違えた問題や苦手分野を中心に復習します。解説を読み込み、繰り返し挑戦することで着実に実力アップ。
+              </p>
+               <div className="mt-4 h-24 flex justify-center items-center">
+                 <p className="text-gray-400 italic">（復習イメージ）</p>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </div>
+
+      {/* 対応試験一覧セクション */}
+      <div className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">対応試験一覧</h2>
+            <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
+              主要な英語資格試験に対応
+            </p>
+            <p className="max-w-xl mt-5 mx-auto text-xl text-gray-500">
+              あなたの目標達成をサポートするため、人気の英語試験の模試をご用意しています。
+            </p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* TOEIC */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-blue-700">TOEIC® L&R TEST</div>
+              <p className="text-gray-600 text-sm mb-4">
+                ビジネスシーンでの英語コミュニケーション能力を測定する世界共通のテスト。リスニングとリーディングの能力を評価します。
+              </p>
+              <Link href="/exams?category=toeic" className="mt-auto text-sm font-medium text-blue-600 hover:text-blue-800">
+                TOEIC模試を見る &rarr;
+              </Link>
+            </motion.div>
+
+            {/* TOEFL */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-red-700">TOEFL iBT®</div>
+              <p className="text-gray-600 text-sm mb-4">
+                主に北米の大学・大学院への留学に必要な英語能力を測定するテスト。読む・聞く・話す・書くの4技能を総合的に評価します。
+              </p>
+              <Link href="/exams?category=toefl" className="mt-auto text-sm font-medium text-red-600 hover:text-red-800">
+                TOEFL模試を見る &rarr;
+              </Link>
+            </motion.div>
+
+            {/* 英検 */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
+            >
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-green-700">英検®</div>
+              <p className="text-gray-600 text-sm mb-4">
+                日本国内で最も広く認知されている英語能力検定試験。幅広いレベルに対応しており、現在は準1級・1級の模試を提供しています。
+              </p>
+              <Link href="/exams?category=eiken" className="mt-auto text-sm font-medium text-green-600 hover:text-green-800">
+                英検模試を見る &rarr;
+              </Link>
+            </motion.div>
+          </div>
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.6 }}
+            className="mt-8 text-center text-sm text-gray-500"
+          >
+            ※ TOEIC and TOEFL are registered trademarks of ETS. This web page is not endorsed or approved by ETS.<br />
+            ※ 英検®は、公益財団法人 日本英語検定協会の登録商標です。このコンテンツは、公益財団法人 日本英語検定協会の承認や推奨、その他の検討を受けたものではありません。
+          </motion.p>
         </div>
       </div>
 
@@ -190,7 +354,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center"
           >
@@ -229,7 +394,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
             className="text-center"
           >
@@ -246,6 +412,7 @@ export default function Home() {
             {/* 無料プラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }}
               className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-100"
             >
               <div className="p-8">
@@ -301,6 +468,7 @@ export default function Home() {
             {/* プレミアムプラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
               className="relative bg-blue-600 rounded-2xl shadow-xl overflow-hidden transform"
             >
               <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-20 -translate-y-20">
@@ -360,10 +528,11 @@ export default function Home() {
                 </div>
               </div>
             </motion.div>
-            
+
             {/* エリートプラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.7 }}
               className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
             >
               <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-20 -translate-y-20">
@@ -420,7 +589,8 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
             className="text-center"
           >
@@ -433,6 +603,7 @@ export default function Home() {
           <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             <motion.div
               whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
               className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -453,6 +624,7 @@ export default function Home() {
 
             <motion.div
               whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
               className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -473,6 +645,7 @@ export default function Home() {
 
             <motion.div
               whileHover={{ y: -5 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-blue-50 rounded-xl p-8 relative"
             >
               <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
@@ -491,6 +664,58 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+        </div>
+      </div>
+
+      {/* よくある質問(FAQ)セクション */}
+      <div className="py-20 bg-gray-50">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">よくある質問</h2>
+            <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
+              疑問点を解決
+            </p>
+          </motion.div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            className="space-y-4"
+          >
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1" className="bg-white p-6 rounded-lg shadow-sm">
+                <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">無料プランとプレミアムプランの違いは何ですか？</AccordionTrigger>
+                <AccordionContent className="text-gray-600 mt-2">
+                  無料プランでは一部の基本的な模試と解説にアクセスできます。プレミアムプランでは、全ての模試への無制限アクセス、AIによる詳細な分析レポート、パーソナライズされた学習プランなど、より高度な機能をご利用いただけます。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-2" className="bg-white p-6 rounded-lg shadow-sm">
+                <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">支払い方法は何がありますか？</AccordionTrigger>
+                <AccordionContent className="text-gray-600 mt-2">
+                  クレジットカード（Visa, Mastercard, American Express, JCB）でのお支払いに対応しています。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-3" className="bg-white p-6 rounded-lg shadow-sm">
+                <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">解約はいつでもできますか？</AccordionTrigger>
+                <AccordionContent className="text-gray-600 mt-2">
+                  はい、いつでもマイページから簡単に解約手続きが可能です。契約期間の途中で解約された場合でも、契約終了日までサービスをご利用いただけます。日割りでの返金は行っておりませんのでご了承ください。
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="item-4" className="bg-white p-6 rounded-lg shadow-sm">
+                <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">スマートフォンやタブレットでも利用できますか？</AccordionTrigger>
+                <AccordionContent className="text-gray-600 mt-2">
+                  はい、トレモックはレスポンシブデザインに対応しており、PC、スマートフォン、タブレットなど、様々なデバイスのブラウザから快適にご利用いただけます。
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
+          </motion.div>
         </div>
       </div>
 
@@ -517,6 +742,15 @@ export default function Home() {
         }
         .animation-delay-4000 {
           animation-delay: 4s;
+        }
+        /* Shadcn/ui Accordion スタイル調整 */
+        [data-state=open] > svg { transform: rotate(180deg); }
+        [data-state=closed] > svg { transform: rotate(0deg); }
+        [data-state=open] > span { /* Trigger内のテキストも調整 */
+           color: #2563eb; /* 例: 青色 */
+        }
+        AccordionTrigger > svg {
+          transition: transform 0.2s ease-out;
         }
       `}</style>
     </div>
