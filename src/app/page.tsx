@@ -480,7 +480,7 @@ export default function Home() {
               className="relative bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl overflow-hidden transform"
             >
               <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-8 -translate-y-8">
-                <div className="absolute transform rotate-25 bg-yellow-400 text-right text-blue-900 font-bold py-1.5 left-[-40px] top-[32px] w-[170px] shadow-md">
+                <div className="absolute transform rotate-45 bg-yellow-400 text-right text-blue-900 font-bold py-1.5 left-[-40px] top-[32px] w-[170px] shadow-md">
                   人気No.1
                 </div>
               </div>

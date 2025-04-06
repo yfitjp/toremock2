@@ -443,7 +443,7 @@ export default function SubscriptionPage() {
             className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-lg flex flex-col z-10 border-2 border-blue-300"
           >
             <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
-              おすすめ
+              人気No.1
             </div>
             <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
             <div className="flex-1">
@@ -454,9 +454,6 @@ export default function SubscriptionPage() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
-              </div>
-              <div className="mt-2 bg-blue-700 px-3 py-1 rounded-full inline-block">
-                <span className="text-xs font-medium text-white">人気No.1</span>
               </div>
               <p className="mt-4 flex items-baseline text-blue-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
