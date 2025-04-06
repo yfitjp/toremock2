@@ -424,14 +424,14 @@ export default function Home() {
               className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200"
             >
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
-                <p className="mt-4 text-gray-500">英語学習の第一歩に最適</p>
-                <p className="mt-8">
+                <h3 className="text-3xl font-bold text-gray-900">{SUBSCRIPTION_PLANS.FREE.name}</h3>
+                <p className="mt-2 text-gray-500">英語学習の第一歩に最適</p>
+                <p className="mt-4">
                   <span className="text-4xl font-extrabold text-gray-900">¥{SUBSCRIPTION_PLANS.FREE.price.toLocaleString()}</span>
                   <span className="text-base font-medium text-gray-500">/月</span>
                 </p>
 
-                <ul className="mt-8 space-y-4">
+                <ul className="mt-8 space-y-3">
                   {SUBSCRIPTION_PLANS.FREE.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <svg className="w-5 h-5 text-green-500" fill="currentColor" viewBox="0 0 20 20">
@@ -472,15 +472,15 @@ export default function Home() {
             >
               <div className="p-8">
                 <div className="flex items-center">
-                  <h3 className="text-2xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                  <h3 className="text-3xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
                   <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
                 </div>
-                <p className="mt-4 text-blue-900">本気で英語力を伸ばしたい方に</p>
-                <p className="mt-8">
+                <p className="mt-2 text-blue-900">本気で英語力を伸ばしたい方に</p>
+                <p className="mt-4">
                   <span className="text-4xl font-extrabold text-blue-900">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                   <span className="text-base font-medium text-blue-900">/月</span>
                 </p>
-                <ul className="mt-8 space-y-4">
+                <ul className="mt-8 space-y-3">
                   {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
@@ -511,13 +511,13 @@ export default function Home() {
               className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
             >
               <div className="p-8">
-                <h3 className="text-2xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
-                <p className="mt-4 text-amber-700">最高レベルの学習体験を提供</p>
-                <p className="mt-8">
+                <h3 className="text-3xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
+                <p className="mt-2 text-amber-700">最高レベルの学習体験を提供</p>
+                <p className="mt-4">
                   <span className="text-4xl font-extrabold text-amber-900">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
                   <span className="text-base font-medium text-amber-700">/月</span>
                 </p>
-                <ul className="mt-8 space-y-4">
+                <ul className="mt-8 space-y-3">
                   {SUBSCRIPTION_PLANS.ELITE.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
                       <svg className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
