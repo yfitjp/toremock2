@@ -448,9 +448,9 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative z-40 p-8 bg-gradient-to-b from-blue-100 to-blue-200 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
+            className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 border border-blue-200 rounded-2xl shadow-md flex flex-col transform z-20"
           >
-            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-gray-900 shadow-md">
+            <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 bg-yellow-400 rounded-full px-4 py-1.5 text-sm font-bold uppercase tracking-wider text-gray-900 shadow-md z-30">
               人気No.1
             </div>
             <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
