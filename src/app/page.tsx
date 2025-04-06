@@ -480,8 +480,8 @@ export default function Home() {
               className="relative bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl overflow-hidden transform"
             >
               <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-8 -translate-y-8">
-                <div className="absolute transform rotate-45 bg-yellow-400 text-center text-blue-900 font-bold py-1.5 left-[-40px] top-[32px] w-[170px] shadow-md">
-                  人気
+                <div className="absolute transform rotate-25 bg-yellow-400 text-right text-blue-900 font-bold py-1.5 left-[-40px] top-[32px] w-[170px] shadow-md">
+                  人気No.1
                 </div>
               </div>
               <div className="p-8">
@@ -543,11 +543,6 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.7 }}
               className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
             >
-              <div className="absolute top-0 right-0 w-40 h-40 transform translate-x-20 -translate-y-20">
-                <div className="absolute transform rotate-45 bg-amber-500 text-center text-white font-semibold py-1 left-[-40px] top-[32px] w-[190px]">
-                  受付停止中
-                </div>
-              </div>
               <div className="p-8">
                 <div className="flex items-center">
                   <h3 className="text-2xl font-bold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
