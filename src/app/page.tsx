@@ -420,7 +420,7 @@ export default function Home() {
             {/* 無料プラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.5 }}
               className="bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200"
             >
               <div className="p-8">
@@ -476,7 +476,7 @@ export default function Home() {
             {/* プレミアムプラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
               className="relative bg-gradient-to-b from-blue-100 to-blue-200 rounded-2xl shadow-xl transform border border-blue-200"
             >
               <div className="p-8">
@@ -538,7 +538,7 @@ export default function Home() {
             {/* エリートプラン */}
             <motion.div
               whileHover={{ scale: 1.02 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.7 }}
               className="relative bg-gradient-to-b from-amber-50 to-amber-100 rounded-2xl shadow-xl overflow-hidden border border-amber-200"
             >
               <div className="p-8">

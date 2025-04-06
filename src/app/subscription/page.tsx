@@ -352,11 +352,8 @@ export default function SubscriptionPage() {
         ) : null}
 
         <div className={`mt-12 ${hasSubscription ? 'opacity-60' : ''} space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8`}>
-          {/* 通常プラン */}
+          {/* 無料プラン */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
             className="relative p-8 bg-white border border-gray-200 rounded-2xl shadow-sm flex flex-col"
           >
             <div className="flex-1">
@@ -445,9 +442,6 @@ export default function SubscriptionPage() {
 
           {/* プレミアムプラン */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
             className="relative p-8 bg-gradient-to-b from-blue-100 to-blue-200 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="absolute -top-1 -left-1 w-full h-full bg-blue-500 rounded-2xl -z-10 blur-sm opacity-30"></div>
@@ -527,9 +521,6 @@ export default function SubscriptionPage() {
 
           {/* エリートプラン */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
             className="relative p-8 bg-gradient-to-b from-amber-50 to-amber-100 border border-amber-200 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="flex-1 relative">
@@ -540,7 +531,6 @@ export default function SubscriptionPage() {
                   </svg>
                 </div>
                 <h3 className="text-xl font-semibold text-amber-800">{SUBSCRIPTION_PLANS.ELITE.name}</h3>
-                <span className="ml-2 px-2 py-0.5 bg-amber-200 text-amber-800 text-xs font-semibold rounded">限定プラン</span>
               </div>
               <p className="mt-4 flex items-baseline text-amber-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.ELITE.price.toLocaleString()}</span>
