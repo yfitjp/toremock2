@@ -89,8 +89,8 @@ export default function Home() {
                     <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
                     <div className="relative">
                       <div className="relative rounded-xl shadow-xl overflow-hidden bg-gradient-to-br from-white to-blue-50 p-6 border-2 border-blue-200 transform hover:scale-105 transition-all duration-300">
-                        <div className="absolute -top-1 -right-1">
-                          <div className="bg-yellow-400 text-blue-900 font-bold px-4 py-1 rounded-bl-lg shadow-md transform rotate-12 text-sm">
+                        <div className="absolute -top-2 -right-2 z-10">
+                          <div className="bg-yellow-400 text-blue-900 font-bold px-4 py-1 rounded-lg shadow-md transform rotate-12 text-sm">
                             無料で挑戦！
                           </div>
                         </div>
