@@ -88,21 +88,29 @@ export default function Home() {
                     <div className="absolute top-0 -right-4 w-72 h-72 bg-indigo-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
                     <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
                     <div className="relative">
-                      <div className="relative rounded-lg shadow-lg overflow-hidden bg-white p-5">
-                        <div className="bg-blue-50 p-4 rounded-lg mb-4">
-                          <h3 className="text-lg font-semibold text-blue-800 mb-2">今すぐ無料で模試を体験</h3>
-                          <p className="text-sm text-blue-600">無料で受験可能な模試を多数ご用意しています</p>
+                      <div className="relative rounded-xl shadow-xl overflow-hidden bg-gradient-to-br from-white to-blue-50 p-6 border-2 border-blue-200 transform hover:scale-105 transition-all duration-300">
+                        <div className="absolute -top-1 -right-1">
+                          <div className="bg-yellow-400 text-blue-900 font-bold px-4 py-1 rounded-bl-lg shadow-md transform rotate-12 text-sm">
+                            無料で挑戦！
+                          </div>
+                        </div>
+                        <div className="bg-blue-600 text-white p-5 rounded-lg mb-5 shadow-lg">
+                          <h3 className="text-xl font-bold mb-2">今すぐ<span className="text-yellow-300 text-2xl font-extrabold">無料</span>で模試を体験</h3>
+                          <p className="text-blue-100">受験可能な模試を多数ご用意しています</p>
                         </div>
                         <div className="flex justify-center">
                           <Link
                             href="/exams"
-                            className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-all duration-300 transform hover:scale-105"
+                            className="inline-flex items-center px-8 py-4 border border-transparent text-lg font-bold rounded-lg text-white bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-lg transition-all duration-300 transform hover:scale-105 hover:shadow-xl"
                           >
                             無料模試を受ける
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 ml-2" viewBox="0 0 20 20" fill="currentColor">
                               <path fillRule="evenodd" d="M10.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L12.586 11H5a1 1 0 110-2h7.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                           </Link>
+                        </div>
+                        <div className="mt-4 text-center text-sm text-gray-500">
+                          <p>※ログイン後すぐに受験していただけます</p>
                         </div>
                       </div>
                     </div>
