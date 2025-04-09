@@ -148,10 +148,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ y: -5, scale: 1.02 }}
                 className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-300 to-blue-500 text-white shadow-md">
                    <Presentation size={36} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">本番さながらの環境</h3>
@@ -165,10 +164,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                whileHover={{ y: -5, scale: 1.02 }}
                 className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-300 to-blue-500 text-white shadow-md">
                    <CheckSquare size={36} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">AIによる詳細分析</h3>
@@ -182,10 +180,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                whileHover={{ y: -5, scale: 1.02 }}
                 className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-300 to-blue-500 text-white shadow-md">
                    <BookOpenCheck size={36} />
                 </div>
                 <h3 className="text-xl font-bold text-gray-800 mb-3">質の高い豊富な問題</h3>
