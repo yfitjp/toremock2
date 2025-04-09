@@ -306,7 +306,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-blue-700">TOEIC® L&R TEST</div>
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-2xl text-blue-700">TOEIC® L&R TEST</div>
               <p className="text-gray-600 text-sm mb-4">
                 ビジネスシーンでの英語コミュニケーション能力を測定する世界共通のテスト。リスニングとリーディングの能力を評価します。
               </p>
@@ -323,7 +323,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.4 }}
               className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-red-700">TOEFL iBT®</div>
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-2xl text-red-700">TOEFL iBT®</div>
               <p className="text-gray-600 text-sm mb-4">
                 主に北米の大学・大学院への留学に必要な英語能力を測定するテスト。読む・聞く・話す・書くの4技能を総合的に評価します。
               </p>
@@ -340,7 +340,7 @@ export default function Home() {
               transition={{ duration: 0.5, delay: 0.5 }}
               className="bg-gray-50 rounded-xl shadow-md overflow-hidden p-6 border border-gray-100 flex flex-col items-center text-center hover:shadow-lg transition-shadow duration-300"
             >
-              <div className="h-10 mb-4 flex items-center justify-center font-bold text-xl text-green-700">英検®</div>
+              <div className="h-10 mb-4 flex items-center justify-center font-bold text-2xl text-green-700">英検®</div>
               <p className="text-gray-600 text-sm mb-4">
                 日本国内で最も広く認知されている英語能力検定試験。幅広いレベルに対応しており、現在は準1級・1級の模試を提供しています。
               </p>
@@ -354,7 +354,7 @@ export default function Home() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-8 text-center text-sm text-gray-500"
+            className="mt-8 text-center text-xs text-gray-500"
           >
             ※ TOEIC and TOEFL are registered trademarks of ETS. This web page is not endorsed or approved by ETS.<br />
             ※ 英検®は、公益財団法人 日本英語検定協会の登録商標です。このコンテンツは、公益財団法人 日本英語検定協会の承認や推奨、その他の検討を受けたものではありません。
