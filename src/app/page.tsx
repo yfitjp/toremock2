@@ -7,7 +7,7 @@ import { useAuth } from './hooks/useAuth';
 import { useEffect, useState } from 'react';
 import { SUBSCRIPTION_PLANS } from './lib/subscriptions';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
-import { BookOpenCheck, CheckSquare, Presentation } from 'lucide-react';
+import { BookOpenCheck, CheckSquare, Presentation, ListChecks, BarChart3, Repeat } from 'lucide-react';
 
 export default function Home() {
   const { user } = useAuth();
@@ -123,7 +123,7 @@ export default function Home() {
       </div>
 
       {/* 特徴セクション */}
-      <div className="py-20 bg-white">
+      <div className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -141,20 +141,21 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="mt-10 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3">
+            <div className="mt-16 grid grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-3">
 
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="flex flex-col items-center text-center"
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
-                   <Presentation size={40} />
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                   <Presentation size={36} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">本番さながらの環境</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">本番さながらの環境</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
                   実際の試験と同じ形式、時間配分で模試を受験できます。リスニング音声の再生速度調整や、リーディングの時間計測など、本番を意識した機能が充実。試験当日の緊張感を和らげ、実力を最大限に発揮できるようサポートします。
                 </p>
               </motion.div>
@@ -164,13 +165,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.4 }}
-                className="flex flex-col items-center text-center"
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
-                   <CheckSquare size={40} />
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                   <CheckSquare size={36} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">AIによる詳細分析</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">AIによる詳細分析</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
                   解答結果をAIが瞬時に分析。セクションごとの正答率だけでなく、問題タイプ別の理解度や弱点分野を可視化します。苦手な問題傾向を把握し、復習すべきポイントを明確にすることで、効率的なスコアアップを実現します。（プレミアムプラン以上）
                 </p>
               </motion.div>
@@ -180,13 +182,14 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 }}
-                className="flex flex-col items-center text-center"
+                whileHover={{ y: -5, scale: 1.02 }}
+                className="bg-gradient-to-br from-blue-50 to-white p-6 rounded-xl shadow-lg hover:shadow-xl border border-blue-100 transition-all duration-300 flex flex-col items-center text-center"
               >
-                <div className="relative mb-6 flex items-center justify-center h-24 w-24 rounded-full bg-blue-100 text-blue-600">
-                   <BookOpenCheck size={40} />
+                <div className="relative mb-6 flex items-center justify-center h-20 w-20 rounded-full bg-gradient-to-tl from-blue-200 to-blue-400 text-white shadow-md">
+                   <BookOpenCheck size={36} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3">質の高い豊富な問題</h3>
-                <p className="text-gray-600 leading-relaxed">
+                <h3 className="text-xl font-bold text-gray-800 mb-3">質の高い豊富な問題</h3>
+                <p className="text-gray-600 leading-relaxed text-sm">
                   TOEIC® L&R TEST、TOEFL iBT®、英検®（準1級・1級）に対応した最新傾向の模試を多数用意。経験豊富な専門家チームが作成・監修した質の高い問題で、実践的な演習が可能です。定期的に新しい模試も追加され、常に新鮮な気持ちで学習に取り組めます。
                 </p>
               </motion.div>
@@ -197,14 +200,14 @@ export default function Home() {
       </div>
 
       {/* 学習の流れセクション */}
-      <div className="py-20 bg-gradient-to-r from-blue-50 to-indigo-50">
+      <div className="py-24 bg-gradient-to-b from-blue-50 to-indigo-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-center mb-16"
+            className="text-center mb-20"
           >
             <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">学習の流れ</h2>
             <p className="mt-1 text-4xl font-extrabold text-gray-900 sm:text-5xl sm:tracking-tight">
@@ -215,60 +218,65 @@ export default function Home() {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-            {/* Step 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">1</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">模試を選択して受験</h3>
-              <p className="text-gray-600 leading-relaxed">
-                豊富なラインナップから、目標とする試験やレベルに合った模試を選びます。本番と同じ形式で、集中して問題に取り組みましょう。
-              </p>
-              <div className="mt-4 h-24 flex justify-center items-center">
-                 <p className="text-gray-400 italic">（模試選択イメージ）</p>
-              </div>
-            </motion.div>
+          <div className="relative">
+             {/* Connecting line (visible on md screens and up) */}
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-blue-200 transform -translate-y-1/2" style={{top: 'calc(5rem)'}}></div>
 
-            {/* Step 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">2</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">結果分析と弱点把握</h3>
-              <p className="text-gray-600 leading-relaxed">
-                受験後すぐに結果が表示され、AIによる詳細な分析レポートを確認できます。自分の強みと弱点を正確に把握しましょう。
-              </p>
-               <div className="mt-4 h-24 flex justify-center items-center">
-                 <p className="text-gray-400 italic">（結果分析イメージ）</p>
-              </div>
-            </motion.div>
+            <div className="relative grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-16">
+              {/* Step 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="relative flex flex-col items-center text-center bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+              >
+                <div className="absolute -top-8 flex items-center justify-center h-16 w-16 rounded-full bg-blue-600 text-white text-2xl font-bold shadow-md border-4 border-white">1</div>
+                <div className="mt-8 mb-4 text-blue-500">
+                  <ListChecks size={48} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">模試を選択して受験</h3>
+                <p className="text-gray-600 leading-relaxed text-sm flex-grow">
+                  豊富なラインナップから、目標とする試験やレベルに合った模試を選びます。本番と同じ形式で、集中して問題に取り組みましょう。
+                </p>
+              </motion.div>
 
-            {/* Step 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              className="text-center"
-            >
-              <div className="flex items-center justify-center h-24 w-24 rounded-full bg-blue-600 text-white text-3xl font-bold mx-auto mb-6 shadow-lg">3</div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">復習と反復学習</h3>
-              <p className="text-gray-600 leading-relaxed">
-                分析結果をもとに、間違えた問題や苦手分野を中心に復習します。解説を読み込み、繰り返し挑戦することで着実に実力アップ。
-              </p>
-               <div className="mt-4 h-24 flex justify-center items-center">
-                 <p className="text-gray-400 italic">（復習イメージ）</p>
-              </div>
-            </motion.div>
+              {/* Step 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="relative flex flex-col items-center text-center bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+              >
+                 <div className="absolute -top-8 flex items-center justify-center h-16 w-16 rounded-full bg-blue-600 text-white text-2xl font-bold shadow-md border-4 border-white">2</div>
+                <div className="mt-8 mb-4 text-blue-500">
+                  <BarChart3 size={48} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">結果分析と弱点把握</h3>
+                <p className="text-gray-600 leading-relaxed text-sm flex-grow">
+                  受験後すぐに結果が表示され、AIによる詳細な分析レポートを確認できます。自分の強みと弱点を正確に把握しましょう。
+                </p>
+              </motion.div>
+
+              {/* Step 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="relative flex flex-col items-center text-center bg-white p-8 rounded-xl shadow-lg border border-gray-100"
+              >
+                 <div className="absolute -top-8 flex items-center justify-center h-16 w-16 rounded-full bg-blue-600 text-white text-2xl font-bold shadow-md border-4 border-white">3</div>
+                <div className="mt-8 mb-4 text-blue-500">
+                   <Repeat size={48} />
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">復習と反復学習</h3>
+                <p className="text-gray-600 leading-relaxed text-sm flex-grow">
+                  分析結果をもとに、間違えた問題や苦手分野を中心に復習します。解説を読み込み、繰り返し挑戦することで着実に実力アップ。
+                </p>
+              </motion.div>
+            </div>
           </div>
         </div>
       </div>
