@@ -4,10 +4,11 @@ import React from 'react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import TableOfContents from '../../components/TableOfContents';
-import ShareButtons from '../../components/ShareButtons';
 // import { getArticleData, getSortedArticlesData } from '../../lib/articles'; // Markdownヘルパーを削除
 import { articleData, getSortedArticlesData, ArticleData, CategoryKey } from '../../lib/article-data'; // ハードコードされたデータをインポート
+// 目次コンポーネントのインポートを削除
+// import TableOfContents from '../../components/TableOfContents';
+import ShareButtons from '../../components/ShareButtons'; // ShareButtonsのインポートを復活させる
 
 // 記事本文コンポーネントをインポート
 import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
@@ -97,8 +98,85 @@ export default async function ArticleDetail({ params }: { params: { id: string }
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
       <div className="grid grid-cols-1 lg:grid-cols-12 lg:gap-x-8 gap-y-12">
-        {/* メインコンテンツエリア */}
-        <div className="lg:col-span-8 order-last lg:order-first">
+
+        {/* サイドバーエリア (記事本文の後に移動) */}
+        <aside className="lg:col-span-4 order-last">
+          <div className="sticky top-24 space-y-8">
+            {/* 目次セクションを削除 */}
+
+            {/* 著者情報 */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">この記事を書いた人</h3>
+              <div className="flex items-center space-x-4">
+                <div className="relative h-12 w-12 bg-slate-300 rounded-full overflow-hidden">
+                  <svg className="absolute inset-0 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
+                </div>
+                <div>
+                  <h4 className="font-medium text-slate-800">英語テスト情報局 編集部</h4>
+                  <p className="text-sm text-slate-500">最新の英語テスト情報をお届けします。</p>
+                </div>
+              </div>
+            </div>
+
+            {/* 関連記事 */}
+            {relatedArticles.length > 0 && (
+              <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+                <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
+                <ul className="space-y-4">
+                  {relatedArticles.map(relArticle => (
+                    <li key={relArticle.id}>
+                      <Link href={`/articles/${relArticle.id}`} className="group block">
+                        <div className="flex items-start space-x-3">
+                          <div className="relative h-16 w-16 bg-slate-200 rounded-lg overflow-hidden flex-shrink-0">
+                            {relArticle.imageSrc ? (
+                              <Image src={relArticle.imageSrc} alt={relArticle.title} fill className="object-cover" sizes="64px"/>
+                            ) : (
+                              <div className="absolute inset-0 flex items-center justify-center text-slate-400">
+                                {categoryInfo[relArticle.category as CategoryKey]?.icon || <span className="text-2xl">📄</span>}
+                              </div>
+                            )}
+                          </div>
+                          <div>
+                            <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
+                            <h4 className="text-sm font-medium text-slate-800 group-hover:text-green-600 transition-colors line-clamp-2">
+                              {relArticle.title}
+                            </h4>
+                          </div>
+                        </div>
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* 関連模試へのリンク */}
+            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
+              <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
+              <div className="flex items-center space-x-3 mb-4">
+                <div className="text-green-600 scale-150">
+                  {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>}
+                </div>
+                <p className="text-sm text-slate-700">
+                  この記事のカテゴリ「{article.category}」に関連する模試に挑戦しませんか？
+                </p>
+              </div>
+              <Link 
+                href={`/?category=${article.category}`} 
+                className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+              >
+                {article.category} の模試を見る
+              </Link>
+            </div>
+
+            {/* シェアボタン */}
+            <ShareButtons title={article.title} />
+
+          </div>
+        </aside>
+
+        {/* メインコンテンツエリア (サイドバーの前に移動) */}
+        <div className="lg:col-span-8 order-first">
           {/* 記事ヘッダー */}
           <div className="mb-8">
             {/* カテゴリ、日付、時間 */}
@@ -175,86 +253,6 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             </div>
           </div>
         </div>
-
-        {/* サイドバーエリア */}
-        <aside className="lg:col-span-4 order-first lg:order-last">
-          <div className="sticky top-24 space-y-8">
-            {/* 目次 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              {/* TODO: TableOfContents に本文コンテンツを渡して目次を生成できるようにする */}
-              <TableOfContents /> 
-            </div>
-
-            {/* 著者情報 */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">この記事を書いた人</h3>
-              <div className="flex items-center space-x-4">
-                <div className="relative h-12 w-12 bg-slate-300 rounded-full overflow-hidden">
-                  <svg className="absolute inset-0 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
-                </div>
-                <div>
-                  <h4 className="font-medium text-slate-800">英語テスト情報局 編集部</h4>
-                  <p className="text-sm text-slate-500">最新の英語テスト情報をお届けします。</p>
-                </div>
-              </div>
-            </div>
-
-            {/* 関連記事 */}
-            {relatedArticles.length > 0 && (
-              <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-                <h3 className="text-lg font-semibold text-slate-800 mb-4">関連記事</h3>
-                <ul className="space-y-4">
-                  {relatedArticles.map(relArticle => (
-                    <li key={relArticle.id}>
-                      <Link href={`/articles/${relArticle.id}`} className="group block">
-                        <div className="flex items-start space-x-3">
-                          <div className="relative h-16 w-16 bg-slate-200 rounded-lg overflow-hidden flex-shrink-0">
-                            {relArticle.imageSrc ? (
-                              <Image src={relArticle.imageSrc} alt={relArticle.title} fill className="object-cover" sizes="64px"/>
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center text-slate-400">
-                                {categoryInfo[relArticle.category as CategoryKey]?.icon || <span className="text-2xl">📄</span>}
-                              </div>
-                            )}
-                          </div>
-                          <div>
-                            <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
-                            <h4 className="text-sm font-medium text-slate-800 group-hover:text-green-600 transition-colors line-clamp-2">
-                              {relArticle.title}
-                            </h4>
-                          </div>
-                        </div>
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-
-            {/* 関連模試へのリンク */}
-            <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
-              <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="text-green-600 scale-150">
-                  {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>}
-                </div>
-                <p className="text-sm text-slate-700">
-                  この記事のカテゴリ「{article.category}」に関連する模試に挑戦しませんか？
-                </p>
-              </div>
-              <Link 
-                href={`/?category=${article.category}`} 
-                className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
-              >
-                {article.category} の模試を見る
-              </Link>
-            </div>
-
-            {/* シェアボタン */}
-            <ShareButtons title={article.title} />
-
-          </div>
-        </aside>
       </div>
     </div>
   );

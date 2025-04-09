@@ -578,7 +578,7 @@ export default function Home() {
                   "ToreMockのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">20代 女性</div>
+                  <div className="font-medium text-gray-900">千葉県 20代 女性</div>
                   <div className="text-blue-600">TOEIC® 870点達成</div>
                 </div>
               </div>
@@ -599,7 +599,7 @@ export default function Home() {
                   "AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">40代 男性</div>
+                  <div className="font-medium text-gray-900">兵庫県 40代 男性</div>
                   <div className="text-blue-600">英検®1級合格</div>
                 </div>
               </div>
@@ -620,7 +620,7 @@ export default function Home() {
                   "本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。"
                 </div>
                 <div className="mt-6">
-                  <div className="font-medium text-gray-900">10代 女性</div>
+                  <div className="font-medium text-gray-900">東京都 10代 女性</div>
                   <div className="text-blue-600">TOEFL® 112点達成</div>
                 </div>
               </div>
