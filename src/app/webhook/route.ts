@@ -262,7 +262,11 @@ export async function POST(request: Request) {
           
           if (userId) {
             // サブスクリプションのステータスに応じて処理
-            const newStatus = (status === 'active' || status === 'trialing') ? 'active' : 'inactive';
+            const newStatus = (status === 'active' || status === 'trialing') 
+              ? 'active' 
+              : (status === 'canceled' || status === 'unpaid' || status === 'past_due') 
+              ? status 
+              : 'canceled'; // 不明な場合は canceled とする
             console.log(`🔄 [Webhook] サブスクリプション更新によるステータス変更: ${userId}, 新ステータス: ${newStatus}`);
             
             const result = await updateSubscriptionStatus(userId, newStatus);
@@ -294,7 +298,7 @@ export async function POST(request: Request) {
           
           if (userId) {
             console.log(`🔄 [Webhook] サブスクリプション削除によるステータス変更: ${userId}`);
-            const result = await updateSubscriptionStatus(userId, 'inactive');
+            const result = await updateSubscriptionStatus(userId, 'canceled');
             console.log(`✅ [Webhook] サブスクリプション削除の処理完了: ${userId}, 結果: ${result ? '成功' : '失敗'}`);
           }
         } catch (error) {
@@ -360,10 +364,10 @@ export async function POST(request: Request) {
             const userId = (customer as Stripe.Customer).metadata?.userId;
             
             if (userId) {
-              // 次回の支払い試行がない場合は無効化
+              // 次回の支払い試行がない場合は無効化（canceled）
               if (!invoice.next_payment_attempt) {
                 console.log(`🔄 [Webhook] 請求支払い失敗によるステータス無効化: ${userId}`);
-                const result = await updateSubscriptionStatus(userId, 'inactive');
+                const result = await updateSubscriptionStatus(userId, 'canceled');
                 console.log(`✅ [Webhook] 請求支払い失敗の処理完了: ${userId}, 結果: ${result ? '成功' : '失敗'}`);
               } else {
                 console.log(`ℹ️ [Webhook] 請求支払い再試行予定あり - 変更なし: ${userId}, 次回試行: ${new Date(invoice.next_payment_attempt * 1000).toISOString()}`);
