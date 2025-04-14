@@ -178,7 +178,7 @@ export default function ArticlesHomePage() {
                   className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors">
                   人気記事を読む
                 </Link>
-                <Link href="/" 
+                <Link href="https://toremock.com/" 
                   className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-800 font-medium rounded-lg shadow-md transition-colors">
                   ToreMockで模試を受ける
                 </Link>
@@ -480,7 +480,7 @@ export default function ArticlesHomePage() {
             リアルな形式で実力を測り、効率的に学習を進めましょう。
           </p>
           <Link 
-            href="/" 
+            href="https://toremock.com/" 
             className="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors"
           >
             模試を受けてみる

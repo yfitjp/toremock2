@@ -652,25 +652,25 @@ export default function Home() {
             className="space-y-4"
           >
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="item-1" className="bg-white p-6 rounded-lg shadow-sm">
+              <AccordionItem value="item-1" className="bg-white p-4 rounded-lg shadow-sm">
                 <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">無料プランとプレミアムプランの違いは何ですか？</AccordionTrigger>
                 <AccordionContent className="text-gray-600 mt-2">
                   無料プランでは一部の基本的な模試と解説にアクセスできます。プレミアムプランでは、全ての模試への無制限アクセス、AIによる詳細な分析レポート、パーソナライズされた学習プランなど、より高度な機能をご利用いただけます。
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-2" className="bg-white p-6 rounded-lg shadow-sm">
+              <AccordionItem value="item-2" className="bg-white p-4 rounded-lg shadow-sm">
                 <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">支払い方法は何がありますか？</AccordionTrigger>
                 <AccordionContent className="text-gray-600 mt-2">
-                  クレジットカード（Visa, Mastercard, American Express, JCB）でのお支払いに対応しています。
+                  クレジットカード（Visa, Mastercard, American Express）でのお支払いに対応しています。
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-3" className="bg-white p-6 rounded-lg shadow-sm">
+              <AccordionItem value="item-3" className="bg-white p-4 rounded-lg shadow-sm">
                 <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">解約はいつでもできますか？</AccordionTrigger>
                 <AccordionContent className="text-gray-600 mt-2">
                   はい、いつでもマイページから簡単に解約手続きが可能です。契約期間の途中で解約された場合でも、契約終了日までサービスをご利用いただけます。日割りでの返金は行っておりませんのでご了承ください。
                 </AccordionContent>
               </AccordionItem>
-              <AccordionItem value="item-4" className="bg-white p-6 rounded-lg shadow-sm">
+              <AccordionItem value="item-4" className="bg-white p-4 rounded-lg shadow-sm">
                 <AccordionTrigger className="text-lg font-medium text-gray-900 hover:no-underline">スマートフォンやタブレットでも利用できますか？</AccordionTrigger>
                 <AccordionContent className="text-gray-600 mt-2">
                   はい、トレモックはレスポンシブデザインに対応しており、PC、スマートフォン、タブレットなど、様々なデバイスのブラウザから快適にご利用いただけます。

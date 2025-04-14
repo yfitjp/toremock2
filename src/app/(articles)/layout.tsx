@@ -91,7 +91,7 @@ export default function ArticlesLayout({
                   リアルな形式で実践的なスキルを身につけましょう。
                 </p>
                 <Link 
-                  href="/" 
+                  href="https://toremock.com/" 
                   className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium"
                 >
                   <span>模試を受験してみる</span>
@@ -153,8 +153,7 @@ export default function ArticlesLayout({
                 <div>
                   <h3 className="text-lg font-semibold mb-4">関連サイト</h3>
                   <ul className="space-y-2 text-slate-300 text-sm">
-                    <li><Link href="/" className="hover:text-white transition">ToreMock 公式サイト</Link></li>
-                    <li><Link href="/" className="hover:text-white transition">英語模試サービス</Link></li>
+                    <li><Link href="https://toremock.com/" className="hover:text-white transition">ToreMock 公式サイト</Link></li>
                   </ul>
                   
                   <h3 className="text-lg font-semibold mb-4 mt-6">お問い合わせ</h3>
