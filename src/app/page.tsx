@@ -575,7 +575,7 @@ export default function Home() {
               </div>
               <div className="relative">
                 <div className="text-lg leading-relaxed text-gray-700">
-                  "ToreMockのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。"
+                  ToreMockのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">千葉県 20代 女性</div>
@@ -596,7 +596,7 @@ export default function Home() {
               </div>
               <div className="relative">
                 <div className="text-lg leading-relaxed text-gray-700">
-                  "AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。"
+                  AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">兵庫県 40代 男性</div>
@@ -617,7 +617,7 @@ export default function Home() {
               </div>
               <div className="relative">
                 <div className="text-lg leading-relaxed text-gray-700">
-                  "本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。"
+                  本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">東京都 10代 女性</div>

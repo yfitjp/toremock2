@@ -12,11 +12,11 @@ const notoSans = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "英語テスト情報局 | 英語力向上のための総合情報ポータル",
-  description: "TOEIC、TOEFL、英検など英語試験対策や英語学習に関する情報を提供する総合情報サイトです。",
-  // articles用のfaviconを設定
+  title: "トレモック情報局 | 英語力向上のための総合情報ポータル",
+  description: "TOEIC、TOEFL、英検など英語試験対策や英語学習に関する情報を提供するトレモックの総合情報サイトです。",
+  // ToreMock本体のfaviconを使用
   icons: {
-    icon: '/articles-favicon.ico',
+    icon: '/favicon.ico',
   },
 };
 
@@ -91,8 +91,8 @@ export default function ArticlesLayout({
                   リアルな形式で実践的なスキルを身につけましょう。
                 </p>
                 <Link 
-                  href="https://toremock.com/" 
-                  className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium"
+                  href="/" 
+                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
                 >
                   <span>模試を受験してみる</span>
                   <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -110,17 +110,17 @@ export default function ArticlesLayout({
                 <div className="col-span-1 md:col-span-2">
                   <div className="flex items-center mb-4">
                     <Image 
-                      src="/articles-nottrans-logo.png" 
-                      alt="英語テスト情報局 ロゴ" 
+                      src="/toremock-logo.png"
+                      alt="トレモック情報局 ロゴ" 
                       width={36} 
                       height={36} 
                       className="mr-3"
                     />
-                    <h3 className="text-xl font-bold">英語テスト情報局</h3>
+                    <h3 className="text-xl font-bold">トレモック情報局</h3>
                   </div>
                   <p className="text-slate-300 text-sm mb-6">
                     TOEIC、TOEFL、英検などの英語試験対策から効率的な学習方法まで、
-                    英語テスト対策に役立つ情報を提供しています。本格的な模試も提供中！
+                    英語テスト対策に役立つ情報を提供しています。ToreMockで本格的な模試も提供中！
                   </p>
                   <div className="flex space-x-4">
                     <a href="#" className="text-slate-300 hover:text-white transition-colors">
@@ -153,7 +153,7 @@ export default function ArticlesLayout({
                 <div>
                   <h3 className="text-lg font-semibold mb-4">関連サイト</h3>
                   <ul className="space-y-2 text-slate-300 text-sm">
-                    <li><Link href="https://toremock.com/" className="hover:text-white transition">ToreMock 公式サイト</Link></li>
+                    <li><Link href="/" className="hover:text-white transition">ToreMock 公式サイト</Link></li>
                   </ul>
                   
                   <h3 className="text-lg font-semibold mb-4 mt-6">お問い合わせ</h3>
@@ -164,7 +164,7 @@ export default function ArticlesLayout({
               </div>
               <div className="border-t border-slate-800 mt-12 pt-8 text-center">
                 <p className="text-slate-400 text-sm">
-                  © {currentYear} 英語テスト情報局 All rights reserved.
+                  © {currentYear} トレモック情報局 All rights reserved.
                 </p>
               </div>
             </div>

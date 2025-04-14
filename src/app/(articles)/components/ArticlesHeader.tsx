@@ -19,13 +19,13 @@ export default function ArticlesHeader() {
           <div className="flex items-center justify-between">
             <Link href="/articles" className="flex items-center no-underline">
               <Image 
-                src="/articles-logo.png" 
-                alt="英語テスト情報局 ロゴ" 
+                src="/toremock-logo.png"
+                alt="トレモック情報局 ロゴ" 
                 width={36} 
                 height={36} 
                 className="mr-3"
               />
-              <h1 className="text-2xl font-bold text-slate-800">英語テスト<span className="text-slate-500">情報局</span></h1>
+              <h1 className="text-2xl font-bold text-slate-800">トレモック<span className="text-slate-500">情報局</span></h1>
             </Link>
             {/* モバイルメニューボタン */}
             <div className="md:hidden">
@@ -66,7 +66,7 @@ export default function ArticlesHeader() {
           <div className="hidden md:block">
             <Link 
               href="/" 
-              className="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors"
+              className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
               <span>模試サイトを見る</span>
               <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -104,7 +104,7 @@ export default function ArticlesHeader() {
             <div className="border-t border-slate-700 pt-3 mt-2">
               <Link 
                 href="/" 
-                className="block w-full text-center py-2 px-3 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
+                className="block w-full text-center py-2 px-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
                 onClick={toggleMobileMenu}
               >
                 模試サイトを見る

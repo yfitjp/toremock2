@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return { title: '記事が見つかりません' };
   }
   return {
-    title: `${article.title} | 英語テスト情報局`,
+    title: `${article.title} | トレモック情報局`,
     description: article.description,
   };
 }
@@ -163,7 +163,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
               </div>
               <Link 
                 href={`/?category=${article.category}`} 
-                className="block w-full text-center px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium"
+                className="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
               >
                 {article.category} の模試を見る
               </Link>
@@ -238,12 +238,12 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             <div className="max-w-3xl mx-auto text-center">
               <h2 className="text-xl md:text-2xl font-bold mb-4">この記事は参考になりましたか？</h2>
               <p className="mb-6 text-slate-300">
-                英語テスト情報局が提携する「ToreMock」では、{article.category}の本番さながらの模試を提供しています。
+                トレモック情報局が提携する「ToreMock」では、{article.category}の本番さながらの模試を提供しています。
                 リアルな形式で実力を測り、効率的に学習を進めましょう。
               </p>
               <Link 
                 href={`/?category=${article.category}`} 
-                className="inline-flex items-center px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors text-lg font-medium"
+                className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
               >
                 <span>{article.category}の模試を受ける</span>
                 <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
