@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "ToreMock - オンライン模擬試験プラットフォーム",
-  description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム",
+  description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
 };
 
 export default function RootLayout({
