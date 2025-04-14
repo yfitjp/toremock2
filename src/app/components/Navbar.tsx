@@ -53,7 +53,7 @@ export default function Navbar() {
             <div className="flex-shrink-0 flex items-center">
               <Link href="/" className="flex items-center group">
                 <Image
-                  src="/images/toremock-logo.png"
+                  src="/toremock-logo.png"
                   alt="ToreMock Logo"
                   width={40}
                   height={40}

@@ -123,29 +123,45 @@ export default function ArticlesHomePage() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
   
-  // URLからカテゴリーを取得
+  // URLからカテゴリーと検索クエリを取得
   useEffect(() => {
     const category = searchParams.get('category') as CategoryKey | null;
+    const query = searchParams.get('q') || '';
+    
     if (category && Object.keys(categoryInfo).includes(category)) {
       setSelectedCategory(category);
+    } else {
+      setSelectedCategory(null);
     }
+    setSearchTerm(query);
+    
   }, [searchParams]);
   
-  // カテゴリー変更時にURLも更新
+  // カテゴリー変更時にURLも更新 (検索クエリも考慮)
   const handleCategoryChange = (category: CategoryKey | null) => {
-    setSelectedCategory(category);
+    const currentQuery = searchParams.get('q') || '';
+    const params = new URLSearchParams();
     if (category) {
-      router.push(`/articles?category=${category}`);
-    } else {
-      router.push('/articles');
+      params.set('category', category);
     }
+    if (currentQuery) {
+      params.set('q', currentQuery);
+    }
+    router.push(`/articles?${params.toString()}`);
   };
   
-  // カテゴリーでフィルタリング
-  const filteredArticles = selectedCategory 
-    ? articles.filter(article => article.category === selectedCategory)
-    : articles;
+  // カテゴリーと検索クエリでフィルタリング
+  const filteredArticles = articles.filter(article => {
+    const matchesCategory = selectedCategory ? article.category === selectedCategory : true;
+    const matchesSearch = searchTerm
+      ? article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())))
+      : true;
+    return matchesCategory && matchesSearch && !article.comingSoon;
+  });
     
   // 利用可能なカテゴリーを抽出（すでに型定義されたものに限定）
   const categories = Array.from(new Set(articles.map(article => article.category)));
@@ -390,67 +406,79 @@ export default function ArticlesHomePage() {
         
         {/* 記事一覧 */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredArticles.map(article => (
-            <div 
-              key={article.id} 
-              className={`border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white ${
-                article.comingSoon ? 'opacity-70' : ''
-              }`}
-            >
-              {/* 画像部分 */}
-              <div className="relative h-48 bg-slate-200">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
-                </div>
-                {article.featured && (
-                  <div className="absolute top-2 right-2 px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
-                    注目記事
-                  </div>
-                )}
-              </div>
-              
-              <div className="p-5">
-                <div className="flex justify-between items-center text-sm text-slate-500 mb-3">
-                  <span className="font-medium text-slate-700">{article.category}</span>
-                  <div className="flex items-center">
-                    <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                    </svg>
-                    <span>{article.readTime}</span>
-                  </div>
+          {filteredArticles.length > 0 ? (
+            filteredArticles.map(article => (
+              <div 
+                key={article.id} 
+                className={`border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white`}
+              >
+                {/* 画像部分 */}
+                <div className="relative h-48 bg-slate-200">
+                  <Image 
+                    src={article.imageSrc || '/images/placeholder.jpg'}
+                    alt={article.title}
+                    fill 
+                    className="object-cover" 
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  />
+                  {article.featured && (
+                    <div className="absolute top-2 right-2 px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
+                      注目記事
+                    </div>
+                  )}
                 </div>
                 
-                <h2 className="text-xl font-bold text-slate-800 mb-3 line-clamp-2 h-14">
-                  {article.title}
-                </h2>
-                
-                <p className="text-slate-600 mb-4 line-clamp-3 h-18">
-                  {article.description}
-                </p>
-                
-                <div className="flex flex-wrap gap-2 mb-4">
-                  {article.tags.map(tag => (
-                    <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
-                      #{tag}
-                    </span>
-                  ))}
-                </div>
-                
-                {article.comingSoon ? (
-                  <div className="text-center py-2 bg-slate-200 text-slate-700 rounded-md font-medium">
-                    近日公開予定
+                <div className="p-5 flex flex-col h-[calc(100%-12rem)]">
+                  <div className="flex justify-between items-center text-sm text-slate-500 mb-3">
+                    <span className="font-medium text-slate-700">{article.category}</span>
+                    <div className="flex items-center">
+                      <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                      </svg>
+                      <span>{article.readTime}</span>
+                    </div>
                   </div>
-                ) : (
+                  
+                  <h2 className="text-xl font-bold text-slate-800 mb-3 line-clamp-2 flex-grow">
+                    {article.title}
+                  </h2>
+                  
+                  <p className="text-slate-600 mb-4 line-clamp-3">
+                    {article.description}
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-2 mb-4 mt-auto">
+                    {article.tags.map(tag => (
+                      <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
+                        #{tag}
+                      </span>
+                    ))}
+                  </div>
+                  
                   <Link
                     href={`/articles/${article.id}`}
-                    className="block text-center py-2 bg-slate-800 text-white rounded-md font-medium hover:bg-slate-700 transition-colors"
+                    className="block text-center py-2 bg-slate-800 text-white rounded-md font-medium hover:bg-slate-700 transition-colors mt-auto"
                   >
                     記事を読む
                   </Link>
-                )}
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-1 md:col-span-2 lg:col-span-3 text-center py-12">
+              <p className="text-xl text-slate-600 mb-4">
+                {searchTerm 
+                  ? `「${searchTerm}」に一致する記事は見つかりませんでした。` 
+                  : '該当する記事は見つかりませんでした。'}
+              </p>
+              <button 
+                onClick={() => router.push('/articles')} 
+                className="px-4 py-2 bg-slate-200 text-slate-700 rounded-md hover:bg-slate-300 transition-colors"
+              >
+                記事一覧に戻る
+              </button>
             </div>
-          ))}
+          )}
         </div>
         
         {/* ページネーション */}

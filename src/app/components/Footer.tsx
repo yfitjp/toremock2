@@ -40,7 +40,7 @@ export default function Footer() {
                 href="https://toremock.com/articles" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-gray-300 hover:text-blue-300 transition-colors duration-200 text-sm flex items-center group"
+                className="text-gray-300 hover:text-blue-300 transition-colors duration-200 text-base flex items-center group"
               >
                 <span className="transform group-hover:translate-x-1 transition-transform duration-200">
                   トレモック情報局

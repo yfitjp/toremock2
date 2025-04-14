@@ -3,12 +3,22 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { useRouter } from 'next/navigation';
 
 export default function ArticlesHeader() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const router = useRouter();
 
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
+  };
+
+  const handleSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/articles?q=${encodeURIComponent(searchQuery.trim())}`);
+    }
   };
 
   return (
@@ -48,11 +58,13 @@ export default function ArticlesHeader() {
             </div>
           </div>
           
-          {/* 検索ボックス */}
-          <div className="relative w-full md:w-64 lg:w-80">
+          {/* 検索ボックス (formでラップ) */}
+          <form onSubmit={handleSearchSubmit} className="relative w-full md:w-64 lg:w-80">
             <input 
               type="text" 
               placeholder="記事を検索..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
               className="w-full py-2 pl-10 pr-4 text-slate-700 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-slate-500 focus:border-transparent"
             />
             <div className="absolute left-3 top-2.5 text-slate-400">
@@ -60,7 +72,7 @@ export default function ArticlesHeader() {
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
               </svg>
             </div>
-          </div>
+          </form>
           
           {/* 模試サイトリンク */}
           <div className="hidden md:block">
