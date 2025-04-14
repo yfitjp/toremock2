@@ -373,7 +373,7 @@ export default function ExamsPage() {
           <div className="relative z-10">
               <h2 className="text-3xl font-extrabold mb-4">
                   <span className="block">全ての模試にアクセスしませんか？</span>
-                  <span className="block text-blue-200">Premiumに登録しましょう</span>
+                  <span className="block text-yellow-200">Premiumに登録しましょう</span>
               </h2>
               <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
                   プレミアムプランなら、全てのTOEIC®・TOEFL®・英検®模試が受け放題。AIによる詳細分析で弱点を克服し、効率的にスコアアップを目指せます。

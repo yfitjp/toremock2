@@ -324,22 +324,32 @@ export default function SubscriptionPage() {
 
   return (
     <div className="bg-white min-h-screen">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="text-center">
-          <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
+      {/* New Header Section like Exams Page */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+        <div className="container mx-auto px-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold mb-4"
+          >
             サブスクリプションプラン
-          </h1>
-          {hasSubscription ? (
-            <p className="mt-4 text-lg text-green-600">
-              現在プレミアムプランをご利用中です。すべての模試にアクセスできます。
-            </p>
-          ) : (
-            <p className="mt-4 text-lg text-gray-500">
-              プレミアムプランに登録して、すべての模試にアクセスしましょう。
-            </p>
-          )}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-blue-100 max-w-3xl"
+          >
+            {hasSubscription 
+              ? "現在プレミアムプランをご利用中です。全ての模試にアクセスできます。"
+              : "プレミアムプランに登録して、全ての模試にアクセスしましょう。"
+            }
+          </motion.p>
         </div>
+      </div>
 
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {hasSubscription ? (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
