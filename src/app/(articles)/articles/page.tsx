@@ -163,8 +163,8 @@ export default function ArticlesHomePage() {
         <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl overflow-hidden shadow-xl">
           <div className="grid md:grid-cols-2 gap-0">
             <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="inline-block px-3 py-1 bg-green-600 text-white text-sm font-medium rounded-full mb-4">
-                英語テストの総合情報
+              <div className="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full mb-4 self-start">
+                英語学習・テスト対策の総合情報
               </div>
               <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
                 確実なスコアアップを<br />サポートする情報ポータル
@@ -175,19 +175,23 @@ export default function ArticlesHomePage() {
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link href="/articles/toeic-mocktest-comparison" 
-                  className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors">
+                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors">
                   人気記事を読む
                 </Link>
-                <Link href="https://toremock.com/" 
+                <Link href="/"
                   className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-800 font-medium rounded-lg shadow-md transition-colors">
                   ToreMockで模試を受ける
                 </Link>
               </div>
             </div>
             <div className="hidden md:block relative h-full min-h-[300px] bg-slate-700">
-              <div className="absolute inset-0 flex items-center justify-center text-white text-opacity-20 text-7xl font-bold">
-                ENGLISH
-              </div>
+              <Image 
+                src="/images/toeic-comparison.jpg" 
+                alt="英語学習をしている女性" 
+                fill 
+                className="object-cover" 
+                priority
+              />
             </div>
           </div>
         </div>
@@ -198,10 +202,10 @@ export default function ArticlesHomePage() {
         <div className="mb-16">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-2xl font-bold text-slate-800">
-              <span className="inline-block w-3 h-8 bg-green-600 rounded-full mr-3"></span>
+              <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
               注目の記事
             </h2>
-            <Link href="/articles" className="text-green-600 hover:text-green-700 font-medium text-sm flex items-center">
+            <Link href="/articles" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
               すべての記事を見る
               <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -256,7 +260,7 @@ export default function ArticlesHomePage() {
       {/* カテゴリーセクション */}
       <div className="mb-16">
         <h2 className="text-2xl font-bold text-slate-800 mb-6">
-          <span className="inline-block w-3 h-8 bg-green-600 rounded-full mr-3"></span>
+          <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
           カテゴリーから探す
         </h2>
         
@@ -286,7 +290,7 @@ export default function ArticlesHomePage() {
       {popularArticles.length > 0 && (
         <div className="mb-16">
           <h2 className="text-2xl font-bold text-slate-800 mb-6">
-            <span className="inline-block w-3 h-8 bg-green-600 rounded-full mr-3"></span>
+            <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
             人気の記事
           </h2>
           
@@ -345,7 +349,7 @@ export default function ArticlesHomePage() {
       <div className="mb-16">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-slate-800">
-            <span className="inline-block w-3 h-8 bg-green-600 rounded-full mr-3"></span>
+            <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
             記事一覧
           </h2>
           <div className="flex items-center space-x-3 text-sm">
@@ -399,7 +403,7 @@ export default function ArticlesHomePage() {
                   <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
                 </div>
                 {article.featured && (
-                  <div className="absolute top-2 right-2 px-2 py-1 bg-green-600 text-white text-xs font-medium rounded">
+                  <div className="absolute top-2 right-2 px-2 py-1 bg-blue-600 text-white text-xs font-medium rounded">
                     注目記事
                   </div>
                 )}
@@ -480,8 +484,8 @@ export default function ArticlesHomePage() {
             リアルな形式で実力を測り、効率的に学習を進めましょう。
           </p>
           <Link 
-            href="https://toremock.com/" 
-            className="inline-block px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg shadow-md transition-colors"
+            href="/"
+            className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors"
           >
             模試を受けてみる
           </Link>
