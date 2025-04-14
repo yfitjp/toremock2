@@ -357,6 +357,39 @@ export default function ExamsPage() {
             </AnimatePresence>
           </>
         )}
+
+        {/* Premium Plan CTA Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-16 mb-12 bg-gradient-to-r from-blue-700 to-indigo-800 rounded-xl shadow-xl p-8 md:p-12 text-white text-center relative overflow-hidden"
+        >
+          {/* Decorative elements */}
+          <div className="absolute -top-10 -left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full filter blur-xl"></div>
+          <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-white bg-opacity-10 rounded-full filter blur-xl"></div>
+
+          <div className="relative z-10">
+              <h2 className="text-3xl font-extrabold mb-4">
+                  <span className="block">全ての模試にアクセスしませんか？</span>
+                  <span className="block text-blue-200">Premiumに登録しましょう</span>
+              </h2>
+              <p className="text-lg text-blue-100 mb-8 max-w-2xl mx-auto">
+                  プレミアムプランなら、全てのTOEIC®・TOEFL®・英検®模試が受け放題。AIによる詳細分析で弱点を克服し、効率的にスコアアップを目指せます。
+              </p>
+              <Link
+                  href="/subscription"
+                  className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-md text-blue-700 bg-white hover:bg-blue-50 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                  プレミアムプランの詳細を見る
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
+                    <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
+                  </svg>
+              </Link>
+          </div>
+        </motion.div>
+
       </div>
     </div>
   );
