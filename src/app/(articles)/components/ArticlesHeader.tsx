@@ -25,7 +25,7 @@ export default function ArticlesHeader() {
                 height={36} 
                 className="mr-3"
               />
-              <h1 className="text-2xl font-bold text-slate-800">トレモック<span className="text-slate-500">情報局</span></h1>
+              <h1 className="text-2xl font-bold text-blue-600">トレモック<span className="text-slate-800">情報局</span></h1>
             </Link>
             {/* モバイルメニューボタン */}
             <div className="md:hidden">

@@ -138,7 +138,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
                           </div>
                           <div>
                             <span className="text-xs text-slate-500 group-hover:text-slate-700">{relArticle.category}</span>
-                            <h4 className="text-sm font-medium text-slate-800 group-hover:text-green-600 transition-colors line-clamp-2">
+                            <h4 className="text-sm font-medium text-slate-800 group-hover:text-blue-600 transition-colors line-clamp-2">
                               {relArticle.title}
                             </h4>
                           </div>
@@ -154,7 +154,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">ToreMockで実力試し！</h3>
               <div className="flex items-center space-x-3 mb-4">
-                <div className="text-green-600 scale-150">
+                <div className="text-blue-600 scale-150">
                   {categoryInfo[article.category]?.icon || <span className="mr-1">📄</span>}
                 </div>
                 <p className="text-sm text-slate-700">
