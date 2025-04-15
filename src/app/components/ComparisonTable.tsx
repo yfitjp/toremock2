@@ -71,7 +71,7 @@ export default function ComparisonTable() {
                   <TableCell key={`${plan.name}-${feature}`} className="px-6 py-4 whitespace-nowrap text-base text-gray-500 text-center"> {/* Increased size */}
                     {/* Conditional rendering for '有料模試へのアクセス' on Free plan */}
                     {feature === '有料模試へのアクセス' && plan.name === 'Free' ? (
-                      <span className="text-xs font-medium">個別購入</span>
+                      <span className="text-sm font-medium">個別購入</span>
                     ) : hasFeature(plan.features, feature) ? (
                       <Check className="h-5 w-5 text-green-500 mx-auto" />
                     ) : (

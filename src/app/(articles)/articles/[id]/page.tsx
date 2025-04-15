@@ -14,12 +14,22 @@ import ShareButtons from '../../components/ShareButtons'; // ShareButtonsのイ�
 import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
 import ToeflSpeakingServicesContent from '../../components/article-contents/ToeflSpeakingServicesContent';
 import ToeicBeginnersGuideContent from '../../components/article-contents/ToeicBeginnersGuideContent';
+import EikenToeicComparisonContent from '../../components/article-contents/EikenToeicComparisonContent';
+import ReadingSkillsGuideContent from '../../components/article-contents/ReadingSkillsGuideContent';
+import ToeflWritingGuideContent from '@/app/(articles)/components/article-contents/ToeflWritingGuideContent';
+import ToeicPart5StrategyContent from '@/app/(articles)/components/article-contents/ToeicPart5StrategyContent';
+import EffectiveVocabularyLearningContent from '@/app/(articles)/components/article-contents/EffectiveVocabularyLearningContent';
 
 // 記事IDと本文コンポーネントのマッピング
 const articleContentComponents: Record<string, React.ComponentType> = {
   'toeic-mocktest-comparison': ToeicMocktestComparisonContent,
   'toefl-speaking-services': ToeflSpeakingServicesContent,
   'toeic-beginners-guide': ToeicBeginnersGuideContent,
+  'eiken-toeic-comparison': EikenToeicComparisonContent,
+  'reading-skills-guide': ReadingSkillsGuideContent,
+  'toefl-writing-guide': ToeflWritingGuideContent,
+  'toeic-part5-strategy': ToeicPart5StrategyContent,
+  'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
 };
 
 // カテゴリ情報 (変更なし)

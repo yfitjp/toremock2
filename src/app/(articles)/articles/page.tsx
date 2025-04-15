@@ -60,26 +60,57 @@ const articles: Article[] = [
     popular: true
   },
   {
-    id: 'coming-soon-1',
+    id: 'eiken-toeic-comparison',
     title: '英検とTOEICはどっちを受ける？違いと選び方を解説',
     description: '英検とTOEICの特徴や違いを比較し、自分の目的に合った試験の選び方を解説します。',
     category: '英語試験',
-    date: '近日公開',
-    readTime: '準備中',
+    date: new Date().toLocaleDateString('ja-JP'),
+    readTime: '7分',
     imageSrc: '/images/eiken-toeic.jpg',
     tags: ['英検', 'TOEIC', '比較'],
-    comingSoon: true
   },
   {
-    id: 'coming-soon-2',
+    id: 'reading-skills-guide',
     title: 'リーディングが苦手な人必見！速読のコツと練習法',
     description: 'TOEICやTOEFLのリーディングセクションで高得点を取るための速読テクニックと効果的な練習方法を紹介。',
     category: '学習法',
-    date: '近日公開',
-    readTime: '準備中',
+    date: new Date().toLocaleDateString('ja-JP'),
+    readTime: '5分',
     imageSrc: '/images/reading-skills.jpg',
     tags: ['リーディング', '速読', 'スキルアップ'],
-    comingSoon: true
+  },
+  {
+    id: 'toefl-writing-guide',
+    title: 'TOEFL iBT® Writing完全攻略: Integrated & Independent Task対策',
+    description: 'TOEFL Writingセクションで高得点を狙うための具体的な戦略、テンプレート活用法、採点基準に基づいた対策を徹底解説。',
+    category: 'TOEFL',
+    date: new Date().toLocaleDateString('ja-JP'),
+    readTime: '15分',
+    imageSrc: '/images/toefl-writing.jpg',
+    tags: ['TOEFL', 'Writing', 'ライティング対策', 'テンプレート'],
+    popular: true,
+  },
+  {
+    id: 'toeic-part5-strategy',
+    title: 'TOEIC L&R Part 5 完全攻略: 時間短縮と正答率UPのコツ',
+    description: 'TOEIC Part 5の文法・語彙問題を効率的に解くための戦略を徹底解説。問題タイプ別の攻略法や時間配分の秘訣を紹介します。',
+    category: 'TOEIC',
+    date: new Date().toLocaleDateString('ja-JP'),
+    readTime: '12分',
+    imageSrc: '/images/toeic-part5.jpg',
+    tags: ['TOEIC', 'Part 5', '文法', '語彙', '時間短縮'],
+    popular: false,
+  },
+  {
+    id: 'effective-vocabulary-learning',
+    title: 'もう忘れない！科学的根拠に基づく効果的な英単語の覚え方',
+    description: '単語学習に挫折していませんか？記憶の仕組みに基づいた、効率的で忘れにくい英単語の暗記法を具体的に解説します。',
+    category: '学習法',
+    date: new Date().toLocaleDateString('ja-JP'),
+    readTime: '10分',
+    imageSrc: '/images/vocabulary-learning.jpg',
+    tags: ['英単語', '暗記法', '記憶術', '学習効率', 'ボキャブラリー'],
+    popular: false,
   }
 ];
 
@@ -178,11 +209,21 @@ export default function ArticlesHomePage() {
   // 人気記事を抽出
   const popularArticles = articles.filter(article => article.popular);
 
+  // Determine the title for the article list section
+  let listTitle = '記事一覧';
+  if (selectedCategory && searchTerm) {
+    listTitle = `${selectedCategory} の記事一覧（「${searchTerm}」の検索結果）`;
+  } else if (selectedCategory) {
+    listTitle = `${selectedCategory} の記事一覧`;
+  } else if (searchTerm) {
+    listTitle = `「${searchTerm}」の検索結果`;
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
 
-      {/* Sections to show only when NO category is selected */}
-      {selectedCategory === null && (
+      {/* Sections to show only when NO category is selected AND NO search is performed */}
+      {selectedCategory === null && searchTerm === '' && (
         <>
           {/* ヒーローセクション */}
           <div className="mb-16">
@@ -378,7 +419,7 @@ export default function ArticlesHomePage() {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-slate-800">
             <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
-            {selectedCategory ? `${selectedCategory} の記事一覧` : '記事一覧'}
+            {listTitle}
           </h2>
           <div className="flex items-center space-x-3 text-sm">
             <span className="text-slate-700">並び替え:</span>

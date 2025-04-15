@@ -605,7 +605,7 @@ export default function Home() {
                 </div>
                 <div className="mt-6">
                   <div className="font-medium text-gray-900">兵庫県 40代 男性</div>
-                  <div className="text-blue-600">英検®1級合格</div>
+                  <div className="text-blue-600">英検® 1級合格</div>
                 </div>
               </div>
             </motion.div>
