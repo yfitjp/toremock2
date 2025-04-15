@@ -129,6 +129,7 @@ export default function ArticlesHomePage() {
   useEffect(() => {
     const category = searchParams.get('category') as CategoryKey | null;
     const query = searchParams.get('q') || '';
+    console.log('[Articles Page] useEffect - Category:', category, 'Query:', query);
     
     if (category && Object.keys(categoryInfo).includes(category)) {
       setSelectedCategory(category);
@@ -149,19 +150,24 @@ export default function ArticlesHomePage() {
     if (currentQuery) {
       params.set('q', currentQuery);
     }
-    router.push(`/articles?${params.toString()}`);
+    const newUrl = `/articles?${params.toString()}`;
+    console.log('[Articles Page] handleCategoryChange - New URL:', newUrl);
+    router.push(newUrl);
   };
   
   // カテゴリーと検索クエリでフィルタリング
   const filteredArticles = articles.filter(article => {
     const matchesCategory = selectedCategory ? article.category === selectedCategory : true;
+    const searchTermLower = searchTerm.toLowerCase(); // 検索語を小文字に変換
     const matchesSearch = searchTerm
-      ? article.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        article.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase())))
+      ? article.title.toLowerCase().includes(searchTermLower) ||
+        article.description.toLowerCase().includes(searchTermLower) ||
+        (article.tags && article.tags.some(tag => tag.toLowerCase().includes(searchTermLower)))
       : true;
+    // console.log(`[Articles Page] Filtering ${article.id}: Cat=${matchesCategory}, Search=${matchesSearch}`); // 個別デバッグ用
     return matchesCategory && matchesSearch && !article.comingSoon;
   });
+  console.log('[Articles Page] Filtered Articles Count:', filteredArticles.length, 'Category:', selectedCategory, 'SearchTerm:', searchTerm);
     
   // 利用可能なカテゴリーを抽出（すでに型定義されたものに限定）
   const categories = Array.from(new Set(articles.map(article => article.category)));
@@ -173,200 +179,206 @@ export default function ArticlesHomePage() {
   const popularArticles = articles.filter(article => article.popular);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      {/* ヒーローセクション */}
-      <div className="mb-16">
-        <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl overflow-hidden shadow-xl">
-          <div className="grid md:grid-cols-2 gap-0">
-            <div className="p-8 md:p-12 flex flex-col justify-center">
-              <div className="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full mb-4 self-start">
-                英語学習・テスト対策の総合情報
-              </div>
-              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
-                確実なスコアアップを<br />サポートする情報ポータル
-              </h1>
-              <p className="text-slate-300 mb-6 text-lg">
-                TOEIC、TOEFL、英検などの試験対策や効率的な学習法を解説。
-                英語テスト攻略に必要な情報を提供します。
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/articles/toeic-mocktest-comparison" 
-                  className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors">
-                  人気記事を読む
-                </Link>
-                <Link href="/"
-                  className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-800 font-medium rounded-lg shadow-md transition-colors">
-                  ToreMockで模試を受ける
-                </Link>
-              </div>
-            </div>
-            <div className="hidden md:block relative h-full min-h-[300px] bg-slate-700">
-              <Image 
-                src="/images/toeic-comparison.jpg" 
-                alt="英語学習をしている女性" 
-                fill 
-                className="object-cover" 
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      {/* 注目記事 */}
-      {featuredArticles.length > 0 && (
-        <div className="mb-16">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-slate-800">
-              <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
-              注目の記事
-            </h2>
-            <Link href="/articles" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
-              すべての記事を見る
-              <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </Link>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-8">
-            {featuredArticles.map(article => (
-              <div 
-                key={article.id}
-                className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-slate-200"
-              >
-                <div className="relative h-56 bg-slate-200">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+
+      {/* Sections to show only when NO category is selected */}
+      {selectedCategory === null && (
+        <>
+          {/* ヒーローセクション */}
+          <div className="mb-16">
+            <div className="bg-gradient-to-r from-slate-800 to-slate-900 rounded-xl overflow-hidden shadow-xl">
+              <div className="grid md:grid-cols-2 gap-0">
+                <div className="p-8 md:p-12 flex flex-col justify-center">
+                  <div className="inline-block px-3 py-1 bg-blue-600 text-white text-sm font-medium rounded-full mb-4 self-start">
+                    英語学習・テスト対策の総合情報
                   </div>
-                </div>
-                <div className="p-6">
-                  <div className="flex justify-between items-center mb-3">
-                    <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
-                      {article.category}
-                    </span>
-                    <div className="text-slate-500 text-sm">{article.date}</div>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-3">
-                    {article.title}
-                  </h3>
-                  <p className="text-slate-600 mb-4">
-                    {article.description}
+                  <h1 className="text-3xl md:text-4xl font-bold text-white mb-4 leading-tight">
+                    確実なスコアアップを<br />サポートする情報ポータル
+                  </h1>
+                  <p className="text-slate-300 mb-6 text-lg">
+                    TOEIC、TOEFL、英検などの試験対策や効率的な学習法を解説。
+                    英語テスト攻略に必要な情報を提供します。
                   </p>
-                  <div className="flex justify-between items-center">
-                    <div className="flex space-x-2">
-                      {article.tags.map(tag => (
-                        <span key={tag} className="text-xs text-slate-500">#{tag}</span>
-                      ))}
-                    </div>
-                    <Link
-                      href={`/articles/${article.id}`}
-                      className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium"
-                    >
-                      記事を読む
+                  <div className="flex flex-wrap gap-3">
+                    <Link href="/articles/toeic-mocktest-comparison" 
+                      className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors">
+                      人気記事を読む
+                    </Link>
+                    <Link href="/"
+                      className="px-6 py-3 bg-white hover:bg-slate-100 text-slate-800 font-medium rounded-lg shadow-md transition-colors">
+                      ToreMockで模試を受ける
                     </Link>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-      
-      {/* カテゴリーセクション */}
-      <div className="mb-16">
-        <h2 className="text-2xl font-bold text-slate-800 mb-6">
-          <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
-          カテゴリーから探す
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {categories.map(category => (
-            <div 
-              key={category} 
-              className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border border-slate-200"
-            >
-              <div className="flex items-center mb-4">
-                <div className="text-4xl mr-3">{categoryInfo[category]?.icon || '📄'}</div>
-                <h3 className="text-xl font-bold text-slate-800">{category}</h3>
-              </div>
-              <p className="text-slate-600 text-sm mb-4">{categoryInfo[category]?.description || '関連する記事を探す'}</p>
-              <button
-                onClick={() => handleCategoryChange(category)}
-                className="w-full py-2 px-4 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors font-medium text-sm text-center"
-              >
-                {category}の記事を見る
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* 人気記事 */}
-      {popularArticles.length > 0 && (
-        <div className="mb-16">
-          <h2 className="text-2xl font-bold text-slate-800 mb-6">
-            <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
-            人気の記事
-          </h2>
-          
-          <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
-            {popularArticles.map((article, index) => (
-              <div 
-                key={article.id}
-                className={`flex flex-col md:flex-row ${index < popularArticles.length - 1 ? 'border-b border-slate-200' : ''}`}
-              >
-                <div className="relative md:w-1/4 h-40 md:h-auto bg-slate-200">
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
-                  </div>
+                <div className="hidden md:block relative h-full min-h-[300px] bg-slate-700">
+                  <Image 
+                    src="/images/toeic-comparison.jpg" 
+                    alt="英語学習をしている女性" 
+                    fill 
+                    className="object-cover" 
+                    priority
+                  />
                 </div>
-                <div className="p-6 md:w-3/4">
-                  <div className="flex justify-between items-start mb-2">
-                    <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
-                      {article.category}
-                    </span>
-                    <div className="flex items-center text-slate-500 text-sm">
-                      <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                      {article.readTime}
+              </div>
+            </div>
+          </div>
+          
+          {/* 注目記事 */}
+          {featuredArticles.length > 0 && (
+            <div className="mb-16">
+              <div className="flex items-center justify-between mb-6">
+                <h2 className="text-2xl font-bold text-slate-800">
+                  <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
+                  注目の記事
+                </h2>
+                <Link href="/articles" className="text-blue-600 hover:text-blue-700 font-medium text-sm flex items-center">
+                  すべての記事を見る
+                  <svg className="ml-1 w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </Link>
+              </div>
+              
+              <div className="grid md:grid-cols-2 gap-8">
+                {featuredArticles.map(article => (
+                  <div 
+                    key={article.id}
+                    className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-slate-200"
+                  >
+                    <div className="relative h-56 bg-slate-200">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
+                      </div>
                     </div>
-                  </div>
-                  <h3 className="text-xl font-bold text-slate-800 mb-2">
-                    {article.title}
-                  </h3>
-                  <p className="text-slate-600 mb-4 line-clamp-2">
-                    {article.description}
-                  </p>
-                  <div className="flex flex-wrap justify-between items-center">
-                    <div className="flex flex-wrap gap-2 mb-2 md:mb-0">
-                      {article.tags.map(tag => (
-                        <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
-                          #{tag}
+                    <div className="p-6">
+                      <div className="flex justify-between items-center mb-3">
+                        <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
+                          {article.category}
                         </span>
-                      ))}
+                        <div className="text-slate-500 text-sm">{article.date}</div>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-800 mb-3">
+                        {article.title}
+                      </h3>
+                      <p className="text-slate-600 mb-4">
+                        {article.description}
+                      </p>
+                      <div className="flex justify-between items-center">
+                        <div className="flex space-x-2">
+                          {article.tags.map(tag => (
+                            <span key={tag} className="text-xs text-slate-500">#{tag}</span>
+                          ))}
+                        </div>
+                        <Link
+                          href={`/articles/${article.id}`}
+                          className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium"
+                        >
+                          記事を読む
+                        </Link>
+                      </div>
                     </div>
-                    <Link
-                      href={`/articles/${article.id}`}
-                      className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium"
-                    >
-                      記事を読む
-                    </Link>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
+          )}
+          
+          {/* カテゴリーセクション */}
+          <div className="mb-16">
+            <h2 className="text-2xl font-bold text-slate-800 mb-6">
+              <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
+              カテゴリーから探す
+            </h2>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {categories.map(category => (
+                <div 
+                  key={category} 
+                  className="bg-white rounded-xl p-6 shadow-md hover:shadow-lg transition-shadow border border-slate-200"
+                >
+                  <div className="flex items-center mb-4">
+                    <div className="text-4xl mr-3">{categoryInfo[category]?.icon || '📄'}</div>
+                    <h3 className="text-xl font-bold text-slate-800">{category}</h3>
+                  </div>
+                  <p className="text-slate-600 text-sm mb-4">{categoryInfo[category]?.description || '関連する記事を探す'}</p>
+                  <button
+                    onClick={() => handleCategoryChange(category)}
+                    className="w-full py-2 px-4 bg-slate-100 text-slate-700 rounded-lg hover:bg-slate-200 transition-colors font-medium text-sm text-center"
+                  >
+                    {category}の記事を見る
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+          
+          {/* 人気記事 */}
+          {popularArticles.length > 0 && (
+            <div className="mb-16">
+              <h2 className="text-2xl font-bold text-slate-800 mb-6">
+                <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
+                人気の記事
+              </h2>
+              
+              <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+                {popularArticles.map((article, index) => (
+                  <div 
+                    key={article.id}
+                    className={`flex flex-col md:flex-row ${index < popularArticles.length - 1 ? 'border-b border-slate-200' : ''}`}
+                  >
+                    <div className="relative md:w-1/4 h-40 md:h-auto bg-slate-200">
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="text-4xl">{categoryInfo[article.category]?.icon || '📄'}</div>
+                      </div>
+                    </div>
+                    <div className="p-6 md:w-3/4">
+                      <div className="flex justify-between items-start mb-2">
+                        <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
+                          {article.category}
+                        </span>
+                        <div className="flex items-center text-slate-500 text-sm">
+                          <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                          </svg>
+                          {article.readTime}
+                        </div>
+                      </div>
+                      <h3 className="text-xl font-bold text-slate-800 mb-2">
+                        {article.title}
+                      </h3>
+                      <p className="text-slate-600 mb-4 line-clamp-2">
+                        {article.description}
+                      </p>
+                      <div className="flex flex-wrap justify-between items-center">
+                        <div className="flex flex-wrap gap-2 mb-2 md:mb-0">
+                          {article.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
+                        <Link
+                          href={`/articles/${article.id}`}
+                          className="px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors text-sm font-medium"
+                        >
+                          記事を読む
+                        </Link>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </>
       )}
       
-      {/* フィルター付き記事一覧 */}
+      {/* フィルター付き記事一覧 (Always visible, but title changes) */}
       <div className="mb-16">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-2xl font-bold text-slate-800">
             <span className="inline-block w-3 h-8 bg-blue-600 rounded-full mr-3"></span>
-            記事一覧
+            {selectedCategory ? `${selectedCategory} の記事一覧` : '記事一覧'}
           </h2>
           <div className="flex items-center space-x-3 text-sm">
             <span className="text-slate-700">並び替え:</span>
@@ -377,7 +389,7 @@ export default function ArticlesHomePage() {
           </div>
         </div>
         
-        {/* カテゴリーフィルター */}
+        {/* カテゴリーフィルター (Always visible) */}
         <div className="flex flex-wrap justify-center mb-10">
           <button
             onClick={() => handleCategoryChange(null)}
@@ -404,7 +416,7 @@ export default function ArticlesHomePage() {
           ))}
         </div>
         
-        {/* 記事一覧 */}
+        {/* 記事一覧 グリッド (Always uses filteredArticles) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredArticles.length > 0 ? (
             filteredArticles.map(article => (
@@ -503,7 +515,8 @@ export default function ArticlesHomePage() {
         </div>
       </div>
       
-      {/* CTA セクション */}
+      {/* CTA セクション (Show always or conditionally based on selectedCategory) */}
+      {/* Option 1: Show always */}
       <div className="mb-16 bg-gradient-to-r from-slate-700 to-slate-900 rounded-xl p-8 shadow-lg text-white">
         <div className="max-w-3xl mx-auto text-center">
           <h2 className="text-2xl font-bold mb-4">模試で英語力をチェックしませんか？</h2>
@@ -520,7 +533,8 @@ export default function ArticlesHomePage() {
         </div>
       </div>
       
-      {/* ニュースレター登録 */}
+      {/* ニュースレター登録 (Show always or conditionally) */}
+      {/* Option 1: Show always */}
       <div className="mb-16 bg-white rounded-xl p-8 shadow-md border border-slate-200">
         <div className="max-w-2xl mx-auto text-center">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full mb-4">
@@ -550,6 +564,7 @@ export default function ArticlesHomePage() {
           </p>
         </div>
       </div>
+
     </div>
   );
 } 
