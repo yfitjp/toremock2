@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react';
 import { SUBSCRIPTION_PLANS } from './lib/subscriptions';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { BookOpenCheck, CheckSquare, Presentation, ListChecks, BarChart3, Repeat } from 'lucide-react';
+import ComparisonTable from '@/app/components/ComparisonTable';
 
 export default function Home() {
   const { user } = useAuth();
@@ -543,6 +544,10 @@ export default function Home() {
               </div>
             </motion.div>
           </div>
+
+          {/* Comparison Table */}
+          <ComparisonTable />
+
         </div>
       </div>
 

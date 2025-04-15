@@ -12,6 +12,7 @@ import { Elements, PaymentElement, useStripe, useElements } from '@stripe/react-
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/app/lib/firebase';
 import { auth } from '@/app/lib/firebase';
+import ComparisonTable from '@/app/components/ComparisonTable';
 
 // Stripeの公開キーを設定
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -590,6 +591,10 @@ export default function SubscriptionPage() {
             <p className="mt-2 text-xs text-amber-600 text-center">※エリートプランは定員に達したため現在新規受付を停止しております。再開をお待ちの方は、まずはプレミアムプランをお試しください。</p>
           </motion.div>
         </div>
+
+        {/* Comparison Table */}
+        <ComparisonTable />
+
       </div>
     </div>
   );
