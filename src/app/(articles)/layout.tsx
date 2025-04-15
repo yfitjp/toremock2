@@ -148,7 +148,7 @@ export default function ArticlesLayout({
                   
                   <h3 className="text-lg font-semibold mb-4 mt-6">お問い合わせ</h3>
                   <p className="text-slate-300 text-sm">
-                    <a href="mailto:info@example.com" className="text-slate-300 hover:text-white transition">info@example.com</a>
+                    <a href="mailto:contact.yfit@gmail.com" className="text-slate-300 hover:text-white transition">contact.yfit@gmail.com</a>
                   </p>
                 </div>
               </div>
