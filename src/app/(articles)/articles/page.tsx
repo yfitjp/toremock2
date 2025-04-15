@@ -5,116 +5,33 @@ import Link from 'next/link';
 import { useState } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
+// Import data and types from the central source
+import { getSortedArticlesData, ArticleData, CategoryKey } from '../lib/article-data';
 
-// 記事データ
-type Article = {
-  id: string;
-  title: string;
-  description: string;
-  category: CategoryKey;
-  date: string;
-  readTime: string;
-  imageSrc: string;
-  tags: string[];
-  featured?: boolean;
-  popular?: boolean;
-  comingSoon?: boolean;
-};
+// Remove local Article type definition
+// type Article = {
+//   id: string;
+//   title: string;
+//   description: string;
+//   category: CategoryKey;
+//   date: string;
+//   readTime: string;
+//   imageSrc: string;
+//   tags: string[];
+//   featured?: boolean;
+//   popular?: boolean;
+//   comingSoon?: boolean;
+// };
 
-// カテゴリータイプを定義
-type CategoryKey = 'TOEIC' | 'TOEFL' | '英語試験' | '学習法';
+// Remove local CategoryKey type definition (imported now)
+// type CategoryKey = 'TOEIC' | 'TOEFL' | '英語試験' | '学習法';
 
-// 記事データ
-const articles: Article[] = [
-  {
-    id: 'toeic-mocktest-comparison',
-    title: 'TOEIC模試を安く受けたい！人気サイトの料金と特徴を徹底比較',
-    description: 'コスパ最強のTOEIC模試サービスを比較。高品質で低価格の模試はどれ？料金、特徴、メリットを詳しく解説します。',
-    category: 'TOEIC',
-    date: '2025年4月15日',
-    readTime: '8分',
-    imageSrc: '/images/toeic-comparison.jpg',
-    tags: ['TOEIC', '模試', '比較'],
-    featured: true
-  },
-  {
-    id: 'toefl-speaking-services',
-    title: 'TOEFLスピーキング対策どこでする？安くて質の高いサービスはコレ',
-    description: 'TOEFLスピーキングを効率的に対策するためのサービスを比較。コストパフォーマンスに優れたサービスを見つけましょう。',
-    category: 'TOEFL',
-    date: '2025年4月15日',
-    readTime: '10分',
-    imageSrc: '/images/toefl-speaking.jpg',
-    tags: ['TOEFL', 'スピーキング', 'オンライン学習'],
-    popular: true
-  },
-  {
-    id: 'toeic-beginners-guide',
-    title: 'TOEIC初心者向け勉強法5選！料金と使いやすさで選ぶなら？',
-    description: 'TOEIC初心者におすすめの勉強法を紹介。自分に合った方法で効率的にスコアアップを目指しましょう。',
-    category: 'TOEIC',
-    date: '2025年4月15日',
-    readTime: '12分',
-    imageSrc: '/images/toeic-beginners.jpg',
-    tags: ['TOEIC', '初心者', '勉強法'],
-    popular: true
-  },
-  {
-    id: 'eiken-toeic-comparison',
-    title: '英検とTOEICはどっちを受ける？違いと選び方を解説',
-    description: '英検とTOEICの特徴や違いを比較し、自分の目的に合った試験の選び方を解説します。',
-    category: '英語試験',
-    date: new Date().toLocaleDateString('ja-JP'),
-    readTime: '7分',
-    imageSrc: '/images/eiken-toeic.jpg',
-    tags: ['英検', 'TOEIC', '比較'],
-  },
-  {
-    id: 'reading-skills-guide',
-    title: 'リーディングが苦手な人必見！速読のコツと練習法',
-    description: 'TOEICやTOEFLのリーディングセクションで高得点を取るための速読テクニックと効果的な練習方法を紹介。',
-    category: '学習法',
-    date: new Date().toLocaleDateString('ja-JP'),
-    readTime: '5分',
-    imageSrc: '/images/reading-skills.jpg',
-    tags: ['リーディング', '速読', 'スキルアップ'],
-  },
-  {
-    id: 'toefl-writing-guide',
-    title: 'TOEFL iBT® Writing完全攻略: Integrated & Independent Task対策',
-    description: 'TOEFL Writingセクションで高得点を狙うための具体的な戦略、テンプレート活用法、採点基準に基づいた対策を徹底解説。',
-    category: 'TOEFL',
-    date: new Date().toLocaleDateString('ja-JP'),
-    readTime: '15分',
-    imageSrc: '/images/toefl-writing.jpg',
-    tags: ['TOEFL', 'Writing', 'ライティング対策', 'テンプレート'],
-    popular: true,
-  },
-  {
-    id: 'toeic-part5-strategy',
-    title: 'TOEIC L&R Part 5 完全攻略: 時間短縮と正答率UPのコツ',
-    description: 'TOEIC Part 5の文法・語彙問題を効率的に解くための戦略を徹底解説。問題タイプ別の攻略法や時間配分の秘訣を紹介します。',
-    category: 'TOEIC',
-    date: new Date().toLocaleDateString('ja-JP'),
-    readTime: '12分',
-    imageSrc: '/images/toeic-part5.jpg',
-    tags: ['TOEIC', 'Part 5', '文法', '語彙', '時間短縮'],
-    popular: false,
-  },
-  {
-    id: 'effective-vocabulary-learning',
-    title: 'もう忘れない！科学的根拠に基づく効果的な英単語の覚え方',
-    description: '単語学習に挫折していませんか？記憶の仕組みに基づいた、効率的で忘れにくい英単語の暗記法を具体的に解説します。',
-    category: '学習法',
-    date: new Date().toLocaleDateString('ja-JP'),
-    readTime: '10分',
-    imageSrc: '/images/vocabulary-learning.jpg',
-    tags: ['英単語', '暗記法', '記憶術', '学習効率', 'ボキャブラリー'],
-    popular: false,
-  }
-];
+// Remove local articles array definition
+// const articles: Article[] = [
+//   // ... data was here ...
+// ];
 
-// カテゴリー情報
+// カテゴリー情報 (CategoryKey is now imported)
 const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element }> = {
   'TOEIC': {
     description: 'TOEIC試験対策や学習方法、効率的なスコアアップ戦略などを紹介します。',
@@ -151,6 +68,9 @@ const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element
 };
 
 export default function ArticlesHomePage() {
+  // Fetch all articles from the central source
+  const allArticles = getSortedArticlesData(); // Use the imported function
+
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(null);
@@ -187,7 +107,7 @@ export default function ArticlesHomePage() {
   };
   
   // カテゴリーと検索クエリでフィルタリング
-  const filteredArticles = articles.filter(article => {
+  const filteredArticles = allArticles.filter(article => {
     const matchesCategory = selectedCategory ? article.category === selectedCategory : true;
     const searchTermLower = searchTerm.toLowerCase(); // 検索語を小文字に変換
     const matchesSearch = searchTerm
@@ -201,13 +121,13 @@ export default function ArticlesHomePage() {
   console.log('[Articles Page] Filtered Articles Count:', filteredArticles.length, 'Category:', selectedCategory, 'SearchTerm:', searchTerm);
     
   // 利用可能なカテゴリーを抽出（すでに型定義されたものに限定）
-  const categories = Array.from(new Set(articles.map(article => article.category)));
+  const categories = Array.from(new Set(allArticles.map(article => article.category)));
   
   // 注目記事を抽出
-  const featuredArticles = articles.filter(article => article.featured);
+  const featuredArticles = allArticles.filter(article => article.featured);
   
   // 人気記事を抽出
-  const popularArticles = articles.filter(article => article.popular);
+  const popularArticles = allArticles.filter(article => article.popular);
 
   // Determine the title for the article list section
   let listTitle = '記事一覧';
