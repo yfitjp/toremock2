@@ -76,28 +76,6 @@ export default function ArticlesLayout({
             {children}
           </main>
           
-          {/* CTA */}
-          <div className="bg-slate-800 text-white py-12">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="max-w-3xl mx-auto text-center">
-                <h2 className="text-2xl font-bold mb-4">本格的な模試で実力を試してみませんか？</h2>
-                <p className="mb-6 text-slate-300">
-                  当サイト運営の「ToreMock」では、TOEIC・TOEFL・英検の模試を提供しています。
-                  リアルな形式で実践的なスキルを身につけましょう。
-                </p>
-                <Link 
-                  href="/" 
-                  className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
-                >
-                  <span>模試を受験してみる</span>
-                  <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                  </svg>
-                </Link>
-              </div>
-            </div>
-          </div>
-          
           {/* フッター */}
           <footer className="bg-slate-900 text-white">
             <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
