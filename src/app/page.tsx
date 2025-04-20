@@ -594,19 +594,24 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: false, amount: 0.1 }} 
                 transition={{ duration: 0.5, delay: index * 0.1 }} 
-                className="bg-blue-50 rounded-xl p-6 relative flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] flex flex-col"
+                className="bg-blue-50 rounded-xl p-6 relative flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] shadow-sm"
               >
-                <div className="flex-grow">
-                  <div className="flex items-center mb-2">
+                <h3 className="text-lg font-semibold text-gray-800 mb-3 truncate" title={testimonial.title}>
+                  {testimonial.title}
+                </h3>
+                
+                <div className="flex justify-between items-center mb-3">
+                  <div className="flex items-center">
                     <span className="text-yellow-400">{'★'.repeat(testimonial.rating)}{'☆'.repeat(5 - testimonial.rating)}</span>
                   </div>
-                  <div className="text-lg leading-relaxed text-gray-700">
-                    {testimonial.comment}
+                  <div className="text-right">
+                    <div className="text-sm font-medium text-gray-700 truncate" title={testimonial.name}>{testimonial.name}</div>
+                    <div className="text-xs text-gray-500">{testimonial.date}</div>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-blue-100"> 
-                  <div className="font-medium text-gray-900">{testimonial.name}</div>
-                  <div className="text-sm text-gray-500">{testimonial.date}</div>
+
+                <div className="text-gray-700 leading-relaxed text-sm h-24 overflow-y-auto scrollbar-thin scrollbar-thumb-blue-100 scrollbar-track-transparent pr-2">
+                  {testimonial.comment}
                 </div>
               </motion.div>
             ))}
