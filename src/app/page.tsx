@@ -9,10 +9,18 @@ import { SUBSCRIPTION_PLANS } from './lib/subscriptions';
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
 import { BookOpenCheck, CheckSquare, Presentation, ListChecks, BarChart3, Repeat } from 'lucide-react';
 import ComparisonTable from '@/app/components/ComparisonTable';
+import { testimonials, Testimonial } from './lib/testimonial-data';
 
 export default function Home() {
   const { user } = useAuth();
   const [scrollY, setScrollY] = useState(0);
+
+  // Calculate average rating and count
+  const totalReviews = testimonials.length;
+  const averageRating = totalReviews > 0 
+    ? testimonials.reduce((sum, t) => sum + t.rating, 0) / totalReviews
+    : 0;
+  const averageRatingRounded = Math.round(averageRating * 10) / 10; // Round to one decimal place
 
   useEffect(() => {
     const handleScroll = () => {
@@ -559,77 +567,49 @@ export default function Home() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-center"
+            className="text-center mb-12" 
           >
             <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">利用者の声</h2>
             <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               実際の利用者様からの評価
             </p>
+            {/* Display Average Rating and Count */}
+            {totalReviews > 0 && (
+              <div className="mt-4 flex items-center justify-center space-x-2">
+                <span className="text-yellow-400 text-2xl">
+                  {'★'.repeat(Math.floor(averageRating))}{'☆'.repeat(5 - Math.floor(averageRating))}
+                </span>
+                <span className="text-2xl font-bold text-gray-700">{averageRatingRounded.toFixed(1)}</span>
+                <span className="text-gray-500">({totalReviews}件のレビュー)</span>
+              </div>
+            )}
           </motion.div>
 
-          <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            <motion.div
-              whileHover={{ y: -5 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
-              className="bg-blue-50 rounded-xl p-8 relative"
-            >
-              <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z" />
-                </svg>
-              </div>
-              <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700">
-                  ToreMockのおかげでTOEICスコアが200点以上アップしました。詳細な分析レポートが特に役立ちました。
+          <div className="flex overflow-x-auto space-x-6 pb-4 -mx-4 px-4 sm:-mx-6 sm:px-6 lg:-mx-8 lg:px-8 scrollbar-thin scrollbar-thumb-blue-200 scrollbar-track-gray-100">
+            {testimonials.map((testimonial, index) => (
+              <motion.div
+                key={testimonial.id}
+                whileHover={{ y: -5 }}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: false, amount: 0.1 }} 
+                transition={{ duration: 0.5, delay: index * 0.1 }} 
+                className="bg-blue-50 rounded-xl p-6 relative flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(33.333%-1rem)] flex flex-col"
+              >
+                <div className="flex-grow">
+                  <div className="flex items-center mb-2">
+                    <span className="text-yellow-400">{'★'.repeat(testimonial.rating)}{'☆'.repeat(5 - testimonial.rating)}</span>
+                  </div>
+                  <div className="text-lg leading-relaxed text-gray-700">
+                    {testimonial.comment}
+                  </div>
                 </div>
-                <div className="mt-6">
-                  <div className="font-medium text-gray-900">千葉県 20代 女性</div>
-                  <div className="text-blue-600">TOEIC® 870点達成</div>
+                <div className="mt-4 pt-4 border-t border-blue-100"> 
+                  <div className="font-medium text-gray-900">{testimonial.name}</div>
+                  <div className="text-sm text-gray-500">{testimonial.date}</div>
                 </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-blue-50 rounded-xl p-8 relative"
-            >
-              <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-                </svg>
-              </div>
-              <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700">
-                  AI搭載の個別学習プランが素晴らしいです。自分の弱点に合わせた問題を解くことで、効率的に学習を進められました。
-                </div>
-                <div className="mt-6">
-                  <div className="font-medium text-gray-900">兵庫県 40代 男性</div>
-                  <div className="text-blue-600">英検® 1級合格</div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -5 }}
-              initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
-              className="bg-blue-50 rounded-xl p-8 relative"
-            >
-              <div className="absolute top-0 right-0 -mt-6 -mr-6 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center">
-                <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              </div>
-              <div className="relative">
-                <div className="text-lg leading-relaxed text-gray-700">
-                  本番さながらの模試環境で実践的なトレーニングができました。専門家のサポートも心強かったです。
-                </div>
-                <div className="mt-6">
-                  <div className="font-medium text-gray-900">東京都 10代 女性</div>
-                  <div className="text-blue-600">TOEFL® 112点達成</div>
-                </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
