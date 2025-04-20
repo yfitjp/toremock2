@@ -221,7 +221,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             )}
             
             {/* メイン画像 */}
-            <div className="relative aspect-video bg-slate-200 rounded-xl mb-8 overflow-hidden">
+            <div className="relative aspect-w-3 aspect-h-2 bg-slate-100 rounded-xl mb-8 overflow-hidden">
               <Image 
                 src={article.imageSrc || '/images/placeholder.jpg'}
                 alt={article.title}

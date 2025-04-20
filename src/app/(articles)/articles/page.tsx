@@ -206,7 +206,7 @@ export default function ArticlesHomePage() {
                     key={article.id}
                     className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow border border-slate-200"
                   >
-                    <div className="relative h-56 bg-slate-100"> 
+                    <div className="relative aspect-w-3 aspect-h-2 bg-slate-100"> 
                       <Image 
                         src={article.imageSrc || '/images/placeholder.jpg'}
                         alt={article.title}
@@ -291,7 +291,7 @@ export default function ArticlesHomePage() {
                     key={article.id}
                     className={`flex flex-col md:flex-row ${index < popularArticles.length - 1 ? 'border-b border-slate-200' : ''}`}
                   >
-                    <div className="relative md:w-1/4 h-40 md:h-auto bg-slate-100 flex-shrink-0"> 
+                    <div className="relative md:w-1/4 aspect-w-3 aspect-h-2 bg-slate-100 flex-shrink-0"> 
                       <Image 
                         src={article.imageSrc || '/images/placeholder.jpg'}
                         alt={article.title}
@@ -393,8 +393,8 @@ export default function ArticlesHomePage() {
                 key={article.id} 
                 className={`border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white`}
               >
-                {/* 画像部分 */}
-                <div className="relative h-48 bg-slate-200">
+                {/* Modify aspect ratio here */}
+                <div className="relative aspect-w-3 aspect-h-2 bg-slate-100">
                   <Image 
                     src={article.imageSrc || '/images/placeholder.jpg'}
                     alt={article.title}
