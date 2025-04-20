@@ -571,7 +571,7 @@ export default function Home() {
           >
             <h2 className="text-base font-semibold text-blue-600 tracking-wide uppercase">利用者の声</h2>
             <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              実際の利用者様からの評価
+              利用者様から頂いたレビュー
             </p>
             {/* Display Average Rating and Count */}
             {totalReviews > 0 && (

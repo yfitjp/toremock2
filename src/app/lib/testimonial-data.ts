@@ -9,14 +9,14 @@ export type Testimonial = {
 export const testimonials: Testimonial[] = [
   {
     id: 1,
-    name: "Yuki K.",
+    name: "Yuki",
     date: "1ヶ月前",
     rating: 5,
     comment: "TOEICスコアが目標の870点達成！ToreMockの詳細な分析レポートが本当に役立ちました。苦手なパートが明確になって対策しやすかったです。"
   },
   {
     id: 2,
-    name: "Taka S.",
+    name: "TAKASHI",
     date: "3週間前",
     rating: 5,
     comment: "AIの学習プランのおかげで効率よく勉強でき、英検1級に合格できました！特に弱点補強の問題が良かったです。"
@@ -30,14 +30,14 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 4,
-    name: "S. Ito",
+    name: "Ito Ko",
     date: "1週間前",
     rating: 5,
     comment: "無料でもかなり使えますね！気軽に始められて、自分のペースで学習できるのが魅力。プレミアムも検討中です。"
   },
   {
     id: 5,
-    name: "Miki T.",
+    name: "みき",
     date: "2週間前",
     rating: 4,
     comment: "解説が丁寧で分かりやすい。間違えた問題もしっかり復習できるので助かります。TOEICも750点超えました！"
@@ -51,7 +51,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 7,
-    name: "英語学習中",
+    name: "英語がんばるぞ💪",
     date: "5日前",
     rating: 4,
     comment: "まだ使い始めたばかりですが、インターフェースが綺麗で使いやすい。問題の難易度もちょうどいい感じです。"
@@ -65,7 +65,7 @@ export const testimonials: Testimonial[] = [
   },
   {
     id: 9,
-    name: "Rina Sato",
+    name: "さとう りな",
     date: "2ヶ月半前",
     rating: 4,
     comment: "スコア分析が細かいのは良いけど、たまに読み込みが遅い時があるかも？でも全体的には満足です。"
@@ -76,5 +76,47 @@ export const testimonials: Testimonial[] = [
     date: "10日前",
     rating: 5,
     comment: "就活前のTOEIC対策に利用。目標スコア達成できました！友達にも勧めたいと思います。"
+  },
+  {
+    id: 11,
+    name: "マイク",
+    date: "3ヶ月前",
+    rating: 5,
+    comment: "アメリカ留学前にTOEFL対策で使いました。スピーキングの練習はできませんが、他のセクションはこれで十分でした。"
+  },
+  {
+    id: 12,
+    name: "user_9876",
+    date: "1ヶ月前",
+    rating: 3,
+    comment: "機能はいいんだけど、デザインが少しシンプルすぎるかな？もうちょっとカスタマイズできると嬉しい。"
+  },
+  {
+    id: 13,
+    name: "T.Y.",
+    date: "4週間前",
+    rating: 5,
+    comment: "プレミアムプランを利用中。AI分析が的確で、自分の弱点がよくわかる。スコアも着実に伸びています。"
+  },
+  {
+    id: 14,
+    name: "もくもく学習",
+    date: "6日前",
+    rating: 4,
+    comment: "解説動画とかもあると、もっと理解が深まりそう。でも問題の質は高いと思います。"
+  },
+  {
+    id: 15,
+    name: "カナ",
+    date: "2ヶ月前",
+    rating: 5,
+    comment: "英検準1級、無事合格できました！特に単語学習機能が役立った気がします。"
+  },
+  {
+    id: 16,
+    name: "TOEIC900点目標！",
+    date: "1週間前",
+    rating: 4,
+    comment: "リーディングの時間がいつも足りなくなるので、時間配分の練習に使ってます。効果ありそうです。"
   },
 ]; 
