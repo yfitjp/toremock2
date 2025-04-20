@@ -137,13 +137,20 @@ export async function POST(request: Request) {
       // チェックアウト完了イベント
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
+        console.log('[Webhook] checkout.session.completed: セッション情報:', {
+          id: session.id,
+          metadata: session.metadata,
+          customer: session.customer,
+          customer_email: session.customer_email,
+        });
+
         let userId = session.metadata?.userId;
         const email = session.metadata?.email || session.customer_email;
         const customerId = session.customer as string;
 
         console.log(`🛒 [Webhook] チェックアウト完了:`, {
           id: session.id,
-          userId: userId || 'メタデータに無し',
+          userIdFromSessionMeta: userId || '無し',
           email,
           customerId,
         });
@@ -151,9 +158,14 @@ export async function POST(request: Request) {
         try {
           // ユーザーIDがメタデータに存在しない場合、顧客情報から取得を試みる
           if (!userId && customerId) {
-            console.log(`🔍 [Webhook] メタデータにユーザーIDがないため顧客情報から取得を試みます - 顧客ID: ${customerId}`);
+            console.log(`🔍 [Webhook] セッションメタデータにユーザーIDがないため顧客情報から取得を試みます - 顧客ID: ${customerId}`);
             try {
               const customer = await stripe.customers.retrieve(customerId);
+              console.log('[Webhook] checkout.session.completed: 取得した顧客情報:', {
+                id: customer.id,
+                metadata: (customer as Stripe.Customer).metadata,
+                email: (customer as Stripe.Customer).email,
+              });
               userId = (customer as Stripe.Customer).metadata?.userId;
               if (userId) {
                 console.log(`✅ [Webhook] 顧客情報からユーザーIDを取得: ${userId}`);
@@ -185,13 +197,20 @@ export async function POST(request: Request) {
       // サブスクリプション作成イベント
       case 'customer.subscription.created': {
         const subscription = event.data.object as Stripe.Subscription;
+        console.log('[Webhook] customer.subscription.created: サブスクリプション情報:', {
+          id: subscription.id,
+          metadata: subscription.metadata,
+          customer: subscription.customer,
+          status: subscription.status,
+        });
+
         let userId = subscription.metadata?.userId;
         const customerId = subscription.customer as string;
         
         console.log(`🆕 [Webhook] サブスクリプション作成:`, {
           id: subscription.id,
           customer: customerId,
-          userId: userId || 'メタデータに無し',
+          userIdFromSubMeta: userId || '無し',
           status: subscription.status,
         });
         
@@ -201,6 +220,11 @@ export async function POST(request: Request) {
             console.log(`🔍 [Webhook] サブスクリプションメタデータにユーザーIDがないため顧客情報から取得を試みます - 顧客ID: ${customerId}`);
             try {
               const customer = await stripe.customers.retrieve(customerId);
+              console.log('[Webhook] customer.subscription.created: 取得した顧客情報:', {
+                id: customer.id,
+                metadata: (customer as Stripe.Customer).metadata,
+                email: (customer as Stripe.Customer).email,
+              });
               userId = (customer as Stripe.Customer).metadata?.userId;
               if (userId) {
                 console.log(`✅ [Webhook] 顧客情報からユーザーIDを取得: ${userId}`);
@@ -232,6 +256,13 @@ export async function POST(request: Request) {
       // サブスクリプション更新イベント
       case 'customer.subscription.updated': {
         const subscription = event.data.object as Stripe.Subscription;
+        console.log('[Webhook] customer.subscription.updated: サブスクリプション情報:', {
+          id: subscription.id,
+          metadata: subscription.metadata,
+          customer: subscription.customer,
+          status: subscription.status,
+        });
+
         let userId = subscription.metadata?.userId;
         const customerId = subscription.customer as string;
         const status = subscription.status;
@@ -239,7 +270,7 @@ export async function POST(request: Request) {
         console.log(`🔄 [Webhook] サブスクリプション更新:`, {
           id: subscription.id,
           customer: customerId,
-          userId: userId || 'メタデータに無し',
+          userIdFromSubMeta: userId || '無し',
           status: status,
         });
         
@@ -249,6 +280,11 @@ export async function POST(request: Request) {
             console.log(`🔍 [Webhook] サブスクリプションメタデータにユーザーIDがないため顧客情報から取得を試みます - 顧客ID: ${customerId}`);
             try {
               const customer = await stripe.customers.retrieve(customerId);
+              console.log('[Webhook] customer.subscription.updated: 取得した顧客情報:', {
+                id: customer.id,
+                metadata: (customer as Stripe.Customer).metadata,
+                email: (customer as Stripe.Customer).email,
+              });
               userId = (customer as Stripe.Customer).metadata?.userId;
               if (userId) {
                 console.log(`✅ [Webhook] 顧客情報からユーザーIDを取得: ${userId}`);
