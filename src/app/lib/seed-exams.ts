@@ -7,7 +7,7 @@ const sampleExams: ExamData[] = [
     id: 'toefl-exam-1',
     title: 'TOEFL模試 vol.1',
     description: 'TOEFL形式の模擬試験です。',
-    duration: 60,
+    duration: 180,
     type: 'TOEFL',
     isFree: true,
     questions: [
@@ -37,7 +37,8 @@ const sampleExams: ExamData[] = [
         sectionType: 'reading',
         questionType: 'multiple-choice',
         imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
-      },{
+      },
+      {
         id: 'toefl-exam-1-r1-04',
         content: 'What is one effect of noise pollution mentioned in the passage?',
         options: ['It attracts more birds to urban areas.', 'It interferes with birds’ ability to communicate.', 'It increases the availability of nesting sites.', 'It reduces the toxicity of chemical runoff.'],
@@ -196,7 +197,7 @@ const sampleExams: ExamData[] = [
     id: 'toefl-exam-2',
     title: 'TOEFL模試 vol.2',
     description: 'TOEFL形式の模擬試験です。',
-    duration: 60,
+    duration: 180,
     type: 'TOEFL',
     isFree: true,
     questions: [
