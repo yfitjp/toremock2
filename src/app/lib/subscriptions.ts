@@ -57,7 +57,7 @@ export const SUBSCRIPTION_PLANS = {
   },
   ELITE: {
     name: 'Elite',
-    price: 5980,
+    price: 5490,
     description: '最高レベルの学習体験を提供する特別なプランです。',
     features: [
       'プレミアムプランのすべての機能',
