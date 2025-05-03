@@ -88,7 +88,7 @@ export default function SubscriptionStatus() {
             <p className="mt-3 text-sm md:ml-6 md:mt-0">
               <a
                 href="/subscription"
-                className="whitespace-nowrap font-medium text-indigo-700 hover:text-indigo-600"
+                className="whitespace-nowrap font-medium text-blue-700 hover:text-blue-600"
               >
                 プレミアムプランを見る
                 <span aria-hidden="true"> &rarr;</span>
