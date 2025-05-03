@@ -158,6 +158,11 @@ export async function POST(request: Request) {
         plan: 'premium',
         email: email,
       },
+      subscription_data: {
+        metadata: {
+          userId: userId,
+        }
+      }
     });
 
     console.log(`✅ [Checkout] セッション作成成功: ${session.id}`);
