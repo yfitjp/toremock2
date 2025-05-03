@@ -5,6 +5,7 @@ import { useAuth } from '@/app/hooks/useAuth';
 import { Subscription } from '@/app/lib/subscriptions';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
+import { CheckCircleIcon, ExclamationTriangleIcon, InformationCircleIcon } from '@heroicons/react/20/solid';
 
 export default function SubscriptionStatus() {
   const { user } = useAuth();
@@ -52,33 +53,45 @@ export default function SubscriptionStatus() {
   }, [user]);
 
   if (loading) {
-    return <div className="text-gray-600">読み込み中...</div>;
+    return <div className="text-gray-600 animate-pulse">ステータスを読み込み中...</div>;
   }
 
   if (error) {
     return (
-      <div className="bg-red-50 border-l-4 border-red-400 p-4 text-sm text-red-700">
-        {error}
+      <div className="rounded-md bg-red-50 p-4">
+        <div className="flex">
+          <div className="flex-shrink-0">
+            <ExclamationTriangleIcon className="h-5 w-5 text-red-400" aria-hidden="true" />
+          </div>
+          <div className="ml-3">
+            <h3 className="text-sm font-medium text-red-800">エラー</h3>
+            <div className="mt-2 text-sm text-red-700">
+              <p>{error}</p>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }
 
   if (!subscription) {
     return (
-      <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4">
+      <div className="rounded-md bg-gray-50 p-4 border border-gray-200">
         <div className="flex">
           <div className="flex-shrink-0">
-            <svg className="h-5 w-5 text-yellow-400" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-            </svg>
+            <InformationCircleIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
           </div>
-          <div className="ml-3">
-            <p className="text-sm text-yellow-700">
-              プレミアム会員ではありません
+          <div className="ml-3 flex-1 md:flex md:justify-between">
+            <p className="text-sm text-gray-700">
+              現在、無料プランをご利用中です。
             </p>
-            <p className="mt-2 text-sm text-yellow-700">
-              <a href="/subscription" className="font-medium underline text-yellow-700 hover:text-yellow-600">
-                プレミアム会員になる
+            <p className="mt-3 text-sm md:ml-6 md:mt-0">
+              <a
+                href="/subscription"
+                className="whitespace-nowrap font-medium text-indigo-700 hover:text-indigo-600"
+              >
+                プレミアムプランを見る
+                <span aria-hidden="true"> &rarr;</span>
               </a>
             </p>
           </div>
@@ -88,23 +101,26 @@ export default function SubscriptionStatus() {
   }
 
   return (
-    <div className="bg-green-50 border-l-4 border-green-400 p-4">
+    <div className="rounded-md bg-blue-50 p-4 border border-blue-200">
       <div className="flex">
         <div className="flex-shrink-0">
-          <svg className="h-5 w-5 text-green-400" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
-          </svg>
+          <CheckCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />
         </div>
         <div className="ml-3">
-          <p className="text-sm text-green-700">
-            プレミアム会員
-          </p>
-          <div className="mt-2 text-sm text-green-700">
-            <p>プラン: {subscription.plan}</p>
-            <p>ステータス: {subscription.status}</p>
-            <p>次回更新日: {format(new Date(subscription.currentPeriodEnd * 1000), 'yyyy年MM月dd日', { locale: ja })}</p>
+          <h3 className="text-sm font-medium text-blue-800">
+            プレミアムプランをご利用中です
+          </h3>
+          <div className="mt-2 text-sm text-blue-700 space-y-1">
+            <p><span className="font-semibold">プラン:</span> {typeof subscription.plan === 'string' ? subscription.plan : (subscription.plan as any)?.name || '詳細不明'}</p>
+            <p><span className="font-semibold">ステータス:</span> {subscription.status === 'active' ? '有効' : subscription.status}</p>
+            <p>
+              <span className="font-semibold">次回更新日:</span>{' '}
+              {format(new Date(subscription.currentPeriodEnd * 1000), 'yyyy年MM月dd日', { locale: ja })}
+            </p>
             {subscription.cancelAtPeriodEnd && (
-              <p className="text-yellow-700">※次回更新時に解約されます</p>
+              <p className="font-semibold text-yellow-700 bg-yellow-100 px-2 py-0.5 rounded inline-block">
+                ※次回更新日に解約予定
+              </p>
             )}
           </div>
         </div>

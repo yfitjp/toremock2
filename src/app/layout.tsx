@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     siteName: "ToreMock",
     images: [
       {
-        url: '/og-image.png', // /public/og-image.png を配置してください
+        url: '/og-image.png', 
         width: 1200,
         height: 630,
         alt: 'ToreMock OGP Image',
