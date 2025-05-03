@@ -1,20 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import * as admin from 'firebase-admin'; // Admin SDK をインポート
-import { getFirestore } from 'firebase-admin/firestore'; // Firestore をインポート
+import { auth, db as adminDb } from '@/app/lib/firebase-admin'; // 中央ファイルからインポート
 import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
-
-// Firebase Admin SDK の初期化 (一度だけ実行)
-if (!admin.apps.length) {
-    // 環境変数からサービスアカウントキーを読み込むなど、適切な方法で初期化
-    // 例: const serviceAccount = JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!); 
-    admin.initializeApp({
-        // credential: admin.credential.cert(serviceAccount),
-        // credential: admin.credential.applicationDefault(), // GCP環境など
-    });
-}
-const auth = admin.auth(); // Auth を取得
-const adminDb = getFirestore(); // Firestore を取得
 
 // stripeインスタンス初期化時のエラーチェック
 const initStripe = () => {
@@ -61,6 +48,11 @@ const getBaseUrl = () => {
 
 export async function POST(request: Request) {
   try {
+    // 初期化済みのインスタンスが存在するか確認
+    if (!adminDb || !auth) {
+       console.error('⛔ [Checkout] Firebase Admin SDKが初期化されていません (中央ファイルを確認)');
+       return NextResponse.json({ error: 'Firebase Admin SDKが初期化されていません' }, { status: 500 });
+    }
     if (!stripe) {
       console.error('⛔ [Checkout] Stripeが初期化されていません');
       return NextResponse.json({ error: 'Stripe APIが初期化されていません' }, { status: 500 });
@@ -80,7 +72,7 @@ export async function POST(request: Request) {
     const token = authHeader.split('Bearer ')[1];
     let decodedToken;
     try {
-      decodedToken = await auth.verifyIdToken(token); // authオブジェクトを使用
+      decodedToken = await auth.verifyIdToken(token);
       console.log('認証成功: トークン検証OK - ユーザー:', decodedToken.uid);
     } catch (error) {
       console.error('認証エラー:', error);
@@ -105,9 +97,7 @@ export async function POST(request: Request) {
 
     if (examId) {
       console.log(`個別模試購入開始: examId=${examId}`);
-      if (!adminDb) {
-         throw new Error('Firestore Admin DBが初期化されていません。');
-      }
+
       const examRef = adminDb.collection('exams').doc(examId);
       const examDoc = await examRef.get();
       if (!examDoc.exists) {
@@ -184,8 +174,10 @@ export async function POST(request: Request) {
 
   } catch (error) {
     console.error('⛔ [Checkout] エラー:', error);
+    const errorMessage = error instanceof Error ? error.message : 'チェックアウトセッションの作成中に予期せぬエラーが発生しました';
+    // statusコードはシンプルに500に戻す (初期化失敗は考えにくくなったため)
     return NextResponse.json(
-      { error: error instanceof Error ? error.message : 'チェックアウトセッションの作成に失敗しました' },
+      { error: errorMessage },
       { status: 500 }
     );
   }
