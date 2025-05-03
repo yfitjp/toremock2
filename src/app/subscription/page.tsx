@@ -462,7 +462,7 @@ export default function SubscriptionPage() {
 
           {/* プレミアムプラン */}
           <motion.div
-            className="relative p-8 bg-gradient-to-b from-green-50 to-green-150 border border-green-200 rounded-2xl shadow-md flex flex-col transform"
+            className="relative p-8 bg-gradient-to-b from-green-50 to-green-200 border border-green-300 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="flex-1">
               <div className="flex items-center">

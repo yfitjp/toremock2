@@ -482,7 +482,7 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative bg-gradient-to-b from-green-50 to-green-150 rounded-2xl shadow-xl transform border border-green-200"
+              className="relative bg-gradient-to-b from-green-50 to-green-200 rounded-2xl shadow-xl transform border border-green-300"
             >
               <div className="p-8">
                 <div className="flex items-center">
