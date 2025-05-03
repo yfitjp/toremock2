@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { useAuth } from '@/app/hooks/useAuth';
@@ -14,6 +14,7 @@ import Link from 'next/link';
 export default function MyPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
+  const [activeSection, setActiveSection] = useState('account');
 
   useEffect(() => {
     if (!loading && !user) {
@@ -47,37 +48,19 @@ export default function MyPage() {
     { id: 2, name: "英検®1級 模試パック 第1回", link: "/exams/eiken/1-1" },
   ];
 
-  return (
-    <div className="bg-gray-50 min-h-screen">
-      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 mb-12">
-        <div className="container mx-auto px-4">
-          <motion.h1
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-3xl font-bold mb-2"
-          >
-            マイページ
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-blue-100 text-lg"
-          >
-            ようこそ、{userName}さん！ アカウント情報や設定、学習履歴をご確認いただけます。
-          </motion.p>
-        </div>
-      </div>
+  const baseLinkClasses = "flex items-center px-4 py-3 text-gray-700 hover:bg-gray-100 rounded-md transition-colors duration-150";
+  const activeLinkClasses = "flex items-center px-4 py-3 text-blue-700 bg-blue-50 rounded-md font-semibold";
 
-      <div className="container mx-auto px-4 pb-16">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-
+  const renderSection = () => {
+    switch (activeSection) {
+      case 'account':
+        return (
           <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="lg:col-span-1 bg-white shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300 flex flex-col"
+            key="account"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
               <User className="mr-2 h-5 w-5 text-blue-500" />
@@ -95,17 +78,20 @@ export default function MyPage() {
                 <span className="text-gray-800 break-all">{user.email}</span>
               </p>
             </div>
-            <div className="mt-auto pt-4 border-t border-gray-100">
+            <div className="pt-4 border-t border-gray-100">
               <h3 className="text-base font-medium text-gray-700 mb-2">サブスクリプション状態</h3>
               <SubscriptionStatus />
             </div>
           </motion.section>
-
+        );
+      case 'settings':
+        return (
           <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:col-span-1 bg-white shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+            key="settings"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
               <Settings className="mr-2 h-5 w-5 text-gray-500" />
@@ -159,12 +145,15 @@ export default function MyPage() {
               </Link>
             </div>
           </motion.section>
-
+        );
+      case 'favorites':
+        return (
           <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="lg:col-span-1 bg-white shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+            key="favorites"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
               <Heart className="mr-2 h-5 w-5 text-pink-500" />
@@ -185,18 +174,21 @@ export default function MyPage() {
               )}
             </div>
           </motion.section>
-
+        );
+      case 'history':
+        return (
           <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            className="lg:col-span-1 bg-white shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+            key="history"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
               <ClipboardList className="mr-2 h-5 w-5 text-indigo-500" />
               受験履歴
             </h2>
-            <div className="space-y-4 max-h-60 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+            <div className="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
               {dummyExamHistory.length > 0 ? (
                 dummyExamHistory.map(exam => (
                   <div key={exam.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out border-b last:border-b-0">
@@ -221,12 +213,15 @@ export default function MyPage() {
               </div>
             )}
           </motion.section>
-
+        );
+      case 'purchase':
+        return (
           <motion.section
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            className="lg:col-span-1 bg-white shadow-lg rounded-xl p-6 border border-gray-100 hover:shadow-xl transition-shadow duration-300"
+            key="purchase"
+            initial={{ opacity: 0, x: 10 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.3 }}
+            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
               <ShoppingCart className="mr-2 h-5 w-5 text-purple-500" />
@@ -234,8 +229,79 @@ export default function MyPage() {
             </h2>
             <PurchaseHistory />
           </motion.section>
+        );
+      default:
+        return null;
+    }
+  };
 
+  return (
+    <div className="bg-gray-50 min-h-screen">
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 mb-12">
+        <div className="container mx-auto px-4">
+          <motion.h1
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold mb-2"
+          >
+            マイページ
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-blue-100 text-lg"
+          >
+            ようこそ、{userName}さん！ アカウント情報や設定、学習履歴をご確認いただけます。
+          </motion.p>
         </div>
+      </div>
+
+      <div className="container mx-auto px-4 py-8 flex">
+        <aside className="w-64 pr-8 flex-shrink-0">
+          <nav className="space-y-2 sticky top-8">
+            <button
+              onClick={() => setActiveSection('account')}
+              className={activeSection === 'account' ? activeLinkClasses : baseLinkClasses}
+            >
+              <User className="mr-3 h-5 w-5" />
+              アカウント情報
+            </button>
+            <button
+              onClick={() => setActiveSection('settings')}
+              className={activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}
+            >
+              <Settings className="mr-3 h-5 w-5" />
+              設定
+            </button>
+            <button
+              onClick={() => setActiveSection('favorites')}
+              className={activeSection === 'favorites' ? activeLinkClasses : baseLinkClasses}
+            >
+              <Heart className="mr-3 h-5 w-5" />
+              お気に入り模試
+            </button>
+            <button
+              onClick={() => setActiveSection('history')}
+              className={activeSection === 'history' ? activeLinkClasses : baseLinkClasses}
+            >
+              <ClipboardList className="mr-3 h-5 w-5" />
+              受験履歴
+            </button>
+            <button
+              onClick={() => setActiveSection('purchase')}
+              className={activeSection === 'purchase' ? activeLinkClasses : baseLinkClasses}
+            >
+              <ShoppingCart className="mr-3 h-5 w-5" />
+              購入履歴
+            </button>
+          </nav>
+        </aside>
+
+        <main className="flex-grow">
+          {renderSection()}
+        </main>
       </div>
     </div>
   );
