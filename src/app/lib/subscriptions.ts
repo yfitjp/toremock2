@@ -6,6 +6,13 @@ import {
 } from './firestore';
 import { doc, getDoc } from 'firebase/firestore';
 import Stripe from 'stripe';
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  limit
+} from 'firebase/firestore';
 
 // Stripe 初期化はサーバーサイド専用なので、ここからは削除 (必要なら webhook などで使う)
 // const stripe = typeof window === 'undefined' ? new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -63,22 +70,36 @@ export const SUBSCRIPTION_PLANS = {
   },
 };
 
-// サブスクリプションの状態を確認 (クライアントSDKを使用)
+// サブスクリプションの状態を確認 (クライアントSDKを使用 - 修正版)
 export const hasActiveSubscription = async (userId: string): Promise<boolean> => {
+  if (!userId) {
+    console.log('userId is missing, cannot check subscription.');
+    return false;
+  }
+
   try {
-    const userRef = doc(clientDb, 'users', userId);
-    const userDoc = await getDoc(userRef);
+    // subscriptions コレクションへの参照を取得
+    const subscriptionsRef = collection(clientDb, 'subscriptions');
 
-    if (!userDoc.exists()) {
-      return false;
-    }
+    // クエリを作成: userId が一致し、status が 'active' のドキュメントを検索
+    // 注意: 'trialing' など、他のアクティブとみなすステータスがあれば、それらも考慮に入れる必要があるかもしれません
+    // 例: where('status', 'in', ['active', 'trialing'])
+    const q = query(
+      subscriptionsRef,
+      where('userId', '==', userId),
+      where('status', '==', 'active'), // 'active' 以外のアクティブステータスも考慮する場合は変更
+      limit(1) // 1つ見つかれば十分なので効率化
+    );
 
-    const userData = userDoc.data();
-    // ★ 注意: このデータ構造 (`userData?.subscriptions?.premium?.status`) が正しいか確認が必要
-    // Firestore の users/{userId} ドキュメントに subscriptions.premium.status がある想定
-    return userData?.subscriptions?.premium?.status === 'active';
+    // クエリを実行
+    const querySnapshot = await getDocs(q);
+
+    // 条件に合致するドキュメントが存在するかどうかを返す
+    return !querySnapshot.empty; // empty でなければ true (アクティブなサブスクリプションあり)
+
   } catch (error) {
     console.error('サブスクリプション状態確認エラー:', error);
+    // エラー発生時は安全のため false を返す
     return false;
   }
 };
@@ -87,12 +108,3 @@ export const hasActiveSubscription = async (userId: string): Promise<boolean> =>
 export const isUserSubscribed = async (userId: string): Promise<boolean> => {
   return await hasActiveSubscription(userId);
 };
-
-// ▼▼▼ サーバーサイド専用のStripe関数は削除 ▼▼▼
-// export async function createPaymentIntent(...) {
-// ...
-// }
-// export async function createCheckoutSession(...) {
-// ...
-// }
-// ▲▲▲ ここまで削除 ▲▲▲ 
