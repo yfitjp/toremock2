@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/hooks/useAuth';
+// import { loadStripe } from '@stripe/stripe-js'; // redirectToCheckoutを使わないので不要
+
+// Stripeの初期化は不要
+// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
 
 interface PurchaseButtonProps {
   examId: string;
@@ -16,16 +20,49 @@ export default function PurchaseButton({ examId, price = 0, isDisabled = false }
 
   const handlePurchase = async () => {
     if (!user) {
-      router.push(`/auth/signin?callbackUrl=/exams/${examId}`);
+      router.push(`/auth/signin?callbackUrl=/exams`);
       return;
     }
 
+    setIsLoading(true);
+    setError(null);
+
     try {
-      setIsLoading(true);
-      setError(null);
-      
-      // チェックアウトページにリダイレクト
-      router.push(`/exams/${examId}/checkout`);
+      const idToken = await user.getIdToken();
+      if (!idToken) {
+        throw new Error('認証トークンの取得に失敗しました');
+      }
+
+      // APIを呼び出してStripe Checkout Sessionを作成 (/api/create-checkout-session を使用)
+      console.log(`Creating checkout session for exam: ${examId} via /api/create-checkout-session`);
+      const response = await fetch('/api/create-checkout-session', { // ★変更点: APIエンドポイント
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({ 
+          userId: user.uid, // userIdも渡す
+          email: user.email, // emailも渡す
+          examId: examId 
+        }),
+      });
+
+      const session = await response.json();
+
+      if (!response.ok) {
+        throw new Error(session.error || '決済セッションの作成に失敗しました');
+      }
+
+      if (!session.sessionUrl) {
+        throw new Error('決済ページのURLが取得できませんでした');
+      }
+
+      // sessionUrl を使ってStripe Checkoutへリダイレクト
+      console.log(`Redirecting to Stripe Checkout via URL: ${session.sessionUrl}`);
+      window.location.href = session.sessionUrl; 
+      // リダイレクトされるので、以降のローディング解除は不要な場合が多い
+
     } catch (err: any) {
       console.error('Purchase error:', err);
       setError(err.message || '購入処理中にエラーが発生しました');
@@ -37,7 +74,7 @@ export default function PurchaseButton({ examId, price = 0, isDisabled = false }
     <div>
       <button
         onClick={handlePurchase}
-        disabled={isLoading || isDisabled}
+        disabled={isLoading || isDisabled || !user}
         className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {isLoading ? (
@@ -49,7 +86,7 @@ export default function PurchaseButton({ examId, price = 0, isDisabled = false }
             処理中...
           </div>
         ) : (
-          <>¥{price.toLocaleString()} で購入</>
+          price > 0 ? `¥${price.toLocaleString()} で購入` : '購入する'
         )}
       </button>
 
