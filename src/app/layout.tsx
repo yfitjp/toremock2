@@ -10,7 +10,10 @@ import LayoutSwitcher from "./components/LayoutSwitcher"; // LayoutSwitcherを�
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "ToreMock - オンライン模擬試験プラットフォーム",
+  title: {
+    template: "%s | トレモック",
+    default: "トレモック - オンライン英語模試プラットフォーム",
+  },
   description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
 };
 
@@ -19,12 +22,27 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const siteName = "トレモック";
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: siteName,
+    url: siteUrl,
+  };
+
   return (
     <html lang="ja">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={inter.className}>
         <AuthProvider>
           <ToastProvider>
-            {/* LayoutSwitcherでラップする */}
             <LayoutSwitcher>
               {children}
             </LayoutSwitcher>
