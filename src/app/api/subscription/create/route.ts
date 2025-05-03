@@ -15,6 +15,7 @@ export async function POST(req: Request) {
     const idToken = authHeader.split('Bearer ')[1];
     const decodedToken = await auth.verifyIdToken(idToken);
     const userId = decodedToken.uid;
+    console.log(`[create-sub] User ID verified: ${userId}`);
 
     if (!STRIPE_PREMIUM_PRICE_ID) {
       console.error('STRIPE_PREMIUM_PRICE_ID が設定されていません');
@@ -43,9 +44,11 @@ export async function POST(req: Request) {
       console.error('顧客の作成/取得に失敗しました:', error);
       return new NextResponse('顧客の作成に失敗しました', { status: 500 });
     }
+    console.log(`[create-sub] Stripe Customer ID: ${customer.id}`);
 
     // サブスクリプションを作成
     try {
+      console.log('[create-sub] Attempting to create Stripe subscription with metadata:', { userId });
       const subscription = await stripe.subscriptions.create({
         customer: customer.id,
         items: [{ price: STRIPE_PREMIUM_PRICE_ID }],
@@ -77,18 +80,23 @@ export async function POST(req: Request) {
         updatedAt: new Date(),
       });
 
-      console.log('サブスクリプションを作成しました:', subscription.id);
+      console.log(`[create-sub] Stripe subscription created successfully: ${subscription.id}`);
 
       return NextResponse.json({
         subscriptionId: subscription.id,
         clientSecret: payment_intent.client_secret,
       });
-    } catch (error) {
-      console.error('サブスクリプションの作成に失敗しました:', error);
-      return new NextResponse('サブスクリプションの作成に失敗しました', { status: 500 });
+    } catch (stripeError: any) {
+      console.error('[create-sub] Stripe subscription creation failed:', stripeError);
+      if (stripeError.type) {
+        console.error(`[create-sub] Stripe Error Type: ${stripeError.type}`);
+        console.error(`[create-sub] Stripe Error Code: ${stripeError.code}`);
+        console.error(`[create-sub] Stripe Error Message: ${stripeError.message}`);
+      }
+      return new NextResponse(`Stripeサブスクリプションの作成に失敗しました: ${stripeError.message || '不明なエラー'}`, { status: 500 });
     }
   } catch (error: any) {
-    console.error('エラーが発生しました:', error);
+    console.error('[create-sub] General error:', error);
     return new NextResponse(
       error instanceof Error ? error.message : '内部サーバーエラー',
       { status: 500 }
