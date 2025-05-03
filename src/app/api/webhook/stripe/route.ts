@@ -146,17 +146,28 @@ export async function POST(req: Request) {
         const paymentIntent = event.data.object as Stripe.PaymentIntent;
         const sessionId = paymentIntent.metadata.sessionId;
 
-        // 購入履歴の更新
-        const purchaseQuery = await db.collection('purchases')
-          .where('stripeSessionId', '==', sessionId)
-          .get();
+        // ★ sessionId が存在する場合のみ購入履歴を検索・更新 ★
+        if (sessionId) {
+          console.log(`[Webhook] Processing failed payment for session: ${sessionId}`);
+          // 購入履歴の更新
+          const purchaseQuery = await db.collection('purchases')
+            .where('stripeSessionId', '==', sessionId)
+            .get();
 
-        if (!purchaseQuery.empty) {
-          const purchaseDoc = purchaseQuery.docs[0];
-          await purchaseDoc.ref.update({
-            status: 'failed',
-            updatedAt: new Date(),
-          });
+          if (!purchaseQuery.empty) {
+            const purchaseDoc = purchaseQuery.docs[0];
+            await purchaseDoc.ref.update({
+              status: 'failed',
+              updatedAt: new Date(), // ここも FieldValue.serverTimestamp() の方が良いかも
+            });
+             console.log(`[Webhook] Updated purchase ${purchaseDoc.id} status to failed.`);
+          } else {
+            console.log(`[Webhook] No purchase found for failed payment session: ${sessionId}`);
+          }
+        } else {
+          // sessionId がない場合 (例: サブスクリプションの自動更新失敗など)
+          console.log('[Webhook] Payment intent failed, but no sessionId found in metadata. Skipping purchase update.', paymentIntent.id);
+          // ここでサブスクリプション自体のステータス更新など、別の処理が必要か検討
         }
 
         break;
