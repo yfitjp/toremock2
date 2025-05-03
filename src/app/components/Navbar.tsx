@@ -99,12 +99,6 @@ export default function Navbar() {
                 >
                   マイページ
                 </Link>
-                <button
-                  onClick={handleSignOut}
-                  className="text-gray-900 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-100"
-                >
-                  ログアウト
-                </button>
               </div>
             ) : (
               <Link
@@ -171,12 +165,7 @@ export default function Navbar() {
               読み込み中...
             </div>
           ) : user ? (
-            <button
-              onClick={handleSignOut}
-              className="w-full text-left block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
-            >
-              ログアウト
-            </button>
+            <></>
           ) : (
             <Link
               href="/auth/signin"

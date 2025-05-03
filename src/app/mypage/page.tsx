@@ -10,25 +10,36 @@ import SubscriptionManagement from '@/app/components/SubscriptionManagement';
 import SubscriptionDebugTools from '@/app/components/SubscriptionDebugTools';
 import { User, Bell, Lock, CreditCard, HelpCircle, LogOut, Settings, Heart, ClipboardList, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
+import { logoutUser } from '@/app/lib/auth-firebase';
 
 // 設定サブセクションの型定義
-type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help' | 'logout';
+type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help';
 
 export default function MyPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
   const [activeSection, setActiveSection] = useState('account');
-  const [activeSettingSection, setActiveSettingSection] = useState<SettingSection>('profile'); // 設定内のアクティブセクション
+  const [activeSettingSection, setActiveSettingSection] = useState<SettingSection>('profile');
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/auth/signin?callbackUrl=/mypage');
     }
-    // メインセクションが変更されたら、設定サブセクションをデフォルトに戻す (任意)
-    // if (activeSection !== 'settings') {
-    //   setActiveSettingSection('profile');
-    // }
-  }, [user, loading, router, activeSection]);
+  }, [user, loading, router]);
+
+  // ログアウト処理関数
+  const handleSignOut = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    try {
+      await logoutUser();
+      // ホームページにリダイレクト
+      router.push('/');
+    } catch (error) {
+      console.error('ログアウトエラー:', error);
+      // エラーメッセージを表示するなど
+      alert('ログアウト中にエラーが発生しました。');
+    }
+  };
 
   if (loading) {
     return (
@@ -137,17 +148,6 @@ export default function MyPage() {
             {/* <p className="mt-4">サポートへのお問い合わせ: support@toremock.com</p> */}
           </div>
         );
-       case 'logout':
-         // ログアウトはボタンクリックで直接実行するため、ここでは何も表示しないか、確認メッセージを表示
-         return (
-           <div>
-             <h3 className="text-lg font-medium text-gray-900 mb-4">ログアウト</h3>
-             <p className="text-gray-600 mb-4">本当にログアウトしますか？</p>
-             <Link href="/auth/signout" className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700">
-                ログアウトする
-             </Link>
-           </div>
-          );
       default:
         return null;
     }
@@ -217,7 +217,7 @@ export default function MyPage() {
                 <button onClick={() => setActiveSettingSection('help')} className={activeSettingSection === 'help' ? activeSettingLinkClasses : baseSettingLinkClasses}>
                    <HelpCircle className="mr-3 h-5 w-5" /> ヘルプ
                 </button>
-                <button onClick={() => setActiveSettingSection('logout')} className={activeSettingSection === 'logout' ? activeSettingLinkClasses : baseSettingLinkClasses}>
+                <button onClick={handleSignOut} className={`${baseSettingLinkClasses} text-red-600 hover:bg-red-50`}>
                    <LogOut className="mr-3 h-5 w-5" /> ログアウト
                 </button>
               </nav>
