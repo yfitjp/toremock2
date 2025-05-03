@@ -478,7 +478,7 @@ export default function SubscriptionPage() {
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
               <div className="mt-1">
-                <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより67%お得！</span>
+                <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより73%お得！</span>
               </div>
               <p className="mt-6 text-blue-900">
                 {SUBSCRIPTION_PLANS.PREMIUM.description} エリートプランと同様の高品質な学習体験を、よりリーズナブルな価格でご提供します。

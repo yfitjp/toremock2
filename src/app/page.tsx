@@ -560,6 +560,7 @@ export default function Home() {
       </div>
 
       {/* 利用者の声セクション */}
+      {/*
       <div className="py-16 bg-white overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -573,7 +574,6 @@ export default function Home() {
             <p className="mt-2 text-3xl font-extrabold text-gray-900 sm:text-4xl">
               利用者様から頂いたレビュー
             </p>
-            {/* Display Average Rating and Count */}
             {totalReviews > 0 && (
               <div className="mt-4 flex items-center justify-center space-x-2">
                 <span className="text-yellow-400 text-2xl">
@@ -618,6 +618,7 @@ export default function Home() {
           </div>
         </div>
       </div>
+      */}
 
       {/* よくある質問(FAQ)セクション */}
       <div className="py-20 bg-gray-50">
