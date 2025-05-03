@@ -11,9 +11,10 @@ import SubscriptionDebugTools from '@/app/components/SubscriptionDebugTools';
 import { User, Bell, Lock, CreditCard, HelpCircle, LogOut, Settings, Heart, ClipboardList, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { logoutUser } from '@/app/lib/auth-firebase';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // 設定サブセクションの型定義
-type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help';
+type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help' | 'logout';
 
 export default function MyPage() {
   const router = useRouter();
@@ -44,7 +45,7 @@ export default function MyPage() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <LoadingSpinner />
       </div>
     );
   }
@@ -148,6 +149,20 @@ export default function MyPage() {
             {/* <p className="mt-4">サポートへのお問い合わせ: support@toremock.com</p> */}
           </div>
         );
+      case 'logout':
+        return (
+          <div>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">ログアウト</h3>
+            <p className="text-gray-600 mb-4">本当にログアウトしますか？</p>
+            <button
+              onClick={handleSignOut}
+              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+            >
+              <LogOut className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
+              ログアウトする
+            </button>
+          </div>
+        );
       default:
         return null;
     }
@@ -217,7 +232,7 @@ export default function MyPage() {
                 <button onClick={() => setActiveSettingSection('help')} className={activeSettingSection === 'help' ? activeSettingLinkClasses : baseSettingLinkClasses}>
                    <HelpCircle className="mr-3 h-5 w-5" /> ヘルプ
                 </button>
-                <button onClick={handleSignOut} className={`${baseSettingLinkClasses} text-red-600 hover:bg-red-50`}>
+                <button onClick={() => setActiveSettingSection('logout')} className={activeSettingSection === 'logout' ? activeSettingLinkClasses : baseSettingLinkClasses}>
                    <LogOut className="mr-3 h-5 w-5" /> ログアウト
                 </button>
               </nav>

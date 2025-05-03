@@ -13,6 +13,7 @@ import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from '@/app/lib/firebase';
 import { auth } from '@/app/lib/firebase';
 import ComparisonTable from '@/app/components/ComparisonTable';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 // Stripeの公開キーを設定
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
@@ -293,7 +294,7 @@ export default function SubscriptionPage() {
   if (loading || checkingSubscription) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+        <LoadingSpinner />
       </div>
     );
   }
