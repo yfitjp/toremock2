@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { useAuth } from '@/app/hooks/useAuth';
-import { getUserActiveSubscription, Subscription } from '@/app/lib/subscriptions';
+import { Subscription } from '@/app/lib/subscriptions';
 import { format } from 'date-fns';
 import { ja } from 'date-fns/locale';
 
@@ -10,16 +10,39 @@ export default function SubscriptionStatus() {
   const { user } = useAuth();
   const [subscription, setSubscription] = useState<Subscription | null>(null);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchSubscription = async () => {
-      if (!user) return;
-      
+      if (!user) {
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+      setError(null);
+
       try {
-        const sub = await getUserActiveSubscription(user.uid);
-        setSubscription(sub);
-      } catch (error) {
-        console.error('Error fetching subscription:', error);
+        const idToken = await user.getIdToken();
+        const response = await fetch('/api/subscription/status', {
+          headers: {
+            'Authorization': `Bearer ${idToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          const errorText = await response.text();
+          console.error('API Error:', response.status, errorText);
+          setError(`サブスクリプション情報の取得に失敗しました (${response.status})`);
+          setSubscription(null);
+        } else {
+          const sub = await response.json();
+          setSubscription(sub);
+        }
+      } catch (error: any) {
+        console.error('Error fetching subscription via API:', error);
+        setError('サブスクリプション情報の取得中に予期せぬエラーが発生しました');
+        setSubscription(null);
       } finally {
         setLoading(false);
       }
@@ -30,6 +53,14 @@ export default function SubscriptionStatus() {
 
   if (loading) {
     return <div className="text-gray-600">読み込み中...</div>;
+  }
+
+  if (error) {
+    return (
+      <div className="bg-red-50 border-l-4 border-red-400 p-4 text-sm text-red-700">
+        {error}
+      </div>
+    );
   }
 
   if (!subscription) {
@@ -55,10 +86,6 @@ export default function SubscriptionStatus() {
       </div>
     );
   }
-
-  const endDate = subscription.endDate instanceof Date 
-    ? subscription.endDate 
-    : new Date((subscription.endDate as any).seconds * 1000);
 
   return (
     <div className="bg-green-50 border-l-4 border-green-400 p-4">
