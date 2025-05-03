@@ -1,8 +1,8 @@
-import { NextResponse, NextRequest } from 'next/server';
-import { headers } from 'next/headers';
+import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import * as admin from 'firebase-admin'; // Firebase Admin SDK をインポート
-import { verifyIdToken } from '@/utils/auth'; // IDトークン検証関数の仮パス
+import * as admin from 'firebase-admin'; // Admin SDK をインポート
+import { getFirestore } from 'firebase-admin/firestore'; // Firestore をインポート
+import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
 
 // Firebase Admin SDK の初期化 (一度だけ実行)
 if (!admin.apps.length) {
@@ -13,101 +13,180 @@ if (!admin.apps.length) {
         // credential: admin.credential.applicationDefault(), // GCP環境など
     });
 }
-const adminDb = admin.firestore();
+const auth = admin.auth(); // Auth を取得
+const adminDb = getFirestore(); // Firestore を取得
 
-// Stripe 初期化 (Secret Key を使用)
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2025-02-24.acacia', // プロジェクトで使用しているバージョンに合わせる
-});
+// stripeインスタンス初期化時のエラーチェック
+const initStripe = () => {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEYが設定されていません');
+  }
+  return new Stripe(secretKey, {
+    apiVersion: '2025-02-24.acacia',
+  });
+};
 
-// 模試タイプとPrice IDの対応マップ (環境変数から取得)
-const PRICE_ID_MAP: { [key: string]: string | undefined } = {
+let stripe: Stripe;
+try {
+  stripe = initStripe();
+} catch (error) {
+  console.error('Stripe初期化エラー:', error);
+}
+
+const getPremiumPriceId = () => {
+  const priceId = process.env.NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_ID;
+  if (!priceId) {
+    throw new Error('NEXT_PUBLIC_STRIPE_PREMIUM_PRICE_IDが設定されていません');
+  }
+  return priceId;
+};
+
+const EXAM_PRICE_ID_MAP: { [key: string]: string | undefined } = {
   'TOEIC': process.env.STRIPE_TOEIC_PRICE_ID,
   'TOEFL': process.env.STRIPE_TOEFL_PRICE_ID,
   'EIKEN': process.env.STRIPE_EIKEN_PRICE_ID,
-  // 必要に応じて他のタイプも追加
 };
 
-export async function POST(request: NextRequest) {
-  try {
-    const headersList = headers();
-    const authorization = headersList.get('authorization');
-    const token = authorization?.split('Bearer ')[1];
+const getBaseUrl = () => {
+  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+  if (baseUrl) {
+    return baseUrl;
+  }
+  if (process.env.NODE_ENV === 'production') {
+    return 'https://toremock.com';
+  }
+  return 'http://localhost:3000';
+};
 
-    if (!token) {
-      return NextResponse.json({ error: '認証トークンが必要です' }, { status: 401 });
+export async function POST(request: Request) {
+  try {
+    if (!stripe) {
+      console.error('⛔ [Checkout] Stripeが初期化されていません');
+      return NextResponse.json({ error: 'Stripe APIが初期化されていません' }, { status: 500 });
     }
 
-    // IDトークンを検証してユーザー情報を取得
-    const decodedToken = await verifyIdToken(token);
-    if (!decodedToken) {
+    const body = await request.json();
+    const { userId, priceId, email, examId } = body;
+
+    if (!userId) {
+      return NextResponse.json({ error: 'ユーザーIDが指定されていません' }, { status: 400 });
+    }
+
+    const authHeader = request.headers.get('Authorization');
+    if (!authHeader?.startsWith('Bearer ')) {
+      return NextResponse.json({ error: '認証トークンが指定されていません' }, { status: 401 });
+    }
+    const token = authHeader.split('Bearer ')[1];
+    let decodedToken;
+    try {
+      decodedToken = await auth.verifyIdToken(token); // authオブジェクトを使用
+      console.log('認証成功: トークン検証OK - ユーザー:', decodedToken.uid);
+    } catch (error) {
+      console.error('認証エラー:', error);
       return NextResponse.json({ error: '認証に失敗しました' }, { status: 401 });
     }
-    const userId = decodedToken.uid;
-
-    // リクエストボディから examId を取得
-    const { examId } = await request.json();
-    if (!examId) {
-      return NextResponse.json({ error: 'examIdが必要です' }, { status: 400 });
+    if (decodedToken.uid !== userId) {
+      return NextResponse.json({ error: '認証ユーザーとリクエストユーザーが一致しません' }, { status: 403 });
     }
 
-    console.log(`Received request for examId: ${examId} from userId: ${userId}`);
-
-    // Firestoreから模試データを取得してタイプを確認
-    const examRef = adminDb.collection('exams').doc(examId);
-    const examDoc = await examRef.get();
-
-    if (!examDoc.exists) {
-      return NextResponse.json({ error: '指定された模試が見つかりません' }, { status: 404 });
+    let customer;
+    const customers = await stripe.customers.list({ email: email, limit: 1 });
+    if (customers.data.length > 0) {
+      customer = customers.data[0];
+      console.log(`既存の顧客を使用: ${customer.id}`);
+    } else {
+      customer = await stripe.customers.create({ email: email, metadata: { userId: userId } });
+      console.log(`新規顧客を作成: ${customer.id}`);
     }
-    const examData = examDoc.data();
-    const examType = examData?.type; // Firestoreの模試ドキュメントに type フィールドがある想定
 
-    if (!examType) {
-        console.error(`Exam type not found for examId: ${examId}`);
+    const baseUrl = getBaseUrl();
+    let session;
+
+    if (examId) {
+      console.log(`個別模試購入開始: examId=${examId}`);
+      if (!adminDb) {
+         throw new Error('Firestore Admin DBが初期化されていません。');
+      }
+      const examRef = adminDb.collection('exams').doc(examId);
+      const examDoc = await examRef.get();
+      if (!examDoc.exists) {
+        return NextResponse.json({ error: '指定された模試が見つかりません' }, { status: 404 });
+      }
+      const examData = examDoc.data();
+      const examType = examData?.type;
+      if (!examType) {
         return NextResponse.json({ error: '模試のタイプが設定されていません' }, { status: 500 });
-    }
-    console.log(`Exam type identified as: ${examType}`);
+      }
 
+      const examPriceId = EXAM_PRICE_ID_MAP[examType];
+      if (!examPriceId) {
+        return NextResponse.json({ error: `タイプ '${examType}' の価格設定が見つかりません` }, { status: 400 });
+      }
+      console.log(`使用する価格ID (模試): ${examPriceId}`);
 
-    // 模試タイプに対応するPrice IDを取得
-    const priceId = PRICE_ID_MAP[examType];
-    if (!priceId) {
-      console.error(`Stripe Price ID not found for exam type: ${examType}. Check environment variables.`);
-      return NextResponse.json({ error: `タイプ '${examType}' の価格設定が見つかりません` }, { status: 400 });
-    }
-     console.log(`Using Stripe Price ID: ${priceId}`);
-
-    // Stripe Checkout Sessionを作成
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ['card'],
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
+      session = await stripe.checkout.sessions.create({
+        customer: customer.id,
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: examPriceId,
+            quantity: 1,
+          },
+        ],
+        mode: 'payment',
+        success_url: `${baseUrl}/purchase/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/exams`,
+        metadata: {
+          userId,
+          type: 'exam_purchase',
+          examId: examId,
+          email: email,
         },
-      ],
-      mode: 'payment',
-      // success_url と cancel_url を環境変数などで設定するのが望ましい
-      // session_id を含めて購入後の処理で利用
-      success_url: `${process.env.NEXT_PUBLIC_BASE_URL}/purchase/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${process.env.NEXT_PUBLIC_BASE_URL}/exams`, // キャンセル時は模試一覧に戻る
-      // メタデータにユーザーIDと模試IDを含める (Webhookでの処理に利用)
-      metadata: {
-        userId: userId,
-        examId: examId,
-      },
-      // 必要に応じて顧客情報（メールなど）を渡すことも可能
-      // customer_email: decodedToken.email,
+      });
+      console.log(`✅ [Checkout] 個別模試セッション作成成功: ${session.id}`);
+
+    } else {
+      console.log('サブスクリプション作成開始');
+      const subscriptionPriceId = priceId || getPremiumPriceId();
+      console.log(`使用する価格ID (サブスク): ${subscriptionPriceId}`);
+
+      session = await stripe.checkout.sessions.create({
+        customer: customer.id,
+        payment_method_types: ['card'],
+        line_items: [
+          {
+            price: subscriptionPriceId,
+            quantity: 1,
+          },
+        ],
+        mode: 'subscription',
+        success_url: `${baseUrl}/subscription/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${baseUrl}/subscription`,
+        metadata: {
+          userId,
+          type: 'subscription',
+          plan: 'premium',
+          email: email,
+        },
+        subscription_data: {
+          metadata: {
+            userId: userId,
+          }
+        }
+      });
+      console.log(`✅ [Checkout] サブスクリプションセッション作成成功: ${session.id}`);
+    }
+
+    return NextResponse.json({
+      sessionUrl: session.url,
     });
 
-    console.log(`Stripe Checkout Session created: ${session.id}`);
-
-    // 作成されたセッションのIDを返す
-    return NextResponse.json({ id: session.id });
-
-  } catch (error: any) {
-    console.error('Error creating checkout session:', error);
-    return NextResponse.json({ error: error.message || 'サーバーエラーが発生しました' }, { status: 500 });
+  } catch (error) {
+    console.error('⛔ [Checkout] エラー:', error);
+    return NextResponse.json(
+      { error: error instanceof Error ? error.message : 'チェックアウトセッションの作成に失敗しました' },
+      { status: 500 }
+    );
   }
 } 
