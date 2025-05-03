@@ -101,16 +101,16 @@ export default function SubscriptionStatus() {
   }
 
   return (
-    <div className="rounded-md bg-blue-50 p-4 border border-blue-200">
+    <div className="rounded-md bg-green-50 p-4 border border-green-200">
       <div className="flex">
         <div className="flex-shrink-0">
-          <CheckCircleIcon className="h-5 w-5 text-blue-400" aria-hidden="true" />
+          <CheckCircleIcon className="h-5 w-5 text-green-400" aria-hidden="true" />
         </div>
         <div className="ml-3">
-          <h3 className="text-sm font-medium text-blue-800">
+          <h3 className="text-sm font-medium text-green-800">
             プレミアムプランをご利用中です
           </h3>
-          <div className="mt-2 text-sm text-blue-700 space-y-1">
+          <div className="mt-2 text-sm text-green-700 space-y-1">
             <p><span className="font-semibold">プラン:</span> {typeof subscription.plan === 'string' ? subscription.plan : (subscription.plan as any)?.name || '詳細不明'}</p>
             <p><span className="font-semibold">ステータス:</span> {subscription.status === 'active' ? '有効' : subscription.status}</p>
             <p>

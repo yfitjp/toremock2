@@ -482,32 +482,32 @@ export default function Home() {
             <motion.div
               whileHover={{ scale: 1.02 }}
               initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.6 }}
-              className="relative bg-gradient-to-b from-blue-50 to-blue-100 rounded-2xl shadow-xl transform border border-blue-200"
+              className="relative bg-gradient-to-b from-green-50 to-green-100 rounded-2xl shadow-xl transform border border-green-200"
             >
               <div className="p-8">
                 <div className="flex items-center">
-                  <h3 className="text-3xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
-                  <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
+                  <h3 className="text-3xl font-bold text-green-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                  <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-green-800 text-base font-semibold rounded">人気No.1</span>
                 </div>
-                <p className="mt-2 text-blue-900">本気で英語力を伸ばしたい方に</p>
+                <p className="mt-2 text-green-900">本気で英語力を伸ばしたい方に</p>
                 <p className="mt-4">
-                  <span className="text-4xl font-extrabold text-blue-900">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
-                  <span className="text-base font-medium text-blue-900">/月</span>
+                  <span className="text-4xl font-extrabold text-green-900">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
+                  <span className="text-base font-medium text-green-900">/月</span>
                 </p>
                 <ul className="mt-8 space-y-3">
                   {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                     <li key={index} className="flex items-center">
-                      <svg className="w-5 h-5 text-blue-700" fill="currentColor" viewBox="0 0 20 20">
+                      <svg className="w-5 h-5 text-green-700" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd" />
                       </svg>
-                      <span className="ml-3 text-blue-900">{feature}</span>
+                      <span className="ml-3 text-green-900">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-8">
                   <Link
                     href="/subscription"
-                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md text-blue-600 bg-white hover:bg-gray-50 transition-colors duration-300"
+                    className="w-full inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-bold rounded-md text-green-600 bg-white hover:bg-gray-50 transition-colors duration-300"
                   >
                     プレミアムを始める
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 ml-2" viewBox="0 0 20 20" fill="currentColor">

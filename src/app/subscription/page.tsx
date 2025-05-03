@@ -462,26 +462,26 @@ export default function SubscriptionPage() {
 
           {/* プレミアムプラン */}
           <motion.div
-            className="relative p-8 bg-gradient-to-b from-blue-50 to-blue-100 border border-blue-200 rounded-2xl shadow-md flex flex-col transform"
+            className="relative p-8 bg-gradient-to-b from-green-50 to-green-100 border border-green-200 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="flex-1">
               <div className="flex items-center">
                 <div className="w-8 h-8 mr-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-blue-600">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="text-green-600">
                     <path fillRule="evenodd" d="M9 4.5a.75.75 0 01.721.544l.813 2.846a3.75 3.75 0 002.576 2.576l2.846.813a.75.75 0 010 1.442l-2.846.813a3.75 3.75 0 00-2.576 2.576l-.813 2.846a.75.75 0 01-1.442 0l-.813-2.846a3.75 3.75 0 00-2.576-2.576l-2.846-.813a.75.75 0 010-1.442l2.846-.813A3.75 3.75 0 007.466 7.89l.813-2.846A.75.75 0 019 4.5zM18 1.5a.75.75 0 01.728.568l.258 1.036c.236.94.97 1.674 1.91 1.91l1.036.258a.75.75 0 010 1.456l-1.036.258c-.94.236-1.674.97-1.91 1.91l-.258 1.036a.75.75 0 01-1.456 0l-.258-1.036a2.625 2.625 0 00-1.91-1.91l-1.036-.258a.75.75 0 010-1.456l1.036-.258a2.625 2.625 0 001.91-1.91l.258-1.036A.75.75 0 0118 1.5zM16.5 15a.75.75 0 01.712.513l.394 1.183c.15.447.5.799.948.948l1.183.395a.75.75 0 010 1.422l-1.183.395c-.447.15-.799.5-.948.948l-.395 1.183a.75.75 0 01-1.422 0l-.395-1.183a1.5 1.5 0 00-.948-.948l-1.183-.395a.75.75 0 010-1.422l1.183-.395c.447-.15.799-.5.948-.948l.395-1.183A.75.75 0 0116.5 15z" clipRule="evenodd" />
                   </svg>
                 </div>
-                <h3 className="text-3xl font-bold text-blue-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
-                <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
+                <h3 className="text-3xl font-bold text-green-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
+                <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-green-800 text-base font-semibold rounded">人気No.1</span>
               </div>
-              <p className="mt-4 flex items-baseline text-blue-900">
+              <p className="mt-4 flex items-baseline text-green-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
               <div className="mt-1">
-                <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより73%お得！</span>
+                <span className="inline-block bg-yellow-400 text-green-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより73%お得！</span>
               </div>
-              <p className="mt-6 text-blue-900">
+              <p className="mt-6 text-green-900">
                 {SUBSCRIPTION_PLANS.PREMIUM.description} エリートプランと同様の高品質な学習体験を、よりリーズナブルな価格でご提供します。
               </p>
 
@@ -489,7 +489,7 @@ export default function SubscriptionPage() {
                 {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                   <li key={index} className="flex">
                     <svg
-                      className="flex-shrink-0 w-6 h-6 text-blue-900"
+                      className="flex-shrink-0 w-6 h-6 text-green-900"
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
                       viewBox="0 0 24 24"
@@ -503,7 +503,7 @@ export default function SubscriptionPage() {
                         d="M5 13l4 4L19 7"
                       />
                     </svg>
-                    <span className="ml-3 text-blue-900">{feature}</span>
+                    <span className="ml-3 text-green-900">{feature}</span>
                   </li>
                 ))}
               </ul>
@@ -530,7 +530,7 @@ export default function SubscriptionPage() {
                 className={`mt-8 block w-full px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-bold text-center transition-all duration-300 ${
                   hasSubscription
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-white text-blue-600 hover:bg-blue-50"
+                    : "bg-white text-green-600 hover:bg-green-50"
                 } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isProcessing ? '処理中...' : hasSubscription ? "すでに登録済み" : "プランに登録する"}
