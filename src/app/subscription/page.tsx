@@ -462,7 +462,7 @@ export default function SubscriptionPage() {
 
           {/* プレミアムプラン */}
           <motion.div
-            className="relative p-8 bg-gradient-to-b from-green-50 to-green-100 border border-green-200 rounded-2xl shadow-md flex flex-col transform"
+            className="relative p-8 bg-gradient-to-b from-green-50 to-green-150 border border-green-200 rounded-2xl shadow-md flex flex-col transform"
           >
             <div className="flex-1">
               <div className="flex items-center">
@@ -530,7 +530,7 @@ export default function SubscriptionPage() {
                 className={`mt-8 block w-full px-6 py-3 border border-transparent rounded-md shadow-sm text-base font-bold text-center transition-all duration-300 ${
                   hasSubscription
                     ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                    : "bg-white text-green-600 hover:bg-green-50"
+                    : "bg-white text-green-700 hover:bg-green-50"
                 } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
               >
                 {isProcessing ? '処理中...' : hasSubscription ? "すでに登録済み" : "プランに登録する"}
