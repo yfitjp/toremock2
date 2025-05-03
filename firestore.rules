@@ -1,8 +1,7 @@
 rules_version = '2';
-
 service cloud.firestore {
   match /databases/{database}/documents {
-    // ユーザーが認証されているかチェック
+    // ユーザーが認証されているかチェック!
     function isAuthenticated() {
       return request.auth != null;
     }
@@ -27,13 +26,7 @@ service cloud.firestore {
     // 模試コレクション
     match /exams/{examId} {
       allow read: if true; // 模試一覧は誰でも閲覧可能
-      allow write: if isAdmin(); // 管理者のみが作成可能
-      
-      // 問題コレクション
-      match /questions/{questionId} {
-        allow read: if true; // 問題は誰でも閲覧可能
-        allow write: if isAdmin(); // 管理者のみが作成可能
-      }
+      allow write: if true; // 開発中は誰でも書き込み可能
     }
 
     // 回答履歴コレクション
@@ -58,5 +51,11 @@ service cloud.firestore {
       allow update: if isAdmin(); // 管理者のみが更新可能
       allow delete: if false;
     }
+    
+    // ★ 問題コレクションをルートレベルに移動 ★
+    match /questions/{questionId} {
+      allow read: if isAuthenticated(); // 認証済みユーザーのみ読み取り可能
+      allow write: if true; // 開発中は誰でも書き込み可能
+    }
   }
-} 
+}

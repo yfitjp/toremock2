@@ -3,7 +3,7 @@ import * as admin from 'firebase-admin';
 // Firebase Admin SDKの初期化
 function initFirebaseAdmin() {
   // 環境変数のチェック
-  const projectId = process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID;
+  const projectId = process.env.FIREBASE_PROJECT_ID;
   const clientEmail = process.env.FIREBASE_CLIENT_EMAIL;
   const privateKey = process.env.FIREBASE_PRIVATE_KEY;
 
