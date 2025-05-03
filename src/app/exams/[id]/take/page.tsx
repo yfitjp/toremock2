@@ -4,7 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import ExamForm from './ExamForm';
 import { useAuth } from '@/app/hooks/useAuth';
-import { getExam, getExamQuestions, Question as FirestoreQuestion } from '@/app/lib/exams';
+import { getExam, getExamQuestions, Question as FirestoreQuestion, Exam } from '@/app/lib/exams';
+import { hasActiveSubscription } from '@/app/lib/subscriptions';
+import { checkExamPurchase } from '@/app/lib/purchases';
 
 // ExamFormに渡すQuestion型定義
 interface ExamQuestion {
@@ -30,99 +32,148 @@ interface ExamData {
 
 export default function ExamPage({ params }: { params: { id: string } }) {
   const router = useRouter();
-  const { user, loading } = useAuth();
-  const [isAuthorized, setIsAuthorized] = useState(false);
+  const { user, loading: authLoading } = useAuth();
+  const [examInfo, setExamInfo] = useState<Exam | null>(null);
   const [examData, setExamData] = useState<ExamData | null>(null);
+  const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // 1. 認証と権限チェック
   useEffect(() => {
-    // 認証状態の確認
-    if (!loading) {
-      if (!user) {
-        // 未ログインの場合はログインページにリダイレクト
-        router.push('/auth/signin');
-      } else {
-        // ログイン済みの場合は権限チェック（ここでは簡易的に全ユーザーに権限を付与）
-        setIsAuthorized(true);
-      }
-    }
-  }, [user, loading, router]);
+    const checkAuthorization = async () => {
+      if (authLoading) return; // 認証情報読み込み中は待機
 
-  useEffect(() => {
-    const fetchExamData = async () => {
-      if (!params.id) return;
-      
+      if (!user) {
+        router.push('/auth/signin?redirect=/exams/' + params.id + '/take'); // リダイレクト先を指定
+        return;
+      }
+
+      setIsLoading(true); // 権限チェック開始
+      setError(null); // エラーをリセット
+
       try {
-        setIsLoading(true);
-        // 模試の基本情報を取得
-        const examInfo = await getExam(params.id);
-        
-        if (!examInfo) {
+        // まず模試情報を取得 (無料かどうかの確認のため)
+        const currentExamInfo = await getExam(params.id);
+        if (!currentExamInfo) {
           setError('模試情報が見つかりません。');
           setIsLoading(false);
           return;
         }
-        
-        // 模試の問題を取得
-        const questions = await getExamQuestions(params.id);
-        
-        if (!questions || questions.length === 0) {
-          setError('問題が登録されていません。');
-          setIsLoading(false);
+        setExamInfo(currentExamInfo); // 模試情報を保存
+
+        // 無料模試なら即座に権限OK
+        if (currentExamInfo.isFree) {
+          setIsAuthorized(true);
+          // ローディングは fetchExamData 側で解除するのでここでは何もしない
           return;
         }
-        
-        // デバッグ用: 取得した問題データをログ出力
-        console.log('取得した問題データ:', questions);
-        
-        // 全データを組み合わせて設定（型を合わせるための変換）
-        const formattedQuestions: ExamQuestion[] = questions.map((q, index) => {
-          // デバッグ用: 各問題のimageUrlをログ出力
-          if (q.imageUrl) {
-            console.log(`問題${index+1} 画像URL:`, q.imageUrl);
-          }
-          
-          // Firebase Storage URLの修正
-          let imageUrl = q.imageUrl;
-          if (imageUrl && imageUrl.startsWith('https://firebasestorage.googleapis.com')) {
-            // そのままでOK、既に正しい形式
-            console.log('Firebase Storage URL確認済み:', imageUrl);
-          }
-          
-          return {
-            id: q.id,
-            content: q.content || '',  // Firestoreから取得したQuestionはcontentフィールドを持つ
-            questionNumber: index + 1,  // 問題番号を設定
-            options: q.options || [],
-            correctAnswer: q.correctAnswer,
-            // 以下のフィールドはFirestoreのQuestionから取得、または仮のデフォルト値を設定
-            questionType: q.questionType || 'multiple-choice', 
-            sectionType: q.sectionType || 'reading',
-            imageUrl: imageUrl,  // 修正したimageURLを設定
-            audioUrl: q.audioUrl   // audioUrlを明示的に設定
-          };
-        });
-        
-        setExamData({
-          ...examInfo,
-          questions: formattedQuestions
-        });
-        
+
+        // 有料模試の場合、サブスクリプションと購入状態を確認
+        const hasSubscription = await hasActiveSubscription(user.uid);
+        const isPurchased = await checkExamPurchase(user.uid, params.id);
+
+        if (hasSubscription || isPurchased) {
+          setIsAuthorized(true);
+        } else {
+          setError('この模試を受験する権限がありません。購入またはサブスクリプションが必要です。');
+          // 必要であれば購入ページなどにリダイレクト
+          // router.push(`/exams/${params.id}/purchase`);
+        }
       } catch (err) {
-        console.error('模試データの取得中にエラーが発生しました:', err);
-        setError('模試データの取得中にエラーが発生しました。');
+        console.error('権限チェックまたは模試情報取得エラー:', err);
+        // FirebaseError の場合、より具体的なメッセージを表示することも検討
+        if (err instanceof Error && 'code' in err && err.code === 'permission-denied') {
+             setError('データのアクセス権限がありません。Firestoreのセキュリティルールを確認してください。');
+        } else {
+             setError('権限の確認中にエラーが発生しました。');
+        }
       } finally {
-        setIsLoading(false);
+        // isAuthorized が false の場合のみローディングを完了させる
+        // isAuthorized が true の場合は fetchExamData がローディングを管理する
+         if (!isAuthorized) {
+            setIsLoading(false);
+         }
       }
     };
 
-    if (isAuthorized) {
-      fetchExamData();
-    }
-  }, [params.id, isAuthorized]);
+    checkAuthorization();
+    // isAuthorized の変更で再実行しないようにする
+  }, [user, authLoading, params.id, router]);
 
-  if (loading || isLoading) {
+  // 2. 権限があり、模試情報が取得できたら問題データを取得
+  useEffect(() => {
+    const fetchExamData = async () => {
+      // isAuthorized が true で、examInfo がセットされたら実行
+      // isLoading は checkAuthorization で true に設定されているか、
+      // 無料模試の場合はまだ true のままのはず
+
+      try {
+        const questions = await getExamQuestions(params.id);
+
+        if (!questions || questions.length === 0) {
+          setError('問題が登録されていません。');
+          setIsLoading(false); // エラー時はローディング解除
+          return;
+        }
+
+        console.log('取得した問題データ:', questions);
+
+        const formattedQuestions: ExamQuestion[] = questions.map((q, index) => {
+           let imageUrl = q.imageUrl;
+           // デバッグ用: 各問題のimageUrlをログ出力
+           if (q.imageUrl) {
+             console.log(`問題${index+1} 画像URL:`, q.imageUrl);
+           }
+           
+           // Firebase Storage URLの修正
+           if (imageUrl && imageUrl.startsWith('https://firebasestorage.googleapis.com')) {
+             console.log('Firebase Storage URL確認済み:', imageUrl);
+           }
+
+          return {
+            id: q.id,
+            content: q.content || '',
+            questionNumber: index + 1,
+            options: q.options || [],
+            correctAnswer: q.correctAnswer,
+            questionType: q.questionType || 'multiple-choice',
+            sectionType: q.sectionType || 'reading',
+            imageUrl: imageUrl,
+            audioUrl: q.audioUrl
+          };
+        });
+
+        setExamData({
+          id: examInfo!.id, // examInfo は non-null であることが保証される
+          title: examInfo!.title,
+          description: examInfo!.description,
+          duration: examInfo!.duration,
+          type: examInfo!.type,
+          questions: formattedQuestions
+        });
+        setError(null); // エラーがなければリセット
+
+      } catch (err) {
+        console.error('問題データの取得中にエラーが発生しました:', err);
+         if (err instanceof Error && 'code' in err && err.code === 'permission-denied') {
+             setError('問題データへのアクセス権限がありません。Firestoreのセキュリティルールを確認してください。');
+        } else {
+            setError('問題データの取得中にエラーが発生しました。');
+        }
+      } finally {
+        setIsLoading(false); // データ取得（成功または失敗）後にローディング完了
+      }
+    };
+
+    // isAuthorized が true になり、examInfo もセットされたら実行
+    if (isAuthorized && examInfo) {
+        fetchExamData();
+    }
+    // fetchExamData を isAuthorized と examInfo の変更時にのみ実行させる
+  }, [isAuthorized, examInfo, params.id]); // 依存配列を修正
+
+  if (authLoading || isLoading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
@@ -153,8 +204,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   if (!examData) {
     return (
       <div className="container mx-auto px-4 py-8">
-        <div className="bg-red-50 border border-red-200 text-red-700 p-4 rounded-md">
-          模試データを読み込めませんでした。
+        <div className="bg-yellow-50 border border-yellow-200 text-yellow-700 p-4 rounded-md">
+          模試データを読み込んでいます... (または、予期せぬエラーが発生しました)
         </div>
       </div>
     );
