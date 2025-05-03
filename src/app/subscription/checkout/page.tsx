@@ -27,17 +27,19 @@ export default function SubscriptionCheckoutPage() {
     }
 
     const createSubscription = async () => {
+      console.log('[Checkout Page] createSubscription function called.');
       try {
         if (!user) {
           throw new Error('ユーザーがログインしていません');
         }
+        console.log('[Checkout Page] User authenticated, proceeding...');
 
         const idToken = await user.getIdToken();
         if (!idToken) {
           throw new Error('認証トークンの取得に失敗しました');
         }
 
-        console.log('サブスクリプション作成を開始します');
+        console.log('[Checkout Page] Fetching /api/subscription/create...');
         const response = await fetch('/api/subscription/create', {
           method: 'POST',
           headers: {
@@ -45,6 +47,7 @@ export default function SubscriptionCheckoutPage() {
             'Content-Type': 'application/json',
           },
         });
+        console.log('[Checkout Page] Fetch response status:', response.status);
 
         if (!response.ok) {
           const errorData = await response.json().catch(() => null);
@@ -52,17 +55,19 @@ export default function SubscriptionCheckoutPage() {
         }
 
         const data = await response.json();
-        console.log('サブスクリプションが作成されました:', data.subscriptionId);
         setClientSecret(data.clientSecret);
         setSubscriptionId(data.subscriptionId);
       } catch (error: any) {
-        console.error('サブスクリプション作成エラー:', error);
+        console.error('[Checkout Page] Error in createSubscription:', error);
         setError(error.message || 'サブスクリプションの作成中にエラーが発生しました');
       }
     };
 
     if (user) {
+      console.log('[Checkout Page] User object exists, calling createSubscription.');
       createSubscription();
+    } else if (!authLoading) {
+      console.log('[Checkout Page] User object is null, authLoading is false. Skipping createSubscription.');
     }
   }, [user, authLoading, router]);
 
