@@ -1,16 +1,12 @@
+import * as admin from 'firebase-admin';
+import { db } from '@/app/lib/firebase-admin';
+import { db as clientDb } from './firebase';
 import {
   COLLECTIONS,
-  getDocument,
-  setDocument,
-  updateDocument,
   queryDocuments,
   addDocument
 } from './firestore';
-import { where, orderBy, limit } from 'firebase/firestore';
-import { auth } from './firebase';
-import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
-import { db } from './firebase';
-import { getAuth } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 import Stripe from 'stripe';
 
 // サーバーサイドでのみStripeを初期化
@@ -72,35 +68,36 @@ export const SUBSCRIPTION_PLANS = {
 // サブスクリプションを作成または更新
 export const createOrUpdateSubscription = async (
   subscriptionId: string,
-  data: Omit<Subscription, 'id' | 'createdAt' | 'updatedAt'>
+  data: Omit<Subscription, 'id' | 'createdAt' | 'updatedAt' | 'endDate'> & { endDate?: Date | admin.firestore.Timestamp }
 ): Promise<void> => {
   try {
-    const existingSubscription = await getDocument<Subscription>(
-      COLLECTIONS.SUBSCRIPTIONS,
-      subscriptionId
-    );
+    const subRef = db.collection('subscriptions').doc(subscriptionId);
+    const subDoc = await subRef.get();
 
-    if (existingSubscription) {
-      // 既存のサブスクリプションを更新
-      await updateDocument<Subscription>(COLLECTIONS.SUBSCRIPTIONS, subscriptionId, {
-        ...data,
-        updatedAt: new Date()
+    const dataToSave: any = { ...data };
+    if (data.startDate instanceof Date) {
+        dataToSave.startDate = admin.firestore.Timestamp.fromDate(data.startDate);
+    }
+    if (data.endDate instanceof Date) {
+        dataToSave.endDate = admin.firestore.Timestamp.fromDate(data.endDate);
+    }
+
+    if (subDoc.exists) {
+      await subRef.update({
+        ...dataToSave,
+        updatedAt: admin.firestore.FieldValue.serverTimestamp()
       });
+      console.log(`Subscription ${subscriptionId} updated with Admin SDK.`);
     } else {
-      // 新しいサブスクリプションを作成
-      await setDocument<Subscription>(
-        COLLECTIONS.SUBSCRIPTIONS,
-        subscriptionId,
-        {
-          ...data,
-          id: subscriptionId,
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      );
+      await subRef.set({
+        ...dataToSave,
+        createdAt: admin.firestore.FieldValue.serverTimestamp(),
+        updatedAt: admin.firestore.FieldValue.serverTimestamp()
+      }, { merge: true });
+      console.log(`Subscription ${subscriptionId} created with Admin SDK.`);
     }
   } catch (error) {
-    console.error('Error creating/updating subscription:', error);
+    console.error(`Error creating/updating subscription ${subscriptionId} with Admin SDK:`, error);
     throw error;
   }
 };
@@ -111,9 +108,10 @@ export const updateSubscription = async (
   data: Partial<Subscription>
 ): Promise<void> => {
   try {
-    await updateDocument<Subscription>(COLLECTIONS.SUBSCRIPTIONS, subscriptionId, {
+    const subRef = db.collection('subscriptions').doc(subscriptionId);
+    await subRef.update({
       ...data,
-      updatedAt: new Date()
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
     });
   } catch (error) {
     console.error(`Error updating subscription ${subscriptionId}:`, error);
@@ -124,7 +122,17 @@ export const updateSubscription = async (
 // 特定のサブスクリプションを取得
 export const getSubscription = async (subscriptionId: string): Promise<Subscription | null> => {
   try {
-    return await getDocument<Subscription>(COLLECTIONS.SUBSCRIPTIONS, subscriptionId);
+    const subRef = db.collection('subscriptions').doc(subscriptionId);
+    const docSnap = await subRef.get();
+    if (!docSnap.exists) {
+      return null;
+    }
+    const data = docSnap.data() as any;
+    if (data.createdAt?.toDate) data.createdAt = data.createdAt.toDate();
+    if (data.updatedAt?.toDate) data.updatedAt = data.updatedAt.toDate();
+    if (data.startDate?.toDate) data.startDate = data.startDate.toDate();
+    if (data.endDate?.toDate) data.endDate = data.endDate.toDate();
+    return { id: docSnap.id, ...data } as Subscription;
   } catch (error) {
     console.error(`Error getting subscription ${subscriptionId}:`, error);
     throw error;
@@ -134,20 +142,27 @@ export const getSubscription = async (subscriptionId: string): Promise<Subscript
 // ユーザーのアクティブなサブスクリプションを取得
 export const getUserActiveSubscription = async (userId: string): Promise<Subscription | null> => {
   try {
-    // ユーザーの最新のサブスクリプションを取得
-    const subscriptions = await queryDocuments<Subscription>(
-      COLLECTIONS.SUBSCRIPTIONS,
-      [
-        where('userId', '==', userId),
-        where('status', '==', 'active'),
-        orderBy('createdAt', 'desc'),
-        limit(1)
-      ]
-    );
+    const q = db.collection('subscriptions')
+      .where('userId', '==', userId)
+      .where('status', '==', 'active')
+      .orderBy('createdAt', 'desc')
+      .limit(1);
 
-    return subscriptions.length > 0 ? subscriptions[0] : null;
+    const querySnapshot = await q.get();
+
+    if (querySnapshot.empty) {
+      return null;
+    }
+
+    const docSnap = querySnapshot.docs[0];
+    const data = docSnap.data() as any;
+    if (data.createdAt?.toDate) data.createdAt = data.createdAt.toDate();
+    if (data.updatedAt?.toDate) data.updatedAt = data.updatedAt.toDate();
+    if (data.startDate?.toDate) data.startDate = data.startDate.toDate();
+    if (data.endDate?.toDate) data.endDate = data.endDate.toDate();
+    return { id: docSnap.id, ...data } as Subscription;
   } catch (error) {
-    console.error('Error getting user subscription:', error);
+    console.error('Error getting user subscription with Admin SDK:', error);
     return null;
   }
 };
@@ -155,7 +170,7 @@ export const getUserActiveSubscription = async (userId: string): Promise<Subscri
 // サブスクリプションの状態を確認
 export const hasActiveSubscription = async (userId: string): Promise<boolean> => {
   try {
-    const userRef = doc(db, 'users', userId);
+    const userRef = doc(clientDb, 'users', userId);
     const userDoc = await getDoc(userRef);
     
     if (!userDoc.exists()) {
@@ -173,9 +188,10 @@ export const hasActiveSubscription = async (userId: string): Promise<boolean> =>
 // サブスクリプションをキャンセル
 export const cancelSubscription = async (subscriptionId: string): Promise<void> => {
   try {
-    await updateSubscription(subscriptionId, {
+    const subRef = db.collection('subscriptions').doc(subscriptionId);
+    await subRef.update({
       status: 'canceled',
-      updatedAt: new Date()
+      updatedAt: admin.firestore.FieldValue.serverTimestamp()
     });
   } catch (error) {
     console.error(`Error canceling subscription ${subscriptionId}:`, error);
