@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { headers } from 'next/headers';
 import { stripe } from '@/app/lib/stripe-server';
 import { STRIPE_EVENTS } from '@/app/lib/stripe-config';
-import { createOrUpdateSubscription } from '@/app/lib/subscriptions';
+import { createOrUpdateSubscriptionAdmin } from '@/app/lib/subscriptions-admin';
 import { updatePurchaseStatus, getPurchaseByPaymentIntent } from '@/app/lib/purchases';
 import Stripe from 'stripe';
 import { db } from '@/app/lib/firebase-admin';
@@ -49,7 +49,7 @@ export async function POST(req: Request) {
 
         console.log('Creating/Updating subscription:', subscription.id, 'for user:', userId, 'status:', subscription.status);
         
-        await createOrUpdateSubscription(subscription.id, {
+        await createOrUpdateSubscriptionAdmin(subscription.id, {
           userId: userId,
           status: subscription.status,
           currentPeriodEnd: subscription.current_period_end,
@@ -109,8 +109,8 @@ export async function POST(req: Request) {
         
         console.log('Payment failed for subscription:', subscription.id);
         
-        await createOrUpdateSubscription(subscription.id, {
-          userId: subscription.metadata.userId,
+        await createOrUpdateSubscriptionAdmin(subscription.id, {
+          userId: subscription.metadata?.userId ?? 'unknown_user',
           status: 'past_due',
           currentPeriodEnd: subscription.current_period_end,
           cancelAtPeriodEnd: subscription.cancel_at_period_end,
