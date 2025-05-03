@@ -11,10 +11,42 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | ToreMock",
+    template: "%s | ToreMock(トレモック)",
     default: "ToreMock - オンライン英語模試",
   },
   description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
+  // OGP設定
+  openGraph: {
+    title: "ToreMock - オンライン英語模試",
+    description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
+    url: "https://toremock.com", // サイトのURL
+    siteName: "ToreMock",
+    images: [
+      {
+        url: '/og-image.png', // /public/og-image.png を配置してください
+        width: 1200,
+        height: 630,
+        alt: 'ToreMock OGP Image',
+      },
+    ],
+    locale: 'ja_JP',
+    type: 'website',
+  },
+  // Twitterカード設定
+  twitter: {
+    card: 'summary_large_image',
+    title: "ToreMock - オンライン英語模試",
+    description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。",
+    site: '@TMock', 
+    images: ['/og-image.png'], 
+  },
+  // アイコン設定
+  icons: {
+    icon: '/favicon.ico', // /public/favicon.ico
+    shortcut: '/favicon-16x16.png', // /public/favicon-16x16.png
+    apple: '/apple-touch-icon.png', // /public/apple-touch-icon.png
+  },
+  // 他のメタデータ (必要であれば追加)
 };
 
 export default function RootLayout({
