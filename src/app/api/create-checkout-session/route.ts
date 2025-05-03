@@ -6,10 +6,26 @@ import { SUBSCRIPTION_PLANS } from '@/app/lib/subscriptions';
 
 // Firebase Admin SDK の初期化 (一度だけ実行)
 if (!admin.apps.length) {
-    admin.initializeApp({
-        // credential: admin.credential.applicationDefault(), // GCP環境など
-        // credential: admin.credential.cert(JSON.parse(process.env.FIREBASE_SERVICE_ACCOUNT_KEY!))
-    });
+    // 環境変数からサービスアカウントキーを読み込む
+    const serviceAccountKey = process.env.FIREBASE_SERVICE_ACCOUNT_KEY;
+    if (!serviceAccountKey) {
+        console.error("Firebase Admin SDK initialization error: FIREBASE_SERVICE_ACCOUNT_KEY environment variable is not set.");
+        // ここでエラーを投げるか、適切に処理する
+        // 例: throw new Error("Firebase Admin SDK configuration error.");
+        // エラーを投げない場合、Firebase機能が利用できない可能性がある
+    } else {
+        try {
+            admin.initializeApp({
+                credential: admin.credential.cert(JSON.parse(serviceAccountKey))
+            });
+            console.log("Firebase Admin SDK initialized successfully.");
+        } catch (parseError) {
+            console.error("Error parsing FIREBASE_SERVICE_ACCOUNT_KEY:", parseError);
+            // パースエラーの処理
+        }
+    }
+    // 環境変数が設定されていない場合、もしくはパースエラーの場合のフォールバックやエラー処理が必要
+    // ここでは、初期化されなかった場合に後続の処理でエラーが出る可能性がある
 }
 const auth = admin.auth();
 const adminDb = getFirestore();

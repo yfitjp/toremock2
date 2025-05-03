@@ -144,20 +144,20 @@ export default function Navbar() {
           </Link>
           {user && (
             <>
+              {!hasSubscription && (
+                <Link
+                  href="/subscription"
+                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+                >
+                  サブスクリプション
+                </Link>
+              )}
               <Link
                 href="/mypage"
                 className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
               >
                 マイページ
               </Link>
-              {!hasSubscription && (
-                <Link
-                  href="/subscription"
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
-                >
-                  プレミアムプラン
-                </Link>
-              )}
             </>
           )}
           {loading || checkingSubscription ? (
