@@ -11,8 +11,8 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | トレモック",
-    default: "トレモック - オンライン英語模試プラットフォーム",
+    template: "%s | ToreMock",
+    default: "ToreMock - オンライン英語模試",
   },
   description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
 };
@@ -22,8 +22,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteName = "トレモック";
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const siteName = "ToreMock";
+  const siteUrl = "https://toremock.com";
 
   const jsonLd = {
     '@context': 'https://schema.org',
