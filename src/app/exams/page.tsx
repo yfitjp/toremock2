@@ -79,22 +79,49 @@ export default function ExamsPage() {
         if (!examData || examData.length === 0) {
           setError('現在利用可能な模試はありません。');
           setExams([]);
+          setExamsByType({}); // エラー時やデータがない場合も初期化
         } else {
-          setExams(examData);
-          
-          // 試験タイプごとに分類
-          const typeMap: Record<string, ExamData[]> = { 'all': examData };
+          // type の優先順位
+          const typeOrder = ['TOEIC', 'TOEFL', 'EIKEN'];
+
+          // 「すべての模試」用のソート
+          const sortedAllExams = [...examData].sort((a, b) => {
+            const typeAIndex = typeOrder.indexOf(a.type);
+            const typeBIndex = typeOrder.indexOf(b.type);
+
+            // typeOrder に基づいてソート
+            if (typeAIndex !== typeBIndex) {
+              // どちらか一方または両方が typeOrder にない場合、ある方を優先
+              if (typeAIndex === -1 && typeBIndex !== -1) return 1;
+              if (typeAIndex !== -1 && typeBIndex === -1) return -1;
+              // 両方とも typeOrder にある場合、インデックスで比較
+              if (typeAIndex !== -1 && typeBIndex !== -1) return typeAIndex - typeBIndex;
+              // 両方とも typeOrder にない場合、type 文字列で比較 (フォールバック)
+              return a.type.localeCompare(b.type);
+            }
+
+            // type が同じ場合は id でソート
+            return a.id.localeCompare(b.id);
+          });
+
+          setExams(sortedAllExams); // ソート済みの全模試リストを設定
+
+          // 試験タイプごとに分類し、各タイプ内で id でソート
+          const typeMap: Record<string, ExamData[]> = { 'all': sortedAllExams }; // 'all' にもソート済みリストを使用
           EXAM_TYPES.forEach(type => {
-            typeMap[type] = examData.filter(exam => exam.type === type);
+            typeMap[type] = examData
+              .filter(exam => exam.type === type)
+              .sort((a, b) => a.id.localeCompare(b.id)); // idでソート
           });
           setExamsByType(typeMap);
-          
+
           setError(null);
         }
       } catch (err) {
         console.error('Error fetching exams:', err);
         setError('模試データの取得中にエラーが発生しました。しばらく待ってから再度お試しください。');
         setExams([]);
+        setExamsByType({}); // エラー時も初期化
       } finally {
         setLoading(false);
       }
