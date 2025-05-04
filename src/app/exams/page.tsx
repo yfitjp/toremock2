@@ -152,9 +152,21 @@ export default function ExamsPage() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4 }}
-        className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex flex-col"
+        className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex flex-col relative"
       >
-        <div className="p-6 flex-grow">
+        <div className="p-6 flex-grow pb-20">
+          <div className="absolute top-4 right-4">
+            {exam.isFree ? (
+              <span className="bg-gradient-to-r from-green-500 to-green-700 text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+                無料
+              </span>
+            ) : (
+              <span className="text-lg font-bold text-gray-800">
+                ¥{exam.price.toLocaleString()}
+              </span>
+            )}
+          </div>
+
           <div className="flex items-center mb-2">
             <span className={`mr-1.5 ${typeStyle.iconColor}`}>{typeStyle.icon}</span>
             <span className="text-sm font-medium text-gray-600">{typeStyle.displayName}</span>
@@ -170,64 +182,54 @@ export default function ExamsPage() {
               </svg>
               <span>{exam.duration}分</span>
             </div>
-            <div className="flex items-center font-medium">
-              {exam.isFree ? (
-                <span className="text-green-600">無料</span>
-              ) : (
-                <>
-                  <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <span className="text-gray-700">¥{exam.price.toLocaleString()}</span>
-                </>
-              )}
-            </div>
           </div>
 
-          {exam.isFree ? (
-            <Link
-              href={`/exams/${exam.id}`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-            >
-              無料で受験する
-            </Link>
-          ) : purchasedExams.has(exam.id) ? (
-            <Link
-              href={`/exams/${exam.id}`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-            >
-              受験する（購入済み）
-            </Link>
-          ) : hasSubscription ? (
-            <Link
-              href={`/exams/${exam.id}`}
-              className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-            >
-              受験する
-            </Link>
-          ) : (
-            <PurchaseButton
-              examId={exam.id}
-              price={exam.price}
-              isDisabled={!user || purchasedExams.has(exam.id)}
-            />
-          )}
-
-          {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
-            <p className="mt-2 text-xs text-green-600 text-center">
-              プレミアム会員特典：無料でアクセス可能
-            </p>
-          )}
-
-          {!user && !exam.isFree && (
-            <p className="mt-2 text-sm text-gray-500 text-center">
-              購入するには
-              <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
-                ログイン
+          <div className="absolute bottom-0 left-0 right-0 p-6 pt-0">
+            {exam.isFree ? (
+              <Link
+                href={`/exams/${exam.id}`}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+              >
+                無料で受験する
               </Link>
-              が必要です
-            </p>
-          )}
+            ) : purchasedExams.has(exam.id) ? (
+              <Link
+                href={`/exams/${exam.id}`}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+              >
+                受験する（購入済み）
+              </Link>
+            ) : hasSubscription ? (
+              <Link
+                href={`/exams/${exam.id}`}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+              >
+                受験する
+              </Link>
+            ) : (
+              <PurchaseButton
+                examId={exam.id}
+                price={exam.price}
+                isDisabled={!user || purchasedExams.has(exam.id)}
+              />
+            )}
+
+            {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
+              <p className="mt-2 text-xs text-green-600 text-center">
+                プレミアム会員特典：無料でアクセス可能
+              </p>
+            )}
+
+            {!user && !exam.isFree && (
+              <p className="mt-2 text-sm text-gray-500 text-center">
+                購入するには
+                <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
+                  ログイン
+                </Link>
+                が必要です
+              </p>
+            )}
+          </div>
         </div>
       </motion.div>
     );
