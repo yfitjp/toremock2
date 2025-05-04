@@ -94,10 +94,10 @@ export default function Home() {
                 >
                   <div className="relative mx-auto w-full max-w-lg">
                     <div className="absolute top-0 -left-4 w-72 h-72 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob"></div>
-                    <div className="absolute top-0 -right-4 w-72 h-72 bg-yellow-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
+                    <div className="absolute top-0 -right-4 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-2000"></div>
                     <div className="absolute -bottom-8 left-20 w-72 h-72 bg-blue-400 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-blob animation-delay-4000"></div>
                     <div className="relative">
-                      <div className="relative rounded-xl shadow-xl bg-gradient-to-br from-white to-blue-50 p-6 border-2 border-white transform hover:scale-105 transition-all duration-300">
+                      <div className="relative rounded-xl shadow-xl bg-white p-6 border-2 border-white transform hover:scale-105 transition-all duration-300">
                         <div className="absolute -top-4 -right-4 z-50">
                           <div className="bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-900 font-bold px-5 py-2 rounded-lg shadow-lg transform rotate-12 text-base">
                             無料で挑戦！

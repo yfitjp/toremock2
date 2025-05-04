@@ -105,7 +105,7 @@ export default function ComparisonTable() {
                    ) : plan.name === 'Premium' ? (
                       <Link
                         href="/subscription"
-                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors" /* Increased size */
+                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-blue-700 transition-colors" /* Increased size */
                       >
                         プランに登録
                       </Link>
