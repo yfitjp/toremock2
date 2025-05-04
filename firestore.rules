@@ -26,14 +26,37 @@ service cloud.firestore {
     // 模試コレクション
     match /exams/{examId} {
       allow read: if true; // 模試一覧は誰でも閲覧可能
-      allow write: if true; // 開発中は誰でも書き込み可能
+      allow write: if isAdmin(); // 管理者のみ書き込み可能
     }
 
     // 回答履歴コレクション
     match /exam_attempts/{attemptId} {
       allow read: if isUserAuthenticated(resource.data.userId) || isAdmin();
-      allow create: if isUserAuthenticated(request.resource.data.userId);
-      allow update, delete: if false; // 回答は作成のみ可能
+      allow create: if isUserAuthenticated(request.resource.data.userId)
+                      && request.resource.data.status == 'in-progress' // 初期ステータスは 'in-progress'
+                      && request.resource.data.currentStructureIndex == 0 // 初期インデックスは 0
+                      && request.resource.data.startedAt == request.time // 開始時間はサーバータイムスタンプ
+                      && request.resource.data.keys().hasAll(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections']) // 必須フィールドチェック
+                      && !request.resource.data.keys().hasAny(['completedAt', 'overallScore', 'updatedAt']); // 作成時に存在してはいけないフィールド
+
+      allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
+                     // 更新対象ドキュメントが自分のものか、または管理者の場合
+                     && resource.data.status == 'in-progress' // 進行中のもののみ更新可能
+                     && request.resource.data.userId == resource.data.userId // userId は変更不可
+                     && request.resource.data.examId == resource.data.examId // examId は変更不可
+                     && request.resource.data.startedAt == resource.data.startedAt // startedAt は変更不可
+                     && request.resource.data.examTitle == resource.data.examTitle // examTitle は変更不可
+                     && request.resource.data.keys().hasOnly(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections', 'completedAt', 'updatedAt']) // 更新可能なフィールドを限定
+                     && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') // status は 'in-progress' または 'completed' のみ
+                     && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex // インデックスは戻せない
+                     && request.resource.data.sections.keys().hasAll(resource.data.sections.keys()) // sections のキーは減らせない
+                     // sections の各値のバリデーション (必要に応じてさらに詳細化)
+                     && request.resource.data.sections.values().map(sec => 
+                         sec.keys().hasOnly(['status', 'answers', 'score', 'completedAt', 'updatedAt']) // セクション内のフィールド限定
+                     ).hasOnly([true])
+                     && request.resource.data.updatedAt == request.time; // updatedAt はサーバータイムスタンプ
+
+      allow delete: if false; // 削除は不可 (または isAdmin())
     }
 
     // サブスクリプションコレクション
@@ -54,8 +77,8 @@ service cloud.firestore {
     
     // ★ 問題コレクションをルートレベルに移動 ★
     match /questions/{questionId} {
-      allow read: if isAuthenticated(); // 認証済みユーザーのみ読み取り可能
-      allow write: if true; // 開発中は誰でも書き込み可能
+      allow read: if isAuthenticated(); // 認証済みユーザーは読み取り可能
+      allow write: if isAdmin(); // 管理者のみ書き込み可能
     }
   }
 }

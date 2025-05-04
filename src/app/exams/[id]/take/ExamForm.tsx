@@ -4,70 +4,42 @@ import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
-import { addDocument } from '@/app/lib/firestore';
-
-interface Question {
-  id: string;
-  content?: string;
-  options: string[];
-  correctAnswer?: number;
-  imageUrl?: string;
-  audioUrl?: string;
-  questionType?: 'multiple-choice' | 'text-input' | 'speaking' | 'writing';
-  sectionType?: 'reading' | 'listening' | 'writing' | 'speaking';
-}
+import { Question, ExamSection, SectionAttempt } from '@/app/lib/firestoreTypes';
 
 interface ExamFormProps {
   examId: string;
+  sectionInfo: ExamSection;
   questions: Question[];
-  examType?: string; // 模試タイプ（TOEIC, TOEFL, EIKENなど）
-  onSubmissionSuccess?: () => void; // 提出成功時のコールバックを追加 (オプショナル)
+  initialAttemptData?: SectionAttempt;
+  onSubmit: (answers: Record<string, number | string>) => void;
+  examType: string;
 }
 
-export default function ExamForm({ examId, questions, examType, onSubmissionSuccess }: ExamFormProps) {
+export default function ExamForm({ 
+  examId, 
+  sectionInfo, 
+  questions, 
+  initialAttemptData, 
+  onSubmit, 
+  examType
+}: ExamFormProps) {
   const router = useRouter();
   const { user } = useAuth();
-  const [answers, setAnswers] = useState<Record<string, number | string>>({});
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(60 * 60); // 60分（秒単位）
+  const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string>>({});
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [timeLeft, setTimeLeft] = useState(sectionInfo.duration || 0);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  // 残り時間のカウントダウン
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          handleSubmit();
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
-
-  // 回答の選択（選択肢タイプ）
   const handleAnswerSelect = (questionId: string, optionIndex: number) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: optionIndex,
-    }));
+    setCurrentAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
   };
 
-  // テキスト回答の変更（テキスト入力タイプ）
   const handleTextInputChange = (questionId: string, text: string) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questionId]: text,
-    }));
+    setCurrentAnswers((prev) => ({ ...prev, [questionId]: text }));
   };
 
-  // 音声の再生
   const handlePlayAudio = () => {
     if (audioRef.current) {
       if (isPlaying) {
@@ -79,135 +51,84 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
     }
   };
 
-  // 次の問題へ
   const handleNext = () => {
-    // 音声を停止
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
     }
-    
-    if (currentQuestion < questions.length - 1) {
-      setCurrentQuestion(currentQuestion + 1);
+    if (currentQuestionIndex < questions.length - 1) {
+      setCurrentQuestionIndex(prev => prev + 1);
     }
   };
 
-  // 前の問題へ
   const handlePrev = () => {
-    // 音声を停止
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
     }
-    
-    if (currentQuestion > 0) {
-      setCurrentQuestion(currentQuestion - 1);
+    if (currentQuestionIndex > 0) {
+      setCurrentQuestionIndex(prev => prev - 1);
     }
   };
 
-  // 回答の提出
-  const handleSubmit = async () => {
+  const handleSectionComplete = () => {
     if (isSubmitting) return;
+    console.log(`Completing section: ${sectionInfo.title}`);
     setIsSubmitting(true);
-    setError(null); // エラーをリセット
+    onSubmit(currentAnswers);
+  };
 
-    // ユーザー認証チェック
-    if (!user) {
-      setError('ログインが必要です。');
-      setIsSubmitting(false);
-      return;
+  useEffect(() => {
+    if (initialAttemptData?.answers) {
+      setCurrentAnswers(initialAttemptData.answers);
     }
+  }, [initialAttemptData]);
 
-    // API呼び出しではなく、クライアントサイドで処理する元のロジックに戻す
-    try {
-      // 正解数を計算（選択問題のみ）
-      let correctCount = 0;
-      let totalMultipleChoiceQuestions = 0;
-      
-      for (const question of questions) {
-        if (question.questionType === 'multiple-choice' || question.questionType === undefined) {
-          totalMultipleChoiceQuestions++;
-          if (question.correctAnswer !== undefined && 
-              typeof answers[question.id] === 'number' && 
-              answers[question.id] === question.correctAnswer) {
-            correctCount++;
-          }
+  useEffect(() => {
+    if (!sectionInfo.duration) return;
+    setTimeLeft(sectionInfo.duration);
+    const timer = setInterval(() => {
+      setTimeLeft((prev) => {
+        if (prev <= 1) {
+          clearInterval(timer);
+          console.log("Time's up for section:", sectionInfo.title);
+          handleSectionComplete();
+          return 0;
         }
-      }
-      
-      // スコアを計算（100点満点）- 選択問題のみ
-      const score = totalMultipleChoiceQuestions > 0 
-        ? Math.round((correctCount / totalMultipleChoiceQuestions) * 100)
-        : 0;
+        return prev - 1;
+      });
+    }, 1000);
+    return () => clearInterval(timer);
+  }, [sectionInfo.duration, sectionInfo.title]);
 
-      // 回答データをFirestoreに保存 (addDocumentを使用)
-      const attemptData = {
-        userId: user.uid,
-        examId: examId,
-        answers: answers, // 整形前のanswersを使用する (以前のロジックに合わせる)
-        score: score,     // 計算したスコア
-        completedAt: new Date(),
-      };
-      
-      console.log('Firestoreへ試験結果保存開始:', attemptData);
-      const docRef = await addDocument('exam_attempts', attemptData);
-      console.log('Firestoreへ試験結果保存成功, Document ID:', docRef);
-
-      // 提出成功時にコールバックを呼び出す
-      onSubmissionSuccess?.();
-
-      // 結果ページにリダイレクト (以前の形式に戻す)
-      // 必要であれば docRef.id を使う形式に変更
-      router.push(`/exams/${examId}/result?score=${score}`); 
-
-    } catch (error) {
-      console.error('試験結果の保存/送信エラー:', error);
-      setError(error instanceof Error ? error.message : '試験結果の送信中にエラーが発生しました。');
-      setIsSubmitting(false); // エラー時もローディング解除
-    }
-    // 成功時はリダイレクトされる想定
-  };
-
-  // 残り時間のフォーマット
-  const formatTime = (seconds: number) => {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes}:${remainingSeconds < 10 ? '0' : ''}${remainingSeconds}`;
-  };
-
-  // 現在の問題
-  const currentQuestionData = questions[currentQuestion];
+  const currentQuestionData = questions[currentQuestionIndex];
 
   if (!currentQuestionData) {
     return <div>問題が見つかりません。</div>;
   }
 
-  // 問題タイプの判定（デフォルトは選択肢問題）
   const questionType = currentQuestionData.questionType || 'multiple-choice';
   const sectionType = currentQuestionData.sectionType || 'reading';
   
-  // TOEFLのReadingセクションかどうかを判定
   const isToeflReading = examType === 'TOEFL' && sectionType === 'reading';
   
-  // デバッグ: 画像URLがあれば出力
   if (currentQuestionData.imageUrl) {
     // console.log('問題画像URL:', currentQuestionData.imageUrl);
-    // console.log('模試タイプ:', examType, '/ セクション:', sectionType);
+    // console.log('模試タイプ:', sectionInfo.examType, '/ セクション:', sectionType);
   }
   
-  // 問題テキストを取得
   const questionText = currentQuestionData.content || '';
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-medium">
-          問題 {currentQuestion + 1} / {questions.length}
+          問題 {currentQuestionIndex + 1} / {questions.length}
         </div>
         <div className="text-lg font-medium text-red-600">
-          残り時間: {formatTime(timeLeft)}
+          残り時間: {timeLeft.toString().padStart(2, '0')}
         </div>
       </div>
 
@@ -215,7 +136,6 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
         <h2 className="text-xl font-semibold mb-4 md:hidden">{questionText}</h2>
         
         <div className="flex flex-col md:flex-row md:space-x-6">
-          {/* 問題画像の表示 */}
           {currentQuestionData.imageUrl && (
             <div className="mb-6 md:mb-0 md:w-3/5">
               <div className={`relative w-full ${
@@ -235,7 +155,6 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
           <div className="md:w-2/5">
             <h2 className="text-xl font-semibold mb-4 hidden md:block">{questionText}</h2>
             
-            {/* リスニング問題の音声プレーヤー */}
             {currentQuestionData.audioUrl && (
               <div className="mb-6">
                 <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
@@ -262,14 +181,13 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
               </div>
             )}
 
-            {/* 問題タイプに応じた回答フォーム */}
             {questionType === 'multiple-choice' && (
               <div className="space-y-3">
-                {currentQuestionData.options.map((option, index) => (
+                {currentQuestionData.options && currentQuestionData.options.map((option, index) => (
                   <div
                     key={index}
                     className={`p-3 border rounded-lg cursor-pointer transition-colors ${
-                      answers[currentQuestionData.id] === index
+                      currentAnswers[currentQuestionData.id] === index
                         ? 'bg-blue-100 border-blue-500'
                         : 'hover:bg-gray-50 border-gray-200'
                     }`}
@@ -279,7 +197,7 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
                       <input
                         type="radio"
                         className="mt-1 mr-2"
-                        checked={answers[currentQuestionData.id] === index}
+                        checked={currentAnswers[currentQuestionData.id] === index}
                         onChange={() => handleAnswerSelect(currentQuestionData.id, index)}
                       />
                       <span>{option}</span>
@@ -289,11 +207,10 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
               </div>
             )}
 
-            {/* テキスト入力問題（Writing問題など） */}
             {questionType === 'text-input' && (
               <div className="space-y-3">
                 <textarea
-                  value={answers[currentQuestionData.id] as string || ''}
+                  value={currentAnswers[currentQuestionData.id] as string || ''}
                   onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
                   className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="ここに回答を入力してください..."
@@ -301,21 +218,20 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
               </div>
             )}
 
-            {/* Writing問題（エッセイなど） */}
             {questionType === 'writing' && (
               <div className="space-y-3">
                 <div className="p-3 bg-gray-50 rounded-lg mb-3">
                   <p className="text-gray-700">以下のテーマについて、200-300語程度の英文を作成してください。</p>
                 </div>
                 <textarea
-                  value={answers[currentQuestionData.id] as string || ''}
+                  value={currentAnswers[currentQuestionData.id] as string || ''}
                   onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
                   className="w-full h-60 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="ここに回答を入力してください..."
                 />
                 <div className="text-right text-gray-500 text-sm">
-                  {typeof answers[currentQuestionData.id] === 'string' 
-                    ? (answers[currentQuestionData.id] as string).length 
+                  {typeof currentAnswers[currentQuestionData.id] === 'string' 
+                    ? (currentAnswers[currentQuestionData.id] as string).length 
                     : 0} 文字
                 </div>
               </div>
@@ -324,26 +240,16 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
         </div>
       </div>
 
-      {error && (
-        <div className="bg-red-50 border border-red-200 text-red-700 p-3 rounded-md mb-4">
-          {error}
-        </div>
-      )}
-
       <div className="flex justify-between">
         <button
           onClick={handlePrev}
-          disabled={currentQuestion === 0}
-          className={`px-4 py-2 rounded-md ${
-            currentQuestion === 0
-              ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-              : 'bg-blue-600 text-white hover:bg-blue-700'
-          }`}
+          disabled={currentQuestionIndex === 0}
+          className={`px-4 py-2 rounded-md ${currentQuestionIndex === 0 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
         >
           前の問題
         </button>
 
-        {currentQuestion < questions.length - 1 ? (
+        {currentQuestionIndex < questions.length - 1 ? (
           <button
             onClick={handleNext}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
@@ -352,15 +258,11 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
           </button>
         ) : (
           <button
-            onClick={handleSubmit}
+            onClick={handleSectionComplete}
             disabled={isSubmitting}
-            className={`px-4 py-2 rounded-md ${
-              isSubmitting
-                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                : 'bg-green-600 text-white hover:bg-green-700'
-            }`}
+            className={`px-4 py-2 rounded-md ${isSubmitting ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
           >
-            {isSubmitting ? '提出中...' : '回答を提出する'}
+            {isSubmitting ? '処理中...' : 'セクション完了'}
           </button>
         )}
       </div>
@@ -370,11 +272,11 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
           {questions.map((_, index) => (
             <button
               key={index}
-              onClick={() => setCurrentQuestion(index)}
+              onClick={() => setCurrentQuestionIndex(index)}
               className={`w-8 h-8 flex items-center justify-center rounded-full ${
-                answers[questions[index].id] !== undefined
+                currentAnswers[questions[index].id] !== undefined
                   ? 'bg-green-500 text-white'
-                  : currentQuestion === index
+                  : currentQuestionIndex === index
                   ? 'bg-blue-600 text-white'
                   : 'bg-gray-200 text-gray-700'
               }`}

@@ -6,17 +6,25 @@ import { useAuth } from '@/app/contexts/AuthContext';
 import { useToast } from '@/app/hooks/useToast';
 import Link from 'next/link'; // Linkを追加
 import LoadingSpinner from '@/app/components/LoadingSpinner'; // ローディングスピナーを追加
-import { getExam, Exam } from '@/app/lib/exams'; // getExam と Exam 型をインポート
+import { getExam } from '@/app/lib/exams'; // Exam を削除
+import { ExamData } from '@/app/lib/firestoreTypes'; // ExamData をインポート
 import { motion } from 'framer-motion'; // motion をインポート
 
 // ExamInfo 型定義は不要なので削除
 // interface ExamInfo { ... }
 
+// 試験タイプと表示名のマッピングを型安全にする
+const EXAM_TYPE_LABELS: { [key: string]: string } = {
+  'TOEIC': 'TOEIC® TEST',
+  'TOEFL': 'TOEFL iBT® TEST',
+  'EIKEN': '英検®'
+};
+
 export default function ExamDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { user, loading } = useAuth(); // loading は認証状態のローディング
   const { showToast } = useToast();
-  const [exam, setExam] = useState<Exam | null>(null); // Exam 型を使用
+  const [exam, setExam] = useState<ExamData | null>(null); // Exam を ExamData に変更
   // purchaseStatus は不要なので削除
   // const [purchaseStatus, setPurchaseStatus] = useState<'none' | 'pending' | 'completed' | 'failed'>('none');
   const [isLoading, setIsLoading] = useState(true); // ページ全体のローディング状態
@@ -83,12 +91,11 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
     );
   }
 
-  // 試験タイプに応じたラベル (take/page.tsx から流用)
-  const examTypeLabel = {
-    'TOEIC': 'TOEIC® TEST',
-    'TOEFL': 'TOEFL iBT® TEST',
-    'EIKEN': '英検®'
-  }[exam.type || 'TOEIC'] || '模試';
+  // 試験タイプに応じたラベル (型安全なマッピングを使用)
+  const examTypeLabel = EXAM_TYPE_LABELS[exam.type] || '模試';
+  // structure から合計 duration を計算
+  const totalDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
+  const totalDurationMinutes = Math.floor(totalDuration / 60);
 
 
   return (
@@ -125,7 +132,7 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clipRule="evenodd" />
                </svg>
-               所要時間: 約{exam.duration || '??'}分
+               所要時間: 約{totalDurationMinutes > 0 ? `${totalDurationMinutes}分` : '??分'}
              </span>
             {exam.isFree && (
               <span className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -153,7 +160,7 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
               <span className="font-semibold text-blue-800">受験前に必ずご確認ください</span>
             </div>
             <ul className="ml-8 mt-3 list-disc text-sm text-blue-700 space-y-2">
-              <li>制限時間は <strong>{exam.duration || '指定なし'}分</strong> です。時間内に全ての問題に回答してください。</li>
+              <li>制限時間は <strong>{totalDurationMinutes > 0 ? `約${totalDurationMinutes}分` : '指定なし'}</strong> です。時間内に全ての問題に回答してください。</li>
               <li>試験開始後はタイマーが作動します。中断した場合でもタイマーは停止しません。</li>
               <li>一度提出した回答は修正できません。</li>
               {exam.type === 'TOEFL' || exam.type === 'IELTS' || exam.type === 'EIKEN' ? (

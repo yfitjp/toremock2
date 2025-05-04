@@ -1,7 +1,9 @@
 import { COLLECTIONS, getCollection, getDocument, addDocument, updateDocument, queryDocuments, setDocument } from './firestore';
 import { where, orderBy, limit } from 'firebase/firestore';
+import { ExamData, Question, ExamAttempt } from './firestoreTypes';
 
 // 模試の型定義
+/*
 export interface Exam {
   id: string;
   title: string;
@@ -14,8 +16,10 @@ export interface Exam {
   createdAt?: Date;
   updatedAt?: Date;
 }
+*/
 
 // 問題の型定義
+/*
 export interface Question {
   id: string;
   examId: string;
@@ -30,8 +34,10 @@ export interface Question {
   createdAt: any;
   updatedAt: any;
 }
+*/
 
 // 模試の回答結果の型定義
+/*
 export interface ExamAttempt {
   id: string;
   userId: string;
@@ -42,12 +48,13 @@ export interface ExamAttempt {
   createdAt: any;
   updatedAt: any;
 }
+*/
 
 // すべての模試を取得
-export const getAllExams = async (): Promise<Exam[]> => {
+export const getAllExams = async (): Promise<ExamData[]> => {
   try {
     // Firestoreから模試データを取得
-    const exams = await getCollection<Exam>(COLLECTIONS.EXAMS, [orderBy('createdAt', 'desc')]);
+    const exams = await getCollection<ExamData>(COLLECTIONS.EXAMS, [orderBy('createdAt', 'desc')]);
     
     if (!exams || exams.length === 0) {
       console.warn('No exams found in Firestore');
@@ -62,9 +69,9 @@ export const getAllExams = async (): Promise<Exam[]> => {
 };
 
 // 特定の模試を取得
-export const getExam = async (examId: string): Promise<Exam | null> => {
+export const getExam = async (examId: string): Promise<ExamData | null> => {
   try {
-    const exam = await getDocument<Exam>(COLLECTIONS.EXAMS, examId);
+    const exam = await getDocument<ExamData>(COLLECTIONS.EXAMS, examId);
     if (!exam) {
       console.warn(`No exam found with ID ${examId}`);
       return null;
@@ -77,9 +84,9 @@ export const getExam = async (examId: string): Promise<Exam | null> => {
 };
 
 // 無料の模試を取得
-export const getFreeExams = async (): Promise<Exam[]> => {
+export const getFreeExams = async (): Promise<ExamData[]> => {
   try {
-    const exams = await queryDocuments<Exam>(
+    const exams = await queryDocuments<ExamData>(
       COLLECTIONS.EXAMS,
       [where('isFree', '==', true)]
     );
@@ -97,9 +104,9 @@ export const getFreeExams = async (): Promise<Exam[]> => {
 };
 
 // 特定のタイプの模試を取得
-export const getExamsByType = async (type: string): Promise<Exam[]> => {
+export const getExamsByType = async (type: string): Promise<ExamData[]> => {
   try {
-    return await queryDocuments<Exam>(
+    return await queryDocuments<ExamData>(
       COLLECTIONS.EXAMS,
       [where('type', '==', type), orderBy('createdAt', 'desc')]
     );
@@ -122,7 +129,8 @@ export const getExamQuestions = async (examId: string): Promise<Question[]> => {
   }
 };
 
-// 模試の回答結果を保存
+// 模試の回答結果を保存 (新しい設計では不要になる可能性が高いのでコメントアウト)
+/*
 export const saveExamAttempt = async (attemptData: Omit<ExamAttempt, 'id' | 'createdAt' | 'updatedAt'>): Promise<string> => {
   try {
     console.log('Saving exam attempt to Firestore:', {
@@ -142,10 +150,10 @@ export const saveExamAttempt = async (attemptData: Omit<ExamAttempt, 'id' | 'cre
       throw new Error('Invalid userId format');
     }
     
-    // 回答データが存在することを確認
-    if (!attemptData.answers || Object.keys(attemptData.answers).length === 0) {
-      console.warn('No answers provided in attempt data');
-    }
+    // 回答データが存在することを確認 (このチェックは新しい型では不要)
+    // if (!attemptData.answers || Object.keys(attemptData.answers).length === 0) {
+    //   console.warn('No answers provided in attempt data');
+    // }
     
     const docId = await addDocument<Omit<ExamAttempt, 'id' | 'createdAt' | 'updatedAt'>>(
       COLLECTIONS.EXAM_ATTEMPTS,
@@ -159,6 +167,7 @@ export const saveExamAttempt = async (attemptData: Omit<ExamAttempt, 'id' | 'cre
     throw error;
   }
 };
+*/
 
 // ユーザーの模試受験履歴を取得
 export const getUserExamAttempts = async (userId: string): Promise<ExamAttempt[]> => {

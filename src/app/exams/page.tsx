@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
-import { getAllExams, Exam, getExamsByType } from '@/app/lib/exams';
+import { getAllExams, getExamsByType } from '@/app/lib/exams';
+import { ExamData } from '@/app/lib/firestoreTypes';
 import { formatTimestamp } from '@/app/lib/firestore';
 import { useAuth } from '@/app/hooks/useAuth';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
@@ -62,13 +63,13 @@ const TYPE_STYLES = {
 
 export default function ExamsPage() {
   const { user, loading: authLoading } = useAuth();
-  const [exams, setExams] = useState<Exam[]>([]);
+  const [exams, setExams] = useState<ExamData[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [hasSubscription, setHasSubscription] = useState(false);
   const [purchasedExams, setPurchasedExams] = useState<Set<string>>(new Set());
   const [activeTab, setActiveTab] = useState<string>('all');
-  const [examsByType, setExamsByType] = useState<Record<string, Exam[]>>({});
+  const [examsByType, setExamsByType] = useState<Record<string, ExamData[]>>({});
 
   useEffect(() => {
     const fetchExams = async () => {
@@ -82,7 +83,7 @@ export default function ExamsPage() {
           setExams(examData);
           
           // 試験タイプごとに分類
-          const typeMap: Record<string, Exam[]> = { 'all': examData };
+          const typeMap: Record<string, ExamData[]> = { 'all': examData };
           EXAM_TYPES.forEach(type => {
             typeMap[type] = examData.filter(exam => exam.type === type);
           });
@@ -142,9 +143,13 @@ export default function ExamsPage() {
     }
   }, [user, authLoading, exams]);
 
-  const renderExamCard = (exam: Exam) => {
+  const renderExamCard = (exam: ExamData) => {
     const typeStyle = TYPE_STYLES[exam.type as keyof typeof TYPE_STYLES] || TYPE_STYLES['TOEIC'];
     
+    // structure から合計 duration を計算
+    const totalDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
+    const totalDurationMinutes = Math.floor(totalDuration / 60);
+
     return (
       <motion.div
         key={exam.id}
@@ -162,7 +167,7 @@ export default function ExamsPage() {
               </span>
             ) : (
               <span className="text-lg font-bold text-gray-800">
-                ¥{exam.price.toLocaleString()}
+                ¥{exam.price?.toLocaleString() ?? '----'}
               </span>
             )}
           </div>
@@ -180,7 +185,7 @@ export default function ExamsPage() {
               <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>{exam.duration}分</span>
+              <span>約{totalDurationMinutes > 0 ? `${totalDurationMinutes}分` : '??分'}</span>
             </div>
           </div>
 
@@ -209,7 +214,7 @@ export default function ExamsPage() {
             ) : (
               <PurchaseButton
                 examId={exam.id}
-                price={exam.price}
+                price={exam.price || 0}
                 isDisabled={!user || purchasedExams.has(exam.id)}
               />
             )}
