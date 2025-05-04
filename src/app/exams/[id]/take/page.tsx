@@ -226,11 +226,11 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   }
 
   if (!user) {
-     return (
+    return (
       <div className="container mx-auto px-4 py-8">
         <p>ログインが必要です。</p> { /* リダイレクトされるはず */}
       </div>
-     );
+    );
   }
 
   if (error) {

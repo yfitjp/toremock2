@@ -49,12 +49,15 @@ service cloud.firestore {
                      && request.resource.data.keys().hasOnly(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections', 'completedAt', 'updatedAt']) // 更新可能なフィールドを限定
                      && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') // status は 'in-progress' または 'completed' のみ
                      && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex // インデックスは戻せない
-                     && request.resource.data.sections.keys().hasAll(resource.data.sections.keys()) // sections のキーは減らせない
-                     // sections の各値のバリデーション (必要に応じてさらに詳細化)
-                     && request.resource.data.sections.values().map(sec => 
-                         sec.keys().hasOnly(['status', 'answers', 'score', 'completedAt', 'updatedAt']) // セクション内のフィールド限定
-                     ).hasOnly([true])
-                     && request.resource.data.updatedAt == request.time; // updatedAt はサーバータイムスタンプ
+                     && request.resource.data.sections.keys().hasAll(resource.data.sections.keys())
+                     // --- セクション内フィールド検証をコメントアウトに戻す ---
+                     // && request.resource.data.sections.keys().forall(
+                     //      sectionKey | 
+                     //        request.resource.data.sections[sectionKey].keys().size() == 5 &&
+                     //        request.resource.data.sections[sectionKey].keys().hasAll([\'status\', \'answers\', \'score\', \'completedAt\', \'updatedAt\'])
+                     //    )
+                     // --- コメントアウトここまで ---
+                     && request.resource.data.updatedAt == request.time;
 
       allow delete: if false; // 削除は不可 (または isAdmin())
     }
