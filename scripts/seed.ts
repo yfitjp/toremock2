@@ -1,109 +1,134 @@
-import * as admin from 'firebase-admin';
-import { getFirestore, Timestamp, WriteBatch } from 'firebase-admin/firestore';
+import { initializeApp, cert, getApps } from 'firebase-admin/app';
+import { getFirestore, Timestamp, FieldValue, CollectionReference, WriteBatch } from 'firebase-admin/firestore';
+import * as fs from 'fs/promises';
 import * as path from 'path';
-import * as fs from 'fs';
+import { pathToFileURL } from 'url';
+import { ExamData, Question } from '../src/app/lib/firestoreTypes';
 
-// --- 設定 --- 
-// examDefinitionsディレクトリの絶対パスを取得 (このスクリプトからの相対パスで解決)
-const definitionsDir = path.resolve(__dirname, '../app/lib/examDefinitions'); 
-const examsCollectionName = 'exams';
-const questionsCollectionName = 'questions';
+// サービスアカウントキーのパス (環境変数から取得、または直接指定)
+// TODO: 環境変数 SERVICE_ACCOUNT_KEY_PATH を設定してください
+const serviceAccountKeyPath = process.env.SERVICE_ACCOUNT_KEY_PATH || './serviceAccountKey.json';
+// examDefinitions ディレクトリのパス
+// __dirname は ES Modules では使えないため、プロジェクトルートからの相対パスを使用
+const definitionsDir = path.resolve('src/app/lib/examDefinitions');
 
 // Firebase Admin SDK の初期化
-// サービスアカウントキーのパスを環境変数から取得
-// process.env.GOOGLE_APPLICATION_CREDENTIALS が設定されている必要がある
-try {
-    if (admin.apps.length === 0) { // 二重初期化を防ぐ
-        admin.initializeApp({
-            credential: admin.credential.applicationDefault(),
-            // 必要であれば databaseURL を指定
-            // databaseURL: "https://<YOUR_PROJECT_ID>.firebaseio.com"
-        });
-        console.log('Firebase Admin SDK initialized successfully.');
+if (!getApps().length) {
+  try {
+    const serviceAccount = JSON.parse(await fs.readFile(serviceAccountKeyPath, 'utf8'));
+    initializeApp({
+      credential: cert(serviceAccount)
+    });
+    console.log('Firebase Admin SDK initialized.');
+  } catch (error: any) {
+    console.error('Error initializing Firebase Admin SDK:', error.message);
+    if (error.code === 'ENOENT') {
+      console.error(`Service account key file not found at ${serviceAccountKeyPath}. Please ensure the file exists or the environment variable SERVICE_ACCOUNT_KEY_PATH is set correctly.`);
     } else {
-        console.log('Firebase Admin SDK already initialized.');
+       console.error('Make sure the service account key file content is valid JSON.');
     }
-} catch (error: any) {
-    console.error('Error initializing Firebase Admin SDK:', error);
-    console.error('Please ensure the GOOGLE_APPLICATION_CREDENTIALS environment variable is set correctly.');
-    process.exit(1); // エラーで終了
+    process.exit(1); // SDK初期化に失敗したら終了
+  }
+} else {
+  console.log('Firebase Admin SDK already initialized.');
 }
 
 const db = getFirestore();
+const examsCollection = db.collection('exams') as CollectionReference<Omit<ExamData, 'id'>>;
+const questionsCollection = db.collection('questions') as CollectionReference<Omit<Question, 'id'>>;
 
 /**
- * 模試データと質問データを Firestore に登録する関数
+ * 指定されたディレクトリから模試定義ファイルを読み込み、Firestoreに登録する
  */
 async function seedDatabase() {
-    console.log(`Loading exam definitions from: ${definitionsDir}`);
+  console.log(`Reading exam definitions from: ${definitionsDir}`);
 
-    try {
-        const files = fs.readdirSync(definitionsDir).filter(file => file.endsWith('.ts') || file.endsWith('.js'));
-        console.log(`Found definition files: ${files.join(', ')}`);
+  try {
+    const files = await fs.readdir(definitionsDir);
+    // .js ファイルを探すように変更
+    const definitionFiles = files.filter((file: string) => file.endsWith('.js'));
 
-        for (const file of files) {
-            const filePath = path.join(definitionsDir, file);
-            console.log(`\nProcessing file: ${file}...`);
+    if (definitionFiles.length === 0) {
+      // エラーメッセージも .js に合わせる
+      console.warn(`No definition files (.js) found in ${definitionsDir}. Make sure to compile .ts files first.`);
+      return;
+    }
 
-            try {
-                // TypeScriptファイルの場合、そのままimportできるか、
-                // もしくは ts-node で実行するか、事前に JavaScript にコンパイルする必要がある
-                // ここでは dynamic import を試みる (Node.js v13.2.0+)
-                // もし ts-node などがなければ、事前に tsc で js に変換しておくのが確実
-                const module = await import(filePath);
-                const { examData, questions } = module;
+    console.log(`Found definition files: ${definitionFiles.join(', ')}`);
 
-                if (!examData || !examData.id || !questions) {
-                    console.warn(`Skipping ${file}: examData or questions not found or examData.id is missing.`);
-                    continue;
-                }
+    // 各定義ファイルを処理
+    for (const file of definitionFiles) {
+      const filePath = path.join(definitionsDir, file);
+      // examId は .js 拡張子を除去して取得
+      const examId = path.basename(file, '.js'); 
+      console.log(`\nProcessing ${file} (Exam ID: ${examId})...`);
 
-                // 1. Exam データ登録
-                console.log(`  Registering exam: ${examData.title} (ID: ${examData.id})`);
-                const examRef = db.collection(examsCollectionName).doc(examData.id);
-                await examRef.set({
-                    ...examData,
-                    createdAt: Timestamp.now(),
-                    updatedAt: Timestamp.now(),
-                }, { merge: true }); // merge: true で既存フィールドを保持しつつ更新/作成
-                console.log(`    Exam ${examData.id} registered/updated.`);
+      try {
+        // .js ファイルをインポート
+        const fileUrl = pathToFileURL(filePath).href;
+        const definitionModule = await import(fileUrl);
+        // examData, questions の取得は変わらず
+        const examData = definitionModule.examData as Omit<ExamData, 'id' | 'createdAt' | 'updatedAt'>;
+        const questions = definitionModule.questions as Omit<Question, 'id' | 'examId'>[];
 
-                // 2. Questions データ登録 (バッチ処理)
-                console.log(`  Registering ${questions.length} questions for exam ${examData.id}...`);
-                const batchSize = 400; // Firestore バッチ書き込みの上限は500だが、余裕を持たせる
-                for (let i = 0; i < questions.length; i += batchSize) {
-                    const batch: WriteBatch = db.batch();
-                    const chunk = questions.slice(i, i + batchSize);
-                    console.log(`    Processing batch ${Math.floor(i / batchSize) + 1} (size: ${chunk.length})...`);
-
-                    for (const question of chunk) {
-                        if (!question || !question.id) {
-                           console.warn(`    Skipping invalid question data in ${file}:`, question);
-                           continue;
-                        }
-                        const questionRef = db.collection(questionsCollectionName).doc(question.id);
-                        batch.set(questionRef, {
-                            ...question,
-                            // 必要であれば createdAt/updatedAt を追加
-                        }, { merge: true });
-                    }
-                    await batch.commit();
-                    console.log(`    Batch ${Math.floor(i / batchSize) + 1} committed.`);
-                }
-                console.log(`  All questions for exam ${examData.id} registered/updated.`);
-
-            } catch (importError: any) {
-                console.error(`Error processing file ${file}:`, importError);
-            }
+        if (!examData || !questions) {
+          console.warn(`Skipping ${file}: Missing examData or questions export.`);
+          continue;
         }
 
-        console.log('\nDatabase seeding completed successfully!');
+        // Firestore バッチ書き込みの準備
+        const batch = db.batch();
 
-    } catch (error: any) {
-        console.error('Error during database seeding:', error);
-        process.exit(1);
+        // 1. 模試ドキュメントを exams コレクションに登録 (IDはファイル名を使用)
+        const examDocRef = examsCollection.doc(examId); // examsCollection を使用
+        batch.set(examDocRef, {
+          ...examData,
+          createdAt: FieldValue.serverTimestamp(),
+          updatedAt: FieldValue.serverTimestamp(),
+        });
+        console.log(`  - Added exam data for ${examId} to batch.`);
+
+        // 2. 問題ドキュメントを questions コレクションに登録
+        for (const questionData of questions) {
+          // 各問題に一意のIDを生成 (例: examId-sectionTitle-order)
+          // 注意: より堅牢なID生成方法が必要な場合がある
+          const questionId = `${examId}-${questionData.sectionTitle.replace(/\s+/g, '-')}-${String(questionData.order).padStart(2, '0')}`.toLowerCase();
+          const questionDocRef = questionsCollection.doc(questionId); // questionsCollection を使用
+          batch.set(questionDocRef, {
+            ...questionData,
+            examId: examId, // 模試IDを紐付け
+          });
+        }
+        console.log(`  - Added ${questions.length} questions for ${examId} to batch.`);
+
+        // バッチ書き込みを実行
+        await batch.commit();
+        console.log(`Successfully committed batch for ${examId}.`);
+
+      } catch (importError: any) {
+        console.error(`Error processing file ${file}:`, importError);
+        if (importError.code === 'MODULE_NOT_FOUND') {
+          console.error(`  Please check if the file path and exports are correct.`);
+        }
+      }
     }
+
+  } catch (readDirError: any) {
+    console.error(`Error reading directory ${definitionsDir}:`, readDirError);
+    if (readDirError.code === 'ENOENT') {
+      console.error('  The specified directory does not exist.');
+    }
+  }
 }
 
 // スクリプト実行
-seedDatabase(); 
+(async () => {
+  try {
+    console.log('Seeding Firestore data...');
+    await seedDatabase();
+    console.log('Successfully seeded Firestore data!');
+  } catch (error) {
+    console.error('Error seeding Firestore data:', error);
+    process.exit(1);
+  }
+})(); 
