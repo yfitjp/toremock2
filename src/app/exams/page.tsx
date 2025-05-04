@@ -157,7 +157,7 @@ export default function ExamsPage() {
         <div className="p-6 flex-grow pb-20">
           <div className="absolute top-4 right-4">
             {exam.isFree ? (
-              <span className="bg-gradient-to-r from-green-500 to-green-700 text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
+              <span className="bg-gradient-to-r from-yellow-500 to-yellow-700 text-white px-2.5 py-1 rounded-md text-xs font-bold shadow-sm">
                 無料
               </span>
             ) : (

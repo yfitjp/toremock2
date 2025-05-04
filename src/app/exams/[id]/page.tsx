@@ -3,53 +3,41 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/app/contexts/AuthContext';
-// import { loadStripe } from '@stripe/stripe-js'; // 不要なので削除
 import { useToast } from '@/app/hooks/useToast';
 import Link from 'next/link'; // Linkを追加
 import LoadingSpinner from '@/app/components/LoadingSpinner'; // ローディングスピナーを追加
+import { getExam, Exam } from '@/app/lib/exams'; // getExam と Exam 型をインポート
 
-// Stripeの初期化は不要
-// const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-
-// 試験情報の型定義 (take/page.tsx から一部流用・調整)
-interface ExamInfo {
-  id: string;
-  title: string;
-  description?: string;
-  duration?: number;
-  type: string;
-  isFree?: boolean; // 無料かどうかの情報も追加
-  // 他に必要な試験情報があればここに追加
-}
+// ExamInfo 型定義は不要なので削除
+// interface ExamInfo { ... }
 
 export default function ExamDetailPage({ params }: { params: { id: string } }) {
   const router = useRouter();
   const { user, loading } = useAuth(); // loading は認証状態のローディング
   const { showToast } = useToast();
-  const [exam, setExam] = useState<ExamInfo | null>(null);
+  const [exam, setExam] = useState<Exam | null>(null); // Exam 型を使用
   // purchaseStatus は不要なので削除
   // const [purchaseStatus, setPurchaseStatus] = useState<'none' | 'pending' | 'completed' | 'failed'>('none');
   const [isLoading, setIsLoading] = useState(true); // ページ全体のローディング状態
 
   useEffect(() => {
     const fetchExam = async () => {
-      setIsLoading(true); // データ取得開始
+      setIsLoading(true);
       try {
-        // APIエンドポイントは模試の基本情報を取得するものに変更 (例)
-        // 必要に応じて適切なAPIエンドポイントを指定してください
-        const response = await fetch(`/api/exams/${params.id}`);
-        if (!response.ok) {
-          const errorData = await response.json().catch(() => ({ message: '模試の取得に失敗しました' }));
-          throw new Error(errorData.message || '模試の取得に失敗しました');
+        // getExam 関数を直接呼び出す
+        const data = await getExam(params.id);
+
+        if (!data) { // データが取得できなかった場合
+          throw new Error('指定された模試が見つかりませんでした。');
         }
-        const data = await response.json();
+
         setExam(data);
       } catch (error) {
         console.error('模試取得エラー:', error);
         showToast(error instanceof Error ? error.message : '模試の取得に失敗しました', 'error');
-        setExam(null); // エラー時はnullに設定
+        setExam(null);
       } finally {
-        setIsLoading(false); // データ取得完了
+        setIsLoading(false);
       }
     };
 
