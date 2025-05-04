@@ -138,10 +138,41 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
         }),
       });
 
-      const result = await response.json();
-
+      // レスポンスのステータスコードと内容を確認
       if (!response.ok) {
-        throw new Error(result.error || '試験結果の送信に失敗しました。');
+        let errorData = { message: '試験結果の送信に失敗しました。' };
+        try {
+          // エラーレスポンスがJSON形式の場合、それを解析
+          errorData = await response.json();
+        } catch (e) {
+          // JSONでなければ、ステータステキストを使用
+          errorData.message = `サーバーエラー: ${response.status} ${response.statusText}`;
+        }
+        throw new Error(errorData.message);
+      }
+
+      // レスポンスボディがあるか確認 (例: 204 No Content ではないか)
+      if (response.status === 204) {
+          // 成功したがコンテンツがない場合の処理 (API仕様による)
+          console.log('試験結果送信成功 (No Content)');
+          onSubmissionSuccess?.();
+          // 結果IDがないので、別ページにリダイレクトするなど
+          router.push(`/exams/${examId}/results`); // 結果IDなしでリダイレクト
+          return; // この後の .json() をスキップ
+      }
+
+      // JSON パースを試みる
+      let result;
+      try {
+        result = await response.json();
+        if (!result || !result.resultId) {
+           // JSONは取得できたが、期待したデータがない場合
+           console.error('Invalid response format:', result);
+           throw new Error('サーバーからの応答形式が無効です。');
+        }
+      } catch (e) {
+          console.error('JSON parse error:', e);
+          throw new Error('サーバーからの応答を解析できませんでした。');
       }
 
       console.log('試験結果送信成功:', result);

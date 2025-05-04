@@ -57,6 +57,59 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     };
   }, [isExamSubmitted]);
 
+  // クライアントサイドナビゲーションに対する離脱警告
+  useEffect(() => {
+    if (isExamSubmitted) return; // 試験提出後は何もしない
+
+    const confirmMessage = '試験を中断してページを移動しますか？\n解答状況は保存されません。';
+
+    // --- リンククリックに対する警告 ---
+    const handleAnchorClick = (event: MouseEvent) => {
+      const targetElement = event.target as Element;
+      const anchor = targetElement.closest('a');
+
+      // ページ内リンク(#)や外部リンク(_blank)は対象外
+      // router.pushなどで遷移する場合は検知できない
+      if (anchor && anchor.href && !anchor.href.startsWith('#') && anchor.target !== '_blank') {
+        // 同一オリジンへの遷移かチェック (より安全に)
+        const targetUrl = new URL(anchor.href, window.location.origin);
+        if (targetUrl.origin === window.location.origin) {
+          if (!window.confirm(confirmMessage)) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+        }
+      }
+    };
+
+    // --- ブラウザの戻る/進む操作に対する警告 ---
+    const handleBeforePopState = () => {
+      if (!isExamSubmitted) {
+        if (!window.confirm(confirmMessage)) {
+          // 遷移をキャンセルするために history API を使う
+          // 注意: これでも一瞬遷移先のコンテンツが見えることがある
+          window.history.pushState(null, '', window.location.href);
+          return false; // Next.js Router の動作をキャンセルする意図 (Pages Router用だが念のため)
+        }
+      }
+      return true; // 遷移を許可
+    };
+
+    // Next.js App Router では router.events が使えないため、popstate を使う
+    // popstate は実際に履歴が変わった*後*に発火するため、ハンドリングが難しい
+    // 代わりに beforepopstate を試す (ブラウザによっては未サポートの可能性あり)
+    // または、より複雑な状態管理が必要になる場合も
+    window.addEventListener('beforepopstate', handleBeforePopState);
+
+    // クリックイベントの監視
+    document.addEventListener('click', handleAnchorClick, true);
+
+    return () => {
+      document.removeEventListener('click', handleAnchorClick, true);
+      window.removeEventListener('beforepopstate', handleBeforePopState);
+    };
+  }, [isExamSubmitted]); // 依存配列を isExamSubmitted のみにして router の変更で再登録されないように
+
   // 1. 認証と権限チェック
   useEffect(() => {
     const checkAuthorization = async () => {
