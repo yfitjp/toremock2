@@ -1,44 +1,65 @@
-import { ExamData, Question } from '../firestoreTypes';
+import { ExamData, Question, ExamSection } from '../firestoreTypes';
 
-export const examData: ExamData = {
-  id: 'toefl-exam-1',
-  title: 'TOEFL模試 vol.1 (新構造版)', // タイトルを少し変更
+// 模試定義 (ExamData)
+export const examData: Omit<ExamData, 'id' | 'createdAt' | 'updatedAt'> = {
+  title: 'TOEFL®模試 vol.1', 
   description: 'TOEFL iBT形式の模擬試験です。リーディングセクションのみ含まれています。',
   type: 'TOEFL',
   isFree: true,
+  price: 0,
   structure: [
     {
       type: 'instructions',
-      title: '試験全体の指示',
-      instructions: 'この模試はTOEFL iBTのリーディングセクションを模したものです。指示に従って問題を解いてください。'
+      title: 'Reading Section',
+      instructions: 'Answer the questions based on the passage.'
     },
     {
       type: 'reading',
-      title: 'Reading Section 1',
-      duration: 18 * 60, // 1パッセージあたり18分目安 (10問)
-      instructions: '最初のパッセージを読み、続く10個の質問に答えてください。'
-      // passageId: 'passage-urban-birds' // 必要ならパッセージIDを指定
+      title: 'Reading Section',
+      duration: 36 * 60, 
+      instructions: 'Answer 20 questions based on 2 passages.'
     },
     {
-      type: 'reading',
-      title: 'Reading Section 2',
-      duration: 18 * 60,
-      instructions: '2番目のパッセージを読み、続く10個の質問に答えてください。'
-      // passageId: 'passage-silk-road'
+      type: 'instructions',
+      title: 'Listening Section',
+      instructions: 'Answer the questions based on the Audio.'
     },
-    // { type: 'listening', title: 'Listening Section', duration: 41 * 60, instructions: '...' },
-    // { type: 'break', title: '休憩', duration: 10 * 60, instructions: '10分間の休憩です。' },
-    // { type: 'speaking', title: 'Speaking Section', duration: 17 * 60, instructions: '...' },
-    // { type: 'writing', title: 'Writing Section', duration: 50 * 60, instructions: '...' },
+    {
+      type: 'listening', 
+      title: 'Listening Section',
+      duration: 41 * 60, 
+      instructions: 'Answer the questions based on the Audio.' 
+    },
+    {
+      type: 'instructions',
+      title: 'Speaking Section',
+      instructions: 'Answer the questions based on the passage.'
+    },
+    {
+      type: 'speaking', 
+      title: 'Speaking Section',
+      duration: 17 * 60, 
+      instructions: 'Answer the questions based on the Audio.' 
+    },
+    {
+      type: 'instructions',
+      title: 'Writing Section',
+      instructions: 'Answer the questions based on the passage.'
+    },
+    {
+      type: 'writing', 
+      title: 'Writing Section',
+      duration: 40 * 60, 
+      instructions: 'Answer the questions based on the passage.' 
+    },
   ],
 };
 
-export const questions: Question[] = [
+// 問題リスト (Question[])
+export const questions: Omit<Question, 'id' | 'examId'>[] = [
   // Reading Section 1 (Urban Birds)
   {
-    id: 'toefl-exam-1-r1-01',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1', // 対応するstructureのtitle
+    sectionTitle: 'Reading Section', 
     sectionType: 'reading',
     order: 1,
     content: 'What is the primary focus of the passage?',
@@ -48,9 +69,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-02',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 2,
     content: 'According to the passage, what is one reason grassland bird species have declined in North America?',
@@ -59,11 +78,8 @@ export const questions: Question[] = [
     questionType: 'multiple-choice',
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
-  // ... (r1-03 から r1-10 まで同様に sectionTitle と order を追加) ...
   {
-    id: 'toefl-exam-1-r1-03',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 3,
     content: 'The word "fragmentation" in paragraph 2 most nearly means:',
@@ -73,9 +89,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-04',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 4,
     content: 'What is one effect of noise pollution mentioned in the passage?',
@@ -85,9 +99,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
    {
-    id: 'toefl-exam-1-r1-05',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 5,
     content: 'What can be inferred about birds like the House Sparrow from the passage?',
@@ -97,9 +109,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-06',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 6,
     content: 'The word "toll" in paragraph 4 most nearly means:',
@@ -109,9 +119,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-07',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 7,
     content: 'What is one finding from the study in London mentioned in the passage?',
@@ -121,9 +129,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-08',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 8,
     content: 'Why does the author mention the collisions of migrating birds with skyscrapers?',
@@ -133,9 +139,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-09',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 9,
     content: 'What can be inferred about the effectiveness of small urban parks?',
@@ -145,9 +149,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r1.png?alt=media&token=318fb20b-d237-4a26-9c34-682078e8aa16',
   },
   {
-    id: 'toefl-exam-1-r1-10',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 1',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 10,
     content: "The author's attitude toward urban planning solutions for bird conservation can best be described as:",
@@ -159,11 +161,9 @@ export const questions: Question[] = [
 
   // Reading Section 2 (Silk Road)
   {
-    id: 'toefl-exam-1-r2-01', // IDを変更
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2', // 対応するstructureのtitle
+    sectionTitle: 'Reading Section', 
     sectionType: 'reading',
-    order: 1, // Section 2 内での順序
+    order: 1, 
     content: 'What is the main purpose of the passage?',
     options: ["To argue that the Silk Road was the most important trade route in history", "To describe the rise, impact, and decline of the Silk Road", "To explain how maritime trade replaced all land-based routes", "To criticize the Mongol Empire's role in global trade"],
     correctAnswer: 1,
@@ -171,9 +171,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-02',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 2,
     content: "According to the passage, what was one role of the Han Dynasty in the Silk Road's development?",
@@ -182,11 +180,8 @@ export const questions: Question[] = [
     questionType: 'multiple-choice',
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
-  // ... (r2-03 から r2-10 まで同様に sectionTitle と order を追加) ...
-    {
-    id: 'toefl-exam-1-r2-03',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+  {
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 3,
     content: 'The word "coveted" in paragraph 2 most nearly means:',
@@ -196,9 +191,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-04',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 4,
     content: 'What is one example of cultural exchange mentioned in the passage?',
@@ -208,9 +201,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-05',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 5,
     content: 'What can be inferred about the Pax Mongolica from the passage?',
@@ -220,9 +211,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-06',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 6,
     content: 'The word "eroded" in paragraph 5 most nearly means:',
@@ -232,9 +221,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-07',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 7,
     content: 'Why does the author mention the development of maritime technologies in the 15th century?',
@@ -244,9 +231,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-08',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 8,
     content: "According to the passage, what was one environmental factor that contributed to the Silk Road's decline?",
@@ -256,9 +241,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-09',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 9,
     content: "What can be inferred about the Silk Road's legacy from the passage?",
@@ -268,9 +251,7 @@ export const questions: Question[] = [
     imageUrl: 'https://firebasestorage.googleapis.com/v0/b/toremock.firebasestorage.app/o/toefl-exam-1-r2.png?alt=media&token=c116d357-cdcd-4a7f-8d92-33dab5f288df',
   },
   {
-    id: 'toefl-exam-1-r2-10',
-    examId: 'toefl-exam-1',
-    sectionTitle: 'Reading Section 2',
+    sectionTitle: 'Reading Section',
     sectionType: 'reading',
     order: 10,
     content: "The author's attitude toward the Silk Road's historical significance can best be described as:",

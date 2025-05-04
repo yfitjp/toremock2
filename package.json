@@ -7,7 +7,9 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "seed": "npx ts-node scripts/seed.ts"
+    "seed:compile": "npx tsc",
+    "seed:run": "node --require tsconfig-paths/register ./dist/scripts/seed.js",
+    "seed": "npm run seed:compile && npm run seed:run"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "^1.3.1",

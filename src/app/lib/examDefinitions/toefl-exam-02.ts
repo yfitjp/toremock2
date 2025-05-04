@@ -1,25 +1,57 @@
-import { ExamData, Question, ExamSection } from '../firestoreTypes'; // 型定義をインポート
+import { ExamData, Question, ExamSection } from '../firestoreTypes'; 
 
 // 模試定義 (ExamData)
 export const examData: Omit<ExamData, 'id' | 'createdAt' | 'updatedAt'> = {
   title: 'TOEFL模試 vol.2',
   description: 'TOEFL形式の模擬試験です。',
   type: 'TOEFL',
-  isFree: true,
-  // price: 1500, // isFree: false の場合
+  isFree: false,
+  price: 290,
   structure: [
-    { 
-      type: 'instructions', 
-      title: '試験開始前の指示', 
-      instructions: 'この試験はリーディングセクションのみで構成されています。準備ができたら「次へ進む」をクリックしてください。' 
+    {
+      type: 'instructions',
+      title: 'Reading Section',
+      instructions: 'Answer the questions based on the passage.'
     },
-    { 
-      type: 'reading', 
-      title: 'Reading Section 1', 
-      duration: 3600, // 例: 60分
-      instructions: '以下のパッセージを読み、設問に答えてください。' 
+    {
+      type: 'reading',
+      title: 'Reading Section',
+      duration: 36 * 60, 
+      instructions: 'Answer 20 questions based on 2 passages.'
     },
-    // 必要に応じて他のセクション (Listening, Speaking, Writing, Break など) を追加
+    {
+      type: 'instructions',
+      title: 'Listening Section',
+      instructions: 'Answer the questions based on the Audio.'
+    },
+    {
+      type: 'listening', 
+      title: 'Listening Section',
+      duration: 41 * 60, 
+      instructions: 'Answer the questions based on the Audio.' 
+    },
+    {
+      type: 'instructions',
+      title: 'Speaking Section',
+      instructions: 'Answer the questions based on the passage.'
+    },
+    {
+      type: 'speaking', 
+      title: 'Speaking Section',
+      duration: 17 * 60, 
+      instructions: 'Answer the questions based on the Audio.' 
+    },
+    {
+      type: 'instructions',
+      title: 'Writing Section',
+      instructions: 'Answer the questions based on the passage.'
+    },
+    {
+      type: 'writing', 
+      title: 'Writing Section',
+      duration: 40 * 60, 
+      instructions: 'Answer the questions based on the passage.' 
+    },
   ],
 };
 
