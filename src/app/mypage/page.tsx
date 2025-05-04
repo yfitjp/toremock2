@@ -127,10 +127,7 @@ export default function MyPage() {
       case 'subscription':
         return (
           <div>
-            <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
-               <CreditCard className="flex-shrink-0 h-5 w-5 text-green-500 mr-2" />
-               サブスクリプション管理
-            </h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-4">サブスクリプション管理</h3>
              <SubscriptionManagement />
              {process.env.NODE_ENV === 'development' && (
                <div className="mt-4 border-t pt-4">

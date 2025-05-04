@@ -89,7 +89,7 @@ export default function Navbar() {
             ) : user ? (
               <div className="flex items-center space-x-4">
                 {hasSubscription && (
-                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 transform hover:scale-105 transition-transform duration-200">
+                  <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-lime-100 text-green-800 transform hover:scale-105 transition-transform duration-200">
                     プレミアム会員
                   </span>
                 )}

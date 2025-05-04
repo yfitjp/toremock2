@@ -357,7 +357,7 @@ export default function SubscriptionPage() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="mt-8 bg-green-50 border border-green-200 rounded-lg p-6 max-w-3xl mx-auto"
+            className="mt-8 bg-lime-50 border border-lime-200 rounded-lg p-6 max-w-3xl mx-auto"
           >
             <div className="flex items-center justify-between">
               <div>
@@ -370,7 +370,7 @@ export default function SubscriptionPage() {
                 アクティブ
               </span>
             </div>
-            <div className="mt-4 border-t border-green-200 pt-4">
+            <div className="mt-4 border-t border-lime-200 pt-4">
               <p className="text-green-700">
                 プレミアムプランでは以下の特典をお楽しみいただけます：
               </p>
@@ -378,7 +378,7 @@ export default function SubscriptionPage() {
                 {SUBSCRIPTION_PLANS.PREMIUM.features.map((feature, index) => (
                   <li key={index} className="flex items-start">
                     <svg
-                      className="flex-shrink-0 w-5 h-5 text-green-500"
+                      className="flex-shrink-0 w-5 h-5 text-green-600"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                       fill="currentColor"
