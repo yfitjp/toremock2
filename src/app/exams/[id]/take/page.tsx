@@ -230,20 +230,6 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         <p className="text-gray-600 mb-4">
           {examData.description || '以下の問題に回答してください。'}
         </p>
-        <div className="p-4 bg-blue-50 rounded-lg mb-6">
-          <div className="flex items-center">
-            <svg className="w-5 h-5 text-blue-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-            </svg>
-            <span className="font-medium">注意事項:</span>
-          </div>
-          <ul className="ml-7 mt-2 list-disc text-sm text-gray-700">
-            <li>制限時間は{examData.duration || 60}分です。時間内に全ての問題に回答してください。</li>
-            <li>1度提出した回答は修正できません。回答を確認してから「回答を提出する」ボタンをクリックしてください。</li>
-            <li>リスニング問題では、ヘッドフォンまたはイヤホンの使用をお勧めします。</li>
-            <li>試験中に他のページへ移動すると、進捗が失われる可能性があります。</li>
-          </ul>
-        </div>
       </div>
       
       {examData.questions && examData.questions.length > 0 && (
