@@ -73,7 +73,7 @@ export default function ComparisonTable() {
                     {feature === '有料模試へのアクセス' && plan.name === 'Free' ? (
                       <span className="text-sm font-medium">個別購入</span>
                     ) : hasFeature(plan.features, feature) ? (
-                      <Check className="h-5 w-5 text-green-500 mx-auto" />
+                      <Check className="h-5 w-5 text-blue-500 mx-auto" />
                     ) : (
                       <Minus className="h-5 w-5 text-gray-400 mx-auto" />
                     )}
@@ -105,7 +105,7 @@ export default function ComparisonTable() {
                    ) : plan.name === 'Premium' ? (
                       <Link
                         href="/subscription"
-                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 transition-colors" /* Increased size */
+                        className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-white bg-lime-600 hover:bg-lime-700 transition-colors" /* Increased size */
                       >
                         プランに登録
                       </Link>
