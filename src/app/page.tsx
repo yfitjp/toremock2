@@ -99,12 +99,12 @@ export default function Home() {
                     <div className="relative">
                       <div className="relative rounded-xl shadow-xl bg-gradient-to-br from-white to-blue-50 p-6 border-2 border-blue-200 transform hover:scale-105 transition-all duration-300">
                         <div className="absolute -top-4 -right-4 z-50">
-                          <div className="bg-yellow-400 text-blue-900 font-bold px-5 py-2 rounded-lg shadow-lg transform rotate-12 text-base">
+                          <div className="bg-gradient-to-r from-yellow-200 to-yellow-400 text-yellow-900 font-bold px-5 py-2 rounded-lg shadow-lg transform rotate-12 text-base">
                             無料で挑戦！
                           </div>
                         </div>
                         <div className="bg-blue-600 text-white p-5 rounded-lg mb-5 shadow-lg">
-                          <h3 className="text-xl font-bold mb-2">今すぐ<span className="text-yellow-300 text-2xl font-extrabold">無料</span>で模試を体験</h3>
+                          <h3 className="text-2xl font-bold mb-2">今すぐ<span className="text-yellow-300 text-3xl font-extrabold">無料</span>で模試を体験</h3>
                           <p className="text-blue-100">受験可能な模試を多数ご用意しています</p>
                         </div>
                         <div className="flex justify-center">
