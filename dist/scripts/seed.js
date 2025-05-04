@@ -41,9 +41,10 @@ const url_1 = require("url");
 // サービスアカウントキーのパス (環境変数から取得、または直接指定)
 // TODO: 環境変数 SERVICE_ACCOUNT_KEY_PATH を設定してください
 const serviceAccountKeyPath = process.env.SERVICE_ACCOUNT_KEY_PATH || './serviceAccountKey.json';
-// examDefinitions ディレクトリのパス
-// __dirname は ES Modules では使えないため、プロジェクトルートからの相対パスを使用
-const definitionsDir = path.resolve('src/app/lib/examDefinitions');
+// 環境変数から定義ディレクトリのパスを取得、なければデフォルト (dist 構造を想定)
+// process.cwd() は node プロセスが開始された場所 (通常はプロジェクトルート) を返す
+const defaultDefinitionsDir = path.resolve(process.cwd(), 'dist/app/lib/examDefinitions');
+const definitionsDir = process.env.EXAM_DEFS_DIR || defaultDefinitionsDir;
 // --- メイン処理を async 関数で囲む ---
 async function main() {
     // Firebase Admin SDK の初期化
