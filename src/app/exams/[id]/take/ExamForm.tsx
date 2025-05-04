@@ -111,84 +111,63 @@ export default function ExamForm({ examId, questions, examType, onSubmissionSucc
   const handleSubmit = async () => {
     if (isSubmitting) return;
     setIsSubmitting(true);
+    setError(null); // エラーをリセット
 
-    // ユーザーの回答を整形
-    const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
-      questionId,
-      answer: answer,
-    }));
+    // ユーザー認証チェック
+    if (!user) {
+      setError('ログインが必要です。');
+      setIsSubmitting(false);
+      return;
+    }
 
+    // API呼び出しではなく、クライアントサイドで処理する元のロジックに戻す
     try {
-      console.log('試験結果送信開始', { examId, userId: user?.uid, answers: formattedAnswers });
-      if (!user?.uid) {
-        throw new Error('ユーザー認証が必要です。');
-      }
-      const idToken = await user.getIdToken();
-
-      const response = await fetch('/api/exams/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${idToken}`,
-        },
-        body: JSON.stringify({
-          examId,
-          userId: user.uid,
-          answers: formattedAnswers,
-        }),
-      });
-
-      // レスポンスのステータスコードと内容を確認
-      if (!response.ok) {
-        let errorData = { message: '試験結果の送信に失敗しました。' };
-        try {
-          // エラーレスポンスがJSON形式の場合、それを解析
-          errorData = await response.json();
-        } catch (e) {
-          // JSONでなければ、ステータステキストを使用
-          errorData.message = `サーバーエラー: ${response.status} ${response.statusText}`;
+      // 正解数を計算（選択問題のみ）
+      let correctCount = 0;
+      let totalMultipleChoiceQuestions = 0;
+      
+      for (const question of questions) {
+        if (question.questionType === 'multiple-choice' || question.questionType === undefined) {
+          totalMultipleChoiceQuestions++;
+          if (question.correctAnswer !== undefined && 
+              typeof answers[question.id] === 'number' && 
+              answers[question.id] === question.correctAnswer) {
+            correctCount++;
+          }
         }
-        throw new Error(errorData.message);
       }
+      
+      // スコアを計算（100点満点）- 選択問題のみ
+      const score = totalMultipleChoiceQuestions > 0 
+        ? Math.round((correctCount / totalMultipleChoiceQuestions) * 100)
+        : 0;
 
-      // レスポンスボディがあるか確認 (例: 204 No Content ではないか)
-      if (response.status === 204) {
-          // 成功したがコンテンツがない場合の処理 (API仕様による)
-          console.log('試験結果送信成功 (No Content)');
-          onSubmissionSuccess?.();
-          // 結果IDがないので、別ページにリダイレクトするなど
-          router.push(`/exams/${examId}/results`); // 結果IDなしでリダイレクト
-          return; // この後の .json() をスキップ
-      }
-
-      // JSON パースを試みる
-      let result;
-      try {
-        result = await response.json();
-        if (!result || !result.resultId) {
-           // JSONは取得できたが、期待したデータがない場合
-           console.error('Invalid response format:', result);
-           throw new Error('サーバーからの応答形式が無効です。');
-        }
-      } catch (e) {
-          console.error('JSON parse error:', e);
-          throw new Error('サーバーからの応答を解析できませんでした。');
-      }
-
-      console.log('試験結果送信成功:', result);
+      // 回答データをFirestoreに保存 (addDocumentを使用)
+      const attemptData = {
+        userId: user.uid,
+        examId: examId,
+        answers: answers, // 整形前のanswersを使用する (以前のロジックに合わせる)
+        score: score,     // 計算したスコア
+        completedAt: new Date(),
+      };
+      
+      console.log('Firestoreへ試験結果保存開始:', attemptData);
+      const docRef = await addDocument('exam_attempts', attemptData);
+      console.log('Firestoreへ試験結果保存成功, Document ID:', docRef);
 
       // 提出成功時にコールバックを呼び出す
       onSubmissionSuccess?.();
 
-      // 結果ページにリダイレクト（結果IDを渡す）
-      router.push(`/exams/${examId}/results/${result.resultId}`);
+      // 結果ページにリダイレクト (以前の形式に戻す)
+      // 必要であれば docRef.id を使う形式に変更
+      router.push(`/exams/${examId}/result?score=${score}`); 
 
     } catch (error) {
-      console.error('試験結果の送信エラー:', error);
+      console.error('試験結果の保存/送信エラー:', error);
       setError(error instanceof Error ? error.message : '試験結果の送信中にエラーが発生しました。');
       setIsSubmitting(false); // エラー時もローディング解除
     }
-    // 成功時はリダイレクトされるので、ここでsetIsSubmitting(false)は不要な場合が多い
+    // 成功時はリダイレクトされる想定
   };
 
   // 残り時間のフォーマット
