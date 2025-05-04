@@ -377,7 +377,7 @@ export default function ExamsPage() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16 mb-12 bg-gradient-to-r from-green-600 to-green-800 rounded-xl shadow-xl p-8 md:p-12 text-white text-center relative overflow-hidden"
+          className="mt-16 mb-12 bg-gradient-to-r from-lime-600 to-green-800 rounded-xl shadow-xl p-8 md:p-12 text-white text-center relative overflow-hidden"
         >
           {/* Decorative elements */}
           <div className="absolute -top-10 -left-10 w-32 h-32 bg-white bg-opacity-10 rounded-full filter blur-xl"></div>

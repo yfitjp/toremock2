@@ -472,14 +472,14 @@ export default function SubscriptionPage() {
                   </svg>
                 </div>
                 <h3 className="text-3xl font-bold text-green-900">{SUBSCRIPTION_PLANS.PREMIUM.name}</h3>
-                <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-green-800 text-base font-semibold rounded">人気No.1</span>
+                <span className="ml-2 px-2 py-0.5 bg-yellow-400 text-blue-800 text-base font-semibold rounded">人気No.1</span>
               </div>
               <p className="mt-4 flex items-baseline text-green-900">
                 <span className="text-5xl font-extrabold tracking-tight">¥{SUBSCRIPTION_PLANS.PREMIUM.price.toLocaleString()}</span>
                 <span className="ml-1 text-xl font-semibold">/月</span>
               </p>
               <div className="mt-1">
-                <span className="inline-block bg-yellow-400 text-green-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより73%お得！</span>
+                <span className="inline-block bg-yellow-400 text-blue-900 px-3 py-1 rounded-full text-sm font-semibold">エリートプランより73%お得！</span>
               </div>
               <p className="mt-6 text-green-900">
                 {SUBSCRIPTION_PLANS.PREMIUM.description} エリートプランと同様の高品質な学習体験を、よりリーズナブルな価格でご提供します。
