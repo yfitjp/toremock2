@@ -28,6 +28,7 @@ const TYPE_STYLES = {
     header: 'bg-gray-700',
     iconColor: 'text-blue-700',
     displayName: 'TOEIC',
+    bgColor: 'bg-blue-700',
   },
   'TOEFL': {
     color: 'gray',
@@ -41,6 +42,7 @@ const TYPE_STYLES = {
     header: 'bg-gray-700',
     iconColor: 'text-red-700',
     displayName: 'TOEFL',
+    bgColor: 'bg-red-700',
   },
   'EIKEN': {
     color: 'gray',
@@ -54,6 +56,7 @@ const TYPE_STYLES = {
     header: 'bg-gray-700',
     iconColor: 'text-green-700',
     displayName: '英検',
+    bgColor: 'bg-green-700',
   }
 };
 
@@ -149,36 +152,36 @@ export default function ExamsPage() {
         animate={{ opacity: 1, y: 0 }}
         exit={{ opacity: 0, y: -20 }}
         transition={{ duration: 0.4 }}
-        className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200"
+        className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200 flex flex-col"
       >
-        <div className={`p-2 ${typeStyle.header} text-white flex items-center`}>
-          <div className={`mr-2 ${typeStyle.iconColor}`}>
-            {typeStyle.icon}
+        <div className="p-6 flex-grow">
+          <div className="flex items-center mb-2">
+            <span className={`mr-1.5 ${typeStyle.iconColor}`}>{typeStyle.icon}</span>
+            <span className="text-sm font-medium text-gray-600">{typeStyle.displayName}</span>
           </div>
-          <span className="font-medium">{typeStyle.displayName}</span>
-          {exam.isFree && (
-            <span className="ml-auto bg-white text-green-600 text-xs px-2 py-1 rounded-full font-medium">無料</span>
-          )}
-        </div>
-        <div className="p-6">
-          <h2 className="text-xl font-semibold mb-3">{exam.title}</h2>
-          <p className="text-gray-600 mb-4 text-sm">{exam.description}</p>
+          
+          <h2 className="text-xl font-semibold mb-3 text-gray-900">{exam.title}</h2>
+          <p className="text-gray-600 mb-4 text-sm flex-grow">{exam.description}</p>
 
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-6">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-6 mt-auto">
             <div className="flex items-center">
               <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
               <span>{exam.duration}分</span>
             </div>
-            {!exam.isFree && (
-              <div className="flex items-center">
-                <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>¥{exam.price.toLocaleString()}</span>
-              </div>
-            )}
+            <div className="flex items-center font-medium">
+              {exam.isFree ? (
+                <span className="text-green-600">無料</span>
+              ) : (
+                <>
+                  <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="text-gray-700">¥{exam.price.toLocaleString()}</span>
+                </>
+              )}
+            </div>
           </div>
 
           {exam.isFree ? (
@@ -273,7 +276,7 @@ export default function ExamsPage() {
             onClick={() => setActiveTab('all')}
             className={`px-4 py-2 rounded-md whitespace-nowrap mr-2 transition-colors ${
               activeTab === 'all' 
-                ? 'bg-blue-600 text-white' 
+                ? 'bg-gray-600 text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -296,13 +299,13 @@ export default function ExamsPage() {
                 onClick={() => setActiveTab(type)}
                 className={`px-4 py-2 rounded-md flex items-center whitespace-nowrap mr-2 transition-colors ${
                   activeTab === type 
-                    ? 'bg-gray-700 text-white' 
+                    ? `${style?.bgColor ?? 'bg-gray-700'} text-white`
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                <span className={`mr-2 ${style.iconColor}`}>{style.icon}</span>
+                <span className={`mr-2 ${activeTab === type ? 'text-white' : style.iconColor}`}>{style.icon}</span>
                 <span>{style.displayName}</span>
-                <span className="ml-2 bg-white bg-opacity-20 text-xs px-2 py-0.5 rounded-full">
+                <span className={`ml-2 ${activeTab === type ? 'bg-white bg-opacity-25' : 'bg-gray-200'} text-xs px-2 py-0.5 rounded-full`}>
                   {examsByType[type]?.length || 0}
                 </span>
               </button>
