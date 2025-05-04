@@ -7,6 +7,7 @@ import { useToast } from '@/app/hooks/useToast';
 import Link from 'next/link'; // Linkを追加
 import LoadingSpinner from '@/app/components/LoadingSpinner'; // ローディングスピナーを追加
 import { getExam, Exam } from '@/app/lib/exams'; // getExam と Exam 型をインポート
+import { motion } from 'framer-motion'; // motion をインポート
 
 // ExamInfo 型定義は不要なので削除
 // interface ExamInfo { ... }
@@ -91,62 +92,99 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
 
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-4xl">
-      {/* 試験タイトルと概要 */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">{exam.title}</h1>
-        <div className="flex items-center mb-2">
-          <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-            {examTypeLabel}
-          </span>
-          {exam.isFree && (
-            <span className="inline-block bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded">
-              無料
-            </span>
-          )}
+    <div className="bg-gray-50 min-h-screen pb-12"> {/* 背景色とpaddingを追加 */}
+      {/* 新しいヘッダーセクション */}
+      <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12">
+        <div className="container mx-auto px-4">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-3xl font-bold mb-2"
+          >
+            {exam.title}
+          </motion.h1>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-blue-100 max-w-3xl"
+          >
+            受験前の最終確認：以下の注意事項をよくお読みください。
+          </motion.p>
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            transition={{ delay: 0.3, duration: 0.5 }}
+            className="mt-4 flex items-center space-x-4 text-blue-200"
+            >
+             <span className="inline-flex items-center bg-white bg-opacity-10 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
+               {examTypeLabel}
+             </span>
+             <span className="inline-flex items-center">
+               <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+                 <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clipRule="evenodd" />
+               </svg>
+               所要時間: 約{exam.duration || '??'}分
+             </span>
+            {exam.isFree && (
+              <span className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
+                 無料
+               </span>
+             )}
+           </motion.div>
         </div>
-        <p className="text-gray-600 dark:text-gray-300">
-          {exam.description || 'この模試は、あなたの英語スキルを測定するために設計されています。'}
-        </p>
       </div>
 
-      {/* 注意事項 */}
-      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-6 border border-yellow-300">
-        <h2 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">受験にあたっての注意事項</h2>
-        <div className="p-4 bg-yellow-50 dark:bg-yellow-900 dark:bg-opacity-20 rounded-lg mb-6">
-          <div className="flex items-center">
-             <svg className="w-5 h-5 text-yellow-600 dark:text-yellow-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
-            <span className="font-medium text-yellow-800 dark:text-yellow-300">重要:</span>
-          </div>
-          <ul className="ml-7 mt-2 list-disc text-sm text-gray-700 dark:text-gray-300 space-y-1">
-            <li>制限時間は <strong>{exam.duration || '指定なし'}分</strong> です。時間内に全ての問題に回答してください。</li>
-            <li>試験開始後はタイマーが作動します。中断した場合でもタイマーは停止しません。</li>
-            <li>一度提出した回答は修正できません。</li>
-            {exam.type === 'TOEFL' || exam.type === 'IELTS' || exam.type === 'EIKEN' ? ( // 例: 特定の試験タイプで追加注意
-              <li>スピーキング・ライティングセクションでは、マイク・キーボードが必要になります。事前に動作確認を行ってください。</li>
-            ) : null}
-            {exam.type === 'TOEIC' && ( // 例: TOEICの場合の注意
-              <li>リスニングセクションとリーディングセクションに分かれています。</li>
-            )}
-            <li>リスニング問題が含まれる場合は、ヘッドフォンまたはイヤホンの使用を強く推奨します。静かな環境で受験してください。</li>
-            <li>試験中にブラウザを閉じたり、他のページに移動したりすると、解答状況が失われる可能性があります。</li>
-            <li>安定したインターネット接続環境で受験してください。</li>
-            <li>準備ができたら下の「受験を開始する」ボタンをクリックしてください。</li>
-          </ul>
-        </div>
-
-        {/* 受験開始ボタン */}
-        <div className="mt-8 text-center">
-          <Link
-            href={`/exams/${exam.id}/take`}
-            className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+      {/* 注意事項セクションを白いカードに変更 */}
+      <div className="container mx-auto px-4 py-8 -mt-10"> {/* ネガティブマージンでヘッダーと重ねる */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }} 
+          animate={{ opacity: 1, y: 0 }} 
+          transition={{ delay: 0.2, duration: 0.5 }}
+          className="bg-white rounded-lg shadow-xl p-6 md:p-8"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
-              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
-            </svg>
-            受験を開始する
-          </Link>
-        </div>
+          {/* <h2 className="text-2xl font-semibold mb-4 text-gray-900">受験にあたっての注意事項</h2> */}{/* カード内ではh2は不要かも */}
+          
+          {/* 注意事項ボックスのデザイン変更 */}
+          <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-8">
+            <div className="flex items-center">
+              <svg className="w-6 h-6 text-blue-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <span className="font-semibold text-blue-800">受験前に必ずご確認ください</span>
+            </div>
+            <ul className="ml-8 mt-3 list-disc text-sm text-blue-700 space-y-2">
+              <li>制限時間は <strong>{exam.duration || '指定なし'}分</strong> です。時間内に全ての問題に回答してください。</li>
+              <li>試験開始後はタイマーが作動します。中断した場合でもタイマーは停止しません。</li>
+              <li>一度提出した回答は修正できません。</li>
+              {exam.type === 'TOEFL' || exam.type === 'IELTS' || exam.type === 'EIKEN' ? (
+                <li>スピーキング・ライティングセクションでは、マイク・キーボードが必要になります。事前にデバイスの接続と動作をご確認ください。</li>
+              ) : null}
+              {exam.type === 'TOEIC' && (
+                <li>リスニングセクションとリーディングセクションに分かれています。セクション間の移動は指示に従ってください。</li>
+              )}
+              <li>リスニング問題が含まれる場合は、ヘッドフォンまたはイヤホンの使用を強く推奨します。静かな環境で受験してください。</li>
+              <li>試験中にブラウザを閉じたり、更新したり、他のページに移動すると、解答状況が失われる可能性があります。十分ご注意ください。</li>
+              <li>安定したインターネット接続環境で受験してください。接続が不安定な場合、問題の読み込みや解答の送信に失敗する可能性があります。</li>
+              <li>万が一、試験中に技術的な問題が発生した場合は、慌てずに画面の指示を確認するか、サポートまでお問い合わせください。</li>
+              <li>試験終了後、結果概要が画面に表示されます。詳細な分析レポートはマイページから後日確認できます。（※表示内容は模試により異なる場合があります）</li>
+              <li>特に記載がない限り、各模試は一度のみ受験可能です。</li>
+              <li>準備ができたら下の「受験を開始する」ボタンをクリックしてください。クリックすると試験が開始され、タイマーが作動します。</li>
+            </ul>
+          </div>
+
+          {/* 受験開始ボタン */}
+          <div className="text-center">
+            <Link
+              href={`/exams/${exam.id}/take`}
+              className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors duration-200"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-8.707l-3-3a1 1 0 00-1.414 1.414L10.586 9H7a1 1 0 100 2h3.586l-1.293 1.293a1 1 0 101.414 1.414l3-3a1 1 0 000-1.414z" clipRule="evenodd" />
+              </svg>
+              受験を開始する
+            </Link>
+          </div>
+        </motion.div>
       </div>
 
        {/* 必要であれば他の模試詳細情報や関連情報へのリンクなどをここに追加 */}
