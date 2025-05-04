@@ -14,7 +14,7 @@ import LoadingSpinner from '../components/LoadingSpinner';
 // 試験タイプのリスト
 const EXAM_TYPES = ['TOEIC', 'TOEFL', 'EIKEN'];
 
-// 試験タイプに応じたアイコンの設定（色は統一）
+// 試験タイプに応じたアイコンと表示名の設定
 const TYPE_STYLES = {
   'TOEIC': {
     color: 'gray',
@@ -25,7 +25,9 @@ const TYPE_STYLES = {
     ),
     bgGradient: 'from-gray-50 to-gray-100',
     border: 'border-gray-200',
-    header: 'bg-gray-700'
+    header: 'bg-gray-700',
+    iconColor: 'text-blue-700',
+    displayName: 'TOEIC',
   },
   'TOEFL': {
     color: 'gray',
@@ -36,7 +38,9 @@ const TYPE_STYLES = {
     ),
     bgGradient: 'from-gray-50 to-gray-100',
     border: 'border-gray-200',
-    header: 'bg-gray-700'
+    header: 'bg-gray-700',
+    iconColor: 'text-red-700',
+    displayName: 'TOEFL',
   },
   'EIKEN': {
     color: 'gray',
@@ -47,7 +51,9 @@ const TYPE_STYLES = {
     ),
     bgGradient: 'from-gray-50 to-gray-100',
     border: 'border-gray-200',
-    header: 'bg-gray-700'
+    header: 'bg-gray-700',
+    iconColor: 'text-green-700',
+    displayName: '英検',
   }
 };
 
@@ -145,11 +151,11 @@ export default function ExamsPage() {
         transition={{ duration: 0.4 }}
         className="bg-white shadow-md rounded-lg overflow-hidden border border-gray-200"
       >
-        <div className="p-2 bg-gray-700 text-white flex items-center">
-          <div className="mr-2">
+        <div className={`p-2 ${typeStyle.header} text-white flex items-center`}>
+          <div className={`mr-2 ${typeStyle.iconColor}`}>
             {typeStyle.icon}
           </div>
-          <span className="font-medium">{exam.type}</span>
+          <span className="font-medium">{typeStyle.displayName}</span>
           {exam.isFree && (
             <span className="ml-auto bg-white text-green-600 text-xs px-2 py-1 rounded-full font-medium">無料</span>
           )}
@@ -177,21 +183,21 @@ export default function ExamsPage() {
 
           {exam.isFree ? (
             <Link
-              href={`/exams/${exam.id}/take`}
+              href={`/exams/${exam.id}`}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               無料で受験する
             </Link>
           ) : purchasedExams.has(exam.id) ? (
             <Link
-              href={`/exams/${exam.id}/take`}
+              href={`/exams/${exam.id}`}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               受験する（購入済み）
             </Link>
           ) : hasSubscription ? (
             <Link
-              href={`/exams/${exam.id}/take`}
+              href={`/exams/${exam.id}`}
               className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
             >
               受験する
@@ -283,6 +289,7 @@ export default function ExamsPage() {
           </button>
           {EXAM_TYPES.map(type => {
             const style = TYPE_STYLES[type as keyof typeof TYPE_STYLES];
+            if (!style) return null;
             return (
               <button
                 key={type}
@@ -293,8 +300,8 @@ export default function ExamsPage() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                <span className="mr-2">{style.icon}</span>
-                <span>{type}</span>
+                <span className={`mr-2 ${style.iconColor}`}>{style.icon}</span>
+                <span>{style.displayName}</span>
                 <span className="ml-2 bg-white bg-opacity-20 text-xs px-2 py-0.5 rounded-full">
                   {examsByType[type]?.length || 0}
                 </span>
@@ -332,7 +339,7 @@ export default function ExamsPage() {
                   transition={{ duration: 0.3 }}
                 >
                   <div className="flex items-center mb-6">
-                    <h2 className="text-2xl font-bold">{activeTab}模試</h2>
+                    <h2 className="text-2xl font-bold">{TYPE_STYLES[activeTab as keyof typeof TYPE_STYLES]?.displayName || activeTab}模試</h2>
                     <span className="ml-3 text-sm text-gray-500">
                       {examsByType[activeTab]?.length || 0}件の模試が見つかりました
                     </span>
@@ -344,7 +351,7 @@ export default function ExamsPage() {
                     </div>
                   ) : (
                     <div className="bg-gray-50 rounded-lg p-8 text-center">
-                      <p className="text-gray-500">現在、{activeTab}の模試はありません。</p>
+                      <p className="text-gray-500">現在、{TYPE_STYLES[activeTab as keyof typeof TYPE_STYLES]?.displayName || activeTab}の模試はありません。</p>
                       <button
                         onClick={() => setActiveTab('all')}
                         className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200"
