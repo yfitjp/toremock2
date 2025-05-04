@@ -21,9 +21,10 @@ interface ExamFormProps {
   examId: string;
   questions: Question[];
   examType?: string; // 模試タイプ（TOEIC, TOEFL, EIKENなど）
+  onSubmissionSuccess?: () => void; // 提出成功時のコールバックを追加 (オプショナル)
 }
 
-export default function ExamForm({ examId, questions, examType }: ExamFormProps) {
+export default function ExamForm({ examId, questions, examType, onSubmissionSuccess }: ExamFormProps) {
   const router = useRouter();
   const { user } = useAuth();
   const [answers, setAnswers] = useState<Record<string, number | string>>({});
@@ -108,51 +109,55 @@ export default function ExamForm({ examId, questions, examType }: ExamFormProps)
 
   // 回答の提出
   const handleSubmit = async () => {
-    if (!user) {
-      setError('ログインが必要です。');
-      return;
-    }
+    if (isSubmitting) return;
+    setIsSubmitting(true);
+
+    // ユーザーの回答を整形
+    const formattedAnswers = Object.entries(answers).map(([questionId, answer]) => ({
+      questionId,
+      answer: answer,
+    }));
 
     try {
-      setIsSubmitting(true);
-      setError(null);
-
-      // 正解数を計算（選択問題のみ）
-      let correctCount = 0;
-      let totalMultipleChoiceQuestions = 0;
-      
-      for (const question of questions) {
-        if (question.questionType === 'multiple-choice' || question.questionType === undefined) {
-          totalMultipleChoiceQuestions++;
-          if (question.correctAnswer !== undefined && 
-              typeof answers[question.id] === 'number' && 
-              answers[question.id] === question.correctAnswer) {
-            correctCount++;
-          }
-        }
+      console.log('試験結果送信開始', { examId, userId: user?.uid, answers: formattedAnswers });
+      if (!user?.uid) {
+        throw new Error('ユーザー認証が必要です。');
       }
-      
-      // スコアを計算（100点満点）- 選択問題のみ
-      const score = totalMultipleChoiceQuestions > 0 
-        ? Math.round((correctCount / totalMultipleChoiceQuestions) * 100)
-        : 0;
-      
-      // 回答データをFirestoreに保存
-      await addDocument('exam_attempts', {
-        userId: user.uid,
-        examId: examId,
-        answers: answers,
-        score: score,
-        completedAt: new Date(),
+      const idToken = await user.getIdToken();
+
+      const response = await fetch('/api/exams/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${idToken}`,
+        },
+        body: JSON.stringify({
+          examId,
+          userId: user.uid,
+          answers: formattedAnswers,
+        }),
       });
 
-      // 結果ページへリダイレクト
-      router.push(`/exams/${examId}/result?score=${score}`);
-    } catch (err) {
-      console.error('Error submitting exam:', err);
-      setError('回答の提出中にエラーが発生しました。もう一度お試しください。');
-      setIsSubmitting(false);
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error || '試験結果の送信に失敗しました。');
+      }
+
+      console.log('試験結果送信成功:', result);
+
+      // 提出成功時にコールバックを呼び出す
+      onSubmissionSuccess?.();
+
+      // 結果ページにリダイレクト（結果IDを渡す）
+      router.push(`/exams/${examId}/results/${result.resultId}`);
+
+    } catch (error) {
+      console.error('試験結果の送信エラー:', error);
+      setError(error instanceof Error ? error.message : '試験結果の送信中にエラーが発生しました。');
+      setIsSubmitting(false); // エラー時もローディング解除
     }
+    // 成功時はリダイレクトされるので、ここでsetIsSubmitting(false)は不要な場合が多い
   };
 
   // 残り時間のフォーマット

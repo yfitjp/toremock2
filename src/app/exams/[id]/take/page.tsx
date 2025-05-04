@@ -38,6 +38,24 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   const [isAuthorized, setIsAuthorized] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [isExamSubmitted, setIsExamSubmitted] = useState(false);
+
+  // ページ離脱防止の警告
+  useEffect(() => {
+    const handleBeforeUnload = (event: BeforeUnloadEvent) => {
+      // 試験が提出されていない場合のみ警告を表示
+      if (!isExamSubmitted) {
+        event.preventDefault();
+        event.returnValue = '';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isExamSubmitted]);
 
   // 1. 認証と権限チェック
   useEffect(() => {
@@ -220,20 +238,23 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
-      <div className="bg-white shadow-md rounded-lg p-6 mb-8">
-        <h1 className="text-3xl font-bold mb-2">{examData.title || '模試'}</h1>
-        <div className="flex items-center mb-2">
-          <span className="inline-block bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-            {examTypeLabel}
-          </span>
+      <div className="bg-white shadow-md rounded-lg p-4 mb-6">
+        <h1 className="text-2xl font-semibold mb-1 text-gray-800">{examData.title || '模試'}</h1>
+        <div className="flex items-center text-sm text-gray-500">
+           <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
+             <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clipRule="evenodd" />
+           </svg>
+          <span>制限時間: {examData.duration || '??'}分</span>
         </div>
-        <p className="text-gray-600 mb-4">
-          {examData.description || '以下の問題に回答してください。'}
-        </p>
       </div>
       
       {examData.questions && examData.questions.length > 0 && (
-        <ExamForm examId={params.id} questions={examData.questions} examType={examData.type} />
+        <ExamForm 
+          examId={params.id} 
+          questions={examData.questions} 
+          examType={examData.type} 
+          onSubmissionSuccess={() => setIsExamSubmitted(true)}
+        />
       )}
     </div>
   );
