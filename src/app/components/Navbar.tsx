@@ -95,7 +95,7 @@ export default function Navbar() {
                 )}
                 <Link
                   href="/mypage"
-                  className="bg-blue-100 text-blue-800 hover:bg-blue-200 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105"
+                  className="bg-gradient-to-r from-blue-100 to-blue-200 text-blue-800 hover:from-blue-200 hover:to-blue-300 px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105"
                 >
                   マイページ
                 </Link>

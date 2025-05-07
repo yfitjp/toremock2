@@ -207,7 +207,7 @@ export default function ExamsPage() {
           <h2 className="text-xl font-semibold mb-3 text-gray-900">{exam.title}</h2>
           <p className="text-gray-600 mb-4 text-sm flex-grow">{exam.description}</p>
 
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-6 mt-auto">
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-2 mt-auto">
             <div className="flex items-center">
               <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
