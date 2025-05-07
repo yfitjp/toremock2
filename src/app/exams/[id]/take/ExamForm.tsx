@@ -113,7 +113,7 @@ export default function ExamForm({
   const currentQuestionData = questions[currentQuestionIndex];
 
   if (!currentQuestionData) {
-    return <div>問題が見つかりません。</div>;
+    return <div>Loading question...</div>;
   }
 
   const questionType = currentQuestionData.questionType || 'multiple-choice';
@@ -132,10 +132,10 @@ export default function ExamForm({
     <div className="bg-white shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-medium">
-          問題 {currentQuestionIndex + 1} / {questions.length}
+          Question {currentQuestionIndex + 1} / {questions.length}
         </div>
         <div className="text-lg font-medium text-red-600">
-          残り時間: {formatTime(timeLeft)}
+          Time Left: {formatTime(timeLeft)}
         </div>
       </div>
 
@@ -182,7 +182,7 @@ export default function ExamForm({
                   </button>
                   <audio ref={audioRef} src={currentQuestionData.audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
                   <div className="ml-4 text-gray-600">
-                    音声を{isPlaying ? '停止' : '再生'}する
+                    {isPlaying ? 'Pause' : 'Play'} Audio
                   </div>
                 </div>
               </div>
@@ -220,7 +220,7 @@ export default function ExamForm({
                   value={currentAnswers[currentQuestionData.id] as string || ''}
                   onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
                   className="w-full h-40 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="ここに回答を入力してください..."
+                  placeholder="Enter your answer here..."
                 />
               </div>
             )}
@@ -228,18 +228,18 @@ export default function ExamForm({
             {questionType === 'writing' && (
               <div className="space-y-3">
                 <div className="p-3 bg-gray-50 rounded-lg mb-3">
-                  <p className="text-gray-700">以下のテーマについて、200-300語程度の英文を作成してください。</p>
+                  <p className="text-gray-700">Please write an essay of 200-300 words on the following topic.</p>
                 </div>
                 <textarea
                   value={currentAnswers[currentQuestionData.id] as string || ''}
                   onChange={(e) => handleTextInputChange(currentQuestionData.id, e.target.value)}
                   className="w-full h-60 p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                  placeholder="ここに回答を入力してください..."
+                  placeholder="Enter your essay here..."
                 />
                 <div className="text-right text-gray-500 text-sm">
                   {typeof currentAnswers[currentQuestionData.id] === 'string' 
                     ? (currentAnswers[currentQuestionData.id] as string).length 
-                    : 0} 文字
+                    : 0} Characters
                 </div>
               </div>
             )}
@@ -253,7 +253,7 @@ export default function ExamForm({
           disabled={currentQuestionIndex === 0}
           className={`px-4 py-2 rounded-md ${currentQuestionIndex === 0 ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-blue-600 text-white hover:bg-blue-700'}`}
         >
-          前の問題
+          Previous
         </button>
 
         {currentQuestionIndex < questions.length - 1 ? (
@@ -261,7 +261,7 @@ export default function ExamForm({
             onClick={handleNext}
             className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700"
           >
-            次の問題
+            Next
           </button>
         ) : (
           <button
@@ -269,7 +269,7 @@ export default function ExamForm({
             disabled={isSubmitting}
             className={`px-4 py-2 rounded-md ${isSubmitting ? 'bg-gray-200 text-gray-500 cursor-not-allowed' : 'bg-green-600 text-white hover:bg-green-700'}`}
           >
-            {isSubmitting ? '処理中...' : 'セクション完了'}
+            {isSubmitting ? 'Submitting...' : 'Complete Section'}
           </button>
         )}
       </div>
