@@ -32,6 +32,13 @@ export default function ExamForm({
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  // Helper function to format seconds into MM分SS秒
+  const formatTime = (totalSeconds: number) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}分${seconds.toString().padStart(2, '0')}秒`;
+  };
+
   const handleAnswerSelect = (questionId: string, optionIndex: number) => {
     setCurrentAnswers((prev) => ({ ...prev, [questionId]: optionIndex }));
   };
@@ -128,7 +135,7 @@ export default function ExamForm({
           問題 {currentQuestionIndex + 1} / {questions.length}
         </div>
         <div className="text-lg font-medium text-red-600">
-          残り時間: {timeLeft.toString().padStart(2, '0')}
+          残り時間: {formatTime(timeLeft)}
         </div>
       </div>
 
