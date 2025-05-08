@@ -351,9 +351,9 @@ export default function MyPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 flex flex-col md:flex-row">
-        <aside className="w-full md:w-64 md:pr-8 mb-8 md:mb-0 flex-shrink-0">
-          <nav className="space-y-2 md:sticky md:top-8">
+      <div className="container mx-auto px-4 py-8 flex">
+        <aside className="w-64 pr-8 flex-shrink-0">
+          <nav className="space-y-2 sticky top-8">
             <button
               onClick={() => setActiveSection('account')}
               className={activeSection === 'account' ? activeLinkClasses : baseLinkClasses}
@@ -392,7 +392,7 @@ export default function MyPage() {
           </nav>
         </aside>
 
-        <main className="flex-grow">
+        <main className="flex-grow overflow-x-auto">
           {renderSection()}
         </main>
       </div>
