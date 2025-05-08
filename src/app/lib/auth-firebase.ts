@@ -6,9 +6,11 @@ import {
   updateProfile,
   User,
   UserCredential,
+  GoogleAuthProvider,
+  signInWithPopup,
 } from 'firebase/auth';
 import { auth } from './firebase';
-import { COLLECTIONS, setDocument } from './firestore';
+import { COLLECTIONS, setDocument, getDocument } from './firestore';
 
 export { auth };
 
@@ -102,6 +104,55 @@ export const loginUser = async (
     } else {
       throw error;
     }
+  }
+};
+
+// Googleでログイン
+export const signInWithGoogle = async (): Promise<UserCredential> => {
+  try {
+    if (!auth) {
+      console.error('Firebase auth is not initialized');
+      throw new Error('Firebase auth is not initialized');
+    }
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const user = result.user;
+
+    // Firestoreにユーザー情報が存在するか確認
+    const userDoc = await getDocument(COLLECTIONS.USERS, user.uid);
+    if (!userDoc) {
+      // 新規ユーザーの場合、Firestoreに情報を保存
+      await setDocument(COLLECTIONS.USERS, user.uid, {
+        name: user.displayName || 'Anonymous',
+        email: user.email,
+        createdAt: new Date(),
+        photoURL: user.photoURL, // プロフィール写真も保存
+      });
+      console.log('New Google user data saved to Firestore');
+    } else {
+      // 既存ユーザーの場合、最終ログイン日時やプロフィール写真などを更新することも可能
+      // 必要であれば更新処理をここに記述
+      await setDocument(COLLECTIONS.USERS, user.uid, {
+        lastLoginAt: new Date(), // 例: 最終ログイン日時
+        photoURL: user.photoURL,
+      }, true); // trueでマージ
+      console.log('Existing Google user data updated in Firestore');
+    }
+
+    console.log('User signed in with Google successfully:', user.uid);
+    return result;
+  } catch (error: any) {
+    console.error('Error signing in with Google:', error);
+    // エラーコードに応じて適切なメッセージをスローする
+    if (error.code === 'auth/popup-closed-by-user') {
+      throw new Error('Googleログインのポップアップが閉じられました。');
+    } else if (error.code === 'auth/cancelled-popup-request') {
+      throw new Error('複数のログインリクエストが発行されました。');
+    } else if (error.code === 'auth/popup-blocked') {
+      throw new Error('ブラウザによってポップアップがブロックされました。ポップアップを許可してください。');
+    }
+    // 他のFirebaseエラーもハンドルする
+    throw error;
   }
 };
 

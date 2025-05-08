@@ -4,7 +4,7 @@ import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { loginUser } from '@/app/lib/auth-firebase';
+import { loginUser, signInWithGoogle } from '@/app/lib/auth-firebase';
 
 function SignInForm() {
   const router = useRouter();
@@ -13,6 +13,7 @@ function SignInForm() {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [loading, setLoading] = useState(false);
+  const [googleLoading, setGoogleLoading] = useState(false);
 
   // 新規登録後のリダイレクトの場合、メッセージを表示
   const registered = searchParams.get('registered');
@@ -46,6 +47,23 @@ function SignInForm() {
       
       setLoading(false);
     }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setGoogleLoading(true);
+    setErrorMessage('');
+    try {
+      await signInWithGoogle();
+      router.push('/mypage');
+    } catch (error: any) {
+      console.error('Googleログインエラー:', error);
+      if (error.message) {
+        setErrorMessage(error.message);
+      } else {
+        setErrorMessage('Googleログイン中にエラーが発生しました');
+      }
+    }
+    setGoogleLoading(false);
   };
 
   return (
@@ -151,6 +169,36 @@ function SignInForm() {
               </button>
             </div>
           </form>
+
+          <div className="mt-6">
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <div className="w-full border-t border-gray-300" />
+              </div>
+              <div className="relative flex justify-center text-sm">
+                <span className="px-2 bg-white text-gray-500">または</span>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <button
+                type="button"
+                onClick={handleGoogleSignIn}
+                disabled={loading || googleLoading}
+                className="w-full flex justify-center items-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
+              >
+                {googleLoading ? (
+                  '処理中...'
+                ) : (
+                  <>
+                    <svg className="w-5 h-5 mr-2" aria-hidden="true" focusable="false" data-prefix="fab" data-icon="google" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><path fill="currentColor" d="M488 261.8C488 403.3 381.5 512 244 512 118.3 512 0 393.7 0 256S118.3 0 244 0c69.8 0 133 28.1 178.5 74.4L383 128H244c-66.2 0-120 53.8-120 120s53.8 120 120 120c58.4 0 108.1-41.8 117.4-96H244v-64h209.4c12.3 50.3 16.2 101.5 16.2 141.8z"></path></svg>
+                    Googleでログイン
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+
         </motion.div>
       </div>
     </div>
