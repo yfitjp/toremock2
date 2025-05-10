@@ -21,6 +21,7 @@ export default function MyPage() {
   const { user, loading } = useAuth();
   const [activeSection, setActiveSection] = useState('account');
   const [activeSettingSection, setActiveSettingSection] = useState<SettingSection>('profile');
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false); // 設定メニューの開閉状態
 
   useEffect(() => {
     if (!loading && !user) {
@@ -39,6 +40,14 @@ export default function MyPage() {
       console.error('ログアウトエラー:', error);
       // エラーメッセージを表示するなど
       alert('ログアウト中にエラーが発生しました。');
+    }
+  };
+
+  // 設定メニューの開閉を切り替える関数
+  const toggleSettings = () => {
+    setIsSettingsOpen(!isSettingsOpen);
+    if (!isSettingsOpen) {
+      setActiveSection('settings');
     }
   };
 
@@ -328,6 +337,84 @@ export default function MyPage() {
     }
   };
 
+  // モバイル用ナビゲーションの設定メニュー部分を修正
+  const renderMobileSettingsButton = () => (
+    <div className="relative">
+      <button
+        onClick={toggleSettings}
+        className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+          activeSection === 'settings' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+        }`}
+      >
+        <Settings className="h-5 w-5 mr-2" />
+        設定
+      </button>
+      {isSettingsOpen && (
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-10"
+        >
+          <button
+            onClick={() => setActiveSettingSection('profile')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <User className="inline-block mr-2 h-4 w-4" />
+            プロフィール
+          </button>
+          <button
+            onClick={() => setActiveSettingSection('notifications')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'notifications' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Bell className="inline-block mr-2 h-4 w-4" />
+            通知
+          </button>
+          <button
+            onClick={() => setActiveSettingSection('password')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'password' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <Lock className="inline-block mr-2 h-4 w-4" />
+            パスワード
+          </button>
+          <button
+            onClick={() => setActiveSettingSection('subscription')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'subscription' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <CreditCard className="inline-block mr-2 h-4 w-4" />
+            サブスクリプション
+          </button>
+          <button
+            onClick={() => setActiveSettingSection('help')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'help' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <HelpCircle className="inline-block mr-2 h-4 w-4" />
+            ヘルプ
+          </button>
+          <button
+            onClick={() => setActiveSettingSection('logout')}
+            className={`w-full text-left px-4 py-2 text-sm ${
+              activeSettingSection === 'logout' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+            }`}
+          >
+            <LogOut className="inline-block mr-2 h-4 w-4" />
+            ログアウト
+          </button>
+        </motion.div>
+      )}
+    </div>
+  );
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 mb-12">
@@ -391,15 +478,7 @@ export default function MyPage() {
               <ShoppingCart className="h-5 w-5 mr-2" />
               購入履歴
             </button>
-            <button
-              onClick={() => setActiveSection('settings')}
-              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
-                activeSection === 'settings' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
-              }`}
-            >
-              <Settings className="h-5 w-5 mr-2" />
-              設定
-            </button>
+            {renderMobileSettingsButton()}
           </nav>
         </div>
 
@@ -435,13 +514,66 @@ export default function MyPage() {
                 <ShoppingCart className="mr-3 h-5 w-5" />
                 購入履歴
               </button>
-              <button
-                onClick={() => setActiveSection('settings')}
-                className={activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}
-              >
-                <Settings className="mr-3 h-5 w-5" />
-                設定
-              </button>
+              <div className="relative">
+                <button
+                  onClick={toggleSettings}
+                  className={`w-full ${activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}`}
+                >
+                  <Settings className="mr-3 h-5 w-5" />
+                  設定
+                </button>
+                {isSettingsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    className="mt-1 space-y-1"
+                  >
+                    <button
+                      onClick={() => setActiveSettingSection('profile')}
+                      className={`w-full ${activeSettingSection === 'profile' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <User className="mr-3 h-5 w-5" />
+                      プロフィール
+                    </button>
+                    <button
+                      onClick={() => setActiveSettingSection('notifications')}
+                      className={`w-full ${activeSettingSection === 'notifications' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <Bell className="mr-3 h-5 w-5" />
+                      通知
+                    </button>
+                    <button
+                      onClick={() => setActiveSettingSection('password')}
+                      className={`w-full ${activeSettingSection === 'password' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <Lock className="mr-3 h-5 w-5" />
+                      パスワード
+                    </button>
+                    <button
+                      onClick={() => setActiveSettingSection('subscription')}
+                      className={`w-full ${activeSettingSection === 'subscription' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <CreditCard className="mr-3 h-5 w-5" />
+                      サブスクリプション
+                    </button>
+                    <button
+                      onClick={() => setActiveSettingSection('help')}
+                      className={`w-full ${activeSettingSection === 'help' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <HelpCircle className="mr-3 h-5 w-5" />
+                      ヘルプ
+                    </button>
+                    <button
+                      onClick={() => setActiveSettingSection('logout')}
+                      className={`w-full ${activeSettingSection === 'logout' ? activeLinkClasses : baseLinkClasses}`}
+                    >
+                      <LogOut className="mr-3 h-5 w-5" />
+                      ログアウト
+                    </button>
+                  </motion.div>
+                )}
+              </div>
             </nav>
           </aside>
 
