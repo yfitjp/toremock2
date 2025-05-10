@@ -351,50 +351,104 @@ export default function MyPage() {
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 flex">
-        <aside className="w-64 pr-8 flex-shrink-0">
-          <nav className="space-y-2 sticky top-8">
+      <div className="container mx-auto px-4 py-8">
+        {/* モバイル用ナビゲーション */}
+        <div className="md:hidden mb-6 overflow-x-auto">
+          <nav className="flex space-x-2 pb-2">
             <button
               onClick={() => setActiveSection('account')}
-              className={activeSection === 'account' ? activeLinkClasses : baseLinkClasses}
+              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+                activeSection === 'account' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              <User className="mr-3 h-5 w-5" />
+              <User className="h-5 w-5 mr-2" />
               アカウント情報
             </button>
             <button
               onClick={() => setActiveSection('favorites')}
-              className={activeSection === 'favorites' ? activeLinkClasses : baseLinkClasses}
+              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+                activeSection === 'favorites' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              <Heart className="mr-3 h-5 w-5" />
-              お気に入り模試
+              <Heart className="h-5 w-5 mr-2" />
+              お気に入り
             </button>
             <button
               onClick={() => setActiveSection('history')}
-              className={activeSection === 'history' ? activeLinkClasses : baseLinkClasses}
+              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+                activeSection === 'history' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              <ClipboardList className="mr-3 h-5 w-5" />
+              <ClipboardList className="h-5 w-5 mr-2" />
               受験履歴
             </button>
             <button
               onClick={() => setActiveSection('purchase')}
-              className={activeSection === 'purchase' ? activeLinkClasses : baseLinkClasses}
+              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+                activeSection === 'purchase' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              <ShoppingCart className="mr-3 h-5 w-5" />
+              <ShoppingCart className="h-5 w-5 mr-2" />
               購入履歴
             </button>
             <button
               onClick={() => setActiveSection('settings')}
-              className={activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}
+              className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+                activeSection === 'settings' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+              }`}
             >
-              <Settings className="mr-3 h-5 w-5" />
+              <Settings className="h-5 w-5 mr-2" />
               設定
             </button>
           </nav>
-        </aside>
+        </div>
 
-        <main className="flex-grow overflow-x-auto">
-          {renderSection()}
-        </main>
+        <div className="flex flex-col md:flex-row">
+          {/* デスクトップ用ナビゲーション */}
+          <aside className="hidden md:block w-64 pr-8 flex-shrink-0">
+            <nav className="space-y-2 sticky top-8">
+              <button
+                onClick={() => setActiveSection('account')}
+                className={activeSection === 'account' ? activeLinkClasses : baseLinkClasses}
+              >
+                <User className="mr-3 h-5 w-5" />
+                アカウント情報
+              </button>
+              <button
+                onClick={() => setActiveSection('favorites')}
+                className={activeSection === 'favorites' ? activeLinkClasses : baseLinkClasses}
+              >
+                <Heart className="mr-3 h-5 w-5" />
+                お気に入り模試
+              </button>
+              <button
+                onClick={() => setActiveSection('history')}
+                className={activeSection === 'history' ? activeLinkClasses : baseLinkClasses}
+              >
+                <ClipboardList className="mr-3 h-5 w-5" />
+                受験履歴
+              </button>
+              <button
+                onClick={() => setActiveSection('purchase')}
+                className={activeSection === 'purchase' ? activeLinkClasses : baseLinkClasses}
+              >
+                <ShoppingCart className="mr-3 h-5 w-5" />
+                購入履歴
+              </button>
+              <button
+                onClick={() => setActiveSection('settings')}
+                className={activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}
+              >
+                <Settings className="mr-3 h-5 w-5" />
+                設定
+              </button>
+            </nav>
+          </aside>
+
+          <main className="flex-grow">
+            {renderSection()}
+          </main>
+        </div>
       </div>
     </div>
   );
