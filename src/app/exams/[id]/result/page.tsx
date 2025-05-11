@@ -31,10 +31,9 @@ export default function ExamResultPage() {
   useEffect(() => {
     const fetchResult = async () => {
       if (!attemptId || !user) {
-        setIsLoading(false);
-        if (!attemptId && !authLoading && !isLoading) { // isLoading をチェックして無限ループを防ぐ
-            // user がまだロードされていないか、attemptIdがない場合
-            if (!authLoading && !user) setError("User not authenticated. Please log in.");
+        setIsLoading(false); 
+        if (!authLoading) { 
+            if (!user) setError("User not authenticated. Please log in.");
             else if (!attemptId) setError("Attempt ID not found in URL.");
         }
         return;
@@ -75,7 +74,7 @@ export default function ExamResultPage() {
     if (!authLoading) {
         fetchResult();
     }
-  }, [attemptId, user, authLoading, examId, isLoading]); // isLoading を依存配列に追加
+  }, [attemptId, user, authLoading, examId]); // isLoading を依存配列から削除
 
   if (authLoading || isLoading) {
     return (
