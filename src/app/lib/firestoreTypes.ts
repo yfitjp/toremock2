@@ -14,6 +14,8 @@ export interface ExamSection {
   title: string;          // 例: "Reading Section 1", "休憩", "指示"
   duration?: number;      // 目安時間 (秒) - オプション
   instructions?: string;  // セクション開始時の指示文
+  audioUrl?: string;      // 音源ファイルのURL (リスニングセクションの音源再生用など)
+  isAudioPlaybackOnly?: boolean; // trueの場合、このセクションは音源再生のみを行い問題は表示しない
   // passageId?: string;  // Reading/Listening で参照するパッセージID (オプション)
   // 他、セクション固有の情報 (例: speakingの準備時間、writingの文字数目安など)
 }

@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import ExamForm from './ExamForm';
 import InstructionsScreen from './InstructionsScreen';
 import BreakScreen from './BreakScreen';
+import AudioPlaybackScreen from './AudioPlaybackScreen';
 import { useAuth } from '@/app/hooks/useAuth';
 import { getExam, getExamQuestions } from '@/app/lib/exams';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
@@ -457,7 +458,21 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         />
       )}
 
-      {currentSectionInfo && ('reading listening writing speaking'.includes(currentSectionInfo.type)) && (
+      {/* 追加: 音源再生専用セクション */}
+      {currentSectionInfo?.type === 'listening' && 
+       currentSectionInfo.isAudioPlaybackOnly === true && 
+       currentSectionInfo.audioUrl && (
+        <AudioPlaybackScreen
+          title={currentSectionInfo.title}
+          audioUrl={currentSectionInfo.audioUrl}
+          onNext={handleNext}
+          duration={currentSectionInfo.duration}
+        />
+      )}
+
+      {currentSectionInfo && 
+       ('reading listening writing speaking'.includes(currentSectionInfo.type)) && 
+       currentSectionInfo.isAudioPlaybackOnly !== true && ( // 変更: isAudioPlaybackOnly でないことを確認
         <ExamForm 
           examId={params.id} 
           sectionInfo={currentSectionInfo}
