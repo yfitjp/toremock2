@@ -170,7 +170,7 @@ export default function ExamsPage() {
     }
   }, [user, authLoading, exams]);
 
-  const renderExamCard = (exam: ExamData) => {
+  const renderExamCard = (exam: ExamData, currentUser: typeof user) => {
     const typeStyle = TYPE_STYLES[exam.type as keyof typeof TYPE_STYLES] || TYPE_STYLES['TOEIC'];
     
     // structure から合計 duration を計算
@@ -218,12 +218,30 @@ export default function ExamsPage() {
 
           <div className="absolute bottom-0 left-0 right-0 p-6 pt-0">
             {exam.isFree ? (
-              <Link
-                href={`/exams/${exam.id}`}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-              >
-                無料で受験する
-              </Link>
+              currentUser ? (
+                <Link
+                  href={`/exams/${exam.id}`}
+                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+                >
+                  無料で受験する
+                </Link>
+              ) : (
+                <>
+                  <button
+                    disabled
+                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-400 bg-gray-100 cursor-not-allowed"
+                  >
+                    無料で受験する
+                  </button>
+                  <p className="mt-2 text-sm text-gray-500 text-center">
+                    受験するには
+                    <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
+                      ログイン
+                    </Link>
+                    が必要です
+                  </p>
+                </>
+              )
             ) : purchasedExams.has(exam.id) ? (
               <Link
                 href={`/exams/${exam.id}`}
@@ -242,7 +260,7 @@ export default function ExamsPage() {
               <PurchaseButton
                 examId={exam.id}
                 price={exam.price || 0}
-                isDisabled={!user || purchasedExams.has(exam.id)}
+                isDisabled={!currentUser || purchasedExams.has(exam.id)}
               />
             )}
 
@@ -252,7 +270,7 @@ export default function ExamsPage() {
               </p>
             )}
 
-            {!user && !exam.isFree && (
+            {!currentUser && !exam.isFree && (
               <p className="mt-2 text-sm text-gray-500 text-center">
                 購入するには
                 <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
@@ -364,7 +382,7 @@ export default function ExamsPage() {
                 >
                   <h2 className="text-2xl font-bold mb-6">すべての模試</h2>
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {exams.map(renderExamCard)}
+                    {exams.map(exam => renderExamCard(exam, user))}
                   </div>
                 </motion.div>
               ) : (
@@ -384,7 +402,7 @@ export default function ExamsPage() {
                   
                   {examsByType[activeTab]?.length > 0 ? (
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                      {examsByType[activeTab].map(renderExamCard)}
+                      {examsByType[activeTab].map(exam => renderExamCard(exam, user))}
                     </div>
                   ) : (
                     <div className="bg-gray-50 rounded-lg p-8 text-center">
