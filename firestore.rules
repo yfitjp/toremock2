@@ -41,15 +41,16 @@ service cloud.firestore {
 
       allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
                      // 更新対象ドキュメントが自分のものか、または管理者の場合
-                     && resource.data.status == 'in-progress' // 進行中のもののみ更新可能
+                     && resource.data.status == 'in-progress' // ★注意: 最終更新時に問題になる可能性あり。まずは他の変更で様子見。
                      && request.resource.data.userId == resource.data.userId // userId は変更不可
                      && request.resource.data.examId == resource.data.examId // examId は変更不可
                      && request.resource.data.startedAt == resource.data.startedAt // startedAt は変更不可
                      && request.resource.data.examTitle == resource.data.examTitle // examTitle は変更不可
-                     && request.resource.data.keys().hasOnly(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections', 'completedAt', 'updatedAt']) // 更新可能なフィールドを限定
+                     // overallScore を更新可能なフィールドに追加
+                     && request.resource.data.keys().hasOnly(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections', 'completedAt', 'updatedAt', 'overallScore']) 
                      && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') // status は 'in-progress' または 'completed' のみ
                      && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex // インデックスは戻せない
-                     && request.resource.data.sections.keys().hasAll(resource.data.sections.keys())
+                     // && request.resource.data.sections.keys().hasAll(resource.data.sections.keys()) // ← この行を削除 (またはコメントアウト)
                      // --- セクション内フィールド検証をコメントアウトに戻す ---
                      // && request.resource.data.sections.keys().forall(
                      //      sectionKey | 
