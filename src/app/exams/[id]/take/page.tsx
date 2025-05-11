@@ -6,6 +6,7 @@ import ExamForm from './ExamForm';
 import InstructionsScreen from './InstructionsScreen';
 import BreakScreen from './BreakScreen';
 import AudioPlaybackScreen from './AudioPlaybackScreen';
+import ImageDisplayScreen from './ImageDisplayScreen';
 import { useAuth } from '@/app/hooks/useAuth';
 import { getExam, getExamQuestions } from '@/app/lib/exams';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
@@ -263,13 +264,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   }[examDefinition.type || 'TOEIC'] || '模試' : '模試';
 
   // --- 現在のセクション情報と問題リストを導出 --- 
-  const currentSectionInfo = examDefinition?.structure?.[currentStructureIndex];
-  const currentSectionQuestions = currentSectionInfo
-    ? allQuestions.filter(q => q.sectionTitle === currentSectionInfo.title).sort((a, b) => a.order - b.order)
-    : [];
-  const currentSectionAttemptData = currentSectionInfo
-    ? attemptData?.sections?.[currentSectionInfo.title]
-    : undefined;
+  const currentSection = examDefinition.structure[currentStructureIndex];
+  const questionsForCurrentSection = allQuestions.filter(
+    (q) => q.sectionTitle === currentSection.title
+  ).sort((a, b) => a.order - b.order);
 
   // --- コールバック関数 --- 
 
@@ -443,44 +441,53 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* --- 現在のセクションに応じたコンポーネント表示 --- */} 
-      {currentSectionInfo?.type === 'instructions' && (
+      {currentSection.type === 'instructions' && (
         <InstructionsScreen 
-          title={currentSectionInfo.title}
-          instructions={currentSectionInfo.instructions}
+          title={currentSection.title}
+          instructions={currentSection.instructions || ''}
           onNext={handleNext} // handleNext を後で定義
         />
       )}
 
-      {currentSectionInfo?.type === 'break' && (
+      {currentSection.type === 'break' && (
         <BreakScreen 
-          title={currentSectionInfo.title}
-          duration={currentSectionInfo.duration}
+          title={currentSection.title}
+          duration={currentSection.duration || 300} // デフォルト休憩時間を設定
           onNext={handleNext} // handleNext を後で定義
         />
       )}
 
       {/* 追加: 音源再生専用セクション */}
-      {currentSectionInfo?.type === 'listening' && 
-       currentSectionInfo.isAudioPlaybackOnly === true && 
-       currentSectionInfo.audioUrl && (
+      {currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
         <AudioPlaybackScreen
-          title={currentSectionInfo.title}
-          audioUrl={currentSectionInfo.audioUrl}
+          title={currentSection.title}
+          audioUrl={currentSection.audioUrl}
           onNext={handleNext}
-          duration={currentSectionInfo.duration}
         />
       )}
 
-      {currentSectionInfo && 
-       ('reading listening writing speaking'.includes(currentSectionInfo.type)) && 
-       currentSectionInfo.isAudioPlaybackOnly !== true && ( // 変更: isAudioPlaybackOnly でないことを確認
+      {/* 新しい条件: isImageDisplayOnly が true で、問題がない場合 (純粋な画像表示セクション)
+       * または、問題がある場合でも、isImageDisplayOnly がセクションレベルで指定されていれば画像表示を優先することも考慮できる
+       * ここでは、問題がない場合のみ ImageDisplayScreen を表示するシンプルな実装にする
+       * 問題がある場合は、ExamForm 内で画像が表示される想定 */}
+      {currentSection.isImageDisplayOnly && currentSection.imageUrl && questionsForCurrentSection.length === 0 && (
+        <ImageDisplayScreen
+          title={currentSection.title}
+          instructions={currentSection.instructions}
+          imageUrl={currentSection.imageUrl} // ExamSection に imageUrl が必要
+          onNext={handleNext}
+        />
+      )}
+
+      {/* 該当セクションに問題がある場合 */}
+      {questionsForCurrentSection.length > 0 && (
         <ExamForm 
           examId={params.id} 
-          sectionInfo={currentSectionInfo}
-          questions={currentSectionQuestions}
-          initialAttemptData={currentSectionAttemptData}
+          sectionInfo={currentSection}
+          questions={questionsForCurrentSection}
+          initialAttemptData={attemptData?.sections[currentSection.title]}
           onSubmit={handleSectionSubmit}
-          examType={examDefinition?.type || ''} // examType を渡す (examDefinitionがnullの場合も考慮)
+          examType={examDefinition.type || ''} // examType を渡す (examDefinitionがnullの場合も考慮)
         />
       )}
       
@@ -496,25 +503,28 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       )}
 
       {/* ↓↓↓ 追加: フォールバック表示 ↓↓↓ */}
-      {! (currentSectionInfo?.type === 'instructions' ||
-          currentSectionInfo?.type === 'break' ||
-          (currentSectionInfo?.type === 'listening' && currentSectionInfo.isAudioPlaybackOnly === true && currentSectionInfo.audioUrl) ||
-          (currentSectionInfo && ('reading listening writing speaking'.includes(currentSectionInfo.type)) && currentSectionInfo.isAudioPlaybackOnly !== true) ||
+      {! (currentSection.type === 'instructions' ||
+          currentSection.type === 'break' ||
+          (currentSection.isAudioPlaybackOnly && currentSection.audioUrl) ||
+          (currentSection.isImageDisplayOnly && currentSection.imageUrl && questionsForCurrentSection.length === 0) ||
+          questionsForCurrentSection.length > 0 ||
           attemptData?.status === 'completed'
-        ) && currentSectionInfo && !isLoading && (
+        ) && currentSection && !isLoading && (
         <div className="mt-8 p-6 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg shadow-md">
           <h3 className="text-lg font-semibold mb-2">デバッグ情報: 表示コンポーネント不明</h3>
           <p className="mb-1">現在のセクション情報に基づいて表示すべきコンポーネントが見つかりませんでした。</p>
           <ul className="list-disc list-inside text-sm space-y-1">
-            <li>セクションタイトル: <code>{currentSectionInfo.title}</code></li>
-            <li>セクションタイプ (type): <code>{currentSectionInfo.type}</code></li>
-            <li>音源再生専用 (isAudioPlaybackOnly): <code>{String(currentSectionInfo.isAudioPlaybackOnly)}</code></li>
-            <li>音源URL (audioUrl): <code>{currentSectionInfo.audioUrl || '未設定'}</code></li>
+            <li>セクションタイトル: <code>{currentSection.title}</code></li>
+            <li>セクションタイプ (type): <code>{currentSection.type}</code></li>
+            <li>音源再生専用 (isAudioPlaybackOnly): <code>{String(currentSection.isAudioPlaybackOnly)}</code></li>
+            <li>音源URL (audioUrl): <code>{currentSection.audioUrl || '未設定'}</code></li>
+            <li>画像表示専用 (isImageDisplayOnly): <code>{String(currentSection.isImageDisplayOnly)}</code></li>
+            <li>画像URL (imageUrl): <code>{currentSection.imageUrl || '未設定'}</code></li>
             <li>現在のインデックス (currentStructureIndex): <code>{currentStructureIndex}</code></li>
             <li>試験定義のセクション数: <code>{examDefinition?.structure?.length}</code></li>
           </ul>
           <p className="mt-3 text-xs text-gray-600">
-            この情報が表示される場合、模試データのセクション設定 (特に type, isAudioPlaybackOnly, audioUrl) を確認してください。
+            この情報が表示される場合、模試データのセクション設定 (特に type, isAudioPlaybackOnly, audioUrl, isImageDisplayOnly, imageUrl) を確認してください。
             リスニングセクションで isAudioPlaybackOnly が true の場合、audioUrl の設定が必須です。
           </p>
         </div>

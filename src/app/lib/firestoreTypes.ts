@@ -15,9 +15,9 @@ export interface ExamSection {
   duration?: number;      // 目安時間 (秒) - オプション
   instructions?: string;  // セクション開始時の指示文
   audioUrl?: string;      // 音源ファイルのURL (リスニングセクションの音源再生用など)
+  imageUrl?: string;      // 画像ファイルのURL (画像表示用など)
   isAudioPlaybackOnly?: boolean; // trueの場合、このセクションは音源再生のみを行い問題は表示しない
-  // passageId?: string;  // Reading/Listening で参照するパッセージID (オプション)
-  // 他、セクション固有の情報 (例: speakingの準備時間、writingの文字数目安など)
+  isImageDisplayOnly?: boolean; // trueの場合、このセクションは画像表示のみを行い問題は表示しない
 }
 
 /**
