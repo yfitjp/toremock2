@@ -85,14 +85,12 @@ export default function MyPage() {
   const activeSettingLinkClasses = "flex items-center p-3 rounded-lg bg-gray-100 text-blue-700 font-medium transition duration-150 ease-in-out w-full text-left";
 
   // --- 設定セクションのコンテンツ描画関数 ---
-  const renderSettingContent = () => {
-    switch (activeSettingSection) {
+  const renderSettingContent = (section: SettingSection) => {
+    switch (section) {
       case 'profile':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">プロフィール編集</h3>
-            <p className="text-gray-600">ここにプロフィール編集フォームが表示されます。（未実装）</p>
-            {/* ダミーフォーム要素など */}
             <div className="mt-4 space-y-3">
               <div>
                 <label htmlFor="displayName" className="block text-sm font-medium text-gray-700">表示名</label>
@@ -104,23 +102,21 @@ export default function MyPage() {
         );
       case 'notifications':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">通知設定</h3>
-            <p className="text-gray-600">ここに通知設定フォームが表示されます。（未実装）</p>
             <div className="mt-4 space-y-2">
-                <div className="flex items-center">
-                    <input id="email-notifications" name="email-notifications" type="checkbox" className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"/>
-                    <label htmlFor="email-notifications" className="ml-2 block text-sm text-gray-900">新しい模試に関するメール通知を受け取る</label>
-                </div>
+              <div className="flex items-center">
+                <input id="email-notifications" name="email-notifications" type="checkbox" className="h-4 w-4 text-blue-600 border-gray-300 rounded focus:ring-blue-500"/>
+                <label htmlFor="email-notifications" className="ml-2 block text-sm text-gray-900">新しい模試に関するメール通知を受け取る</label>
+              </div>
             </div>
           </div>
         );
       case 'password':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">パスワード変更</h3>
-            <p className="text-gray-600">ここにパスワード変更フォームが表示されます。（未実装）</p>
-             <div className="mt-4 space-y-3">
+            <div className="mt-4 space-y-3">
               <div>
                 <label htmlFor="current-password" className="block text-sm font-medium text-gray-700">現在のパスワード</label>
                 <input type="password" name="current-password" id="current-password" className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 sm:text-sm"/>
@@ -135,29 +131,28 @@ export default function MyPage() {
         );
       case 'subscription':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">サブスクリプション管理</h3>
-             <SubscriptionManagement />
-             {process.env.NODE_ENV === 'development' && (
-               <div className="mt-4 border-t pt-4">
-                  <h4 className="text-base font-medium text-gray-800 mb-2">開発用デバッグツール</h4>
-                 <SubscriptionDebugTools />
-               </div>
-             )}
+            <SubscriptionManagement />
+            {process.env.NODE_ENV === 'development' && (
+              <div className="mt-4 border-t pt-4">
+                <h4 className="text-base font-medium text-gray-800 mb-2">開発用デバッグツール</h4>
+                <SubscriptionDebugTools />
+              </div>
+            )}
           </div>
         );
-       case 'help':
+      case 'help':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">ヘルプ & サポート</h3>
             <p className="text-gray-600 mb-2">ご不明な点がございましたら、以下のFAQをご覧いただくか、サポートまでお問い合わせください。</p>
             <Link href="/faq" className="text-blue-600 hover:underline">よくある質問を見る</Link>
-            {/* <p className="mt-4">サポートへのお問い合わせ: support@toremock.com</p> */}
           </div>
         );
       case 'logout':
         return (
-          <div>
+          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
             <h3 className="text-lg font-medium text-gray-900 mb-4">ログアウト</h3>
             <p className="text-gray-600 mb-4">本当にログアウトしますか？</p>
             <button
@@ -243,7 +238,7 @@ export default function MyPage() {
                 </button>
               </nav>
               <div className="flex-grow md:border-l md:pl-6">
-                 {renderSettingContent()}
+                 {renderSettingContent(activeSettingSection)}
               </div>
             </div>
           </motion.div>
@@ -356,60 +351,92 @@ export default function MyPage() {
           exit={{ opacity: 0, y: -10 }}
           className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-10"
         >
-          <button
-            onClick={() => setActiveSettingSection('profile')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <User className="inline-block mr-2 h-4 w-4" />
-            プロフィール
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('notifications')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'notifications' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <Bell className="inline-block mr-2 h-4 w-4" />
-            通知
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('password')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'password' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <Lock className="inline-block mr-2 h-4 w-4" />
-            パスワード
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('subscription')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'subscription' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <CreditCard className="inline-block mr-2 h-4 w-4" />
-            サブスクリプション
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('help')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'help' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <HelpCircle className="inline-block mr-2 h-4 w-4" />
-            ヘルプ
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('logout')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'logout' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <LogOut className="inline-block mr-2 h-4 w-4" />
-            ログアウト
-          </button>
+          <div className="space-y-1">
+            <button
+              onClick={() => setActiveSettingSection('profile')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <User className="inline-block mr-2 h-4 w-4" />
+              プロフィール
+            </button>
+            {activeSettingSection === 'profile' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('profile')}
+              </div>
+            )}
+            <button
+              onClick={() => setActiveSettingSection('notifications')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'notifications' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <Bell className="inline-block mr-2 h-4 w-4" />
+              通知
+            </button>
+            {activeSettingSection === 'notifications' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('notifications')}
+              </div>
+            )}
+            <button
+              onClick={() => setActiveSettingSection('password')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'password' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <Lock className="inline-block mr-2 h-4 w-4" />
+              パスワード
+            </button>
+            {activeSettingSection === 'password' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('password')}
+              </div>
+            )}
+            <button
+              onClick={() => setActiveSettingSection('subscription')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'subscription' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <CreditCard className="inline-block mr-2 h-4 w-4" />
+              サブスクリプション
+            </button>
+            {activeSettingSection === 'subscription' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('subscription')}
+              </div>
+            )}
+            <button
+              onClick={() => setActiveSettingSection('help')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'help' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <HelpCircle className="inline-block mr-2 h-4 w-4" />
+              ヘルプ
+            </button>
+            {activeSettingSection === 'help' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('help')}
+              </div>
+            )}
+            <button
+              onClick={() => setActiveSettingSection('logout')}
+              className={`w-full text-left px-4 py-2 text-sm ${
+                activeSettingSection === 'logout' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
+              }`}
+            >
+              <LogOut className="inline-block mr-2 h-4 w-4" />
+              ログアウト
+            </button>
+            {activeSettingSection === 'logout' && (
+              <div className="px-4 py-2">
+                {renderSettingContent('logout')}
+              </div>
+            )}
+          </div>
         </motion.div>
       )}
     </div>
@@ -529,48 +556,80 @@ export default function MyPage() {
                     exit={{ opacity: 0, y: -10 }}
                     className="mt-1 space-y-1"
                   >
-                    <button
-                      onClick={() => setActiveSettingSection('profile')}
-                      className={`w-full ${activeSettingSection === 'profile' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <User className="mr-3 h-5 w-5" />
-                      プロフィール
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('notifications')}
-                      className={`w-full ${activeSettingSection === 'notifications' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <Bell className="mr-3 h-5 w-5" />
-                      通知
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('password')}
-                      className={`w-full ${activeSettingSection === 'password' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <Lock className="mr-3 h-5 w-5" />
-                      パスワード
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('subscription')}
-                      className={`w-full ${activeSettingSection === 'subscription' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <CreditCard className="mr-3 h-5 w-5" />
-                      サブスクリプション
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('help')}
-                      className={`w-full ${activeSettingSection === 'help' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <HelpCircle className="mr-3 h-5 w-5" />
-                      ヘルプ
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('logout')}
-                      className={`w-full ${activeSettingSection === 'logout' ? activeLinkClasses : baseLinkClasses}`}
-                    >
-                      <LogOut className="mr-3 h-5 w-5" />
-                      ログアウト
-                    </button>
+                    <div className="space-y-1">
+                      <button
+                        onClick={() => setActiveSettingSection('profile')}
+                        className={`w-full ${activeSettingSection === 'profile' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <User className="mr-3 h-5 w-5" />
+                        プロフィール
+                      </button>
+                      {activeSettingSection === 'profile' && (
+                        <div className="pl-4">
+                          {renderSettingContent('profile')}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setActiveSettingSection('notifications')}
+                        className={`w-full ${activeSettingSection === 'notifications' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <Bell className="mr-3 h-5 w-5" />
+                        通知
+                      </button>
+                      {activeSettingSection === 'notifications' && (
+                        <div className="pl-4">
+                          {renderSettingContent('notifications')}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setActiveSettingSection('password')}
+                        className={`w-full ${activeSettingSection === 'password' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <Lock className="mr-3 h-5 w-5" />
+                        パスワード
+                      </button>
+                      {activeSettingSection === 'password' && (
+                        <div className="pl-4">
+                          {renderSettingContent('password')}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setActiveSettingSection('subscription')}
+                        className={`w-full ${activeSettingSection === 'subscription' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <CreditCard className="mr-3 h-5 w-5" />
+                        サブスクリプション
+                      </button>
+                      {activeSettingSection === 'subscription' && (
+                        <div className="pl-4">
+                          {renderSettingContent('subscription')}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setActiveSettingSection('help')}
+                        className={`w-full ${activeSettingSection === 'help' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <HelpCircle className="mr-3 h-5 w-5" />
+                        ヘルプ
+                      </button>
+                      {activeSettingSection === 'help' && (
+                        <div className="pl-4">
+                          {renderSettingContent('help')}
+                        </div>
+                      )}
+                      <button
+                        onClick={() => setActiveSettingSection('logout')}
+                        className={`w-full ${activeSettingSection === 'logout' ? activeLinkClasses : baseLinkClasses}`}
+                      >
+                        <LogOut className="mr-3 h-5 w-5" />
+                        ログアウト
+                      </button>
+                      {activeSettingSection === 'logout' && (
+                        <div className="pl-4">
+                          {renderSettingContent('logout')}
+                        </div>
+                      )}
+                    </div>
                   </motion.div>
                 )}
               </div>
@@ -578,7 +637,7 @@ export default function MyPage() {
           </aside>
 
           <main className="flex-grow">
-            {renderSection()}
+            {activeSection !== 'settings' && renderSection()}
           </main>
         </div>
       </div>
