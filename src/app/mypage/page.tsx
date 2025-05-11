@@ -86,10 +86,11 @@ export default function MyPage() {
 
   // --- 設定セクションのコンテンツ描画関数 ---
   const renderSettingContent = (section: SettingSection) => {
+    const commonWrapperClass = "p-4 bg-white rounded-b-lg shadow-inner border border-gray-100";
     switch (section) {
       case 'profile':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">プロフィール編集</h3>
             <div className="mt-4 space-y-3">
               <div>
@@ -102,7 +103,7 @@ export default function MyPage() {
         );
       case 'notifications':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">通知設定</h3>
             <div className="mt-4 space-y-2">
               <div className="flex items-center">
@@ -114,7 +115,7 @@ export default function MyPage() {
         );
       case 'password':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">パスワード変更</h3>
             <div className="mt-4 space-y-3">
               <div>
@@ -131,7 +132,7 @@ export default function MyPage() {
         );
       case 'subscription':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">サブスクリプション管理</h3>
             <SubscriptionManagement />
             {process.env.NODE_ENV === 'development' && (
@@ -144,7 +145,7 @@ export default function MyPage() {
         );
       case 'help':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">ヘルプ & サポート</h3>
             <p className="text-gray-600 mb-2">ご不明な点がございましたら、以下のFAQをご覧いただくか、サポートまでお問い合わせください。</p>
             <Link href="/faq" className="text-blue-600 hover:underline">よくある質問を見る</Link>
@@ -152,7 +153,7 @@ export default function MyPage() {
         );
       case 'logout':
         return (
-          <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className={commonWrapperClass}>
             <h3 className="text-lg font-medium text-gray-900 mb-4">ログアウト</h3>
             <p className="text-gray-600 mb-4">本当にログアウトしますか？</p>
             <button
@@ -168,6 +169,82 @@ export default function MyPage() {
         return null;
     }
   };
+
+  // 設定メニューの開閉を切り替える関数 (モバイルのドロップダウン全体の制御用)
+  const toggleSettingsDropdown = () => {
+    setIsSettingsOpen(!isSettingsOpen);
+    // 「設定」ボタンを押したときに、メインセクションを「settings」にする
+    // これにより、モバイルでドロップダウン内の項目をクリックした際に、コンテンツが下に表示される
+    if (!isSettingsOpen) {
+        setActiveSection('settings');
+    } else {
+        // ドロップダウンを閉じるときに、もし設定項目が開いていたらそれを維持するため、
+        // activeSectionをリセットしない、または別のロジック（例：アカウント情報に戻すなど）
+        // ここでは、ドロップダウンを閉じてもactiveSettingSectionは維持されるようにする
+        // もし他のメインセクションが選択されていたら、そちらを優先する
+        if (activeSection === 'settings' && !Object.values(['profile', 'notifications', 'password', 'subscription', 'help', 'logout']).includes(activeSettingSection)) {
+             setActiveSection('account'); // デフォルトに戻す例
+        }
+    }
+  };
+
+  // モバイル用ナビゲーションの設定メニュー部分を修正
+  const renderMobileSettingsButton = () => (
+    <div className="relative">
+      <button
+        onClick={toggleSettingsDropdown}
+        className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
+          activeSection === 'settings' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+        }`}
+      >
+        <Settings className="h-5 w-5 mr-2" />
+        設定
+      </button>
+      {isSettingsOpen && activeSection === 'settings' && (
+        <motion.div
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
+          exit={{ opacity: 0, height: 0 }}
+          className="absolute top-full left-0 mt-1 w-full bg-gray-50 rounded-md shadow-lg z-10 overflow-hidden"
+        >
+          {(['profile', 'notifications', 'password', 'subscription', 'help', 'logout'] as SettingSection[]).map((item) => (
+            <div key={item} className="border-b last:border-b-0">
+              <button
+                onClick={() => {
+                  setActiveSettingSection(prev => prev === item ? '' as SettingSection : item); // 同じものをクリックしたら閉じる
+                }}
+                className={`w-full text-left px-4 py-3 text-sm flex items-center justify-between ${
+                  activeSettingSection === item ? 'bg-blue-100 text-blue-700 font-medium' : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <span className="flex items-center">
+                  {item === 'profile' && <User className="inline-block mr-2 h-4 w-4" />}
+                  {item === 'notifications' && <Bell className="inline-block mr-2 h-4 w-4" />}
+                  {item === 'password' && <Lock className="inline-block mr-2 h-4 w-4" />}
+                  {item === 'subscription' && <CreditCard className="inline-block mr-2 h-4 w-4" />}
+                  {item === 'help' && <HelpCircle className="inline-block mr-2 h-4 w-4" />}
+                  {item === 'logout' && <LogOut className="inline-block mr-2 h-4 w-4" />}
+                  {item.charAt(0).toUpperCase() + item.slice(1)}
+                </span>
+                {/* アイコンなどで開閉状態を示すことも可能 */}
+              </button>
+              {activeSettingSection === item && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  exit={{ opacity: 0, height: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="overflow-hidden"
+                >
+                  {renderSettingContent(item)}
+                </motion.div>
+              )}
+            </div>
+          ))}
+        </motion.div>
+      )}
+    </div>
+  );
 
   // --- メインセクションの描画関数 ---
   const renderSection = () => {
@@ -288,87 +365,12 @@ export default function MyPage() {
           </motion.section>
         );
       default:
+        // activeSection が 'settings' の場合、モバイルでは renderMobileSettingsButton がコンテンツをハンドルする
+        // デスクトップでは後述のロジックで設定UIが表示される
+        // その他の場合は null
         return null;
     }
   };
-
-  // モバイル用ナビゲーションの設定メニュー部分を修正
-  const renderMobileSettingsButton = () => (
-    <div className="relative">
-      <button
-        onClick={toggleSettings}
-        className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
-          activeSection === 'settings' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
-        }`}
-      >
-        <Settings className="h-5 w-5 mr-2" />
-        設定
-      </button>
-      {isSettingsOpen && (
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -10 }}
-          className="absolute top-full left-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-10"
-        >
-          <button
-            onClick={() => setActiveSettingSection('profile')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'profile' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <User className="inline-block mr-2 h-4 w-4" />
-            プロフィール
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('notifications')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'notifications' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <Bell className="inline-block mr-2 h-4 w-4" />
-            通知
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('password')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'password' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <Lock className="inline-block mr-2 h-4 w-4" />
-            パスワード
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('subscription')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'subscription' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <CreditCard className="inline-block mr-2 h-4 w-4" />
-            サブスクリプション
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('help')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'help' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <HelpCircle className="inline-block mr-2 h-4 w-4" />
-            ヘルプ
-          </button>
-          <button
-            onClick={() => setActiveSettingSection('logout')}
-            className={`w-full text-left px-4 py-2 text-sm ${
-              activeSettingSection === 'logout' ? 'bg-blue-50 text-blue-700' : 'text-gray-700 hover:bg-gray-50'
-            }`}
-          >
-            <LogOut className="inline-block mr-2 h-4 w-4" />
-            ログアウト
-          </button>
-        </motion.div>
-      )}
-    </div>
-  );
 
   return (
     <div className="bg-gray-50 min-h-screen">
@@ -395,10 +397,10 @@ export default function MyPage() {
 
       <div className="container mx-auto px-4 py-8">
         {/* モバイル用ナビゲーション */}
-        <div className="md:hidden mb-6 overflow-x-auto">
-          <nav className="flex space-x-2 pb-2">
+        <div className="md:hidden mb-6"> {/* overflow-x-auto は settings dropdown がはみ出る可能性があるので削除または調整 */}
+          <nav className="flex space-x-2 pb-2 overflow-x-auto"> {/* 水平スクロールは維持 */}
             <button
-              onClick={() => setActiveSection('account')}
+              onClick={() => { setActiveSection('account'); setIsSettingsOpen(false); }}
               className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
                 activeSection === 'account' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
               }`}
@@ -407,7 +409,7 @@ export default function MyPage() {
               アカウント情報
             </button>
             <button
-              onClick={() => setActiveSection('favorites')}
+              onClick={() => { setActiveSection('favorites'); setIsSettingsOpen(false); }}
               className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
                 activeSection === 'favorites' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
               }`}
@@ -416,7 +418,7 @@ export default function MyPage() {
               お気に入り
             </button>
             <button
-              onClick={() => setActiveSection('history')}
+              onClick={() => { setActiveSection('history'); setIsSettingsOpen(false); }}
               className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
                 activeSection === 'history' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
               }`}
@@ -425,7 +427,7 @@ export default function MyPage() {
               受験履歴
             </button>
             <button
-              onClick={() => setActiveSection('purchase')}
+              onClick={() => { setActiveSection('purchase'); setIsSettingsOpen(false); }}
               className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
                 activeSection === 'purchase' ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
               }`}
@@ -433,8 +435,9 @@ export default function MyPage() {
               <ShoppingCart className="h-5 w-5 mr-2" />
               購入履歴
             </button>
-            {renderMobileSettingsButton()}
+            {renderMobileSettingsButton()} {/* ここで設定ボタンとドロップダウンがレンダリングされる */}
           </nav>
+          {/* モバイルで設定項目が選択されている場合、そのコンテンツはrenderMobileSettingsButton内で表示されるので、メインエリアには表示しない */}
         </div>
 
         <div className="flex flex-col md:flex-row">
@@ -470,7 +473,11 @@ export default function MyPage() {
                 購入履歴
               </button>
               <button
-                onClick={() => setActiveSection('settings')}
+                onClick={() => {
+                  setActiveSection('settings');
+                  // デスクトップでは設定セクションを開いたら、デフォルトでプロフィールを表示するなどが考えられる
+                  // if (activeSettingSection === '' as SettingSection) setActiveSettingSection('profile');
+                }}
                 className={activeSection === 'settings' ? activeLinkClasses : baseLinkClasses}
               >
                 <Settings className="mr-3 h-5 w-5" />
@@ -480,59 +487,52 @@ export default function MyPage() {
           </aside>
 
           <main className="flex-grow">
-            {activeSection === 'settings' ? (
-              <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
-                <h2 className="text-xl font-semibold mb-6 border-b pb-2 text-gray-800 flex items-center">
-                  <Settings className="mr-2 h-5 w-5 text-gray-500" />
-                  設定
-                </h2>
-                <div className="flex flex-col md:flex-row gap-6">
-                  <nav className="md:w-48 flex-shrink-0 space-y-1">
-                    <button
-                      onClick={() => setActiveSettingSection('profile')}
-                      className={activeSettingSection === 'profile' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <User className="mr-3 h-5 w-5" /> プロフィール
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('notifications')}
-                      className={activeSettingSection === 'notifications' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <Bell className="mr-3 h-5 w-5" /> 通知
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('password')}
-                      className={activeSettingSection === 'password' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <Lock className="mr-3 h-5 w-5" /> パスワード
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('subscription')}
-                      className={activeSettingSection === 'subscription' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <CreditCard className="mr-3 h-5 w-5" /> サブスクリプション
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('help')}
-                      className={activeSettingSection === 'help' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <HelpCircle className="mr-3 h-5 w-5" /> ヘルプ
-                    </button>
-                    <button
-                      onClick={() => setActiveSettingSection('logout')}
-                      className={activeSettingSection === 'logout' ? activeSettingLinkClasses : baseSettingLinkClasses}
-                    >
-                      <LogOut className="mr-3 h-5 w-5" /> ログアウト
-                    </button>
-                  </nav>
-                  <div className="flex-grow md:border-l md:pl-6">
-                    {renderSettingContent(activeSettingSection)}
+            {/* デスクトップ表示で設定が選択されている場合 */}
+            <div className="hidden md:block">
+              {activeSection === 'settings' ? (
+                <motion.div
+                  key="settings-desktop"
+                  initial={{ opacity: 0, x: 10 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3 }}
+                  className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
+                >
+                  <h2 className="text-xl font-semibold mb-6 border-b pb-2 text-gray-800 flex items-center">
+                    <Settings className="mr-2 h-5 w-5 text-gray-500" />
+                    設定
+                  </h2>
+                  <div className="flex flex-col md:flex-row gap-6">
+                    <nav className="md:w-48 flex-shrink-0 space-y-1">
+                      {(['profile', 'notifications', 'password', 'subscription', 'help', 'logout'] as SettingSection[]).map(item => (
+                        <button
+                          key={item}
+                          onClick={() => setActiveSettingSection(item)}
+                          className={activeSettingSection === item ? activeSettingLinkClasses : baseSettingLinkClasses}
+                        >
+                          {item === 'profile' && <User className="mr-3 h-5 w-5" />}
+                          {item === 'notifications' && <Bell className="mr-3 h-5 w-5" />}
+                          {item === 'password' && <Lock className="mr-3 h-5 w-5" />}
+                          {item === 'subscription' && <CreditCard className="mr-3 h-5 w-5" />}
+                          {item === 'help' && <HelpCircle className="mr-3 h-5 w-5" />}
+                          {item === 'logout' && <LogOut className="mr-3 h-5 w-5" />}
+                          {item.charAt(0).toUpperCase() + item.slice(1)}
+                        </button>
+                      ))}
+                    </nav>
+                    <div className="flex-grow md:border-l md:pl-6">
+                      {renderSettingContent(activeSettingSection)}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ) : (
-              renderSection()
-            )}
+                </motion.div>
+              ) : (
+                renderSection() // アカウント情報、お気に入りなど
+              )}
+            </div>
+            {/* モバイル表示で、かつ設定セクションでない場合 */}
+            <div className="md:hidden">
+              {activeSection !== 'settings' && renderSection()}
+              {/* モバイルの設定コンテンツは renderMobileSettingsButton 内で直接レンダリングされる */}
+            </div>
           </main>
         </div>
       </div>
