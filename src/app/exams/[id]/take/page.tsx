@@ -209,14 +209,15 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       } finally {
         // 完了済みチェックで早期 return する場合があるので、ここでの setIsLoading(false) は削除し、
         // 正常に初期化が完了した場合のみ最後に設定する
-        // setIsLoading(false);
-        if (!error) { // エラーが発生していない場合のみローディングを解除
-             setIsLoading(false);
-         }
+        // setIsLoading(false); 
+        // if (!error) { // エラーが発生していない場合のみローディングを解除
+        //      setIsLoading(false);
+        //  }
+        setIsLoading(false); // 修正: エラーの有無に関わらずローディングを解除
       }
     };
     initializeExam();
-  }, [params.id, user, authLoading, error]); // error を依存配列に追加
+  }, [params.id, user, authLoading]); // 修正: error を依存配列から削除
 
   if (authLoading || isLoading) {
     return (
