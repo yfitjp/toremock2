@@ -140,7 +140,7 @@ export default function MyPage() {
   };
 
   const renderMainSection = () => {
-    if (activeSection === 'settings') return null; 
+    if (activeSection === 'settings') return null;
 
     switch (activeSection) {
       case 'account':
@@ -153,7 +153,7 @@ export default function MyPage() {
             className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
-              <User className="mr-2 h-5 w-5 text-blue-500" />
+              <User className="mr-2 h-5 w-5 text-blue-600" />
               アカウント情報
             </h2>
             <div className="space-y-3 mb-6">
@@ -176,7 +176,7 @@ export default function MyPage() {
             className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
-              <Heart className="mr-2 h-5 w-5 text-pink-500" />
+              <Heart className="mr-2 h-5 w-5 text-blue-600" />
               お気に入り模試
             </h2>
             <div className="space-y-3">
@@ -205,7 +205,7 @@ export default function MyPage() {
             className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
-              <ClipboardList className="mr-2 h-5 w-5 text-indigo-500" />
+              <ClipboardList className="mr-2 h-5 w-5 text-blue-600" />
               受験履歴
             </h2>
             <div className="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
@@ -244,7 +244,7 @@ export default function MyPage() {
             className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
           >
             <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
-              <ShoppingCart className="mr-2 h-5 w-5 text-purple-500" />
+              <ShoppingCart className="mr-2 h-5 w-5 text-blue-600" />
               購入履歴
             </h2>
             <PurchaseHistory />
@@ -348,28 +348,34 @@ export default function MyPage() {
                   initial={{ opacity: 0, x: -10 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
-                  className="flex bg-white shadow-lg rounded-xl border border-gray-100 overflow-hidden"
+                  className="flex flex-col bg-white shadow-lg rounded-xl border border-gray-100 overflow-hidden"
                 >
-                  <nav className="w-16 flex-shrink-0 border-r border-gray-200 bg-gray-50">
-                    <div className="flex flex-col items-center space-y-1 py-2">
-                      {settingItems.map(item => (
-                        <button
-                          key={item.name}
-                          onClick={() => setActiveSettingSection(item.name)}
-                          title={item.label}
-                          className={`p-3 rounded-md flex justify-center items-center w-full ${
-                            activeSettingSection === item.name
-                              ? 'bg-blue-500 text-white'
-                              : 'text-gray-600 hover:bg-gray-200 hover:text-gray-800'
-                          }`}
-                        >
-                          {item.icon}
-                        </button>
-                      ))}
+                  <div className="p-4 border-b flex items-center">
+                    <Settings className="mr-2 h-5 w-5 text-blue-600" />
+                    <h2 className="text-xl font-semibold text-gray-800">設定</h2>
+                  </div>
+                  <div className="flex flex-grow">
+                    <nav className="w-16 flex-shrink-0 border-r border-gray-200 bg-gray-50">
+                      <div className="flex flex-col items-center space-y-1 py-2">
+                        {settingItems.map(item => (
+                          <button
+                            key={item.name}
+                            onClick={() => setActiveSettingSection(item.name)}
+                            title={item.label}
+                            className={`p-3 rounded-md flex justify-center items-center w-full ${
+                              activeSettingSection === item.name
+                                ? 'bg-blue-600 text-white'
+                                : 'text-gray-600 hover:bg-gray-200 hover:text-gray-800'
+                            }`}
+                          >
+                            {item.icon}
+                          </button>
+                        ))}
+                      </div>
+                    </nav>
+                    <div className="flex-grow p-0 min-w-0">
+                      {renderSettingContent(activeSettingSection)}
                     </div>
-                  </nav>
-                  <div className="flex-grow p-0">
-                    {renderSettingContent(activeSettingSection)}
                   </div>
                 </motion.div>
               ) : (
@@ -387,7 +393,7 @@ export default function MyPage() {
                   className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
                 >
                   <h2 className="text-xl font-semibold mb-6 border-b pb-2 text-gray-800 flex items-center">
-                    <Settings className="mr-2 h-5 w-5 text-gray-500" />
+                    <Settings className="mr-2 h-5 w-5 text-blue-600" />
                     設定
                   </h2>
                   <div className="flex gap-6">
@@ -398,7 +404,7 @@ export default function MyPage() {
                           onClick={() => setActiveSettingSection(item.name)}
                           className={activeSettingSection === item.name ? activeSettingLinkClasses : baseSettingLinkClasses}
                         >
-                          {item.icon} <span className="ml-2">{item.label}</span> {/* 設定項目もラベルを表示 */}
+                          {item.icon} <span className="ml-2">{item.label}</span>
                         </button>
                       ))}
                     </nav>
