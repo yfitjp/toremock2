@@ -316,37 +316,86 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     const currentSectionInfo = examDefinition.structure[currentStructureIndex];
     if (!currentSectionInfo) return;
 
-    console.log(`Submitting section ${currentSectionInfo.title}`);
+    console.log(`[Page] Submitting section ${currentSectionInfo.title}`);
     setIsLoading(true); // 処理中の表示
 
     try {
-      // スコア計算 (可能な場合)
-      let sectionScore: number | undefined = undefined;
-      if ('reading listening'.includes(currentSectionInfo.type)) { // 例: 選択問題ベースのセクション
-        const sectionQuestions = allQuestions.filter(q => q.sectionTitle === currentSectionInfo.title);
-        let correctCount = 0;
-        let totalScoreable = 0;
-        sectionQuestions.forEach(q => {
-          if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice') {
-            totalScoreable++;
-            if (submittedAnswers[q.id] === q.correctAnswer) {
-              correctCount++;
-            }
-          }
-        });
-        sectionScore = totalScoreable > 0 ? Math.round((correctCount / totalScoreable) * 100) : 0;
-        console.log(`Section Score (${currentSectionInfo.title}): ${sectionScore}%`);
-      }
-
-      // Firestore 更新データ準備
       const sectionUpdateKey = `sections.${currentSectionInfo.title}`;
       const updateData: Record<string, any> = {
         [`${sectionUpdateKey}.answers`]: submittedAnswers,
         [`${sectionUpdateKey}.status`]: 'completed',
         [`${sectionUpdateKey}.completedAt`]: serverTimestamp(),
       };
-      if (sectionScore !== undefined) {
-        updateData[`${sectionUpdateKey}.score`] = sectionScore;
+      
+      let sectionScore: number | undefined = undefined;
+
+      const questionsForThisSection = allQuestions.filter(q => q.sectionTitle === currentSectionInfo.title);
+      // Writingセクションの場合、通常問題は1つと想定。プロンプトや解答のキーとして利用。
+      const currentQuestionDataForGrading = questionsForThisSection.length > 0 ? questionsForThisSection[0] : undefined;
+
+      if (currentSectionInfo.type === 'writing' && currentQuestionDataForGrading && submittedAnswers[currentQuestionDataForGrading.id]) {
+        try {
+          const essayText = submittedAnswers[currentQuestionDataForGrading.id] as string;
+          const essayPrompt = currentQuestionDataForGrading.content || 'N/A'; 
+
+          console.log('[Page] Submitting essay to /api/grade-writing:', { essayText, essayPrompt });
+
+          const gradingResponse = await fetch('/api/grade-writing', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ essayText, essayPrompt }),
+          });
+
+          if (!gradingResponse.ok) {
+            const errorData = await gradingResponse.json().catch(() => ({ error: 'Failed to parse error JSON' })); // エラーレスポンスのパース失敗も考慮
+            console.error('[Page] Grading API call failed:', gradingResponse.status, errorData);
+            throw new Error(`Grading API failed with status ${gradingResponse.status}: ${errorData.error || 'Unknown error from grading API'}`);
+          }
+
+          const gradingResult = await gradingResponse.json();
+          console.log('[Page] Grading Result from API:', gradingResult);
+
+          if (typeof gradingResult.score === 'number') {
+            updateData[`${sectionUpdateKey}.score`] = gradingResult.score;
+            sectionScore = gradingResult.score;
+          }
+          if (gradingResult.feedback) {
+            updateData[`${sectionUpdateKey}.feedback`] = gradingResult.feedback;
+          }
+          if (gradingResult.positive_points) {
+            updateData[`${sectionUpdateKey}.positive_points`] = gradingResult.positive_points;
+          }
+          if (gradingResult.areas_for_improvement) {
+            updateData[`${sectionUpdateKey}.areas_for_improvement`] = gradingResult.areas_for_improvement;
+          }
+
+        } catch (gradingError: any) {
+          console.error('[Page] Failed to get or process grading from API:', gradingError);
+          updateData[`${sectionUpdateKey}.feedback`] = `Automated grading failed: ${gradingError.message || 'Unknown error'}`;
+          updateData[`${sectionUpdateKey}.score`] = undefined;
+          sectionScore = undefined;
+        }
+      } else if (currentSectionInfo.type === 'reading' || currentSectionInfo.type === 'listening') {
+        // 既存の選択問題のスコアリングロジック
+        let correctCount = 0;
+        let totalScoreable = 0;
+        questionsForThisSection.forEach(q => {
+          if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && submittedAnswers[q.id] !== undefined) {
+            totalScoreable++;
+            if (submittedAnswers[q.id] === q.correctAnswer) {
+              correctCount++;
+            }
+          }
+        });
+        if (totalScoreable > 0) {
+            sectionScore = Math.round((correctCount / totalScoreable) * 100);
+            updateData[`${sectionUpdateKey}.score`] = sectionScore;
+        } else {
+            // 解答可能な問題がなかった場合や、解答がなかった場合など
+            updateData[`${sectionUpdateKey}.score`] = undefined; // または 0 や 'N/A' など業務要件に応じて
+            sectionScore = undefined;
+        }
+        console.log(`[Page] Section Score (${currentSectionInfo.title}): ${sectionScore !== undefined ? sectionScore + '%' : 'N/A'}`);
       }
 
       const nextIndex = currentStructureIndex + 1;

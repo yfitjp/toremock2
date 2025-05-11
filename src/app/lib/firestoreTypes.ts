@@ -60,7 +60,11 @@ export interface Question {
 export interface SectionAttempt {
   status: 'pending' | 'in-progress' | 'completed' | 'skipped'; // スキップ状態も追加
   answers?: Record<string, number | string>; // { questionId: answer }
-  score?: number; // 自動採点可能な場合
+  score?: number; // 自動採点可能な場合 (選択式またはAI採点スコア)
+  feedback?: string; // AIからのフィードバック
+  positive_points?: string[]; // AIからの良かった点 (オプション)
+  areas_for_improvement?: string[]; // AIからの改善点 (オプション)
+  // llmRawResponse?: any; // デバッグ用にLLMの生レスポンスを保存する場合 (オプション)
   startedAt?: Timestamp;
   completedAt?: Timestamp;
   // writing/speaking の評価結果などを格納するフィールド (例: evaluation: { score: number, feedback: string })
