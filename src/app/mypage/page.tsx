@@ -277,6 +277,15 @@ export default function MyPage() {
     { name: 'logout', icon: <LogOut size={20} />, label: 'ログアウト' },
   ];
 
+  // メインナビゲーション項目の定義 (モバイルとデスクトップで共通化)
+  const mainNavItems: { name: string; icon: JSX.Element; mobileIcon: JSX.Element; label: string }[] = [
+    { name: 'account', icon: <User className="mr-3 h-5 w-5" />, mobileIcon: <User size={24} />, label: 'アカウント情報' },
+    { name: 'favorites', icon: <Heart className="mr-3 h-5 w-5" />, mobileIcon: <Heart size={24} />, label: 'お気に入り模試' },
+    { name: 'history', icon: <ClipboardList className="mr-3 h-5 w-5" />, mobileIcon: <ClipboardList size={24} />, label: '受験履歴' },
+    { name: 'purchase', icon: <ShoppingCart className="mr-3 h-5 w-5" />, mobileIcon: <ShoppingCart size={24} />, label: '購入履歴' },
+    { name: 'settings', icon: <Settings className="mr-3 h-5 w-5" />, mobileIcon: <Settings size={24} />, label: '設定' },
+  ];
+
   return (
     <div className="bg-gray-50 min-h-screen">
       <div className="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-12 mb-12">
@@ -287,47 +296,45 @@ export default function MyPage() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
+        {/* モバイル用トップナビゲーション */} 
         <div className="md:hidden mb-6">
-          <nav className="flex space-x-2 pb-2 overflow-x-auto">
-            {['account', 'favorites', 'history', 'purchase', 'settings'].map((section) => (
+          <nav className="flex justify-around items-center pb-2 border-b"> {/* justify-around でアイコンを均等配置、スクロール不要なので overflow-x-auto を削除 */}
+            {mainNavItems.map((item) => (
               <button
-                key={section}
-                onClick={() => setActiveSection(section as any)}
-                className={`flex items-center px-4 py-2 rounded-md whitespace-nowrap ${
-                  activeSection === section ? 'bg-blue-50 text-blue-700' : 'bg-white text-gray-700 hover:bg-gray-50'
+                key={item.name}
+                onClick={() => setActiveSection(item.name as any)}
+                title={item.label} // アイコンにマウスオーバーでラベル表示
+                className={`p-2 rounded-md flex flex-col items-center justify-center ${
+                  activeSection === item.name 
+                    ? 'text-blue-600' 
+                    : 'text-gray-600 hover:text-blue-500'
                 }`}
               >
-                {section === 'account' && <User className="h-5 w-5 mr-2" />}
-                {section === 'favorites' && <Heart className="h-5 w-5 mr-2" />}
-                {section === 'history' && <ClipboardList className="h-5 w-5 mr-2" />}
-                {section === 'purchase' && <ShoppingCart className="h-5 w-5 mr-2" />}
-                {section === 'settings' && <Settings className="h-5 w-5 mr-2" />}
-                {section.charAt(0).toUpperCase() + section.slice(1)}
+                {item.mobileIcon}
+                {/* モバイル版はアイコン下に非常に小さな文字でラベルを表示することも検討可能だが、一旦アイコンのみとする */}
+                {/* <span className={`text-xs mt-1 ${activeSection === item.name ? 'text-blue-600' : 'text-gray-500'}`}>{item.label}</span> */}
               </button>
             ))}
           </nav>
         </div>
 
         <div className="flex flex-col md:flex-row md:space-x-8">
+          {/* デスクトップ用左側ナビゲーション */} 
           <aside className="hidden md:block w-64 flex-shrink-0">
             <nav className="space-y-2 sticky top-8">
-              {['account', 'favorites', 'history', 'purchase', 'settings'].map((section) => (
+              {mainNavItems.map((item) => (
                 <button
-                  key={section}
+                  key={item.name}
                   onClick={() => {
-                    setActiveSection(section as any);
-                    if (section === 'settings' && activeSettingSection === '' as SettingSection) {
+                    setActiveSection(item.name as any);
+                    if (item.name === 'settings' && activeSettingSection === '' as SettingSection) {
                       setActiveSettingSection('profile');
                     }
                   }}
-                  className={activeSection === section ? activeLinkClasses : baseLinkClasses}
+                  className={activeSection === item.name ? activeLinkClasses : baseLinkClasses}
                 >
-                  {section === 'account' && <User className="mr-3 h-5 w-5" />}
-                  {section === 'favorites' && <Heart className="mr-3 h-5 w-5" />}
-                  {section === 'history' && <ClipboardList className="mr-3 h-5 w-5" />}
-                  {section === 'purchase' && <ShoppingCart className="mr-3 h-5 w-5" />}
-                  {section === 'settings' && <Settings className="mr-3 h-5 w-5" />}
-                  {section.charAt(0).toUpperCase() + section.slice(1)}
+                  {item.icon} 
+                  {item.label} {/* デスクトップではラベルを表示 */}
                 </button>
               ))}
             </nav>
@@ -391,7 +398,7 @@ export default function MyPage() {
                           onClick={() => setActiveSettingSection(item.name)}
                           className={activeSettingSection === item.name ? activeSettingLinkClasses : baseSettingLinkClasses}
                         >
-                          {item.icon} <span className="ml-2">{item.label}</span>
+                          {item.icon} <span className="ml-2">{item.label}</span> {/* 設定項目もラベルを表示 */}
                         </button>
                       ))}
                     </nav>
