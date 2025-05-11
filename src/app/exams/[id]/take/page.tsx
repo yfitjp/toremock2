@@ -425,8 +425,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           setCurrentStructureIndex(nextIndex);
        } else {
            console.log('Exam Completed! Redirecting to results...');
-           // 結果ページへ自動リダイレクト (コメント解除)
-           router.push(`/exams/${params.id}/results/${attemptId}`);
+           console.log(`Redirecting to: /exams/${params.id}/result?attemptId=${attemptId}`);
+           router.push(`/exams/${params.id}/result?attemptId=${attemptId}`);
        }
 
     } catch (err: any) {
@@ -496,40 +496,22 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
            <h2 className="text-xl font-bold text-green-800 mb-4">試験完了！</h2>
            <p className="text-green-700 mb-4">お疲れ様でした。結果を確認しましょう。</p>
-           <Link href={`/exams/${params.id}/results/${attemptId}`} /* 結果ページのパスは要調整 */ className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+           <Link href={`/exams/${params.id}/result?attemptId=${attemptId}`} className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
              結果を見る
            </Link>
         </div>
       )}
 
       {/* ↓↓↓ 追加: フォールバック表示 ↓↓↓ */}
-      {! (currentSection.type === 'instructions' ||
-          currentSection.type === 'break' ||
-          (currentSection.isAudioPlaybackOnly && currentSection.audioUrl) ||
-          (currentSection.isImageDisplayOnly && currentSection.imageUrl && questionsForCurrentSection.length === 0) ||
-          questionsForCurrentSection.length > 0 ||
-          attemptData?.status === 'completed'
-        ) && currentSection && !isLoading && (
-        <div className="mt-8 p-6 bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg shadow-md">
-          <h3 className="text-lg font-semibold mb-2">デバッグ情報: 表示コンポーネント不明</h3>
-          <p className="mb-1">現在のセクション情報に基づいて表示すべきコンポーネントが見つかりませんでした。</p>
-          <ul className="list-disc list-inside text-sm space-y-1">
-            <li>セクションタイトル: <code>{currentSection.title}</code></li>
-            <li>セクションタイプ (type): <code>{currentSection.type}</code></li>
-            <li>音源再生専用 (isAudioPlaybackOnly): <code>{String(currentSection.isAudioPlaybackOnly)}</code></li>
-            <li>音源URL (audioUrl): <code>{currentSection.audioUrl || '未設定'}</code></li>
-            <li>画像表示専用 (isImageDisplayOnly): <code>{String(currentSection.isImageDisplayOnly)}</code></li>
-            <li>画像URL (imageUrl): <code>{currentSection.imageUrl || '未設定'}</code></li>
-            <li>現在のインデックス (currentStructureIndex): <code>{currentStructureIndex}</code></li>
-            <li>試験定義のセクション数: <code>{examDefinition?.structure?.length}</code></li>
-          </ul>
-          <p className="mt-3 text-xs text-gray-600">
-            この情報が表示される場合、模試データのセクション設定 (特に type, isAudioPlaybackOnly, audioUrl, isImageDisplayOnly, imageUrl) を確認してください。
-            リスニングセクションで isAudioPlaybackOnly が true の場合、audioUrl の設定が必須です。
-          </p>
+      {attemptData?.status === 'completed' && (
+        <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
+           <h2 className="text-xl font-bold text-green-800 mb-4">試験完了！</h2>
+           <p className="text-green-700 mb-4">お疲れ様でした。結果を確認しましょう。</p>
+           <Link href={`/exams/${params.id}/result?attemptId=${attemptId}`} className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
+             結果を見る
+           </Link>
         </div>
       )}
-      {/* ↑↑↑ 追加: フォールバック表示 ↑↑↑ */}
     </div>
   );
-} 
+}
