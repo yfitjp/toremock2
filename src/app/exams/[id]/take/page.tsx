@@ -287,7 +287,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     }
   };
 
-  // Instructions / Break 画面から呼ばれる: 次のセクションへ進む
+  // Instructions / Break / Speaking準備 画面から呼ばれる: 次のセクションへ進む
   const handleNext = async () => {
     if (!examDefinition || !attemptData) return;
 
@@ -297,14 +297,19 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         currentStructureIndex: nextIndex,
       };
       
-      // 現在のセクションがinstructions/breakの場合、status: 'skipped'などを記録しても良い
-      // const currentSectionTitle = examDefinition.structure[currentStructureIndex].title;
-      // updateData[`sections.${currentSectionTitle}.status`] = 'skipped'; 
+      // 必要であれば、現在のセクションのステータスも更新
+      const currentSectionTitle = examDefinition.structure[currentStructureIndex].title;
+      const currentSectionStatus = attemptData.sections[currentSectionTitle]?.status;
+      if (currentSectionStatus === 'pending' || currentSectionStatus === undefined) {
+         // 準備画面などを通過した場合も 'skipped' または 'completed' にする（要件による）
+         // updateData[`sections.${currentSectionTitle}.status`] = 'completed'; 
+         // updateData[`sections.${currentSectionTitle}.completedAt`] = serverTimestamp();
+      }
       
       await updateAttemptInFirestore(updateData);
       setCurrentStructureIndex(nextIndex); // ローカル State も更新
+      setAttemptData(prev => prev ? { ...prev, currentStructureIndex: nextIndex } : null);
     } else {
-      // 通常ここには来ないはず (最後のセクションはExamFormからSubmitされる)
       console.warn('Trying to move past the last section from handleNext');
     } 
   };
@@ -317,7 +322,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     if (!currentSectionInfo) return;
 
     console.log(`[Page] Submitting section ${currentSectionInfo.title}`);
-    setIsLoading(true); // 処理中の表示
+    setIsLoading(true); 
 
     try {
       const sectionUpdateKey = `sections.${currentSectionInfo.title}`;
@@ -330,9 +335,9 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       let sectionScore: number | undefined = undefined;
 
       const questionsForThisSection = allQuestions.filter(q => q.sectionTitle === currentSectionInfo.title);
-      // Writingセクションの場合、通常問題は1つと想定。プロンプトや解答のキーとして利用。
       const currentQuestionDataForGrading = questionsForThisSection.length > 0 ? questionsForThisSection[0] : undefined;
 
+      // --- セクションタイプに応じた採点処理 --- 
       if (currentSectionInfo.type === 'writing' && currentQuestionDataForGrading && submittedAnswers[currentQuestionDataForGrading.id]) {
         try {
           const essayText = submittedAnswers[currentQuestionDataForGrading.id] as string;
@@ -347,7 +352,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           });
 
           if (!gradingResponse.ok) {
-            const errorData = await gradingResponse.json().catch(() => ({ error: 'Failed to parse error JSON' })); // エラーレスポンスのパース失敗も考慮
+            const errorData = await gradingResponse.json().catch(() => ({ error: 'Failed to parse error JSON' }));
             console.error('[Page] Grading API call failed:', gradingResponse.status, errorData);
             throw new Error(`Grading API failed with status ${gradingResponse.status}: ${errorData.error || 'Unknown error from grading API'}`);
           }
@@ -375,8 +380,15 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           updateData[`${sectionUpdateKey}.score`] = undefined;
           sectionScore = undefined;
         }
+      } else if (currentSectionInfo.type === 'speaking') {
+          // Speaking セクションの処理
+          console.log('[Page] Speaking section submitted with answers:', submittedAnswers);
+          // TODO: 音声ファイルを Storage にアップロードし、URL を answers に保存する処理を後で追加
+          // 現時点では submittedAnswers (仮のID文字列) をそのまま保存
+          updateData[`${sectionUpdateKey}.score`] = undefined; // 採点は後で実装
+          sectionScore = undefined;
       } else if (currentSectionInfo.type === 'reading' || currentSectionInfo.type === 'listening') {
-        // 既存の選択問題のスコアリングロジック
+        // 既存の選択問題のスコアリングロジック - 変更なし
         let correctCount = 0;
         let totalScoreable = 0;
         questionsForThisSection.forEach(q => {
@@ -391,34 +403,34 @@ export default function ExamPage({ params }: { params: { id: string } }) {
             sectionScore = Math.round((correctCount / totalScoreable) * 100);
             updateData[`${sectionUpdateKey}.score`] = sectionScore;
         } else {
-            // 解答可能な問題がなかった場合や、解答がなかった場合など
-            updateData[`${sectionUpdateKey}.score`] = undefined; // または 0 や 'N/A' など業務要件に応じて
+            updateData[`${sectionUpdateKey}.score`] = undefined;
             sectionScore = undefined;
         }
         console.log(`[Page] Section Score (${currentSectionInfo.title}): ${sectionScore !== undefined ? sectionScore + '%' : 'N/A'}`);
       }
+      // --- 採点処理ここまで ---
 
+      // --- 次のステップへの遷移処理 --- 
       const nextIndex = currentStructureIndex + 1;
       let isLastSection = false;
-      let overallScore: number | undefined = undefined; // 全体スコア変数
+      let overallScore: number | undefined = undefined; 
 
       if (nextIndex >= examDefinition.structure.length) {
         // 最後のセクションの場合
         isLastSection = true;
         updateData['status'] = 'completed';
         updateData['completedAt'] = serverTimestamp();
-        updateData['currentStructureIndex'] = nextIndex; // 完了を示すためにインデックスを進める
+        updateData['currentStructureIndex'] = nextIndex; 
         
         // --- 全体スコアの計算 --- 
-        // ローカルの最新のセクション状態 (更新前のデータと今回の更新データをマージ)
         const updatedSectionsForScore = { 
             ...attemptData.sections, 
             [currentSectionInfo.title]: {
                 ...(attemptData.sections[currentSectionInfo.title] || {}),
                 answers: submittedAnswers,
                 status: 'completed', 
-                score: sectionScore, // 計算した今回のスコアを使用
-                completedAt: serverTimestamp() // 仮の時刻
+                score: sectionScore, 
+                completedAt: serverTimestamp()
             } as SectionAttempt
         };
         
@@ -432,7 +444,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         });
         if (scoreCount > 0) {
            overallScore = Math.round(totalScore / scoreCount);
-           updateData['overallScore'] = overallScore; // 計算結果を更新データに追加
+           updateData['overallScore'] = overallScore; 
            console.log('Overall Score Calculated:', overallScore);
         } else {
            console.log('Could not calculate overall score.');
@@ -455,7 +467,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
                   answers: submittedAnswers,
                   status: 'completed', 
                   score: sectionScore,
-                  completedAt: Timestamp.now() // ローカルでは現在の時刻で仮反映
+                  // feedback なども更新データに含まれていれば反映させる (現状のコードにはないが将来的には)
+                  completedAt: Timestamp.now()
               } as SectionAttempt
           };
           const updatedAttempt = { 
@@ -464,13 +477,13 @@ export default function ExamPage({ params }: { params: { id: string } }) {
               currentStructureIndex: nextIndex,
               status: isLastSection ? 'completed' : prev.status,
               completedAt: isLastSection ? Timestamp.now() : prev.completedAt,
-              overallScore: isLastSection ? overallScore : prev.overallScore // 計算した全体スコアも反映
+              overallScore: isLastSection ? overallScore : prev.overallScore 
           } as ExamAttempt;
           return updatedAttempt;
       });
 
-      // 最後のセクションでなければ、次のセクションへ
-       if (!isLastSection) {
+      // 遷移処理
+      if (!isLastSection) {
           setCurrentStructureIndex(nextIndex);
        } else {
            console.log('Exam Completed! Redirecting to results...');
@@ -487,80 +500,110 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   };
 
   // --- レンダリングロジック --- 
+  
+  // セクションタイプに応じた判定フラグ
+  const isInstructions = currentSection.type === 'instructions';
+  const isBreak = currentSection.type === 'break';
+  // isAudioPlaybackOnly, isImageDisplayOnly フラグを使用
+  const isAudioOnly = currentSection.isAudioPlaybackOnly && currentSection.audioUrl;
+  const isImageOnly = currentSection.isImageDisplayOnly && currentSection.imageUrl;
+  const isSpeaking = currentSection.type === 'speaking';
+  const isReading = currentSection.type === 'reading';
+  const isListening = currentSection.type === 'listening';
+  const isWriting = currentSection.type === 'writing';
+
+  const questionsForThisSection = questionsForCurrentSection; // エイリアス (既存の変数名を使用)
+  const hasSpeakingQuestion = questionsForThisSection.some(q => q.questionType === 'speaking');
+  const isSpeakingPreparation = isSpeaking && !hasSpeakingQuestion;
+  // ExamForm を表示する条件 (Speaking準備以外で、問題が存在するセクション)
+  const shouldShowExamForm = 
+    !isInstructions && 
+    !isBreak && 
+    !isAudioOnly && 
+    !isImageOnly && 
+    !isSpeakingPreparation && 
+    (isReading || isListening || isWriting || isSpeaking);
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* --- 現在のセクションに応じたコンポーネント表示 --- */} 
-      {currentSection.type === 'instructions' && (
+
+      {isInstructions && (
         <InstructionsScreen 
           title={currentSection.title}
-          instructions={currentSection.instructions || ''}
-          onNext={handleNext} // handleNext を後で定義
-        />
-      )}
-
-      {currentSection.type === 'break' && (
-        <BreakScreen 
-          title={currentSection.title}
-          duration={currentSection.duration || 300} // デフォルト休憩時間を設定
-          onNext={handleNext} // handleNext を後で定義
-        />
-      )}
-
-      {/* 追加: 音源再生専用セクション */}
-      {currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
-        <AudioPlaybackScreen
-          title={currentSection.title}
-          audioUrl={currentSection.audioUrl}
+          instructions={currentSection.instructions}
+          duration={currentSection.duration} 
           onNext={handleNext}
         />
       )}
 
-      {/* 新しい条件: isImageDisplayOnly が true で、問題がない場合 (純粋な画像表示セクション)
-       * または、問題がある場合でも、isImageDisplayOnly がセクションレベルで指定されていれば画像表示を優先することも考慮できる
-       * ここでは、問題がない場合のみ ImageDisplayScreen を表示するシンプルな実装にする
-       * 問題がある場合は、ExamForm 内で画像が表示される想定 */}
-      {currentSection.isImageDisplayOnly && currentSection.imageUrl && questionsForCurrentSection.length === 0 && (
-        <ImageDisplayScreen
+      {isBreak && (
+        <BreakScreen 
+          title={currentSection.title} 
+          duration={currentSection.duration || 300} 
+          onNext={handleNext} // onComplete -> onNext に修正
+        />
+      )}
+
+      {isAudioOnly && (
+        <AudioPlaybackScreen 
+          title={currentSection.title}
+          audioUrl={currentSection.audioUrl || ''}
+          // duration は AudioPlaybackScreen が受け取るので渡しても良い
+          duration={currentSection.duration} 
+          onNext={handleNext} // onComplete -> onNext に修正
+        />
+      )}
+
+      {isImageOnly && (
+        <ImageDisplayScreen 
+          title={currentSection.title}
+          imageUrl={currentSection.imageUrl || ''}
+          // duration は ImageDisplayScreen が受け取らないので削除
+          // 必要であれば ImageDisplayScreen を改修
+          onNext={handleNext} // onComplete -> onNext に修正
+        />
+      )}
+
+      {/* Speaking Preparation Section */} 
+      {isSpeakingPreparation && (
+        <InstructionsScreen 
           title={currentSection.title}
           instructions={currentSection.instructions}
-          imageUrl={currentSection.imageUrl} // ExamSection に imageUrl が必要
-          onNext={handleNext}
+          duration={currentSection.duration} 
+          onNext={handleNext} 
         />
       )}
 
-      {/* 該当セクションに問題がある場合 */}
-      {questionsForCurrentSection.length > 0 && (
-        <ExamForm 
-          examId={params.id} 
+      {/* Speaking Response Section or other form-based sections */} 
+      {shouldShowExamForm && (
+        <ExamForm
+          examId={params.id}
           sectionInfo={currentSection}
-          questions={questionsForCurrentSection}
+          questions={questionsForThisSection}
           initialAttemptData={attemptData?.sections[currentSection.title]}
           onSubmit={handleSectionSubmit}
-          examType={examDefinition.type || ''} // examType を渡す (examDefinitionがnullの場合も考慮)
+          examType={examDefinition.type} 
         />
       )}
       
-      {/* 完了メッセージや結果ページへのリンク（オプション） */} 
-      {attemptData?.status === 'completed' && (
-        <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
-           <h2 className="text-xl font-bold text-green-800 mb-4">試験完了！</h2>
-           <p className="text-green-700 mb-4">お疲れ様でした。結果を確認しましょう。</p>
-           <Link href={`/exams/${params.id}/result?attemptId=${attemptId}`} className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-             結果を見る
-           </Link>
-        </div>
+      {/* Fallback or Loading/Error display if no component matches (optional) */} 
+      {!isInstructions && !isBreak && !isAudioOnly && !isImageOnly && !isSpeakingPreparation && !shouldShowExamForm && (
+        <div>Loading section or unknown section type...</div>
       )}
 
-      {/* ↓↓↓ 追加: フォールバック表示 ↓↓↓ */}
-      {attemptData?.status === 'completed' && (
-        <div className="mt-8 p-6 bg-green-50 border border-green-200 rounded-lg text-center">
-           <h2 className="text-xl font-bold text-green-800 mb-4">試験完了！</h2>
-           <p className="text-green-700 mb-4">お疲れ様でした。結果を確認しましょう。</p>
-           <Link href={`/exams/${params.id}/result?attemptId=${attemptId}`} className="inline-block px-6 py-2 bg-green-600 text-white rounded hover:bg-green-700">
-             結果を見る
-           </Link>
-        </div>
-      )}
+      {/* Debug Info (Optional) */} 
+      {/* 
+      <pre className="mt-8 p-4 bg-gray-100 rounded text-xs overflow-auto">
+        {JSON.stringify({ 
+          currentStructureIndex, 
+          currentSection, 
+          isSpeakingPreparation, 
+          attemptId, 
+          attemptData 
+        }, null, 2)}
+      </pre>
+      */} 
     </div>
   );
 }
