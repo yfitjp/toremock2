@@ -149,7 +149,7 @@ export default function ExamForm({
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording]);
+  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.stopRecording]);
 
   const currentQuestionData = questions[currentQuestionIndex];
 
@@ -187,13 +187,15 @@ export default function ExamForm({
   };
 
   useEffect(() => {
-    const completeSectionIfNeeded = () => {
-      if (questionType === 'speaking' && isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
-        console.log('Recording time up and recording stopped, submitting.');
-        handleSectionComplete();
-      }
-    };
-    completeSectionIfNeeded();
+    if (questionType === 'speaking') {
+        const completeSectionIfNeeded = () => {
+          if (isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
+            console.log('Recording time up and recording stopped, submitting.');
+            handleSectionComplete();
+          }
+        };
+        completeSectionIfNeeded();
+    }
   }, [isRecordingTimeUp, recorder.status, questionType, isSubmitting]);
 
   // DEBUG LOG
