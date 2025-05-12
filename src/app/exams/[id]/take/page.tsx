@@ -524,6 +524,16 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     !isSpeakingPreparation && 
     (isReading || isListening || isWriting || isSpeaking);
 
+  // DEBUG LOG (ExamForm が表示される場合のみ)
+  if (shouldShowExamForm) {
+    console.log('[take/page.tsx] Preparing to render ExamForm with:', {
+      sectionTitle: currentSection.title,
+      sectionType: currentSection.type,
+      questionCount: questionsForThisSection.length,
+      // questions: questionsForThisSection // 詳細が必要な場合
+    });
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* --- 現在のセクションに応じたコンポーネント表示 --- */} 
