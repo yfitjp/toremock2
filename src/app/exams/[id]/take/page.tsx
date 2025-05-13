@@ -459,7 +459,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     try {
       const updateData: Record<string, any> = {
         [`sections.${sectionTitle}`]: newSectionAttemptData,
-        currentStructureIndex: nextActualIndex
+        currentStructureIndex: nextActualIndex,
+        updatedAt: serverTimestamp()
       };
 
       if (nextActualIndex >= examDefinition.structure.length) {
@@ -519,7 +520,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       const updateData: Record<string, any> = {
         [`sections.${sectionTitle}.status`]: 'skipped',
         [`sections.${sectionTitle}.completedAt`]: serverTimestamp(),
-        currentStructureIndex: nextIdx
+        currentStructureIndex: nextIdx,
+        updatedAt: serverTimestamp()
       };
        if (nextIdx >= examDefinition.structure.length) {
         updateData['status'] = 'completed'; // 最後なら試験自体も完了

@@ -41,7 +41,7 @@ service cloud.firestore {
 
       allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
                      // 更新対象ドキュメントが自分のものか、または管理者の場合
-                     && resource.data.status == 'in-progress' // ★注意: 最終更新時に問題になる可能性あり。まずは他の変更で様子見。
+                     // && resource.data.status == 'in-progress' // この行をコメントアウトまたは削除
                      && request.resource.data.userId == resource.data.userId // userId は変更不可
                      && request.resource.data.examId == resource.data.examId // examId は変更不可
                      && request.resource.data.startedAt == resource.data.startedAt // startedAt は変更不可
