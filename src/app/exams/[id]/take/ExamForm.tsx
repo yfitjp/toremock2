@@ -71,14 +71,19 @@ export default function ExamForm({
   };
 
   const handleNext = () => {
+    console.log('[ExamForm handleNext] Start. currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length);
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
     }
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prev => prev + 1);
+      setCurrentQuestionIndex(prev => {
+        console.log('[ExamForm handleNext] Incrementing index from:', prev);
+        return prev + 1;
+      });
     } else {
+      console.log('[ExamForm handleNext] Else block. currentQuestionIndex:', currentQuestionIndex);
       if (questionType !== 'speaking') {
         handleSectionComplete();
       }
@@ -155,6 +160,7 @@ export default function ExamForm({
   }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording]);
 
   const currentQuestionData = questions[currentQuestionIndex];
+  console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
 
   if (questionType !== 'speaking' && !currentQuestionData) {
     return <div>Loading question...</div>;
