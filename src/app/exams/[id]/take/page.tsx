@@ -319,11 +319,16 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   // questionsForCurrentSection は ExamForm に渡すためにここで定義
   // この時点で currentSection は null ではないはず
   const questionsForCurrentForm = useMemo(() => {
-    if (!currentSection) { // currentSection が null または undefined の場合は空配列を返す
+    console.log('[DEBUG] useMemo for questionsForCurrentForm. currentSection:', currentSection, 'questions state:', questions);
+    if (!currentSection || !currentSection.title) { 
+      console.log('[DEBUG] currentSection or title is missing, returning empty array for questions.');
       return [];
     }
-    // .sort() は元の配列を変更する可能性があるため、スプレッド構文でコピーしてからソートする
-    return [...(questions[currentSection.title] || [])].sort((a: Question, b: Question) => a.order - b.order);
+    const sectionQuestions = questions[currentSection.title] || [];
+    console.log('[DEBUG] Questions for section ', currentSection.title, ':', sectionQuestions);
+    // 一時的にソート処理をコメントアウトし、単純な配列を返す
+    // return [...(questions[currentSection.title] || [])].sort((a: Question, b: Question) => a.order - b.order);
+    return sectionQuestions; // ソートなしで返す (スプレッドでのコピーも一旦なしで元の参照を渡してみる)
   }, [questions, currentSection]); // 依存配列に currentSection をそのまま含める（titleだけでなく）
 
   // 試験タイプに応じたタイトルや説明を設定
