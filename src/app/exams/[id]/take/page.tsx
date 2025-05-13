@@ -319,9 +319,12 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   // questionsForCurrentSection は ExamForm に渡すためにここで定義
   // この時点で currentSection は null ではないはず
   const questionsForCurrentForm = useMemo(() => {
+    if (!currentSection) { // currentSection が null または undefined の場合は空配列を返す
+      return [];
+    }
     // .sort() は元の配列を変更する可能性があるため、スプレッド構文でコピーしてからソートする
     return [...(questions[currentSection.title] || [])].sort((a: Question, b: Question) => a.order - b.order);
-  }, [questions, currentSection.title]);
+  }, [questions, currentSection]); // 依存配列に currentSection をそのまま含める（titleだけでなく）
 
   // 試験タイプに応じたタイトルや説明を設定
   const examTypeLabel = examDefinition ? {
