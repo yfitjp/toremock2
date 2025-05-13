@@ -502,43 +502,36 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   // --- レンダリングロジック --- 
   
   // セクションタイプに応じた判定フラグ
-  const isInstructions = currentSection.type === 'instructions';
-  const isBreak = currentSection.type === 'break';
-  // isAudioPlaybackOnly, isImageDisplayOnly フラグを使用
-  const isAudioOnly = currentSection.isAudioPlaybackOnly && currentSection.audioUrl;
-  const isImageOnly = currentSection.isImageDisplayOnly && currentSection.imageUrl;
-  const isSpeaking = currentSection.type === 'speaking';
-  const isReading = currentSection.type === 'reading';
-  const isListening = currentSection.type === 'listening';
-  const isWriting = currentSection.type === 'writing';
+  // const isInstructions = currentSection.type === 'instructions';
+  // const isBreak = currentSection.type === 'break';
+  // // isAudioPlaybackOnly, isImageDisplayOnly フラグを使用
+  // const isAudioOnly = currentSection.isAudioPlaybackOnly && currentSection.audioUrl;
+  // const isImageOnly = currentSection.isImageDisplayOnly && currentSection.imageUrl;
+  // const isSpeaking = currentSection.type === 'speaking';
+  // const isReading = currentSection.type === 'reading';
+  // const isListening = currentSection.type === 'listening';
+  // const isWriting = currentSection.type === 'writing';
 
-  const questionsForThisSection = questionsForCurrentSection; // エイリアス (既存の変数名を使用)
-  const hasSpeakingQuestion = questionsForThisSection.some(q => q.questionType === 'speaking');
-  const isSpeakingPreparation = isSpeaking && !hasSpeakingQuestion;
-  // ExamForm を表示する条件 (Speaking準備以外で、問題が存在するセクション)
-  const shouldShowExamForm = 
-    !isInstructions && 
-    !isBreak && 
-    !isAudioOnly && 
-    !isImageOnly && 
-    !isSpeakingPreparation && 
-    (isReading || isListening || isWriting || isSpeaking);
+  // const questionsForThisSection = questionsForCurrentSection; // エイリアス (既存の変数名を使用)
+  // const hasSpeakingQuestion = questionsForThisSection.some(q => q.questionType === 'speaking');
+  // const isSpeakingPreparation = isSpeaking && !hasSpeakingQuestion;
+  // // ExamForm を表示する条件 (Speaking準備以外で、問題が存在するセクション)
+  // const shouldShowExamForm = 
+  //   !isInstructions && 
+  //   !isBreak && 
+  //   !isAudioOnly && 
+  //   !isImageOnly && 
+  //   !isSpeakingPreparation && 
+  //   (isReading || isListening || isWriting || isSpeaking);
 
-  // DEBUG LOG (ExamForm が表示される場合のみ)
-  if (shouldShowExamForm) {
-    console.log('[take/page.tsx] Preparing to render ExamForm with:', {
-      sectionTitle: currentSection.title,
-      sectionType: currentSection.type,
-      questionCount: questionsForThisSection.length,
-      // questions: questionsForThisSection // 詳細が必要な場合
-    });
-  }
+  const sectionRenderType = currentSection.type;
+  const hasQuestions = questionsForCurrentSection.length > 0;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* --- 現在のセクションに応じたコンポーネント表示 --- */} 
 
-      {isInstructions && (
+      {sectionRenderType === 'instructions' && (
         <InstructionsScreen 
           title={currentSection.title}
           instructions={currentSection.instructions}
@@ -547,36 +540,33 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         />
       )}
 
-      {isBreak && (
+      {sectionRenderType === 'break' && (
         <BreakScreen 
           title={currentSection.title} 
           duration={currentSection.duration || 300} 
-          onNext={handleNext} // onComplete -> onNext に修正
+          onNext={handleNext}
         />
       )}
 
-      {isAudioOnly && (
-        <AudioPlaybackScreen 
-          title={currentSection.title}
-          audioUrl={currentSection.audioUrl || ''}
-          // duration は AudioPlaybackScreen が受け取るので渡しても良い
-          duration={currentSection.duration} 
-          onNext={handleNext} // onComplete -> onNext に修正
-        />
-      )}
-
-      {isImageOnly && (
+      {sectionRenderType === 'speaking' && !hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl && (
         <ImageDisplayScreen 
           title={currentSection.title}
-          imageUrl={currentSection.imageUrl || ''}
-          // duration は ImageDisplayScreen が受け取らないので削除
-          // 必要であれば ImageDisplayScreen を改修
-          onNext={handleNext} // onComplete -> onNext に修正
+          imageUrl={currentSection.imageUrl}
+          onNext={handleNext}
         />
       )}
 
-      {/* Speaking Preparation Section */} 
-      {isSpeakingPreparation && (
+      {sectionRenderType === 'speaking' && !hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
+        <AudioPlaybackScreen 
+          title={currentSection.title}
+          audioUrl={currentSection.audioUrl}
+          duration={currentSection.duration}
+          onNext={handleNext}
+        />
+      )}
+      
+      {sectionRenderType === 'speaking' && !hasQuestions && !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl) && (
+        // Speaking preparation that is not image/audio only (e.g. just instructions & timer)
         <InstructionsScreen 
           title={currentSection.title}
           instructions={currentSection.instructions}
@@ -584,22 +574,70 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           onNext={handleNext} 
         />
       )}
-
-      {/* Speaking Response Section or other form-based sections */} 
-      {shouldShowExamForm && (
+      
+      {sectionRenderType === 'speaking' && hasQuestions && (
         <ExamForm
           examId={params.id}
           sectionInfo={currentSection}
-          questions={questionsForThisSection}
+          questions={questionsForCurrentSection}
           initialAttemptData={attemptData?.sections[currentSection.title]}
           onSubmit={handleSectionSubmit}
           examType={examDefinition.type} 
         />
       )}
+
+      {(sectionRenderType === 'reading' || sectionRenderType === 'listening' || sectionRenderType === 'writing') && (
+        <>
+          {!hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl && (
+            <ImageDisplayScreen 
+              title={currentSection.title}
+              imageUrl={currentSection.imageUrl}
+              onNext={handleNext}
+            />
+          )}
+          {!hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
+            <AudioPlaybackScreen 
+              title={currentSection.title}
+              audioUrl={currentSection.audioUrl}
+              duration={currentSection.duration}
+              onNext={handleNext}
+            />
+          )}
+          {hasQuestions && (
+            <ExamForm
+              examId={params.id}
+              sectionInfo={currentSection}
+              questions={questionsForCurrentSection}
+              initialAttemptData={attemptData?.sections[currentSection.title]}
+              onSubmit={handleSectionSubmit}
+              examType={examDefinition.type} 
+            />
+          )}
+          {/* If type is R/L/W but no questions AND not image/audio only (e.g. just instructions for a writing task start) */}
+          {!hasQuestions && 
+           !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && 
+           !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl) &&
+           currentSection.instructions && (
+            <InstructionsScreen
+              title={currentSection.title}
+              instructions={currentSection.instructions}
+              duration={currentSection.duration}
+              onNext={handleNext}
+            />
+          )}
+        </>
+      )}
       
       {/* Fallback or Loading/Error display if no component matches (optional) */} 
-      {!isInstructions && !isBreak && !isAudioOnly && !isImageOnly && !isSpeakingPreparation && !shouldShowExamForm && (
-        <div>Loading section or unknown section type...</div>
+      {![
+        'instructions', 
+        'break', 
+        'speaking', 
+        'reading', 
+        'listening', 
+        'writing'
+      ].includes(sectionRenderType) && (
+        <div>Loading section or unknown section type... ({sectionRenderType})</div>
       )}
 
       {/* Debug Info (Optional) */} 

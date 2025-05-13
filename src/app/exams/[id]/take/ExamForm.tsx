@@ -149,7 +149,7 @@ export default function ExamForm({
       });
     }, 1000);
     return () => clearInterval(timer);
-  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.stopRecording]);
+  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording]);
 
   const currentQuestionData = questions[currentQuestionIndex];
 
@@ -187,25 +187,14 @@ export default function ExamForm({
   };
 
   useEffect(() => {
-    if (questionType === 'speaking') {
-        const completeSectionIfNeeded = () => {
-          if (isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
-            console.log('Recording time up and recording stopped, submitting.');
-            handleSectionComplete();
-          }
-        };
-        completeSectionIfNeeded();
-    }
+    const completeSectionIfNeeded = () => {
+      if (questionType === 'speaking' && isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
+        console.log('Recording time up and recording stopped, submitting.');
+        handleSectionComplete();
+      }
+    };
+    completeSectionIfNeeded();
   }, [isRecordingTimeUp, recorder.status, questionType, isSubmitting]);
-
-  // DEBUG LOG
-  console.log('[ExamForm.tsx] State before render:', {
-    sectionType: sectionInfo.type,
-    questionCount: questions.length,
-    calculatedQuestionType: questionType,
-    currentQuestionIndex,
-    isLastQuestion: currentQuestionIndex === questions.length - 1
-  });
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
@@ -426,32 +415,6 @@ export default function ExamForm({
           </button>
         )}
       </div>
-
-      {/* Question Navigator */}
-      {questionType !== 'speaking' && questions.length > 1 && (
-        <div className="mt-8">
-          <div className="flex flex-wrap justify-center gap-2">
-            {questions.map((q, index) => (
-              <button
-                key={q.id || index} // question に id があるはずなので q.id を優先
-                onClick={() => setCurrentQuestionIndex(index)}
-                className={`w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium transition-colors
-                  ${currentAnswers[q.id] !== undefined
-                    ? 'bg-green-500 text-white hover:bg-green-600' // Answered
-                    : currentQuestionIndex === index
-                    ? 'bg-blue-600 text-white' // Current
-                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300' // Not answered, not current
-                  }
-                  disabled={questionType === 'speaking'} // Speaking中は無効のまま（ここは念のため）
-                `}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
     </div>
   );
 } 
