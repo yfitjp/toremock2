@@ -24,6 +24,7 @@ export default function ExamForm({
   onSubmit, 
   examType
 }: ExamFormProps) {
+  console.log('[ExamForm] Props received:', { examId, sectionInfo, questions, examType });
   const router = useRouter();
   const { user } = useAuth();
   const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string /* | AudioBlob */>>({});
@@ -36,11 +37,13 @@ export default function ExamForm({
   const recorder = useRecorder();
   const [isRecordingTimeUp, setIsRecordingTimeUp] = useState(false);
 
+  console.log('[ExamForm] Determining questionType. questions:', questions, 'sectionInfo.type:', sectionInfo.type);
   const questionType = questions && questions.length > 0 && questions[0]?.questionType 
                      ? questions[0].questionType 
                      : sectionInfo.type === 'speaking' 
                      ? 'speaking' 
                      : 'multiple-choice';
+  console.log('[ExamForm] questionType determined:', questionType);
 
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
@@ -200,11 +203,23 @@ export default function ExamForm({
     <div className="bg-white shadow-md rounded-lg p-6">
       <div className="flex justify-between items-center mb-6">
         <div className="text-lg font-medium">
-          {questionType !== 'speaking' ? 
-            `Question ${currentQuestionIndex + 1} / ${questions.length}` : 
+          {questionType !== 'speaking' ?
+            `Question ${currentQuestionIndex + 1} / ${questions.length}` :
             sectionInfo.title
           }
         </div>
+        {questionType !== 'speaking' && questions.length > 0 && (
+          <div className="flex space-x-2">
+            {questions.map((_, index) => (
+              <div
+                key={`progress-${index}`}
+                className={`w-3 h-3 rounded-full ${
+                  index === currentQuestionIndex ? 'bg-green-500' : 'bg-gray-300'
+                }`}
+              ></div>
+            ))}
+          </div>
+        )}
         <div className="text-lg font-medium text-red-600">
           Time Left: {formatTime(timeLeft)}
         </div>
