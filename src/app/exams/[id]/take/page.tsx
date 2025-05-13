@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import ExamForm from './ExamForm';
 import InstructionsScreen from './InstructionsScreen';
@@ -318,7 +318,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   
   // questionsForCurrentSection は ExamForm に渡すためにここで定義
   // この時点で currentSection は null ではないはず
-  const questionsForCurrentForm = questions[currentSection.title]?.sort((a: Question, b: Question) => a.order - b.order) || [];
+  const questionsForCurrentForm = useMemo(() => {
+    // .sort() は元の配列を変更する可能性があるため、スプレッド構文でコピーしてからソートする
+    return [...(questions[currentSection.title] || [])].sort((a: Question, b: Question) => a.order - b.order);
+  }, [questions, currentSection.title]);
 
   // 試験タイプに応じたタイトルや説明を設定
   const examTypeLabel = examDefinition ? {
@@ -330,7 +333,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   // --- コールバック関数 --- 
 
   // Firestore の attempt ドキュメントを更新するヘルパー関数
-  const updateAttemptInFirestore = async (dataToUpdate: Partial<ExamAttempt>) => {
+  const updateAttemptInFirestore = useCallback(async (dataToUpdate: Partial<ExamAttempt>) => {
     if (!attemptId) return;
     try {
       const attemptRef = doc(db, 'exam_attempts', attemptId);
@@ -343,10 +346,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       // ここでエラーをユーザーに通知することも検討
       setError('受験状況の保存に失敗しました。'); 
     }
-  };
+  }, [attemptId]); // attemptId のみ依存
 
   // Instructions / Break / Speaking準備 画面から呼ばれる: 次のセクションへ進む
-  const handleNext = async () => {
+  const handleNext = useCallback(async () => {
     if (!examDefinition || !attemptData) return;
 
     const nextIndex = currentStructureIndex + 1;
@@ -370,10 +373,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     } else {
       console.warn('Trying to move past the last section from handleNext');
     } 
-  };
+  }, [examDefinition, attemptData, currentStructureIndex, updateAttemptInFirestore]); // 依存関係を明示
 
   // ExamForm から呼ばれる: セクションの解答を提出し、次に進む
-  const handleSectionSubmit = async (submittedAnswers: Record<string, number | string | Blob>) => {
+  const handleSectionSubmit = useCallback(async (submittedAnswers: Record<string, number | string | Blob>) => {
     if (!user || !examDefinition || !currentSection || !attemptData || !attemptData.id || isSubmitting) {
       console.warn('[Page] handleSectionSubmit called with invalid state');
       return;
@@ -504,7 +507,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore]); // 依存関係を明示
 
   const handleSkipSection = async () => {
     if (!user || !examDefinition || !currentSection || !attemptData || !attemptData.id || isSubmitting) return;

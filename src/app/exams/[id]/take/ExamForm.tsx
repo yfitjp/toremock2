@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
@@ -16,7 +16,7 @@ interface ExamFormProps {
   examType: string;
 }
 
-export default function ExamForm({ 
+export default React.memo(function ExamForm({ 
   examId, 
   sectionInfo, 
   questions, 
@@ -249,7 +249,7 @@ export default function ExamForm({
     // また、コンポーネントがアンマウントされる際にも呼び出される
     if (questionType === 'speaking') {
       return () => {
-        // console.log('[ExamForm] Cleaning up recorder for speaking section.');
+        console.log('[ExamForm] Cleaning up recorder for speaking section on unmount. Current status:', recorder.status);
         recorder.resetRecorder();
       };
     }
@@ -488,4 +488,4 @@ export default function ExamForm({
       </div>
     </div>
   );
-} 
+}); 
