@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
 import { Question, ExamSection, SectionAttempt } from '@/app/lib/firestoreTypes';
-import { useRecorder, RecorderStatus, UseRecorderReturnType } from '@/app/hooks/useRecorder';
+import useRecorder, { RecorderStatus, UseRecorderReturnType } from '@/app/hooks/useRecorder';
 
 interface ExamFormProps {
   examId: string;
@@ -406,7 +406,7 @@ export default function ExamForm({
               ) : (
                 <button
                   onClick={handleStartRecording}
-                  disabled={timeLeft === 0 || isSubmitting || recorder.status === 'permission-denied'}
+                  disabled={timeLeft === 0 || isSubmitting}
                   className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
                 >
                   Start Recording
