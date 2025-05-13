@@ -46,6 +46,13 @@ export default function ExamForm({
                      : 'multiple-choice';
   // console.log('[ExamForm] questionType determined:', questionType);
 
+  useEffect(() => {
+    console.log(`%c[ExamForm] MOUNTED - ${sectionInfo.title} - ${new Date().toLocaleTimeString()}`, 'color: green; font-weight: bold;');
+    return () => {
+      console.log(`%c[ExamForm] UNMOUNTING - ${sectionInfo.title} - ${new Date().toLocaleTimeString()}`, 'color: red; font-weight: bold;');
+    };
+  }, [sectionInfo.title]); // sectionInfo.title が変わることは稀なので、ほぼマウント・アンマウント時に対応
+
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
     const seconds = totalSeconds % 60;
