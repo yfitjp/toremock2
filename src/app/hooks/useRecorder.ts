@@ -27,30 +27,36 @@ const useRecorder = (): UseRecorderReturnType => {
   const audioChunksRef = useRef<Blob[]>([]);
 
   const getMicrophonePermission = useCallback(async () => {
+    console.log('[useRecorder] getMicrophonePermission called. Current status:', status);
     setStatus('permission-requested');
     setErrorMessage(null);
     try {
       const mediaStream = await navigator.mediaDevices.getUserMedia({ audio: true });
       setStream(mediaStream);
       setStatus('permission-granted');
+      console.log('[useRecorder] Microphone permission GRANTED. Stream set.');
     } catch (err) {
-      console.error("Error accessing microphone:", err);
+      console.error("[useRecorder] Error accessing microphone:", err);
       setErrorMessage(err instanceof Error ? err.message : 'Unknown error accessing microphone.');
       setStatus('permission-denied');
+      console.log('[useRecorder] Microphone permission DENIED.');
     }
-  }, []);
+  }, [status]);
 
   const startRecording = useCallback(() => {
+    console.log('[useRecorder] startRecording called. Current status:', status, 'Stream available:', !!stream);
     if (!stream || status === 'recording') {
-      console.warn('Stream not available or already recording.');
+      console.warn('[useRecorder] Stream not available or already recording.');
       if (!stream) setErrorMessage('Microphone permission not granted or stream not available.');
       return;
     }
     if (status === 'permission-denied') {
+        console.warn('[useRecorder] Attempted to start recording but permission was denied.');
         setErrorMessage('Microphone permission was denied. Please enable it in your browser settings.');
         return;
     }
 
+    console.log('[useRecorder] Setting status to "recording".');
     setStatus('recording');
     setAudioBlob(null);
     setAudioUrl(null);
@@ -59,20 +65,24 @@ const useRecorder = (): UseRecorderReturnType => {
     setErrorMessage(null);
 
     try {
+        console.log('[useRecorder] Creating MediaRecorder instance.');
         mediaRecorderRef.current = new MediaRecorder(stream);
 
         mediaRecorderRef.current.ondataavailable = (event) => {
             if (event.data.size > 0) {
+            // console.log('[useRecorder] ondataavailable - chunk size:', event.data.size);
             audioChunksRef.current.push(event.data);
             }
         };
 
         mediaRecorderRef.current.onstop = () => {
+            console.log('[useRecorder] onstop called. Number of chunks:', audioChunksRef.current.length);
             const completeBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
             setAudioBlob(completeBlob);
             const url = URL.createObjectURL(completeBlob);
             setAudioUrl(url);
             setStatus('stopped');
+            console.log('[useRecorder] Status set to "stopped". Audio Blob created, size:', completeBlob.size, 'URL:', url);
         };
 
         mediaRecorderRef.current.onerror = (event) => {
@@ -80,26 +90,33 @@ const useRecorder = (): UseRecorderReturnType => {
             const errMsg = event.error?.message || 'Unknown MediaRecorder error';
             setErrorMessage(`Recording error: ${errMsg}`);
             setStatus('error');
+            console.error('[useRecorder] MediaRecorder error event:', event);
         };
         
+        console.log('[useRecorder] Calling mediaRecorder.start().');
         mediaRecorderRef.current.start();
+        console.log('[useRecorder] mediaRecorder.start() called successfully.');
 
     } catch (err) {
-        console.error("Error starting recording:", err);
+        console.error("[useRecorder] Error starting recording:", err);
         setErrorMessage(err instanceof Error ? err.message : 'Unknown error starting recording.');
         setStatus('error');
     }
   }, [stream, status, audioUrl]);
 
   const stopRecording = useCallback(() => {
+    console.log('[useRecorder] stopRecording called. Current status:', status, 'MediaRecorder exists:', !!mediaRecorderRef.current);
     if (mediaRecorderRef.current && status === 'recording') {
+      console.log('[useRecorder] Calling mediaRecorder.stop().');
       mediaRecorderRef.current.stop();
+      // onstop で status が 'stopped' に設定される
     } else {
-      console.warn('MediaRecorder not active or not recording.');
+      console.warn('[useRecorder] MediaRecorder not active or not recording. Cannot stop.');
     }
   }, [status]);
 
   const resetRecorder = useCallback(() => {
+    console.log('[useRecorder] resetRecorder called. Current status:', status);
     if (stream) {
         stream.getTracks().forEach(track => track.stop());
     }
@@ -113,7 +130,8 @@ const useRecorder = (): UseRecorderReturnType => {
     audioChunksRef.current = [];
     setStatus('idle');
     setErrorMessage(null);
-  }, [stream, audioUrl]);
+    console.log('[useRecorder] Recorder reset to idle state.');
+  }, [stream, audioUrl, status]);
 
   return {
     status,

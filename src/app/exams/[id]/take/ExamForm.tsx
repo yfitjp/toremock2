@@ -34,6 +34,7 @@ export default function ExamForm({
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
+  console.log('[ExamForm] Initializing. Section type:', sectionInfo.type);
   const recorder: UseRecorderReturnType = useRecorder();
   const [isRecordingTimeUp, setIsRecordingTimeUp] = useState(false);
 
@@ -106,19 +107,19 @@ export default function ExamForm({
 
   const handleSectionComplete = useCallback(() => {
     if (isSubmitting) return;
-    // console.log(`Completing section: ${sectionInfo.title}`);
+    console.log(`[ExamForm] handleSectionComplete called for section: ${sectionInfo.title}. Recorder status: ${recorder.status}, AudioBlob exists: ${!!recorder.audioBlob}`);
     setIsSubmitting(true);
     const questionId = questions[currentQuestionIndex]?.id || 'speaking_answer';
 
     if (questionType === 'speaking' && recorder.audioBlob) {
-      // console.log('Recorded audio for speaking:', recorder.audioBlob);
+      console.log('[ExamForm] Submitting with audioBlob. Size:', recorder.audioBlob.size);
       const answersWithAudio = {
         ...currentAnswers,
         [questionId]: recorder.audioBlob
       };
       onSubmit(answersWithAudio);
     } else if (questionType === 'speaking') {
-      // console.log('No audio recorded for speaking or submission forced.');
+      console.log('[ExamForm] No audioBlob or submission forced. Submitting with no_audio_recorded.');
       const emptyAudioAnswer = { 
         ...currentAnswers,
         [questionId]: 'no_audio_recorded'
@@ -138,6 +139,7 @@ export default function ExamForm({
   useEffect(() => {
     if (!sectionInfo.duration) return;
     setTimeLeft(sectionInfo.duration);
+    console.log(`[ExamForm] Timer started for section: ${sectionInfo.title}, duration: ${sectionInfo.duration}s, questionType: ${questionType}`);
     setIsRecordingTimeUp(false);
 
     const timer = setInterval(() => {
@@ -145,8 +147,9 @@ export default function ExamForm({
         if (prev <= 1) {
           clearInterval(timer);
           if (questionType === 'speaking') {
-            // console.log("Recording time's up for:", sectionInfo.title);
+            console.log("[ExamForm] Recording time's up for:", sectionInfo.title, "Recorder status:", recorder.status);
             if (recorder.status === 'recording') {
+              console.log('[ExamForm] Timer: Stopping recording due to time up.');
               recorder.stopRecording();
             }
             setIsRecordingTimeUp(true);
@@ -161,6 +164,7 @@ export default function ExamForm({
     }, 1000);
     return () => {
       clearInterval(timer);
+      console.log(`[ExamForm] Timer cleared for section: ${sectionInfo.title}`);
       if (questionType === 'speaking') {
         // recorder.resetRecorder(); // コンポーネントアンマウント時にクリーンアップ
       }
@@ -186,27 +190,41 @@ export default function ExamForm({
   const questionText = currentQuestionData?.content || '';
 
   const handleRequestMicPermission = async () => {
+    console.log('[ExamForm] handleRequestMicPermission called. Current recorder status:', recorder.status);
     await recorder.getMicrophonePermission();
+    console.log('[ExamForm] Microphone permission request finished. Recorder status:', recorder.status, 'Error:', recorder.errorMessage);
   };
 
   const handleStartRecording = () => {
-    if (recorder.status === 'permission-granted' || recorder.status === 'stopped') {
+    console.log('[ExamForm] handleStartRecording called. Current recorder status:', recorder.status);
+    if (recorder.status === 'permission-granted' || recorder.status === 'stopped' || recorder.status === 'idle') { // idleも追加
+      console.log('[ExamForm] Attempting to start recording.');
       recorder.startRecording();
       setIsRecordingTimeUp(false);
-      setTimeLeft(sectionInfo.duration || 0); 
+      // スピーキングセクションのタイマーをリセットして開始
+      if (sectionInfo.duration) {
+          console.log('[ExamForm] Resetting timer for speaking recording.');
+          setTimeLeft(sectionInfo.duration); 
+      }
+    } else {
+      console.warn('[ExamForm] Cannot start recording. Status:', recorder.status, 'Error:', recorder.errorMessage);
     }
   };
 
   const handleStopRecording = () => {
+    console.log('[ExamForm] handleStopRecording called. Current recorder status:', recorder.status);
     if (recorder.status === 'recording') {
+      console.log('[ExamForm] Attempting to stop recording.');
       recorder.stopRecording();
+    } else {
+      console.warn('[ExamForm] Cannot stop recording. Not currently recording. Status:', recorder.status);
     }
   };
 
   useEffect(() => {
     const completeSectionIfNeeded = () => {
       if (questionType === 'speaking' && isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
-        // console.log('Recording time up and recording stopped, submitting.');
+        console.log('[ExamForm] useEffect[isRecordingTimeUp, recorder.status]: Recording time up AND recorder stopped. Calling handleSectionComplete.');
         handleSectionComplete();
       }
     };
@@ -215,8 +233,8 @@ export default function ExamForm({
 
   // recorderの状態が変化したときにログを出力
   useEffect(() => {
-    // console.log('[ExamForm] Recorder status updated:', recorder.status, 'Error:', recorder.errorMessage);
-  }, [recorder.status, recorder.errorMessage]);
+    console.log('[ExamForm] Recorder status updated in ExamForm:', recorder.status, 'AudioBlob:', recorder.audioBlob ? `Exists, size: ${recorder.audioBlob.size}` : 'null', 'Error:', recorder.errorMessage);
+  }, [recorder.status, recorder.errorMessage, recorder.audioBlob]);
 
   // クリーンアップエフェクト
   useEffect(() => {
