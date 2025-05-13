@@ -425,8 +425,8 @@ export default function ExamForm({
           </button>
         )}
 
-        {(questionType !== 'speaking' && currentQuestionIndex === questions.length - 1) || 
-         (questionType === 'speaking' && (recorder.status === 'stopped' || isRecordingTimeUp)) && (
+        {((questionType !== 'speaking' && currentQuestionIndex === questions.length - 1) ||
+          (questionType === 'speaking' && (recorder.status === 'stopped' || isRecordingTimeUp))) && (
           <button
             onClick={handleSectionComplete}
             disabled={isSubmitting || (questionType === 'speaking' && recorder.status === 'recording')}
