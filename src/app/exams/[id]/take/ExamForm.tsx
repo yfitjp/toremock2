@@ -24,7 +24,7 @@ export default function ExamForm({
   onSubmit, 
   examType
 }: ExamFormProps) {
-  console.log('[ExamForm] Props received:', { examId, sectionInfo, questions, examType });
+  // console.log('[ExamForm] Props received:', { examId, sectionInfo, questions, examType });
   const router = useRouter();
   const { user } = useAuth();
   const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string | Blob>>({});
@@ -37,13 +37,13 @@ export default function ExamForm({
   const recorder: UseRecorderReturnType = useRecorder();
   const [isRecordingTimeUp, setIsRecordingTimeUp] = useState(false);
 
-  console.log('[ExamForm] Determining questionType. questions:', questions, 'sectionInfo.type:', sectionInfo.type);
+  // console.log('[ExamForm] Determining questionType. questions:', questions, 'sectionInfo.type:', sectionInfo.type);
   const questionType = questions && questions.length > 0 && questions[0]?.questionType 
                      ? questions[0].questionType 
                      : sectionInfo.type === 'speaking' 
                      ? 'speaking' 
                      : 'multiple-choice';
-  console.log('[ExamForm] questionType determined:', questionType);
+  // console.log('[ExamForm] questionType determined:', questionType);
 
   const formatTime = (totalSeconds: number) => {
     const minutes = Math.floor(totalSeconds / 60);
@@ -71,7 +71,7 @@ export default function ExamForm({
   };
 
   const handleNext = () => {
-    console.log('[ExamForm handleNext] Start. currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length);
+    // console.log('[ExamForm handleNext] Start. currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length);
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
@@ -79,11 +79,11 @@ export default function ExamForm({
     }
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prev => {
-        console.log('[ExamForm handleNext] Incrementing index from:', prev);
+        // console.log('[ExamForm handleNext] Incrementing index from:', prev);
         return prev + 1;
       });
     } else {
-      console.log('[ExamForm handleNext] Else block. currentQuestionIndex:', currentQuestionIndex);
+      // console.log('[ExamForm handleNext] Else block. currentQuestionIndex:', currentQuestionIndex);
       if (questionType !== 'speaking') {
         handleSectionComplete();
       }
@@ -106,19 +106,19 @@ export default function ExamForm({
 
   const handleSectionComplete = useCallback(() => {
     if (isSubmitting) return;
-    console.log(`Completing section: ${sectionInfo.title}`);
+    // console.log(`Completing section: ${sectionInfo.title}`);
     setIsSubmitting(true);
     const questionId = questions[currentQuestionIndex]?.id || 'speaking_answer';
 
     if (questionType === 'speaking' && recorder.audioBlob) {
-      console.log('Recorded audio for speaking:', recorder.audioBlob);
+      // console.log('Recorded audio for speaking:', recorder.audioBlob);
       const answersWithAudio = {
         ...currentAnswers,
         [questionId]: recorder.audioBlob
       };
       onSubmit(answersWithAudio);
     } else if (questionType === 'speaking') {
-      console.log('No audio recorded for speaking or submission forced.');
+      // console.log('No audio recorded for speaking or submission forced.');
       const emptyAudioAnswer = { 
         ...currentAnswers,
         [questionId]: 'no_audio_recorded'
@@ -145,13 +145,13 @@ export default function ExamForm({
         if (prev <= 1) {
           clearInterval(timer);
           if (questionType === 'speaking') {
-            console.log("Recording time's up for:", sectionInfo.title);
+            // console.log("Recording time's up for:", sectionInfo.title);
             if (recorder.status === 'recording') {
               recorder.stopRecording();
             }
             setIsRecordingTimeUp(true);
           } else {
-            console.log("Time's up for section:", sectionInfo.title);
+            // console.log("Time's up for section:", sectionInfo.title);
             handleSectionComplete();
           }
           return 0;
@@ -168,7 +168,7 @@ export default function ExamForm({
   }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording, handleSectionComplete]);
 
   const currentQuestionData = questions[currentQuestionIndex];
-  console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
+  // console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
 
   if (questionType !== 'speaking' && !currentQuestionData) {
     return <div>Loading question...</div>;
@@ -206,7 +206,7 @@ export default function ExamForm({
   useEffect(() => {
     const completeSectionIfNeeded = () => {
       if (questionType === 'speaking' && isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
-        console.log('Recording time up and recording stopped, submitting.');
+        // console.log('Recording time up and recording stopped, submitting.');
         handleSectionComplete();
       }
     };
@@ -215,7 +215,7 @@ export default function ExamForm({
 
   // recorderの状態が変化したときにログを出力
   useEffect(() => {
-    console.log('[ExamForm] Recorder status updated:', recorder.status, 'Error:', recorder.errorMessage);
+    // console.log('[ExamForm] Recorder status updated:', recorder.status, 'Error:', recorder.errorMessage);
   }, [recorder.status, recorder.errorMessage]);
 
   // クリーンアップエフェクト
@@ -224,7 +224,7 @@ export default function ExamForm({
     // また、コンポーネントがアンマウントされる際にも呼び出される
     if (questionType === 'speaking') {
       return () => {
-        console.log('[ExamForm] Cleaning up recorder for speaking section.');
+        // console.log('[ExamForm] Cleaning up recorder for speaking section.');
         recorder.resetRecorder();
       };
     }
