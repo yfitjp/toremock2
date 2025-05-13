@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import ExamForm from './ExamForm';
 import InstructionsScreen from './InstructionsScreen';
 import BreakScreen from './BreakScreen';
@@ -25,7 +25,8 @@ import {
     updateDoc, 
     Timestamp, 
     WriteBatch,
-    writeBatch
+    writeBatch,
+    setDoc
 } from 'firebase/firestore';
 import { db } from '@/app/lib/firebase';
 import { 
@@ -37,17 +38,27 @@ import {
 } from '@/app/lib/firestoreTypes';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
 import Link from 'next/link';
+import { FirebaseError } from 'firebase/app';
+import { QueryDocumentSnapshot } from 'firebase/firestore';
 
 export default function ExamPage({ params }: { params: { id: string } }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const attemptIdFromQuery = searchParams.get('attemptId');
   const { user, loading: authLoading } = useAuth();
   const [examDefinition, setExamDefinition] = useState<FirestoreExamData | null>(null);
-  const [allQuestions, setAllQuestions] = useState<Question[]>([]);
+  const [questions, setQuestions] = useState<Record<string, Question[]>>({});
   const [attemptId, setAttemptId] = useState<string | null>(null);
   const [attemptData, setAttemptData] = useState<ExamAttempt | null>(null);
   const [currentStructureIndex, setCurrentStructureIndex] = useState<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentSection, setCurrentSection] = useState<ExamSection | null>(null);
+  const [nextSectionTitle, setNextSectionTitle] = useState<string | null>(null);
+  const [timeLeftInSection, setTimeLeftInSection] = useState<number | null>(null);
+  const [showSkipConfirm, setShowSkipConfirm] = useState(false);
+  const [showExitConfirm, setShowExitConfirm] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // ページ離脱防止の警告
   useEffect(() => {
@@ -121,10 +132,12 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // 初期化処理: 模試定義、問題、受験記録の読み込み/作成
   useEffect(() => {
-    const initializeExam = async () => {
-      if (authLoading || !user) return;
+    const fetchData = async () => {
+      if (!user || !params.id) {
+        setIsLoading(false);
+        return;
+      }
       setIsLoading(true);
-      setError(null);
       try {
         // 1. 模試定義の取得
         const examDef = await getExam(params.id); 
@@ -134,11 +147,22 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         setExamDefinition(examDef);
 
         // 2. 全問題の取得
-        const questions = await getExamQuestions(params.id);
-        if (!questions || questions.length === 0) {
-          throw new Error('模試の問題が見つかりません。');
-        }
-        setAllQuestions(questions);
+        const q = query(collection(db, 'questions'), where('examId', '==', params.id));
+        const querySnapshot = await getDocs(q);
+        const fetchedQuestions: Question[] = [];
+        querySnapshot.forEach((doc: QueryDocumentSnapshot) => {
+          fetchedQuestions.push({ id: doc.id, ...doc.data() } as Question);
+        });
+        if (fetchedQuestions.length === 0) console.warn('No questions found for this exam.');
+        
+        const questionsBySection: Record<string, Question[]> = {};
+        fetchedQuestions.forEach(q => {
+          if (!questionsBySection[q.sectionTitle]) {
+            questionsBySection[q.sectionTitle] = [];
+          }
+          questionsBySection[q.sectionTitle].push(q);
+        });
+        setQuestions(questionsBySection); // fetchedQuestions の代わりに questionsBySection をセット
 
         // 3. 進行中の受験記録を探す
         const attemptsRef = collection(db, 'exam_attempts');
@@ -217,8 +241,37 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         setIsLoading(false); // 修正: エラーの有無に関わらずローディングを解除
       }
     };
-    initializeExam();
-  }, [params.id, user, authLoading]); // 修正: error を依存配列から削除
+
+    if (user && params.id) {
+      fetchData();
+    } else if (!authLoading) { // userがnullかつauthLoadingも終わっている場合はエラーかリダイレクト
+      setIsLoading(false);
+      // router.push('/login'); // 必要ならログインページへ
+    }
+  }, [user, params.id, attemptIdFromQuery, router, authLoading]);
+
+  // currentSection, nextSectionTitle, timeLeftInSection の設定とisLoadingの最終処理
+  useEffect(() => {
+    if (examDefinition && attemptData) {
+      if (currentStructureIndex < examDefinition.structure.length) {
+        const section = examDefinition.structure[currentStructureIndex];
+        setCurrentSection(section);
+        if (section?.duration) {
+          setTimeLeftInSection(section.duration);
+        }
+        const nextTitle = currentStructureIndex + 1 < examDefinition.structure.length ? examDefinition.structure[currentStructureIndex + 1]?.title : null;
+        setNextSectionTitle(nextTitle);
+        setIsLoading(false); // ここで最終的にローディングを解除
+      } else if (attemptData.status === 'completed'){
+        setIsLoading(false); // 完了済みの場合もローディング解除
+        router.push(`/exams/${params.id}/result?attemptId=${attemptData.id}`);
+      } else {
+        // currentStructureIndex が範囲外だが未完了の場合 (通常はありえないが)
+        setIsLoading(false);
+        setError("試験の進行状態が無効です。");
+      }
+    }
+  }, [currentStructureIndex, examDefinition, attemptData, router, params.id]);
 
   if (authLoading || isLoading) {
     return (
@@ -256,18 +309,23 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     );
   }
 
+  // currentSection が null の場合はローディングなどを表示 (useEffectでセットされるのを待つ)
+  if (!currentSection) {
+    // examDefinition や attemptData があっても currentSection がまだセットされていない初期状態
+    // isLoading が false になってここに到達する場合、何らかの初期化問題の可能性
+    return <div className="flex justify-center items-center h-screen">Initializing section...</div>;
+  }
+  
+  // questionsForCurrentSection は ExamForm に渡すためにここで定義
+  // この時点で currentSection は null ではないはず
+  const questionsForCurrentForm = questions[currentSection.title]?.sort((a: Question, b: Question) => a.order - b.order) || [];
+
   // 試験タイプに応じたタイトルや説明を設定
   const examTypeLabel = examDefinition ? {
     'TOEIC': 'TOEIC® TEST',
     'TOEFL': 'TOEFL iBT® TEST',
     'EIKEN': '英検®'
   }[examDefinition.type || 'TOEIC'] || '模試' : '模試';
-
-  // --- 現在のセクション情報と問題リストを導出 --- 
-  const currentSection = examDefinition.structure[currentStructureIndex];
-  const questionsForCurrentSection = allQuestions.filter(
-    (q) => q.sectionTitle === currentSection.title
-  ).sort((a, b) => a.order - b.order);
 
   // --- コールバック関数 --- 
 
@@ -315,187 +373,194 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   };
 
   // ExamForm から呼ばれる: セクションの解答を提出し、次に進む
-  const handleSectionSubmit = async (submittedAnswers: Record<string, number | string>) => {
-    if (!examDefinition || !attemptData || !attemptId) return;
+  const handleSectionSubmit = async (submittedAnswers: Record<string, number | string | Blob>) => {
+    if (!user || !examDefinition || !currentSection || !attemptData || !attemptData.id || isSubmitting) {
+      console.warn('[Page] handleSectionSubmit called with invalid state');
+      return;
+    }
+    console.log(`[Page] handleSectionSubmit for section: ${currentSection.title}`, submittedAnswers);
+    setIsSubmitting(true);
 
-    const currentSectionInfo = examDefinition.structure[currentStructureIndex];
-    if (!currentSectionInfo) return;
+    const attemptDocRef = doc(db, 'exam_attempts', attemptData.id);
+    const sectionTitle = currentSection.title;
+    const sectionType = currentSection.type;
 
-    console.log(`[Page] Submitting section ${currentSectionInfo.title}`);
-    setIsLoading(true); 
+    const newSectionAttemptData: Partial<SectionAttempt> = {
+      status: 'completed',
+      completedAt: serverTimestamp() as Timestamp,
+    };
 
-    try {
-      const sectionUpdateKey = `sections.${currentSectionInfo.title}`;
-      const updateData: Record<string, any> = {
-        [`${sectionUpdateKey}.answers`]: submittedAnswers,
-        [`${sectionUpdateKey}.status`]: 'completed',
-        [`${sectionUpdateKey}.completedAt`]: serverTimestamp(),
-      };
-      
-      let sectionScore: number | undefined = undefined;
+    const textOrNumberAnswers: Record<string, string | number> = {};
+    let audioBlobToUpload: Blob | null = null;
+    let audioAnswerKey: string | null = null;
 
-      const questionsForThisSection = allQuestions.filter(q => q.sectionTitle === currentSectionInfo.title);
-      const currentQuestionDataForGrading = questionsForThisSection.length > 0 ? questionsForThisSection[0] : undefined;
+    for (const key in submittedAnswers) {
+      const answer = submittedAnswers[key];
+      if (answer instanceof Blob) {
+        audioBlobToUpload = answer;
+        audioAnswerKey = key;
+        textOrNumberAnswers[key] = 'audio_pending_upload';
+      } else {
+        textOrNumberAnswers[key] = answer;
+      }
+    }
+    newSectionAttemptData.answers = textOrNumberAnswers;
 
-      // --- セクションタイプに応じた採点処理 --- 
-      if (currentSectionInfo.type === 'writing' && currentQuestionDataForGrading && submittedAnswers[currentQuestionDataForGrading.id]) {
+    const questionsForThisSection = questions[sectionTitle]?.sort((a: Question, b: Question) => a.order - b.order) || [];
+
+    if (sectionType === 'writing' && questionsForThisSection.length > 0) {
+      const writingQuestion = questionsForThisSection[0];
+      const userAnswer = textOrNumberAnswers[writingQuestion.id] as string;
+      const prompt = writingQuestion.content;
+
+      if (userAnswer && userAnswer.trim().length > 0) {
         try {
-          const essayText = submittedAnswers[currentQuestionDataForGrading.id] as string;
-          const essayPrompt = currentQuestionDataForGrading.content || 'N/A'; 
-
-          console.log('[Page] Submitting essay to /api/grade-writing:', { essayText, essayPrompt });
-
-          const gradingResponse = await fetch('/api/grade-writing', {
+          const response = await fetch('/api/grade-writing', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ essayText, essayPrompt }),
+            body: JSON.stringify({ essay: userAnswer, prompt }),
           });
-
-          if (!gradingResponse.ok) {
-            const errorData = await gradingResponse.json().catch(() => ({ error: 'Failed to parse error JSON' }));
-            console.error('[Page] Grading API call failed:', gradingResponse.status, errorData);
-            throw new Error(`Grading API failed with status ${gradingResponse.status}: ${errorData.error || 'Unknown error from grading API'}`);
+          if (!response.ok) {
+            const errorData = await response.json().catch(() => ({error: "Failed to parse error response"}));
+            throw new Error(errorData.error || `Failed to grade writing: ${response.statusText}`);
           }
-
-          const gradingResult = await gradingResponse.json();
-          console.log('[Page] Grading Result from API:', gradingResult);
-
-          if (typeof gradingResult.score === 'number') {
-            updateData[`${sectionUpdateKey}.score`] = gradingResult.score;
-            sectionScore = gradingResult.score;
-          }
-          if (gradingResult.feedback) {
-            updateData[`${sectionUpdateKey}.feedback`] = gradingResult.feedback;
-          }
-          if (gradingResult.positive_points) {
-            updateData[`${sectionUpdateKey}.positive_points`] = gradingResult.positive_points;
-          }
-          if (gradingResult.areas_for_improvement) {
-            updateData[`${sectionUpdateKey}.areas_for_improvement`] = gradingResult.areas_for_improvement;
-          }
-
-        } catch (gradingError: any) {
-          console.error('[Page] Failed to get or process grading from API:', gradingError);
-          updateData[`${sectionUpdateKey}.feedback`] = `Automated grading failed: ${gradingError.message || 'Unknown error'}`;
-          updateData[`${sectionUpdateKey}.score`] = undefined;
-          sectionScore = undefined;
+          const gradingResult = await response.json();
+          newSectionAttemptData.score = gradingResult.score;
+          newSectionAttemptData.feedback = gradingResult.feedback;
+          newSectionAttemptData.positive_points = gradingResult.positive_points;
+          newSectionAttemptData.areas_for_improvement = gradingResult.areas_for_improvement;
+        } catch (err) {
+          console.error("[Page] Error during AI grading:", err);
+          setError(err instanceof Error ? err.message : 'Unknown error during AI grading');
+          newSectionAttemptData.feedback = "Error during AI grading.";
         }
-      } else if (currentSectionInfo.type === 'speaking') {
-          // Speaking セクションの処理
-          console.log('[Page] Speaking section submitted with answers:', submittedAnswers);
-          // TODO: 音声ファイルを Storage にアップロードし、URL を answers に保存する処理を後で追加
-          // 現時点では submittedAnswers (仮のID文字列) をそのまま保存
-          updateData[`${sectionUpdateKey}.score`] = undefined; // 採点は後で実装
-          sectionScore = undefined;
-      } else if (currentSectionInfo.type === 'reading' || currentSectionInfo.type === 'listening') {
-        // 既存の選択問題のスコアリングロジック - 変更なし
-        let correctCount = 0;
-        let totalScoreable = 0;
-        questionsForThisSection.forEach(q => {
-          if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && submittedAnswers[q.id] !== undefined) {
-            totalScoreable++;
-            if (submittedAnswers[q.id] === q.correctAnswer) {
-              correctCount++;
-            }
-          }
-        });
-        if (totalScoreable > 0) {
-            sectionScore = Math.round((correctCount / totalScoreable) * 100);
-            updateData[`${sectionUpdateKey}.score`] = sectionScore;
-        } else {
-            updateData[`${sectionUpdateKey}.score`] = undefined;
-            sectionScore = undefined;
-        }
-        console.log(`[Page] Section Score (${currentSectionInfo.title}): ${sectionScore !== undefined ? sectionScore + '%' : 'N/A'}`);
+      } else {
+        console.log("[Page] Writing answer empty, skipping grading.");
       }
-      // --- 採点処理ここまで ---
+    } else if (sectionType === 'reading' || sectionType === 'listening') {
+      let correctCount = 0;
+      let totalScoreable = 0;
+      questionsForThisSection.forEach((q: Question) => {
+        if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && textOrNumberAnswers[q.id] !== undefined) {
+          totalScoreable++;
+          if (textOrNumberAnswers[q.id] === q.correctAnswer) {
+            correctCount++;
+          }
+        }
+      });
+      if (totalScoreable > 0) {
+        newSectionAttemptData.score = Math.round((correctCount / totalScoreable) * 100);
+      }
+      console.log(`[Page] Score for ${sectionType} ${sectionTitle}: ${newSectionAttemptData.score}`);
+    }
+    // TODO: Speakingセクションの処理 (音声アップロードと採点)
 
-      // --- 次のステップへの遷移処理 --- 
-      const nextIndex = currentStructureIndex + 1;
-      let isLastSection = false;
-      let overallScore: number | undefined = undefined; 
+    const nextActualIndex = currentStructureIndex + 1;
+    try {
+      const updateData: Record<string, any> = {
+        [`sections.${sectionTitle}`]: newSectionAttemptData,
+        currentStructureIndex: nextActualIndex
+      };
 
-      if (nextIndex >= examDefinition.structure.length) {
-        // 最後のセクションの場合
-        isLastSection = true;
+      if (nextActualIndex >= examDefinition.structure.length) {
         updateData['status'] = 'completed';
         updateData['completedAt'] = serverTimestamp();
-        updateData['currentStructureIndex'] = nextIndex; 
-        
-        // --- 全体スコアの計算 --- 
-        const updatedSectionsForScore = { 
-            ...attemptData.sections, 
-            [currentSectionInfo.title]: {
-                ...(attemptData.sections[currentSectionInfo.title] || {}),
-                answers: submittedAnswers,
-                status: 'completed', 
-                score: sectionScore, 
-                completedAt: serverTimestamp()
-            } as SectionAttempt
-        };
-        
-        let totalScore = 0;
-        let scoreCount = 0;
-        Object.values(updatedSectionsForScore).forEach(sec => {
-          if (typeof sec.score === 'number') {
-            totalScore += sec.score;
-            scoreCount++;
-          }
-        });
-        if (scoreCount > 0) {
-           overallScore = Math.round(totalScore / scoreCount);
-           updateData['overallScore'] = overallScore; 
-           console.log('Overall Score Calculated:', overallScore);
-        } else {
-           console.log('Could not calculate overall score.');
-        }
-        // --- 全体スコア計算ここまで ---
-      } else {
-        updateData['currentStructureIndex'] = nextIndex;
       }
 
-      // Firestore 更新実行
-      await updateAttemptInFirestore(updateData);
+      await updateDoc(attemptDocRef, updateData);
 
-      // ローカル State 更新
       setAttemptData(prev => {
-          if (!prev) return null;
-          const updatedSections = { 
-              ...prev.sections, 
-              [currentSectionInfo.title]: {
-                  ...(prev.sections[currentSectionInfo.title] || {}),
-                  answers: submittedAnswers,
-                  status: 'completed', 
-                  score: sectionScore,
-                  // feedback なども更新データに含まれていれば反映させる (現状のコードにはないが将来的には)
-                  completedAt: Timestamp.now()
-              } as SectionAttempt
-          };
-          const updatedAttempt = { 
-              ...prev, 
-              sections: updatedSections,
-              currentStructureIndex: nextIndex,
-              status: isLastSection ? 'completed' : prev.status,
-              completedAt: isLastSection ? Timestamp.now() : prev.completedAt,
-              overallScore: isLastSection ? overallScore : prev.overallScore 
-          } as ExamAttempt;
-          return updatedAttempt;
+        if (!prev) return null;
+        return {
+          ...prev,
+          sections: {
+            ...prev.sections,
+            [sectionTitle]: {
+              ...(prev.sections[sectionTitle] || {}),
+              ...newSectionAttemptData,
+              completedAt: Timestamp.now()
+            } as SectionAttempt
+          },
+          currentStructureIndex: nextActualIndex,
+          status: (nextActualIndex >= examDefinition.structure.length) ? 'completed' : prev.status,
+          completedAt: (nextActualIndex >= examDefinition.structure.length) ? Timestamp.now() : prev.completedAt
+        };
       });
 
-      // 遷移処理
-      if (!isLastSection) {
-          setCurrentStructureIndex(nextIndex);
-       } else {
-           console.log('Exam Completed! Redirecting to results...');
-           console.log(`Redirecting to: /exams/${params.id}/result?attemptId=${attemptId}`);
-           router.push(`/exams/${params.id}/result?attemptId=${attemptId}`);
-       }
-
-    } catch (err: any) {
-      console.error("Error submitting section:", err);
-      setError(err.message || 'セクションの提出中にエラーが発生しました。');
+      if (nextActualIndex < examDefinition.structure.length) {
+        setCurrentStructureIndex(nextActualIndex);
+        const newCurrentSection = examDefinition.structure[nextActualIndex];
+        setCurrentSection(newCurrentSection);
+        if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
+        const newNextSectionTitle = nextActualIndex + 1 < examDefinition.structure.length ? examDefinition.structure[nextActualIndex + 1]?.title : null;
+        setNextSectionTitle(newNextSectionTitle);
+      } else {
+        router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
+      }
+    } catch (err) {
+      console.error("[Page] Error submitting section to Firestore:", err);
+      setError(err instanceof Error ? err.message : 'Unknown error submitting section');
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleSkipSection = async () => {
+    if (!user || !examDefinition || !currentSection || !attemptData || !attemptData.id || isSubmitting) return;
+    console.log(`[Page] Skipping section: ${currentSection.title}`);
+    setIsSubmitting(true);
+    setShowSkipConfirm(false);
+
+    const attemptDocRef = doc(db, 'exam_attempts', attemptData.id);
+    const sectionTitle = currentSection.title;
+    const nextIdx = currentStructureIndex + 1;
+
+    try {
+      const updateData: Record<string, any> = {
+        [`sections.${sectionTitle}.status`]: 'skipped',
+        [`sections.${sectionTitle}.completedAt`]: serverTimestamp(),
+        currentStructureIndex: nextIdx
+      };
+       if (nextIdx >= examDefinition.structure.length) {
+        updateData['status'] = 'completed'; // 最後なら試験自体も完了
+        updateData['completedAt'] = serverTimestamp();
+      }
+      await updateDoc(attemptDocRef, updateData);
+
+      setAttemptData(prev => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          sections: {
+            ...prev.sections,
+            [sectionTitle]: {
+              ...(prev.sections[sectionTitle] || {}),
+              status: 'skipped',
+              completedAt: Timestamp.now()
+            } as SectionAttempt
+          },
+          currentStructureIndex: nextIdx,
+          status: (nextIdx >= examDefinition.structure.length) ? 'completed' : prev.status,
+          completedAt: (nextIdx >= examDefinition.structure.length) ? Timestamp.now() : prev.completedAt
+        };
+      });
+      
+      setCurrentStructureIndex(nextIdx);
+      if (nextIdx < examDefinition.structure.length) {
+        // moveToNextSection(); // インデックス更新後に直接次のセクション情報を設定
+        const newCurrentSection = examDefinition.structure[nextIdx];
+        setCurrentSection(newCurrentSection);
+        if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
+        const newNextSectionTitle = nextIdx + 1 < examDefinition.structure.length ? examDefinition.structure[nextIdx + 1]?.title : null;
+        setNextSectionTitle(newNextSectionTitle);
+      } else {
+        router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
+      }
+    } catch (err) {
+      console.error("[Page] Error skipping section:", err);
+      setError(err instanceof Error ? err.message : 'Error skipping section');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -525,7 +590,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   //   (isReading || isListening || isWriting || isSpeaking);
 
   const sectionRenderType = currentSection.type;
-  const hasQuestions = questionsForCurrentSection.length > 0;
+  const hasQuestions = questionsForCurrentForm.length > 0;
 
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
@@ -579,7 +644,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         <ExamForm
           examId={params.id}
           sectionInfo={currentSection}
-          questions={questionsForCurrentSection}
+          questions={questionsForCurrentForm}
           initialAttemptData={attemptData?.sections[currentSection.title]}
           onSubmit={handleSectionSubmit}
           examType={examDefinition.type} 
@@ -607,7 +672,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
             <ExamForm
               examId={params.id}
               sectionInfo={currentSection}
-              questions={questionsForCurrentSection}
+              questions={questionsForCurrentForm}
               initialAttemptData={attemptData?.sections[currentSection.title]}
               onSubmit={handleSectionSubmit}
               examType={examDefinition.type} 
