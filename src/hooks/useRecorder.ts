@@ -1,8 +1,13 @@
-'use client';
+import { useState, useCallback, useRef } from 'react';
 
-import { useState, useRef, useCallback, useEffect } from 'react';
-
-export type RecorderStatus = 'idle' | 'permission-requested' | 'permission-granted' | 'permission-denied' | 'recording' | 'stopped' | 'error';
+export type RecorderStatus =
+  | 'idle'
+  | 'permission-requested'
+  | 'permission-granted'
+  | 'permission-denied'
+  | 'recording'
+  | 'stopped'
+  | 'error';
 
 export interface UseRecorderReturnType {
   status: RecorderStatus;
@@ -54,7 +59,6 @@ const useRecorder = (): UseRecorderReturnType => {
     setStatus('recording');
     setAudioBlob(null);
     setAudioUrl(null);
-    if(audioUrl) URL.revokeObjectURL(audioUrl);
     audioChunksRef.current = [];
     setErrorMessage(null);
 
@@ -77,6 +81,7 @@ const useRecorder = (): UseRecorderReturnType => {
 
         mediaRecorderRef.current.onerror = (event) => {
             console.error("MediaRecorder error:", event);
+            // @ts-ignore
             const errMsg = event.error?.message || 'Unknown MediaRecorder error';
             setErrorMessage(`Recording error: ${errMsg}`);
             setStatus('error');
@@ -89,11 +94,12 @@ const useRecorder = (): UseRecorderReturnType => {
         setErrorMessage(err instanceof Error ? err.message : 'Unknown error starting recording.');
         setStatus('error');
     }
-  }, [stream, status, audioUrl]);
+  }, [stream, status]);
 
   const stopRecording = useCallback(() => {
     if (mediaRecorderRef.current && status === 'recording') {
       mediaRecorderRef.current.stop();
+      // The status will be set to 'stopped' by the onstop event handler
     } else {
       console.warn('MediaRecorder not active or not recording.');
     }
@@ -105,15 +111,16 @@ const useRecorder = (): UseRecorderReturnType => {
     }
     setStream(null);
     setAudioBlob(null);
-    if (audioUrl) {
-        URL.revokeObjectURL(audioUrl);
-    }
     setAudioUrl(null);
+    if (audioUrl) {
+        URL.revokeObjectURL(audioUrl); // Clean up the object URL
+    }
     mediaRecorderRef.current = null;
     audioChunksRef.current = [];
     setStatus('idle');
     setErrorMessage(null);
   }, [stream, audioUrl]);
+
 
   return {
     status,

@@ -1,18 +1,18 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
 import { Question, ExamSection, SectionAttempt } from '@/app/lib/firestoreTypes';
-import { useRecorder, RecorderStatus, AudioBlob } from '@/app/hooks/useRecorder';
+import { useRecorder, RecorderStatus, UseRecorderReturnType } from '@/app/hooks/useRecorder';
 
 interface ExamFormProps {
   examId: string;
   sectionInfo: ExamSection;
   questions: Question[];
   initialAttemptData?: SectionAttempt;
-  onSubmit: (answers: Record<string, number | string /* | AudioBlob */>) => void;
+  onSubmit: (answers: Record<string, number | string | Blob>) => void;
   examType: string;
 }
 
@@ -27,14 +27,14 @@ export default function ExamForm({
   console.log('[ExamForm] Props received:', { examId, sectionInfo, questions, examType });
   const router = useRouter();
   const { user } = useAuth();
-  const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string /* | AudioBlob */>>({});
+  const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string | Blob>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [timeLeft, setTimeLeft] = useState(sectionInfo.duration || 0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
 
-  const recorder = useRecorder();
+  const recorder: UseRecorderReturnType = useRecorder();
   const [isRecordingTimeUp, setIsRecordingTimeUp] = useState(false);
 
   console.log('[ExamForm] Determining questionType. questions:', questions, 'sectionInfo.type:', sectionInfo.type);
@@ -96,12 +96,15 @@ export default function ExamForm({
       audioRef.current.currentTime = 0;
       setIsPlaying(false);
     }
+    if (questionType === 'speaking') {
+      // recorder.resetRecorder(); // ページ遷移やセクション完了時にresetするのでここでは不要かも
+    }
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex(prev => prev - 1);
     }
   };
 
-  const handleSectionComplete = () => {
+  const handleSectionComplete = useCallback(() => {
     if (isSubmitting) return;
     console.log(`Completing section: ${sectionInfo.title}`);
     setIsSubmitting(true);
@@ -109,9 +112,9 @@ export default function ExamForm({
 
     if (questionType === 'speaking' && recorder.audioBlob) {
       console.log('Recorded audio for speaking:', recorder.audioBlob);
-      const answersWithAudio = { 
+      const answersWithAudio = {
         ...currentAnswers,
-        [questionId]: `recorded_audio_${Date.now()}.webm`
+        [questionId]: recorder.audioBlob
       };
       onSubmit(answersWithAudio);
     } else if (questionType === 'speaking') {
@@ -124,7 +127,7 @@ export default function ExamForm({
     } else {
       onSubmit(currentAnswers);
     }
-  };
+  }, [isSubmitting, sectionInfo.title, questions, currentQuestionIndex, questionType, recorder.audioBlob, currentAnswers, onSubmit]);
 
   useEffect(() => {
     if (initialAttemptData?.answers) {
@@ -156,8 +159,13 @@ export default function ExamForm({
         return prev - 1;
       });
     }, 1000);
-    return () => clearInterval(timer);
-  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording]);
+    return () => {
+      clearInterval(timer);
+      if (questionType === 'speaking') {
+        // recorder.resetRecorder(); // コンポーネントアンマウント時にクリーンアップ
+      }
+    };
+  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording, handleSectionComplete]);
 
   const currentQuestionData = questions[currentQuestionIndex];
   console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
@@ -203,7 +211,24 @@ export default function ExamForm({
       }
     };
     completeSectionIfNeeded();
-  }, [isRecordingTimeUp, recorder.status, questionType, isSubmitting]);
+  }, [isRecordingTimeUp, recorder.status, questionType, isSubmitting, handleSectionComplete]);
+
+  // recorderの状態が変化したときにログを出力
+  useEffect(() => {
+    console.log('[ExamForm] Recorder status updated:', recorder.status, 'Error:', recorder.errorMessage);
+  }, [recorder.status, recorder.errorMessage]);
+
+  // クリーンアップエフェクト
+  useEffect(() => {
+    // このエフェクトは questionType が 'speaking' の場合にのみ recorder をリセットする
+    // また、コンポーネントがアンマウントされる際にも呼び出される
+    if (questionType === 'speaking') {
+      return () => {
+        console.log('[ExamForm] Cleaning up recorder for speaking section.');
+        recorder.resetRecorder();
+      };
+    }
+  }, [questionType, recorder.resetRecorder]); // recorder.resetRecorder のみでOK
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
@@ -231,7 +256,7 @@ export default function ExamForm({
         </div>
       </div>
 
-      {questionType !== 'speaking' && (
+      {questionType !== 'speaking' && currentQuestionData && (
         <div className="mb-8">
           <h2 className="text-xl font-semibold mb-4 md:hidden">{questionText}</h2>
           
@@ -343,11 +368,11 @@ export default function ExamForm({
 
       {questionType === 'speaking' && (
         <div className="space-y-6 p-4 border border-gray-200 rounded-lg">
-          <h3 className="text-lg font-semibold text-center">{currentQuestionData.content || sectionInfo.instructions || "Speaking Task"}</h3>
+          <h3 className="text-lg font-semibold text-center">{currentQuestionData?.content || sectionInfo.instructions || "Speaking Task"}</h3>
           
-          {recorder.error && (
+          {recorder.errorMessage && (
             <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
-              <p><strong>Error:</strong> {recorder.error}</p>
+              <p><strong>Error:</strong> {recorder.errorMessage}</p>
             </div>
           )}
 
@@ -381,7 +406,7 @@ export default function ExamForm({
               ) : (
                 <button
                   onClick={handleStartRecording}
-                  disabled={timeLeft === 0 || isSubmitting}
+                  disabled={timeLeft === 0 || isSubmitting || recorder.status === 'permission-denied'}
                   className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
                 >
                   Start Recording
@@ -389,14 +414,14 @@ export default function ExamForm({
               )}
 
               <p className="text-sm text-gray-600">
-                Status: {recorder.status} 
+                Status: {recorder.status}
                 {recorder.status === 'stopped' && recorder.audioBlob && ` (Recorded: ${(recorder.audioBlob.size / 1024).toFixed(2)} KB)`}
               </p>
 
-              {recorder.audioBlob && recorder.status === 'stopped' && (
+              {recorder.audioUrl && recorder.status === 'stopped' && (
                 <div className="w-full mt-2">
                   <p className="text-sm text-gray-700 mb-1">Recorded Audio:</p>
-                  <audio controls src={URL.createObjectURL(recorder.audioBlob)} className="w-full" />
+                  <audio controls src={recorder.audioUrl} className="w-full" />
                 </div>
               )}
             </div>
@@ -425,7 +450,7 @@ export default function ExamForm({
           </button>
         )}
 
-        {((questionType !== 'speaking' && currentQuestionIndex === questions.length - 1) ||
+        {((questionType !== 'speaking' && currentQuestionIndex === questions.length - 1 && questions.length > 0) ||
           (questionType === 'speaking' && (recorder.status === 'stopped' || isRecordingTimeUp))) && (
           <button
             onClick={handleSectionComplete}
