@@ -605,119 +605,109 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   const sectionRenderType = currentSection.type;
   const hasQuestions = questionsForCurrentForm.length > 0;
 
+  console.log(`%c[Page.tsx Render Logic] Top of render. currentSection.type: ${currentSection.type}, hasQuestions: ${hasQuestions}, currentSection:`, 'color: blue; font-weight: bold;', currentSection);
+  console.log(`%c[Page.tsx Render Logic] questionsForCurrentForm:`, 'color: blue; font-weight: bold;', questionsForCurrentForm);
+  
+  let screenToRender = null;
+
+  if (sectionRenderType === 'instructions') {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering InstructionsScreen', 'color: green;');
+    screenToRender = <InstructionsScreen 
+      title={currentSection.title}
+      instructions={currentSection.instructions}
+      duration={currentSection.duration} 
+      onNext={handleNext}
+    />;
+  } else if (sectionRenderType === 'break') {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering BreakScreen', 'color: green;');
+    screenToRender = <BreakScreen 
+      title={currentSection.title} 
+      duration={currentSection.duration || 300} 
+      onNext={handleNext}
+    />;
+  } else if (sectionRenderType === 'speaking' && !hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl) {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering ImageDisplayScreen (Speaking, noQ, ImgOnly)', 'color: green;');
+    screenToRender = <ImageDisplayScreen 
+      title={currentSection.title}
+      imageUrl={currentSection.imageUrl}
+      onNext={handleNext}
+    />;
+  } else if (sectionRenderType === 'speaking' && !hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl) {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering AudioPlaybackScreen (Speaking, noQ, AudOnly)', 'color: green;');
+    screenToRender = <AudioPlaybackScreen 
+      title={currentSection.title}
+      audioUrl={currentSection.audioUrl}
+      duration={currentSection.duration}
+      onNext={handleNext}
+    />;
+  } else if (sectionRenderType === 'speaking' && !hasQuestions && !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl)) {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering InstructionsScreen (Speaking, noQ, not Img/AudOnly - Prep)', 'color: green;');
+    screenToRender = <InstructionsScreen 
+      title={currentSection.title}
+      instructions={currentSection.instructions}
+      duration={currentSection.duration} 
+      onNext={handleNext} 
+    />;
+  } else if (sectionRenderType === 'speaking' && hasQuestions) {
+    console.log('%c[Page.tsx Render Logic] Condition met: Rendering ExamForm (Speaking, hasQ)', 'color: green;');
+    screenToRender = <ExamForm
+      examId={params.id}
+      sectionInfo={currentSection}
+      questions={questionsForCurrentForm}
+      initialAttemptData={attemptData?.sections[currentSection.title]}
+      onSubmit={handleSectionSubmit}
+      examType={examDefinition.type} 
+    />;
+  } else if (sectionRenderType === 'reading' || sectionRenderType === 'listening' || sectionRenderType === 'writing') {
+    console.log('%c[Page.tsx Render Logic] Condition met: Entering R/L/W block', 'color: orange;');
+    if (!hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl) {
+      console.log('%c[Page.tsx Render Logic] Rendering ImageDisplayScreen (R/L/W, noQ, ImgOnly)', 'color: green;');
+      screenToRender = <ImageDisplayScreen 
+        title={currentSection.title}
+        imageUrl={currentSection.imageUrl}
+        onNext={handleNext}
+      />;
+    } else if (!hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl) {
+      console.log('%c[Page.tsx Render Logic] Rendering AudioPlaybackScreen (R/L/W, noQ, AudOnly)', 'color: green;');
+      screenToRender = <AudioPlaybackScreen 
+        title={currentSection.title}
+        audioUrl={currentSection.audioUrl}
+        duration={currentSection.duration}
+        onNext={handleNext}
+      />;
+    } else if (hasQuestions) {
+      console.log('%c[Page.tsx Render Logic] Rendering ExamForm (R/L/W, hasQ)', 'color: green;');
+      screenToRender = <ExamForm
+        examId={params.id}
+        sectionInfo={currentSection}
+        questions={questionsForCurrentForm}
+        initialAttemptData={attemptData?.sections[currentSection.title]}
+        onSubmit={handleSectionSubmit}
+        examType={examDefinition.type} 
+      />;
+    } else if (!hasQuestions && !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl) && currentSection.instructions) {
+      console.log('%c[Page.tsx Render Logic] Rendering InstructionsScreen (R/L/W, noQ, not Img/AudOnly, hasInstructions)', 'color: green;');
+      screenToRender = <InstructionsScreen
+        title={currentSection.title}
+        instructions={currentSection.instructions}
+        duration={currentSection.duration}
+        onNext={handleNext}
+      />;
+    } else {
+      console.log(`%c[Page.tsx Render Logic] No screen matched in R/L/W block. sectionRenderType: ${sectionRenderType}, hasQuestions: ${hasQuestions}, currentSection:`, 'color: red; font-weight: bold;', currentSection);
+      // R/L/W の条件分岐内で何もマッチしない場合
+      screenToRender = <div>Error: Could not determine screen for R/L/W section.</div>; 
+    }
+  } else {
+    console.log(`%c[Page.tsx Render Logic] No top-level condition matched. Rendering Fallback. sectionRenderType: ${sectionRenderType}`, 'color: red; font-weight: bold;');
+    screenToRender = <div>Loading section or unknown section type... ({sectionRenderType})</div>; 
+  }
+
   return (
     <div className="container mx-auto px-4 py-8 max-w-6xl">
       {/* --- 現在のセクションに応じたコンポーネント表示 --- */} 
-
-      {sectionRenderType === 'instructions' && (
-        <InstructionsScreen 
-          title={currentSection.title}
-          instructions={currentSection.instructions}
-          duration={currentSection.duration} 
-          onNext={handleNext}
-        />
-      )}
-
-      {sectionRenderType === 'break' && (
-        <BreakScreen 
-          title={currentSection.title} 
-          duration={currentSection.duration || 300} 
-          onNext={handleNext}
-        />
-      )}
-
-      {sectionRenderType === 'speaking' && !hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl && (
-        <ImageDisplayScreen 
-          title={currentSection.title}
-          imageUrl={currentSection.imageUrl}
-          onNext={handleNext}
-        />
-      )}
-
-      {sectionRenderType === 'speaking' && !hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
-        <AudioPlaybackScreen 
-          title={currentSection.title}
-          audioUrl={currentSection.audioUrl}
-          duration={currentSection.duration}
-          onNext={handleNext}
-        />
-      )}
+      {screenToRender}
       
-      {sectionRenderType === 'speaking' && !hasQuestions && !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl) && (
-        // Speaking preparation that is not image/audio only (e.g. just instructions & timer)
-        <InstructionsScreen 
-          title={currentSection.title}
-          instructions={currentSection.instructions}
-          duration={currentSection.duration} 
-          onNext={handleNext} 
-        />
-      )}
-      
-      {sectionRenderType === 'speaking' && hasQuestions && (
-        <ExamForm
-          examId={params.id}
-          sectionInfo={currentSection}
-          questions={questionsForCurrentForm}
-          initialAttemptData={attemptData?.sections[currentSection.title]}
-          onSubmit={handleSectionSubmit}
-          examType={examDefinition.type} 
-        />
-      )}
-
-      {(sectionRenderType === 'reading' || sectionRenderType === 'listening' || sectionRenderType === 'writing') && (
-        <>
-          {!hasQuestions && currentSection.isImageDisplayOnly && currentSection.imageUrl && (
-            <ImageDisplayScreen 
-              title={currentSection.title}
-              imageUrl={currentSection.imageUrl}
-              onNext={handleNext}
-            />
-          )}
-          {!hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl && (
-            <AudioPlaybackScreen 
-              title={currentSection.title}
-              audioUrl={currentSection.audioUrl}
-              duration={currentSection.duration}
-              onNext={handleNext}
-            />
-          )}
-          {hasQuestions && (
-            <ExamForm
-              examId={params.id}
-              sectionInfo={currentSection}
-              questions={questionsForCurrentForm}
-              initialAttemptData={attemptData?.sections[currentSection.title]}
-              onSubmit={handleSectionSubmit}
-              examType={examDefinition.type} 
-            />
-          )}
-          {/* If type is R/L/W but no questions AND not image/audio only (e.g. just instructions for a writing task start) */}
-          {!hasQuestions && 
-           !(currentSection.isImageDisplayOnly && currentSection.imageUrl) && 
-           !(currentSection.isAudioPlaybackOnly && currentSection.audioUrl) &&
-           currentSection.instructions && (
-            <InstructionsScreen
-              title={currentSection.title}
-              instructions={currentSection.instructions}
-              duration={currentSection.duration}
-              onNext={handleNext}
-            />
-          )}
-        </>
-      )}
-      
-      {/* Fallback or Loading/Error display if no component matches (optional) */} 
-      {![
-        'instructions', 
-        'break', 
-        'speaking', 
-        'reading', 
-        'listening', 
-        'writing'
-      ].includes(sectionRenderType) && (
-        <div>Loading section or unknown section type... ({sectionRenderType})</div>
-      )}
-
       {/* Debug Info (Optional) */} 
       {/* 
       <pre className="mt-8 p-4 bg-gray-100 rounded text-xs overflow-auto">
