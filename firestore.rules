@@ -39,17 +39,43 @@ service cloud.firestore {
                       && request.resource.data.keys().hasAll(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections']) // 必須フィールドチェック
                       && !request.resource.data.keys().hasAny(['completedAt', 'overallScore', 'updatedAt']); // 作成時に存在してはいけないフィールド
 
-      allow update: if isUserAuthenticated(resource.data.userId);
-/*  // マルチラインコメントで確実に他の条件を無効化
+      allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
                      && request.resource.data.userId == resource.data.userId 
                      && request.resource.data.examId == resource.data.examId 
                      && request.resource.data.startedAt == resource.data.startedAt 
                      && request.resource.data.examTitle == resource.data.examTitle 
+                     && request.resource.data.keys().hasOnly(
+                        ['userId', 'examId', 'examTitle', 'startedAt', 'status', 
+                         'currentStructureIndex', 'completedAt', 'updatedAt', 'overallScore']
+                        // 'sections' キーは意図的に除外
+                      )
                      && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') 
                      && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex 
                      && request.resource.data.updatedAt == request.time;
-*/
+
       allow delete: if false; // 削除は不可 (または isAdmin())
+
+      // sections サブコレクションのルール
+      match /sections/{sectionDocId} {
+        allow read: if get(/databases/$(database)/documents/exam_attempts/$(attemptId)).data.userId == request.auth.uid || isAdmin();
+        
+        allow write: if (get(/databases/$(database)/documents/exam_attempts/$(attemptId)).data.userId == request.auth.uid || isAdmin())
+                      && request.resource.data.keys().hasOnly([
+                          'status', 'answers', 'score', 'feedback', 
+                          'positive_points', 'areas_for_improvement', 
+                          'audioStorageUrl', 'transcribedText', 'transcriptionError', 
+                          'startedAt', 'completedAt' // completedAt は request.time との比較も考慮
+                         ]) 
+                      && (request.resource.data.status == 'pending' || 
+                          request.resource.data.status == 'in-progress' || 
+                          request.resource.data.status == 'completed' ||
+                          request.resource.data.status == 'skipped')
+                      // completedAt は設定時のみサーバータイムスタンプであることを確認 (または既存の値を保持)
+                      // startedAt も同様の考慮が必要な場合がある
+                      // && (request.resource.data.completedAt == request.time || (resource.data.completedAt != null && request.resource.data.completedAt == resource.data.completedAt) || resource.data.completedAt == null)
+                      // && (request.resource.data.startedAt == request.time || (resource.data.startedAt != null && request.resource.data.startedAt == resource.data.startedAt) || resource.data.startedAt == null)
+                      ;
+      }
     }
 
     // サブスクリプションコレクション

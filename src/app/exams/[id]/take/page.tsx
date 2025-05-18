@@ -275,10 +275,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     // 5. セクションデータのFirestoreへの書き込み
     try {
       console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
-      await updateDoc(currentSectionAttemptRef, finalSectionData);
-      console.log('[Page] Section data updated in Firestore.');
+      await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true });
+      console.log('[Page] Section data updated/set in Firestore.');
     } catch (error) {
-      console.error(`[Page] Error updating section data for ${sectionTitle} in Firestore:`, error);
+      console.error(`[Page] Error updating/setting section data for ${sectionTitle} in Firestore:`, error);
       setError(`データベースエラーが発生しました: ${sectionTitle}の保存に失敗しました。`);
       setIsSubmitting(false);
       return; 
