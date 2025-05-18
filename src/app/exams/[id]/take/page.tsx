@@ -360,6 +360,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [user.uid, params.id, ...] for fetchData', 'color: orange;');
   useEffect(() => {
+    console.log('%c[ExamPage] useEffect for fetchData TRIGGERED', 'color: red; font-weight: bold;', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
     // console.log('%c[ExamPage] useEffect [user.uid, params.id, ...] for fetchData - START', 'color: orange;', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
     const fetchData = async () => {
       // console.log('%c[ExamPage] fetchData - START', 'color: green;');
@@ -450,6 +451,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [currentStructureIndex, examDefinition, ...] for section setup', 'color: orange;');
   useEffect(() => {
+    console.log('%c[ExamPage] useEffect for section setup TRIGGERED', 'color: red; font-weight: bold;', { currentStructureIndex, examDefinition, attemptData });
     // console.log('%c[ExamPage] useEffect [currentStructureIndex, examDefinition, ...] for section setup - START', 'color: orange;', { currentStructureIndex, examDefinition, attemptData });
     if (examDefinition && attemptData) {
       if (currentStructureIndex < examDefinition.structure.length) {
