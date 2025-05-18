@@ -415,7 +415,12 @@ export default React.memo(function ExamForm({
             </div>
           )}
 
-          {recorder.status === 'idle' || recorder.status === 'permission-requested' && (
+          {(() => {
+            console.log('[ExamForm Speaking UI Render] Checking recorder.status before button render:', recorder.status);
+            return null; 
+          })()}
+          
+          {(recorder.status === 'idle' || recorder.status === 'permission-requested') && (
             <button
               onClick={handleRequestMicPermission}
               disabled={recorder.status === 'permission-requested'}
