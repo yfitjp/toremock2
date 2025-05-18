@@ -43,6 +43,7 @@ import { FirebaseError } from 'firebase/app';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 
 export default function ExamPage({ params }: { params: { id: string } }) {
+  console.log('%c[ExamPage] Component RENDERED', 'color: blue; font-weight: bold;');
   // console.log('%c[ExamPage] Component Start', 'color: magenta; font-weight: bold;', { params });
 
   const router = useRouter();
