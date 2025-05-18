@@ -253,21 +253,21 @@ export default React.memo(function ExamForm({
   }, [isRecordingTimeUp, recorder.status, questionType, isSubmitting, handleSectionComplete]);
 
   // recorderの状態が変化したときにログを出力
-  useEffect(() => {
-    console.log('[ExamForm] Recorder status updated in ExamForm:', recorder.status, 'AudioBlob:', recorder.audioBlob ? `Exists, size: ${recorder.audioBlob.size}` : 'null', 'Error:', recorder.errorMessage);
-  }, [recorder.status, recorder.errorMessage, recorder.audioBlob]);
+  // useEffect(() => {
+  //   console.log('[ExamForm] Recorder status updated in ExamForm:', recorder.status, 'AudioBlob:', recorder.audioBlob ? `Exists, size: ${recorder.audioBlob.size}` : 'null', 'Error:', recorder.errorMessage);
+  // }, [recorder.status, recorder.errorMessage, recorder.audioBlob]);
 
   // クリーンアップエフェクト
-  useEffect(() => {
-    // このエフェクトは questionType が 'speaking' の場合にのみ recorder をリセットする
-    // また、コンポーネントがアンマウントされる際にも呼び出される
-    if (questionType === 'speaking') {
-      return () => {
-        console.log('[ExamForm] Cleaning up recorder for speaking section on unmount. Current status:', recorder.status);
-        recorder.resetRecorder();
-      };
-    }
-  }, [questionType, recorder.resetRecorder]); // recorder.resetRecorder のみでOK
+  // useEffect(() => {
+  //   // このエフェクトは questionType が 'speaking' の場合にのみ recorder をリセットする
+  //   // また、コンポーネントがアンマウントされる際にも呼び出される
+  //   if (questionType === 'speaking') {
+  //     return () => {
+  //       console.log('[ExamForm] Cleaning up recorder for speaking section on unmount. Current status:', recorder.status);
+  //       recorder.resetRecorder();
+  //     };
+  //   }
+  // }, [questionType, recorder.resetRecorder]); // recorder.resetRecorder のみでOK
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6">
