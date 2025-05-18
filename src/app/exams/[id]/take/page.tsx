@@ -227,6 +227,50 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       }
     }
 
+    // SpeakingセクションのAI採点 (文字起こし成功後、かつ audioAnswerKey が存在する場合)
+    if (sectionType === 'speaking' && 
+        finalSectionData.transcribedText && 
+        finalSectionData.transcribedText !== 'transcription_failed' && 
+        finalSectionData.transcribedText !== 'transcription_error' &&
+        audioAnswerKey // audioAnswerKey が音声処理ブロックから引き継がれている必要がある
+       ) {
+      try {
+        const currentQuestion = questionsForCurrentForm.find(q => q.id === audioAnswerKey);
+        const speakingTaskPrompt = currentQuestion?.content;
+
+        if (!speakingTaskPrompt) {
+            console.warn(`[Page] Speaking task prompt not found for question ID: ${audioAnswerKey}. Proceeding with general evaluation.`);
+        }
+
+        console.log(`[Page] Calling grade-speaking API for section: ${sectionTitle}, Question ID: ${audioAnswerKey}`);
+        const gradeResponse = await fetch('/api/grade-speaking', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            transcribedText: finalSectionData.transcribedText,
+            speakingPrompt: speakingTaskPrompt || '', 
+          }),
+        });
+
+        if (!gradeResponse.ok) {
+          const errorData = await gradeResponse.json().catch(() => ({ error: "Failed to parse error response from grade-speaking API" }));
+          console.error('[Page] Error from grade-speaking API:', gradeResponse.status, errorData);
+          finalSectionData.feedback = `Automated speaking scoring failed. API Error: ${gradeResponse.status} - ${errorData.error || 'Unknown error'}`;
+          // score は設定しないか、エラーを示す値を設定
+        } else {
+          const gradingResult = await gradeResponse.json();
+          console.log('[Page] Speaking grading received:', gradingResult);
+          finalSectionData.score = gradingResult.score;
+          finalSectionData.feedback = gradingResult.feedback;
+          finalSectionData.positive_points = gradingResult.positive_points;
+          finalSectionData.areas_for_improvement = gradingResult.areas_for_improvement;
+        }
+      } catch (gradeError) {
+        console.error('[Page] Error calling grade-speaking API:', gradeError);
+        finalSectionData.feedback = `Automated speaking scoring failed: ${gradeError instanceof Error ? gradeError.message : String(gradeError)}`;
+      }
+    }
+
     // 4. スコアリングとフィードバック
     const questionsForThisSection = questions[sectionTitle]?.sort((a: Question, b: Question) => a.order - b.order) || [];
 
