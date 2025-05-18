@@ -484,7 +484,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [attemptData?.status] for unloads', 'color: orange;');
   useEffect(() => {
-    // console.log('%c[ExamPage] useEffect [attemptData?.status] for unloads - START', 'color: orange;', { attemptDataStatus: attemptData?.status });
+    console.log('[ExamPage] useEffect for UNLOAD HANDLERS TRIGGERED. Deps:', { attemptDataStatus: attemptData?.status });
     const handleBeforeUnload = (event: BeforeUnloadEvent) => {
       if (attemptData?.status !== 'completed') {
         event.preventDefault();
@@ -493,7 +493,6 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     };
     window.addEventListener('beforeunload', handleBeforeUnload);
     return () => {
-      // console.log('%c[ExamPage] useEffect [attemptData?.status] for unloads - CLEANUP', 'color: orange;');
       window.removeEventListener('beforeunload', handleBeforeUnload);
     };
   }, [attemptData?.status]);
@@ -501,7 +500,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [attemptData?.status] for navigation', 'color: orange;');
   useEffect(() => {
-    // console.log('%c[ExamPage] useEffect [attemptData?.status] for navigation - START', 'color: orange;', { attemptDataStatus: attemptData?.status });
+    console.log('[ExamPage] useEffect for NAVIGATION CONFIRMATION TRIGGERED. Deps:', { attemptDataStatus: attemptData?.status });
     if (attemptData?.status === 'completed') return;
     const confirmMessage = '試験を中断してページを移動しますか？\n解答状況は保存されません。';
     const handleAnchorClick = (event: MouseEvent) => {
@@ -529,7 +528,6 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     window.addEventListener('beforepopstate', handleBeforePopState);
     document.addEventListener('click', handleAnchorClick, true);
     return () => {
-      // console.log('%c[ExamPage] useEffect [attemptData?.status] for navigation - CLEANUP', 'color: orange;');
       document.removeEventListener('click', handleAnchorClick, true);
       window.removeEventListener('beforepopstate', handleBeforePopState);
     };
@@ -538,8 +536,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [user.uid, params.id, ...] for fetchData', 'color: orange;');
   useEffect(() => {
-    console.log('%c[ExamPage] useEffect for fetchData TRIGGERED', 'color: red; font-weight: bold;', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
-    // console.log('%c[ExamPage] useEffect [user.uid, params.id, ...] for fetchData - START', 'color: orange;', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
+    console.log('[ExamPage] useEffect for FETCH DATA TRIGGERED. Deps:', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
     const fetchData = async () => {
       // console.log('%c[ExamPage] fetchData - START', 'color: green;');
       if (!user || !params.id) {
@@ -629,8 +626,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [currentStructureIndex, examDefinition, ...] for section setup', 'color: orange;');
   useEffect(() => {
-    console.log('%c[ExamPage] useEffect for section setup TRIGGERED', 'color: red; font-weight: bold;', { currentStructureIndex, examDefinition, attemptData });
-    // console.log('%c[ExamPage] useEffect [currentStructureIndex, examDefinition, ...] for section setup - START', 'color: orange;', { currentStructureIndex, examDefinition, attemptData });
+    console.log('[ExamPage] useEffect for SECTION SETUP TRIGGERED. Deps:', { currentStructureIndex, examDefinitionExists: !!examDefinition, attemptDataExists: !!attemptData });
     if (examDefinition && attemptData) {
       if (currentStructureIndex < examDefinition.structure.length) {
         const section = examDefinition.structure[currentStructureIndex];
