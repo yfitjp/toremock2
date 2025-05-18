@@ -270,18 +270,9 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   }
   console.log('%c[ExamPage] Passed all pre-render checks. currentSection available.', 'color: blue;', { currentSection });
 
-  console.log('%c[ExamPage] Before useMemo questionsForCurrentForm', 'color: magenta;');
-  const questionsForCurrentForm = useMemo(() => {
-    console.log('%c[ExamPage] useMemo questionsForCurrentForm - START', 'color: purple;', { currentSectionInMemo: currentSection, questionsInMemo: questions });
-    if (!currentSection || !currentSection.title) {
-      console.log('%c[ExamPage] useMemo questionsForCurrentForm - currentSection or title missing, returning []', 'color: red;');
-      return [];
-    }
-    const sectionQuestions = questions[currentSection.title] || [];
-    console.log('%c[ExamPage] useMemo questionsForCurrentForm - END', 'color: purple;', { sectionQuestions });
-    return sectionQuestions;
-  }, [questions, currentSection]);
-  console.log('%c[ExamPage] After useMemo questionsForCurrentForm', 'color: magenta;', { questionsForCurrentForm });
+  console.log('%c[ExamPage] Before useMemo questionsForCurrentForm (TEMPORARILY USING EMPTY ARRAY)', 'color: red; font-weight: bold;');
+  const questionsForCurrentForm: Question[] = [];
+  console.log('%c[ExamPage] After useMemo questionsForCurrentForm (USING EMPTY ARRAY)', 'color: red; font-weight: bold;', { questionsForCurrentForm });
 
   const examTypeLabel = examDefinition ? {
     'TOEIC': 'TOEIC® TEST',
