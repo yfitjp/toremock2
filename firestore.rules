@@ -39,27 +39,16 @@ service cloud.firestore {
                       && request.resource.data.keys().hasAll(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections']) // 必須フィールドチェック
                       && !request.resource.data.keys().hasAny(['completedAt', 'overallScore', 'updatedAt']); // 作成時に存在してはいけないフィールド
 
-      allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
-                     // 更新対象ドキュメントが自分のものか、または管理者の場合
-                     // && resource.data.status == 'in-progress' // この行をコメントアウトまたは削除
-                     && request.resource.data.userId == resource.data.userId // userId は変更不可
-                     && request.resource.data.examId == resource.data.examId // examId は変更不可
-                     && request.resource.data.startedAt == resource.data.startedAt // startedAt は変更不可
-                     && request.resource.data.examTitle == resource.data.examTitle // examTitle は変更不可
-                     // overallScore を更新可能なフィールドに追加
-                     && request.resource.data.keys().hasOnly(['userId', 'examId', 'examTitle', 'startedAt', 'status', 'currentStructureIndex', 'sections', 'completedAt', 'updatedAt', 'overallScore']) 
-                     && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') // status は 'in-progress' または 'completed' のみ
-                     && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex // インデックスは戻せない
-                     // && request.resource.data.sections.keys().hasAll(resource.data.sections.keys()) // ← この行を削除 (またはコメントアウト)
-                     // --- セクション内フィールド検証をコメントアウトに戻す ---
-                     // && request.resource.data.sections.keys().forall(
-                     //      sectionKey | 
-                     //        request.resource.data.sections[sectionKey].keys().size() == 5 &&
-                     //        request.resource.data.sections[sectionKey].keys().hasAll([\'status\', \'answers\', \'score\', \'completedAt\', \'updatedAt\'])
-                     //    )
-                     // --- コメントアウトここまで ---
+      allow update: if isUserAuthenticated(resource.data.userId);
+/*  // マルチラインコメントで確実に他の条件を無効化
+                     && request.resource.data.userId == resource.data.userId 
+                     && request.resource.data.examId == resource.data.examId 
+                     && request.resource.data.startedAt == resource.data.startedAt 
+                     && request.resource.data.examTitle == resource.data.examTitle 
+                     && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') 
+                     && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex 
                      && request.resource.data.updatedAt == request.time;
-
+*/
       allow delete: if false; // 削除は不可 (または isAdmin())
     }
 

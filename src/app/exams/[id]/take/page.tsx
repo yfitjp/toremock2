@@ -142,48 +142,44 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useCallback handleSectionSubmit', 'color: magenta;');
   const handleSectionSubmit = useCallback(async (submittedAnswers: Record<string, number | string | Blob>) => {
-    // console.log('%c[ExamPage] useCallback handleSectionSubmit - CALLED', 'color: darkcyan;', { submittedAnswers });
     if (!user || !examDefinition || !currentSection || !attemptData || !attemptData.id || isSubmitting) {
-      // console.warn('[Page] handleSectionSubmit called with invalid state');
       return;
     }
-    // console.log(`[Page] handleSectionSubmit for section: ${currentSection.title}`, submittedAnswers);
     setIsSubmitting(true);
 
     const attemptDocRef = doc(db, 'exam_attempts', attemptData.id);
     const sectionTitle = currentSection.title;
     const sectionType = currentSection.type;
-
-    // 対象となるセクションのドキュメント参照 (ifブロックの外に移動)
     const currentSectionAttemptRef = doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle);
 
-    const newSectionAttemptData: Partial<SectionAttempt> = {
-      status: 'completed',
-      completedAt: serverTimestamp() as Timestamp,
-    };
-
-    let audioBlobToUpload: Blob | null = null;
-    let audioAnswerKey: string | null = null;
-
-    // Firestoreに保存する解答データを準備
+    // 1. 解答データの準備
     const answersToSaveInFirestore: Record<string, string | number> = {};
+    let audioBlobToUpload: Blob | null = null; 
+    let audioAnswerKey: string | null = null;   
 
     for (const key in submittedAnswers) {
       const answer = submittedAnswers[key];
-      if (answer instanceof Blob) {
+      // Speakingセクションの場合のみBlobをaudioBlobToUploadに割り当て、それ以外は直接answersToSaveInFirestoreに格納
+      if (answer instanceof Blob && sectionType === 'speaking') { 
         audioBlobToUpload = answer;
         audioAnswerKey = key;
-        // 初期状態では 'audio_pending_upload' としておく
-        answersToSaveInFirestore[key] = 'audio_pending_upload'; 
-      } else {
+        answersToSaveInFirestore[key] = 'audio_pending_upload'; // 初期状態
+      } else if (!(answer instanceof Blob)) { 
         answersToSaveInFirestore[key] = answer;
       }
     }
 
-    // audioBlobToUpload があれば、Firebase Storage にアップロード
-    if (audioBlobToUpload && audioAnswerKey && user && attemptData?.id && questionsForCurrentForm.find(q => q.id === audioAnswerKey)) {
-      const questionId = audioAnswerKey; // 明確化のため
-      const storage = getStorage(undefined, "gs://toremock.firebasestorage.app"); 
+    // 2. finalSectionData の初期化
+    const finalSectionData: Partial<SectionAttempt> = {
+      status: 'completed',
+      answers: answersToSaveInFirestore,
+      completedAt: serverTimestamp() as Timestamp,
+    };
+
+    // 3. 音声処理と文字起こし (Speakingセクションの場合のみ実行)
+    if (sectionType === 'speaking' && audioBlobToUpload && audioAnswerKey && user && attemptData?.id && questionsForCurrentForm.find(q => q.id === audioAnswerKey)) {
+      const questionId = audioAnswerKey;
+      const storage = getStorage(undefined, "gs://toremock.firebasestorage.app");
       const filePath = `speaking_answers/${user.uid}/${attemptData.id}/${questionId}.webm`;
       const storageRef = ref(storage, filePath);
 
@@ -191,81 +187,52 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         console.log(`[Page] Uploading audio to: ${filePath}`);
         const uploadTask = await uploadBytesResumable(storageRef, audioBlobToUpload);
         const downloadURL = await getDownloadURL(uploadTask.ref);
-        answersToSaveInFirestore[audioAnswerKey] = downloadURL; // アップロード成功後、URLで上書き
+        
+        finalSectionData.audioStorageUrl = downloadURL;
+        if (finalSectionData.answers && finalSectionData.answers[audioAnswerKey] === 'audio_pending_upload') {
+            finalSectionData.answers[audioAnswerKey] = downloadURL;
+        }
         console.log('[Page] Audio uploaded successfully. URL:', downloadURL);
 
-        // Firestoreに保存する最終的なデータを作成
-        const dataToSave: Partial<SectionAttempt> = {
-          status: 'completed',
-          answers: answersToSaveInFirestore, // 従来の解答（もしあれば）
-          completedAt: serverTimestamp() as Timestamp,
-          audioStorageUrl: downloadURL, // audioStorageUrl をここに追加
-        };
-
-        // console.log(`[Page] Saving to Firestore. Path: ${sectionTitle}, Data:`, dataToSave); // パス表示を修正するなら sectionAttemptRef.path
-        console.log(`[Page] Saving to Firestore. Path: ${currentSectionAttemptRef.path}, Data:`, dataToSave);
-        await updateDoc(currentSectionAttemptRef, dataToSave); // 修正: currentSectionAttemptRef を使用
-        console.log('[Page] Firestore updated with audio URL.');
-
-        // 文字起こしAPIを呼び出す
         try {
           console.log(`[Page] Calling transcribe API with URL: ${downloadURL}`);
           const transcribeResponse = await fetch('/api/transcribe', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ audioUrl: downloadURL }),
           });
 
           if (!transcribeResponse.ok) {
             const errorData = await transcribeResponse.json().catch(() => ({ error: 'Failed to parse error response from transcribe API' }));
             console.error('[Page] Error from transcribe API:', transcribeResponse.status, errorData);
-            await updateDoc(currentSectionAttemptRef, { // ★ 修正
-              transcribedText: 'transcription_failed',
-              transcriptionError: errorData.error || `API Error: ${transcribeResponse.status}`
-            });
+            finalSectionData.transcribedText = 'transcription_failed';
+            finalSectionData.transcriptionError = errorData.error || `API Error: ${transcribeResponse.status}`;
           } else {
             const { transcription } = await transcribeResponse.json();
             console.log('[Page] Transcription received:', transcription);
-            await updateDoc(currentSectionAttemptRef, { // ★ 修正
-              transcribedText: transcription,
-              transcriptionError: null,
-            });
-            console.log('[Page] Firestore updated with transcription.');
+            finalSectionData.transcribedText = transcription;
+            finalSectionData.transcriptionError = undefined;
           }
         } catch (transcribeError) {
           console.error('[Page] Error calling transcribe API:', transcribeError);
-          await updateDoc(currentSectionAttemptRef, { // ★ 修正
-            transcribedText: 'transcription_error',
-            transcriptionError: transcribeError instanceof Error ? transcribeError.message : String(transcribeError)
-          });
+          finalSectionData.transcribedText = 'transcription_error';
+          finalSectionData.transcriptionError = transcribeError instanceof Error ? transcribeError.message : String(transcribeError);
         }
-
       } catch (error) {
         console.error("[Page] Error uploading audio to Firebase Storage:", error);
-        answersToSaveInFirestore[audioAnswerKey] = 'audio_upload_failed'; // エラー情報を記録
-        // 必要であれば、ここでユーザーにエラー通知を行うか、エラーをsetErrorで状態管理することも検討
+        if (finalSectionData.answers && finalSectionData.answers[audioAnswerKey]) {
+            finalSectionData.answers[audioAnswerKey] = 'audio_upload_failed';
+        }
+        // ここで finalSectionData.transcriptionError などにも情報を記録できる
       }
-    } else {
-      // 音声ファイルがない場合は、通常通りFirestoreに解答を保存
-      const dataToSave: Partial<SectionAttempt> = {
-        status: 'completed',
-        answers: answersToSaveInFirestore,
-        completedAt: serverTimestamp() as Timestamp,
-      };
-      console.log(`[Page] Saving to Firestore (no audio). Path: ${currentSectionAttemptRef.path}, Data:`, dataToSave);
-      await updateDoc(currentSectionAttemptRef, dataToSave);
-      console.log('[Page] Firestore updated (no audio).');
     }
-    
-    // newSectionAttemptData.answers = answersToSaveInFirestore; // この行は重複しているか、ロジックを見直す必要がありそう。一旦コメントアウト
 
+    // 4. スコアリングとフィードバック
     const questionsForThisSection = questions[sectionTitle]?.sort((a: Question, b: Question) => a.order - b.order) || [];
 
     if (sectionType === 'writing' && questionsForThisSection.length > 0) {
       const writingQuestion = questionsForThisSection[0];
-      const userAnswer = answersToSaveInFirestore[writingQuestion.id] as string;
+      const userAnswer = finalSectionData.answers?.[writingQuestion.id] as string; // finalSectionDataから取得
       const prompt = writingQuestion.content;
 
       if (userAnswer && userAnswer.trim().length > 0) {
@@ -280,90 +247,112 @@ export default function ExamPage({ params }: { params: { id: string } }) {
             throw new Error(errorData.error || `Failed to grade writing: ${response.statusText}`);
           }
           const gradingResult = await response.json();
-          newSectionAttemptData.score = gradingResult.score;
-          newSectionAttemptData.feedback = gradingResult.feedback;
-          newSectionAttemptData.positive_points = gradingResult.positive_points;
-          newSectionAttemptData.areas_for_improvement = gradingResult.areas_for_improvement;
+          finalSectionData.score = gradingResult.score;
+          finalSectionData.feedback = gradingResult.feedback;
+          finalSectionData.positive_points = gradingResult.positive_points;
+          finalSectionData.areas_for_improvement = gradingResult.areas_for_improvement;
         } catch (err) {
-          // console.error("[Page] Error during AI grading:", err);
-          // setError(err instanceof Error ? err.message : 'Unknown error during AI grading'); // UIにエラー表示すると邪魔になる場合も
-          newSectionAttemptData.feedback = "Error during AI grading."; // Attempt の方に記録
+          console.error("[Page] Error during AI grading:", err);
+          finalSectionData.feedback = "Error during AI grading."; 
         }
-      } else {
-        // console.log("[Page] Writing answer empty, skipping grading.");
       }
     } else if (sectionType === 'reading' || sectionType === 'listening') {
       let correctCount = 0;
       let totalScoreable = 0;
       questionsForThisSection.forEach((q: Question) => {
-        if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && answersToSaveInFirestore[q.id] !== undefined) {
+        if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && finalSectionData.answers?.[q.id] !== undefined) {
           totalScoreable++;
-          if (answersToSaveInFirestore[q.id] === q.correctAnswer) {
+          if (finalSectionData.answers[q.id] === q.correctAnswer) {
             correctCount++;
           }
         }
       });
       if (totalScoreable > 0) {
-        newSectionAttemptData.score = Math.round((correctCount / totalScoreable) * 100);
+        finalSectionData.score = Math.round((correctCount / totalScoreable) * 100);
       }
-      // console.log(`[Page] Score for ${sectionType} ${sectionTitle}: ${newSectionAttemptData.score}`);
     }
 
-    const nextActualIndex = currentStructureIndex + 1;
+    // 5. セクションデータのFirestoreへの書き込み
     try {
-      const updateData: Record<string, any> = {
-        [`sections.${sectionTitle}`]: newSectionAttemptData,
-        currentStructureIndex: nextActualIndex,
-        updatedAt: serverTimestamp()
+      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
+      await updateDoc(currentSectionAttemptRef, finalSectionData);
+      console.log('[Page] Section data updated in Firestore.');
+    } catch (error) {
+      console.error(`[Page] Error updating section data for ${sectionTitle} in Firestore:`, error);
+      setError(`データベースエラーが発生しました: ${sectionTitle}の保存に失敗しました。`);
+      setIsSubmitting(false);
+      return; 
+    }
+
+    // 6. ExamAttempt全体の更新 (currentStructureIndex, status など)
+    const nextActualIndex = currentStructureIndex + 1;
+    // Omit<ExamAttempt, 'sections'> を使うと型エラーになる場合があるため、具体的なキーを指定
+    const attemptUpdateData: {
+      currentStructureIndex: number;
+      updatedAt: Timestamp;
+      status?: 'in-progress' | 'completed' | 'aborted';
+      completedAt?: Timestamp;
+    } = {
+      currentStructureIndex: nextActualIndex,
+      updatedAt: serverTimestamp() as Timestamp,
+    };
+
+    if (nextActualIndex >= examDefinition.structure.length) {
+      attemptUpdateData.status = 'completed';
+      attemptUpdateData.completedAt = serverTimestamp() as Timestamp;
+    }
+
+    try {
+      console.log(`[Page] Updating ExamAttempt ${attemptDocRef.path} with:`, JSON.stringify(attemptUpdateData, null, 2));
+      await updateDoc(attemptDocRef, attemptUpdateData); 
+      console.log('[Page] ExamAttempt top-level data updated.');
+    } catch (err) {
+      console.error("[Page] Error updating ExamAttempt top-level data to Firestore:", err);
+      setError(err instanceof Error ? err.message : '試験全体の進捗の保存に失敗しました。');
+      setIsSubmitting(false);
+      return; 
+    }
+    
+    // 7. ローカルステートの更新と画面遷移
+    setAttemptData(prev => {
+      if (!prev) return null;
+      // currentSectionAttemptRef への書き込みは成功しているので、ローカルの sections もそれに合わせて更新
+      const updatedSections = {
+        ...prev.sections,
+        [sectionTitle]: {
+          ...(prev.sections[sectionTitle] || {}), // 既存のセクションデータ
+          ...finalSectionData, // 書き込んだデータで更新
+          completedAt: finalSectionData.completedAt || Timestamp.now() // completedAtを確実にする
+        } as SectionAttempt // completedAtがサーバタイムスタンプの場合があるのでキャストは注意、finalSectionData側で解決済みのはず
       };
 
-      if (nextActualIndex >= examDefinition.structure.length) {
-        updateData['status'] = 'completed';
-        updateData['completedAt'] = serverTimestamp();
-      }
+      return {
+        ...prev,
+        sections: updatedSections,
+        currentStructureIndex: nextActualIndex,
+        status: attemptUpdateData.status || prev.status, // 更新後のstatusを反映
+        completedAt: attemptUpdateData.completedAt || prev.completedAt, // 更新後のcompletedAtを反映
+        updatedAt: Timestamp.now() // 近似値
+      };
+    });
 
-      await updateDoc(attemptDocRef, updateData);
-
-      setAttemptData(prev => {
-        if (!prev) return null;
-        return {
-          ...prev,
-          sections: {
-            ...prev.sections,
-            [sectionTitle]: {
-              ...(prev.sections[sectionTitle] || {}),
-              ...newSectionAttemptData,
-              completedAt: Timestamp.now() // serverTimestampの代わりにクライアント時刻（近似）
-            } as SectionAttempt
-          },
-          currentStructureIndex: nextActualIndex,
-          status: (nextActualIndex >= examDefinition.structure.length) ? 'completed' : prev.status,
-          completedAt: (nextActualIndex >= examDefinition.structure.length) ? Timestamp.now() : prev.completedAt
-        };
-      });
-
-      if (nextActualIndex < examDefinition.structure.length) {
-        setCurrentStructureIndex(nextActualIndex);
-        const newCurrentSection = examDefinition.structure[nextActualIndex];
-        setCurrentSection(newCurrentSection);
-        if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
-        const newNextSectionTitle = nextActualIndex + 1 < examDefinition.structure.length ? examDefinition.structure[nextActualIndex + 1]?.title : null;
-        setNextSectionTitle(newNextSectionTitle);
+    if (nextActualIndex < examDefinition.structure.length) {
+      setCurrentStructureIndex(nextActualIndex);
+      const newCurrentSection = examDefinition.structure[nextActualIndex];
+      setCurrentSection(newCurrentSection);
+      if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
+      const newNextSectionTitle = nextActualIndex + 1 < examDefinition.structure.length ? examDefinition.structure[nextActualIndex + 1]?.title : null;
+      setNextSectionTitle(newNextSectionTitle);
+    } else {
+      if (examDefinition.id && attemptData.id) {
+      router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
       } else {
-        if (examDefinition.id && attemptData.id) {
-        router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
-        } else {
-          console.error("Cannot redirect, exam or attempt ID missing after completion.");
-          setError("試験結果へのリダイレクトに失敗しました。");
-        }
+        console.error("Cannot redirect, exam or attempt ID missing after completion.");
+        setError("試験結果へのリダイレクトに失敗しました。");
       }
-    } catch (err) {
-      console.error("[Page] Error submitting section to Firestore:", err);
-      setError(err instanceof Error ? err.message : 'Unknown error submitting section');
-    } finally {
-      setIsSubmitting(false);
     }
-  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm]);
+    setIsSubmitting(false);
+  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm, currentStructureIndex]); // currentStructureIndex を依存配列に追加
   // console.log('%c[ExamPage] After useCallback handleSectionSubmit', 'color: magenta;');
   
 
