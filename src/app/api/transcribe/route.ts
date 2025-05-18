@@ -38,7 +38,7 @@ export async function POST(request: Request) {
     const transcriptionResponse = await openai.audio.transcriptions.create({
       file: audioFile, // ダウンロードした音声ファイル
       model: 'whisper-1',
-      // language: 'en', // 必要に応じて言語を指定
+      language: 'en', // ★修正: 言語を英語に明示的に指定
       // response_format: 'json', // デフォルトでjson
     });
 
