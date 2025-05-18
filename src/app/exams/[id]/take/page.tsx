@@ -28,6 +28,7 @@ import {
     writeBatch,
     setDoc
 } from 'firebase/firestore';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 import { db } from '@/app/lib/firebase';
 import { 
     ExamData as FirestoreExamData, 
@@ -157,27 +158,51 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       completedAt: serverTimestamp() as Timestamp,
     };
 
-    const textOrNumberAnswers: Record<string, string | number> = {};
     let audioBlobToUpload: Blob | null = null;
     let audioAnswerKey: string | null = null;
+
+    // Firestoreに保存する解答データを準備
+    const answersToSaveInFirestore: Record<string, string | number> = {};
 
     for (const key in submittedAnswers) {
       const answer = submittedAnswers[key];
       if (answer instanceof Blob) {
         audioBlobToUpload = answer;
         audioAnswerKey = key;
-        textOrNumberAnswers[key] = 'audio_pending_upload'; // Firestore にはまずこう記録
+        // 初期状態では 'audio_pending_upload' としておく
+        answersToSaveInFirestore[key] = 'audio_pending_upload'; 
       } else {
-        textOrNumberAnswers[key] = answer;
+        answersToSaveInFirestore[key] = answer;
       }
     }
-    newSectionAttemptData.answers = textOrNumberAnswers;
+
+    // audioBlobToUpload があれば、Firebase Storage にアップロード
+    if (audioBlobToUpload && audioAnswerKey && user && attemptData?.id && questionsForCurrentForm.find(q => q.id === audioAnswerKey)) {
+      const questionId = audioAnswerKey; // 明確化のため
+      const storage = getStorage();
+      const filePath = `speaking_answers/${user.uid}/${attemptData.id}/${questionId}.webm`;
+      const storageRef = ref(storage, filePath);
+
+      try {
+        console.log(`[Page] Uploading audio to: ${filePath}`);
+        const uploadTask = await uploadBytesResumable(storageRef, audioBlobToUpload);
+        const downloadURL = await getDownloadURL(uploadTask.ref);
+        answersToSaveInFirestore[audioAnswerKey] = downloadURL; // アップロード成功後、URLで上書き
+        console.log('[Page] Audio uploaded successfully. URL:', downloadURL);
+      } catch (uploadError) {
+        console.error("[Page] Error uploading audio to Firebase Storage:", uploadError);
+        answersToSaveInFirestore[audioAnswerKey] = 'audio_upload_failed'; // エラー情報を記録
+        // 必要であれば、ここでユーザーにエラー通知を行うか、エラーをsetErrorで状態管理することも検討
+      }
+    }
+    
+    newSectionAttemptData.answers = answersToSaveInFirestore; // 更新された解答データを使用
 
     const questionsForThisSection = questions[sectionTitle]?.sort((a: Question, b: Question) => a.order - b.order) || [];
 
     if (sectionType === 'writing' && questionsForThisSection.length > 0) {
       const writingQuestion = questionsForThisSection[0];
-      const userAnswer = textOrNumberAnswers[writingQuestion.id] as string;
+      const userAnswer = answersToSaveInFirestore[writingQuestion.id] as string;
       const prompt = writingQuestion.content;
 
       if (userAnswer && userAnswer.trim().length > 0) {
@@ -208,9 +233,9 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       let correctCount = 0;
       let totalScoreable = 0;
       questionsForThisSection.forEach((q: Question) => {
-        if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && textOrNumberAnswers[q.id] !== undefined) {
+        if (q.correctAnswer !== undefined && q.questionType === 'multiple-choice' && answersToSaveInFirestore[q.id] !== undefined) {
           totalScoreable++;
-          if (textOrNumberAnswers[q.id] === q.correctAnswer) {
+          if (answersToSaveInFirestore[q.id] === q.correctAnswer) {
             correctCount++;
           }
         }
