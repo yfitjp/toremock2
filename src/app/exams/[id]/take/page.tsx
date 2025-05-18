@@ -342,9 +342,51 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
     // 5. セクションデータのFirestoreへの書き込み
     try {
-      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
+      // === 追加デバッグログ START ===
+      console.log(`[Page DEBUG] Preparing to write to sections. Attempt ID: '${attemptData?.id}', Section Title: '${sectionTitle}'`);
+      if (!attemptData?.id || !sectionTitle) {
+        console.error("[Page CRITICAL DEBUG] Aborting section write due to missing attemptId or sectionTitle!", { attemptId: attemptData?.id, sectionTitle });
+        setError("致命的なエラー: 受験IDまたはセクションタイトルが見つかりません。");
+        setIsSubmitting(false);
+        return;
+      }
+      console.log(`[Page DEBUG] currentSectionAttemptRef path: ${currentSectionAttemptRef.path}`);
+      
+      // 元の finalSectionData を一時的に退避
+      const originalFinalSectionData = { ...finalSectionData }; 
+      
+      // 書き込みデータの最小化テスト (必要に応じてこちらを有効化)
+      // const minimalTestData = { 
+      //   status: "completed_debug_test", 
+      //   test_timestamp: serverTimestamp(),
+      //   debug_section_title: sectionTitle 
+      // };
+      // console.log(`[Page DEBUG] Attempting to write MINIMAL test data to ${currentSectionAttemptRef.path}:`, JSON.stringify(minimalTestData, null, 2));
+      // await setDoc(currentSectionAttemptRef, minimalTestData, { merge: true });
+      // console.log('[Page DEBUG] MINIMAL Test data write attempt finished.');
+
+      // 通常の書き込み (最小化テスト時は上記を有効にし、こちらをコメントアウト)
+      console.log(`[Page DEBUG] Attempting to write FULL finalSectionData to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
       await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true });
-      console.log('[Page] Section data updated/set in Firestore.');
+      console.log('[Page DEBUG] FULL finalSectionData write attempt finished.');
+
+      // 書き込み直後の読み取り確認
+      try {
+        console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} immediately after setDoc.`);
+        const docSnapshot = await getDoc(currentSectionAttemptRef);
+        if (docSnapshot.exists()) {
+          console.log('[Page DEBUG] Re-read section data successfully. Data:', JSON.stringify(docSnapshot.data(), null, 2));
+        } else {
+          console.error('[Page DEBUG] Re-read failed: Document does NOT exist at path:', currentSectionAttemptRef.path);
+        }
+      } catch (readError) {
+        console.error('[Page DEBUG] Error during re-read of section data:', readError);
+      }
+      // === 追加デバッグログ END ===
+
+      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2)); // このログはデバッグ用に残してもよい
+      // await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true }); // これは上記のデバッグブロック内の setDoc に置き換えたのでコメントアウト
+      console.log('[Page] Section data updated/set in Firestore.'); // このログは setDoc の成功を示すものではなくなるので注意 (直後の reread で確認)
     } catch (error) {
       console.error(`[Page] Error updating/setting section data for ${sectionTitle} in Firestore:`, error);
       setError(`データベースエラーが発生しました: ${sectionTitle}の保存に失敗しました。`);

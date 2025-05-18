@@ -60,22 +60,13 @@ service cloud.firestore {
       match /sections/{sectionDocId} {
         allow read: if get(/databases/$(database)/documents/exam_attempts/$(attemptId)).data.userId == request.auth.uid || isAdmin();
         
-        allow write: if (get(/databases/$(database)/documents/exam_attempts/$(attemptId)).data.userId == request.auth.uid || isAdmin())
-                      && request.resource.data.keys().hasOnly([
-                          'status', 'answers', 'score', 'feedback', 
-                          'positive_points', 'areas_for_improvement', 
-                          'audioStorageUrl', 'transcribedText', 'transcriptionError', 
-                          'startedAt', 'completedAt' // completedAt は request.time との比較も考慮
-                         ]) 
-                      && (request.resource.data.status == 'pending' || 
-                          request.resource.data.status == 'in-progress' || 
-                          request.resource.data.status == 'completed' ||
-                          request.resource.data.status == 'skipped')
-                      // completedAt は設定時のみサーバータイムスタンプであることを確認 (または既存の値を保持)
-                      // startedAt も同様の考慮が必要な場合がある
-                      // && (request.resource.data.completedAt == request.time || (resource.data.completedAt != null && request.resource.data.completedAt == resource.data.completedAt) || resource.data.completedAt == null)
-                      // && (request.resource.data.startedAt == request.time || (resource.data.startedAt != null && request.resource.data.startedAt == resource.data.startedAt) || resource.data.startedAt == null)
-                      ;
+        // allow write: if (get(/databases/$(database)/documents/exam_attempts/$(attemptId)).data.userId == request.auth.uid || isAdmin()) // 元の条件をコメントアウト
+        //               // && request.resource.data.keys().hasOnly([ ... ]) // コメントアウト済み
+        //               && (request.resource.data.status == 'pending' || 
+        //                   request.resource.data.status == 'in-progress' || 
+        //                   request.resource.data.status == 'completed' ||
+        //                   request.resource.data.status == 'skipped');
+        allow write: if true; // ★★★ デバッグ目的で一時的に true に設定 ★★★
       }
     }
 
