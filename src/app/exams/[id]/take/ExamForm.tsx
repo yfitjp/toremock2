@@ -211,13 +211,13 @@ export default React.memo(function ExamForm({
   const questionText = currentQuestionData?.content || '';
 
   const handleRequestMicPermission = async () => {
-    console.log('[ExamForm] handleRequestMicPermission called. Current recorder status:', recorder.status);
+    console.log('[ExamForm] handleRequestMicPermission CALLED. Current recorder status:', recorder.status);
     await recorder.getMicrophonePermission();
     console.log('[ExamForm] Microphone permission request finished. Recorder status:', recorder.status, 'Error:', recorder.errorMessage);
   };
 
   const handleStartRecording = () => {
-    console.log('[ExamForm] handleStartRecording called. Current recorder status:', recorder.status);
+    console.log('[ExamForm] handleStartRecording CALLED. Current recorder status:', recorder.status);
     if (recorder.status === 'permission-granted' || recorder.status === 'stopped' || recorder.status === 'idle') { // idleも追加
       console.log('[ExamForm] Attempting to start recording.');
       recorder.startRecording();
