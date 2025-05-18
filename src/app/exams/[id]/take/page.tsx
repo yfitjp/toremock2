@@ -384,9 +384,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       }
       // === 追加デバッグログ END ===
 
-      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2)); // このログはデバッグ用に残してもよい
-      // await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true }); // これは上記のデバッグブロック内の setDoc に置き換えたのでコメントアウト
-      console.log('[Page] Section data updated/set in Firestore.'); // このログは setDoc の成功を示すものではなくなるので注意 (直後の reread で確認)
+      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
+      console.log('[Page] Section data updated/set in Firestore.');
     } catch (error) {
       console.error(`[Page] Error updating/setting section data for ${sectionTitle} in Firestore:`, error);
       setError(`データベースエラーが発生しました: ${sectionTitle}の保存に失敗しました。`);
@@ -424,6 +423,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     }
     
     // 7. ローカルステートの更新と画面遷移
+    // === 一時的に setAttemptData をコメントアウトしてテスト ===
+    /*
     setAttemptData(prev => {
       if (!prev) return null;
       // currentSectionAttemptRef への書き込みは成功しているので、ローカルの sections もそれに合わせて更新
@@ -432,19 +433,34 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         [sectionTitle]: {
           ...(prev.sections[sectionTitle] || {}), // 既存のセクションデータ
           ...finalSectionData, // 書き込んだデータで更新
-          completedAt: finalSectionData.completedAt || Timestamp.now() // completedAtを確実にする
-        } as SectionAttempt // completedAtがサーバタイムスタンプの場合があるのでキャストは注意、finalSectionData側で解決済みのはず
+          completedAt: finalSectionData.completedAt || Timestamp.now() 
+        } as SectionAttempt 
       };
 
       return {
         ...prev,
-        sections: updatedSections,
+        sections: updatedSections, // この updatedSections が問題を引き起こす可能性？
         currentStructureIndex: nextActualIndex,
-        status: attemptUpdateData.status || prev.status, // 更新後のstatusを反映
-        completedAt: attemptUpdateData.completedAt || prev.completedAt, // 更新後のcompletedAtを反映
-        updatedAt: Timestamp.now() // 近似値
+        status: attemptUpdateData.status || prev.status, 
+        completedAt: attemptUpdateData.completedAt || prev.completedAt, 
+        updatedAt: Timestamp.now() 
       };
     });
+    */ 
+    console.log('[Page DEBUG] setAttemptData call SKIPPED for testing.');
+
+    // handleSectionSubmit の最後で再度読み取りテスト (オプション)
+    try {
+      console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} AT THE END of handleSectionSubmit.`);
+      const docSnapshotAtEnd = await getDoc(currentSectionAttemptRef);
+      if (docSnapshotAtEnd.exists()) {
+        console.log('[Page DEBUG] Re-read AT END successful. Data:', JSON.stringify(docSnapshotAtEnd.data(), null, 2));
+      } else {
+        console.error('[Page DEBUG] Re-read AT END failed: Document does NOT exist at path:', currentSectionAttemptRef.path);
+      }
+    } catch (readError) {
+      console.error('[Page DEBUG] Error during re-read AT END of section data:', readError);
+    }
 
     if (nextActualIndex < examDefinition.structure.length) {
       setCurrentStructureIndex(nextActualIndex);
@@ -455,14 +471,14 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       setNextSectionTitle(newNextSectionTitle);
     } else {
       if (examDefinition.id && attemptData.id) {
-      router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
+        router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
       } else {
         console.error("Cannot redirect, exam or attempt ID missing after completion.");
         setError("試験結果へのリダイレクトに失敗しました。");
       }
     }
     setIsSubmitting(false);
-  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm, currentStructureIndex]); // currentStructureIndex を依存配列に追加
+  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm, currentStructureIndex]);
   // console.log('%c[ExamPage] After useCallback handleSectionSubmit', 'color: magenta;');
   
 
