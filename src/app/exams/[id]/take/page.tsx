@@ -335,8 +335,17 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   // console.log('%c[ExamPage] Before useEffect [user, params.id, ...] for fetchData', 'color: orange;');
   useEffect(() => {
-    // console.log('%c[ExamPage] useEffect [user, params.id, ...] for fetchData - START', 'color: orange;', { user, paramsId: params.id, attemptIdFromQuery, authLoading });
+    // この useEffect が実行された原因を特定するためのログ
+    console.log('[ExamPage] useEffect for fetchData TRIGGERED. Dependencies:', {
+      user: user?.uid, // user オブジェクト全体ではなく、安定したIDなどをログに出す
+      paramsId: params.id,
+      attemptIdFromQuery,
+      authLoading
+      // router オブジェクトは複雑なので、ここでは省略するか、特定のプロパティのみログに出す
+    });
+
     const fetchData = async () => {
+      console.log('[ExamPage] fetchData CALLED. Current attemptIdFromQuery:', attemptIdFromQuery);
       // console.log('%c[ExamPage] fetchData - START', 'color: green;');
       if (!user || !params.id) {
         setIsLoading(false);
