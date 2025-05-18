@@ -276,18 +276,30 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
     if (sectionType === 'writing' && questionsForThisSection.length > 0) {
       const writingQuestion = questionsForThisSection[0];
-      const userAnswer = finalSectionData.answers?.[writingQuestion.id] as string; // finalSectionDataから取得
+      // finalSectionData.answers から解答を取得しようとします
+      const userAnswer = finalSectionData.answers?.[writingQuestion.id] as string; 
       const prompt = writingQuestion.content;
+
+      // === デバッグログ追加 START ===
+      console.log(`[Page DEBUG] Attempting to grade writing for section: ${sectionTitle}, Question ID: ${writingQuestion?.id}`);
+      console.log(`[Page DEBUG] Extracted prompt:`, prompt);
+      console.log(`[Page DEBUG] finalSectionData.answers object:`, JSON.stringify(finalSectionData.answers, null, 2));
+      console.log(`[Page DEBUG] Raw value from finalSectionData.answers['${writingQuestion?.id}']:`, finalSectionData.answers?.[writingQuestion?.id]);
+      console.log(`[Page DEBUG] userAnswer variable (type: ${typeof userAnswer}, value): '${userAnswer}'`);
+      // === デバッグログ追加 END ===
 
       if (userAnswer && userAnswer.trim().length > 0) {
         try {
+          console.log(`[Page] Calling /api/grade-writing with essay length: ${userAnswer.length} (prompt ${prompt ? "provided" : "missing"})`);
           const response = await fetch('/api/grade-writing', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ essay: userAnswer, prompt }),
           });
           if (!response.ok) {
-            const errorData = await response.json().catch(() => ({error: "Failed to parse error response"}));
+            const errorData = await response.json().catch(() => ({error: "Failed to parse error response from grade-writing API"}));
+            // APIからのエラーメッセージをより詳細にログ出力
+            console.error(`[Page] Error response from /api/grade-writing: Status ${response.status}`, errorData);
             throw new Error(errorData.error || `Failed to grade writing: ${response.statusText}`);
           }
           const gradingResult = await response.json();
@@ -295,10 +307,22 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           finalSectionData.feedback = gradingResult.feedback;
           finalSectionData.positive_points = gradingResult.positive_points;
           finalSectionData.areas_for_improvement = gradingResult.areas_for_improvement;
+          console.log('[Page] Writing grading received successfully:', gradingResult);
         } catch (err) {
-          console.error("[Page] Error during AI grading:", err);
-          finalSectionData.feedback = "Error during AI grading."; 
+          console.error("[Page] Error during AI grading (inside try/catch):", err);
+          finalSectionData.feedback = `AI grading failed: ${err instanceof Error ? err.message : String(err)}`;
+          // エラー発生時はスコアや他のフィードバック項目をリセットまたはエラーを示す値にすることも検討
+          finalSectionData.score = undefined; // または 0 や null
+          finalSectionData.positive_points = [];
+          finalSectionData.areas_for_improvement = ["An error occurred during automated grading."];
         }
+      } else {
+        // このブロックは、userAnswer がない、または空の場合に実行されます
+        console.error(`[Page] AI Grading SKIPPED for writing. Answer was empty, undefined, or whitespace. Question ID: ${writingQuestion?.id}, userAnswer: '${userAnswer}'`);
+        finalSectionData.score = 0; // または undefined/null
+        finalSectionData.feedback = "AI grading skipped: Your answer was not provided or was empty.";
+        finalSectionData.positive_points = [];
+        finalSectionData.areas_for_improvement = ["Please provide a response to be graded."];
       }
     } else if (sectionType === 'reading' || sectionType === 'listening') {
       let correctCount = 0;
