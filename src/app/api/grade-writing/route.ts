@@ -9,11 +9,37 @@ const client = new OpenAI({
 
 export async function POST(request: Request) {
   try {
-    const body = await request.json();
-    const essayText = body.essayText as string | undefined;
-    const essayPrompt = body.essayPrompt as string | undefined; // 問題の指示文
+    // === デバッグログ追加 START ===
+    let rawBodyText = "Raw body could not be read";
+    let parsedBodyForLog: any = null;
+    try {
+      // リクエストボディをテキストとしてまず読み取り、ログに出力
+      const clonedRequest = request.clone(); // cloneしないと複数回bodyを読めない
+      rawBodyText = await clonedRequest.text();
+      console.log('[Grade Writing API DEBUG] Received raw request body:', rawBodyText);
+      
+      // 次にJSONとしてパース
+      // 注意: request.json() は一度しか呼べないため、ここで本処理用のパースを行う
+      // もし再度clone().json()でパースすると、元のrequestオブジェクトのbodyが消費済みになる可能性がある。
+      // そのため、一度だけjson()を呼び、その結果を後続処理とログで使用する。
+      parsedBodyForLog = await request.json(); // ここで request の body が消費される
+      console.log('[Grade Writing API DEBUG] Parsed request body:', JSON.stringify(parsedBodyForLog, null, 2));
+    } catch (bodyReadError: any) {
+      console.error('[Grade Writing API DEBUG] Error reading or parsing request body:', bodyReadError);
+      // ボディの読み取りやパースに失敗した場合でも、処理を続行せずにエラーレスポンスを返す
+      return NextResponse.json({ error: 'Failed to read or parse request body', details: bodyReadError.message }, { status: 400 });
+    }
+    // === デバッグログ追加 END ===
 
-    if (!essayText) {
+    // parsedBodyForLog を使って essay と prompt を取得する
+    const essay = parsedBodyForLog.essay as string | undefined;
+    const prompt = parsedBodyForLog.prompt as string | undefined;
+
+    console.log(`[Grade Writing API DEBUG] Extracted essay (type: ${typeof essay}, length: ${essay?.length}):`, essay);
+    console.log(`[Grade Writing API DEBUG] Extracted prompt (type: ${typeof prompt}):`, prompt);
+
+    if (!essay || essay.trim().length === 0) { // essayがundefinedか空文字列かをチェック
+      console.error('[Grade Writing API] Essay text is missing or empty. Parsed body was:', JSON.stringify(parsedBodyForLog, null, 2));
       return NextResponse.json({ error: 'Essay text is required' }, { status: 400 });
     }
 
@@ -38,7 +64,7 @@ export async function POST(request: Request) {
       },
       {
         role: 'user',
-        content: `Essay Prompt: ${essayPrompt || 'N/A (Evaluate general writing quality)'}\n\nEssay to evaluate:\n${essayText}`,
+        content: `Essay Prompt: ${prompt || 'N/A (Evaluate general writing quality)'}\n\nEssay to evaluate:\n${essay}`,
       },
     ];
 
