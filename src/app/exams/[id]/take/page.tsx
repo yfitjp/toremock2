@@ -211,7 +211,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
             const { transcription } = await transcribeResponse.json();
             console.log('[Page] Transcription received:', transcription);
             finalSectionData.transcribedText = transcription;
-            finalSectionData.transcriptionError = undefined;
+            delete finalSectionData.transcriptionError;
           }
         } catch (transcribeError) {
           console.error('[Page] Error calling transcribe API:', transcribeError);

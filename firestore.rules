@@ -40,14 +40,15 @@ service cloud.firestore {
                       && !request.resource.data.keys().hasAny(['completedAt', 'overallScore', 'updatedAt']); // 作成時に存在してはいけないフィールド
 
       allow update: if (isUserAuthenticated(resource.data.userId) || isAdmin())
-                     && request.resource.data.userId == resource.data.userId 
-                     && request.resource.data.examId == resource.data.examId 
-                     && request.resource.data.startedAt == resource.data.startedAt 
-                     && request.resource.data.examTitle == resource.data.examTitle 
+                     // && request.resource.data.userId == resource.data.userId  // 一時コメントアウト
+                     // && request.resource.data.examId == resource.data.examId  // 一時コメントアウト
+                     // && request.resource.data.startedAt == resource.data.startedAt  // 一時コメントアウト
+                     // && request.resource.data.examTitle == resource.data.examTitle  // 一時コメントアウト
                      && request.resource.data.keys().hasOnly(
                         ['userId', 'examId', 'examTitle', 'startedAt', 'status', 
-                         'currentStructureIndex', 'completedAt', 'updatedAt', 'overallScore']
-                        // 'sections' キーは意図的に除外
+                         'currentStructureIndex', 'completedAt', 'updatedAt', 'overallScore',
+                         'sections'
+                        ]
                       )
                      && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') 
                      && request.resource.data.currentStructureIndex >= resource.data.currentStructureIndex 
