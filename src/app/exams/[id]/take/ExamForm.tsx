@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
 import { useAuth } from '@/app/hooks/useAuth';
@@ -29,7 +29,7 @@ export default React.memo(function ExamForm({
   const { user } = useAuth();
   const [currentAnswers, setCurrentAnswers] = useState<Record<string, number | string | Blob>>({});
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [timeLeft, setTimeLeft] = useState(sectionInfo.duration || 0);
+  const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -143,40 +143,54 @@ export default React.memo(function ExamForm({
     }
   }, [initialAttemptData]);
 
+  // Timer logic unified based on sectionInfo.duration
   useEffect(() => {
-    if (!sectionInfo.duration) return;
-    setTimeLeft(sectionInfo.duration);
-    console.log(`[ExamForm] Timer started for section: ${sectionInfo.title}, duration: ${sectionInfo.duration}s, questionType: ${questionType}`);
-    setIsRecordingTimeUp(false);
+    let timerId: NodeJS.Timeout | null = null;
+    console.log(`[ExamForm TimerEffect] Initializing for: ${sectionInfo.title}, Duration: ${sectionInfo.duration}`);
 
-    const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev <= 1) {
-          clearInterval(timer);
-          if (questionType === 'speaking') {
-            console.log("[ExamForm] Recording time's up for:", sectionInfo.title, "Recorder status:", recorder.status);
-            if (recorder.status === 'recording') {
-              console.log('[ExamForm] Timer: Stopping recording due to time up.');
-              recorder.stopRecording();
+    if (sectionInfo.duration && sectionInfo.duration > 0) {
+      setTimeLeft(sectionInfo.duration);
+      console.log(`[ExamForm TimerEffect] Timer SET for ${sectionInfo.title} with duration: ${sectionInfo.duration}`);
+
+      timerId = setInterval(() => {
+        setTimeLeft(prevTime => {
+          if (prevTime <= 1) {
+            if (timerId) clearInterval(timerId);
+            if (sectionInfo.type === 'speaking') {
+              setIsRecordingTimeUp(true); 
+              console.log('[ExamForm TimerEffect] Speaking time is up.');
+              // Consider if stopRecording() should be called here or handled by recorder based on time up.
             }
-            setIsRecordingTimeUp(true);
-          } else {
-            // console.log("Time's up for section:", sectionInfo.title);
-            handleSectionComplete();
+            return 0;
           }
-          return 0;
-        }
-        return prev - 1;
-      });
-    }, 1000);
+          return prevTime - 1;
+        });
+      }, 1000);
+    } else {
+      setTimeLeft(0); 
+      console.log(`[ExamForm TimerEffect] No duration for ${sectionInfo.title}, timer set to 0.`);
+    }
+
     return () => {
-      clearInterval(timer);
-      console.log(`[ExamForm] Timer cleared for section: ${sectionInfo.title}`);
-      if (questionType === 'speaking') {
-        // recorder.resetRecorder(); // コンポーネントアンマウント時にクリーンアップ
+      if (timerId) {
+        clearInterval(timerId);
+        console.log(`[ExamForm TimerEffect] Timer CLEARED for ${sectionInfo.title}`);
       }
     };
-  }, [sectionInfo.duration, sectionInfo.title, questionType, recorder.status, recorder.stopRecording, handleSectionComplete]);
+  // examId を依存配列に追加することで、異なる試験インスタンス間でセクション情報が同じでもタイマーがリセットされるようにする
+  // currentQuestionIndex を削除。セクションごとのタイマーであり、質問遷移でリセットすべきではない。
+  }, [sectionInfo.title, sectionInfo.type, sectionInfo.duration, examId]); 
+
+  useEffect(() => {
+    // console.log(`[ExamForm] Recorder status updated in ExamForm: ${recorder.status} AudioBlob: ${recorder.audioBlob ? 'Exists' : 'null'} Error: ${recorder.errorMessage}`);
+    if (recorder.status === 'stopped' && recorder.audioBlob && questions[currentQuestionIndex]) {
+      // console.log('[ExamForm] Audio recorded, setting answer for question ID:', questions[currentQuestionIndex].id);
+      setCurrentAnswers(prev => ({ ...prev, [questions[currentQuestionIndex].id]: recorder.audioBlob as any }));
+    } else if (recorder.status === 'error') {
+      // console.error('[ExamForm] Recording error:', recorder.errorMessage);
+      // Optionally, provide feedback to the user
+    }
+  }, [recorder.status, recorder.audioBlob, recorder.errorMessage, currentQuestionIndex, questions]);
 
   const currentQuestionData = questions[currentQuestionIndex];
   // console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
@@ -209,10 +223,10 @@ export default React.memo(function ExamForm({
       recorder.startRecording();
       setIsRecordingTimeUp(false);
       // スピーキングセクションのタイマーをリセットして開始
-      if (sectionInfo.duration) {
-          console.log('[ExamForm] Resetting timer for speaking recording.');
-          setTimeLeft(sectionInfo.duration); 
-      }
+      // if (sectionInfo.duration) { // このブロックをコメントアウト
+      //     console.log('[ExamForm] Resetting timer for speaking recording.');
+      //     setTimeLeft(sectionInfo.duration); 
+      // }
     } else {
       console.warn('[ExamForm] Cannot start recording. Status:', recorder.status, 'Error:', recorder.errorMessage);
     }
