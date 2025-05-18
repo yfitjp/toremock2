@@ -113,6 +113,7 @@ export default React.memo(function ExamForm({
   };
 
   const handleSectionComplete = useCallback(() => {
+    console.log('%c[ExamForm] handleSectionComplete CALLED', 'color: blue; font-weight: bold;', { isSubmitting, sectionInfoTitle: sectionInfo.title, recorderStatus: recorder.status, audioBlobExists: !!recorder.audioBlob });
     if (isSubmitting) return;
     console.log(`[ExamForm] handleSectionComplete called for section: ${sectionInfo.title}. Recorder status: ${recorder.status}, AudioBlob exists: ${!!recorder.audioBlob}`);
     setIsSubmitting(true);
