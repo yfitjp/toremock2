@@ -333,19 +333,10 @@ export default function ExamPage({ params }: { params: { id: string } }) {
   }, [attemptData?.status]);
   // console.log('%c[ExamPage] After useEffect [attemptData?.status] for navigation', 'color: orange;');
 
-  // console.log('%c[ExamPage] Before useEffect [user, params.id, ...] for fetchData', 'color: orange;');
+  // console.log('%c[ExamPage] Before useEffect [user.uid, params.id, ...] for fetchData', 'color: orange;');
   useEffect(() => {
-    // この useEffect が実行された原因を特定するためのログ
-    console.log('[ExamPage] useEffect for fetchData TRIGGERED. Dependencies:', {
-      user: user?.uid, // user オブジェクト全体ではなく、安定したIDなどをログに出す
-      paramsId: params.id,
-      attemptIdFromQuery,
-      authLoading
-      // router オブジェクトは複雑なので、ここでは省略するか、特定のプロパティのみログに出す
-    });
-
+    // console.log('%c[ExamPage] useEffect [user.uid, params.id, ...] for fetchData - START', 'color: orange;', { userId: user?.uid, paramsId: params.id, attemptIdFromQuery, authLoading });
     const fetchData = async () => {
-      console.log('[ExamPage] fetchData CALLED. Current attemptIdFromQuery:', attemptIdFromQuery);
       // console.log('%c[ExamPage] fetchData - START', 'color: green;');
       if (!user || !params.id) {
         setIsLoading(false);
@@ -429,7 +420,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     } else if (!authLoading) {
       setIsLoading(false);
     }
-  }, [user, params.id, attemptIdFromQuery, router, authLoading]);
+  }, [user?.uid, params.id, attemptIdFromQuery, router, authLoading]);
   // console.log('%c[ExamPage] After useEffect [user, params.id, ...] for fetchData', 'color: orange;');
 
   // console.log('%c[ExamPage] Before useEffect [currentStructureIndex, examDefinition, ...] for section setup', 'color: orange;');

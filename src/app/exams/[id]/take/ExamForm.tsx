@@ -149,7 +149,7 @@ export default React.memo(function ExamForm({
     console.log(`[ExamForm TimerEffect] Initializing for: ${sectionInfo.title}, Duration: ${sectionInfo.duration}`);
 
     if (sectionInfo.duration && sectionInfo.duration > 0) {
-      setTimeLeft(sectionInfo.duration);
+    setTimeLeft(sectionInfo.duration);
       console.log(`[ExamForm TimerEffect] Timer SET for ${sectionInfo.title} with duration: ${sectionInfo.duration}`);
 
       timerId = setInterval(() => {
@@ -160,12 +160,12 @@ export default React.memo(function ExamForm({
               setIsRecordingTimeUp(true); 
               console.log('[ExamForm TimerEffect] Speaking time is up.');
               // Consider if stopRecording() should be called here or handled by recorder based on time up.
-            }
-            return 0;
           }
+          return 0;
+        }
           return prevTime - 1;
-        });
-      }, 1000);
+      });
+    }, 1000);
     } else {
       setTimeLeft(0); 
       console.log(`[ExamForm TimerEffect] No duration for ${sectionInfo.title}, timer set to 0.`);
