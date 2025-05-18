@@ -154,6 +154,9 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     const sectionTitle = currentSection.title;
     const sectionType = currentSection.type;
 
+    // 対象となるセクションのドキュメント参照 (ifブロックの外に移動)
+    const currentSectionAttemptRef = doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle);
+
     const newSectionAttemptData: Partial<SectionAttempt> = {
       status: 'completed',
       completedAt: serverTimestamp() as Timestamp,
@@ -191,14 +194,11 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         answersToSaveInFirestore[audioAnswerKey] = downloadURL; // アップロード成功後、URLで上書き
         console.log('[Page] Audio uploaded successfully. URL:', downloadURL);
 
-        // 対象となるセクションのドキュメント参照
-        const currentSectionAttemptRef = doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle);
-
         // Firestoreに保存する最終的なデータを作成
         const dataToSave: Partial<SectionAttempt> = {
           status: 'completed',
           answers: answersToSaveInFirestore, // 従来の解答（もしあれば）
-          completedAt: serverTimestamp(),
+          completedAt: serverTimestamp() as Timestamp,
           audioStorageUrl: downloadURL, // audioStorageUrl をここに追加
         };
 
@@ -252,14 +252,14 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       const dataToSave: Partial<SectionAttempt> = {
         status: 'completed',
         answers: answersToSaveInFirestore,
-        completedAt: serverTimestamp(),
+        completedAt: serverTimestamp() as Timestamp,
       };
-      console.log(`[Page] Saving to Firestore (no audio). Path: ${sectionTitle}, Data:`, dataToSave);
-      await updateDoc(doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle), dataToSave);
+      console.log(`[Page] Saving to Firestore (no audio). Path: ${currentSectionAttemptRef.path}, Data:`, dataToSave);
+      await updateDoc(currentSectionAttemptRef, dataToSave);
       console.log('[Page] Firestore updated (no audio).');
     }
     
-    newSectionAttemptData.answers = answersToSaveInFirestore; // 更新された解答データを使用
+    // newSectionAttemptData.answers = answersToSaveInFirestore; // この行は重複しているか、ロジックを見直す必要がありそう。一旦コメントアウト
 
     const questionsForThisSection = questions[sectionTitle]?.sort((a: Question, b: Question) => a.order - b.order) || [];
 
