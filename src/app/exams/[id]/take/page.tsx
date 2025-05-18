@@ -283,19 +283,19 @@ export default function ExamPage({ params }: { params: { id: string } }) {
 
   console.log('%c[ExamPage] Before useCallback updateAttemptInFirestore', 'color: magenta;');
   const updateAttemptInFirestore = useCallback(async (dataToUpdate: Partial<ExamAttempt>) => {
-    console.log('%c[ExamPage] useCallback updateAttemptInFirestore - CALLED', 'color: darkcyan;', { dataToUpdate });
-    if (!attemptId) return;
-    try {
-      const attemptRef = doc(db, 'exam_attempts', attemptId);
-      await updateDoc(attemptRef, {
-        ...dataToUpdate,
-        updatedAt: serverTimestamp(),
-      });
-    } catch (error) {
-      console.error("Error updating exam attempt:", error);
-      setError('受験状況の保存に失敗しました。'); 
-    }
-  }, [attemptId]);
+    console.log('%c[ExamPage] useCallback updateAttemptInFirestore - CALLED (TEMPORARILY SIMPLIFIED)', 'color: darkcyan;', { dataToUpdate });
+    // if (!attemptId) return;
+    // try {
+    //   const attemptRef = doc(db, 'exam_attempts', attemptId);
+    //   await updateDoc(attemptRef, {
+    //     ...dataToUpdate,
+    //     updatedAt: serverTimestamp(),
+    //   });
+    // } catch (error) {
+    //   console.error("Error updating exam attempt:", error);
+    //   setError('受験状況の保存に失敗しました。'); 
+    // }
+  }, [/* attemptId */]); // 依存配列を一時的に空にする
   console.log('%c[ExamPage] After useCallback updateAttemptInFirestore', 'color: magenta;');
 
   console.log('%c[ExamPage] Before useCallback handleNext', 'color: magenta;');
