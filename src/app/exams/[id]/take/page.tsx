@@ -180,7 +180,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     // audioBlobToUpload があれば、Firebase Storage にアップロード
     if (audioBlobToUpload && audioAnswerKey && user && attemptData?.id && questionsForCurrentForm.find(q => q.id === audioAnswerKey)) {
       const questionId = audioAnswerKey; // 明確化のため
-      const storage = getStorage();
+      const storage = getStorage(undefined, "gs://toremock.appspot.com"); 
       const filePath = `speaking_answers/${user.uid}/${attemptData.id}/${questionId}.webm`;
       const storageRef = ref(storage, filePath);
 
