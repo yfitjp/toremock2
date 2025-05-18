@@ -190,11 +190,73 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         const downloadURL = await getDownloadURL(uploadTask.ref);
         answersToSaveInFirestore[audioAnswerKey] = downloadURL; // アップロード成功後、URLで上書き
         console.log('[Page] Audio uploaded successfully. URL:', downloadURL);
-      } catch (uploadError) {
-        console.error("[Page] Error uploading audio to Firebase Storage:", uploadError);
+
+        // 対象となるセクションのドキュメント参照
+        const currentSectionAttemptRef = doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle);
+
+        // Firestoreに保存する最終的なデータを作成
+        const dataToSave: Partial<SectionAttempt> = {
+          status: 'completed',
+          answers: answersToSaveInFirestore, // 従来の解答（もしあれば）
+          completedAt: serverTimestamp(),
+          audioStorageUrl: downloadURL, // audioStorageUrl をここに追加
+        };
+
+        // console.log(`[Page] Saving to Firestore. Path: ${sectionTitle}, Data:`, dataToSave); // パス表示を修正するなら sectionAttemptRef.path
+        console.log(`[Page] Saving to Firestore. Path: ${currentSectionAttemptRef.path}, Data:`, dataToSave);
+        await updateDoc(currentSectionAttemptRef, dataToSave); // 修正: currentSectionAttemptRef を使用
+        console.log('[Page] Firestore updated with audio URL.');
+
+        // 文字起こしAPIを呼び出す
+        try {
+          console.log(`[Page] Calling transcribe API with URL: ${downloadURL}`);
+          const transcribeResponse = await fetch('/api/transcribe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ audioUrl: downloadURL }),
+          });
+
+          if (!transcribeResponse.ok) {
+            const errorData = await transcribeResponse.json().catch(() => ({ error: 'Failed to parse error response from transcribe API' }));
+            console.error('[Page] Error from transcribe API:', transcribeResponse.status, errorData);
+            await updateDoc(currentSectionAttemptRef, { // ★ 修正
+              transcribedText: 'transcription_failed',
+              transcriptionError: errorData.error || `API Error: ${transcribeResponse.status}`
+            });
+          } else {
+            const { transcription } = await transcribeResponse.json();
+            console.log('[Page] Transcription received:', transcription);
+            await updateDoc(currentSectionAttemptRef, { // ★ 修正
+              transcribedText: transcription,
+              transcriptionError: null,
+            });
+            console.log('[Page] Firestore updated with transcription.');
+          }
+        } catch (transcribeError) {
+          console.error('[Page] Error calling transcribe API:', transcribeError);
+          await updateDoc(currentSectionAttemptRef, { // ★ 修正
+            transcribedText: 'transcription_error',
+            transcriptionError: transcribeError instanceof Error ? transcribeError.message : String(transcribeError)
+          });
+        }
+
+      } catch (error) {
+        console.error("[Page] Error uploading audio to Firebase Storage:", error);
         answersToSaveInFirestore[audioAnswerKey] = 'audio_upload_failed'; // エラー情報を記録
         // 必要であれば、ここでユーザーにエラー通知を行うか、エラーをsetErrorで状態管理することも検討
       }
+    } else {
+      // 音声ファイルがない場合は、通常通りFirestoreに解答を保存
+      const dataToSave: Partial<SectionAttempt> = {
+        status: 'completed',
+        answers: answersToSaveInFirestore,
+        completedAt: serverTimestamp(),
+      };
+      console.log(`[Page] Saving to Firestore (no audio). Path: ${sectionTitle}, Data:`, dataToSave);
+      await updateDoc(doc(db, 'exam_attempts', attemptData.id, 'sections', sectionTitle), dataToSave);
+      console.log('[Page] Firestore updated (no audio).');
     }
     
     newSectionAttemptData.answers = answersToSaveInFirestore; // 更新された解答データを使用

@@ -7,6 +7,6 @@ alwaysApply: false
 @firestoreTypes.ts を確認すればわかる通り、SectionやQuestionについてtypeを設定し、TOEFL模試に適した機能を実現しようとしています。
 以下の事を行ってほしいのですが、私は熟練したエンジニアではなく知識が少ないため、分かりやすい説明と(私の力に頼らない)能動的な作業を心掛けてほしいです。わからないことがあったら聞いてください。勘違いの仮定はミスの原因になるのでできるだけ避けましょう！
 １．録音機能の実装(すでに前のAIエージェントが実装に挑戦したが、失敗しており、まだ録音できるようになっていない)
-２．Speech-To-Text APIの実装(Google Cloud Speech-to-text APIを使用、未実装)
-
+２．Speech-To-Text APIの実装(OpenAI Speech-to-text API(Whisper)を使用、未実装)
+参照：@https://platform.openai.com/docs/guides/speech-to-text 
 ３．採点機能の実装(未実装だが、writingでは採点機能を実装しているためそれと同様の機能を作成すればOK)
