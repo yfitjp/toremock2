@@ -2,6 +2,8 @@
 
 import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { initializeApp, setLogLevel } from 'firebase/app';
+import { app } from '@/app/lib/firebase';
 import ExamForm from './ExamForm';
 import InstructionsScreen from './InstructionsScreen';
 import BreakScreen from './BreakScreen';
@@ -43,6 +45,10 @@ import { FirebaseError } from 'firebase/app';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
 
 export default function ExamPage({ params }: { params: { id: string } }) {
+  // Firebase SDKのログレベルをデバッグに設定
+  setLogLevel('debug'); 
+  console.log('%c[ExamPage] Firebase log level set to debug.', 'color: orange; font-weight: bold;');
+
   console.log('%c[ExamPage] Component RENDERED', 'color: blue; font-weight: bold;');
   // console.log('%c[ExamPage] Component Start', 'color: magenta; font-weight: bold;', { params });
 
