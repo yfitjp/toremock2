@@ -77,14 +77,15 @@ export interface SectionAttempt {
  * exam_attempts コレクションのドキュメント型
  */
 export interface ExamAttempt {
-  id?: string;          // Firestore が自動生成する ID (読み込み時には取得可能)
+  id: string;
   userId: string;
   examId: string;
-  examTitle: string;    // 結果表示用に保持 (ExamData.title)
+  examTitle: string;
   startedAt: Timestamp;
-  completedAt?: Timestamp; // 全完了時
   status: 'in-progress' | 'completed' | 'aborted';
-  currentStructureIndex: number; // structure 配列のどこまで進んだか
-  sections: Record<string, SectionAttempt>; // { [sectionTitle]: SectionAttempt }
-  overallScore?: number; // 全体スコア (計算可能な場合)
+  currentStructureIndex: number;
+  completedAt?: Timestamp;
+  updatedAt?: Timestamp;
+  overallScore?: number;
+  // 他のフィールドがあればそのまま
 } 

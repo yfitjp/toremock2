@@ -402,17 +402,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       // ローカルステートの更新（スキップを解除）
       setAttemptData(prev => {
         if (!prev) return null;
-        const updatedSections = {
-          ...prev.sections,
-          [sectionTitle]: {
-            ...writtenData,
-            completedAt: writtenData.completedAt || Timestamp.now()
-          } as SectionAttempt
-        };
-
         return {
           ...prev,
-          sections: updatedSections,
           currentStructureIndex: nextActualIndex,
           status: attemptUpdateData.status || prev.status,
           completedAt: attemptUpdateData.completedAt || prev.completedAt,
@@ -564,10 +555,6 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         } else {
           // console.log('新しい受験記録を作成します。');
           // examDefがnullでないことは上で確認済み
-          const initialSections: Record<string, SectionAttempt> = {};
-          examDef.structure.forEach((section: ExamSection) => { 
-            initialSections[section.title] = { status: 'pending' };
-          });
           const newAttemptData: Omit<ExamAttempt, 'id'> = {
             userId: user.uid,
             examId: params.id,
@@ -575,7 +562,6 @@ export default function ExamPage({ params }: { params: { id: string } }) {
             startedAt: serverTimestamp() as Timestamp,
             status: 'in-progress',
             currentStructureIndex: 0,
-            sections: initialSections,
           };
           const docRef = await addDoc(collection(db, 'exam_attempts'), newAttemptData);
           setAttemptId(docRef.id);
@@ -707,7 +693,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           examId={params.id}
           sectionInfo={currentSection}
           questions={questionsForCurrentForm}
-          initialAttemptData={attemptData?.sections[currentSection.title]}
+          initialAttemptData={undefined}
           onSubmit={handleSectionSubmit}
           examType={examDefinition.type} 
     />;
@@ -734,7 +720,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
               examId={params.id}
               sectionInfo={currentSection}
               questions={questionsForCurrentForm}
-              initialAttemptData={attemptData?.sections[currentSection.title]}
+              initialAttemptData={undefined}
               onSubmit={handleSectionSubmit}
               examType={examDefinition.type} 
       />;
