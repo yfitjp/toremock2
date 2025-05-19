@@ -388,12 +388,12 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         attemptUpdateData.completedAt = serverTimestamp() as Timestamp;
       }
 
-      // 親ドキュメントの更新
+      // 親ドキュメントの更新（一度だけ）
       console.log(`[Page] Updating ExamAttempt ${attemptDocRef.path} with:`, JSON.stringify(attemptUpdateData, null, 2));
       await updateDoc(attemptDocRef, attemptUpdateData);
       console.log('[Page] ExamAttempt top-level data updated.');
 
-      // ローカルステートの更新を復活させる
+      // ローカルステートの更新（スキップを解除）
       setAttemptData(prev => {
         if (!prev) return null;
         const updatedSections = {
@@ -422,98 +422,31 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       }
       console.log('[Page DEBUG] Final verification successful. Data:', JSON.stringify(finalSnapshot.data(), null, 2));
 
+      // 次のセクションへの移動
+      if (nextActualIndex < examDefinition.structure.length) {
+        setCurrentStructureIndex(nextActualIndex);
+        const newCurrentSection = examDefinition.structure[nextActualIndex];
+        setCurrentSection(newCurrentSection);
+        if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
+        const newNextSectionTitle = nextActualIndex + 1 < examDefinition.structure.length ? examDefinition.structure[nextActualIndex + 1]?.title : null;
+        setNextSectionTitle(newNextSectionTitle);
+      } else {
+        if (examDefinition.id && attemptData.id) {
+          router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
+        } else {
+          console.error("Cannot redirect, exam or attempt ID missing after completion.");
+          setError("試験結果へのリダイレクトに失敗しました。");
+        }
+      }
+
     } catch (error) {
       console.error(`[Page] Error in section data operations:`, error);
       setError(`データベースエラーが発生しました: ${error instanceof Error ? error.message : '不明なエラー'}`);
       setIsSubmitting(false);
       return;
-    }
-
-    // 6. ExamAttempt全体の更新 (currentStructureIndex, status など)
-    const nextActualIndex = currentStructureIndex + 1;
-    // Omit<ExamAttempt, 'sections'> を使うと型エラーになる場合があるため、具体的なキーを指定
-    const attemptUpdateData: {
-      currentStructureIndex: number;
-      updatedAt: Timestamp;
-      status?: 'in-progress' | 'completed' | 'aborted';
-      completedAt?: Timestamp;
-    } = {
-      currentStructureIndex: nextActualIndex,
-      updatedAt: serverTimestamp() as Timestamp,
-    };
-
-    if (nextActualIndex >= examDefinition.structure.length) {
-      attemptUpdateData.status = 'completed';
-      attemptUpdateData.completedAt = serverTimestamp() as Timestamp;
-    }
-
-    try {
-      console.log(`[Page] Updating ExamAttempt ${attemptDocRef.path} with:`, JSON.stringify(attemptUpdateData, null, 2));
-      await updateDoc(attemptDocRef, attemptUpdateData); 
-      console.log('[Page] ExamAttempt top-level data updated.');
-    } catch (err) {
-      console.error("[Page] Error updating ExamAttempt top-level data to Firestore:", err);
-      setError(err instanceof Error ? err.message : '試験全体の進捗の保存に失敗しました。');
+    } finally {
       setIsSubmitting(false);
-      return; 
     }
-    
-    // 7. ローカルステートの更新と画面遷移
-    // === 一時的に setAttemptData をコメントアウトしてテスト ===
-    /*
-    setAttemptData(prev => {
-      if (!prev) return null;
-      // currentSectionAttemptRef への書き込みは成功しているので、ローカルの sections もそれに合わせて更新
-      const updatedSections = {
-        ...prev.sections,
-        [sectionTitle]: {
-          ...(prev.sections[sectionTitle] || {}), // 既存のセクションデータ
-          ...finalSectionData, // 書き込んだデータで更新
-          completedAt: finalSectionData.completedAt || Timestamp.now() 
-        } as SectionAttempt 
-      };
-
-      return {
-        ...prev,
-        sections: updatedSections, // この updatedSections が問題を引き起こす可能性？
-        currentStructureIndex: nextActualIndex,
-        status: attemptUpdateData.status || prev.status, 
-        completedAt: attemptUpdateData.completedAt || prev.completedAt, 
-        updatedAt: Timestamp.now() 
-      };
-    });
-    */ 
-    console.log('[Page DEBUG] setAttemptData call SKIPPED for testing.');
-
-    // handleSectionSubmit の最後で再度読み取りテスト (オプション)
-    try {
-      console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} AT THE END of handleSectionSubmit.`);
-      const docSnapshotAtEnd = await getDoc(currentSectionAttemptRef);
-      if (docSnapshotAtEnd.exists()) {
-        console.log('[Page DEBUG] Re-read AT END successful. Data:', JSON.stringify(docSnapshotAtEnd.data(), null, 2));
-      } else {
-        console.error('[Page DEBUG] Re-read AT END failed: Document does NOT exist at path:', currentSectionAttemptRef.path);
-      }
-    } catch (readError) {
-      console.error('[Page DEBUG] Error during re-read AT END of section data:', readError);
-    }
-
-    if (nextActualIndex < examDefinition.structure.length) {
-      setCurrentStructureIndex(nextActualIndex);
-      const newCurrentSection = examDefinition.structure[nextActualIndex];
-      setCurrentSection(newCurrentSection);
-      if (newCurrentSection.duration) setTimeLeftInSection(newCurrentSection.duration);
-      const newNextSectionTitle = nextActualIndex + 1 < examDefinition.structure.length ? examDefinition.structure[nextActualIndex + 1]?.title : null;
-      setNextSectionTitle(newNextSectionTitle);
-    } else {
-      if (examDefinition.id && attemptData.id) {
-        router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
-      } else {
-        console.error("Cannot redirect, exam or attempt ID missing after completion.");
-        setError("試験結果へのリダイレクトに失敗しました。");
-      }
-    }
-    setIsSubmitting(false);
   }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm, currentStructureIndex]);
   // console.log('%c[ExamPage] After useCallback handleSectionSubmit', 'color: magenta;');
   
