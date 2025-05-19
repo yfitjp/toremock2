@@ -352,45 +352,81 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       }
       console.log(`[Page DEBUG] currentSectionAttemptRef path: ${currentSectionAttemptRef.path}`);
       
-      // 元の finalSectionData を一時的に退避
-      const originalFinalSectionData = { ...finalSectionData }; 
-      
-      // 書き込みデータの最小化テスト (必要に応じてこちらを有効化)
-      // const minimalTestData = { 
-      //   status: "completed_debug_test", 
-      //   test_timestamp: serverTimestamp(),
-      //   debug_section_title: sectionTitle 
-      // };
-      // console.log(`[Page DEBUG] Attempting to write MINIMAL test data to ${currentSectionAttemptRef.path}:`, JSON.stringify(minimalTestData, null, 2));
-      // await setDoc(currentSectionAttemptRef, minimalTestData, { merge: true });
-      // console.log('[Page DEBUG] MINIMAL Test data write attempt finished.');
-
-      // 通常の書き込み (最小化テスト時は上記を有効にし、こちらをコメントアウト)
+      // 書き込みと読み取りを確実に完了させる
       console.log(`[Page DEBUG] Attempting to write FULL finalSectionData to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
       await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true });
       console.log('[Page DEBUG] FULL finalSectionData write attempt finished.');
 
       // 書き込み直後の読み取り確認
-      try {
-        console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} immediately after setDoc.`);
-        const docSnapshot = await getDoc(currentSectionAttemptRef);
-        if (docSnapshot.exists()) {
-          console.log('[Page DEBUG] Re-read section data successfully. Data:', JSON.stringify(docSnapshot.data(), null, 2));
-        } else {
-          console.error('[Page DEBUG] Re-read failed: Document does NOT exist at path:', currentSectionAttemptRef.path);
-        }
-      } catch (readError) {
-        console.error('[Page DEBUG] Error during re-read of section data:', readError);
+      console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} immediately after setDoc.`);
+      const docSnapshot = await getDoc(currentSectionAttemptRef);
+      if (!docSnapshot.exists()) {
+        throw new Error('Section data write verification failed: Document does not exist after write');
       }
-      // === 追加デバッグログ END ===
+      const writtenData = docSnapshot.data();
+      console.log('[Page DEBUG] Re-read section data successfully. Data:', JSON.stringify(writtenData, null, 2));
 
-      console.log(`[Page] Saving final section data to ${currentSectionAttemptRef.path}:`, JSON.stringify(finalSectionData, null, 2));
-      console.log('[Page] Section data updated/set in Firestore.');
+      // データの整合性チェック
+      if (writtenData.status !== 'completed') {
+        throw new Error('Section data write verification failed: Status is not "completed"');
+      }
+
+      // 親ドキュメントの更新データを準備
+      const nextActualIndex = currentStructureIndex + 1;
+      const attemptUpdateData: {
+        currentStructureIndex: number;
+        updatedAt: Timestamp;
+        status?: 'in-progress' | 'completed' | 'aborted';
+        completedAt?: Timestamp;
+      } = {
+        currentStructureIndex: nextActualIndex,
+        updatedAt: serverTimestamp() as Timestamp,
+      };
+
+      if (nextActualIndex >= examDefinition.structure.length) {
+        attemptUpdateData.status = 'completed';
+        attemptUpdateData.completedAt = serverTimestamp() as Timestamp;
+      }
+
+      // 親ドキュメントの更新
+      console.log(`[Page] Updating ExamAttempt ${attemptDocRef.path} with:`, JSON.stringify(attemptUpdateData, null, 2));
+      await updateDoc(attemptDocRef, attemptUpdateData);
+      console.log('[Page] ExamAttempt top-level data updated.');
+
+      // ローカルステートの更新を復活させる
+      setAttemptData(prev => {
+        if (!prev) return null;
+        const updatedSections = {
+          ...prev.sections,
+          [sectionTitle]: {
+            ...writtenData,
+            completedAt: writtenData.completedAt || Timestamp.now()
+          } as SectionAttempt
+        };
+
+        return {
+          ...prev,
+          sections: updatedSections,
+          currentStructureIndex: nextActualIndex,
+          status: attemptUpdateData.status || prev.status,
+          completedAt: attemptUpdateData.completedAt || prev.completedAt,
+          updatedAt: Timestamp.now()
+        };
+      });
+
+      // 最後の読み取り確認
+      console.log(`[Page DEBUG] Final verification read from ${currentSectionAttemptRef.path}`);
+      const finalSnapshot = await getDoc(currentSectionAttemptRef);
+      if (!finalSnapshot.exists()) {
+        throw new Error('Final verification failed: Document does not exist');
+      }
+      console.log('[Page DEBUG] Final verification successful. Data:', JSON.stringify(finalSnapshot.data(), null, 2));
+
     } catch (error) {
-      console.error(`[Page] Error updating/setting section data for ${sectionTitle} in Firestore:`, error);
-      setError(`データベースエラーが発生しました: ${sectionTitle}の保存に失敗しました。`);
+      console.error(`[Page] Error in section data operations:`, error);
+      setError(`データベースエラーが発生しました: ${error instanceof Error ? error.message : '不明なエラー'}`);
       setIsSubmitting(false);
-      return; 
+      return;
     }
 
     // 6. ExamAttempt全体の更新 (currentStructureIndex, status など)
