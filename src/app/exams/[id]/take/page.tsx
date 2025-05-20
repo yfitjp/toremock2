@@ -346,126 +346,69 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       }
     }
 
-    // 5. セクションデータのFirestoreへの書き込み
+    // 5. セクションデータのFirestoreへの書き込みとローカルステートの更新
     try {
-      // === 追加デバッグログ START ===
-      console.log(`[Page DEBUG] Preparing to write to sections. Attempt ID: '${attemptData?.id}', Section Title: '${sectionTitle}'`);
+      console.log(`[Page DEBUG] Preparing to update sections field in ExamAttempt. Attempt ID: '${attemptData?.id}', Section Title: '${sectionTitle}'`);
       if (!attemptData?.id || !sectionTitle) {
-        console.error("[Page CRITICAL DEBUG] Aborting section write due to missing attemptId or sectionTitle!", { attemptId: attemptData?.id, sectionTitle });
+        console.error("[Page CRITICAL DEBUG] Aborting section update due to missing attemptId or sectionTitle!", { attemptId: attemptData?.id, sectionTitle });
         setError("致命的なエラー: 受験IDまたはセクションタイトルが見つかりません。");
         setIsSubmitting(false);
         return;
       }
-      console.log(`[Page DEBUG] currentSectionAttemptRef path: ${currentSectionAttemptRef.path}`);
-      
-      // 書き込む finalSectionData の内容を詳細にログ出力
-      console.log(`[Page DEBUG] FINALIZING finalSectionData for ${currentSectionAttemptRef.path}. Content:`, JSON.stringify(finalSectionData, (key, value) => {
-        if (value && value._methodName === 'serverTimestamp') {
-          return 'FieldValue.serverTimestamp()';
-        }
-        return value;
-      }, 2));
 
-      // Firestoreへの書き込みと読み取りを確実に完了させる
-      await setDoc(currentSectionAttemptRef, finalSectionData, { merge: true });
-      console.log('[Page DEBUG] setDoc operation for section data has completed.');
+      // 更新するセクションの完全なデータを作成
+      // finalSectionData には title や type が含まれていない可能性があるため、ここで明示的に設定
+      const completeSectionDataForUpdate: SectionAttempt = {
+        ...finalSectionData, // これには answers, status, completedAt, audioStorageUrl, transcribedText などが含まれる
+        title: sectionTitle,
+        type: sectionType,
+        // score や feedback なども finalSectionData から引き継がれる
+      };
 
-      // 書き込み直後の読み取り確認
-      console.log(`[Page DEBUG] Attempting to re-read section data from ${currentSectionAttemptRef.path} immediately after setDoc.`);
-      const docSnapshot = await getDoc(currentSectionAttemptRef);
-      if (!docSnapshot.exists()) {
-        console.error(`[Page ERROR] Section data write verification FAILED: Document does not exist at ${currentSectionAttemptRef.path} after write.`);
-        throw new Error('Section data write verification failed: Document does not exist after write');
-      }
-      const writtenData = docSnapshot.data();
-      console.log('[Page DEBUG] Re-read section data successfully. RAW Data from Firestore:', JSON.stringify(writtenData, null, 2));
-
-      // データの整合性チェック (より詳細に)
-      if (!writtenData || writtenData.status !== 'completed') {
-        console.error(`[Page ERROR] Section data write verification FAILED: Status is not "completed" or data is missing. Found status: "${writtenData?.status}"`, writtenData);
-        throw new Error(`Section data write verification failed: Status is not "completed" or data missing. Found status: "${writtenData?.status}"`);
-      }
-      if (finalSectionData.score !== undefined && writtenData.score !== finalSectionData.score) {
-        console.warn(`[Page WARN] Score mismatch after write. Expected: ${finalSectionData.score}, Got: ${writtenData.score}`);
-      }
-      if (!writtenData.completedAt) {
-        console.warn(`[Page WARN] completedAt field is missing in Firestore after write.`);
-      }
-
-      // 親ドキュメントの更新データを準備
-      const nextActualIndex = currentStructureIndex + 1;
-      const attemptUpdateData: {
-        currentStructureIndex: number;
-        updatedAt: Timestamp;
-        status?: 'in-progress' | 'completed' | 'aborted';
-        completedAt?: Timestamp;
-      } = {
-        currentStructureIndex: nextActualIndex,
+      // 親ドキュメントの sections フィールドを更新
+      const updatePayload: any = {
+        [`sections.${sectionTitle}`]: completeSectionDataForUpdate,
         updatedAt: serverTimestamp() as Timestamp,
       };
 
+      const nextActualIndex = currentStructureIndex + 1;
+      updatePayload.currentStructureIndex = nextActualIndex;
+
       if (nextActualIndex >= examDefinition.structure.length) {
-        attemptUpdateData.status = 'completed';
-        attemptUpdateData.completedAt = serverTimestamp() as Timestamp;
+        updatePayload.status = 'completed';
+        updatePayload.completedAt = serverTimestamp() as Timestamp;
       }
 
-      // 親ドキュメントの更新（一度だけ）
-      console.log(`[Page] Updating ExamAttempt ${attemptDocRef.path} with:`, JSON.stringify(attemptUpdateData, null, 2));
-      await updateDoc(attemptDocRef, attemptUpdateData);
-      console.log('[Page] ExamAttempt top-level data updated.');
+      console.log(`[Page DEBUG] Attempting to update ExamAttempt ${attemptDocRef.path} with payload:`, JSON.stringify(updatePayload, null, 2));
+      await updateDoc(attemptDocRef, updatePayload);
+      console.log('[Page DEBUG] ExamAttempt sections field and other top-level data updated successfully.');
 
-      // ローカルステートの更新（スキップを解除）
+      // ローカルステートの更新
       setAttemptData(prev => {
         if (!prev) return null;
-        console.log('[Page DEBUG] Updating local attemptData. Previous state:', JSON.stringify(prev, null, 2));
-        console.log('[Page DEBUG] Data from Firestore for section update (writtenData):', JSON.stringify(writtenData, null, 2));
-        
-        const updatedSectionAttempt: SectionAttempt = {
-          id: sectionTitle, // sectionTitle を ID として使用
-          examId: prev.examId, 
-          userId: prev.userId,
-          attemptId: prev.id,
-          sectionTitle: sectionTitle,
-          startedAt: prev.sections[sectionTitle]?.startedAt || Timestamp.now(), // 既存のstartedAtを使うか、なければ現在時刻
-          ...writtenData, // Firestoreから読み取ったデータで上書き
-          status: 'completed', // 念のため再度 'completed' を設定
-          // completedAt は writtenData に含まれているはず (FirestoreのserverTimestampが解決された値)
-          // score も writtenData に含まれているはず
-        } as SectionAttempt; // SectionAttempt 型にキャスト
-
-        // completedAtがTimestampオブジェクトでない場合(例: Firestoreから読み込んだ直後のオブジェクト)、変換が必要な場合がある
-        // ただし、writtenData.completedAt は Firestore の Timestamp オブジェクトのはず
-        if (writtenData.completedAt && !(writtenData.completedAt instanceof Timestamp)) {
-            console.warn('[Page WARN] writtenData.completedAt is not a Timestamp instance. Type:', typeof writtenData.completedAt, 'Value:', writtenData.completedAt);
-            // 必要であれば変換: updatedSectionAttempt.completedAt = new Timestamp(writtenData.completedAt.seconds, writtenData.completedAt.nanoseconds);
-        }
-
         const updatedSections = {
           ...prev.sections,
-          [sectionTitle]: updatedSectionAttempt
+          [sectionTitle]: {
+            ...(prev.sections?.[sectionTitle] || {}), // 既存のデータを念のためマージ
+            ...completeSectionDataForUpdate, // 更新されたデータで上書き
+            // completedAt は serverTimestamp() で設定されるため、ローカルでは Timestamp.now() を使うか、
+            // Firestore から読み直した値を使うのが理想だが、一旦は completeSectionDataForUpdate の値を使用
+            completedAt: completeSectionDataForUpdate.completedAt || Timestamp.now() 
+          } as SectionAttempt
         };
-        
-        const newLocalAttemptData = {
+
+        return {
           ...prev,
           sections: updatedSections,
           currentStructureIndex: nextActualIndex,
-          status: attemptUpdateData.status || prev.status,
-          completedAt: attemptUpdateData.completedAt || prev.completedAt,
-          updatedAt: Timestamp.now() // ローカルの更新時刻
+          status: updatePayload.status || prev.status,
+          completedAt: updatePayload.completedAt || prev.completedAt,
+          updatedAt: Timestamp.now() // ローカルの updatedAt も更新
         };
-        console.log('[Page DEBUG] New local attemptData state:', JSON.stringify(newLocalAttemptData, null, 2));
-        return newLocalAttemptData;
       });
+      console.log('[Page DEBUG] Local attemptData state updated.');
 
-      // 最後の読み取り確認
-      console.log(`[Page DEBUG] Final verification read from ${currentSectionAttemptRef.path}`);
-      const finalSnapshot = await getDoc(currentSectionAttemptRef);
-      if (!finalSnapshot.exists()) {
-        throw new Error('Final verification failed: Document does not exist');
-      }
-      console.log('[Page DEBUG] Final verification successful. Data:', JSON.stringify(finalSnapshot.data(), null, 2));
-
-      // 次のセクションへの移動
+      // 次のセクションへの移動または結果ページへのリダイレクト
       if (nextActualIndex < examDefinition.structure.length) {
         setCurrentStructureIndex(nextActualIndex);
         const newCurrentSection = examDefinition.structure[nextActualIndex];
@@ -475,23 +418,25 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         setNextSectionTitle(newNextSectionTitle);
       } else {
         if (examDefinition.id && attemptData.id) {
+          console.log(`[Page] Exam completed. Redirecting to results page: /exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
           router.push(`/exams/${examDefinition.id}/result?attemptId=${attemptData.id}`);
         } else {
-          console.error("Cannot redirect, exam or attempt ID missing after completion.");
+          console.error("[Page] Cannot redirect, exam or attempt ID missing after completion.");
           setError("試験結果へのリダイレクトに失敗しました。");
         }
       }
 
     } catch (error) {
-      console.error(`[Page CRITICAL ERROR] Error in section data operations for ${currentSectionAttemptRef?.path || 'unknown path'}:`, error);
-      setError(`データベースエラーが発生しました: ${error instanceof Error ? error.message : '不明なエラー'}`);
-      // Ensure isSubmitting is reset even if an error occurs early
-      setIsSubmitting(false);
-      return;
+      console.error(`[Page] Error in section data update operations:`, error);
+      if (error instanceof FirebaseError) {
+        setError(`Firestoreエラー: ${error.message} (コード: ${error.code})`);
+      } else {
+        setError(`セクションデータの更新中にエラーが発生しました: ${String(error)}`);
+      }
     } finally {
       setIsSubmitting(false);
     }
-  }, [user, examDefinition, currentSection, attemptData, questions, router, isSubmitting, updateAttemptInFirestore, questionsForCurrentForm, currentStructureIndex]);
+  }, [user, examDefinition, currentSection, questions, attemptData, currentStructureIndex, updateAttemptInFirestore, router, isSubmitting, questionsForCurrentForm]); // questionsForCurrentForm を依存配列に追加
   // console.log('%c[ExamPage] After useCallback handleSectionSubmit', 'color: magenta;');
   
 

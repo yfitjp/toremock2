@@ -58,6 +58,8 @@ export interface Question {
  * exam_attempts コレクション内の各セクションの解答状況
  */
 export interface SectionAttempt {
+  title: string; // セクションのタイトル (例: "Speaking Task 1 - Respond")
+  type: SectionType; // セクションのタイプ (例: "speaking")
   status: 'pending' | 'in-progress' | 'completed' | 'skipped'; // スキップ状態も追加
   answers?: Record<string, number | string>; // { questionId: answer }
   score?: number; // 自動採点可能な場合 (選択式またはAI採点スコア)
