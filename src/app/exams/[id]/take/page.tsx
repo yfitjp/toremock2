@@ -362,6 +362,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
         ...finalSectionData, // これには answers, status, completedAt, audioStorageUrl, transcribedText などが含まれる
         title: sectionTitle,
         type: sectionType,
+        status: 'completed', // status を明示的に指定
         // score や feedback なども finalSectionData から引き継がれる
       };
 
@@ -549,7 +550,11 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           // examDefがnullでないことは上で確認済み
           const initialSections: Record<string, SectionAttempt> = {};
           examDef.structure.forEach((section: ExamSection) => { 
-            initialSections[section.title] = { status: 'pending' };
+            initialSections[section.title] = { 
+              title: section.title, // title を追加
+              type: section.type,   // type を追加
+              status: 'pending' 
+            };
           });
           const newAttemptData: Omit<ExamAttempt, 'id'> = {
             userId: user.uid,
