@@ -12,6 +12,9 @@ import { User, Bell, Lock, CreditCard, HelpCircle, LogOut, Settings, Heart, Clip
 import Link from 'next/link';
 import { logoutUser } from '@/app/lib/auth-firebase';
 import LoadingSpinner from '../components/LoadingSpinner';
+import { db } from '@/app/lib/firebase'; // Firestore instance
+import { collection, query, where, orderBy, getDocs, Timestamp } from 'firebase/firestore'; // Firestore functions
+import { ExamAttempt } from '@/app/lib/firestoreTypes'; // ExamAttempt type
 
 // 設定サブセクションの型定義
 type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help' | 'logout';
@@ -21,12 +24,45 @@ export default function MyPage() {
   const { user, loading } = useAuth();
   const [activeSection, setActiveSection] = useState('account');
   const [activeSettingSection, setActiveSettingSection] = useState<SettingSection>('profile');
+  const [examHistory, setExamHistory] = useState<ExamAttempt[]>([]);
+  const [historyLoading, setHistoryLoading] = useState(true);
+  const [historyError, setHistoryError] = useState<string | null>(null);
 
   useEffect(() => {
     if (!loading && !user) {
       router.push('/auth/signin?callbackUrl=/mypage');
     }
   }, [user, loading, router]);
+
+  useEffect(() => {
+    const fetchExamHistory = async () => {
+      if (user && activeSection === 'history') {
+        setHistoryLoading(true);
+        setHistoryError(null);
+        try {
+          const attemptsRef = collection(db, 'exam_attempts');
+          const q = query(
+            attemptsRef,
+            where('userId', '==', user.uid),
+            where('status', '==', 'completed'),
+            orderBy('completedAt', 'desc')
+          );
+          const querySnapshot = await getDocs(q);
+          const history: ExamAttempt[] = [];
+          querySnapshot.forEach((doc) => {
+            history.push({ id: doc.id, ...doc.data() } as ExamAttempt);
+          });
+          setExamHistory(history);
+        } catch (error: any) {          
+          console.error("Error fetching exam history:", error);
+          setHistoryError("受験履歴の取得に失敗しました。時間をおいて再度お試しください。");
+        }
+        setHistoryLoading(false);
+      }
+    };
+
+    fetchExamHistory();
+  }, [user, activeSection]); // activeSection を依存配列に追加
 
   const handleSignOut = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -209,14 +245,26 @@ export default function MyPage() {
               受験履歴
             </h2>
             <div className="space-y-4 max-h-96 overflow-y-auto pr-2 scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
-              {dummyExamHistory.length > 0 ? (
-                dummyExamHistory.map(exam => (
-                  <div key={exam.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out border-b last:border-b-0">
+              {historyLoading ? (
+                <p className="text-sm text-gray-500 text-center py-4">受験履歴を読み込んでいます...</p>
+              ) : historyError ? (
+                <p className="text-sm text-red-500 text-center py-4">{historyError}</p>
+              ) : examHistory.length > 0 ? (
+                examHistory.map(attempt => (
+                  <div key={attempt.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out border-b last:border-b-0">
                     <div>
-                      <p className="text-sm font-medium text-gray-900">{exam.name}</p>
-                      <p className="text-xs text-gray-500">{exam.date} - スコア: {exam.score}</p>
+                      <p className="text-sm font-medium text-gray-900">{attempt.examTitle}</p>
+                      <p className="text-xs text-gray-500">
+                        {attempt.completedAt instanceof Timestamp 
+                          ? attempt.completedAt.toDate().toLocaleDateString() 
+                          : attempt.completedAt ? new Date(attempt.completedAt as any).toLocaleDateString() : '日付不明'} 
+                        {attempt.overallScore !== undefined && ` - スコア: ${attempt.overallScore}%`}
+                      </p>
                     </div>
-                    <Link href={exam.link} className="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 whitespace-nowrap">
+                    <Link 
+                      href={`/exams/${attempt.examId}/result?attemptId=${attempt.id}`}
+                      className="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 whitespace-nowrap"
+                    >
                       詳細を見る
                     </Link>
                   </div>
@@ -225,13 +273,14 @@ export default function MyPage() {
                 <p className="text-sm text-gray-500 text-center py-4">受験履歴はありません。</p>
               )}
             </div>
-            {dummyExamHistory.length > 3 && (
+            {/* TODO: 全履歴ページへのリンクは、別途ページ作成後に有効化 */} 
+            {/* {examHistory.length > 3 && (
               <div className="mt-4 text-center">
                 <Link href="/history/exams" className="text-sm font-medium text-blue-600 hover:text-blue-800">
                   全ての受験履歴を見る →
                 </Link>
               </div>
-            )}
+            )} */}
           </motion.section>
         );
       case 'purchase':
@@ -255,12 +304,6 @@ export default function MyPage() {
     }
   };
 
-  // ダミーデータ
-  const dummyExamHistory = [
-    { id: 1, name: "TOEIC® L&R TEST 模試 Vol.3", date: "2024年5月15日", score: "850 / 990", link: "/results/1" },
-    { id: 2, name: "英検®準1級 模試パック 第2回", date: "2024年4月28日", score: "合格", link: "/results/2" },
-    { id: 3, name: "TOEFL iBT® 実践模試 B", date: "2024年4月10日", score: "95 / 120", link: "/results/3" },
-  ];
 
   const dummyFavoriteExams = [
     { id: 1, name: "TOEIC® L&R TEST 模試 Vol.4", link: "/exams/toeic/vol4" },
