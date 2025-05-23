@@ -48,7 +48,7 @@ export const metadata: Metadata = {
   },
   // Google Search Consoleの設定
   other: {
-    googleSiteVerification: "EDRe6uY-RLnEEWm6nU-tkniIUg-JK2wGVR7VwtZy74s"
+    "google-site-verification": "EDRe6uY-RLnEEWm6nU-tkniIUg-JK2wGVR7VwtZy74s"
   },
 };
 
