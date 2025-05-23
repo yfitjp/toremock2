@@ -207,39 +207,68 @@ export default function ExamResultPage() {
               </div>
               
               {/* 回答表示セクション */}
-              {((typedSectionData.answers && Object.keys(typedSectionData.answers).length > 0) || typedSectionData.transcribedText) && (
+              {((typedSectionData.answers && Object.keys(typedSectionData.answers).length > 0) || typedSectionData.transcribedText || typedSectionData.revisedEssay || typedSectionData.revisedTranscribedText) && (
                 <div className="mt-4 pt-3 border-t border-gray-200">
-                  <h4 className="text-md font-semibold text-gray-600 mb-2">あなたの回答:</h4>
-                  {typedSectionData.transcribedText && (
-                    <div className="mb-3 p-2 bg-gray-100 rounded">
+                  <h4 className="text-md font-semibold text-gray-600 mb-2">あなたの回答と添削結果:</h4>
+                  
+                  {/* Speakingの文字起こしと添削結果 */}
+                  {typedSectionData.type === 'speaking' && typedSectionData.transcribedText && (
+                    <div className="mb-3 p-3 bg-gray-100 rounded-lg shadow-sm">
+                      <h5 className="text-sm font-semibold text-gray-500 mb-1">元の文字起こし:</h5>
                       <p className="text-sm text-gray-800 whitespace-pre-wrap">{typedSectionData.transcribedText}</p>
                     </div>
                   )}
-                  {typedSectionData.answers && Object.entries(typedSectionData.answers).length > 0 && (
+                  {typedSectionData.type === 'speaking' && typedSectionData.revisedTranscribedText && (
+                    <div className="mb-3 p-3 bg-green-50 border border-green-200 rounded-lg shadow-sm">
+                      <h5 className="text-sm font-semibold text-green-700 mb-1">AIによる添削結果 (スピーキング):</h5>
+                      <p className="text-sm text-green-800 whitespace-pre-wrap">{typedSectionData.revisedTranscribedText}</p>
+                    </div>
+                  )}
+
+                  {/* Writingのエッセイと添削結果 */}
+                  {typedSectionData.type === 'writing' && typedSectionData.answers && Object.keys(typedSectionData.answers).length > 0 && (
+                     Object.entries(typedSectionData.answers).map(([questionId, answer]) => (
+                        <div key={`${questionId}-original`} className="mb-3 p-3 bg-gray-100 rounded-lg shadow-sm">
+                            <h5 className="text-sm font-semibold text-gray-500 mb-1">あなたのエッセイ:</h5>
+                            <p className="text-sm text-gray-800 whitespace-pre-wrap">{String(answer)}</p>
+                        </div>
+                    ))
+                  )}
+                  {typedSectionData.type === 'writing' && typedSectionData.revisedEssay && (
+                    <div className="mb-3 p-3 bg-green-50 border border-green-200 rounded-lg shadow-sm">
+                        <h5 className="text-sm font-semibold text-green-700 mb-1">AIによる添削結果 (ライティング):</h5>
+                        <p className="text-sm text-green-800 whitespace-pre-wrap">{typedSectionData.revisedEssay}</p>
+                    </div>
+                  )}
+
+                  {/* Reading/Listening の選択式問題の回答 (既存ロジックを少し調整) */}
+                  { (typedSectionData.type === 'reading' || typedSectionData.type === 'listening') && typedSectionData.answers && Object.keys(typedSectionData.answers).length > 0 && (
                     <dl className="space-y-1 text-sm text-gray-800">
-                      {Object.entries(typedSectionData.answers).map(([questionId, answer], index) => {
-                        const isSingleQuestionSpeakingWriting = 
-                          (typedSectionData.type === 'speaking' || typedSectionData.type === 'writing') && 
-                          Object.keys(typedSectionData.answers || {}).length === 1;
-                        return (
+                      {Object.entries(typedSectionData.answers).map(([questionId, answer], index) => (
                           <div key={questionId} className="p-2 bg-gray-100 rounded">
                             <span className="font-semibold text-gray-500">
-                              {!isSingleQuestionSpeakingWriting && `${index + 1}: `}
+                              {`${index + 1}: `}
                             </span>
                             <span className="ml-1 whitespace-pre-wrap">
-                              {typedSectionData.type === 'speaking' && typeof answer === 'string' && (answer.startsWith('http') || answer.startsWith('blob:')) ? (
-                                <audio controls src={answer} className="w-full max-w-xs" />
-                              ) : typeof answer === 'number' ? (
-                                String.fromCharCode(65 + answer) // 0=A, 1=B, 2=C, 3=D
-                              ) : (
-                                answer
-                              )}
+                              {typeof answer === 'number' ? String.fromCharCode(65 + answer) : String(answer)}
                             </span>
                           </div>
-                        );
-                      })}
+                        )
+                      )}
                     </dl>
                   )}
+                   {/* Speakingの録音音声再生 (既存のanswersループから独立して表示) */}
+                   {typedSectionData.type === 'speaking' && typedSectionData.answers && Object.entries(typedSectionData.answers).map(([questionId, answer]) => {
+                        if (typeof answer === 'string' && (answer.startsWith('http') || answer.startsWith('blob:'))) {
+                            return (
+                                <div key={`${questionId}-audio`} className="mt-2 p-2 bg-gray-100 rounded-lg shadow-sm">
+                                    <h5 className="text-sm font-semibold text-gray-500 mb-1">録音音声:</h5>
+                                    <audio controls src={answer} className="w-full max-w-xs" />
+                                </div>
+                            );
+                        }
+                        return null;
+                    })}
                 </div>
               )}
 

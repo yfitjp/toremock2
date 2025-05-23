@@ -20,10 +20,10 @@ export default function AudioPlaybackScreen({
   const [audioDuration, setAudioDuration] = useState(0);
 
   const formatTime = (totalSeconds: number | undefined) => {
-    if (totalSeconds === undefined || isNaN(totalSeconds)) return 'Loading...'; // Handle NaN
+    if (totalSeconds === undefined || isNaN(totalSeconds) || totalSeconds === 0) return '0:00'; // Handle NaN or 0
     const minutes = Math.floor(totalSeconds / 60);
-    const seconds = Math.floor(totalSeconds % 60); // Use Math.floor for seconds as well
-    return `${minutes}min ${seconds.toString().padStart(2, '0')}sec`;
+    const seconds = Math.floor(totalSeconds % 60);
+    return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   };
 
   useEffect(() => {

@@ -55,10 +55,11 @@ export async function POST(request: Request) {
                     "score": <number>,
                     "feedback": "<string>",
                     "positive_points": ["<string>", "..."],
-                    "areas_for_improvement": ["<string>", "..."]
+                    "areas_for_improvement": ["<string>", "..."],
+                    "revised_essay": "<string with the revised version of the essay, keeping original meaning but improving grammar, vocabulary, and flow.>"
                   }
                   Ensure the output is a single, valid JSON object. Do not include any explanatory text before or after the JSON object.
-                  Focus on clarity, organization, grammar, vocabulary, and task fulfillment.
+                  Focus on clarity, organization, grammar, vocabulary, and task fulfillment for the feedback and score.
                   If no specific prompt is provided for the essay, evaluate its general writing quality.
                   Remember to output only JSON.`, // "json" を含める
       },
@@ -75,7 +76,7 @@ export async function POST(request: Request) {
       messages: messages,
       response_format: { type: "json_object" }, // JSONモードを有効化
       temperature: 0.3, // 採点の一貫性を高めるため低めに設定
-      max_tokens: 1000,  // 応答に必要な十分なトークン数を確保 (適宜調整)
+      max_tokens: 1200,  // 応答に必要な十分なトークン数を確保 (適宜調整)
       stream: false,
     });
 
@@ -113,10 +114,11 @@ export async function POST(request: Request) {
     if (typeof parsedResponse.score !== 'number' || 
         typeof parsedResponse.feedback !== 'string' ||
         !Array.isArray(parsedResponse.positive_points) ||
-        !Array.isArray(parsedResponse.areas_for_improvement)
+        !Array.isArray(parsedResponse.areas_for_improvement) ||
+        typeof parsedResponse.revised_essay !== 'string' // revised_essay の型を検証
        ) {
         console.error('[Grade API] Unexpected JSON structure from DeepSeek API:', parsedResponse);
-        throw new Error('DeepSeek API JSON response does not contain all required fields (score, feedback, positive_points, areas_for_improvement) or they are of the wrong type.');
+        throw new Error('DeepSeek API JSON response does not contain all required fields (score, feedback, positive_points, areas_for_improvement, revised_essay) or they are of the wrong type.');
     }
 
     console.log('[Grade API] Successfully parsed response:', parsedResponse);
@@ -126,6 +128,7 @@ export async function POST(request: Request) {
       feedback: parsedResponse.feedback,
       positive_points: parsedResponse.positive_points,
       areas_for_improvement: parsedResponse.areas_for_improvement,
+      revised_essay: parsedResponse.revised_essay, // 添削結果をレスポンスに追加
       // llmRawResponseForDebug: completion, // デバッグ用に生のレスポンス全体を返すことも可能だが、本番では注意
     });
 

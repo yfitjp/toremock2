@@ -29,7 +29,8 @@ export async function POST(request: Request) {
                     "score": <number>,
                     "feedback": "<string>",
                     "positive_points": ["<string>", "..."],
-                    "areas_for_improvement": ["<string>", "..."]
+                    "areas_for_improvement": ["<string>", "..."],
+                    "revised_transcription": "<string with the revised version of the transcribed speech, keeping original meaning but improving grammar, vocabulary, and natural phrasing.>"
                   }
                   Ensure the output is a single, valid JSON object. Do not include any explanatory text before or after the JSON object.
                   If no specific prompt is provided, evaluate general speaking quality based on the transcription.
@@ -48,7 +49,7 @@ export async function POST(request: Request) {
       messages: messages,
       response_format: { type: "json_object" },
       temperature: 0.3, 
-      max_tokens: 1000, 
+      max_tokens: 1200, 
       stream: false,
     });
 
@@ -83,10 +84,11 @@ export async function POST(request: Request) {
     if (typeof parsedResponse.score !== 'number' || 
         typeof parsedResponse.feedback !== 'string' ||
         !Array.isArray(parsedResponse.positive_points) ||
-        !Array.isArray(parsedResponse.areas_for_improvement)
+        !Array.isArray(parsedResponse.areas_for_improvement) ||
+        typeof parsedResponse.revised_transcription !== 'string'
        ) {
         console.error('[Grade Speaking API] Unexpected JSON structure from DeepSeek API:', parsedResponse);
-        throw new Error('DeepSeek API JSON response does not contain all required fields (score, feedback, positive_points, areas_for_improvement) or they are of the wrong type.');
+        throw new Error('DeepSeek API JSON response does not contain all required fields (score, feedback, positive_points, areas_for_improvement, revised_transcription) or they are of the wrong type.');
     }
 
     console.log('[Grade Speaking API] Successfully parsed response:', parsedResponse);
@@ -96,6 +98,7 @@ export async function POST(request: Request) {
       feedback: parsedResponse.feedback,
       positive_points: parsedResponse.positive_points,
       areas_for_improvement: parsedResponse.areas_for_improvement,
+      revised_transcription: parsedResponse.revised_transcription,
     });
 
   } catch (error: any) {

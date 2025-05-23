@@ -270,6 +270,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           finalSectionData.feedback = gradingResult.feedback;
           finalSectionData.positive_points = gradingResult.positive_points;
           finalSectionData.areas_for_improvement = gradingResult.areas_for_improvement;
+          finalSectionData.revisedTranscribedText = gradingResult.revised_transcription;
         }
       } catch (gradeError) {
         console.error('[Page] Error calling grade-speaking API:', gradeError);
@@ -313,6 +314,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           finalSectionData.feedback = gradingResult.feedback;
           finalSectionData.positive_points = gradingResult.positive_points;
           finalSectionData.areas_for_improvement = gradingResult.areas_for_improvement;
+          finalSectionData.revisedEssay = gradingResult.revised_essay;
           console.log('[Page] Writing grading received successfully:', gradingResult);
         } catch (err) {
           console.error("[Page] Error during AI grading (inside try/catch):", err);

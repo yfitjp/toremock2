@@ -68,6 +68,8 @@ export interface SectionAttempt {
   areas_for_improvement?: string[]; // AIからの改善点 (オプション)
   audioStorageUrl?: string;         // Speaking問題の音声ファイルURL (新規追加)
   transcribedText?: string;         // Speaking問題の文字起こしテキスト (新規追加)
+  revisedEssay?: string;            // Writing問題の添削結果 (新規追加)
+  revisedTranscribedText?: string;  // Speaking問題の添削された文字起こし (新規追加)
   transcriptionError?: string;      // 文字起こしエラー時のメッセージ (新規追加)
   // llmRawResponse?: any; // デバッグ用にLLMの生レスポンスを保存する場合 (オプション)
   startedAt?: Timestamp;
