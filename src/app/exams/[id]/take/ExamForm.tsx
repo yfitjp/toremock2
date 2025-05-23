@@ -32,7 +32,6 @@ export default React.memo(function ExamForm({
   const [timeLeft, setTimeLeft] = useState<number>(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
 
   console.log('[ExamForm] Initializing. Section type:', sectionInfo.type);
   const recorder: UseRecorderReturnType = useRecorder();
@@ -67,27 +66,15 @@ export default React.memo(function ExamForm({
     setCurrentAnswers((prev) => ({ ...prev, [questionId]: text }));
   };
 
-  const handlePlayAudio = () => {
-    if (audioRef.current) {
-      if (isPlaying) {
-        audioRef.current.pause();
-      } else {
-        audioRef.current.play();
-      }
-      setIsPlaying(!isPlaying);
-    }
-  };
-
   const handleNext = () => {
     // console.log('[ExamForm handleNext] Start. currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length);
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      setIsPlaying(false);
     }
     if (currentQuestionIndex < questions.length - 1) {
+      // console.log('[ExamForm handleNext] Incrementing index from:', prev);
       setCurrentQuestionIndex(prev => {
-        // console.log('[ExamForm handleNext] Incrementing index from:', prev);
         return prev + 1;
       });
     } else {
@@ -102,7 +89,6 @@ export default React.memo(function ExamForm({
     if (audioRef.current) {
       audioRef.current.pause();
       audioRef.current.currentTime = 0;
-      setIsPlaying(false);
     }
     if (questionType === 'speaking') {
       // recorder.resetRecorder(); // ページ遷移やセクション完了時にresetするのでここでは不要かも
@@ -182,6 +168,24 @@ export default React.memo(function ExamForm({
   // currentQuestionIndex を削除。セクションごとのタイマーであり、質問遷移でリセットすべきではない。
   }, [sectionInfo.title, sectionInfo.type, sectionInfo.duration, examId]); 
 
+  const currentQuestionData = questions[currentQuestionIndex];
+  // console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
+
+  useEffect(() => {
+    if (currentQuestionData?.audioUrl && audioRef.current) {
+      audioRef.current.src = currentQuestionData.audioUrl;
+      audioRef.current.load();
+      const playPromise = audioRef.current.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.error("Audio autoplay failed in ExamForm:", error);
+          // Optionally show a play button or message if autoplay is blocked
+        });
+      }
+      // setIsPlaying(true); // No longer needed as there's no manual play/pause button
+    }
+  }, [currentQuestionData?.audioUrl]);
+
   useEffect(() => {
     // console.log(`[ExamForm] Recorder status updated in ExamForm: ${recorder.status} AudioBlob: ${recorder.audioBlob ? 'Exists' : 'null'} Error: ${recorder.errorMessage}`);
     if (recorder.status === 'stopped' && recorder.audioBlob && questions[currentQuestionIndex]) {
@@ -192,9 +196,6 @@ export default React.memo(function ExamForm({
       // Optionally, provide feedback to the user
     }
   }, [recorder.status, recorder.audioBlob, recorder.errorMessage, currentQuestionIndex, questions]);
-
-  const currentQuestionData = questions[currentQuestionIndex];
-  // console.log('[ExamForm Render] currentQuestionIndex:', currentQuestionIndex, 'questions.length:', questions.length, 'questionType:', questionType);
 
   if (questionType !== 'speaking' && !currentQuestionData) {
     return <div>Loading question...</div>;
@@ -323,24 +324,15 @@ export default React.memo(function ExamForm({
               {currentQuestionData.audioUrl && (
                 <div className="mb-6">
                   <div className="flex items-center justify-center p-4 bg-gray-50 rounded-lg">
-                    <button
-                      onClick={handlePlayAudio}
-                      className="flex items-center justify-center w-12 h-12 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-md transition-colors"
-                    >
-                      {isPlaying ? (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 9v6m4-6v6m7-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      ) : (
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                      )}
-                    </button>
-                    <audio ref={audioRef} src={currentQuestionData.audioUrl} onEnded={() => setIsPlaying(false)} className="hidden" />
+                    <audio 
+                      ref={audioRef} 
+                      controls={false}
+                      controlsList="nodownload"
+                      onEnded={() => { /* setIsPlaying(false); No longer needed */ }}
+                      className="w-full"
+                    />
                     <div className="ml-4 text-gray-600">
-                      {isPlaying ? 'Pause' : 'Play'} Audio
+                       Audio will play automatically.
                     </div>
                   </div>
                 </div>

@@ -35,7 +35,7 @@ export default function Home() {
       {/* ヒーローセクション */}
       <div className="relative overflow-hidden bg-gradient-to-r from-blue-50 to-indigo-50">
         <div className="absolute inset-0 z-0 opacity-20">
-          <div className="absolute inset-0 bg-[url('/images/grid-pattern.svg')] bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
+          <div className="absolute inset-0 bg-center [mask-image:linear-gradient(180deg,white,rgba(255,255,255,0))]"></div>
         </div>
         
         <div className="max-w-7xl mx-auto">
