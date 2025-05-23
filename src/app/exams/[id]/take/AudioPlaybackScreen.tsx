@@ -1,62 +1,89 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 interface AudioPlaybackScreenProps {
   title: string;
   audioUrl: string;
   onNext: () => void;
-  duration?: number; // 音源の長さや目安時間（秒）
+  duration?: number; // This could be a pre-fetched or estimated duration
 }
 
 export default function AudioPlaybackScreen({
   title,
   audioUrl,
   onNext,
-  duration,
+  // duration: estimatedDuration, // Rename for clarity if used as fallback
 }: AudioPlaybackScreenProps) {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [audioCurrentTime, setAudioCurrentTime] = useState(0);
+  const [audioDuration, setAudioDuration] = useState(0);
 
-  // duration を分秒形式に変換するヘルパー関数
   const formatTime = (totalSeconds: number | undefined) => {
-    if (totalSeconds === undefined) return '';
+    if (totalSeconds === undefined || isNaN(totalSeconds)) return 'Loading...'; // Handle NaN
     const minutes = Math.floor(totalSeconds / 60);
-    const seconds = totalSeconds % 60;
-    return `${minutes}min ${seconds}sec`;
+    const seconds = Math.floor(totalSeconds % 60); // Use Math.floor for seconds as well
+    return `${minutes}min ${seconds.toString().padStart(2, '0')}sec`;
   };
 
   useEffect(() => {
-    if (audioRef.current) {
-      // audioUrlが変更された場合、新しいソースをロードして再生
-      audioRef.current.load(); // Ensure new src is loaded if audioUrl changes
-      audioRef.current.play().catch(error => {
+    const audioElement = audioRef.current;
+    if (audioElement) {
+      const handleTimeUpdate = () => {
+        setAudioCurrentTime(audioElement.currentTime);
+      };
+      const handleLoadedMetadata = () => {
+        setAudioDuration(audioElement.duration);
+      };
+
+      audioElement.addEventListener('timeupdate', handleTimeUpdate);
+      audioElement.addEventListener('loadedmetadata', handleLoadedMetadata);
+
+      // Play logic
+      audioElement.load();
+      audioElement.play().catch(error => {
         console.error("Audio autoplay failed in AudioPlaybackScreen:", error);
-        // Consider adding a fallback play button if autoplay is blocked
       });
+
+      return () => {
+        audioElement.removeEventListener('timeupdate', handleTimeUpdate);
+        audioElement.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      };
     }
   }, [audioUrl]);
 
+  const progressPercent = audioDuration > 0 ? (audioCurrentTime / audioDuration) * 100 : 0;
+
   return (
     <div className="p-6 bg-white shadow-xl rounded-lg max-w-2xl mx-auto my-8">
-      <h2 className="text-3xl font-bold mb-6 text-center text-gray-800">{title}</h2>
-      {duration && (
-        <p className="mb-5 text-md text-center text-gray-600">
-          Estimated audio duration: {formatTime(duration)}
-        </p>
-      )}
-      <div className="my-6">
+      <h2 className="text-3xl font-bold mb-4 text-center text-gray-800">{title}</h2>
+      
+      {/* Audio Player and Custom Progress Bar */}
+      <div className="my-6 space-y-3">
         <audio
           ref={audioRef}
           src={audioUrl}
-          autoPlay
-          controlsList="nodownload" // Disables download and other context menu items
-          // controls={false} // Explicitly set for clarity, though default is no controls without the attribute
-          className="w-full"
-          onEnded={onNext} // Automatically go to next when audio finishes
+          // autoPlay // Autoplay is handled in useEffect
+          controlsList="nodownload"
+          className="w-full hidden" // Hide default player, we use custom UI
+          onEnded={onNext}
         >
           Your browser does not support the audio element.
         </audio>
+
+        {/* Custom Progress Bar */}
+        <div className="w-full bg-gray-200 rounded-full h-2.5 overflow-hidden">
+          <div
+            className="bg-blue-600 h-2.5 rounded-full transition-all duration-150 ease-linear"
+            style={{ width: `${progressPercent}%` }}
+          ></div>
+        </div>
+        <div className="flex justify-between text-sm text-gray-500">
+          <span>{formatTime(audioCurrentTime)}</span>
+          <span>{formatTime(audioDuration)}</span>
+        </div>
       </div>
+
       <p className="mb-8 text-center text-gray-700">
         Listen to the audio. You will automatically proceed to the questions once the audio finishes.
         If it does not proceed, please click the button below.
