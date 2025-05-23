@@ -322,10 +322,10 @@ export default function MyPage() {
 
   // メインナビゲーション項目の定義 (モバイルとデスクトップで共通化)
   const mainNavItems: { name: string; icon: JSX.Element; mobileIcon: JSX.Element; label: string }[] = [
-    { name: 'account', icon: <User className="mr-3 h-5 w-5" />, mobileIcon: <User size={24} />, label: 'アカウント情報' },
-    { name: 'favorites', icon: <Heart className="mr-3 h-5 w-5" />, mobileIcon: <Heart size={24} />, label: 'お気に入り模試' },
     { name: 'history', icon: <ClipboardList className="mr-3 h-5 w-5" />, mobileIcon: <ClipboardList size={24} />, label: '受験履歴' },
     { name: 'purchase', icon: <ShoppingCart className="mr-3 h-5 w-5" />, mobileIcon: <ShoppingCart size={24} />, label: '購入履歴' },
+    { name: 'favorites', icon: <Heart className="mr-3 h-5 w-5" />, mobileIcon: <Heart size={24} />, label: 'お気に入り' },
+    { name: 'account', icon: <User className="mr-3 h-5 w-5" />, mobileIcon: <User size={24} />, label: 'アカウント情報' },
     { name: 'settings', icon: <Settings className="mr-3 h-5 w-5" />, mobileIcon: <Settings size={24} />, label: '設定' },
   ];
 

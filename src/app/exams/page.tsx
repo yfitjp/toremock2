@@ -174,8 +174,21 @@ export default function ExamsPage() {
     const typeStyle = TYPE_STYLES[exam.type as keyof typeof TYPE_STYLES] || TYPE_STYLES['TOEIC'];
     
     // structure から合計 duration を計算
-    const totalDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
-    const totalDurationMinutes = Math.floor(totalDuration / 60);
+    let totalDurationMinutes: number | string;
+    switch (exam.type) {
+      case 'TOEIC':
+      case 'TOEFL':
+        totalDurationMinutes = 120;
+        break;
+      case 'EIKEN':
+        totalDurationMinutes = 80;
+        break;
+      default:
+        // 既存のロジックまたはデフォルト値
+        const calculatedDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
+        totalDurationMinutes = calculatedDuration > 0 ? Math.floor(calculatedDuration / 60) : '??';
+        break;
+    }
 
     return (
       <motion.div
@@ -212,7 +225,7 @@ export default function ExamsPage() {
               <svg className="w-4 h-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
-              <span>約{totalDurationMinutes > 0 ? `${totalDurationMinutes}分` : '??分'}</span>
+              <span>約{totalDurationMinutes}分</span>
             </div>
           </div>
 

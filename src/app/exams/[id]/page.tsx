@@ -94,8 +94,20 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
   // 試験タイプに応じたラベル (型安全なマッピングを使用)
   const examTypeLabel = EXAM_TYPE_LABELS[exam.type] || '模試';
   // structure から合計 duration を計算
-  const totalDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
-  const totalDurationMinutes = Math.floor(totalDuration / 60);
+  let totalDurationMinutes: number | string;
+  switch (exam.type) {
+    case 'TOEIC':
+    case 'TOEFL':
+      totalDurationMinutes = 120;
+      break;
+    case 'EIKEN':
+      totalDurationMinutes = 80;
+      break;
+    default:
+      const calculatedDuration = exam.structure?.reduce((acc, section) => acc + (section.duration || 0), 0) || 0;
+      totalDurationMinutes = calculatedDuration > 0 ? Math.floor(calculatedDuration / 60) : '??';
+      break;
+  }
 
 
   return (
@@ -132,7 +144,7 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 mr-1" viewBox="0 0 20 20" fill="currentColor">
                  <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.414-1.414L11 10.586V6z" clipRule="evenodd" />
                </svg>
-               所要時間: 約{totalDurationMinutes > 0 ? `${totalDurationMinutes}分` : '??分'}
+               所要時間: 約{totalDurationMinutes}分
              </span>
             {exam.isFree && (
               <span className="inline-flex items-center bg-gradient-to-r from-yellow-400 to-yellow-600 text-white text-xs font-medium px-2.5 py-0.5 rounded-full">
@@ -160,7 +172,7 @@ export default function ExamDetailPage({ params }: { params: { id: string } }) {
               <span className="font-semibold text-blue-800">受験前に必ずご確認ください</span>
             </div>
             <ul className="ml-8 mt-3 list-disc text-sm text-blue-700 space-y-2">
-              <li>制限時間は <strong>{totalDurationMinutes > 0 ? `約${totalDurationMinutes}分` : '指定なし'}</strong> です。時間内に全ての問題に回答してください。</li>
+              <li>制限時間は <strong>{totalDurationMinutes}分</strong> です。時間内に全ての問題に回答してください。</li>
               <li>試験開始後はタイマーが作動します。中断した場合でもタイマーは停止しません。</li>
               <li>一度提出した回答は修正できません。</li>
               {exam.type === 'TOEFL' || exam.type === 'IELTS' || exam.type === 'EIKEN' ? (
