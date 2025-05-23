@@ -105,22 +105,36 @@ export default React.memo(function ExamForm({
     setIsSubmitting(true);
     const questionId = questions[currentQuestionIndex]?.id || 'speaking_answer';
 
+    // Prepare answers to submit, including handling for unanswered multiple-choice questions
+    const answersToSubmit = { ...currentAnswers };
+
+    if (questionType !== 'speaking') {
+      questions.forEach(q => {
+        if (q.questionType === 'multiple-choice' && !(q.id in answersToSubmit)) {
+          answersToSubmit[q.id] = -1; // Mark unanswered multiple-choice as -1
+        }
+        // For other question types (text-input, writing), if not in answersToSubmit, it means they were left blank
+        // and will be saved as such (or not at all if the key doesn't exist, depending on Firestore behavior for undefined values in maps)
+        // For this requirement, we only explicitly mark multiple-choice.
+      });
+    }
+
     if (questionType === 'speaking' && recorder.audioBlob) {
       console.log('[ExamForm] Submitting with audioBlob. Size:', recorder.audioBlob.size);
       const answersWithAudio = {
-        ...currentAnswers,
+        ...answersToSubmit, // Use potentially modified answersToSubmit
         [questionId]: recorder.audioBlob
       };
       onSubmit(answersWithAudio);
     } else if (questionType === 'speaking') {
       console.log('[ExamForm] No audioBlob or submission forced. Submitting with no_audio_recorded.');
       const emptyAudioAnswer = { 
-        ...currentAnswers,
+        ...answersToSubmit, // Use potentially modified answersToSubmit
         [questionId]: 'no_audio_recorded'
       };
       onSubmit(emptyAudioAnswer);
     } else {
-      onSubmit(currentAnswers);
+      onSubmit(answersToSubmit); // Use potentially modified answersToSubmit for non-speaking
     }
   }, [isSubmitting, sectionInfo.title, questions, currentQuestionIndex, questionType, recorder.audioBlob, currentAnswers, onSubmit]);
 
@@ -455,12 +469,12 @@ export default React.memo(function ExamForm({
                 {recorder.status === 'stopped' && recorder.audioBlob && ` (Recorded: ${(recorder.audioBlob.size / 1024).toFixed(2)} KB)`}
               </p>
 
-              {recorder.audioUrl && recorder.status === 'stopped' && (
+              {/* recorder.audioUrl && recorder.status === 'stopped' && (
                 <div className="w-full mt-2">
                   <p className="text-sm text-gray-700 mb-1">Recorded Audio:</p>
                   <audio controls src={recorder.audioUrl} className="w-full" />
                 </div>
-              )}
+              )*/}
             </div>
           )}
           {isRecordingTimeUp && recorder.status !== 'recording' && (

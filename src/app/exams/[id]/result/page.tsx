@@ -124,11 +124,24 @@ export default function ExamResultPage() {
     }))
     .filter(({ data }) => (data.answers && Object.keys(data.answers).length > 0) || data.score !== undefined)
     .sort((a, b) => {
-      const indexA = sectionOrder.indexOf(a.data.type);
-      const indexB = sectionOrder.indexOf(b.data.type);
-      if (indexA === -1) return 1;
-      if (indexB === -1) return -1;
-      return indexA - indexB;
+      const typeOrder = sectionOrder; // sectionOrder を使用
+      const indexA = typeOrder.indexOf(a.data.type);
+      const indexB = typeOrder.indexOf(b.data.type);
+
+      // まず SectionType でソート
+      if (indexA !== indexB) {
+        if (indexA === -1) return 1; // typeOrder にないものは後方へ
+        if (indexB === -1) return -1; // typeOrder にないものは後方へ
+        return indexA - indexB;
+      }
+
+      // 同じ SectionType の場合、completedAt でソート (昇順)
+      // completedAt が Timestamp オブジェクトであることを想定
+      // completedAt が存在しない場合は後方に (実際には完了済みセクションには存在するはず)
+      const timeA = a.data.completedAt?.toMillis() || Number.MAX_SAFE_INTEGER;
+      const timeB = b.data.completedAt?.toMillis() || Number.MAX_SAFE_INTEGER;
+
+      return timeA - timeB;
     });
 
   // パート別スコアと総合スコアの計算
@@ -209,12 +222,12 @@ export default function ExamResultPage() {
               {/* 回答表示セクション */}
               {((typedSectionData.answers && Object.keys(typedSectionData.answers).length > 0) || typedSectionData.transcribedText || typedSectionData.revisedEssay || typedSectionData.revisedTranscribedText) && (
                 <div className="mt-4 pt-3 border-t border-gray-200">
-                  <h4 className="text-md font-semibold text-gray-600 mb-2">あなたの回答と添削結果:</h4>
+                  <h4 className="text-md font-semibold text-gray-600 mb-2">あなたの回答:</h4>
                   
                   {/* Speakingの文字起こしと添削結果 */}
                   {typedSectionData.type === 'speaking' && typedSectionData.transcribedText && (
                     <div className="mb-3 p-3 bg-gray-100 rounded-lg shadow-sm">
-                      <h5 className="text-sm font-semibold text-gray-500 mb-1">元の文字起こし:</h5>
+                      <h5 className="text-sm font-semibold text-gray-500 mb-1">あなたのスピーチ:</h5>
                       <p className="text-sm text-gray-800 whitespace-pre-wrap">{typedSectionData.transcribedText}</p>
                     </div>
                   )}
@@ -250,7 +263,10 @@ export default function ExamResultPage() {
                               {`${index + 1}: `}
                             </span>
                             <span className="ml-1 whitespace-pre-wrap">
-                              {typeof answer === 'number' ? String.fromCharCode(65 + answer) : String(answer)}
+                              {typeof answer === 'number' ? 
+                                (answer === -1 ? '未回答' : String.fromCharCode(65 + answer)) 
+                                : String(answer)
+                              }
                             </span>
                           </div>
                         )
