@@ -163,12 +163,6 @@ export default function ExamResultPage() {
       <div className="bg-white shadow-xl rounded-lg p-6 mb-8">
         <h2 className="text-2xl font-semibold mb-4 border-b border-gray-300 pb-3 text-gray-700">概要</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          <div>
-            <span className="font-medium text-gray-600">ステータス:</span> 
-            <span className={`ml-2 font-semibold ${attempt.status === 'completed' ? 'text-green-600' : 'text-yellow-600'}`}>
-              {attempt.status === 'completed' ? '完了' : attempt.status.charAt(0).toUpperCase() + attempt.status.slice(1)}
-            </span>
-          </div>
           {attempt.startedAt && (
             <div><span className="font-medium text-gray-600">開始日時:</span> {attempt.startedAt?.toDate().toLocaleString()}</div>
           )}
@@ -198,13 +192,7 @@ export default function ExamResultPage() {
           {displaySections.map(({ title: sectionTitle, data: typedSectionData }) => (
             <div key={sectionTitle} className="p-4 bg-gray-50 rounded-md shadow-sm">
               <h3 className="text-xl font-semibold text-gray-700 mb-3">{sectionTitle}</h3>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2">
-                <div>
-                    <span className="font-medium text-gray-600">ステータス:</span> 
-                    <span className={`ml-1 ${typedSectionData.status === 'completed' ? 'text-green-700' : 'text-gray-600'}`}>
-                        {typedSectionData.status === 'completed' ? '完了' : typedSectionData.status}
-                    </span>
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-3">
                 {typedSectionData.score !== undefined ? (
                   <div>
                     <span className="font-medium text-gray-600">スコア:</span> 
@@ -229,17 +217,28 @@ export default function ExamResultPage() {
                     </div>
                   )}
                   {typedSectionData.answers && Object.entries(typedSectionData.answers).length > 0 && (
-                    <dl className="space-y-2 text-sm text-gray-800">
-                      {Object.entries(typedSectionData.answers).map(([questionId, answer], index) => (
-                        <div key={questionId} className="p-2 bg-gray-100 rounded">
-                          <dt className="font-semibold text-gray-500">{index + 1}:</dt>
-                          <dd className="ml-2 mt-1 whitespace-pre-wrap">
-                            {typeof answer === 'number'
-                              ? String.fromCharCode(65 + answer) // 0=A, 1=B, 2=C, 3=D
-                              : answer}
-                          </dd>
-                        </div>
-                      ))}
+                    <dl className="space-y-1 text-sm text-gray-800">
+                      {Object.entries(typedSectionData.answers).map(([questionId, answer], index) => {
+                        const isSingleQuestionSpeakingWriting = 
+                          (typedSectionData.type === 'speaking' || typedSectionData.type === 'writing') && 
+                          Object.keys(typedSectionData.answers || {}).length === 1;
+                        return (
+                          <div key={questionId} className="p-2 bg-gray-100 rounded">
+                            <span className="font-semibold text-gray-500">
+                              {!isSingleQuestionSpeakingWriting && `${index + 1}: `}
+                            </span>
+                            <span className="ml-1 whitespace-pre-wrap">
+                              {typedSectionData.type === 'speaking' && typeof answer === 'string' && (answer.startsWith('http') || answer.startsWith('blob:')) ? (
+                                <audio controls src={answer} className="w-full max-w-xs" />
+                              ) : typeof answer === 'number' ? (
+                                String.fromCharCode(65 + answer) // 0=A, 1=B, 2=C, 3=D
+                              ) : (
+                                answer
+                              )}
+                            </span>
+                          </div>
+                        );
+                      })}
                     </dl>
                   )}
                 </div>
