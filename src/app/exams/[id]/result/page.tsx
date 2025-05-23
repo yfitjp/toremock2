@@ -212,7 +212,6 @@ export default function ExamResultPage() {
                   <h4 className="text-md font-semibold text-gray-600 mb-2">あなたの回答:</h4>
                   {typedSectionData.transcribedText && (
                     <div className="mb-3 p-2 bg-gray-100 rounded">
-                      <h5 className="text-sm font-semibold text-gray-500 mb-1">音声認識結果:</h5>
                       <p className="text-sm text-gray-800 whitespace-pre-wrap">{typedSectionData.transcribedText}</p>
                     </div>
                   )}
