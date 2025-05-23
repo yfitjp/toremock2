@@ -46,7 +46,10 @@ export const metadata: Metadata = {
     shortcut: '/favicon-16x16.png', // /public/favicon-16x16.png
     apple: '/apple-touch-icon.png', // /public/apple-touch-icon.png
   },
-  // 他のメタデータ (必要であれば追加)
+  // Google Search Consoleの設定
+  other: {
+    googleSiteVerification: "EDRe6uY-RLnEEWm6nU-tkniIUg-JK2wGVR7VwtZy74s"
+  },
 };
 
 export default function RootLayout({
