@@ -25,6 +25,7 @@ const useRecorder = (): UseRecorderReturnType => {
 
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const audioChunksRef = useRef<Blob[]>([]);
+  const mimeTypeRef = useRef<string>('audio/webm');
 
   const getMicrophonePermission = useCallback(async () => {
     console.log('[useRecorder] getMicrophonePermission called. Current status:', status);
@@ -56,6 +57,31 @@ const useRecorder = (): UseRecorderReturnType => {
         return;
     }
 
+    // Determine supported MIME type
+    const MimeTypes = [
+      'audio/webm;codecs=opus', // Opus in WebM (High quality, good compression)
+      'audio/webm',
+      'audio/mp4', // For Safari (results in m4a)
+      'audio/ogg;codecs=opus' // Opus in OGG
+    ];
+    
+    let supportedMimeType = '';
+    for (const type of MimeTypes) {
+      if (MediaRecorder.isTypeSupported(type)) {
+        supportedMimeType = type;
+        break;
+      }
+    }
+
+    if (!supportedMimeType) {
+      console.error('[useRecorder] No supported MIME type found for MediaRecorder.');
+      setErrorMessage('No supported audio recording format found for your browser.');
+      setStatus('error');
+      return;
+    }
+    mimeTypeRef.current = supportedMimeType;
+    console.log(`[useRecorder] Using MIME type: ${supportedMimeType}`);
+
     console.log('[useRecorder] Setting status to "recording".');
     setStatus('recording');
     setAudioBlob(null);
@@ -66,7 +92,7 @@ const useRecorder = (): UseRecorderReturnType => {
 
     try {
         console.log('[useRecorder] Creating MediaRecorder instance.');
-        mediaRecorderRef.current = new MediaRecorder(stream);
+        mediaRecorderRef.current = new MediaRecorder(stream, { mimeType: mimeTypeRef.current });
 
         mediaRecorderRef.current.ondataavailable = (event) => {
             if (event.data.size > 0) {
@@ -77,7 +103,7 @@ const useRecorder = (): UseRecorderReturnType => {
 
         mediaRecorderRef.current.onstop = () => {
             console.log('[useRecorder] onstop called. Number of chunks:', audioChunksRef.current.length);
-            const completeBlob = new Blob(audioChunksRef.current, { type: 'audio/webm' });
+            const completeBlob = new Blob(audioChunksRef.current, { type: mimeTypeRef.current });
             setAudioBlob(completeBlob);
             const url = URL.createObjectURL(completeBlob);
             setAudioUrl(url);
