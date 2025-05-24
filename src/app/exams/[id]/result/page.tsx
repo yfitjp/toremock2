@@ -202,11 +202,11 @@ export default function ExamResultPage() {
       </div>
 
       <div className="bg-white shadow-xl rounded-lg p-6">
-        <h2 className="text-2xl font-semibold mb-6 border-b border-gray-300 pb-3 text-indigo-700">セクション詳細</h2>
+        <h2 className="text-2xl font-semibold mb-6 border-b border-gray-300 pb-3 text-blue-700">セクション詳細</h2>
         <div className="space-y-8">
           {displaySections.map(({ title: sectionTitle, data: typedSectionData }) => (
             <div key={sectionTitle} className="p-5 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-              <h3 className="text-xl font-semibold text-indigo-600 mb-3">{sectionTitle}</h3>
+              <h3 className="text-xl font-semibold text-blue-600 mb-3">{sectionTitle}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-3">
                 {typedSectionData.score !== undefined ? (
                   <div>
@@ -322,7 +322,7 @@ export default function ExamResultPage() {
       </div>
 
       <div className="mt-12 text-center">
-          <Link href="/exams" className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out">
+          <Link href="/exams" className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out">
             &larr; 試験一覧に戻る
           </Link>
       </div>
