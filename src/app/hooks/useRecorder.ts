@@ -120,8 +120,8 @@ const useRecorder = (): UseRecorderReturnType => {
         };
         
         console.log('[useRecorder] Calling mediaRecorder.start().');
-        mediaRecorderRef.current.start();
-        console.log('[useRecorder] mediaRecorder.start() called successfully.');
+        mediaRecorderRef.current.start(1000);
+        console.log('[useRecorder] mediaRecorder.start(1000) called successfully.');
 
     } catch (err) {
         console.error("[useRecorder] Error starting recording:", err);
