@@ -12,11 +12,6 @@ import ComparisonTable from '@/app/components/ComparisonTable';
 import { testimonials, Testimonial } from './lib/testimonial-data';
 import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'ToreMock - オンライン英語模試 | TOEIC®,TOEFL®の模試が無料',
-  description: 'ToreMockは、TOEIC®、TOEFL®、英検®に対応したオンライン英語模試プラットフォームです。無料模試で実力を試し、AI分析と豊富な問題で英語学習を効率化しましょう。',
-};
-
 export default function Home() {
   const { user } = useAuth();
   const [scrollY, setScrollY] = useState(0);

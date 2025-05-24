@@ -173,38 +173,40 @@ export default function ExamResultPage() {
       <h1 className="text-3xl font-bold mb-2 text-gray-800">{examTitleToDisplay}</h1>
       <p className="text-lg text-gray-600 mb-6">{attempt.completedAt?.toDate().toLocaleDateString()} の試行結果</p>
       
-      <div className="bg-white shadow-xl rounded-lg p-6 mb-8">
-        <h2 className="text-2xl font-semibold mb-4 border-b border-gray-300 pb-3 text-gray-700">概要</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-4">
-          {attempt.startedAt && (
-            <div><span className="font-medium text-gray-600">開始日時:</span> {attempt.startedAt?.toDate().toLocaleString()}</div>
-          )}
-          {attempt.completedAt && (
-            <div><span className="font-medium text-gray-600">完了日時:</span> {attempt.completedAt?.toDate().toLocaleString()}</div>
-          )}
-          {/* 新しいスコア表示 */}
-          <div className="md:col-span-2 mt-4 pt-4 border-t border-gray-200">
-            <p className="text-xl font-semibold text-gray-700 mb-2">
-              あなたのスコア： <span className="text-3xl font-bold text-blue-600">{totalCalculatedScore}</span>/120
-            </p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-md">
-              {sectionOrder.map(partType => (
-                <div key={partType}>
-                  <span className="capitalize">{partType}</span>: 
-                  <span className="font-semibold ml-1">{partScores[partType] !== undefined ? partScores[partType] : 'N/A'}/30</span>
-                </div>
-              ))}
-            </div>
-          </div>
+      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white shadow-xl rounded-xl p-6 mb-8">
+        <h2 className="text-2xl font-semibold mb-4 pb-2 border-b border-blue-400">スコア概要</h2>
+        <div className="text-center mb-6">
+          <p className="text-lg font-medium opacity-90">総合スコア</p>
+          <p className="text-6xl font-bold my-2">
+            {totalCalculatedScore}
+            <span className="text-3xl opacity-80">/120</span>
+          </p>
         </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+          {sectionOrder.map(partType => (
+            <div key={partType} className="bg-white bg-opacity-20 backdrop-blur-sm p-3 rounded-lg shadow">
+              <p className="text-sm font-medium capitalize opacity-90">{partType}</p>
+              <p className="text-2xl font-bold">
+                {partScores[partType] !== undefined ? partScores[partType] : 'N/A'}
+                <span className="text-sm opacity-80">/30</span>
+              </p>
+            </div>
+          ))}
+        </div>
+        {attempt.startedAt && attempt.completedAt && (
+          <div className="mt-6 pt-4 border-t border-blue-400 border-opacity-50 text-xs opacity-80 grid grid-cols-1 sm:grid-cols-2 gap-x-4">
+            <p><span className="font-semibold">開始:</span> {attempt.startedAt?.toDate().toLocaleString()}</p>
+            <p><span className="font-semibold">完了:</span> {attempt.completedAt?.toDate().toLocaleString()}</p>
+          </div>
+        )}
       </div>
 
       <div className="bg-white shadow-xl rounded-lg p-6">
-        <h2 className="text-2xl font-semibold mb-6 border-b border-gray-300 pb-3 text-gray-700">セクション詳細</h2>
-        <div className="space-y-6">
+        <h2 className="text-2xl font-semibold mb-6 border-b border-gray-300 pb-3 text-indigo-700">セクション詳細</h2>
+        <div className="space-y-8">
           {displaySections.map(({ title: sectionTitle, data: typedSectionData }) => (
-            <div key={sectionTitle} className="p-4 bg-gray-50 rounded-md shadow-sm">
-              <h3 className="text-xl font-semibold text-gray-700 mb-3">{sectionTitle}</h3>
+            <div key={sectionTitle} className="p-5 bg-gray-50 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <h3 className="text-xl font-semibold text-indigo-600 mb-3">{sectionTitle}</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2 mb-3">
                 {typedSectionData.score !== undefined ? (
                   <div>
@@ -319,8 +321,8 @@ export default function ExamResultPage() {
         </div>
       </div>
 
-      <div className="mt-10 text-center">
-          <Link href="/exams" className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-md transition-colors duration-150">
+      <div className="mt-12 text-center">
+          <Link href="/exams" className="px-8 py-3 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-200 ease-in-out">
             &larr; 試験一覧に戻る
           </Link>
       </div>
