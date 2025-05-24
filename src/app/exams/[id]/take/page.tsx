@@ -186,7 +186,25 @@ export default function ExamPage({ params }: { params: { id: string } }) {
     if (sectionType === 'speaking' && audioBlobToUpload && audioAnswerKey && user && attemptData?.id && questionsForCurrentForm.find(q => q.id === audioAnswerKey)) {
       const questionId = audioAnswerKey;
       const storage = getStorage(undefined, "gs://toremock.firebasestorage.app");
-      const filePath = `speaking_answers/${user.uid}/${attemptData.id}/${questionId}.webm`;
+      
+      // MIMEタイプに基づいて拡張子を決定
+      let fileExtension = '.webm'; // デフォルト
+      const mimeType = audioBlobToUpload.type;
+      if (mimeType) {
+        if (mimeType.includes('mp4')) { // audio/mp4
+          fileExtension = '.mp4'; 
+        } else if (mimeType.includes('mpeg')) { // audio/mpeg (MP3)
+          fileExtension = '.mp3';
+        } else if (mimeType.includes('webm')) { // audio/webm
+          fileExtension = '.webm';
+        } else if (mimeType.includes('ogg')) { // audio/ogg
+          fileExtension = '.ogg';
+        } else if (mimeType.includes('wav')) { // audio/wav
+          fileExtension = '.wav';
+        } // 必要に応じて他のサポート形式を追加
+      }
+      
+      const filePath = `speaking_answers/${user.uid}/${attemptData.id}/${questionId}${fileExtension}`;
       const storageRef = ref(storage, filePath);
 
       try {
