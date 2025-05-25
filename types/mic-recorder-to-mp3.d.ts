@@ -1,4 +1,4 @@
-declare module 'mic-recorder-to-mp3' {
+declare module 'mic-recorder-to-mp3-fixed' {
   interface MicRecorderOptions {
     bitRate?: number;
     encoder?: string; // 'mp3' or 'wav'

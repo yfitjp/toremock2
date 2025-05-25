@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useRef, useCallback, useEffect } from 'react';
-import MicRecorder from 'mic-recorder-to-mp3';
+import MicRecorder from 'mic-recorder-to-mp3-fixed';
 
 export type RecorderStatus = 'idle' | 'permission-requested' | 'permission-granted' | 'permission-denied' | 'recording' | 'stopped' | 'error';
 
