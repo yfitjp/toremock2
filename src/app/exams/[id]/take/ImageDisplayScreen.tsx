@@ -1,18 +1,60 @@
-import React from 'react';
-import Image from 'next/image'; // Next.js の Image コンポーネントを使用する場合
+import React, { useState, useEffect } from 'react';
+// Next.js の Image コンポーネントを使用する場合。今回は通常のimgを使用するのでコメントアウトも検討
+// import Image from 'next/image'; 
 
 interface ImageDisplayScreenProps {
   imageUrl: string;
   onNext: () => void;
   title?: string;
   instructions?: string; // オプションで指示文も表示できるようにする
+  duration?: number; // 秒単位の時間制限
 }
 
-const ImageDisplayScreen: React.FC<ImageDisplayScreenProps> = ({ imageUrl, onNext, title, instructions }) => {
+const ImageDisplayScreen: React.FC<ImageDisplayScreenProps> = ({ imageUrl, onNext, title, instructions, duration }) => {
+  const [timeLeft, setTimeLeft] = useState(duration || 0);
+
+  useEffect(() => {
+    if (duration && duration > 0) {
+      setTimeLeft(duration);
+      const timer = setInterval(() => {
+        setTimeLeft((prevTime) => {
+          if (prevTime <= 1) {
+            clearInterval(timer);
+            onNext(); // 時間切れで自動遷移
+            return 0;
+          }
+          return prevTime - 1;
+        });
+      }, 1000);
+
+      return () => clearInterval(timer); // アンマウント時にタイマーをクリア
+    } else {
+        // duration がない場合は、timeLeft を非常に大きな値にするか、
+        // もしくはタイマー関連の表示をしないなどのハンドリングも考えられる。
+        // ここでは Next ボタンのみに依存するため、0のままでも問題ないが、
+        // 視覚的に「時間無制限」を示すために null や undefined を使う設計も良い。
+        // 今回はpropsでdurationが渡されない場合はタイマー表示なしとするため、初期値0でOK
+    }
+  }, [duration, onNext]);
+
+  const formatTime = (totalSeconds: number) => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+  };
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-4">
       <div className="bg-white shadow-xl rounded-lg p-6 md:p-10 max-w-3xl w-full text-center">
-        {title && <h1 className="text-2xl md:text-3xl font-bold mb-6 text-gray-800">{title}</h1>}
+        <div className="flex justify-between items-center mb-6">
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800 flex-grow text-center">{title || 'Display'}</h1>
+            {duration && duration > 0 && (
+                <div className="text-lg font-medium text-red-500">
+                    Time Left: {formatTime(timeLeft)}
+                </div>
+            )}
+        </div>
+
         {instructions && (
           <div 
             className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl mx-auto mb-6 text-left" 
