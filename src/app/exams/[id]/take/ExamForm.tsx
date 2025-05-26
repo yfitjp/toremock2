@@ -309,7 +309,7 @@ export default React.memo(function ExamForm({
 
       {questionType !== 'speaking' && currentQuestionData && (
         <div className="mb-8">
-          <h2 className="text-xl font-semibold mb-4 md:hidden">{questionText}</h2>
+          <h2 className="text-xl font-semibold mb-4 md:hidden whitespace-pre-line">{questionText}</h2>
           
           <div className="flex flex-col md:flex-row md:space-x-6">
             {currentQuestionData.imageUrl && (
@@ -329,7 +329,7 @@ export default React.memo(function ExamForm({
             )}
             
             <div className="md:w-2/5">
-              <h2 className="text-xl font-semibold mb-4 hidden md:block">{questionText}</h2>
+              <h2 className="text-xl font-semibold mb-4 hidden md:block whitespace-pre-line">{questionText}</h2>
               
               {currentQuestionData.audioUrl && (
                 <div className="mb-6">
@@ -410,7 +410,7 @@ export default React.memo(function ExamForm({
 
       {questionType === 'speaking' && (
         <div className="space-y-6 p-4 border border-gray-200 rounded-lg">
-          <h3 className="text-lg font-semibold text-center">{currentQuestionData?.content || sectionInfo.instructions || "Speaking Task"}</h3>
+          <h3 className="text-lg font-semibold text-center whitespace-pre-line">{currentQuestionData?.content || sectionInfo.instructions || "Speaking Task"}</h3>
           
           {recorder.errorMessage && (
             <div className="p-3 bg-red-100 border border-red-400 text-red-700 rounded-md">
