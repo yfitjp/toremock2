@@ -676,6 +676,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           title={currentSection.title}
           imageUrl={currentSection.imageUrl}
           onNext={handleNext}
+          duration={currentSection.duration}
     />;
   } else if (sectionRenderType === 'speaking' && !hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl) {
     // console.log('%c[ExamPage] Render Logic: Matched speaking audio display', 'color: green;');
@@ -711,6 +712,7 @@ export default function ExamPage({ params }: { params: { id: string } }) {
               title={currentSection.title}
               imageUrl={currentSection.imageUrl}
               onNext={handleNext}
+              duration={currentSection.duration}
       />;
     } else if (!hasQuestions && currentSection.isAudioPlaybackOnly && currentSection.audioUrl) {
       // console.log('%c[ExamPage] Render Logic: R/L/W AudioDisplay', 'color: green;');
