@@ -211,6 +211,24 @@ export default React.memo(function ExamForm({
     }
   }, [recorder.status, recorder.audioBlob, recorder.errorMessage, currentQuestionIndex, questions]);
 
+  // Automatic permission request and recording for speaking questions
+  useEffect(() => {
+    if (questionType === 'speaking' && sectionInfo.type === 'speaking') { // Ensure it's the actual speaking task section
+      console.log('[ExamForm Speaking Auto-Flow] useEffect triggered. Recorder status:', recorder.status);
+      if (recorder.status === 'idle' || recorder.status === 'permission-denied') {
+        console.log('[ExamForm Speaking Auto-Flow] Requesting microphone permission automatically.');
+        recorder.getMicrophonePermission(); 
+      } else if (recorder.status === 'permission-granted' && !isSubmitting && timeLeft > 0) {
+        console.log('[ExamForm Speaking Auto-Flow] Permission granted, starting recording automatically.');
+        recorder.startRecording();
+        setIsRecordingTimeUp(false); // Reset time up flag if any
+      }
+    }
+    // Dependencies: recorder.status ensures this runs when permission status changes.
+    // timeLeft > 0 prevents starting recording if the timer has already run out (e.g., on re-render after time up)
+    // sectionInfo.type and questionType ensure this only runs for the intended speaking sections.
+  }, [recorder.status, questionType, sectionInfo.type, isSubmitting, timeLeft, recorder.getMicrophonePermission, recorder.startRecording]);
+
   if (questionType !== 'speaking' && !currentQuestionData) {
     return <div>Loading question...</div>;
   }
@@ -225,28 +243,6 @@ export default React.memo(function ExamForm({
   }
   
   const questionText = currentQuestionData?.content || '';
-
-  const handleRequestMicPermission = async () => {
-    console.log('[ExamForm] handleRequestMicPermission CALLED. Current recorder status:', recorder.status);
-    await recorder.getMicrophonePermission();
-    console.log('[ExamForm] Microphone permission request finished. Recorder status:', recorder.status, 'Error:', recorder.errorMessage);
-  };
-
-  const handleStartRecording = () => {
-    console.log('[ExamForm] handleStartRecording CALLED. Current recorder status:', recorder.status);
-    if (recorder.status === 'permission-granted' || recorder.status === 'stopped' || recorder.status === 'idle') { // idleも追加
-      console.log('[ExamForm] Attempting to start recording.');
-      recorder.startRecording();
-      setIsRecordingTimeUp(false);
-      // スピーキングセクションのタイマーをリセットして開始
-      // if (sectionInfo.duration) { // このブロックをコメントアウト
-      //     console.log('[ExamForm] Resetting timer for speaking recording.');
-      //     setTimeLeft(sectionInfo.duration); 
-      // }
-    } else {
-      console.warn('[ExamForm] Cannot start recording. Status:', recorder.status, 'Error:', recorder.errorMessage);
-    }
-  };
 
   const handleStopRecording = () => {
     console.log('[ExamForm] handleStopRecording called. Current recorder status:', recorder.status);
@@ -428,13 +424,13 @@ export default React.memo(function ExamForm({
           })()}
           
           {(recorder.status === 'idle' || recorder.status === 'permission-requested') && (
-            <button
-              onClick={handleRequestMicPermission}
-              disabled={recorder.status === 'permission-requested'}
-              className="w-full px-4 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 disabled:bg-gray-400 transition-colors"
-            >
-              {recorder.status === 'permission-requested' ? 'Requesting Mic...' : 'Allow Microphone Access'}
-            </button>
+            <div className="text-center p-4">
+              <p className="text-lg font-semibold">Waiting for microphone permission...</p>
+              <p className="text-sm text-gray-600">Your browser should prompt you for microphone access.</p>
+              {recorder.status === 'permission-requested' && (
+                <div className="mt-2 text-blue-600">Requesting microphone access...</div>
+              )}
+            </div>
           )}
 
           {recorder.status === 'permission-denied' && (
@@ -455,13 +451,14 @@ export default React.memo(function ExamForm({
                   Stop Recording
                 </button>
               ) : (
-                <button
-                  onClick={handleStartRecording}
-                  disabled={timeLeft === 0 || isSubmitting}
-                  className="w-full px-4 py-3 bg-green-600 text-white font-semibold rounded-lg hover:bg-green-700 disabled:bg-gray-400 transition-colors"
-                >
-                  Start Recording
-                </button>
+                <div className="text-center p-4">
+                  {timeLeft > 0 && (
+                     <p className="text-lg font-semibold text-gray-700">Preparing to record...</p>
+                  )}
+                  {timeLeft === 0 && (
+                     <p className="text-lg font-semibold text-orange-600">Time is up. Recording cannot start.</p>
+                  )}
+                </div>
               )}
 
               <p className="text-sm text-gray-600">
