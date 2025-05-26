@@ -48,6 +48,8 @@ export interface Question {
   content?: string;      // 問題文
   options?: string[];
   correctAnswer?: number | string; // number: 選択肢index, string: テキスト解答例など
+  modelAnswer?: string; // スピーキング/ライティング問題の模範解答 (新規追加)
+  questionContext?: string; // 問題の背景情報 (文章や講義の内容など) (新規追加)
   imageUrl?: string;
   audioUrl?: string;
   // passageId?: string; // 関連パッセージID

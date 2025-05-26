@@ -388,7 +388,7 @@ export default React.memo(function ExamForm({
               {questionType === 'writing' && (
                 <div className="space-y-3">
                   <div className="p-3 bg-gray-50 rounded-lg mb-3">
-                    <p className="text-gray-700">Please write an essay of 200-300 words on the following topic.</p>
+                    <p className="text-gray-700">Please write an essay following the instructions above.</p>
                   </div>
                   <textarea
                     value={currentAnswers[currentQuestionData.id] as string || ''}

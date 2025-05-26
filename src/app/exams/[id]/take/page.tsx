@@ -245,6 +245,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       try {
         const currentQuestion = questionsForCurrentForm.find(q => q.id === audioAnswerKey);
         const speakingTaskPrompt = currentQuestion?.content;
+        const modelAnswerForSpeaking = currentQuestion?.modelAnswer;
+        const questionContextForSpeaking = currentQuestion?.questionContext;
 
         if (!speakingTaskPrompt) {
             console.warn(`[Page] Speaking task prompt not found for question ID: ${audioAnswerKey}. Proceeding with general evaluation.`);
@@ -257,6 +259,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           body: JSON.stringify({
             transcribedText: finalSectionData.transcribedText,
             speakingPrompt: speakingTaskPrompt || '', 
+            modelAnswer: modelAnswerForSpeaking || '',
+            questionContext: questionContextForSpeaking || '',
           }),
         });
 
@@ -288,6 +292,8 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       // finalSectionData.answers から解答を取得しようとします
       const userAnswer = finalSectionData.answers?.[writingQuestion.id] as string; 
       const prompt = writingQuestion.content;
+      const modelAnswerForWriting = writingQuestion.modelAnswer;
+      const questionContextForWriting = writingQuestion.questionContext;
 
       // === デバッグログ追加 START ===
       console.log(`[Page DEBUG] Attempting to grade writing for section: ${sectionTitle}, Question ID: ${writingQuestion?.id}`);
@@ -303,7 +309,12 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           const response = await fetch('/api/grade-writing', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ essay: userAnswer, prompt }),
+            body: JSON.stringify({ 
+              essay: userAnswer, 
+              prompt, 
+              modelAnswer: modelAnswerForWriting || '',
+              questionContext: questionContextForWriting || ''
+            }),
           });
           if (!response.ok) {
             const errorData = await response.json().catch(() => ({error: "Failed to parse error response from grade-writing API"}));

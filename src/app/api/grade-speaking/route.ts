@@ -12,17 +12,25 @@ export async function POST(request: Request) {
     const body = await request.json();
     const transcribedText = body.transcribedText as string | undefined;
     const speakingPrompt = body.speakingPrompt as string | undefined; // 問題の指示文
+    const modelAnswer = body.modelAnswer as string | undefined; // modelAnswer を追加
+    const questionContext = body.questionContext as string | undefined; // questionContext を追加
 
     if (!transcribedText) {
       return NextResponse.json({ error: 'Transcribed text is required' }, { status: 400 });
     }
+    // modelAnswer のログ追加 (任意)
+    console.log(`[Grade Speaking API DEBUG] Extracted modelAnswer (type: ${typeof modelAnswer}):`, modelAnswer);
+    // questionContext のログ追加 (任意)
+    console.log(`[Grade Speaking API DEBUG] Extracted questionContext (type: ${typeof questionContext}):`, questionContext);
 
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       {
         role: 'system',
         content: `You are an expert English speaking evaluator for TOEFL-style exams.
-                  Please evaluate the following transcribed speech based on the provided prompt (if any).
-                  Consider aspects like fluency, pronunciation (as inferable from text), vocabulary, grammar, and task fulfillment.
+                  Please evaluate the following transcribed speech based on the provided prompt, model answer (if any), and question context (if any).
+                  The question context provides background information like a lecture transcript or a reading passage that the speaking task might be based on.
+                  If a model answer is provided, use it as a benchmark for a 100% score and evaluate the user's speech in comparison.
+                  Consider aspects like fluency, pronunciation (as inferable from text), vocabulary, grammar, task fulfillment, and accurate use of information from the question context.
                   Provide a score from 0 to 100, and constructive feedback.
                   Your response MUST be in strict JSON format, like this example:
                   {
@@ -33,12 +41,18 @@ export async function POST(request: Request) {
                     "revised_transcription": "<string with the revised version of the transcribed speech, keeping original meaning but improving grammar, vocabulary, and natural phrasing.>"
                   }
                   Ensure the output is a single, valid JSON object. Do not include any explanatory text before or after the JSON object.
-                  If no specific prompt is provided, evaluate general speaking quality based on the transcription.
-                  Remember to output only JSON.`,
+                  If no specific prompt is provided, evaluate general speaking quality based on the transcription, considering the context if available.
+                  If a model answer is provided, it should be the primary reference for scoring, but the context should inform the understanding of the task.
+                  Remember to output only JSON.`, 
       },
       {
         role: 'user',
-        content: `Speaking Task Prompt: ${speakingPrompt || 'N/A (Evaluate general speaking quality based on transcription)'}\n\nTranscribed Speech to evaluate:\n${transcribedText}`,
+        content: `Speaking Task Prompt: ${speakingPrompt || 'N/A (Evaluate general speaking quality based on transcription)'}
+Model Answer: ${modelAnswer || 'N/A'}
+Question Context: ${questionContext || 'N/A'}
+
+Transcribed Speech to evaluate:
+${transcribedText}`,
       },
     ];
 
@@ -49,7 +63,7 @@ export async function POST(request: Request) {
       messages: messages,
       response_format: { type: "json_object" },
       temperature: 0.3, 
-      max_tokens: 1200, 
+      max_tokens: 3000, 
       stream: false,
     });
 

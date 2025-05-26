@@ -34,9 +34,13 @@ export async function POST(request: Request) {
     // parsedBodyForLog を使って essay と prompt を取得する
     const essay = parsedBodyForLog.essay as string | undefined;
     const prompt = parsedBodyForLog.prompt as string | undefined;
+    const modelAnswer = parsedBodyForLog.modelAnswer as string | undefined;
+    const questionContext = parsedBodyForLog.questionContext as string | undefined;
 
     console.log(`[Grade Writing API DEBUG] Extracted essay (type: ${typeof essay}, length: ${essay?.length}):`, essay);
     console.log(`[Grade Writing API DEBUG] Extracted prompt (type: ${typeof prompt}):`, prompt);
+    console.log(`[Grade Writing API DEBUG] Extracted modelAnswer (type: ${typeof modelAnswer}):`, modelAnswer);
+    console.log(`[Grade Writing API DEBUG] Extracted questionContext (type: ${typeof questionContext}):`, questionContext);
 
     if (!essay || essay.trim().length === 0) { // essayがundefinedか空文字列かをチェック
       console.error('[Grade Writing API] Essay text is missing or empty. Parsed body was:', JSON.stringify(parsedBodyForLog, null, 2));
@@ -48,7 +52,9 @@ export async function POST(request: Request) {
       {
         role: 'system',
         content: `You are an expert English writing evaluator for TOEFL-style exams.
-                  Please evaluate the following essay based on the provided prompt (if any).
+                  Please evaluate the following essay based on the provided prompt, model answer (if any), and question context (if any).
+                  The question context provides background information like a lecture transcript or a reading passage.
+                  If a model answer is provided, use it as a benchmark for a 100% score and evaluate the user's essay in comparison.
                   Provide a score from 0 to 100, and constructive feedback.
                   Your response MUST be in strict JSON format, like this example:
                   {
@@ -59,13 +65,19 @@ export async function POST(request: Request) {
                     "revised_essay": "<string with the revised version of the essay, keeping original meaning but improving grammar, vocabulary, and flow.>"
                   }
                   Ensure the output is a single, valid JSON object. Do not include any explanatory text before or after the JSON object.
-                  Focus on clarity, organization, grammar, vocabulary, and task fulfillment for the feedback and score.
-                  If no specific prompt is provided for the essay, evaluate its general writing quality.
-                  Remember to output only JSON.`, // "json" を含める
+                  Focus on clarity, organization, grammar, vocabulary, task fulfillment, and accurate use of information from the question context for the feedback and score.
+                  If no specific prompt is provided for the essay, evaluate its general writing quality, considering the context if available.
+                  If a model answer is provided, it should be the primary reference for scoring, but the context should inform the understanding of the task.
+                  Remember to output only JSON.`,
       },
       {
         role: 'user',
-        content: `Essay Prompt: ${prompt || 'N/A (Evaluate general writing quality)'}\n\nEssay to evaluate:\n${essay}`,
+        content: `Essay Prompt: ${prompt || 'N/A (Evaluate general writing quality)'}
+Model Answer: ${modelAnswer || 'N/A'}
+Question Context: ${questionContext || 'N/A'}
+
+Essay to evaluate:
+${essay}`,
       },
     ];
 
@@ -76,7 +88,7 @@ export async function POST(request: Request) {
       messages: messages,
       response_format: { type: "json_object" }, // JSONモードを有効化
       temperature: 0.3, // 採点の一貫性を高めるため低めに設定
-      max_tokens: 1200,  // 応答に必要な十分なトークン数を確保 (適宜調整)
+      max_tokens: 3000,  // 応答に必要な十分なトークン数を確保 (適宜調整)
       stream: false,
     });
 
