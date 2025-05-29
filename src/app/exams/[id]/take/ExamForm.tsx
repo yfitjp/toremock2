@@ -291,7 +291,7 @@ export default React.memo(function ExamForm({
           }
         </div>
         {questionType !== 'speaking' && questions.length > 0 && (
-          <div className="flex space-x-2">
+          <div className="hidden sm:flex space-x-2">
             {questions.map((_, index) => (
               <div
                 key={`progress-${index}`}
