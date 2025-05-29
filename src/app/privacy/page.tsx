@@ -76,7 +76,7 @@ export default function PrivacyPolicyPage() {
               </p>
               <div className="mt-2 text-gray-900">
                 <p>ToreMock カスタマーサポート</p>
-                <p>メール：contact.yfit@gmail.com</p>
+                <p>メール：support@toremock.com</p>
               </div>
             </section>
 

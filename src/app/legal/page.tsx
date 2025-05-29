@@ -30,7 +30,7 @@ export default function LegalPage() {
             <section>
               <h2 className="text-xl font-bold text-gray-900 mb-4">連絡先</h2>
               <p className="text-gray-900">
-                メールアドレス：contact.yfit@gmail.com<br />
+                メールアドレス：support@toremock.com<br />
                 受付時間：平日 8:00-20:00
               </p>
             </section>
