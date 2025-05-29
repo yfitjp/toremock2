@@ -88,7 +88,7 @@ export default function PurchaseSuccessPage() {
               className="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-white"
             >
               <svg
-                className="h-8 w-8 text-green-600"
+                className="h-8 w-8 text-blue-600"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -124,7 +124,7 @@ export default function PurchaseSuccessPage() {
                   whileTap={{ scale: 0.98 }}
                 >
                   <Link
-                    href={`/exams/${examId}/take`}
+                    href={`/exams/${examId}/`}
                     className="w-full flex justify-center py-3 px-4 border border-transparent rounded-md shadow-md text-base font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200"
                   >
                     <span>今すぐ模試を受験する</span>
