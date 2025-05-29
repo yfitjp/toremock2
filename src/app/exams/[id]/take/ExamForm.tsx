@@ -296,7 +296,7 @@ export default React.memo(function ExamForm({
               <div
                 key={`progress-${index}`}
                 className={`w-3 h-3 rounded-full ${
-                  index === currentQuestionIndex ? 'bg-green-500' : 'bg-gray-300'
+                  index === currentQuestionIndex ? 'bg-blue-500' : 'bg-gray-300'
                 }`}
               ></div>
             ))}
