@@ -8,7 +8,7 @@ import PurchaseHistory from '@/app/components/PurchaseHistory';
 import SubscriptionStatus from '@/app/components/SubscriptionStatus';
 import SubscriptionManagement from '@/app/components/SubscriptionManagement';
 import SubscriptionDebugTools from '@/app/components/SubscriptionDebugTools';
-import { User, Bell, Lock, CreditCard, HelpCircle, LogOut, Settings, Heart, ClipboardList, ShoppingCart } from 'lucide-react';
+import { User, Bell, Lock, CreditCard, HelpCircle, LogOut, Settings, ClipboardList, ShoppingCart } from 'lucide-react';
 import Link from 'next/link';
 import { logoutUser } from '@/app/lib/auth-firebase';
 import LoadingSpinner from '../components/LoadingSpinner';
@@ -22,7 +22,7 @@ type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' 
 export default function MyPage() {
   const router = useRouter();
   const { user, loading } = useAuth();
-  const [activeSection, setActiveSection] = useState('account');
+  const [activeSection, setActiveSection] = useState('history');
   const [activeSettingSection, setActiveSettingSection] = useState<SettingSection>('profile');
   const [examHistory, setExamHistory] = useState<ExamAttempt[]>([]);
   const [historyLoading, setHistoryLoading] = useState(true);
@@ -202,35 +202,6 @@ export default function MyPage() {
             </div>
           </motion.section>
         );
-      case 'favorites':
-        return (
-          <motion.section
-            key="favorites"
-            initial={{ opacity: 0, x: 10 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white shadow-lg rounded-xl p-6 border border-gray-100"
-          >
-            <h2 className="text-xl font-semibold mb-4 border-b pb-2 text-gray-800 flex items-center">
-              <Heart className="mr-2 h-5 w-5 text-blue-600" />
-              お気に入り模試
-            </h2>
-            <div className="space-y-3">
-              {dummyFavoriteExams.length > 0 ? (
-                dummyFavoriteExams.map(exam => (
-                  <div key={exam.id} className="flex items-center justify-between p-2 rounded hover:bg-gray-50">
-                    <span className="text-sm text-gray-700 truncate pr-2">{exam.name}</span>
-                    <Link href={exam.link} className="text-sm font-medium text-blue-600 hover:text-blue-800 whitespace-nowrap">
-                      模試を見る
-                    </Link>
-                  </div>
-                ))
-              ) : (
-                <p className="text-sm text-gray-500">お気に入りの模試はありません。</p>
-              )}
-            </div>
-          </motion.section>
-        );
       case 'history':
         return (
           <motion.section
@@ -304,12 +275,6 @@ export default function MyPage() {
     }
   };
 
-
-  const dummyFavoriteExams = [
-    { id: 1, name: "TOEIC® L&R TEST 模試 Vol.4", link: "/exams/toeic/vol4" },
-    { id: 2, name: "英検®1級 模試パック 第1回", link: "/exams/eiken/1-1" },
-  ];
-
   // 設定項目の定義
   const settingItems: { name: SettingSection; icon: JSX.Element; label: string }[] = [
     { name: 'profile', icon: <User size={20} />, label: 'プロフィール' },
@@ -324,7 +289,6 @@ export default function MyPage() {
   const mainNavItems: { name: string; icon: JSX.Element; mobileIcon: JSX.Element; label: string }[] = [
     { name: 'history', icon: <ClipboardList className="mr-3 h-5 w-5" />, mobileIcon: <ClipboardList size={24} />, label: '受験履歴' },
     { name: 'purchase', icon: <ShoppingCart className="mr-3 h-5 w-5" />, mobileIcon: <ShoppingCart size={24} />, label: '購入履歴' },
-    { name: 'favorites', icon: <Heart className="mr-3 h-5 w-5" />, mobileIcon: <Heart size={24} />, label: 'お気に入り' },
     { name: 'account', icon: <User className="mr-3 h-5 w-5" />, mobileIcon: <User size={24} />, label: 'アカウント情報' },
     { name: 'settings', icon: <Settings className="mr-3 h-5 w-5" />, mobileIcon: <Settings size={24} />, label: '設定' },
   ];
