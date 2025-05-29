@@ -123,22 +123,44 @@ export async function POST(req: Request) {
 
       case 'checkout.session.completed': {
         const session = event.data.object as Stripe.Checkout.Session;
-        const { userId, examId } = session.metadata!;
+        const metadata = session.metadata;
 
-        // 購入履歴の更新
-        const purchaseQuery = await db.collection('purchases')
-          .where('stripeSessionId', '==', session.id)
-          .get();
-
-        if (!purchaseQuery.empty) {
-          const purchaseDoc = purchaseQuery.docs[0];
-          await purchaseDoc.ref.update({
-            status: 'completed',
-            stripePaymentIntentId: session.payment_intent as string,
-            updatedAt: new Date(),
-          });
+        if (!metadata) {
+          console.error('[Webhook] Metadata not found in checkout session:', session.id);
+          return new NextResponse('Metadata not found', { status: 400 });
         }
 
+        const { userId, examId, type, email } = metadata; // email も取得
+
+        // 個別模試購入の場合のみ処理
+        if (type === 'exam_purchase' && userId && examId) {
+          console.log(`[Webhook] Processing completed checkout session for exam purchase: ${session.id}, User: ${userId}, Exam: ${examId}`);
+
+          // Firestoreに購入情報を書き込む
+          const purchaseRef = db.collection('purchases').doc(); // 新しいドキュメントIDを生成
+          await purchaseRef.set({
+            userId: userId,
+            examId: examId,
+            examTitle: metadata.examTitle || '', // create-checkout-sessionのmetadataに含める必要あり
+            purchaseDate: new Date(), // 購入日時
+            status: 'completed', // ステータス
+            stripeSessionId: session.id, // Stripe Checkout Session ID
+            stripePaymentIntentId: session.payment_intent as string, // Stripe Payment Intent ID
+            amount: session.amount_total, // 金額 (Stripeから取得)
+            currency: session.currency, // 通貨 (Stripeから取得)
+            customerEmail: email, // 顧客メールアドレス
+            // createdAt: admin.firestore.FieldValue.serverTimestamp(), // admin SDKを使っている場合はこちら
+            // updatedAt: admin.firestore.FieldValue.serverTimestamp(),
+            createdAt: new Date(),
+            updatedAt: new Date(),
+          });
+          console.log(`[Webhook] Purchase record created: ${purchaseRef.id} for session: ${session.id}`);
+        } else if (type === 'subscription') {
+          // サブスクリプションの場合はここで特別な処理は不要（SUBSCRIPTION_CREATED/UPDATEDで処理されるため）
+          console.log(`[Webhook] Checkout session completed for subscription: ${session.id}. Handled by subscription events.`);
+        } else {
+          console.warn(`[Webhook] Checkout session completed with unknown type or missing data: ${session.id}`, metadata);
+        }
         break;
       }
 

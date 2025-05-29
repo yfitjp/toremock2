@@ -158,12 +158,13 @@ export async function POST(request: Request) {
           },
         ],
         mode: 'payment', // ★変更点: paymentモード
-        success_url: `${baseUrl}/purchase/success?session_id={CHECKOUT_SESSION_ID}`, // ★変更点: 個別購入成功URL
+        success_url: `${baseUrl}/exams/${examId}/purchase/success?session_id={CHECKOUT_SESSION_ID}`, // ★変更点: 個別購入成功URL
         cancel_url: `${baseUrl}/exams`, // ★変更点: キャンセル時は模試一覧へ
         metadata: {
           userId,
           type: 'exam_purchase', // ★変更点: メタデータにタイプ指定
           examId: examId,
+          examTitle: examData?.title, // ★追加: 模試のタイトル
           email: email, // 必要に応じてメールも記録
         },
       });
