@@ -46,8 +46,8 @@ service cloud.firestore {
                      // && request.resource.data.examTitle == resource.data.examTitle  // 一時コメントアウト
                      && request.resource.data.keys().hasOnly(
                         ['userId', 'examId', 'examTitle', 'startedAt', 'status', 
-                         'currentStructureIndex', 'completedAt', 'updatedAt', 'overallScore',
-                         'sections'
+                         'currentStructureIndex', 'completedAt', 'updatedAt', 
+                         'sections', 'readingScore', 'listeningScore', 'speakingScore', 'writingScore', 'totalScore'
                         ]
                       )
                      && (request.resource.data.status == 'in-progress' || request.resource.data.status == 'completed') 

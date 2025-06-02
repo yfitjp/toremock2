@@ -222,22 +222,32 @@ export default function MyPage() {
                 <p className="text-sm text-red-500 text-center py-4">{historyError}</p>
               ) : examHistory.length > 0 ? (
                 examHistory.map(attempt => (
-                  <div key={attempt.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out border-b last:border-b-0">
-                    <div>
-                      <p className="text-sm font-medium text-gray-900">{attempt.examTitle}</p>
-                      <p className="text-xs text-gray-500">
-                        {attempt.completedAt instanceof Timestamp 
-                          ? attempt.completedAt.toDate().toLocaleDateString() 
-                          : attempt.completedAt ? new Date(attempt.completedAt as any).toLocaleDateString() : '日付不明'} 
-                        {attempt.totalScore !== undefined && ` - スコア: ${attempt.totalScore}点 /120`}
+                  <div key={attempt.id} className="flex items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition duration-150 ease-in-out border-b last:border-b-0">
+                    <div className="flex-grow">
+                      <p className="text-md font-semibold text-gray-800">{attempt.examTitle} 
+                        <span className="text-xs text-gray-500 font-normal ml-2">
+                          (実施日: {attempt.completedAt instanceof Timestamp 
+                            ? attempt.completedAt.toDate().toLocaleDateString() 
+                            : attempt.completedAt ? new Date(attempt.completedAt as any).toLocaleDateString() : '日付不明'})
+                        </span>
                       </p>
                     </div>
-                    <Link 
-                      href={`/exams/${attempt.examId}/result?attemptId=${attempt.id}`}
-                      className="ml-4 text-sm font-medium text-blue-600 hover:text-blue-800 whitespace-nowrap"
-                    >
-                      詳細を見る
-                    </Link>
+                    <div className="flex items-center flex-shrink-0 ml-4">
+                      {attempt.totalScore !== undefined && (
+                        <div className="text-right mr-4">
+                          <p className="text-sm text-gray-500">スコア</p>
+                          <p className="text-xl font-bold text-blue-600">
+                            {attempt.totalScore}<span className="text-sm font-normal">/120</span>
+                          </p>
+                        </div>
+                      )}
+                      <Link 
+                        href={`/exams/${attempt.examId}/result?attemptId=${attempt.id}`}
+                        className="text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md whitespace-nowrap shadow-sm transition-colors duration-150"
+                      >
+                        詳細を見る
+                      </Link>
+                    </div>
                   </div>
                 ))
               ) : (
