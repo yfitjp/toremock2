@@ -229,7 +229,7 @@ export default function MyPage() {
                         {attempt.completedAt instanceof Timestamp 
                           ? attempt.completedAt.toDate().toLocaleDateString() 
                           : attempt.completedAt ? new Date(attempt.completedAt as any).toLocaleDateString() : '日付不明'} 
-                        {attempt.overallScore !== undefined && ` - スコア: ${attempt.overallScore}%`}
+                        {attempt.totalScore !== undefined && ` - スコア: ${attempt.totalScore}点 /120`}
                       </p>
                     </div>
                     <Link 

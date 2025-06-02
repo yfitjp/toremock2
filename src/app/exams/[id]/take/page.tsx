@@ -37,7 +37,8 @@ import {
     Question, 
     ExamAttempt, 
     SectionAttempt, 
-    ExamSection 
+    ExamSection,
+    SectionType
 } from '@/app/lib/firestoreTypes';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
 import Link from 'next/link';
@@ -393,6 +394,37 @@ export default function ExamPage({ params }: { params: { id: string } }) {
       if (nextActualIndex >= examDefinition.structure.length) {
         updatePayload.status = 'completed';
         updatePayload.completedAt = serverTimestamp() as Timestamp;
+
+        // 試験完了時にスコアを計算して保存
+        const sectionOrder: SectionType[] = ['reading', 'listening', 'speaking', 'writing'];
+        const partScores: { [key in SectionType]?: number } = {};
+        let totalCalculatedScore = 0;
+        
+        // 更新されたセクションデータを含む可能性のある attemptData.sections を使用
+        const sectionsForScoring = {
+          ...attemptData.sections,
+          [sectionTitle]: completeSectionDataForUpdate // 現在処理中のセクションの最新データ
+        };
+
+        sectionOrder.forEach(partType => {
+          const sectionsForPart = Object.values(sectionsForScoring)
+            .filter(section => section.type === partType && section.score !== undefined);
+
+          if (sectionsForPart.length > 0) {
+            const averageScore = sectionsForPart.reduce((sum, section) => sum + (section.score || 0), 0) / sectionsForPart.length;
+            const partScore = Math.round(averageScore * 0.3); // 100点満点を30点満点に換算し四捨五入
+            partScores[partType] = partScore;
+            totalCalculatedScore += partScore;
+          } else {
+            partScores[partType] = 0; // スコアがない場合は0点として扱う
+          }
+        });
+
+        updatePayload.readingScore = partScores['reading'] || 0;
+        updatePayload.listeningScore = partScores['listening'] || 0;
+        updatePayload.speakingScore = partScores['speaking'] || 0;
+        updatePayload.writingScore = partScores['writing'] || 0;
+        updatePayload.totalScore = totalCalculatedScore;
       }
 
       console.log(`[Page DEBUG] Attempting to update ExamAttempt ${attemptDocRef.path} with payload:`, JSON.stringify(updatePayload, null, 2));
@@ -419,6 +451,12 @@ export default function ExamPage({ params }: { params: { id: string } }) {
           currentStructureIndex: nextActualIndex,
           status: updatePayload.status || prev.status,
           completedAt: updatePayload.completedAt || prev.completedAt,
+          // 試験完了時に計算したスコアもローカルステートに反映
+          readingScore: updatePayload.readingScore !== undefined ? updatePayload.readingScore : prev.readingScore,
+          listeningScore: updatePayload.listeningScore !== undefined ? updatePayload.listeningScore : prev.listeningScore,
+          speakingScore: updatePayload.speakingScore !== undefined ? updatePayload.speakingScore : prev.speakingScore,
+          writingScore: updatePayload.writingScore !== undefined ? updatePayload.writingScore : prev.writingScore,
+          totalScore: updatePayload.totalScore !== undefined ? updatePayload.totalScore : prev.totalScore,
           updatedAt: Timestamp.now() // ローカルの updatedAt も更新
         };
       });

@@ -144,29 +144,38 @@ export default function ExamResultPage() {
       return timeA - timeB;
     });
 
-  // パート別スコアと総合スコアの計算
-  const calculateScores = () => {
-    const partScores: { [key in SectionType]?: number } = {};
-    let totalCalculatedScore = 0;
+  // パート別スコアと総合スコアの計算ロジックを削除し、attempt から直接取得するように変更
+  // const calculateScores = () => {
+  //   const partScores: { [key in SectionType]?: number } = {};
+  //   let totalCalculatedScore = 0;
 
-    sectionOrder.forEach(partType => {
-      const sectionsForPart = Object.values(attempt.sections || {})
-        .filter(section => section.type === partType && section.score !== undefined);
+  //   sectionOrder.forEach(partType => {
+  //     const sectionsForPart = Object.values(attempt.sections || {})
+  //       .filter(section => section.type === partType && section.score !== undefined);
 
-      if (sectionsForPart.length > 0) {
-        const averageScore = sectionsForPart.reduce((sum, section) => sum + (section.score || 0), 0) / sectionsForPart.length;
-        const partScore = Math.round(averageScore * 0.3); // 100点満点を30点満点に換算し四捨五入
-        partScores[partType] = partScore;
-        totalCalculatedScore += partScore;
-      } else {
-        partScores[partType] = 0; // スコアがない場合は0点として扱う
-      }
-    });
+  //     if (sectionsForPart.length > 0) {
+  //       const averageScore = sectionsForPart.reduce((sum, section) => sum + (section.score || 0), 0) / sectionsForPart.length;
+  //       const partScore = Math.round(averageScore * 0.3); // 100点満点を30点満点に換算し四捨五入
+  //       partScores[partType] = partScore;
+  //       totalCalculatedScore += partScore;
+  //     } else {
+  //       partScores[partType] = 0; // スコアがない場合は0点として扱う
+  //     }
+  //   });
 
-    return { partScores, totalCalculatedScore };
+  //   return { partScores, totalCalculatedScore };
+  // };
+
+  // const { partScores, totalCalculatedScore } = calculateScores();
+
+  // Firestore から取得したスコアを使用
+  const partScores: { [key in 'reading' | 'listening' | 'speaking' | 'writing']?: number } = {
+    reading: attempt.readingScore,
+    listening: attempt.listeningScore,
+    speaking: attempt.speakingScore,
+    writing: attempt.writingScore,
   };
-
-  const { partScores, totalCalculatedScore } = calculateScores();
+  const totalCalculatedScore = attempt.totalScore;
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -178,7 +187,7 @@ export default function ExamResultPage() {
         <div className="text-center mb-6">
           <p className="text-lg font-medium opacity-90">総合スコア</p>
           <p className="text-6xl font-bold my-2">
-            {totalCalculatedScore}
+            {totalCalculatedScore !== undefined ? totalCalculatedScore : 'N/A'}
             <span className="text-3xl opacity-80">/120</span>
           </p>
         </div>
@@ -187,7 +196,7 @@ export default function ExamResultPage() {
             <div key={partType} className="bg-white bg-opacity-20 backdrop-blur-sm p-3 rounded-lg shadow">
               <p className="text-sm font-medium capitalize opacity-90">{partType}</p>
               <p className="text-2xl font-bold">
-                {partScores[partType] !== undefined ? partScores[partType] : 'N/A'}
+                {partScores[partType as keyof typeof partScores] !== undefined ? partScores[partType as keyof typeof partScores] : 'N/A'}
                 <span className="text-sm opacity-80">/30</span>
               </p>
             </div>

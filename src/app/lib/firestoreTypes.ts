@@ -92,5 +92,9 @@ export interface ExamAttempt {
   status: 'in-progress' | 'completed' | 'aborted';
   currentStructureIndex: number; // structure 配列のどこまで進んだか
   sections: Record<string, SectionAttempt>; // { [sectionTitle]: SectionAttempt }
-  overallScore?: number; // 全体スコア (計算可能な場合)
+  readingScore?: number;
+  listeningScore?: number;
+  speakingScore?: number;
+  writingScore?: number;
+  totalScore?: number; // overallScore の代わりにこちらをメインで使用
 } 
