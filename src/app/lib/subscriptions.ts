@@ -43,12 +43,12 @@ export const SUBSCRIPTION_PLANS = {
       '無料模試へのアクセス',
       '各模試の詳細な解説',
       'スコア分析と学習アドバイス',
-      '有料模試は個別購入（￥290/模試）',
+      '有料模試は個別購入（￥190/模試~）',
     ],
   },
   PREMIUM: {
     name: 'Premium',
-    price: 1490,
+    price: 990,
     description: 'すべての模試にアクセスでき、詳細な解説や学習分析機能が利用できます。',
     features: [
       'すべての模試へのアクセス',
@@ -58,7 +58,7 @@ export const SUBSCRIPTION_PLANS = {
   },
   ELITE: {
     name: 'Elite',
-    price: 5490,
+    price: 4990,
     description: '最高レベルの学習体験を提供する特別なプランです。',
     features: [
       'プレミアムプランのすべての機能',
