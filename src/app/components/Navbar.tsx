@@ -71,14 +71,12 @@ export default function Navbar() {
               >
                 模試一覧
               </Link>
-              {user && !hasSubscription && (
-                <Link
-                  href="/subscription"
-                  className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
-                >
-                  サブスクリプション
-                </Link>
-              )}
+              <Link
+                href="/subscription"
+                className="border-transparent text-gray-900 hover:text-blue-600 hover:border-blue-500 inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium transition-all duration-200"
+              >
+                サブスクリプション
+              </Link>
             </div>
           </div>
           <div className="hidden sm:ml-6 sm:flex sm:items-center">
@@ -142,23 +140,19 @@ export default function Navbar() {
           >
             模試一覧
           </Link>
+          <Link
+            href="/subscription"
+            className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+          >
+            サブスクリプション
+          </Link>
           {user && (
-            <>
-              {!hasSubscription && (
-                <Link
-                  href="/subscription"
-                  className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
-                >
-                  サブスクリプション
-                </Link>
-              )}
-              <Link
-                href="/mypage"
-                className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
-              >
-                マイページ
-              </Link>
-            </>
+            <Link
+              href="/mypage"
+              className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-900 hover:bg-gray-50 hover:border-blue-500 hover:text-blue-600 transition-all duration-200"
+            >
+              マイページ
+            </Link>
           )}
           {loading || checkingSubscription ? (
             <div className="block pl-3 pr-4 py-2 border-l-4 text-base font-medium border-transparent text-gray-500 animate-pulse">

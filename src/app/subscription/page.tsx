@@ -170,7 +170,10 @@ export default function SubscriptionPage() {
   }, [user, loading]);
 
   const handleSubscribe = async () => {
-    if (!user) return;
+    if (!user) {
+      router.push('/auth/signin');
+      return;
+    }
     
     try {
       setIsProcessing(true);
@@ -295,31 +298,6 @@ export default function SubscriptionPage() {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gray-50">
         <LoadingSpinner />
-      </div>
-    );
-  }
-
-  if (!user) {
-    return (
-      <div className="bg-white min-h-screen">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="text-center">
-            <h1 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              サブスクリプションプラン
-            </h1>
-            <p className="mt-4 text-lg text-gray-500">
-              サブスクリプションを購入するにはログインが必要です。
-            </p>
-            <div className="mt-8">
-              <Link
-                href="/auth/signin"
-                className="inline-flex items-center px-6 py-3 border border-transparent text-base font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
-              >
-                ログイン
-              </Link>
-            </div>
-          </div>
-        </div>
       </div>
     );
   }
