@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { getAllExams, getExamsByType } from '@/app/lib/exams';
 import { ExamData } from '@/app/lib/firestoreTypes';
 import { formatTimestamp } from '@/app/lib/firestore';
@@ -62,6 +63,7 @@ const TYPE_STYLES = {
 };
 
 export default function ExamsPage() {
+  const router = useRouter();
   const { user, loading: authLoading } = useAuth();
   const [exams, setExams] = useState<ExamData[]>([]);
   const [loading, setLoading] = useState(true);
@@ -170,7 +172,7 @@ export default function ExamsPage() {
     }
   }, [user, authLoading, exams]);
 
-  const renderExamCard = (exam: ExamData, currentUser: typeof user) => {
+  const renderExamCard = (exam: ExamData) => {
     const typeStyle = TYPE_STYLES[exam.type as keyof typeof TYPE_STYLES] || TYPE_STYLES['TOEIC'];
     
     // structure から合計 duration を計算
@@ -231,65 +233,63 @@ export default function ExamsPage() {
 
           <div className="absolute bottom-0 left-0 right-0 p-6 pt-0">
             {exam.isFree ? (
-              currentUser ? (
-                <Link
-                  href={`/exams/${exam.id}`}
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
-                >
-                  無料で受験する
-                </Link>
-              ) : (
-                <>
-                  <button
-                    disabled
-                    className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-gray-400 bg-gray-100 cursor-not-allowed"
-                  >
-                    無料で受験する
-                  </button>
-                  <p className="mt-2 text-sm text-gray-500 text-center">
-                    受験するには
-                    <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
-                      ログイン
-                    </Link>
-                    が必要です
-                  </p>
-                </>
-              )
+              <button
+                onClick={() => {
+                  if (!user) {
+                    router.push('/auth/signin');
+                  } else {
+                    router.push(`/exams/${exam.id}`);
+                  }
+                }}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
+              >
+                無料で受験する
+              </button>
             ) : purchasedExams.has(exam.id) ? (
-              <Link
-                href={`/exams/${exam.id}`}
+              <button
+                onClick={() => {
+                  if (!user) {
+                    router.push('/auth/signin');
+                  } else {
+                    router.push(`/exams/${exam.id}`);
+                  }
+                }}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
               >
                 受験する（購入済み）
-              </Link>
+              </button>
             ) : hasSubscription ? (
-              <Link
-                href={`/exams/${exam.id}`}
+              <button
+                onClick={() => {
+                  if (!user) {
+                    router.push('/auth/signin');
+                  } else {
+                    router.push(`/exams/${exam.id}`);
+                  }
+                }}
                 className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors"
               >
                 受験する
-              </Link>
+              </button>
             ) : (
-              <PurchaseButton
-                examId={exam.id}
-                price={exam.price || 0}
-                isDisabled={!currentUser || purchasedExams.has(exam.id)}
-              />
+              <div onClick={(e) => {
+                if (!user) {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  router.push('/auth/signin');
+                }
+              }}>
+                <PurchaseButton
+                  examId={exam.id}
+                  price={exam.price || 0}
+                  isDisabled={purchasedExams.has(exam.id)}
+                />
+              </div>
             )}
 
             {hasSubscription && !exam.isFree && !purchasedExams.has(exam.id) && (
               <p className="mt-2 text-xs text-green-600 text-center">
                 プレミアム会員特典：無料でアクセス可能
-              </p>
-            )}
-
-            {!currentUser && !exam.isFree && (
-              <p className="mt-2 text-sm text-gray-500 text-center">
-                購入するには
-                <Link href="/auth/signin" className="text-blue-600 hover:text-blue-500 ml-1">
-                  ログイン
-                </Link>
-                が必要です
               </p>
             )}
           </div>
@@ -395,7 +395,7 @@ export default function ExamsPage() {
                 >
                   <h2 className="text-2xl font-bold mb-6">すべての模試</h2>
                   <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {exams.map(exam => renderExamCard(exam, user))}
+                    {exams.map(exam => renderExamCard(exam))}
                   </div>
                 </motion.div>
               ) : (
@@ -415,7 +415,7 @@ export default function ExamsPage() {
                   
                   {examsByType[activeTab]?.length > 0 ? (
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                      {examsByType[activeTab].map(exam => renderExamCard(exam, user))}
+                      {examsByType[activeTab].map(exam => renderExamCard(exam))}
                     </div>
                   ) : (
                     <div className="bg-gray-50 rounded-lg p-8 text-center">
