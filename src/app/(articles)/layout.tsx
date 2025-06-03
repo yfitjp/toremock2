@@ -33,6 +33,17 @@ export default function ArticlesLayout({
   return (
     <html lang="ja">
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-W7R7Z5TQPP"></script>
+        <script>
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-W7R7Z5TQPP');
+          `}
+        </script>
         {/* Next.jsが自動的にメタデータやタイトルを挿入 */}
       </head>
       <body className={`${notoSans.className} bg-slate-50`} style={{ margin: 0, padding: 0 }}>
