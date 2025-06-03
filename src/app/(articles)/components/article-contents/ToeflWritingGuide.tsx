@@ -203,4 +203,4 @@ const ToeflWritingGuide: React.FC = () => {
   );
 };
 
-export default ToeflWritingGuideContent; 
+export default ToeflWritingGuide; 

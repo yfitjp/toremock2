@@ -95,4 +95,4 @@ const ToeicMocktestComparison = () => {
   );
 };
 
-export default ToeicMocktestComparisonContent; 
+export default ToeicMocktestComparison; 

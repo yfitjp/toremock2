@@ -93,4 +93,4 @@ const ToeflSpeakingServices = () => {
   );
 };
 
-export default ToeflSpeakingServicesContent; 
+export default ToeflSpeakingServices; 

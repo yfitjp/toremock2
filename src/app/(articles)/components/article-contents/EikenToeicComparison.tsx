@@ -72,4 +72,4 @@ const EikenToeicComparison: React.FC = () => {
   );
 };
 
-export default EikenToeicComparisonContent; 
+export default EikenToeicComparison; 

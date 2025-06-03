@@ -150,4 +150,4 @@ const ToeicPart5Strategy: React.FC = () => {
   );
 };
 
-export default ToeicPart5StrategyContent; 
+export default ToeicPart5Strategy; 

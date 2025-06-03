@@ -53,4 +53,4 @@ const ReadingSkillsGuide: React.FC = () => {
   );
 };
 
-export default ReadingSkillsGuideContent; 
+export default ReadingSkillsGuide; 

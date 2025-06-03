@@ -138,4 +138,4 @@ const EffectiveVocabularyLearning: React.FC = () => {
   );
 };
 
-export default EffectiveVocabularyLearningContent; 
+export default EffectiveVocabularyLearning; 

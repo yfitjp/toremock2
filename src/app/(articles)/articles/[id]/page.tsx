@@ -207,7 +207,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
                 href={`/?category=${article.category}`} 
                 className="block w-full text-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium"
               >
-                {article.category} の模試を見る
+                模試を無料で受ける
               </Link>
             </div>
 
@@ -287,7 +287,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
                 href={`/?category=${article.category}`} 
                 className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-lg font-medium"
               >
-                <span>{article.category}の模試を受ける</span>
+                <span>模試を受ける</span>
                 <svg className="ml-2 h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
                 </svg>

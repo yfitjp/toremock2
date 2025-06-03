@@ -286,4 +286,4 @@ const ToeicBeginnersGuide = () => {
   );
 };
 
-export default ToeicBeginnersGuideContent; 
+export default ToeicBeginnersGuide; 
