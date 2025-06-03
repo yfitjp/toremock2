@@ -10,32 +10,6 @@ import { articleData, getSortedArticlesData, ArticleData, CategoryKey } from '..
 // import TableOfContents from '../../components/TableOfContents';
 import ShareButtons from '../../components/ShareButtons'; // ShareButtonsのインポートを復活させる
 
-// 記事本文コンポーネントのインポートは動的に行うため削除
-// import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
-// import ToeflSpeakingServicesContent from '../../components/article-contents/ToeflSpeakingServicesContent';
-// import ToeicBeginnersGuideContent from '../../components/article-contents/ToeicBeginnersGuideContent';
-// import EikenToeicComparisonContent from '../../components/article-contents/EikenToeicComparisonContent';
-// import ReadingSkillsGuideContent from '../../components/article-contents/ReadingSkillsGuideContent';
-// import ToeflWritingGuideContent from '@/app/(articles)/components/article-contents/ToeflWritingGuideContent';
-// import ToeicPart5StrategyContent from '@/app/(articles)/components/article-contents/ToeicPart5StrategyContent';
-// import EffectiveVocabularyLearningContent from '@/app/(articles)/components/article-contents/EffectiveVocabularyLearningContent';
-// import EnglishPronunciationLRTips from '@/app/(articles)/components/article-contents/EnglishPronunciationLRTips';
-// import EnglishSnsSlangAbbreviations from '@/app/(articles)/components/article-contents/EnglishSnsSlangAbbreviations';
-
-// 記事IDと本文コンポーネントのマッピングは動的に解決するため削除
-// const articleContentComponents: Record<string, React.ComponentType> = {
-//   'toeic-mocktest-comparison': ToeicMocktestComparisonContent,
-//   'toefl-speaking-services': ToeflSpeakingServicesContent,
-//   'toeic-beginners-guide': ToeicBeginnersGuideContent,
-//   'eiken-toeic-comparison': EikenToeicComparisonContent,
-//   'reading-skills-guide': ReadingSkillsGuideContent,
-//   'toefl-writing-guide': ToeflWritingGuideContent,
-//   'toeic-part5-strategy': ToeicPart5StrategyContent,
-//   'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
-//   'english-pronunciation-l-r-tips': EnglishPronunciationLRTips,
-//   'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviations,
-// };
-
 // 記事IDをコンポーネント名（パスカルケース）に変換する関数
 const formatArticleIdToComponentName = (id: string): string => {
   return id
