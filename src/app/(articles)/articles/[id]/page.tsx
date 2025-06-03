@@ -154,7 +154,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
                   <svg className="absolute inset-0 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
                 </div>
                 <div>
-                  <h4 className="font-medium text-slate-800">英語テスト情報局 編集部</h4>
+                  <h4 className="font-medium text-slate-800">トレモック情報局 編集部</h4>
                   <p className="text-sm text-slate-500">最新の英語テスト情報をお届けします。</p>
                 </div>
               </div>
@@ -271,7 +271,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             id="article-content"
             dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLレンダリングを削除
           /> */}
-          <div id="article-content" className="mb-12">
+          <div id="article-content" className="prose prose-lg max-w-none mb-12">
             {ArticleContentComponent && <ArticleContentComponent />} {/* 動的にロードしたコンポーネントをレンダリング */}
           </div>
           
