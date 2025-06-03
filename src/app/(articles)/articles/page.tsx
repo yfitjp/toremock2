@@ -345,39 +345,45 @@ export default function ArticlesHomePage() {
                   )}
                 </div>
                 
-                <div className="p-5 flex flex-col h-[calc(100%-12rem)]">
-                  <div className="flex justify-between items-center text-sm text-slate-500 mb-3">
-                    <span className="font-medium text-slate-700">{article.category}</span>
-                    <div className="flex items-center">
-                      <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
-                      </svg>
-                      <span>{article.readTime}</span>
+                <div className="p-5 flex flex-col flex-grow">
+                  {/* 上部コンテンツエリア（タイトル、説明など） */}
+                  <div>
+                    <div className="flex justify-between items-center text-sm text-slate-500 mb-3">
+                      <span className="font-medium text-slate-700">{article.category}</span>
+                      <div className="flex items-center">
+                        <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                        </svg>
+                        <span>{article.readTime}</span>
+                      </div>
                     </div>
+                    
+                    <h2 className="text-xl font-bold text-slate-800 mb-3 line-clamp-2">
+                      {article.title}
+                    </h2>
+                    
+                    <p className="text-slate-600 mb-4 line-clamp-3">
+                      {article.description}
+                    </p>
                   </div>
                   
-                  <h2 className="text-xl font-bold text-slate-800 mb-3 line-clamp-2 flex-grow">
-                    {article.title}
-                  </h2>
-                  
-                  <p className="text-slate-600 mb-4 line-clamp-3">
-                    {article.description}
-                  </p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4 mt-auto">
-                    {article.tags.map(tag => (
-                      <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
-                        #{tag}
-                      </span>
-                    ))}
+                  {/* 下部コンテンツエリア（タグ、ボタン）。mt-autoで親要素の下部にプッシュ */}
+                  <div className="mt-auto">
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {article.tags.map(tag => (
+                        <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
+                          #{tag}
+                        </span>
+                      ))}
+                    </div>
+                    
+                    <Link
+                      href={`/articles/${article.id}`}
+                      className="block text-center py-2 bg-slate-800 text-white rounded-md font-medium hover:bg-slate-700 transition-colors"
+                    >
+                      記事を読む
+                    </Link>
                   </div>
-                  
-                  <Link
-                    href={`/articles/${article.id}`}
-                    className="block text-center py-2 bg-slate-800 text-white rounded-md font-medium hover:bg-slate-700 transition-colors mt-auto"
-                  >
-                    記事を読む
-                  </Link>
                 </div>
               </div>
             ))
