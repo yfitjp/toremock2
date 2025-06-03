@@ -173,7 +173,7 @@ export default function ArticlesHomePage() {
                 </div>
                 <div className="hidden md:block relative h-full min-h-[300px] bg-slate-700">
                   <Image 
-                    src="/images/toeic-comparison.jpg" 
+                    src="/images/toremock-hero.jpg" 
                     alt="英語学習をしている女性" 
                     fill 
                     className="object-cover" 
