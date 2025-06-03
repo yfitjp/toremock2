@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ReadingSkillsGuideContent: React.FC = () => {
+const ReadingSkillsGuide: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
       <p>

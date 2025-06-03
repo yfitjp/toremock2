@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ToeicPart5StrategyContent: React.FC = () => {
+const ToeicPart5Strategy: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
       <p>

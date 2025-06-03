@@ -10,30 +10,38 @@ import { articleData, getSortedArticlesData, ArticleData, CategoryKey } from '..
 // import TableOfContents from '../../components/TableOfContents';
 import ShareButtons from '../../components/ShareButtons'; // ShareButtonsのインポートを復活させる
 
-// 記事本文コンポーネントをインポート
-import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
-import ToeflSpeakingServicesContent from '../../components/article-contents/ToeflSpeakingServicesContent';
-import ToeicBeginnersGuideContent from '../../components/article-contents/ToeicBeginnersGuideContent';
-import EikenToeicComparisonContent from '../../components/article-contents/EikenToeicComparisonContent';
-import ReadingSkillsGuideContent from '../../components/article-contents/ReadingSkillsGuideContent';
-import ToeflWritingGuideContent from '@/app/(articles)/components/article-contents/ToeflWritingGuideContent';
-import ToeicPart5StrategyContent from '@/app/(articles)/components/article-contents/ToeicPart5StrategyContent';
-import EffectiveVocabularyLearningContent from '@/app/(articles)/components/article-contents/EffectiveVocabularyLearningContent';
-import EnglishPronunciationLRTips from '@/app/(articles)/components/article-contents/EnglishPronunciationLRTips';
-import EnglishSnsSlangAbbreviations from '@/app/(articles)/components/article-contents/EnglishSnsSlangAbbreviations';
+// 記事本文コンポーネントのインポートは動的に行うため削除
+// import ToeicMocktestComparisonContent from '../../components/article-contents/ToeicMocktestComparisonContent';
+// import ToeflSpeakingServicesContent from '../../components/article-contents/ToeflSpeakingServicesContent';
+// import ToeicBeginnersGuideContent from '../../components/article-contents/ToeicBeginnersGuideContent';
+// import EikenToeicComparisonContent from '../../components/article-contents/EikenToeicComparisonContent';
+// import ReadingSkillsGuideContent from '../../components/article-contents/ReadingSkillsGuideContent';
+// import ToeflWritingGuideContent from '@/app/(articles)/components/article-contents/ToeflWritingGuideContent';
+// import ToeicPart5StrategyContent from '@/app/(articles)/components/article-contents/ToeicPart5StrategyContent';
+// import EffectiveVocabularyLearningContent from '@/app/(articles)/components/article-contents/EffectiveVocabularyLearningContent';
+// import EnglishPronunciationLRTips from '@/app/(articles)/components/article-contents/EnglishPronunciationLRTips';
+// import EnglishSnsSlangAbbreviations from '@/app/(articles)/components/article-contents/EnglishSnsSlangAbbreviations';
 
-// 記事IDと本文コンポーネントのマッピング
-const articleContentComponents: Record<string, React.ComponentType> = {
-  'toeic-mocktest-comparison': ToeicMocktestComparisonContent,
-  'toefl-speaking-services': ToeflSpeakingServicesContent,
-  'toeic-beginners-guide': ToeicBeginnersGuideContent,
-  'eiken-toeic-comparison': EikenToeicComparisonContent,
-  'reading-skills-guide': ReadingSkillsGuideContent,
-  'toefl-writing-guide': ToeflWritingGuideContent,
-  'toeic-part5-strategy': ToeicPart5StrategyContent,
-  'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
-  'english-pronunciation-l-r-tips': EnglishPronunciationLRTips,
-  'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviations,
+// 記事IDと本文コンポーネントのマッピングは動的に解決するため削除
+// const articleContentComponents: Record<string, React.ComponentType> = {
+//   'toeic-mocktest-comparison': ToeicMocktestComparisonContent,
+//   'toefl-speaking-services': ToeflSpeakingServicesContent,
+//   'toeic-beginners-guide': ToeicBeginnersGuideContent,
+//   'eiken-toeic-comparison': EikenToeicComparisonContent,
+//   'reading-skills-guide': ReadingSkillsGuideContent,
+//   'toefl-writing-guide': ToeflWritingGuideContent,
+//   'toeic-part5-strategy': ToeicPart5StrategyContent,
+//   'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
+//   'english-pronunciation-l-r-tips': EnglishPronunciationLRTips,
+//   'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviations,
+// };
+
+// 記事IDをコンポーネント名（パスカルケース）に変換する関数
+const formatArticleIdToComponentName = (id: string): string => {
+  return id
+    .split('-')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join('');
 };
 
 // カテゴリ情報 (変更なし)
@@ -99,12 +107,32 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
 
 // ページコンポーネント (サーバーコンポーネント)
 export default async function ArticleDetail({ params }: { params: { id: string } }) {
-  // const article = await getArticleData(params.id); // Markdownヘルパーを削除
-  const article = articleData[params.id]; // ハードコードデータから取得
-  const ArticleContent = articleContentComponents[params.id]; // 対応する本文コンポーネントを取得
+  const article = articleData[params.id];
 
-  if (!article || !ArticleContent) { // データまたはコンポーネントがなければ404
+  if (!article) {
     notFound();
+  }
+
+  const componentName = formatArticleIdToComponentName(params.id);
+  let ArticleContentComponent: React.ComponentType<any> | null = null;
+
+  try {
+    // サーバーコンポーネントでは await import() を使用して動的にコンポーネントをロード
+    // コンポーネントファイルは `@/app/(articles)/components/article-contents/` 配下に
+    // `ComponentName.tsx` (または .js) の形式で存在することを期待
+    const module = await import(`@/app/(articles)/components/article-contents/${componentName}`);
+    ArticleContentComponent = module.default || module; // ES Module または CommonJS モジュールに対応
+  } catch (error) {
+    // 開発環境ではエラーログを出力
+    if (process.env.NODE_ENV === 'development') {
+      console.error(`Failed to load content component for article ID '${params.id}'. Expected component: '${componentName}' at '@/app/(articles)/components/article-contents/${componentName}'. Error: `, error);
+    }
+    // コンポーネントのロードに失敗した場合は notFound を呼び出す
+    // この catch ブロックの外で ArticleContentComponent が null かどうかをチェックする
+  }
+
+  if (!ArticleContentComponent) {
+    notFound(); // コンポーネントが見つからない、またはロードに失敗した場合
   }
 
   const relatedArticles = getRelatedArticles(article.id, article.category, article.tags);
@@ -244,7 +272,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLレンダリングを削除
           /> */}
           <div id="article-content" className="mb-12">
-            <ArticleContent /> {/* ハードコードされた本文コンポーネントをレンダリング */}
+            {ArticleContentComponent && <ArticleContentComponent />} {/* 動的にロードしたコンポーネントをレンダリング */}
           </div>
           
           {/* CTA セクション */}

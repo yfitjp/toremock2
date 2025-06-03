@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const ToeicMocktestComparisonContent = () => {
+const ToeicMocktestComparison = () => {
   return (
     <div className="prose prose-lg max-w-none">
       {/* リード文 */}

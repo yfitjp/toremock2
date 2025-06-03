@@ -1,6 +1,6 @@
 import React from 'react';
 
-const EffectiveVocabularyLearningContent: React.FC = () => {
+const EffectiveVocabularyLearning: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
       <p>
