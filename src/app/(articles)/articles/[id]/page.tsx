@@ -33,7 +33,7 @@ const articleContentComponents: Record<string, React.ComponentType> = {
   'toeic-part5-strategy': ToeicPart5StrategyContent,
   'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
   'english-pronunciation-l-r-tips': EnglishPronunciationLRTips,
-  'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviation,
+  'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviations,
 };
 
 // カテゴリ情報 (変更なし)
