@@ -19,6 +19,8 @@ import ReadingSkillsGuideContent from '../../components/article-contents/Reading
 import ToeflWritingGuideContent from '@/app/(articles)/components/article-contents/ToeflWritingGuideContent';
 import ToeicPart5StrategyContent from '@/app/(articles)/components/article-contents/ToeicPart5StrategyContent';
 import EffectiveVocabularyLearningContent from '@/app/(articles)/components/article-contents/EffectiveVocabularyLearningContent';
+import EnglishPronunciationLRTips from '@/app/(articles)/components/article-contents/EnglishPronunciationLRTips';
+import EnglishSnsSlangAbbreviations from '@/app/(articles)/components/article-contents/EnglishSnsSlangAbbreviations';
 
 // 記事IDと本文コンポーネントのマッピング
 const articleContentComponents: Record<string, React.ComponentType> = {
@@ -30,6 +32,8 @@ const articleContentComponents: Record<string, React.ComponentType> = {
   'toefl-writing-guide': ToeflWritingGuideContent,
   'toeic-part5-strategy': ToeicPart5StrategyContent,
   'effective-vocabulary-learning': EffectiveVocabularyLearningContent,
+  'english-pronunciation-l-r-tips': EnglishPronunciationLRTips,
+  'english-sns-slang-abbreviations': EnglishSnsSlangAbbreviation,
 };
 
 // カテゴリ情報 (変更なし)

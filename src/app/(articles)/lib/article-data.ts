@@ -103,6 +103,45 @@ export const articleData: Record<string, ArticleData> = {
     imageSrc: '/images/vocabulary-learning.jpg',
     tags: ['英単語', '暗記法', '記憶術', '学習効率', 'ボキャブラリー'],
     popular: false,
+  },
+  "english-pronunciation-l-r-tips": {
+    id: "english-pronunciation-l-r-tips",
+    title: "LとRの発音、もう迷わない！ネイティブに近づく簡単練習法",
+    description: "英語のLとRの発音に悩む日本人必見！この記事では、ネイティブのような自然な発音を手に入れるためのLとRの正しい発音方法と、初心者でも簡単に実践できる効果的な練習のコツを徹底解説。今日から始めて、自信を持って英語を話しましょう！",
+    category: "学習法",
+    date: "2025-06-03",
+    readTime: "8分",
+    imageSrc: "/images/l-r-pronunciation-tips.jpg",
+    tags: [
+      "LとRの発音",
+      "英語 発音練習",
+      "ネイティブ発音",
+      "発音矯正",
+      "英語学習",
+      "スピーキング",
+      "リスニング",
+      "日本人向け英語",
+      "英会話"
+    ]
+  },
+  "english-sns-slang-abbreviations": {
+    id: "english-sns-slang-abbreviations",
+    title: "インスタで使える！ネイティブが使う英語スラング・略語集",
+    description: "インスタグラムなどのSNSでネイティブが頻繁に使う最新の英語スラングや略語を厳選して解説。LOL、OMG、BTWなどの基本からYOLOのような流行語まで、意味や使い方、例文を豊富に紹介。海外の友人とのコミュニケーションを円滑にし、SNS投稿をよりネイティブっぽくするための実践的なヒントが満載です。",
+    category: "学習法",
+    date: "2025-06-03",
+    readTime: "9分",
+    imageSrc: "/images/sns-english-slang-communication.jpg",
+    tags: [
+      "英語スラング",
+      "英語略語",
+      "SNS英語",
+      "インスタグラム英語",
+      "ネイティブ表現",
+      "チャット英語",
+      "英語学習",
+      "コミュニケーション"
+    ]
   }
 };
 
