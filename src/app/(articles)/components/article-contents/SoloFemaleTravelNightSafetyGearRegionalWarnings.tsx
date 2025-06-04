@@ -33,7 +33,7 @@ const SoloFemaleTravelNightSafetyGearRegionalWarnings: React.FC = () => {
             <li><strong>翻訳アプリ:</strong> Google翻訳等、緊急時のコミュニケーションに。</li>
         </ul>
     </li>
-    <li><strong><strong style="color: red;">要注意: 催涙スプレー・スタンガン等</strong></strong> これらは日本では軽犯罪法違反の可能性があり、多くの国で所持・持ち込みが<strong>法律で禁止または厳しく制限</strong>されています。安易な持ち込みは絶対に避け、音や光で威嚇するグッズを選びましょう。</li>
+    <li><strong>要注意: 催涙スプレー・スタンガン等</strong> これらは日本では軽犯罪法違反の可能性があり、多くの国で所持・持ち込みが<strong>法律で禁止または厳しく制限</strong>されています。安易な持ち込みは絶対に避け、音や光で威嚇するグッズを選びましょう。</li>
   </ul>
   <p>グッズはあくまで補助です。危険な場所を避けることが最優先ですが、備えは精神的な安心にも繋がります。海外旅行保険への加入と補償内容確認も忘れずに。</p>
 
