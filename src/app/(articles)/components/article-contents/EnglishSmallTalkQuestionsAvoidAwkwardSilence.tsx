@@ -65,7 +65,7 @@ const EnglishSmallTalkQuestionsAvoidAwkwardSilence: React.FC = () => {
       <li><strong>最近のポジティブなニュース（スポーツ、エンタメなど）:</strong> 「Did you catch the game last night? It was incredible!」 (昨夜の試合見ましたか？すごかったですね！) – 明るい話題は場を和ませます。</li>
       <li><strong>その場の状況や共通の体験:</strong> 「This is a great event, isn't it? How are you enjoying it so far?」 (素晴らしいイベントですね。ここまでいかがですか？) / 「The music here is really nice. Do you know who the artist is?」 (ここの音楽、とても良いですね。誰の曲かご存知ですか？) – 共通の体験について話すのは自然です。</li>
     </ol>
-    <p><strong><span style="color: red;">注意点:</span></strong> 一般的に、初対面の人やまだ親しくない相手に対して、<strong>政治、宗教、収入、個人的なゴシップ、病気の話、人の悪口</strong>など、デリケートな話題やネガティブな話は避けるのがマナーです。相手の表情や反応を見ながら、心地よい距離感を保つことが大切です。</p>
+    <p><strong>注意点:</strong> 一般的に、初対面の人やまだ親しくない相手に対して、<strong>政治、宗教、収入、個人的なゴシップ、病気の話、人の悪口</strong>など、デリケートな話題やネガティブな話は避けるのがマナーです。相手の表情や反応を見ながら、心地よい距離感を保つことが大切です。</p>
 
     <h2>スモールトークをさらに円滑にする3つのコツ</h2>
     <p>質問テクニックや話題のレパートリーに加えて、以下の3つのコツを意識すると、よりスムーズで心地よいスモールトークができるようになります。これらはスモールトークだけでなく、あらゆるコミュニケーションにおいて重要なポイントです。</p>
