@@ -1,0 +1,14 @@
+[
+  {
+    "article_id": "factory-visit-technical-english-phrases-manufacturing-quality-control",
+    "image_generation_prompt": "ベクターアートスタイルで、近代的な工場の製造ラインを背景に、ヘルメットを着用した日本人ビジネスマンが、作業服姿の現地技術者と身振り手振りを交えながら熱心に話し込んでいる様子を描写してください。吹き出しに「？」や「OK!」といった記号を小さく配置し、コミュニケーションの活発さを表現。明るい青や白を基調としたクリーンな配色で、専門性と国際的なビジネスシーンの雰囲気を演出。人物はシンプルながらも表情豊かに。背景の機械類は具体的すぎず、象徴的に描いてください。画像内に文字は入れないでください。",
+    "suggested_image_filename": "factory-visit-technical-english-phrases-manufacturing-quality-control.jpg",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\factory-visit-technical-english-phrases-manufacturing-quality-control.jpg"
+  },
+  {
+    "article_id": "academic-english-writing-discussion-section-phrases-logical-flow",
+    "image_generation_prompt": "知的な雰囲気のベクターアート。薄い青やグレー基調の背景に、数式、グラフ、開かれた学術書、ペンを配置。中央には脳のアイコンがあり、そこから論理的な思考の流れを示す光の線や矢印が伸びる。テーマは「英語論文の考察執筆」。洗練されたデザインで、研究者にインスピレーションを与える。文字は不要。",
+    "suggested_image_filename": "academic-english-writing-discussion-section-phrases-logical-flow.jpg",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\academic-english-writing-discussion-section-phrases-logical-flow.jpg"
+  }
+]

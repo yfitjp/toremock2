@@ -844,6 +844,128 @@ export const articleData: Record<string, ArticleData> = {
       "英語力アップ",
       "ライティング練習"
     ]
+  },
+  "factory-visit-technical-english-phrases-manufacturing-quality-control": {
+    "id": "factory-visit-technical-english-phrases-manufacturing-quality-control",
+    "title": "工場視察で使う専門英語！製造・品質管理の質問フレーズ集",
+    "description": "海外出張での工場視察時、製造プロセスや品質管理について専門用語で質問するのに役立つ英語フレーズ集。具体的な質問例と応答のポイント、コミュニケーションのコツを解説し、技術的な会話をスムーズに進めるお手伝いをします。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "10分",
+    "imageSrc": "/images/factory-visit-technical-english-phrases-manufacturing-quality-control.jpg",
+    "tags": [
+      "工場視察",
+      "ビジネス英語",
+      "専門英語",
+      "製造業",
+      "品質管理",
+      "英語フレーズ",
+      "海外出張",
+      "技術英語",
+      "コミュニケーション"
+    ]
+  },
+  "academic-english-writing-discussion-section-phrases-logical-flow": {
+    "id": "academic-english-writing-discussion-section-phrases-logical-flow",
+    "title": "英語論文『考察』執筆術！論理展開を強化する接続表現集",
+    "description": "英語論文の『考察』で論理的な文章を書くための秘訣を解説。結果の解釈から主張の明確化まで、アカデミックな接続詞・フレーズを厳選して紹介。査読者を納得させる説得力ある考察作成をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "5分",
+    "imageSrc": "/images/academic-english-writing-discussion-section-phrases-logical-flow.jpg",
+    "tags": [
+      "英語論文",
+      "考察",
+      "アカデミックライティング",
+      "接続詞",
+      "論理展開",
+      "論文執筆",
+      "英語学習",
+      "研究"
+    ]
+  },
+  "business-trip-english-dining-etiquette-phrases": {
+    "id": "business-trip-english-dining-etiquette-phrases",
+    "title": "海外出張で困らない！英語での食事マナーと注文・会計フレーズ集",
+    "description": "海外出張時の英語での食事、もう困りません！レストラン予約からスマートな注文方法、知っておくべきテーブルマナー、会計時の英語フレーズ、チップの習慣まで網羅的に解説。ビジネスディナーもこれで安心です。実践的な例文満載で、すぐに役立ちます。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "9分",
+    "imageSrc": "/images/business-trip-english-dining-etiquette-phrases.jpg",
+    "tags": [
+      "海外出張",
+      "英語",
+      "食事マナー",
+      "ビジネス英語",
+      "英会話フレーズ",
+      "レストラン英語",
+      "チップ",
+      "注文",
+      "会計"
+    ]
+  },
+  "toeic-part7-triple-passage-time-management-strategies": {
+    "id": "toeic-part7-triple-passage-time-management-strategies",
+    "title": "TOEIC Part7トリプルパッセージ時間配分と設問別攻略法",
+    "description": "TOEIC Part7の最難関、トリプルパッセージで時間が足りず悩んでいませんか？この記事では、効果的な時間配分テクニック、設問タイプごとの具体的な攻略法、そしてスコアアップに繋がる実践的な学習戦略を徹底解説します。目標点突破を目指しましょう。",
+    "category": "TOEIC",
+    "date": "2025-06-04",
+    "readTime": "8分",
+    "imageSrc": "/images/toeic-part7-triple-passage-time-management-strategies.jpg",
+    "tags": [
+      "TOEIC",
+      "Part7",
+      "トリプルパッセージ",
+      "時間配分",
+      "英語学習",
+      "読解",
+      "スコアアップ",
+      "試験対策",
+      "リーディング",
+      "英語勉強法"
+    ]
+  },
+  "business-english-small-talk-first-impression-tips": {
+    "id": "business-english-small-talk-first-impression-tips",
+    "title": "出張直前！英語スモールトークで好印象を残す秘訣3選",
+    "description": "海外出張や赴任前に必須のビジネス英語スモールトーク術を解説。初対面でも好印象を与える鉄板ネタ、避けるべきNG話題、文化的配慮を含めた実践フレーズを紹介し、円滑な人間関係構築をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "6分",
+    "imageSrc": "/images/business-english-small-talk-first-impression-tips.jpg",
+    "tags": [
+      "ビジネス英語",
+      "スモールトーク",
+      "英会話",
+      "海外出張",
+      "第一印象",
+      "コミュニケーション",
+      "異文化理解",
+      "英語学習"
+    ]
+  },
+  "academic-english-paper-introduction-writing-guide-for-researchers": {
+    "id": "academic-english-paper-introduction-writing-guide-for-researchers",
+    "title": "英語論文Introduction完全攻略！採択率UP構成術",
+    "description": "英語論文のIntroduction執筆は研究者にとって最初の関門。本記事では、読者を引きつけ研究の価値を伝えるためのCARSモデルに基づいた構成術、実践的なテクニック、そしてそのまま使えるアカデミック英語表現を網羅的に解説。これであなたの論文採択率アップを目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "約12分",
+    "imageSrc": "/images/academic-english-paper-introduction-writing-guide-for-researchers.jpg",
+    "tags": [
+      "英語論文",
+      "Introduction",
+      "書き方",
+      "研究論文",
+      "アカデミックライティング",
+      "CARSモデル",
+      "論文構成",
+      "採択率アップ",
+      "大学院生",
+      "研究者",
+      "英語学習",
+      "論文作法"
+    ]
   }
 };
 
