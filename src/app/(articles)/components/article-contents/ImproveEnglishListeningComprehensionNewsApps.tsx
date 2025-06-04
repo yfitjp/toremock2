@@ -51,7 +51,7 @@ const ImproveEnglishListeningComprehensionNewsApps: React.FC = () => {
 </ol>
 
 <h3>中級者向け</h3>
-<ol start="3">
+<ol>
   <li><strong>BBC Learning English (公式アプリ):</strong> <br />イギリスの公共放送BBCによる英語学習者向けコンテンツ。有名な「6 Minute English」をはじめ、質の高いプログラムが豊富です。イギリス英語に触れたい方にも最適。公式アプリ (bbc.co.uk/learningenglish から探せます) が便利です。
   <p><strong>特徴:</strong> イギリス英語、多彩な学習プログラム、スクリプト・語彙解説付き、中級レベルのトピックが豊富。</p></li>
   <li><strong>NPR One (アプリ):</strong> <br />アメリカの非営利公共ラジオ局NPR (National Public Radio) のアプリ。質の高い報道番組やドキュメンタリー、ストーリーテリング形式の番組など、多様なコンテンツが楽しめます。自然なアメリカ英語に触れたい中級者におすすめです。
@@ -59,7 +59,7 @@ const ImproveEnglishListeningComprehensionNewsApps: React.FC = () => {
 </ol>
 
 <h3>上級者向け</h3>
-<ol start="5">
+<ol>
   <li><strong>大手ニュース機関の公式アプリ (例: BBC News, CNN, Reutersなど):</strong> <br />BBC News、CNN、Reutersといった世界的なニュース機関の公式アプリは、ネイティブスピーカー向けの最新ニュースをリアルタイムで提供しています。専門的な語彙や複雑な構文も含まれますが、時事英語の読解力・聴解力を総合的に高めたい上級者には最適です。
   <p><strong>特徴:</strong> 最新の国際ニュース、ネイティブスピード、専門的な語彙も豊富、動画・音声コンテンツ多数。</p></li>
 </ol>
