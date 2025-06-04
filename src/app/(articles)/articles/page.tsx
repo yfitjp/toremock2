@@ -75,25 +75,29 @@ export default function ArticlesHomePage() {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<CategoryKey | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
-  
-  // URLからカテゴリーと検索クエリを取得
+  const [currentPage, setCurrentPage] = useState(1); // ★ Current page state
+
+  const ITEMS_PER_PAGE = 30; // ★ Articles per page
+
+  // URLからカテゴリー、検索クエリ、ページ番号を取得
   useEffect(() => {
     const category = searchParams.get('category') as CategoryKey | null;
     const query = searchParams.get('q') || '';
-    console.log('[Articles Page] useEffect - Category:', category, 'Query:', query);
-    
+    const page = parseInt(searchParams.get('page') || '1', 10); // ★ Get page from URL
+    console.log('[Articles Page] useEffect - Category:', category, 'Query:', query, 'Page:', page);
+
     if (category && Object.keys(categoryInfo).includes(category)) {
       setSelectedCategory(category);
     } else {
       setSelectedCategory(null);
     }
     setSearchTerm(query);
+    setCurrentPage(isNaN(page) || page < 1 ? 1 : page); // ★ Set current page, default to 1 if invalid
     
   }, [searchParams]);
-  
-  // カテゴリー変更時にURLも更新 (検索クエリも考慮)
-  const handleCategoryChange = (category: CategoryKey | null) => {
-    const currentQuery = searchParams.get('q') || '';
+
+  // カテゴリーまたはページ変更時にURLも更新 (検索クエリも考慮)
+  const updateUrl = (category: CategoryKey | null, page: number, currentQuery: string) => {
     const params = new URLSearchParams();
     if (category) {
       params.set('category', category);
@@ -101,9 +105,24 @@ export default function ArticlesHomePage() {
     if (currentQuery) {
       params.set('q', currentQuery);
     }
+    if (page > 1) { // ★ Add page to URL only if it's not the first page
+      params.set('page', page.toString());
+    }
     const newUrl = `/articles?${params.toString()}`;
-    console.log('[Articles Page] handleCategoryChange - New URL:', newUrl);
-    router.push(newUrl);
+    console.log('[Articles Page] updateUrl - New URL:', newUrl);
+    router.push(newUrl, { scroll: false }); // ★ Add scroll: false
+  };
+  
+  const handleCategoryChange = (category: CategoryKey | null) => {
+    const currentQuery = searchParams.get('q') || '';
+    // Reset to page 1 when category changes
+    updateUrl(category, 1, currentQuery);
+  };
+
+  const handlePageChange = (newPage: number) => { // ★ Page change handler
+    const currentQuery = searchParams.get('q') || '';
+    const currentCategory = selectedCategory;
+    updateUrl(currentCategory, newPage, currentQuery);
   };
   
   // カテゴリーと検索クエリでフィルタリング
@@ -128,6 +147,13 @@ export default function ArticlesHomePage() {
   
   // 人気記事を抽出
   const popularArticles = allArticles.filter(article => article.popular);
+
+  // Calculate total pages and current articles to display
+  const totalPages = Math.ceil(filteredArticles.length / ITEMS_PER_PAGE);
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentArticles = filteredArticles.slice(startIndex, endIndex);
+  console.log(`[Articles Page] Pagination - Current: ${currentPage}, Total: ${totalPages}, Displaying: ${currentArticles.length}`);
 
   // Determine the title for the article list section
   let listTitle = '記事一覧';
@@ -321,10 +347,10 @@ export default function ArticlesHomePage() {
           ))}
         </div>
         
-        {/* 記事一覧 グリッド (Always uses filteredArticles) */}
+        {/* 記事一覧 グリッド (Always uses currentArticles) */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredArticles.length > 0 ? (
-            filteredArticles.map(article => (
+          {currentArticles.length > 0 ? ( // ★ Change to currentArticles
+            currentArticles.map(article => ( // ★ Change to currentArticles
               <div 
                 key={article.id} 
                 className={`border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white`}
@@ -405,25 +431,58 @@ export default function ArticlesHomePage() {
         </div>
         
         {/* ページネーション */}
-        <div className="flex justify-center mt-10">
-          <div className="inline-flex rounded-md shadow">
-            <a href="#" className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-l-md hover:bg-slate-50">
-              前へ
-            </a>
-            <a href="#" className="px-4 py-2 text-sm font-medium text-white bg-slate-800 border border-slate-800">
-              1
-            </a>
-            <a href="#" className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50">
-              2
-            </a>
-            <a href="#" className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 hover:bg-slate-50">
-              3
-            </a>
-            <a href="#" className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border border-slate-300 rounded-r-md hover:bg-slate-50">
-              次へ
-            </a>
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-10">
+            <div className="inline-flex rounded-md shadow">
+              <button
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`px-4 py-2 text-sm font-medium border border-slate-300 rounded-l-md ${currentPage === 1 ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white text-slate-700 hover:bg-slate-50'}`}
+              >
+                前へ
+              </button>
+              {[...Array(totalPages)].map((_, i) => {
+                const pageNum = i + 1;
+                // Show first page, last page, and pages around current page
+                const showPage = 
+                  pageNum === 1 || 
+                  pageNum === totalPages || 
+                  (pageNum >= currentPage - 2 && pageNum <= currentPage + 2) ||
+                  (currentPage <= 3 && pageNum <= 5) || // show first 5 if current is 1,2,3
+                  (currentPage >= totalPages - 2 && pageNum >= totalPages - 4); // show last 5 if current is near end
+
+                const showEllipsisBefore = pageNum === currentPage - 3 && currentPage > 4 && totalPages > 7;
+                const showEllipsisAfter = pageNum === currentPage + 3 && currentPage < totalPages - 3 && totalPages > 7;
+
+                if (showEllipsisBefore) {
+                  return <span key={`ellipsis-before-${pageNum}`} className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border-y border-slate-300">...</span>;
+                }
+                if (showPage) {
+                  return (
+                    <button
+                      key={pageNum}
+                      onClick={() => handlePageChange(pageNum)}
+                      className={`px-4 py-2 text-sm font-medium border-y border-slate-300 ${currentPage === pageNum ? 'bg-slate-800 text-white border-slate-800' : 'bg-white text-slate-700 hover:bg-slate-50 border-slate-300'}`}
+                    >
+                      {pageNum}
+                    </button>
+                  );
+                }
+                if (showEllipsisAfter) {
+                  return <span key={`ellipsis-after-${pageNum}`} className="px-4 py-2 text-sm font-medium text-slate-700 bg-white border-y border-slate-300">...</span>;
+                }
+                return null;
+              })}
+              <button
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-4 py-2 text-sm font-medium border border-slate-300 rounded-r-md ${currentPage === totalPages ? 'bg-slate-100 text-slate-400 cursor-not-allowed' : 'bg-white text-slate-700 hover:bg-slate-50'}`}
+              >
+                次へ
+              </button>
+            </div>
           </div>
-        </div>
+        )}
       </div>
       
       {/* CTA セクション (Show always or conditionally based on selectedCategory) */}
