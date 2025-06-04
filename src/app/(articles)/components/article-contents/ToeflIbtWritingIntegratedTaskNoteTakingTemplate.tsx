@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const ToeflIbtWritingIntegratedTaskNoteTakingTemplate: React.FC = () => {
@@ -31,9 +30,9 @@ const ToeflIbtWritingIntegratedTaskNoteTakingTemplate: React.FC = () => {
     <p>それでは、具体的にどのようなメモ取りテンプレートを使えば良いのでしょうか？ここでは、リーディングとリスニングの情報を効率的に整理し、比較検討しやすくするための実践的なテンプレートを紹介します。このテンプレートは、2列対比形式を基本とし、各ポイントを明確に記録できるように設計されています。</p>
     <p><strong>基本テンプレート構造:</strong></p>
     <p>紙やPCのドキュメントを縦に2分割、または表計算ソフトで2列の表を作成するイメージです。</p>
-    <div style="display: flex; justify-content: space-around; margin-bottom: 1em;">
-      <div style="border: 1px solid #ccc; padding: 10px; width: 45%;">
-        <h4 style="text-align: center; margin-top:0;">リーディング (Reading)</h4>
+    <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '1em' }}>
+      <div style={{ border: '1px solid #ccc', padding: '10px', width: '45%' }}>
+        <h4 style={{ textAlign: 'center', marginTop: '0' }}>リーディング (Reading)</h4>
         <p><strong>Main Point / Claim:</strong> (パッセージの主題・主張)</p>
         <hr />
         <p><strong>Reason/Point 1:</strong></p>
@@ -45,8 +44,8 @@ const ToeflIbtWritingIntegratedTaskNoteTakingTemplate: React.FC = () => {
         <p><strong>Reason/Point 3 (if any):</strong></p>
         <ul><li>Detail/Example:</li></ul>
       </div>
-      <div style="border: 1px solid #ccc; padding: 10px; width: 45%;">
-        <h4 style="text-align: center; margin-top:0;">リスニング (Listening)</h4>
+      <div style={{ border: '1px solid #ccc', padding: '10px', width: '45%' }}>
+        <h4 style={{ textAlign: 'center', marginTop: '0' }}>リスニング (Listening)</h4>
         <p><strong>Lecturer's Stance:</strong> (Rの主張に賛成/反対/疑問など)</p>
         <hr />
         <p><strong>Counter-Argument/Point 1 (to R's Point 1):</strong></p>
