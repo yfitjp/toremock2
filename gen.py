@@ -10,17 +10,11 @@ import re # For className conversion
 
 # --- 設定ここから --- #
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 1
+NUM_THEMES_TO_GENERATE = 10
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-英語の勉強をしている社会人に向けて、英語学習が楽しくなるような、
-実践的なアドバイスや豆知識を提供したい。
-ターゲットは、英語の勉強方法に悩んでいる層や、特定の英語試験の対策を探している層、
-または具体的なスキルアップ（例：英会話、ライティング、発音矯正など）を目指している層。
-記事のトピック例: TOEIC Part別攻略法、ビジネス英語メールの書き方、英語面接対策、
-効果的なシャドーイングのやり方、おすすめ英語学習アプリの比較レビューなど、
-読者が直面している具体的な課題を解決できるような、ニッチで専門的なテーマを歓迎します。
+留学や旅行をする予定がある人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
 """
 # --- 設定ここまで --- #
 
@@ -200,11 +194,11 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
     "description": "記事の主題を明確に反映し、SEOを意識した100～150文字程度の説明文。",
     "category": "記事内容に最も適したカテゴリを {categories_str} の中から一つだけ選択してください。",
     "date": "{execution_date}",
-    "readTime": "記事本文のボリューム感を考慮し、平均的な読者が読むのにかかりそうな時間を『X分』という形式で記述してください。",
+    "readTime": "記事本文のボリューム感を考慮し、平均的な読者が読むのにかかりそうな時間を『X分』という形式で記述してください。(「約」は含めないでください)",
     "imageSrc": "必ず `/images/{theme_id}.jpg` という形式で、記事IDをファイル名として使用し、拡張子は.jpgとしてください。",
     "tags": ["記事内容から抽出した、SEOに有効な複数のキーワードタグ(日本語)を文字列の配列として記述してください。", "例: 英語学習", "初心者"]
   }},
-  "image_generation_prompt": "この記事のテーマと内容（タイトル: {article_title}）を最もよく表す、魅力的で高品質なサムネイル画像を生成するための、具体的な日本語のプロンプト（70単語くらい）を記述してください。必ず'vector art'スタイルで生成するように指示してください。画像内に文字はあまり入れないようにしてほしいですが、記事のキャッチコピーや重要なキーワード(例：TOEIC Part1, Harvardなど)を含めた方がいい場合は、その具体的な文字列、フォントの雰囲気、色、および画像内での大まかな配置を明確にプロンプトに記述してください。"
+  "image_generation_prompt": "この記事のテーマと内容（タイトル: {article_title}）を良く表し、さらに見た人の興味を引き、何だろう？と思わせるような、サムネイル画像を生成するための、具体的な英語のプロンプト（100単語くらい）を記述してください。必ず'vector art'スタイルで生成するように指示してください。画像内に文字は必要以上に入れないようにしてください。記事のキャッチコピーや重要なキーワード(例：TOEIC Part1, Harvardなど)を含めるべきと判断する場合は、その具体的な文字列を明確にプロンプトに記述してください。登場人物がいる場合は日本人(Japanese)であることを明記してください。"
 }}
 ```
 
@@ -305,7 +299,6 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
         print(f"HTML・メタデータ・画像プロンプト生成中にエラー: {e}. Theme ID: {theme_id}")
         return "", None, None
 
-# --- 画像生成と保存 ---
 def generate_and_save_image(task: dict) -> bool:
     """
     指定されたプロンプトに基づいてOpenAI DALL·Eを使用して画像を生成し、指定されたパスに保存する。
@@ -328,17 +321,31 @@ def generate_and_save_image(task: dict) -> bool:
         print(f"  エラー: 画像生成プロンプトまたは出力パスが不足しています。記事ID: {article_id}")
         return False
 
-    print(f"    OpenAI画像生成開始 - 出力先: {output_path}")
+    print(f"    OpenAI DALL·E画像生成開始 - 出力先: {output_path}")
     try:
         response = openai_client.images.generate(
-            model="gpt-image-1",
+            model="dall-e-3",  # dall-e-3 を使用
             prompt=prompt_text,
-            n=1,
-            size="1536x1024",
-            quality="medium"
+            n=1,  # 生成する画像の数
+            size="1792x1024",
+            quality="hd",
+            response_format="url"  # または "b64_json"
         )
 
-        if response.data and response.data[0].b64_json:
+        if response.data and response.data[0].url:
+            image_url = response.data[0].url
+            print(f"      画像URL受信: {image_url}")
+            
+            # URLから画像をダウンロードして保存
+            img_data_response = requests.get(image_url, timeout=30) # タイムアウトを設定
+            img_data_response.raise_for_status()  # HTTPエラーがあれば例外を発生
+
+            with open(output_path, 'wb') as f:
+                f.write(img_data_response.content)
+            print(f"      画像を {output_path} に正常に保存しました。")
+            return True
+        elif response.data and response.data[0].b64_json:
+            # response_format="b64_json" の場合の処理 (今回はurlを使用)
             import base64
             img_bytes = base64.b64decode(response.data[0].b64_json)
             print(f"      画像データ(b64_json)受信完了。ファイルに保存中...")
@@ -347,11 +354,9 @@ def generate_and_save_image(task: dict) -> bool:
             print(f"      画像を {output_path} に正常に保存しました。")
             return True
         else:
-            print(f"  エラー: OpenAI APIレスポンスからb64_jsonを抽出できませんでした。記事ID: {article_id}")
+            print(f"  エラー: OpenAI APIレスポンスから画像URLまたはb64_jsonを抽出できませんでした。記事ID: {article_id}")
             if hasattr(response, 'error'):
                 print(f"    API Error: {response.error}")
-            elif hasattr(response, 'data') and response.data and hasattr(response.data[0], 'error'):
-                 print(f"    API Error in data: {response.data[0].error}")
             return False
 
     except openai.APIError as e:

@@ -74,7 +74,7 @@ export async function generateMetadata({ params }: { params: { id: string } }) {
     return { title: '記事が見つかりません' };
   }
   return {
-    title: `${article.title} | トレモック情報局`,
+    title: `${article.title}`,
     description: article.description,
   };
 }

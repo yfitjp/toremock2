@@ -966,6 +966,70 @@ export const articleData: Record<string, ArticleData> = {
       "英語学習",
       "論文作法"
     ]
+  },
+  "toeic-part2-indirect-answer-strategy": {
+    "id": "toeic-part2-indirect-answer-strategy",
+    "title": "TOEIC Part2変化球応答の攻略法！間接的な答えを見抜く聞き取り術",
+    "description": "TOEIC Part2の難関、間接的な応答（変化球）に悩んでいませんか？この記事では、典型的な変化球パターンとその見抜き方、効果的な聞き取りトレーニング法、本番で役立つ実践テクニックを徹底解説。スコアアップを目指すあなたの強力な味方です！",
+    "category": "TOEIC",
+    "date": "2025-06-04",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-part2-indirect-answer-strategy.jpg",
+    "tags": [
+      "TOEIC",
+      "Part2",
+      "リスニング",
+      "間接応答",
+      "英語学習",
+      "スコアアップ",
+      "聞き取り",
+      "対策",
+      "勉強法",
+      "攻略法"
+    ]
+  },
+  "overseas-pharmacy-english-symptoms-cold-medicine": {
+    "id": "overseas-pharmacy-english-symptoms-cold-medicine",
+    "title": "海外薬局で風邪の症状を伝える英語フレーズ集！薬剤師との会話例で安心",
+    "description": "留学や海外旅行中に風邪をひいたら？海外の薬局で咳・鼻水・喉の痛みなどの症状を英語で正確に伝え、適切な市販薬を選ぶための実践的フレーズを薬剤師との会話例付きで解説。アレルギーや副作用の質問方法も網羅し、急な体調不良も安心です。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "7分",
+    "imageSrc": "/images/overseas-pharmacy-english-symptoms-cold-medicine.jpg",
+    "tags": [
+      "海外旅行 英語",
+      "薬局 英語",
+      "風邪 症状 英語",
+      "薬剤師 会話",
+      "留学 英語",
+      "市販薬 英語",
+      "体調不良 英語",
+      "英会話フレーズ",
+      "海外生活",
+      "英語学習"
+    ]
+  },
+  "overseas-supermarket-shopping-guide-product-labels-checkout-tips": {
+    "id": "overseas-supermarket-shopping-guide-product-labels-checkout-tips",
+    "title": "海外スーパー攻略！商品表示の見方からレジでの実践テクまで",
+    "description": "海外スーパーでの買い物に不安を感じていませんか？この記事では、商品ラベル（単位、アレルギー）の読み解き方、量り売り商品の購入テクニック、スムーズなレジでのやり取り、エコバッグの活用法まで、実践的な情報を網羅。これであなたも海外でのショッピングが楽しくなる！",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "8分",
+    "imageSrc": "/images/overseas-supermarket-shopping-guide-product-labels-checkout-tips.jpg",
+    "tags": [
+      "海外スーパー",
+      "買い物ガイド",
+      "商品ラベル",
+      "単位換算",
+      "アレルギー表示",
+      "量り売り",
+      "海外レジ",
+      "英会話フレーズ",
+      "エコバッグ",
+      "海外生活術",
+      "旅行準備"
+    ]
   }
 };
 
