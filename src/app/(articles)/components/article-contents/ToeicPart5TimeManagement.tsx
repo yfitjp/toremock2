@@ -4,7 +4,6 @@ import React from 'react';
 const ToeicPart5TimeManagement: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
-      <h1>TOEIC Part5 時間配分！75点UPの時短術</h1>
 <p>「TOEICのリーディング、いつも時間が足りない…」「Part5で時間を使いすぎて、長文問題に手が回らない…」そんな悩みを抱えていませんか？TOEIC Part5は短文穴埋め問題で構成され、リーディングセクションの最初の関門です。ここで時間を効率的に使うことが、リーディング全体のスコアを左右すると言っても過言ではありません。この記事では、Part5で時間を有効に使い、<strong>75点アップ</strong>を目指すための具体的な時間配分テクニックと、素早く正解を見抜くための時短術を徹底解説します。これを読めば、あなたもPart5を得点源に変えられるはずです！</p>
 
 <h2>TOEIC Part5 時間配分の基本戦略：なぜ時短が重要なのか？</h2>

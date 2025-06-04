@@ -4,8 +4,6 @@ import React from 'react';
 const IeltsWritingTask1GraphDescription: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
-      <h1>IELTSライティングTask1 グラフ問題の書き方</h1>
-
 <p>IELTSアカデミックモジュールのライティングTask1、特にグラフ問題は多くの受験者が苦労するポイントの一つです。「何を書けばいいの？」「どうやって150語も書くの？」「高得点を取るには？」そんな疑問をお持ちではありませんか？ご安心ください！この記事では、IELTSライティングTask1のグラフ問題で高得点を獲得するための効果的なアプローチを、データの読み取り方から具体的な記述構成、使える表現まで、初心者にも分かりやすく徹底解説します。この記事を読めば、あなたも自信を持ってグラフ問題に取り組めるようになるはずです！</p>
 
 <h2>IELTSライティングTask1 グラフ問題とは？</h2>

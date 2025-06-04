@@ -27,7 +27,7 @@
   <url>
     <loc>https://toremock.com/contact</loc>
     <lastmod>2024-07-26</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -39,7 +39,7 @@
   <url>
     <loc>https://toremock.com/legal</loc>
     <lastmod>2024-07-26</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -57,7 +57,7 @@
   <url>
     <loc>https://toremock.com/terms</loc>
     <lastmod>2024-07-26</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
@@ -69,7 +69,7 @@
   <url>
     <loc>https://toremock.com/subscription/cancel</loc>
     <lastmod>2024-07-26</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.4</priority>
   </url>
   <url>
@@ -81,7 +81,7 @@
   <url>
     <loc>https://toremock.com/privacy</loc>
     <lastmod>2024-07-26</lastmod>
-    <changefreq>yearly</changefreq>
+    <changefreq>monthly</changefreq>
     <priority>0.3</priority>
   </url>
 
@@ -247,6 +247,56 @@
     <priority>0.8</priority>
   </url>\n  <url>
     <loc>https://toremock.com/articles/english-debate-rebuttal-phrases-strategies</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/toeic-part5-advanced-grammar-strategy</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/business-english-email-nuance-phrases-request-refusal</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/english-conference-call-listening-difficulty-phrases</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/english-learning-app-pronunciation-vocabulary-comparison</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/netflix-shadowing-beginners-guide-drama-selection</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/english-presentation-opening-hooks-audience-engagement</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/english-small-talk-questions-avoid-awkward-silence</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/toeic-listening-part2-indirect-answers-strategy</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/english-diary-writing-tips-consistency-topic-ideas</loc>
+    <lastmod>2025-06-04</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>\n  <url>
+    <loc>https://toremock.com/articles/online-english-meeting-speaking-timing-interruption-phrases</loc>
     <lastmod>2025-06-04</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

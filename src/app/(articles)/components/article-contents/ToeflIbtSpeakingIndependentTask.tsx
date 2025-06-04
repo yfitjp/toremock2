@@ -4,7 +4,6 @@ import React from 'react';
 const ToeflIbtSpeakingIndependentTask: React.FC = () => {
   return (
     <div className="prose prose-lg max-w-none">
-      <h1>TOEFLスピーキング Independent Task攻略法</h1>
 <p>TOEFL iBTのスピーキングセクション、特にIndependent Taskは、多くの受験者が頭を悩ませる関門の一つではないでしょうか。「自分の意見を英語で、しかも短時間で論理的にまとめるなんて…」と不安に感じる方もいるかもしれません。しかし、心配は無用です！この記事では、Independent Taskで高得点を獲得するための<strong>鉄板テンプレート</strong>、日々の<strong>効果的な練習法</strong>、そして本番で役立つ<strong>具体的なコツ</strong>を、初心者にも分かりやすく徹底解説します。この記事を読めば、あなたも自信を持って自分の意見を述べられるようになり、目標スコア達成に一歩近づけるはずです。さあ、一緒にIndependent Task攻略の旅を始めましょう！</p>
 
 <h2>TOEFLスピーキング Independent Taskとは？基本をしっかり押さえよう</h2>

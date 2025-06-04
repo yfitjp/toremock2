@@ -666,6 +666,205 @@ export const articleData: Record<string, ArticleData> = {
       "説得力",
       "ビジネス英語"
     ]
+  },
+  "toeic-part5-advanced-grammar-strategy": {
+    "id": "toeic-part5-advanced-grammar-strategy",
+    "title": "TOEIC Part5特定文法問題の秒殺テク！仮定法・倒置攻略",
+    "description": "TOEIC Part5で多くの受験者が苦手とする仮定法や倒置。この記事では、これらの難解文法項目を「秒殺」するための具体的な見分け方、解答テクニックを豊富な例文と共に徹底解説します。頻出パターンから効果的な練習法、おすすめ教材まで網羅し、あなたのPart5攻略とスコアアップを力強くサポートします！",
+    "category": "TOEIC",
+    "date": "2025-06-04",
+    "readTime": "12分",
+    "imageSrc": "/images/toeic-part5-advanced-grammar-strategy.jpg",
+    "tags": [
+      "TOEIC",
+      "Part5",
+      "文法",
+      "仮定法",
+      "倒置",
+      "英語学習",
+      "スコアアップ",
+      "試験対策",
+      "秒殺テクニック"
+    ]
+  },
+  "business-english-email-nuance-phrases-request-refusal": {
+    "id": "business-english-email-nuance-phrases-request-refusal",
+    "title": "英語ビジネスメールで誤解されない！催促・断りの絶妙表現",
+    "description": "英語でのビジネスメール、催促や断りの伝え方に困っていませんか？この記事では、相手に失礼なく意図を正確に伝えるための具体的な催促・断り英語フレーズと、微妙なニュアンスの出し方を例文豊富に解説。円滑な国際ビジネスコミュニケーションを目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "9分",
+    "imageSrc": "/images/business-english-email-nuance-phrases-request-refusal.jpg",
+    "tags": [
+      "ビジネス英語",
+      "英語メール",
+      "コミュニケーション",
+      "英語フレーズ",
+      "催促メール",
+      "断りメール",
+      "ビジネスマナー",
+      "英語学習",
+      "異文化コミュニケーション",
+      "ニュアンス"
+    ]
+  },
+  "english-conference-call-listening-difficulty-phrases": {
+    "id": "english-conference-call-listening-difficulty-phrases",
+    "title": "英語電話会議で聞き取れない時の神フレーズ！焦らず対応",
+    "description": "英語の電話会議で「聞き取れない…」と困った経験はありませんか？この記事では、失礼なく聞き返すための具体的な英語フレーズ集や、聞き取り精度を上げるための事前準備、会議中の心構えまで、実践的な対策を分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "10分",
+    "imageSrc": "/images/english-conference-call-listening-difficulty-phrases.jpg",
+    "tags": [
+      "英語会議",
+      "電話会議",
+      "リスニング",
+      "聞き取れない",
+      "ビジネス英語",
+      "英語フレーズ",
+      "英語学習",
+      "コミュニケーション",
+      "オンライン会議"
+    ]
+  },
+  "english-learning-app-pronunciation-vocabulary-comparison": {
+    "id": "english-learning-app-pronunciation-vocabulary-comparison",
+    "title": "英語学習アプリ特定機能比較！発音矯正/単語暗記特化型",
+    "description": "英語学習アプリ選びに迷う方必見！本記事では「発音矯正」と「単語暗記」という特定機能に特化したおすすめアプリを徹底比較。ELSA SpeakやAnkiなどの人気アプリの特徴、選び方のポイントを解説し、あなたの英語力向上に最適なアプリ探しをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "6分",
+    "imageSrc": "/images/english-learning-app-pronunciation-vocabulary-comparison.jpg",
+    "tags": [
+      "英語学習アプリ",
+      "発音矯正",
+      "単語暗記",
+      "スキマ時間学習",
+      "英語学習 初心者",
+      "アプリ比較",
+      "おすすめアプリ"
+    ]
+  },
+  "netflix-shadowing-beginners-guide-drama-selection": {
+    "id": "netflix-shadowing-beginners-guide-drama-selection",
+    "title": "初心者向けNetflixシャドーイング！挫折しないドラマと方法",
+    "description": "Netflixでの英語シャドーイングに挑戦したい初心者必見！挫折しないための具体的なステップ、効果的な学習法、おすすめドラマ5選を徹底解説。楽しく英語力を向上させるコツが満載です。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "10分",
+    "imageSrc": "/images/netflix-shadowing-beginners-guide-drama-selection.jpg",
+    "tags": [
+      "Netflix",
+      "シャドーイング",
+      "英語学習",
+      "初心者",
+      "海外ドラマ",
+      "リスニング",
+      "スピーキング",
+      "独学"
+    ]
+  },
+  "english-presentation-opening-hooks-audience-engagement": {
+    "id": "english-presentation-opening-hooks-audience-engagement",
+    "title": "英語プレゼン冒頭で掴む！聴衆を惹きつける導入テクニック",
+    "description": "英語プレゼン、最初の数分が勝負！この記事では、聴衆を惹きつけ、プレゼンを成功に導くための効果的な導入テクニック7選を徹底解説。すぐに使える英語フレーズや、準備・練習方法、役立つ学習ツールも具体例満載でご紹介します。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "8分",
+    "imageSrc": "/images/english-presentation-opening-hooks-audience-engagement.jpg",
+    "tags": [
+      "英語プレゼン",
+      "プレゼン導入",
+      "スピーチ冒頭",
+      "アイスブレイク",
+      "聴衆の心をつかむ",
+      "ビジネス英語",
+      "英語学習法",
+      "プレゼンテクニック",
+      "英語フレーズ"
+    ]
+  },
+  "english-small-talk-questions-avoid-awkward-silence": {
+    "id": "english-small-talk-questions-avoid-awkward-silence",
+    "title": "英語雑談で話題が途切れない！ネイティブ流質問テクニック",
+    "description": "英語でのスモールトーク、話題が尽きて気まずい沈黙に困っていませんか？この記事では、会話が自然に弾むネイティブ流の質問テクニック5選や、どんな相手にも使える鉄板話題集10選を具体例と共に徹底解説。今日から実践できるコツを掴んで、雑談への苦手意識を克服し、英会話をもっと楽しみましょう！",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "12分",
+    "imageSrc": "/images/english-small-talk-questions-avoid-awkward-silence.jpg",
+    "tags": [
+      "英語学習",
+      "スモールトーク",
+      "英会話",
+      "コミュニケーション",
+      "質問力",
+      "雑談ネタ",
+      "ネイティブフレーズ",
+      "会話術",
+      "気まずい沈黙対策"
+    ]
+  },
+  "toeic-listening-part2-indirect-answers-strategy": {
+    "id": "toeic-listening-part2-indirect-answers-strategy",
+    "title": "TOEIC Part2変化球応答も怖くない！間接的回答攻略法",
+    "description": "TOEICリスニングPart2でスコアアップを阻む間接的な応答。この記事では、頻出する変化球の回答パターンを徹底分析し、具体的な攻略テクニックと実践的な練習問題を解説します。これであなたもPart2マスターに！",
+    "category": "TOEIC",
+    "date": "2025-06-04",
+    "readTime": "6分",
+    "imageSrc": "/images/toeic-listening-part2-indirect-answers-strategy.jpg",
+    "tags": [
+      "TOEIC",
+      "リスニング",
+      "Part2",
+      "間接応答",
+      "英語学習",
+      "スコアアップ",
+      "試験対策",
+      "英語耳",
+      "攻略法"
+    ]
+  },
+  "english-diary-writing-tips-consistency-topic-ideas": {
+    "id": "english-diary-writing-tips-consistency-topic-ideas",
+    "title": "英語日記が続く！初心者向けネタ出しと書き方3ステップ",
+    "description": "英語日記を始めたいけど何を書けばいいかわからない、三日坊主になってしまう、という初心者の方へ。この記事では、英語日記を楽しく続けるための具体的な3ステップ、豊富なネタ出しアイデア、役立つ英語フレーズを分かりやすく解説します。今日から英語力アップを目指しましょう！",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "12分",
+    "imageSrc": "/images/english-diary-writing-tips-consistency-topic-ideas.jpg",
+    "tags": [
+      "英語日記",
+      "英語学習",
+      "初心者",
+      "継続のコツ",
+      "ネタ",
+      "書き方",
+      "英語フレーズ",
+      "英語力アップ",
+      "ライティング練習"
+    ]
+  },
+  "online-english-meeting-speaking-timing-interruption-phrases": {
+    "id": "online-english-meeting-speaking-timing-interruption-phrases",
+    "title": "英語オンライン会議で発言する勇気！スマートな割込み術",
+    "description": "英語オンライン会議で発言できない悩みを解決！スマートに割込むための便利フレーズや、タイミングを見極めるコツ、自信を持って意見を伝えるための準備と練習法を具体的に解説。今日から使える実践テクニックで、会議の主役を目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-04",
+    "readTime": "6分",
+    "imageSrc": "/images/online-english-meeting-speaking-timing-interruption-phrases.jpg",
+    "tags": [
+      "英語会議",
+      "オンライン会議",
+      "ビジネス英語",
+      "英会話フレーズ",
+      "スピーキング",
+      "コミュニケーション",
+      "英語学習",
+      "割り込み術",
+      "発言タイミング",
+      "英語表現"
+    ]
   }
 };
 
