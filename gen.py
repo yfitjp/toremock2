@@ -10,7 +10,7 @@ import re # For className conversion
 
 # --- 設定ここから --- #
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 2
+NUM_THEMES_TO_GENERATE = 1
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """

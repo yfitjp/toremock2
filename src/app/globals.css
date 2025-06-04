@@ -88,3 +88,60 @@
     }
   }
 }
+
+@layer base {
+  /* Typography プラグイン（prose）のカスタマイズ */
+  .prose {
+    @apply text-slate-700;
+  }
+  .prose :where(a):not(:where([class~="not-prose"] *)) {
+    @apply text-blue-600 no-underline font-medium;
+  }
+  .prose :where(a):not(:where([class~="not-prose"] *)):hover {
+    @apply underline text-blue-700;
+  }
+  .prose :where(strong):not(:where([class~="not-prose"] *)) {
+    @apply text-slate-800 font-semibold;
+  }
+  .prose :where(ul > li::marker):not(:where([class~="not-prose"] *)) {
+    @apply text-slate-500;
+  }
+  .prose :where(ol > li::marker):not(:where([class~="not-prose"] *)) {
+    @apply text-slate-500;
+  }
+
+  .prose-lg {
+    @apply text-lg leading-relaxed;
+  }
+  .prose-lg :where(h1):not(:where([class~="not-prose"] *)) {
+    @apply text-3xl font-bold text-slate-900 mb-6 mt-8;
+  }
+  .prose-lg :where(h2):not(:where([class~="not-prose"] *)) {
+    @apply text-2xl font-semibold text-slate-800 mb-4 mt-10 pt-2 pb-2 border-l-4 border-blue-600 pl-4 border-b border-slate-300;
+  }
+  .prose-lg :where(h3):not(:where([class~="not-prose"] *)) {
+    @apply text-xl font-semibold text-slate-800 mb-3 mt-8 pt-1 pb-1 border-l-4 border-blue-500 pl-3;
+  }
+  .prose-lg :where(h4):not(:where([class~="not-prose"] *)) {
+    @apply text-lg font-semibold text-slate-800 mb-2 mt-6;
+  }
+  .prose-lg :where(img):not(:where([class~="not-prose"] *)) {
+    @apply rounded-lg shadow-md my-8; /* 画像に少しスタイルを追加 */
+  }
+  .prose-lg :where(hr):not(:where([class~="not-prose"] *)) {
+    @apply my-10 border-slate-300; /* 水平線のスタイル */
+  }
+  .prose-lg :where(blockquote):not(:where([class~="not-prose"] *)) {
+    @apply border-l-4 border-blue-500 pl-4 italic text-slate-600 my-6; /* 引用のスタイル */
+  }
+  .prose-lg :where(figure > figcaption):not(:where([class~="not-prose"] *)) {
+    @apply text-sm text-slate-500 text-center mt-2; /* 画像キャプションのスタイル */
+  }
+  /* コードブロックのスタイル（任意で追加・調整） */
+  .prose-lg :where(pre):not(:where([class~="not-prose"] *)) {
+    @apply bg-slate-800 text-slate-50 p-4 rounded-lg shadow-md text-sm my-8;
+  }
+  .prose-lg :where(code):not(:where([class~="not-prose"] *)):not(:where(pre > code)):not(:where([class~="not-prose"] *)) {
+    @apply bg-slate-100 text-slate-800 px-1 py-0.5 rounded text-sm font-mono;
+  }
+}

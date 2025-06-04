@@ -245,7 +245,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             id="article-content"
             dangerouslySetInnerHTML={{ __html: article.contentHtml }} // HTMLレンダリングを削除
           /> */}
-          <div id="article-content" className="prose prose-lg max-w-none mb-12">
+          <div id="article-content" className="prose prose-lg max-w-3xl mx-auto mb-12">
             {ArticleContentComponent && <ArticleContentComponent />} {/* 動的にロードしたコンポーネントをレンダリング */}
           </div>
           
