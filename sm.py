@@ -52,7 +52,7 @@ def generate_sitemap_entries_for_articles(articles):
             f"    <loc>{loc}</loc>\n"
             f"    <lastmod>{lastmod}</lastmod>\n"
             f"    <changefreq>weekly</changefreq>\n"
-            f"    <priority>0.9</priority>\n"
+            f"    <priority>0.8</priority>\n"
             f"  </url>"
         )
         xml_entries.append(entry)
