@@ -80,7 +80,7 @@ export default function ArticlesHeader() {
               href="/" 
               className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <span>模試サイトを見る</span>
+              <span>無料で模試を受ける</span>
               <svg className="ml-2 h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
@@ -119,7 +119,7 @@ export default function ArticlesHeader() {
                 className="block w-full text-center py-2 px-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-sm"
                 onClick={toggleMobileMenu}
               >
-                模試サイトを見る
+                無料で模試を受ける
               </Link>
             </div>
           </div>

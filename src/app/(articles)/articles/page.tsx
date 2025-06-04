@@ -498,7 +498,7 @@ export default function ArticlesHomePage() {
             href="/"
             className="inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors"
           >
-            模試を受けてみる
+            無料で模試を受ける
           </Link>
         </div>
       </div>

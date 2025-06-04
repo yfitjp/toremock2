@@ -10,11 +10,11 @@ import re # For className conversion
 
 # --- 設定ここから --- #
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 10
+NUM_THEMES_TO_GENERATE = 20
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-留学や旅行をする予定がある人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
+海外大学/大学院への留学をする予定がある人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
 """
 # --- 設定ここまで --- #
 
