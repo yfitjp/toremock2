@@ -22,7 +22,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "英語学習を始めたばかりの高校生・大学生へ。何から手をつければ良いか分からないあなたに、英単語・文法の基礎固めから、リスニング・リーディングの習慣化、アウトプット練習、そして学習を継続するコツまで、具体的な方法とおすすめ教材・ツールを分かりやすく解説します。",
     "category": "学習法",
     "date": "2025-06-04",
-    "readTime": "約10分",
+    "readTime": "10分",
     "imageSrc": "/images/english-study-beginner-tips.jpg",
     "tags": [
       "英語学習",
@@ -66,7 +66,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "英語学習を毎日の習慣にしたいけど続かないあなたへ。この記事では、忙しい学生や社会人でも無理なく英語学習を生活の一部にするための、具体的で効果的な3つの秘訣（スモールステップ、学習のエンタメ化、記録と振り返り）を分かりやすく解説。今日から実践できるヒントが満載です。",
     "category": "学習法",
     "date": "2025-06-04",
-    "readTime": "約9分",
+    "readTime": "9分",
     "imageSrc": "/images/english-study-habit-making.jpg",
     "tags": [
       "英語学習",
@@ -123,7 +123,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "TOEICリスニングでスコアアップを目指すあなたへ。満点獲得者が実践するディクテーションの具体的なやり方、効果、注意点を徹底解説。聞き取れない原因を特定し、効果的な学習法でリスニング力を飛躍的に向上させましょう。",
     "category": "TOEIC",
     "date": "2025-06-04",
-    "readTime": "約6分",
+    "readTime": "6分",
     "imageSrc": "/images/toeic-listening-dictation-practice.jpg",
     "tags": [
       "TOEICリスニング",
@@ -161,7 +161,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "英検2級の面接、緊張しますよね？この記事では、面接の流れから頻出質問とその模範解答例、さらには合格を確実にするための重要なポイントや効果的な練習方法まで、具体的かつ分かりやすく解説します。これであなたも自信を持って面接に臨めます！",
     "category": "英語試験",
     "date": "2025-06-04",
-    "readTime": "約12分",
+    "readTime": "12分",
     "imageSrc": "/images/eiken-grade2-interview-tips.jpg",
     "tags": [
       "英検2級",
@@ -200,7 +200,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "英会話を独学で習得したいあなたへ。この記事では、シャドーイング、オンライン英会話、独り言など、自宅でできる効果的な練習法を5つ厳選して紹介します。具体的なやり方やおすすめ教材も解説し、スピーキング力アップをサポート。今日から実践できるヒントが満載です！",
     "category": "学習法",
     "date": "2025-06-04",
-    "readTime": "約9分",
+    "readTime": "9分",
     "imageSrc": "/images/english-conversation-self-study.jpg",
     "tags": [
       "英会話",
@@ -221,7 +221,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "英語のリスニングとスピーキングを同時に鍛えるシャドーイング。この記事では、初心者でも無理なく効果的にシャドーイングを始めるための正しいやり方を7つのステップで徹底解説。教材選びのコツから効果を最大化する秘訣、よくある疑問まで網羅し、あなたの英語力向上をサポートします。",
     "category": "学習法",
     "date": "2025-06-04",
-    "readTime": "約9分",
+    "readTime": "9分",
     "imageSrc": "/images/shadowing-effective-method.jpg",
     "tags": [
       "シャドーイング",
@@ -592,7 +592,7 @@ export const articleData: Record<string, ArticleData> = {
     "description": "IELTSライティングTask1のグラフ問題で高得点を取るための秘訣を徹底解説。データの読み取り方から効果的なパラグラフ構成、使える英語表現、実践的な練習方法まで網羅し、スコアアップをサポートします。初心者にも分かりやすく、自信を持って試験に臨めるよう導きます。",
     "category": "英語試験",
     "date": "2025-06-04",
-    "readTime": "約8分",
+    "readTime": "8分",
     "imageSrc": "/images/ielts-writing-task1-graph-description.jpg",
     "tags": [
       "IELTS",
@@ -845,14 +845,14 @@ export const articleData: Record<string, ArticleData> = {
       "ライティング練習"
     ]
   },
-  "online-english-meeting-speaking-timing-interruption-phrases": {
+  "online-english-meeting-speaking-interruption-phrases": {
     "id": "online-english-meeting-speaking-timing-interruption-phrases",
     "title": "英語オンライン会議で発言する勇気！スマートな割込み術",
     "description": "英語オンライン会議で発言できない悩みを解決！スマートに割込むための便利フレーズや、タイミングを見極めるコツ、自信を持って意見を伝えるための準備と練習法を具体的に解説。今日から使える実践テクニックで、会議の主役を目指しましょう。",
     "category": "学習法",
     "date": "2025-06-04",
     "readTime": "6分",
-    "imageSrc": "/images/online-english-meeting-speaking-timing-interruption-phrases.jpg",
+    "imageSrc": "/images/online-english-meeting-speaking-interruption-phrases.jpg",
     "tags": [
       "英語会議",
       "オンライン会議",
