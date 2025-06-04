@@ -844,27 +844,6 @@ export const articleData: Record<string, ArticleData> = {
       "英語力アップ",
       "ライティング練習"
     ]
-  },
-  "online-english-meeting-speaking-interruption-phrases": {
-    "id": "online-english-meeting-speaking-timing-interruption-phrases",
-    "title": "英語オンライン会議で発言する勇気！スマートな割込み術",
-    "description": "英語オンライン会議で発言できない悩みを解決！スマートに割込むための便利フレーズや、タイミングを見極めるコツ、自信を持って意見を伝えるための準備と練習法を具体的に解説。今日から使える実践テクニックで、会議の主役を目指しましょう。",
-    "category": "学習法",
-    "date": "2025-06-04",
-    "readTime": "6分",
-    "imageSrc": "/images/online-english-meeting-speaking-interruption-phrases.jpg",
-    "tags": [
-      "英語会議",
-      "オンライン会議",
-      "ビジネス英語",
-      "英会話フレーズ",
-      "スピーキング",
-      "コミュニケーション",
-      "英語学習",
-      "割り込み術",
-      "発言タイミング",
-      "英語表現"
-    ]
   }
 };
 
