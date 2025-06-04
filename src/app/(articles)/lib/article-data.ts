@@ -1616,26 +1616,6 @@ export const articleData: Record<string, ArticleData> = {
       "支払い"
     ]
   },
-  "credit-card-travel-insurance-pitfalls-claim-documents-procedure": {
-    "id": "credit-card-travel-insurance-pitfalls-claim-documents-procedure",
-    "title": "クレカ付帯保険の盲点！請求に必要な書類と手続き徹底ガイド",
-    "description": "クレジットカード付帯の海外旅行保険は本当に安心？自動付帯・利用付帯の違い、補償期間や金額の落とし穴を徹底解説。事故発生時の保険金請求に必要な書類リストや手続きの流れ、事前の備えまで具体的にガイドします。海外旅行前の最終チェックに！",
-    "category": "学習法",
-    "date": "2025-06-05",
-    "readTime": "12分",
-    "imageSrc": "/images/credit-card-travel-insurance-pitfalls-claim-documents-procedure.jpg",
-    "tags": [
-      "クレジットカード付帯保険",
-      "海外旅行保険",
-      "保険金請求",
-      "必要書類",
-      "旅行準備",
-      "自動付帯",
-      "利用付帯",
-      "補償内容",
-      "海外旅行 トラブル"
-    ]
-  },
   "overseas-atm-withdrawal-fee-saving-cards-operation-tips": {
     "id": "overseas-atm-withdrawal-fee-saving-cards-operation-tips",
     "title": "海外ATM手数料最小化！お得なカードと現地操作のコツ【主要通貨】",
