@@ -24,7 +24,7 @@ const BusinessEnglishEmailAvoidingAmbiguity: React.FC = () => {
     <h2>今日から実践！曖昧さをなくす5つの黄金ルール</h2>
     <p>曖昧な英語メールから卒業し、明確でプロフェッショナルなコミュニケーションを実現するための5つの黄金ルールをご紹介します。これらを意識するだけで、あなたのメールは劇的に変わるはずです。</p>
     <h3>ルール1: 具体的な言葉を選ぶ – 数字、日付、行動を明確に</h3>
-    <p>曖昧さの最大の原因は、具体性の欠如です。「いくつかの」「すぐに」「検討します」といった言葉は便利ですが、受け手によって解釈が大きく変わってしまいます。これを避けるためには、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>具体的な数字、日付、時間、そして行動</span>を明示することが重要です。</p>
+    <p>曖昧さの最大の原因は、具体性の欠如です。「いくつかの」「すぐに」「検討します」といった言葉は便利ですが、受け手によって解釈が大きく変わってしまいます。これを避けるためには、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>具体的な数字、日付、時間、そして行動</strong>を明示することが重要です。</p>
     <ul>
       <li><strong>NG:</strong> We need several samples. (いくつかのサンプルが必要です。)</li>
       <li><strong>OK:</strong> We need <span style={{ color: '#2563eb', fontWeight: 'bold' }}>five</span> samples. (5つのサンプルが必要です。)</li>
@@ -36,7 +36,7 @@ const BusinessEnglishEmailAvoidingAmbiguity: React.FC = () => {
     <p>このように、誰が何をいつまでに行うのかを明確にすることで、誤解の余地をなくし、スムーズな業務遂行をサポートします。</p>
 
     <h3>ルール2: 肯定的な表現を心がける – 前向きな姿勢を伝える</h3>
-    <p>否定的な言葉や遠回しな表現は、相手にネガティブな印象を与えたり、意図が伝わりにくくなったりすることがあります。「できません」「問題があります」と伝える必要がある場合でも、可能な限り<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>代替案や解決策を添えて肯定的なトーンで伝える</span>工夫をしましょう。</p>
+    <p>否定的な言葉や遠回しな表現は、相手にネガティブな印象を与えたり、意図が伝わりにくくなったりすることがあります。「できません」「問題があります」と伝える必要がある場合でも、可能な限り<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>代替案や解決策を添えて肯定的なトーンで伝える</strong>工夫をしましょう。</p>
     <ul>
       <li><strong>NG:</strong> I can't finish this by today. (今日中にこれを終えることはできません。)</li>
       <li><strong>OK:</strong> While I won't be able to finish this by today, I <span style={{ color: '#2563eb', fontWeight: 'bold' }}>can complete it by tomorrow afternoon</span>. Would that work for you? (今日中に終えることは難しいですが、明日の午後までには完了できます。それでよろしいでしょうか？)</li>
@@ -45,7 +45,7 @@ const BusinessEnglishEmailAvoidingAmbiguity: React.FC = () => {
     </ul>
 
     <h3>ルール3: 受動態よりも能動態を意識する – 責任の所在を明確に</h3>
-    <p>受動態（be動詞 + 過去分詞）は、行為者を曖昧にする傾向があります。ビジネスメールでは、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>誰が何をするのかを明確にするために、できるだけ能動態を使う</span>ことをお勧めします。</p>
+    <p>受動態（be動詞 + 過去分詞）は、行為者を曖昧にする傾向があります。ビジネスメールでは、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>誰が何をするのかを明確にするために、できるだけ能動態を使う</strong>ことをお勧めします。</p>
     <ul>
       <li><strong>NG:</strong> The decision will be made soon. (決定は間もなくなされます。 – 誰が？)</li>
       <li><strong>OK:</strong> <span style={{ color: '#2563eb', fontWeight: 'bold' }}>We</span> will make the decision by the end of this week. (私たちが今週末までに決定します。)</li>
@@ -55,7 +55,7 @@ const BusinessEnglishEmailAvoidingAmbiguity: React.FC = () => {
     <p>能動態を使うことで、責任の所在が明確になり、メッセージがよりダイレクトに伝わります。</p>
 
     <h3>ルール4: 簡潔さを追求する (KISSの原則) – 1文1メッセージ</h3>
-    <p>KISSとは「Keep It Simple, Stupid」の略で、「簡潔に、分かりやすく」という意味の原則です。ビジネスメールでは、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>一文を短くし、一つの文には一つのメッセージだけを込める</span>ように心がけましょう。冗長な表現や複雑な言い回し、専門用語の多用は避け、相手が短時間で内容を理解できるように配慮することが大切です。</p>
+    <p>KISSとは「Keep It Simple, Stupid」の略で、「簡潔に、分かりやすく」という意味の原則です。ビジネスメールでは、<strong style={{ color: '#2563eb', fontWeight: 'bold' }}>一文を短くし、一つの文には一つのメッセージだけを込める</strong>ように心がけましょう。冗長な表現や複雑な言い回し、専門用語の多用は避け、相手が短時間で内容を理解できるように配慮することが大切です。</p>
     <p>例えば、情報を伝える際は箇条書きを利用したり、段落を適切に区切ったりするのも効果的です。ツールとしては、<a href="https://hemingwayapp.com/" target="_blank" rel="noopener noreferrer">Hemingway Editor</a>のようなウェブサイトが、文章の簡潔性や可読性をチェックするのに役立ちます。</p>
 
     <h3>ルール5: 確認を怠らない – 相互理解を深める</h3>
