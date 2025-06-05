@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 const ToeflIbtSpeakingIndependentTaskDeepReasoningExamples: React.FC = () => {
@@ -51,7 +50,7 @@ const ToeflIbtSpeakingIndependentTaskDeepReasoningExamples: React.FC = () => {
   <h2>具体例を効果的に示す方法</h2>
   <p>説得力のある具体例は、あなたの意見を鮮やかに彩り、聞き手の理解を助けます。単なる「例えば〜」ではなく、記憶に残る具体例を提示するためのコツを見ていきましょう。</p>
   <h3>1. S.T.A.R.メソッドを応用する</h3>
-  <p>S.T.A.R.メソッドは、主に面接で使われる手法ですが、スピーキングの具体例を構成する上でも非常に有効です。
+  <p>S.T.A.R.メソッドは、主に面接で使われる手法ですが、スピーキングの具体例を構成する上でも非常に有効です。</p>
   <ul>
     <li><strong>Situation (状況):</strong> どのような状況だったか？</li>
     <li><strong>Task (課題):</strong> その状況で何をする必要があったか？</li>

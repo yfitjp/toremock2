@@ -10,11 +10,11 @@ import re # For className conversion
 
 # --- 設定ここから --- #
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 1
+NUM_THEMES_TO_GENERATE = 50
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-TOEICまたはTOEFLの勉強をする層の人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
+TOEICまたはTOEFLの勉強をする層の人に向けて、実践的なアドバイスや豆知識、役立つ情報を提供したい。
 例：「TOEFLは誰が採点しているのか」、「アイビーリーグとは」、「EA(Early Action)とは」、「TOEICは主にどんな人が受けるのか」など
 """
 # --- 設定ここまで --- #
