@@ -2239,6 +2239,1599 @@ export const articleData: Record<string, ArticleData> = {
     "ETS"
     ]
   },
+  "toeic-part1-distinguishing-state-action": {
+    "id": "toeic-part1-distinguishing-state-action",
+    "title": "TOEIC Part1写真描写：「状態」と「動作」の見分け方",
+    "description": "TOEIC Part1の写真描写問題でスコアアップを目指すあなたへ。「状態」を表す表現と「動作」を表す表現の違いを徹底解説！具体的な見分け方のコツ、紛らわしい動詞のペア、効果的な学習法まで、初心者にも分かりやすく紹介します。これでPart1対策は万全！",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/toeic-part1-distinguishing-state-action.jpg",
+    "tags": [
+    "TOEIC",
+    "Part1",
+    "写真描写問題",
+    "リスニング対策",
+    "英語学習",
+    "状態動詞",
+    "動作動詞",
+    "スコアアップ",
+    "英語初心者",
+    "TOEIC対策"
+    ]
+  },
+  "toeic-part2-indirect-response-strategy": {
+    "id": "toeic-part2-indirect-response-strategy",
+    "title": "TOEIC Part2変化球応答問題の攻略法！Yes/No以外",
+    "description": "TOEIC Part2でスコアアップを阻む「変化球」応答。この記事では、Yes/Noでは答えられない間接的な応答パターンを徹底分析し、具体的な攻略法とトレーニング術を解説。頻出パターンをマスターして、リスニングセクションの難問を克服しましょう。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toeic-part2-indirect-response-strategy.jpg",
+    "tags": [
+    "TOEIC",
+    "Part2",
+    "リスニング",
+    "間接応答",
+    "英語学習",
+    "試験対策",
+    "スコアアップ",
+    "英語の質問",
+    "応答パターン"
+    ]
+  },
+  "toeic-part3-4-recovery-strategy-no-prereading": {
+    "id": "toeic-part3-4-recovery-strategy-no-prereading",
+    "title": "TOEIC Part3,4先読み不可時のリカバリー戦略",
+    "description": "TOEIC Part3・Part4で先読みが間に合わない！そんな絶望的な状況でも諦めないための具体的なリカバリー戦略を徹底解説。平常心を保つコツから設問・選択肢の瞬時の読み取り方、普段のトレーニング法まで、スコアアップに繋がる実践的テクニックを紹介します。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/toeic-part3-4-recovery-strategy-no-prereading.jpg",
+    "tags": [
+    "TOEIC",
+    "リスニング",
+    "Part3",
+    "Part4",
+    "先読み",
+    "リカバリー戦略",
+    "英語学習",
+    "試験対策",
+    "高得点",
+    "TOEIC対策"
+    ]
+  },
+  "toeic-part5-pos-verb-form-high-speed-solving": {
+    "id": "toeic-part5-pos-verb-form-high-speed-solving",
+    "title": "TOEIC Part5品詞・動詞問題15秒解答テクニック",
+    "description": "TOEIC Part5のスコアアップを目指すあなたへ！この記事では、品詞問題と動詞の形を問う問題をわずか15秒で解くための具体的なテクニックを徹底解説。空所の前後確認、文型把握、時制・態の識別方法から、効果的な学習法、おすすめ教材まで網羅。時間短縮と正答率アップを実現し、目標スコア達成をサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toeic-part5-pos-verb-form-high-speed-solving.jpg",
+    "tags": [
+    "TOEIC Part5",
+    "品詞問題",
+    "動詞の形",
+    "解答テクニック",
+    "TOEIC対策",
+    "英語学習",
+    "時間短縮",
+    "スコアアップ",
+    "TOEIC文法",
+    "初心者向け"
+    ]
+  },
+  "toeic-part6-sentence-insertion-logical-markers": {
+    "id": "toeic-part6-sentence-insertion-logical-markers",
+    "title": "TOEIC Part6文挿入問題で満点を取る論理マーカー活用術",
+    "description": "TOEIC Part6の文挿入問題で高得点を目指すための効果的なテクニックを解説。特に、文章の前後関係を示す「論理マーカー」に注目し、その種類、具体的な解答手順、役立つヒントを詳述。実践的な学習法やおすすめ教材も紹介し、スコアアップをサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-part6-sentence-insertion-logical-markers.jpg",
+    "tags": [
+    "TOEIC",
+    "Part6",
+    "文挿入問題",
+    "論理マーカー",
+    "英語学習",
+    "リーディング対策",
+    "スコアアップ",
+    "解答テクニック",
+    "英語教材"
+    ]
+  },
+  "toeic-part7-triple-passage-time-management": {
+    "id": "toeic-part7-triple-passage-time-management",
+    "title": "TOEIC Part7トリプルパッセージ時間内攻略の情報整理術",
+    "description": "TOEIC Part7のトリプルパッセージで時間が足りないあなたへ。複数の文書から効率的に情報を整理し、時間内に問題を解き切るための具体的なテクニックやトレーニング方法、おすすめリソースを徹底解説します。スコアアップを目指しましょう。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-part7-triple-passage-time-management.jpg",
+    "tags": [
+    "TOEIC",
+    "Part7",
+    "トリプルパッセージ",
+    "時間管理",
+    "情報整理",
+    "英語学習",
+    "読解対策",
+    "スコアアップ",
+    "リーディング対策"
+    ]
+  },
+  "toeic-test-day-listening-concentration-tips": {
+    "id": "toeic-test-day-listening-concentration-tips",
+    "title": "TOEIC当日リスニングで集中力を維持する秘訣と耳慣らし",
+    "description": "TOEICリスニングで集中力を保つ秘訣を徹底解説！試験当日の耳慣らし方法から、事前にできる効果的なトレーニング、メモ取りテクニックまで、スコアアップに繋がる具体的なアドバイスを満載。これであなたもリスニングの悩みを解消！",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/toeic-test-day-listening-concentration-tips.jpg",
+    "tags": [
+    "TOEICリスニング",
+    "集中力",
+    "英語学習",
+    "試験対策",
+    "耳慣らし",
+    "高得点",
+    "英語耳",
+    "リスニング対策"
+    ]
+  },
+  "toeic-paraphrasing-recognition-practice": {
+    "id": "toeic-paraphrasing-recognition-practice",
+    "title": "TOEICスコア直結！「パラフレーズ」の見抜き方と練習法",
+    "description": "TOEICスコアアップの鍵となる「パラフレーズ」を徹底解説！リスニングやリーディングで言い換え表現を素早く見抜くための具体的な3ステップと、効果的な練習法を伝授します。おすすめ教材や陥りがちな罠も紹介し、あなたのTOEIC対策を強力にサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/toeic-paraphrasing-recognition-practice.jpg",
+    "tags": [
+    "TOEIC",
+    "パラフレーズ",
+    "言い換え",
+    "リスニング対策",
+    "リーディング対策",
+    "英語学習",
+    "スコアアップ",
+    "TOEIC対策",
+    "英語勉強法"
+    ]
+  },
+  "toeic-advanced-business-vocabulary-beyond-textbooks": {
+    "id": "toeic-advanced-business-vocabulary-beyond-textbooks",
+    "title": "TOEIC頻出ビジネス単語帳にない実践的語彙リスト",
+    "description": "TOEIC高得点でもビジネス現場で言葉に詰まる経験はありませんか？本記事では、市販の単語帳ではカバーしきれない、より実践的なビジネス語彙とその習得法を具体的に解説。会議や交渉で使える表現から最新の業界用語まで、あなたの英語コミュニケーション能力を一段階引き上げます。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-advanced-business-vocabulary-beyond-textbooks.jpg",
+    "tags": [
+    "TOEIC語彙",
+    "ビジネス英語",
+    "実践語彙",
+    "英語学習法",
+    "ボキャブラリービルディング",
+    "キャリアアップ",
+    "英語コミュニケーション",
+    "単語帳の先へ"
+    ]
+  },
+  "toeic-ip-vs-public-test-score-reliability": {
+    "id": "toeic-ip-vs-public-test-score-reliability",
+    "title": "TOEIC IPテストと公開テスト、企業評価と信頼性の違い",
+    "description": "TOEIC IPテストと公開テスト、どちらを受験すべきか迷いますよね。本記事では、2つのテスト形式の違い、企業からの評価、スコアの信頼性、そしてあなたの目的に合ったテストの選び方を具体的に解説します。就職やキャリアアップに役立つ情報が満載です。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-ip-vs-public-test-score-reliability.jpg",
+    "tags": [
+    "TOEIC",
+    "IPテスト",
+    "公開テスト",
+    "企業評価",
+    "スコア信頼性",
+    "英語試験",
+    "就職活動",
+    "キャリアアップ"
+    ]
+  },
+  "toefl-reading-prose-summary-question-strategy": {
+    "id": "toefl-reading-prose-summary-question-strategy",
+    "title": "TOEFLリーディング要約問題で確実に3点取る方法",
+    "description": "TOEFLリーディングの最難関、要約問題（Prose Summary）で確実に3点を獲得するための具体的な5ステップ戦略、選択肢の見抜き方、時間配分、おすすめ教材まで徹底解説。スコアアップに直結する情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toefl-reading-prose-summary-question-strategy.jpg",
+    "tags": [
+    "TOEFLリーディング",
+    "要約問題",
+    "Prose Summary",
+    "TOEFL対策",
+    "英語学習",
+    "試験戦略",
+    "高得点",
+    "リーディング対策"
+    ]
+  },
+  "toefl-listening-lecture-note-taking-symbols-abbreviations": {
+    "id": "toefl-listening-lecture-note-taking-symbols-abbreviations",
+    "title": "TOEFLリスニング講義メモ取り術：記号と略語で効率化",
+    "description": "TOEFLリスニングで高得点を狙うには、効率的なメモ取りが不可欠です。この記事では、講義内容を素早く正確に記録するための記号や略語の使い方、具体的なメモ取りテクニック、おすすめの練習法までを詳しく解説。スコアアップに繋がる実践的な情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-listening-lecture-note-taking-symbols-abbreviations.jpg",
+    "tags": [
+    "TOEFLリスニング",
+    "ノートテイキング",
+    "メモ取り",
+    "記号",
+    "略語",
+    "英語学習",
+    "試験対策",
+    "効率化"
+    ]
+  },
+  "toefl-speaking-independent-task-prep-method": {
+    "id": "toefl-speaking-independent-task-prep-method",
+    "title": "TOEFLスピーキング独立タスク高評価のPREP法活用術",
+    "description": "TOEFLスピーキング独立タスクで高評価を得るためのPREP法活用術を徹底解説！明確な主張、論理的な理由、説得力のある具体例でスピーキング力を劇的に向上させるコツや練習方法、おすすめ教材も紹介します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toefl-speaking-independent-task-prep-method.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "独立タスク",
+    "PREP法",
+    "英語学習",
+    "試験対策",
+    "高得点",
+    "留学"
+    ]
+  },
+  "toefl-speaking-integrated-task-information-summary-template": {
+    "id": "toefl-speaking-integrated-task-information-summary-template",
+    "title": "TOEFLスピーキング統合タスク時間内情報まとめテンプレート",
+    "description": "TOEFLスピーキング統合タスクで高得点を狙うための万能情報整理テンプレートを大公開！メモ取りのコツから具体的なスピーチ構成、効果的な練習方法、おすすめ教材まで網羅的に解説。あなたのスコアアップを強力にサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-speaking-integrated-task-information-summary-template.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "統合タスク",
+    "テンプレート",
+    "英語学習",
+    "試験対策",
+    "時間管理",
+    "情報整理",
+    "高得点"
+    ]
+  },
+  "toefl-writing-integrated-task-summary-contrast-tips": {
+    "id": "toefl-writing-integrated-task-summary-contrast-tips",
+    "title": "TOEFLライティング統合タスク高得点の要約と対比のコツ",
+    "description": "TOEFLライティング統合タスクで高得点を取るための、リーディングの正確な要約とリスニングとの効果的な対比方法を徹底解説。具体的なテンプレートや練習法、役立つフレーズも紹介し、スコアアップをサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toefl-writing-integrated-task-summary-contrast-tips.jpg",
+    "tags": [
+    "TOEFL",
+    "ライティング",
+    "統合タスク",
+    "英語試験",
+    "留学",
+    "要約",
+    "対比",
+    "勉強法",
+    "高得点",
+    "アカデミックライティング"
+    ]
+  },
+  "toefl-writing-independent-task-persuasive-examples": {
+    "id": "toefl-writing-independent-task-persuasive-examples",
+    "title": "TOEFLライティング独立タスクで使える説得力ある具体例",
+    "description": "TOEFLライティングのIndependent Taskで高得点を狙うために不可欠な「説得力のある具体例」の作り方を徹底解説。個人的経験、社会的な出来事、歴史的事実から具体例を見つける3つのアプローチや、効果的な記述テクニック、実践的な練習方法まで網羅。これであなたのエッセイが格段にレベルアップします！",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/toefl-writing-independent-task-persuasive-examples.jpg",
+    "tags": [
+    "TOEFL",
+    "ライティング",
+    "Independent Task",
+    "具体例",
+    "エッセイ",
+    "英語試験対策",
+    "説得力",
+    "高得点",
+    "学習法"
+    ]
+  },
+  "toefl-home-edition-room-setup-technical-troubleshooting": {
+    "id": "toefl-home-edition-room-setup-technical-troubleshooting",
+    "title": "TOEFL Home Edition受験時の部屋準備とトラブル回避策",
+    "description": "TOEFL Home Editionを自宅でスムーズに受験するための部屋の準備方法、必要な機材設定、試験当日のトラブルシューティング策を徹底解説。この記事を読めば、安心して試験に臨み、実力を最大限に発揮できます。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-home-edition-room-setup-technical-troubleshooting.jpg",
+    "tags": [
+    "TOEFL Home Edition",
+    "自宅受験",
+    "試験準備",
+    "部屋のセットアップ",
+    "機材トラブル",
+    "オンライン試験",
+    "英語試験対策",
+    "ETS",
+    "ProctorU"
+    ]
+  },
+  "toefl-score-report-delivery-university-submission-process": {
+    "id": "toefl-score-report-delivery-university-submission-process",
+    "title": "TOEFLスコアはいつ届く？大学への公式スコア送付手順",
+    "description": "TOEFLスコアレポートがいつ届くか、オンライン確認と郵送での所要日数を解説。大学への公式スコア送付手順、無料送付と追加送付の違い、DIコードの確認方法、注意点まで網羅し、スムーズな出願をサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-score-report-delivery-university-submission-process.jpg",
+    "tags": [
+    "TOEFLスコア",
+    "スコアレポート",
+    "大学出願",
+    "海外留学",
+    "英語試験",
+    "ETS",
+    "スコア送付",
+    "TOEFL iBT",
+    "試験結果",
+    "DIコード"
+    ]
+  },
+  "toefl-speaking-ets-fluency-evaluation-criteria": {
+    "id": "toefl-speaking-ets-fluency-evaluation-criteria",
+    "title": "TOEFLスピーキングでETSが評価する「流暢さ」の基準",
+    "description": "TOEFLスピーキングで高得点を取るために不可欠な「流暢さ」。ETSが評価する具体的な基準（発話速度、連続性、ためらい）を徹底解説し、シャドーイングや音読、思考整理など、流暢さを向上させるための実践的な練習方法とコツを紹介します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-speaking-ets-fluency-evaluation-criteria.jpg",
+    "tags": [
+    "TOEFLスピーキング",
+    "流暢さ",
+    "ETS",
+    "評価基準",
+    "スピーキング対策",
+    "英語学習",
+    "試験対策",
+    "発音練習",
+    "シャドーイング"
+    ]
+  },
+  "toefl-writing-common-grammar-mistakes-to-avoid": {
+    "id": "toefl-writing-common-grammar-mistakes-to-avoid",
+    "title": "TOEFLライティングで減点されない頻出文法ミス5選",
+    "description": "TOEFLライティングで高得点を狙うために避けるべき頻出文法ミス5選を徹底解説。主語と動詞の一致から冠詞、カンマの誤用まで、具体例と対策法を学び、減点を防ぎましょう。スコアアップに繋がる実践的なアドバイスも満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toefl-writing-common-grammar-mistakes-to-avoid.jpg",
+    "tags": [
+    "TOEFL",
+    "ライティング",
+    "文法",
+    "英語学習",
+    "試験対策",
+    "英文法",
+    "高得点"
+    ]
+  },
+  "ivy-league-undergraduate-extracurricular-activities-examples": {
+    "id": "ivy-league-undergraduate-extracurricular-activities-examples",
+    "title": "アイビーリーグ学部出願で重視される課外活動とは？具体例",
+    "description": "アイビーリーグ合格を目指す受験生必見！本記事では、ハーバード大学などが重視する課外活動の5つの重要ポイント、具体的な成功例、そして効果的なアピール方法を徹底解説。あなたの個性と情熱を最大限に活かし、夢を掴むためのヒントが満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "15分",
+    "imageSrc": "/images/ivy-league-undergraduate-extracurricular-activities-examples.jpg",
+    "tags": [
+    "アイビーリーグ",
+    "課外活動",
+    "海外大学進学",
+    "アメリカ大学",
+    "出願対策",
+    "自己PR",
+    "エッセイ対策",
+    "リーダーシップ",
+    "ボランティア活動",
+    "合格体験記"
+    ]
+  },
+  "us-university-ea-ed-strategy-pros-cons": {
+    "id": "us-university-ea-ed-strategy-pros-cons",
+    "title": "米大学のEA/ED戦略：合格率アップの秘訣と注意点",
+    "description": "アメリカの大学進学で注目されるEA（早期アクション）とED（早期ディシジョン）について徹底解説。それぞれのメリット・デメリット、合格率を高める戦略、具体的な準備方法、注意点まで網羅。自分に最適な出願方法を見つけ、夢の合格を掴みましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/us-university-ea-ed-strategy-pros-cons.jpg",
+    "tags": [
+    "アメリカ大学進学",
+    "早期出願",
+    "EA",
+    "ED",
+    "合格戦略",
+    "海外留学",
+    "出願準備",
+    "大学受験",
+    "TOEFL",
+    "IELTS",
+    "SAT",
+    "ACT"
+    ]
+  },
+  "study-abroad-scholarships-undergraduate-no-repayment": {
+    "id": "study-abroad-scholarships-undergraduate-no-repayment",
+    "title": "留学費用削減！返済不要の奨学金（学部生向け）の種類",
+    "description": "学部留学の費用を大幅に削減できる、返済不要の奨学金の種類や探し方、獲得のための戦略を徹底解説。JASSOや海外機関、大学独自の奨学金情報を活用し、経済的負担を気にせず夢の留学を実現しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/study-abroad-scholarships-undergraduate-no-repayment.jpg",
+    "tags": [
+    "海外留学",
+    "奨学金",
+    "学部留学",
+    "返済不要奨学金",
+    "留学費用",
+    "留学準備",
+    "資金調達",
+    "JASSO",
+    "大学奨学金"
+    ]
+  },
+  "us-graduate-school-statement-of-purpose-writing-tips": {
+    "id": "us-graduate-school-statement-of-purpose-writing-tips",
+    "title": "米大学院出願 Statement of Purpose (SoP) 効果的な書き方",
+    "description": "米大学院合格を掴むためのStatement of Purpose (SoP) の効果的な書き方を徹底解説。自己分析から構成、執筆テクニック、避けるべき点、添削の重要性まで、具体的なステップと実践的なアドバイスであなたのSoP作成をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/us-graduate-school-statement-of-purpose-writing-tips.jpg",
+    "tags": [
+    "大学院留学",
+    "Statement of Purpose",
+    "SoP",
+    "エッセイ",
+    "出願書類",
+    "海外大学院",
+    "自己推薦書",
+    "志望理由書",
+    "書き方",
+    "アメリカ大学院",
+    "合格対策",
+    "パーソナルステートメント"
+    ]
+  },
+  "recommendation-letter-request-professor-approach": {
+    "id": "recommendation-letter-request-professor-approach",
+    "title": "推薦状を教授に依頼する効果的なアプローチ方法と提供情報",
+    "description": "大学院進学や留学、就職活動で不可欠な推薦状。この記事では、教授へ推薦状を依頼する際の効果的なアプローチ方法、タイミング、提供すべき情報、依頼後のマナーまでを網羅的に解説します。成功へのステップを具体的に学びましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/recommendation-letter-request-professor-approach.jpg",
+    "tags": [
+    "推薦状",
+    "教授 依頼",
+    "大学",
+    "大学院 留学",
+    "アカデミック",
+    "進学準備",
+    "書類作成",
+    "マナー",
+    "英文推薦状",
+    "就職活動"
+    ]
+  },
+  "common-app-online-application-tips-common-mistakes": {
+    "id": "common-app-online-application-tips-common-mistakes",
+    "title": "英語圏大学オンライン願書(Common App等)記入時の注意点",
+    "description": "英語圏の大学に出願する際のオンライン願書、特にCommon Applicationの記入方法と注意点を徹底解説。アカウント作成からエッセイ、課外活動、推薦状まで、ステップ別に具体的にアドバイス。よくある間違いを避け、合格を勝ち取るためのヒントが満載です。海外大学進学を目指す方は必見！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/common-app-online-application-tips-common-mistakes.jpg",
+    "tags": [
+    "Common App",
+    "大学願書",
+    "海外大学",
+    "出願書類",
+    "エッセイ",
+    "推薦状",
+    "課外活動",
+    "英語圏大学",
+    "オンライン申請",
+    "留学準備",
+    "アメリカ大学出願"
+    ]
+  },
+  "post-university-acceptance-procedures-deposit-i20": {
+    "id": "post-university-acceptance-procedures-deposit-i20",
+    "title": "海外大学合格後の手続き：デポジット支払いからI-20取得",
+    "description": "海外大学合格後、夢の留学生活を始めるために不可欠な手続きをステップごとに解説。入学意思表明、デポジット支払い方法、I-20フォーム申請、SEVIS費用支払いまで、具体的な注意点や役立つ情報源を交えて分かりやすくガイドします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/post-university-acceptance-procedures-deposit-i20.jpg",
+    "tags": [
+    "海外大学",
+    "留学準備",
+    "入学手続き",
+    "デポジット",
+    "I-20",
+    "学生ビザ",
+    "アメリカ留学",
+    "留学生活",
+    "教育",
+    "F-1ビザ",
+    "SEVIS"
+    ]
+  },
+  "f1-student-visa-interview-questions-tips-ng-actions": {
+    "id": "f1-student-visa-interview-questions-tips-ng-actions",
+    "title": "学生ビザ(F-1)面接で聞かれる質問と回答のポイントNG行動",
+    "description": "アメリカ留学の夢を叶えるF-1ビザ面接。この記事では、頻出質問と効果的な回答法、準備物、面接官に好印象を与えるコツ、そして絶対避けるべきNG行動を徹底解説。万全の対策で合格を掴みましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/f1-student-visa-interview-questions-tips-ng-actions.jpg",
+    "tags": [
+    "F1ビザ",
+    "学生ビザ",
+    "アメリカ留学",
+    "ビザ面接",
+    "面接対策",
+    "留学準備",
+    "英語面接",
+    "質問例",
+    "NG行動",
+    "渡米準備"
+    ]
+  },
+  "study-abroad-dorm-life-vs-apartment-hunting-pros-cons": {
+    "id": "study-abroad-dorm-life-vs-apartment-hunting-pros-cons",
+    "title": "留学先の寮生活vsアパート探し：メリット・デメリットと注意点",
+    "description": "留学生活の大きな選択肢である寮生活とアパート暮らし。それぞれのメリット・デメリットを徹底比較し、費用、プライバシー、国際交流などの観点からあなたに最適な住まい選びをサポートします。後悔しないための注意点も解説。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/study-abroad-dorm-life-vs-apartment-hunting-pros-cons.jpg",
+    "tags": [
+    "留学",
+    "海外生活",
+    "住居",
+    "学生寮",
+    "アパート",
+    "一人暮らし",
+    "費用比較",
+    "留学準備",
+    "異文化交流",
+    "住まい選び"
+    ]
+  },
+  "us-universities-without-toefl-admission-requirements": {
+    "id": "us-universities-without-toefl-admission-requirements",
+    "title": "TOEFLなしで入学できる米国の大学/プログラムの条件",
+    "description": "TOEFLスコアなしでアメリカの大学・大学院に進学する方法を網羅的に解説。条件付き入学、IELTSやDuolingoなど代替試験、英語圏での学歴、コミュニティカレッジからの編入など、多様な選択肢とそれぞれの条件、必要な準備、大学の探し方まで具体的に紹介。夢を諦めずに挑戦するあなたを応援します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "13分",
+    "imageSrc": "/images/us-universities-without-toefl-admission-requirements.jpg",
+    "tags": [
+    "アメリカ大学留学",
+    "TOEFL免除",
+    "英語学習",
+    "海外進学",
+    "留学準備",
+    "条件付き入学",
+    "IELTS",
+    "Duolingo English Test",
+    "コミュニティカレッジ"
+    ]
+  },
+  "english-presentation-opening-phrases-audience-engagement": {
+    "id": "english-presentation-opening-phrases-audience-engagement",
+    "title": "英語プレゼンで聴衆を引き込む冒頭の掴みフレーズ集",
+    "description": "英語プレゼンの冒頭で聴衆の心を掴むための実践的なフレーズとテクニックを徹底解説。自己紹介から目的提示、驚きの事実、質問、ストーリーテリングまで、すぐに使える例文であなたのプレゼンを成功に導きます。効果を高める応用テクニックも紹介。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-presentation-opening-phrases-audience-engagement.jpg",
+    "tags": [
+    "英語プレゼン",
+    "冒頭フレーズ",
+    "聴衆の掴み",
+    "ビジネス英語",
+    "スピーチ",
+    "コミュニケーション",
+    "英語学習",
+    "プレゼンテーションスキル"
+    ]
+  },
+  "business-english-email-avoiding-ambiguity": {
+    "id": "business-english-email-avoiding-ambiguity",
+    "title": "ビジネス英語メールで誤解を招かない「曖昧表現」の避け方",
+    "description": "ビジネス英語メールで意図が伝わらず困っていませんか？本記事では、誤解を招く曖昧な表現を避け、明確でプロフェッショナルな英文メールを作成するための具体的なテクニック、NGフレーズと言い換え例、実践的な学習法を徹底解説。グローバルなビジネスシーンで信頼されるコミュニケーション術を身につけましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/business-english-email-avoiding-ambiguity.jpg",
+    "tags": [
+    "ビジネス英語",
+    "英語メール",
+    "コミュニケーション",
+    "曖昧表現",
+    "英文ライティング",
+    "グローバルビジネス",
+    "英語学習"
+    ]
+  },
+  "english-job-interview-questions-to-ask-employer": {
+    "id": "english-job-interview-questions-to-ask-employer",
+    "title": "英語面接「逆質問」で意欲を示す効果的な質問例",
+    "description": "英語面接の最後に聞かれる「何か質問はありますか？」でチャンスを掴む！この記事では、面接官に好印象を与え、あなたの熱意を伝えるための効果的な逆質問例を具体的に解説。NG質問や準備のコツも網羅し、採用担当者の心に響く質問で内定を勝ち取りましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-job-interview-questions-to-ask-employer.jpg",
+    "tags": [
+    "英語面接",
+    "逆質問",
+    "就職活動",
+    "転職活動",
+    "外資系企業",
+    "面接対策",
+    "キャリアアップ",
+    "質問例",
+    "英語学習"
+    ]
+  },
+  "english-academic-paper-bibliography-references-style-apa-mla": {
+    "id": "english-academic-paper-bibliography-references-style-apa-mla",
+    "title": "英語論文 参考文献リスト(APA, MLA)の正しい書き方",
+    "description": "英語論文作成は大変ですよね。特にAPAやMLAといった参考文献リストの書き方は悩みの種。この記事では、各スタイルの基本から、書籍・雑誌・ウェブサイト別の具体例、さらにはZoteroやMendeleyといった便利な文献管理ツールまで徹底解説します。正確な引用で、あなたの論文の信頼性を格段にアップさせましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "11分",
+    "imageSrc": "/images/english-academic-paper-bibliography-references-style-apa-mla.jpg",
+    "tags": [
+    "参考文献リスト",
+    "APAスタイル",
+    "MLAスタイル",
+    "英語論文",
+    "引用ルール",
+    "文献管理",
+    "アカデミックライティング",
+    "論文作成",
+    "レポート作成"
+    ]
+  },
+  "english-news-headlines-reading-comprehension-techniques": {
+    "id": "english-news-headlines-reading-comprehension-techniques",
+    "title": "英語ニュース記事「見出し」を正確に理解する読解テクニック",
+    "description": "英語ニュースの見出しは省略や特有の表現が多く難解です。この記事では、見出しのルール、5つの読解ステップ、効果的な学習法やおすすめリソースを具体的に解説。初心者でも正確に内容を把握し、情報収集や英語力向上に繋げるテクニックが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-news-headlines-reading-comprehension-techniques.jpg",
+    "tags": [
+    "英語ニュース",
+    "見出し読解",
+    "リーディング",
+    "英語学習",
+    "速読",
+    "英語の勉強",
+    "Headlinese",
+    "情報収集",
+    "英語初心者"
+    ]
+  },
+  "english-connected-speech-listening-training-liaison-reduction": {
+    "id": "english-connected-speech-listening-training-liaison-reduction",
+    "title": "英語の音声変化（リエゾン等）を聞き取るための特訓法",
+    "description": "英語の音声変化（リエゾン、リダクション等）が聞き取れない…とお悩みですか？この記事では、ネイティブの英語をスムーズに理解するための具体的な特訓法をステップ別に解説。ディクテーションやシャドーイングの効果的なやり方、おすすめ教材も紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/english-connected-speech-listening-training-liaison-reduction.jpg",
+    "tags": [
+    "英語リスニング",
+    "音声変化",
+    "リエゾン",
+    "リダクション",
+    "リンキング",
+    "英語学習",
+    "聞き取り練習",
+    "シャドーイング",
+    "ディクテーション",
+    "英語学習法",
+    "ネイティブ英語",
+    "TOEIC対策",
+    "TOEFL対策"
+    ]
+  },
+  "english-extensive-reading-motivation-book-recommendations": {
+    "id": "english-extensive-reading-motivation-book-recommendations",
+    "title": "洋書多読を継続するコツ：レベル別おすすめ作品とモチベ維持",
+    "description": "英語学習で洋書多読を始めたいけど、どうすれば続けられる？この記事では、初心者から上級者までのレベル別おすすめ洋書や、楽しく多読を継続するための具体的なコツ、モチベーション維持の秘訣を詳しく解説。あなたにぴったりの一冊を見つけて、英語の世界を広げましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-extensive-reading-motivation-book-recommendations.jpg",
+    "tags": [
+    "英語多読",
+    "洋書",
+    "英語学習",
+    "モチベーション維持",
+    "おすすめ本",
+    "初心者",
+    "中級者",
+    "上級者",
+    "リーディング",
+    "英語教材"
+    ]
+  },
+  "english-learning-apps-selection-guide-toeic-toefl": {
+    "id": "english-learning-apps-selection-guide-toeic-toefl",
+    "title": "英語学習アプリの選び方：TOEIC/TOEFL対策に役立つのは？",
+    "description": "TOEICやTOEFLのスコアアップを目指すあなたへ。最適な英語学習アプリの選び方を徹底解説！各試験対策のポイント、無料・有料アプリの違い、効果的な活用法まで、自分にぴったりのアプリを見つけるヒントが満載です。",
+    "category": "英語試験",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-learning-apps-selection-guide-toeic-toefl.jpg",
+    "tags": [
+    "英語学習アプリ",
+    "TOEIC対策",
+    "TOEFL対策",
+    "アプリ選び",
+    "英語試験",
+    "スコアアップ",
+    "おすすめアプリ",
+    "英語勉強法"
+    ]
+  },
+  "english-pronunciation-correction-self-study-practice-steps": {
+    "id": "english-pronunciation-correction-self-study-practice-steps",
+    "title": "英語の発音矯正：独学で効果を出す具体的な練習ステップ",
+    "description": "英語の発音に悩むあなたへ。この記事では、独学でも効果的に発音を矯正するための具体的な練習ステップを徹底解説。フォニックスからシャドーイング、おすすめツールまで、自信がつくクリアな発音を身につける秘訣が満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/english-pronunciation-correction-self-study-practice-steps.jpg",
+    "tags": [
+    "英語 発音",
+    "発音矯正",
+    "独学",
+    "英語学習",
+    "スピーキング",
+    "リスニング力向上",
+    "フォニックス",
+    "シャドーイング",
+    "英語の発音練習",
+    "IPA",
+    "音声変化"
+    ]
+  },
+  "toeic-vs-toefl-which-test-to-take-purpose-based-guide": {
+    "id": "toeic-vs-toefl-which-test-to-take-purpose-based-guide",
+    "title": "TOEICとTOEFLどっちを受けるべき？目的別最適試験ガイド",
+    "description": "TOEICとTOEFL、どちらの英語試験を受けるべきか迷っていませんか？この記事では、それぞれの試験の特徴、目的別の選び方、効果的な学習法まで徹底解説。あなたの目標達成に最適な試験を見つけ、英語力アップを実現しましょう。",
+    "category": "英語試験",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/toeic-vs-toefl-which-test-to-take-purpose-based-guide.jpg",
+    "tags": [
+    "TOEIC",
+    "TOEFL",
+    "英語試験",
+    "比較",
+    "選び方",
+    "留学準備",
+    "就職活動",
+    "キャリアアップ",
+    "英語学習",
+    "テスト対策"
+    ]
+  },
+  "english-drama-phrases-you-bet-for-real-nuance": {
+    "id": "english-drama-phrases-you-bet-for-real-nuance",
+    "title": "海外ドラマ頻出「You bet!」「For real?」意味・使い方完全ガイド",
+    "description": "海外ドラマの頻出フレーズ「You bet!」と「For real?」の意味、使い方、ネイティブのニュアンスを徹底解説。豊富な例文と実践的な学習法で、あなたも今日から自然な英会話を目指せます。英語学習者必見の完全ガイド！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/english-drama-phrases-you-bet-for-real-nuance.jpg",
+    "tags": [
+    "英語学習",
+    "英会話フレーズ",
+    "海外ドラマ英語",
+    "You bet",
+    "For real",
+    "ネイティブ表現",
+    "英語スラング",
+    "リスニング",
+    "スピーキング",
+    "初心者向け英語"
+    ]
+  },
+  "english-online-meeting-speaking-timing-tips": {
+    "id": "english-online-meeting-speaking-timing-tips",
+    "title": "英語オンライン会議で発言できない？スマートに割って入るコツ",
+    "description": "英語のオンライン会議で発言するタイミングが掴めず悩んでいませんか？この記事では、会議でスマートに割って入り、自信を持って意見を伝えるための具体的な準備、心構え、実践的な英語フレーズ、効果を高めるテクニックを分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-online-meeting-speaking-timing-tips.jpg",
+    "tags": [
+    "英語オンライン会議",
+    "発言タイミング",
+    "ビジネス英語",
+    "コミュニケーション術",
+    "英語フレーズ",
+    "会議 割り込み",
+    "英語学習法"
+    ]
+  },
+  "english-resume-self-promotion-achievement-examples": {
+    "id": "english-resume-self-promotion-achievement-examples",
+    "title": "英文履歴書で差がつく！成果を具体的に示す自己PR術【例文付】",
+    "description": "英文履歴書で採用担当者に響く自己PRを作成したいですか？この記事では、具体的な成果を効果的にアピールするためのSTARメソッド、強力なアクション動詞、数値化テクニックを豊富な例文と共に解説。あなたの強みを最大限に伝え、理想のキャリアを掴むための秘訣を伝授します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-resume-self-promotion-achievement-examples.jpg",
+    "tags": [
+    "英文履歴書",
+    "自己PR",
+    "成果",
+    "書き方",
+    "例文",
+    "キャリアアップ",
+    "転職活動",
+    "就職活動",
+    "英語",
+    "STARメソッド",
+    "アピール方法"
+    ]
+  },
+  "english-phrases-for-playing-with-native-kids": {
+    "id": "english-phrases-for-playing-with-native-kids",
+    "title": "ネイティブ子供と遊ぶ英語フレーズ集！自然な声かけで楽しく交流",
+    "description": "ネイティブの子供たちと公園や遊び場で出会った時、自然に使える英語フレーズ集です。遊びの誘い方から、一緒に楽しむ言葉、困った時の表現、別れの挨拶まで、具体的な例文とコツを紹介。親子で英語のコミュニケーションをもっと豊かにしましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-phrases-for-playing-with-native-kids.jpg",
+    "tags": [
+    "子供英会話",
+    "英語フレーズ",
+    "ネイティブと交流",
+    "子育て英語",
+    "親子英語",
+    "国際交流",
+    "遊びの英語"
+    ]
+  },
+  "toeic-listening-part3-4-prediction-reading-technique": {
+    "id": "toeic-listening-part3-4-prediction-reading-technique",
+    "title": "TOEIC Part3・4対策！先読みが間に合う人の“設問予測”術",
+    "description": "TOEICリスニングPart3・4で時間が足りない方へ。この記事では、設問を先読みするだけでなく、内容を予測するテクニックを具体的に解説します。設問タイプ別の予測ポイントや効果的なトレーニング方法を学び、スコアアップを目指しましょう。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toeic-listening-part3-4-prediction-reading-technique.jpg",
+    "tags": [
+    "TOEIC",
+    "リスニング対策",
+    "Part3",
+    "Part4",
+    "先読み",
+    "設問予測",
+    "英語学習",
+    "スコアアップ",
+    "勉強法"
+    ]
+  },
+  "polite-english-reminder-email-examples": {
+    "id": "polite-english-reminder-email-examples",
+    "title": "【例文】英語メールで相手に失礼なく催促するスマートな書き方",
+    "description": "英語でのビジネスメールや重要な連絡で、相手に失礼なく返信を催促する方法を知りたいですか？本記事では、丁寧なリマインダーメールの書き方、状況別の例文、避けるべきNG表現、役立つツールまで網羅的に解説します。スマートなコミュニケーションで良好な関係を築きましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/polite-english-reminder-email-examples.jpg",
+    "tags": [
+    "英語メール",
+    "催促メール",
+    "ビジネス英語",
+    "例文",
+    "書き方",
+    "リマインダーメール",
+    "英語学習",
+    "コミュニケーション",
+    "マナー"
+    ]
+  },
+  "us-college-application-essay-self-introduction-tips": {
+    "id": "us-college-application-essay-self-introduction-tips",
+    "title": "米大学出願エッセイ: 合格を掴む自己紹介の書き出しテクニック",
+    "description": "アメリカの大学出願で合否を左右するエッセイ。この記事では、アドミッションオフィサーの心に響く自己紹介の書き出しテクニックを徹底解説。ありきたりな表現を避け、あなただけの物語を効果的に伝える秘訣や、役立つリソースも紹介します。合格を掴む最初の一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/us-college-application-essay-self-introduction-tips.jpg",
+    "tags": [
+    "大学出願",
+    "エッセイ",
+    "自己紹介",
+    "書き出し",
+    "留学",
+    "アメリカ大学",
+    "合格対策",
+    "英語エッセイ",
+    "カレッジエッセイ"
+    ]
+  },
+  "uk-us-english-pronunciation-difference-water-t-sound": {
+    "id": "uk-us-english-pronunciation-difference-water-t-sound",
+    "title": "イギリス英語「ウォーター」のTは違う？米語との発音比較解説",
+    "description": "「water」の「t」の音、イギリス英語とアメリカ英語でどう違う？この記事では、Flap TやGlottal Stopといった発音ルールを初心者にも分かりやすく解説し、聞き分けのコツや具体的な練習法を紹介します。あなたの英語学習をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/uk-us-english-pronunciation-difference-water-t-sound.jpg",
+    "tags": [
+    "イギリス英語",
+    "アメリカ英語",
+    "発音",
+    "Tの音",
+    "英語学習",
+    "リスニング",
+    "スピーキング",
+    "違い",
+    "water",
+    "Flap T",
+    "Glottal Stop"
+    ]
+  },
+  "english-presentation-opening-attention-grabbing-phrases": {
+    "id": "english-presentation-opening-attention-grabbing-phrases",
+    "title": "英語プレゼン冒頭で聴衆を惹きつける！掴みの鉄板フレーズ集",
+    "description": "英語プレゼンの冒頭で聴衆の心を掴むための実践的なフレーズやテクニックを豊富に紹介。質問、驚きの事実、ストーリーテリングなど、多様なアプローチと具体的な英語表現を学び、自信を持ってプレゼンをスタートさせる秘訣を解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/english-presentation-opening-attention-grabbing-phrases.jpg",
+    "tags": [
+    "英語プレゼン",
+    "プレゼンテーション",
+    "スピーチ",
+    "冒頭",
+    "掴み",
+    "アイスブレイク",
+    "英語学習",
+    "ビジネス英語",
+    "パブリックスピーキング",
+    "コミュニケーションスキル"
+    ]
+  },
+  "reading-english-novels-vocabulary-coping-strategy": {
+    "id": "reading-english-novels-vocabulary-coping-strategy",
+    "title": "洋書がスラスラ読める！知らない単語で挫折しない英語小説読破術",
+    "description": "洋書を読みたいけど単語が分からなくて挫折しそう…」そんな悩みを解決！この記事では、知らない単語に出会ってもスムーズに英語の小説を読み進めるための具体的な心構え、対処法5選、継続のコツを徹底解説。レベルに合った本の選び方から辞書の効果的な使い方まで、洋書読破をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/reading-english-novels-vocabulary-coping-strategy.jpg",
+    "tags": [
+    "洋書",
+    "英語学習",
+    "多読",
+    "リーディング",
+    "語彙力",
+    "英語勉強法",
+    "挫折しない",
+    "英語初心者"
+    ]
+  },
+  "english-job-interview-weakness-answer-examples": {
+    "id": "english-job-interview-weakness-answer-examples",
+    "title": "英語面接「あなたの短所は？」好印象な回答例文とNG例",
+    "description": "英語面接で「短所」を尋ねられた際の答え方に悩んでいませんか？この記事では、自己分析力と成長意欲をアピールする好印象な回答戦略、具体的な英語例文、避けるべきNG例を徹底解説。面接成功をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/english-job-interview-weakness-answer-examples.jpg",
+    "tags": [
+    "英語面接",
+    "短所 回答",
+    "弱み 伝え方",
+    "外資系 転職",
+    "面接対策 英語",
+    "自己分析",
+    "キャリアアップ",
+    "英語学習",
+    "回答例文"
+    ]
+  },
+  "english-sns-comments-casual-phrases-for-friends": {
+    "id": "english-sns-comments-casual-phrases-for-friends",
+    "title": "インスタが楽しくなる！友達に使うネイティブ風英語コメント集",
+    "description": "インスタなどのSNSで海外の友達に送る英語コメントに困っていませんか？この記事では、ネイティブが使うような自然でカジュアルな英語フレーズをシーン別に紹介。基本的なリアクションから会話を広げる一言、絵文字の使い方まで解説します。友達とのコミュニケーションがもっと楽しくなるヒントが満載です！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/english-sns-comments-casual-phrases-for-friends.jpg",
+    "tags": [
+    "英語学習",
+    "インスタグラム",
+    "SNSコメント",
+    "英会話フレーズ",
+    "ネイティブ英語",
+    "カジュアル英語",
+    "友達との会話"
+    ]
+  },
+  "english-academic-paper-citing-previous-research-phrases": {
+    "id": "english-academic-paper-citing-previous-research-phrases",
+    "title": "英語論文の質UP！「先行研究」を的確に引用する表現集",
+    "description": "英語論文で先行研究を効果的に引用するための具体的な表現を多数紹介。研究の信頼性を高め、論理的な文章を構築するための実践的なフレーズ集と学習法を解説します。アカデミックライティングのスキルアップを目指す方必見です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/english-academic-paper-citing-previous-research-phrases.jpg",
+    "tags": [
+    "英語論文",
+    "引用表現",
+    "アカデミックライティング",
+    "先行研究",
+    "研究論文",
+    "英語表現",
+    "参考文献",
+    "学術論文"
+    ]
+  },
+  "english-restaurant-allergy-request-phrases-travel": {
+    "id": "english-restaurant-allergy-request-phrases-travel",
+    "title": "海外レストランで安心！食物アレルギーを伝える英語フレーズ徹底解説",
+    "description": "海外旅行のレストランで食物アレルギーを英語で伝えるのは不安ですか？この記事では、具体的な英語フレーズ、予約から注文までの実践的な伝え方、アレルギーカードの活用法まで徹底解説。安心して美味しい食事を楽しむためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/english-restaurant-allergy-request-phrases-travel.jpg",
+    "tags": [
+    "食物アレルギー 英語",
+    "海外旅行 レストラン",
+    "アレルギー対応 英語",
+    "英語 フレーズ",
+    "旅行英会話",
+    "食事 英語",
+    "アレルゲン 伝え方",
+    "海外 食事"
+    ]
+  },
+  "english-teleconference-asking-to-repeat-politely": {
+    "id": "english-teleconference-asking-to-repeat-politely",
+    "title": "英語電話会議で聞き取れない…失礼なく聞き返す丁寧フレーズ集",
+    "description": "英語の電話会議で相手の発言が聞き取れず困った経験はありませんか？この記事では、失礼なくスムーズに聞き返すための丁寧な英語フレーズを状況別に紹介します。聞き取りのコツや練習法も解説し、あなたの国際的なコミュニケーションをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-teleconference-asking-to-repeat-politely.jpg",
+    "tags": [
+    "英語会議",
+    "聞き返し",
+    "ビジネス英語",
+    "丁寧な表現",
+    "英語フレーズ",
+    "リスニング",
+    "コミュニケーション",
+    "オンライン会議",
+    "英会話"
+    ]
+  },
+  "english-contract-legal-jargon-explanation-heretofore-whereas": {
+    "id": "english-contract-legal-jargon-explanation-heretofore-whereas",
+    "title": "英語契約書「heretofore」「whereas」とは？頻出法律用語を攻略",
+    "description": "英語契約書特有の「heretofore」や「whereas」などの難解な法律用語の意味、使い方、背景を初心者にも分かりやすく解説。例文や他の頻出用語も紹介し、契約書読解の不安を解消します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-contract-legal-jargon-explanation-heretofore-whereas.jpg",
+    "tags": [
+    "英語契約書",
+    "法律英語",
+    "heretofore",
+    "whereas",
+    "リーガルジャーゴン",
+    "ビジネス英語",
+    "英語学習",
+    "契約書翻訳",
+    "国際契約",
+    "法律翻訳"
+    ]
+  },
+  "english-native-fillers-like-you-know-proper-usage": {
+    "id": "english-native-fillers-like-you-know-proper-usage",
+    "title": "ネイティブはなぜ「like」を多用？英語フィラーの自然な使い方",
+    "description": "ネイティブが会話でよく使う「like」や「you know」などのフィラー。その意味、正しい使い方、自然に使いこなすコツを徹底解説。この記事を読めば、あなたの英会話がもっと自然で流暢になります。具体的な学習法や注意点も紹介。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/english-native-fillers-like-you-know-proper-usage.jpg",
+    "tags": [
+    "英語フィラー",
+    "つなぎ言葉",
+    "英会話",
+    "ネイティブ表現",
+    "英語学習",
+    "スピーキング",
+    "リスニング",
+    "like",
+    "you know"
+    ]
+  },
+  "english-r-l-pronunciation-tongue-position-guide": {
+    "id": "english-r-l-pronunciation-tongue-position-guide",
+    "title": "【図解】英語のRとLの発音、舌の位置で劇的に変わる！矯正のコツ",
+    "description": "英語のRとLの発音に悩んでいませんか？この記事では、正しい舌の位置を図解のように分かりやすく解説し、劇的な発音改善のコツを伝授します。初心者でも簡単に実践できる練習法やおすすめツールも紹介。ネイティブのような流暢な発音を目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-r-l-pronunciation-tongue-position-guide.jpg",
+    "tags": [
+    "英語学習",
+    "発音矯正",
+    "RとL",
+    "リスニング",
+    "スピーキング",
+    "英語初心者",
+    "舌の位置",
+    "発音練習",
+    "ミニマルペア",
+    "シャドーイング"
+    ]
+  },
+  "english-email-attaching-files-smart-phrases": {
+    "id": "english-email-attaching-files-smart-phrases",
+    "title": "英語メール「添付ファイルご確認ください」をスマートに伝える表現集",
+    "description": "英語メールで「添付ファイルご確認ください」とスマートに伝える表現を厳選。基本から丁寧、プロフェッショナルなフレーズ、複数ファイルの伝え方、注意点まで例文付きで解説。ビジネスシーンで役立つ英語メール術を身につけましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-email-attaching-files-smart-phrases.jpg",
+    "tags": [
+    "英語メール",
+    "ビジネス英語",
+    "添付ファイル",
+    "英語表現",
+    "英文メール",
+    "例文",
+    "英語学習",
+    "コミュニケーション"
+    ]
+  },
+  "english-small-talk-topics-phrases-first-meeting": {
+    "id": "english-small-talk-topics-phrases-first-meeting",
+    "title": "初対面の外国人と会話が続く！スモールトーク鉄板ネタ＆英語フレーズ",
+    "description": "初対面の外国人と何を話せばいいか分からない？この記事では、会話が途切れないスモールトークの鉄板ネタと、すぐに使える便利な英語フレーズを豊富に紹介します。今日から使える実践的なテクニックで、国際交流の第一歩を踏み出しましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-small-talk-topics-phrases-first-meeting.jpg",
+    "tags": [
+    "スモールトーク",
+    "英会話",
+    "初対面",
+    "英語フレーズ",
+    "国際交流",
+    "コミュニケーション",
+    "英語学習",
+    "初心者"
+    ]
+  },
+  "english-news-headlines-reading-abbreviations-grammar": {
+    "id": "english-news-headlines-reading-abbreviations-grammar",
+    "title": "英語ニュースの見出しがスラスラ読める！特有の省略ルール解説",
+    "description": "英語ニュースの見出しでよく使われる冠詞やbe動詞の省略、to不定詞での未来表現など、6つの特有ルールを具体例と共に解説。読解力を鍛える実践トレーニング法や、BBC Learning Englishなどの学習リソースも紹介し、ニュース英語をスラスラ読むコツを伝授します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/english-news-headlines-reading-abbreviations-grammar.jpg",
+    "tags": [
+    "英語ニュース",
+    "見出し",
+    "省略ルール",
+    "英語学習",
+    "リーディング",
+    "読解力",
+    "英語表現",
+    "時事英語"
+    ]
+  },
+  "toefl-ibt-speaking-logical-answer-template-independent": {
+    "id": "toefl-ibt-speaking-logical-answer-template-independent",
+    "title": "TOEFLスピーキング高得点！論理的な回答構成テンプレート【Independent】",
+    "description": "TOEFL iBTスピーキングのIndependent Taskで高得点を狙うための万能テンプレートを徹底解説！具体的な回答構成、時間配分、使えるフレーズ集、効果的な練習方法まで網羅。これであなたも論理的で説得力のあるスピーキングが身につきます。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/toefl-ibt-speaking-logical-answer-template-independent.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "Independent Task",
+    "英語学習",
+    "試験対策",
+    "テンプレート",
+    "高得点",
+    "論理構成",
+    "解答例",
+    "ETS"
+    ]
+  },
+  "english-reply-customer-complaint-email-sincerely": {
+    "id": "english-reply-customer-complaint-email-sincerely",
+    "title": "【例文】海外顧客の英語クレームに誠意を伝える返信メール術",
+    "description": "海外の顧客から英語でクレームが来た際、どのように返信すれば誠意が伝わるか悩んでいませんか？この記事では、具体的な例文を交えながら、謝罪、問題解決、そして顧客との良好な関係を築くための英語メールの書き方のポイントを分かりやすく解説します。基本構成から使えるフレーズ、避けるべき表現まで網羅し、あなたのビジネスをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/english-reply-customer-complaint-email-sincerely.jpg",
+    "tags": [
+    "英語 メール 返信",
+    "クレーム対応 英語",
+    "ビジネス英語",
+    "海外顧客対応",
+    "英文メール 例文",
+    "謝罪メール 英語",
+    "顧客サービス",
+    "誠意を伝える"
+    ]
+  },
+  "english-jokes-types-cultural-tips-for-non-natives": {
+    "id": "english-jokes-types-cultural-tips-for-non-natives",
+    "title": "英語でスベらない！外国人にウケるジョークの選び方と注意点",
+    "description": "英語でジョークを言いたいけどスベるのが怖い？この記事では、外国人にウケるジョークの種類、文化的な注意点、伝え方のコツを徹底解説。異文化コミュニケーションを円滑にし、相手と打ち解けるためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-jokes-types-cultural-tips-for-non-natives.jpg",
+    "tags": [
+    "英語ジョーク",
+    "異文化コミュニケーション",
+    "ユーモア",
+    "英語学習",
+    "コミュニケーション術",
+    "国際交流",
+    "スベらない話"
+    ]
+  },
+  "english-learning-apps-comparison-vocabulary-memorization": {
+    "id": "english-learning-apps-comparison-vocabulary-memorization",
+    "title": "【目的別】英単語暗記に本当に効く！神アプリ徹底比較2024",
+    "description": "2024年最新版！英単語暗記に本当に効果のある神アプリを目的別に徹底比較。初心者向けからTOEIC対策、日常会話、上級者向けまで、あなたにぴったりのアプリが見つかります。効果的なアプリ活用法も解説し、英語学習を強力にサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-learning-apps-comparison-vocabulary-memorization.jpg",
+    "tags": [
+    "英単語アプリ",
+    "英語学習",
+    "TOEIC対策",
+    "日常英会話",
+    "アプリ比較",
+    "単語暗記",
+    "おすすめアプリ",
+    "無料アプリ",
+    "英語初心者",
+    "学習効率化"
+    ]
+  },
+  "toefl-ibt-speaking-template-usage-precautions": {
+    "id": "toefl-ibt-speaking-template-usage-precautions",
+    "title": "TOEFLスピーキング高得点テンプレート活用術と注意点",
+    "description": "TOEFLスピーキングで高得点を目指す方向けに、テンプレートの効果的な活用術と注意点を徹底解説。テンプレートのメリット・デメリット、カスタマイズ方法、自然な話し方のコツ、おすすめ教材まで網羅。スコアアップに繋がる実践的なアドバイスが満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/toefl-ibt-speaking-template-usage-precautions.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "テンプレート",
+    "英語学習",
+    "試験対策",
+    "高得点",
+    "勉強法",
+    "TOEFL iBT",
+    "英語の話し方"
+    ]
+  },
+  "academic-english-abstract-writing-techniques": {
+    "id": "academic-english-abstract-writing-techniques",
+    "title": "英語論文アブストラクト作成術：査読者を惹きつける構成",
+    "description": "英語論文のアブストラクトは査読者の第一印象を決定づける最重要パートです。本記事では、読者の関心を惹き、論文の価値を効果的に伝えるためのIMRAD構造に基づいた構成術、具体的な表現テクニック、執筆後のチェックポイントまで、アクセプト率を高めるアブストラクト作成の秘訣を網羅的に解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/academic-english-abstract-writing-techniques.jpg",
+    "tags": [
+    "英語論文",
+    "アブストラクト",
+    "アカデミックライティング",
+    "論文作成",
+    "研究",
+    "英語学習",
+    "査読",
+    "論文構成",
+    "IMRAD"
+    ]
+  },
+  "graduate-school-recommendation-letter-request-email": {
+    "id": "graduate-school-recommendation-letter-request-email",
+    "title": "海外大学院の推薦状、依頼メール例文と効果的な頼み方",
+    "description": "海外大学院出願に不可欠な推薦状。この記事では、教授や上司への効果的な依頼メールの書き方、例文、添付すべき資料、依頼のタイミングとマナー、よくある質問まで網羅的に解説。スムーズな推薦状準備で合格を掴みましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/graduate-school-recommendation-letter-request-email.jpg",
+    "tags": [
+    "推薦状",
+    "依頼メール",
+    "海外大学院",
+    "留学準備",
+    "英文メール",
+    "出願書類",
+    "大学院留学"
+    ]
+  },
+  "toefl-ielts-score-deadline-application-schedule": {
+    "id": "toefl-ielts-score-deadline-application-schedule",
+    "title": "TOEFL/IELTSスコア提出期限と出願逆算スケジュール",
+    "description": "海外留学や大学院出願に必須のTOEFL/IELTS。スコア提出期限から逆算した学習・出願スケジュールの立て方を徹底解説！目標スコア達成とスムーズな出願準備のためのタイムライン、注意点、お役立ちツールも紹介します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toefl-ielts-score-deadline-application-schedule.jpg",
+    "tags": [
+    "TOEFL",
+    "IELTS",
+    "留学準備",
+    "出願スケジュール",
+    "英語試験",
+    "スコアアップ",
+    "大学院留学",
+    "海外大学",
+    "学習計画"
+    ]
+  },
+  "english-group-discussion-participation-tips": {
+    "id": "english-group-discussion-participation-tips",
+    "title": "英語グループディスカッションで的確に発言するコツ！",
+    "description": "英語でのグループディスカッション、緊張しますよね？この記事では、事前準備から発言のコツ、論理的な意見表明、他者との関わり方まで、的確に発言し議論に貢献するための実践的なテクニックを分かりやすく解説。自信を持ってディスカッションに臨みましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-group-discussion-participation-tips.jpg",
+    "tags": [
+    "英語グループディスカッション",
+    "英会話",
+    "スピーキング",
+    "英語学習",
+    "コミュニケーション",
+    "英語試験対策",
+    "ビジネス英語"
+    ]
+  },
+  "us-university-office-hours-utilization-questions": {
+    "id": "us-university-office-hours-utilization-questions",
+    "title": "米国大学オフィスアワー活用術！教授への効果的な質問例",
+    "description": "米国の大学生活で欠かせないオフィスアワー。この記事では、教授への効果的な質問例や準備、マナー、さらには英語での質問のコツまで具体的に解説。オフィスアワーを最大限に活用し、学業成績向上と充実した留学生活を目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/us-university-office-hours-utilization-questions.jpg",
+    "tags": [
+    "米国大学",
+    "オフィスアワー",
+    "留学",
+    "質問力",
+    "教授",
+    "コミュニケーション",
+    "学習法",
+    "大学生活",
+    "アカデミックスキル",
+    "英語学習"
+    ]
+  },
+  "english-presentation-opening-speech-techniques": {
+    "id": "english-presentation-opening-speech-techniques",
+    "title": "英語プレゼン冒頭で聴衆を掴む！スピーチテクニック集",
+    "description": "英語プレゼンの冒頭で聴衆の心を掴むスピーチテクニックを徹底解説！印象的な質問、驚きのデータ、ストーリーテリングなど、今日から使える実践的な方法を紹介。準備のコツや役立つリソースも満載で、あなたのプレゼンを成功に導きます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-presentation-opening-speech-techniques.jpg",
+    "tags": [
+    "英語プレゼン",
+    "スピーチテクニック",
+    "プレゼンテーション",
+    "冒頭",
+    "アイスブレイク",
+    "聴衆を惹きつける",
+    "ビジネス英語",
+    "英語学習",
+    "コミュニケーションスキル"
+    ]
+  },
+  "study-abroad-culture-shock-coping-strategies": {
+    "id": "study-abroad-culture-shock-coping-strategies",
+    "title": "留学初期のカルチャーショック具体的症状と対処法5選",
+    "description": "留学初期のカルチャーショックに悩んでいませんか？この記事では、具体的な症状と、それらを乗り越えるための5つの実践的対処法を詳しく解説。異文化理解を深め、不安を自信に変え、充実した留学生活を送るためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/study-abroad-culture-shock-coping-strategies.jpg",
+    "tags": [
+    "カルチャーショック",
+    "留学",
+    "海外生活",
+    "異文化理解",
+    "ストレス対処法",
+    "メンタルヘルス",
+    "留学準備",
+    "自己成長",
+    "適応障害"
+    ]
+  },
+  "graduate-school-sop-writing-tips-admission": {
+    "id": "graduate-school-sop-writing-tips-admission",
+    "title": "大学院留学SOPで合格を掴む！自己PRと研究テーマ術",
+    "description": "大学院留学の合否を左右するSOP（Statement of Purpose）。本記事では、自己PRと研究テーマを効果的に伝え、合格を掴むためのSOP作成術をステップバイステップで解説。自己分析からリサーチ、構成、推敲、NG例まで具体的に紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/graduate-school-sop-writing-tips-admission.jpg",
+    "tags": [
+    "SOP",
+    "大学院留学",
+    "志望理由書",
+    "自己PR",
+    "研究計画",
+    "出願書類",
+    "合格対策",
+    "海外大学院",
+    "留学準備",
+    "エッセイ作成"
+    ]
+  },
+  "toefl-vs-ielts-for-graduate-school-comparison": {
+    "id": "toefl-vs-ielts-for-graduate-school-comparison",
+    "title": "大学院留学ならTOEFL？IELTS？目的別徹底比較と選び方",
+    "description": "大学院留学を目指す方へ。TOEFLとIELTS、どちらを選ぶべきか悩んでいませんか？この記事では、両試験の基本情報から目的別の選び方、具体的な学習戦略まで徹底比較。あなたに最適な試験を見つけ、目標スコア達成をサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-06",
+    "readTime": "15分",
+    "imageSrc": "/images/toefl-vs-ielts-for-graduate-school-comparison.jpg",
+    "tags": [
+    "大学院留学",
+    "TOEFL",
+    "IELTS",
+    "英語試験",
+    "試験対策",
+    "スコアアップ",
+    "留学準備",
+    "海外大学院"
+    ]
+  },
+  "improve-listening-comprehension-fast-english-lectures": {
+    "id": "improve-listening-comprehension-fast-english-lectures",
+    "title": "英語授業の早口対策！リスニング短期向上トレーニング",
+    "description": "大学の英語授業や海外の講義で、早口の英語が聞き取れず悩んでいませんか？この記事では、リスニングが難しい原因を分析し、シャドーイングやディクテーションなどの短期集中トレーニング方法、役立つアプリや教材を具体的に紹介。今日から実践できるコツで、あなたのリスニング力向上をサポートします！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/improve-listening-comprehension-fast-english-lectures.jpg",
+    "tags": [
+    "英語リスニング",
+    "早口対策",
+    "英語学習法",
+    "シャドーイング",
+    "ディクテーション",
+    "英語教材",
+    "リスニング力向上",
+    "英語初心者",
+    "短期集中"
+    ]
+  },
+  "us-university-gpa-system-maintenance-strategy": {
+    "id": "us-university-gpa-system-maintenance-strategy",
+    "title": "米国大学GPA徹底解説！高GPA維持の科目履修戦略",
+    "description": "アメリカの大学でのGPAの重要性から、高GPAを維持するための具体的な科目履修戦略、効果的な学習習慣、さらにはGPAが下がった時の対処法までを網羅的に解説。GPA管理に悩む全ての留学生必見の記事です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/us-university-gpa-system-maintenance-strategy.jpg",
+    "tags": [
+    "アメリカ大学 GPA",
+    "GPA 維持",
+    "科目履修 戦略",
+    "成績評価",
+    "留学",
+    "大学生活",
+    "単位取得",
+    "アカデミックスキル",
+    "学習習慣",
+    "シラバス活用"
+    ]
+  },
+  "academic-paper-citation-styles-apa-mla-tools": {
+    "id": "academic-paper-citation-styles-apa-mla-tools",
+    "title": "英語論文参考文献リスト作成術(APA/MLA)と引用ツール",
+    "description": "英語論文の参考文献リスト作成は必須スキル。この記事では、主要な引用スタイルであるAPAとMLAの違い、具体的な書き方、そして作業を効率化するMendeleyやZoteroなどの便利な文献管理ツールを紹介します。正確な引用で論文の信頼性を高めましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/academic-paper-citation-styles-apa-mla-tools.jpg",
+    "tags": [
+    "英語論文",
+    "参考文献",
+    "APAスタイル",
+    "MLAスタイル",
+    "引用ルール",
+    "参考文献リスト",
+    "引用ツール",
+    "アカデミックライティング",
+    "文献管理",
+    "Zotero",
+    "Mendeley",
+    "盗用防止"
+    ]
+  },
+  "early-action-decision-us-college-application-strategy": {
+    "id": "early-action-decision-us-college-application-strategy",
+    "title": "海外大EA/ED出願のメリット・デメリットと合格戦略",
+    "description": "海外大学進学を目指す方必見！アメリカの大学入試で重要な早期出願制度、EA（アーリーアクション）とED（アーリーデシジョン）の仕組み、メリット・デメリットを徹底解説。合格を勝ち取るための具体的な準備方法や戦略的アプローチ、注意点まで網羅し、あなたの海外大進学をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/early-action-decision-us-college-application-strategy.jpg",
+    "tags": [
+    "海外大学進学",
+    "アメリカ大学",
+    "早期出願",
+    "EA",
+    "ED",
+    "大学受験",
+    "合格戦略",
+    "留学準備",
+    "出願対策",
+    "アーリーアクション",
+    "アーリーデシジョン"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 
