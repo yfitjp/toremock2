@@ -2199,7 +2199,47 @@ export const articleData: Record<string, ArticleData> = {
       "英語勉強法",
       "モチベーション"
     ]
-  }
+  },
+  "toefl-ibt-speaking-independent-task-deep-reasoning-examples": {
+    "id": "toefl-ibt-speaking-independent-task-deep-reasoning-examples",
+    "title": "TOEFLスピーキングTask1:理由と具体例を深掘る秘訣",
+    "description": "TOEFL iBTスピーキングTask1で高得点を狙うには、理由と具体例の深掘りが不可欠です。本記事では、PREP法やWhy So?テクニック、S.T.A.R.メソッドなど、説得力のある回答を構成するための具体的な思考法、テンプレートに頼らない練習方法、役立つリソースを初心者にも分かりやすく解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toefl-ibt-speaking-independent-task-deep-reasoning-examples.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "Independent Task",
+    "英語試験対策",
+    "具体例",
+    "理由付け",
+    "高得点",
+    "学習法",
+    "Task1"
+    ]
+  },
+  "toefl-writing-ai-human-scorer-high-score-strategy": {
+    "id": "toefl-writing-ai-human-scorer-high-score-strategy",
+    "title": "TOEFLライティング: AIと人間両方を唸らせる高得点術",
+    "description": "TOEFLライティングで高得点を目指す方へ。AI採点(e-rater)と人間の採点官、両方の評価基準を徹底解説し、双方に響く具体的な戦略と学習法を紹介します。語彙、文法、構成からアイデア展開まで、スコアアップに繋がる実践的テクニックが満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/toefl-writing-ai-human-scorer-high-score-strategy.jpg",
+    "tags": [
+    "TOEFLライティング",
+    "AI採点",
+    "e-rater",
+    "高得点戦略",
+    "英語試験対策",
+    "ライティング学習法",
+    "アカデミックライティング",
+    "ETS"
+    ]
+  },
+  // ARTICLE_DATA_END
 };
 
 // すべての記事データを日付順（降順）で取得するヘルパー関数
@@ -2215,4 +2255,4 @@ export const getSortedArticlesData = (): ArticleData[] => {
       return 0;
     }
   });
-}; 
+};

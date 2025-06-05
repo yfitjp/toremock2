@@ -10,11 +10,12 @@ import re # For className conversion
 
 # --- 設定ここから --- #
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 20
+NUM_THEMES_TO_GENERATE = 1
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-海外大学/大学院への留学をする予定がある人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
+TOEICまたはTOEFLの勉強をする層の人に向けて、実践的なアドバイスや豆知識、お役立ち情報を提供したい。
+例：「TOEFLは誰が採点しているのか」、「アイビーリーグとは」、「EA(Early Action)とは」、「TOEICは主にどんな人が受けるのか」など
 """
 # --- 設定ここまで --- #
 
@@ -178,9 +179,9 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
 あなたはプロのコンテンツライター兼ウェブデベロッパーです。
 以下のテーマ情報に基づいて、読者の役に立ち、かつSEOにも配慮した魅力的なブログ記事のHTMLコンテンツと、それに対応するメタデータをJSON形式で提供してください。
 
-テーマID: {theme_id}
-記事タイトル: {article_title}
-記事の初期概要: {article_initial_description}
+テーマID: {{theme_id}}
+記事タイトル: {{article_title}}
+記事の初期概要: {{article_initial_description}}
 
 **出力フォーマットの厳守:**
 必ず以下の形式で、JSONオブジェクトとして応答してください。HTMLコンテンツとメタデータは分離してください。
@@ -198,12 +199,12 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
     "imageSrc": "必ず `/images/{theme_id}.jpg` という形式で、記事IDをファイル名として使用し、拡張子は.jpgとしてください。",
     "tags": ["記事内容から抽出した、SEOに有効な複数のキーワードタグ(日本語)を文字列の配列として記述してください。", "例: 英語学習", "初心者"]
   }},
-  "image_generation_prompt": "この記事のテーマと内容（タイトル: {article_title}）を良く表し、さらに見た人の興味を引き、何だろう？と思わせるような、サムネイル画像を生成するための、具体的な英語のプロンプト（100単語くらい）を記述してください。必ず'vector art'スタイルで生成するように指示してください。画像内に文字は必要以上に入れないようにしてください。記事のキャッチコピーや重要なキーワード(例：TOEIC Part1, Harvardなど)を含めるべきと判断する場合は、その具体的な文字列を明確にプロンプトに記述してください。登場人物がいる場合は日本人(Japanese)であることを明記してください。"
+  "image_generation_prompt": "この記事のテーマと内容（タイトル: {article_title}）を良く表し、さらに見た人の興味を引き、何だろう？と思わせるような、サムネイル画像を生成するための、具体的な英語のプロンプト（100単語くらい）を記述してください。必ず'vector art'スタイルで生成するように指示してください。画像内に文字列はできるだけ入らないようにしてください。必要不可欠なキーワード(例：TOEIC Part1, Harvardなど)を含めるべきと判断する場合は、数単語以内にとどめ、その具体的な文字列を明確にプロンプトに記述してください。登場人物がいる場合は日本人(Japanese)であることを明記してください。"
 }}
 ```
 
 **HTMLコンテンツ作成の指示:**
-- **重要:** 生成するHTMLは、Reactコンポーネント内の `<div className=\"prose prose-lg max-w-none\">` のようなコンテナ要素の直接の子要素として挿入されることを想定しています。
+- **重要:** 生成するHTMLは、Reactコンポーネント内の `<div className=\\"prose prose-lg max-w-none\\">` のようなコンテナ要素の直接の子要素として挿入されることを想定しています。
 - **そのため、`<html>`、`<head>`、`<body>` タグ、およびDOCTYPE宣言は絶対に含めないでください。**
 - 生成すべきHTMLは、記事の本文そのものです。例えば、全体を `<article>` タグで囲み、その中に見出し (`<h2>`, `<h3>` 等)、段落 (`<p>`)、リスト (`<ul>`, `<ol>`)、強調 (`<strong>`) などの意味論的なHTML要素を使って構成してください。
 - 以下の正しいHTML構造の例のように、記事コンテンツのみを返してください。
@@ -230,6 +231,11 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
 - 箇条書きは `<ul><li>...</li></ul>` または `<ol><li>...</li></ol>` を使用してください。
 - 強調は `<strong>` タグを使用してください。
 - 専門用語は避け、初心者にも分かりやすい言葉を選んでください。
+- **スタイルと強調**: 文章の重要な部分には、`<strong>` タグによる太字強調だけでなく、必要に応じてReactのインラインスタイルを用いた色文字などの装飾を推奨します。これにより、視覚的なアクセントを加え、読者の理解を助け、記事の魅力を高めることができます。
+    - **インラインスタイルの使用法**: Reactコンポーネント内でインラインスタイルを適用する場合、`style`属性にはJavaScriptオブジェクトを渡します。CSSプロパティ名はキャメルケース（例: `backgroundColor`、`fontSize`）で記述し、値は文字列としてください。
+    - 例: `<span style={{{{ color: 'blue', fontWeight: 'bold' }}}}>重要なテキスト</span>`
+    - この形式を守らないと、ビルドエラーの原因となるため、必ずキャメルケースを使用してください。
+    - ただし、過度な装飾は避け、可読性を損なわない範囲で効果的に使用してください。特に`prose`クラスとの兼ね合いも考慮し、全体のデザイン調和を保つよう心がけてください。
 
 - **実践的な具体例の重視**: 読者がすぐにアクションに移せるような、具体的で実践的な情報を積極的に盛り込んでください。その際、以下の点に注意してください。
     - **実在する情報源の積極的な活用**: 実在する有用な書籍名、ウェブサイトのURL、ツール名、アプリ名などを具体的に提示し、読者がさらに深く学んだり、実践したりするためのリソースとして紹介してください。これにより、記事の信頼性と実用性が大幅に向上します。
@@ -460,13 +466,105 @@ if __name__ == '__main__':
                         print(f"  テーマ「{theme_data.get('title')}」の必要情報（HTML、メタデータ、または画像プロンプト）を完全には生成できませんでした。")
                 
                 if all_articles_metadata:
-                    metadata_agg_filename = os.path.join(lib_dir, f"all_articles_metadata_{timestamp}.json")
-                    print(f"\n全てのメタデータを {metadata_agg_filename} に保存します。")
-                    with open(metadata_agg_filename, "w", encoding="utf-8") as meta_f:
-                        json.dump(all_articles_metadata, meta_f, ensure_ascii=False, indent=2)
-                    print(f"{metadata_agg_filename} への保存が完了しました。")
+                    article_data_ts_path = os.path.join(lib_dir, "article-data.ts")
+                    print(f"\n--- 生成されたメタデータを {article_data_ts_path} に追記します ---")
+                    try:
+                        with open(article_data_ts_path, "r+", encoding="utf-8") as ts_file:
+                            content = ts_file.readlines() # リストとして読み込む
+                            
+                            # マーカーコメント `// ARTICLE_DATA_END` を探す
+                            marker_line_index = -1
+                            for i in range(len(content) - 1, -1, -1):
+                                if content[i].strip() == "// ARTICLE_DATA_END":
+                                    marker_line_index = i
+                                    break
+                            
+                            if marker_line_index == -1:
+                                print(f"  エラー: {article_data_ts_path} の中でマーカー `// ARTICLE_DATA_END` が見つかりませんでした。追記できません。")
+                            else:
+                                new_metadata_entries = []
+                                metadata_items = list(all_articles_metadata.items())
+
+                                for i, (article_id, metadata) in enumerate(metadata_items):
+                                    # ArticleData型に合わせて整形
+                                    ts_metadata_obj = {
+                                        "id": metadata.get("id", ""),
+                                        "title": metadata.get("title", ""),
+                                        "description": metadata.get("description", ""),
+                                        "category": metadata.get("category", "学習法"),
+                                        "date": metadata.get("date", current_date_str),
+                                        "readTime": metadata.get("readTime", "5分"),
+                                        "imageSrc": metadata.get("imageSrc", f"/images/{article_id}.jpg"),
+                                        "tags": metadata.get("tags", []),
+                                        # featured, popular, comingSoon はオプションなので、
+                                        # 必要に応じてデフォルト値や条件分岐で追加
+                                        # 例: if metadata.get("featured"): ts_metadata_obj["featured"] = True
+                                    }
+                                    if "featured" in metadata: ts_metadata_obj["featured"] = metadata["featured"]
+                                    if "popular" in metadata: ts_metadata_obj["popular"] = metadata["popular"]
+                                    if "comingSoon" in metadata: ts_metadata_obj["comingSoon"] = metadata["comingSoon"]
+
+                                    # json.dumps を使ってオブジェクトを文字列化し、インデント調整
+                                    entry_json_str = json.dumps(ts_metadata_obj, ensure_ascii=False, indent=2)
+                                    
+                                    obj_lines = entry_json_str.splitlines()
+                                    
+                                    formatted_entry_parts = []
+                                    formatted_entry_parts.append(f'  "{article_id}": {{') 
+                                    
+                                    for line_idx in range(1, len(obj_lines) - 1):
+                                        property_line = obj_lines[line_idx].strip()
+                                        formatted_entry_parts.append(f'    {property_line}')
+                                    
+                                    formatted_entry_parts.append('  }')
+                                    
+                                    formatted_entry_str = "\n".join(formatted_entry_parts)
+                                    
+                                    new_metadata_entries.append(formatted_entry_str)
+
+                                if new_metadata_entries:
+                                    # マーカーの前の行が既存のデータエントリの閉じ括弧 `}` または `{` であればカンマを追加
+                                    line_before_marker_idx = marker_line_index -1
+                                    if line_before_marker_idx >= 0: 
+                                        line_before_marker = content[line_before_marker_idx].strip()
+                                        if line_before_marker == "}": # 既存エントリの末尾
+                                            content[line_before_marker_idx] = content[line_before_marker_idx].rstrip() + ",\n"
+                                        # elif line_before_marker.endswith("},"): # 既にカンマがある場合は何もしない (このケースは entry_str にカンマが含まれるかで制御)
+                                        #     pass 
+                                        # elif line_before_marker == "{": # オブジェクトが空で、最初の要素として追加する場合 (カンマ不要)
+                                        #     pass 
+                                        # elif line_before_marker.endswith("}"): # カンマがない既存エントリの末尾
+                                        #      content[line_before_marker_idx] = content[line_before_marker_idx].rstrip() + ",\n"
+                                    
+                                    entries_to_insert = []
+                                    for i, entry_str in enumerate(new_metadata_entries):
+                                        # マーカーの直前に追加するので、最後のエントリにもカンマが必要（マーカーの前の行が `{` でない限り）
+                                        # ただし、マーカーの前の行が { の場合（つまりこれが最初のエントリ）はカンマ不要
+                                        should_add_comma_after_entry = True
+                                        if marker_line_index > 0 and content[marker_line_index-1].strip() == "{":
+                                            if i == len(new_metadata_entries) -1: # これが最初かつ最後のエントリ
+                                                 should_add_comma_after_entry = False
+                                        
+                                        if i < len(new_metadata_entries) - 1: # 複数エントリの途中
+                                            entries_to_insert.append(entry_str + ",\n")
+                                        elif should_add_comma_after_entry: # 最後のエントリで、かつカンマが必要な場合
+                                            entries_to_insert.append(entry_str + ",\n")
+                                        else: # 最後のエントリで、かつカンマが不要な場合
+                                            entries_to_insert.append(entry_str + "\n")
+                                    
+                                    for entry_line in reversed(entries_to_insert):
+                                        content.insert(marker_line_index, entry_line)
+
+                                    ts_file.seek(0)
+                                    ts_file.writelines(content)
+                                    ts_file.truncate()
+                                    print(f"  メタデータを {article_data_ts_path} に追記しました。")
+                    except FileNotFoundError:
+                        print(f"  エラー: {article_data_ts_path} が見つかりません。")
+                    except Exception as e:
+                        print(f"  {article_data_ts_path} へのメタデータ追記中にエラーが発生しました: {e}")
                 else:
-                    print("\n有効なメタデータが一つも生成されませんでした。")
+                    print("\n追記するメタデータがありません。")
 
                 if image_generation_tasks:
                     img_tasks_filename = os.path.join(lib_dir, f"image_generation_tasks_{timestamp}.json")
