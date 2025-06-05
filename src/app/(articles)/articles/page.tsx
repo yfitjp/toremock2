@@ -8,29 +8,6 @@ import Image from 'next/image';
 // Import data and types from the central source
 import { getSortedArticlesData, ArticleData, CategoryKey } from '../lib/article-data';
 
-// Remove local Article type definition
-// type Article = {
-//   id: string;
-//   title: string;
-//   description: string;
-//   category: CategoryKey;
-//   date: string;
-//   readTime: string;
-//   imageSrc: string;
-//   tags: string[];
-//   featured?: boolean;
-//   popular?: boolean;
-//   comingSoon?: boolean;
-// };
-
-// Remove local CategoryKey type definition (imported now)
-// type CategoryKey = 'TOEIC' | 'TOEFL' | '英語試験' | '学習法';
-
-// Remove local articles array definition
-// const articles: Article[] = [
-//   // ... data was here ...
-// ];
-
 // カテゴリー情報 (CategoryKey is now imported)
 const categoryInfo: Record<CategoryKey, { description: string; icon: JSX.Element }> = {
   'TOEIC': {
@@ -187,7 +164,7 @@ export default function ArticlesHomePage() {
                     英語テスト攻略に必要な情報を提供します。
                   </p>
                   <div className="flex flex-wrap gap-3">
-                    <Link href="/articles/toeic-mocktest-comparison" 
+                    <Link href="/articles/toeic-vs-toefl-which-test-to-take-purpose-based-guide" 
                       className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-md transition-colors">
                       人気記事を読む
                     </Link>

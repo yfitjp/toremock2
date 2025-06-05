@@ -39,6 +39,7 @@ export const articleData: Record<string, ArticleData> = {
       "英語教材"
     ],
     "featured": true,
+    "popular": true
   },
   "english-learning-motivation-keep": {
     "id": "english-learning-motivation-keep",
@@ -60,7 +61,7 @@ export const articleData: Record<string, ArticleData> = {
       "習慣化",
       "英語の勉強"
     ],
-    "featured": true,
+    "featured": true
   },
   "english-study-habit-making": {
     "id": "english-study-habit-making",
@@ -80,7 +81,7 @@ export const articleData: Record<string, ArticleData> = {
       "英語独学",
       "スモールステップ"
     ],
-    "featured": true,
+    "featured": true
   },
   "fun-english-learning-methods": {
     "id": "fun-english-learning-methods",
@@ -417,7 +418,6 @@ export const articleData: Record<string, ArticleData> = {
       "マナー",
       "コミュニケーション"
     ],
-    "popular": true,
   },
   "english-presentation-slide-design": {
     "id": "english-presentation-slide-design",
@@ -3052,7 +3052,8 @@ export const articleData: Record<string, ArticleData> = {
     "キャリアアップ",
     "英語学習",
     "テスト対策"
-    ]
+    ],
+    "popular": true
   },
   "english-drama-phrases-you-bet-for-real-nuance": {
     "id": "english-drama-phrases-you-bet-for-real-nuance",
@@ -3310,7 +3311,8 @@ export const articleData: Record<string, ArticleData> = {
     "英語表現",
     "参考文献",
     "学術論文"
-    ]
+    ],
+    "popular": true
   },
   "english-restaurant-allergy-request-phrases-travel": {
     "id": "english-restaurant-allergy-request-phrases-travel",
