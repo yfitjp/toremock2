@@ -3256,26 +3256,6 @@ export const articleData: Record<string, ArticleData> = {
     "英語初心者"
     ]
   },
-  "english-job-interview-weakness-answer-examples": {
-    "id": "english-job-interview-weakness-answer-examples",
-    "title": "英語面接「あなたの短所は？」好印象な回答例文とNG例",
-    "description": "英語面接で「短所」を尋ねられた際の答え方に悩んでいませんか？この記事では、自己分析力と成長意欲をアピールする好印象な回答戦略、具体的な英語例文、避けるべきNG例を徹底解説。面接成功をサポートします。",
-    "category": "学習法",
-    "date": "2025-06-06",
-    "readTime": "12分",
-    "imageSrc": "/images/english-job-interview-weakness-answer-examples.jpg",
-    "tags": [
-    "英語面接",
-    "短所 回答",
-    "弱み 伝え方",
-    "外資系 転職",
-    "面接対策 英語",
-    "自己分析",
-    "キャリアアップ",
-    "英語学習",
-    "回答例文"
-    ]
-  },
   "english-sns-comments-casual-phrases-for-friends": {
     "id": "english-sns-comments-casual-phrases-for-friends",
     "title": "インスタが楽しくなる！友達に使うネイティブ風英語コメント集",
