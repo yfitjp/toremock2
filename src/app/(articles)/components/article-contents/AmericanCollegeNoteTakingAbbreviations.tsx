@@ -41,8 +41,8 @@ const AmericanCollegeNoteTakingAbbreviations: React.FC = () => {
   <ul>
     <li><strong>=</strong> : equals, is the same as (等しい)</li>
     <li><strong>≠</strong> : is not equal to (等しくない)</li>
-    <li><strong>></strong> : is greater than (〜より大きい)</li>
-    <li><strong><</strong> : is less than (〜より小さい)</li>
+    <li><strong>＞</strong> : is greater than (〜より大きい)</li>
+    <li><strong>＜</strong> : is less than (〜より小さい)</li>
     <li><strong>≈ / ~</strong> : approximately (約)</li>
     <li><strong>#</strong> : number (数、番号)</li>
     <li><strong>$ / ¥</strong> : money, cost, price (お金、費用)</li>

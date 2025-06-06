@@ -27,8 +27,8 @@ const FleaMarketNegotiationEnglish: React.FC = () => {
       <p>まずは笑顔で挨拶。そして、商品を手に取って「これ、いいですね！」と興味を示しましょう。いきなり値段の話から入るより、ずっと友好的な雰囲気で始められます。</p>
       <p><strong>使えるフレーズ:</strong></p>
       <ul>
-        <li>"Hello! How are you today?" (こんにちは！)
-        <li>"This is lovely." / "I really like this!" (これ、素敵ですね！)
+        <li>"Hello! How are you today?" (こんにちは！)</li>
+        <li>"This is lovely." / "I really like this!" (これ、素敵ですね！)</li>
         <li>"I'm just looking, thank you." (見ているだけです、ありがとう) ※声をかけられた場合</li>
       </ul>
     </li>

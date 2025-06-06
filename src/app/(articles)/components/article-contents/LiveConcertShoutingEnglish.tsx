@@ -13,17 +13,17 @@ const LiveConcertShoutingEnglish: React.FC = () => {
     <h3>パフォーマンスを褒める</h3>
     <p>曲や演奏、ダンスが素晴らしかった時に使えるフレーズです。曲の直後やMCの合間に叫んでみましょう。</p>
     <ul>
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>That was amazing!</strong> (今の最高だった！)
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>Incredible!</strong> (信じられないくらい凄い！)
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>You're the best!</strong> (あなたが一番！)
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>We love you!</strong> (大好きだよ！ - I love youより一体感が出ます)
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>That was amazing!</strong> (今の最高だった！)</li>
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>Incredible!</strong> (信じられないくらい凄い！)</li>
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>You're the best!</strong> (あなたが一番！)</li>
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>We love you!</strong> (大好きだよ！ - I love youより一体感が出ます)</li>
     </ul>
     <p>特に「Amazing」や「Incredible」は、感情を表現するのに非常に便利な単語です。演奏後、会場が一体となって称賛を送る瞬間に使うと、感動もひとしおです。シンプルですが、力強く気持ちが伝わります。</p>
     <h3>アーティストへの呼びかけ</h3>
     <p>MC中など、アーティストが客席に語りかけている時に。名前を叫ぶのも良いですが、こんな一言を添えてみてはいかがでしょうか。</p>
     <ul>
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>We're so happy you're here!</strong> (日本に来てくれて本当に嬉しい！)
-        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>Thank you for coming to Japan!</strong> (日本に来てくれてありがとう！)
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>We're so happy you're here!</strong> (日本に来てくれて本当に嬉しい！)</li>
+        <li><strong style={{ color: '#2563eb', fontWeight: 'bold' }}>Thank you for coming to Japan!</strong> (日本に来てくれてありがとう！)</li>
     </ul>
     <p>海外からわざわざ来てくれたことへの感謝を伝えるこれらのフレーズは、アーティストにとっても非常に嬉しい言葉のはず。あなたの感謝の気持ちを、ストレートに伝えてみましょう。</p>
 
