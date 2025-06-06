@@ -1,7 +1,7 @@
 import google.generativeai as genai
 from google.generativeai import types # types をインポートに追加
-import openai # OpenAIライブラリをインポート
-import requests # requestsライブラリをインポート
+import vertexai
+from vertexai.preview.vision_models import ImageGenerationModel
 import os
 from dotenv import load_dotenv
 import json
@@ -12,14 +12,18 @@ import re # For className conversion
 # モデルの選択
 MODEL = 'gemini-2.5-pro-preview-06-05'
 
+# Vertex AI Imagen の設定
+PROJECT_ID = "gen-lang-client-0577382790"
+LOCATION = "us-central1"
+
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 1
+NUM_THEMES_TO_GENERATE = 20
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
 TOEICまたはTOEFLの勉強をする層の人に向けて、実践的なアドバイスや豆知識、役立つ情報を提供したい。
 ただし、直接的にこれらの英語試験の対策に関連する情報ではなく、これらの層の人が必要とする情報を選ぶこと。
-需要は一定あるが、まだそれについての記事が少ないような、ニッチなテーマを考えてください。
+需要は一定あるが、まだそれについての記事が少ないような、ニッチなテーマを考えてください。以下の例も十分に参考にしてください。
 良い例：無料で参加できるアメリカの大学のサマースクール、海外大学で使われる学校生活に関するスラング集
 悪い例：TOEFL Writing セクションの攻略法
 """
@@ -35,16 +39,7 @@ if not GEMINI_API_KEY:
 if GEMINI_API_KEY:
     genai.configure(api_key=GEMINI_API_KEY)
 
-# OpenAI APIキーを設定
-OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
-if not OPENAI_API_KEY:
-    # OpenAIの機能も使うので、キーがない場合はエラーにするか、警告に留めるか選択
-    raise ValueError("OPENAI_API_KEY not found in .env file. OpenAI image generation will fail.")
-
-# OpenAIクライアントの初期化 (APIキーは環境変数 OPENAI_API_KEY から自動的に読み込まれるか、ここで明示的に渡す)
-# client = openai.OpenAI(api_key=OPENAI_API_KEY) # 明示的に渡す場合
-# 環境変数から自動で読み込まれることを期待する場合は、引数なしでOK
-openai_client = openai.OpenAI()
+# OpenAI関連のコードはImagen 3への移行に伴い削除されました。
 
 # --- Helper Functions ---
 def kebab_to_pascal_case(kebab_str: str) -> str:
@@ -202,7 +197,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
     "category": "記事内容に最も適したカテゴリを {categories_str} の中から一つだけ選択してください。",
     "date": "{execution_date}",
     "readTime": "記事本文のボリューム感を考慮し、平均的な読者が読むのにかかりそうな時間を『X分』という形式で記述してください。(「約」は含めないでください)",
-    "imageSrc": "必ず `/images/{theme_id}.jpg` という形式で、記事IDをファイル名として使用し、拡張子は.jpgとしてください。",
+    "imageSrc": "必ず `/images/{theme_id}.png` という形式で、記事IDをファイル名として使用し、拡張子は.pngとしてください。",
     "tags": ["記事内容から抽出した、SEOに有効な複数のキーワードタグ(日本語)を文字列の配列として記述してください。", "例: 英語学習", "初心者"]
   }},
   "image_generation_prompt": "この記事のテーマと内容（タイトル: {article_title}）を良く表し、さらに見た人の興味を引くような、サムネイル画像を生成するための、具体的な英語のプロンプト（100単語くらい）を記述してください。必ず'vector art'スタイルで生成するように指示してください。**画像内に文字列は一切含まれないようにください。**登場人物がいる場合は日本人(Japanese)であることを明記してください。"
@@ -265,7 +260,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
 - `category` は、提示された選択肢 ({categories_str}) の中から最も適切なものを一つだけ選んでください。
 - `date` は提供された日付 ({execution_date}) を使用してください。
 - `readTime` はHTMLコンテンツの長さを考慮して現実的な値を設定してください。
-- `imageSrc` は"必ず `/images/{theme_id}.jpg` という形式で、記事IDをファイル名として使用し、拡張子は.jpgとしてください。
+- `imageSrc` は"必ず `/images/{theme_id}.png` という形式で、記事IDをファイル名として使用し、拡張子は.pngとしてください。
 - `tags` は記事内容から判断し、複数の適切な日本語のキーワードをリスト形式で設定してください。
 
 上記の指示に従い、正確なJSON形式で応答してください。
@@ -296,7 +291,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
             print(f"Warning: 生成されたカテゴリが無効です: {metadata.get('category')}. Theme ID: {theme_id}")
             return html_content, metadata, None
         # imageSrcの形式チェックを追加
-        expected_image_src = f"/images/{theme_id}.jpg"
+        expected_image_src = f"/images/{theme_id}.png"
         if metadata.get("imageSrc") != expected_image_src:
             print(f"Warning: 生成されたimageSrcの形式が不正です。Expected: {expected_image_src}, Got: {metadata.get('imageSrc')}. Theme ID: {theme_id}")
             # 修正を試みるか、エラーとするか。今回はエラーとしてNoneを返す。
@@ -311,14 +306,15 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
         print(f"HTML・メタデータ・画像プロンプト生成中にエラー: {e}. Theme ID: {theme_id}")
         return "", None, None
 
-def generate_and_save_image(task: dict) -> bool:
+def generate_and_save_image(task: dict, model: ImageGenerationModel) -> bool:
     """
-    指定されたプロンプトに基づいてOpenAI DALL·Eを使用して画像を生成し、指定されたパスに保存する。
+    指定されたプロンプトに基づいてVertex AI Imagen 3を使用して画像を生成し、指定されたパスに保存する。
     Args:
         task: 画像生成タスクの情報を含む辞書。
-              - image_generation_prompt (str): DALL·Eへのプロンプト。
+              - image_generation_prompt (str): Imagenへのプロンプト。
               - target_output_path (str): 画像の保存先パス。
               - article_id (str): 記事ID (エラー表示用)。
+        model: ImageGenerationModelのインスタンス。
     Returns:
         bool: 画像の生成と保存に成功した場合は True、それ以外は False。
     """
@@ -326,69 +322,54 @@ def generate_and_save_image(task: dict) -> bool:
     output_path = task.get("target_output_path")
     article_id = task.get("article_id", "N/A")
 
-    if not OPENAI_API_KEY:
-        print(f"  エラー: OpenAI APIキーが設定されていません。記事ID: {article_id}")
-        return False
     if not prompt_text or not output_path:
         print(f"  エラー: 画像生成プロンプトまたは出力パスが不足しています。記事ID: {article_id}")
         return False
 
-    print(f"    OpenAI DALL·E画像生成開始 - 出力先: {output_path}")
+    print(f"    Vertex AI Imagen 3 画像生成開始 - 出力先: {output_path}")
     try:
-        response = openai_client.images.generate(
-            model="dall-e-3",  # dall-e-3 を使用
+        # DALL-E 3 は 1792x1024 (約16:9) であったため、16:9 のアスペクト比を維持
+        images = model.generate_images(
             prompt=prompt_text,
-            n=1,  # 生成する画像の数
-            size="1792x1024",
-            quality="hd",
-            response_format="url"  # または "b64_json"
+            number_of_images=1,
+            # 画像内に不要なテキストが生成されるのを防ぐため、ネガティブプロンプトを強化
+            negative_prompt="text, letters, blurry, low quality, watermark, signature, words, font, typo",
+            aspect_ratio="16:9",
         )
 
-        if response.data and response.data[0].url:
-            image_url = response.data[0].url
-            print(f"      画像URL受信: {image_url}")
-            
-            # URLから画像をダウンロードして保存
-            img_data_response = requests.get(image_url, timeout=30) # タイムアウトを設定
-            img_data_response.raise_for_status()  # HTTPエラーがあれば例外を発生
+        # 画像データをバイトとして取得
+        image_bytes = images[0]._image_bytes
 
-            with open(output_path, 'wb') as f:
-                f.write(img_data_response.content)
-            print(f"      画像を {output_path} に正常に保存しました。")
-            return True
-        elif response.data and response.data[0].b64_json:
-            # response_format="b64_json" の場合の処理 (今回はurlを使用)
-            import base64
-            img_bytes = base64.b64decode(response.data[0].b64_json)
-            print(f"      画像データ(b64_json)受信完了。ファイルに保存中...")
-            with open(output_path, 'wb') as f:
-                f.write(img_bytes)
-            print(f"      画像を {output_path} に正常に保存しました。")
-            return True
-        else:
-            print(f"  エラー: OpenAI APIレスポンスから画像URLまたはb64_jsonを抽出できませんでした。記事ID: {article_id}")
-            if hasattr(response, 'error'):
-                print(f"    API Error: {response.error}")
-            return False
+        # 画像をファイルに保存
+        with open(output_path, 'wb') as f:
+            f.write(image_bytes)
+        
+        print(f"      画像を {output_path} に正常に保存しました。")
+        return True
 
-    except openai.APIError as e:
-        # OpenAI API自体からのエラー (例:レート制限、認証エラーなど)
-        print(f"  OpenAI APIエラー: {e}. 記事ID: {article_id}")
-        if hasattr(e, 'status_code'): print(f"    Status Code: {e.status_code}")
-        if hasattr(e, 'response') and e.response: print(f"    Response: {e.response.text}")
-        return False
-    except requests.exceptions.RequestException as e:
-        # 画像ダウンロード時のネットワークエラーなど
-        print(f"  画像ダウンロードエラー: {e}. 記事ID: {article_id}, URL: {image_url if 'image_url' in locals() else 'N/A'}")
-        return False
     except Exception as e:
-        print(f"  エラー: OpenAI画像生成中に予期せぬエラーが発生しました。記事ID: {article_id} - {e}")
+        # Vertex AIのエラーは google.api_core.exceptions.GoogleAPICallError のサブクラスが多い
+        print(f"  エラー: Vertex AI Imagen画像生成中に予期せぬエラーが発生しました。記事ID: {article_id} - {e}")
         print(f"    エラータイプ: {type(e)}")
         return False
 
 if __name__ == '__main__':
-    if not GEMINI_API_KEY and not OPENAI_API_KEY:
-        raise ValueError("必要なAPIキー (GEMINI_API_KEY or OPENAI_API_KEY) が.envファイルに見つかりません。")
+    if not GEMINI_API_KEY:
+        raise ValueError("必要なAPIキー (GEMINI_API_KEY) が.envファイルに見つかりません。")
+
+    # Vertex AIの初期化
+    print("--- Vertex AI の初期化 ---")
+    imagen_model = None
+    try:
+        vertexai.init(project=PROJECT_ID, location=LOCATION)
+        # 画像生成モデルのロード
+        imagen_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
+        print("  Vertex AI Imagen 3 モデルのロード完了。")
+    except Exception as e:
+        print(f"  エラー: Vertex AI の初期化またはモデルのロードに失敗しました: {e}")
+        print("  Google Cloudへの認証が正しく設定されているか確認してください（例: gcloud auth application-default login）。")
+        print("  画像生成はスキップされます。")
+
 
     # --- 出力先ディレクトリ設定 ---
     base_dir = os.getcwd() # スクリプト実行ディレクトリをベースとするか、固定パスか選択
@@ -454,8 +435,8 @@ if __name__ == '__main__':
                         print(f"  メタデータを集約しました。")
 
                         raw_image_src = article_metadata.get('imageSrc', '') 
-                        image_filename_from_meta = os.path.basename(raw_image_src) if raw_image_src else f"{article_metadata['id']}.jpg"
-                        # imageSrcの形式は `/images/{theme_id}.jpg` なので、os.path.basenameでファイル名だけ取得
+                        image_filename_from_meta = os.path.basename(raw_image_src) if raw_image_src else f"{article_metadata['id']}.png"
+                        # imageSrcの形式は `/images/{theme_id}.png` なので、os.path.basenameでファイル名だけ取得
                         # 保存先は public_images_dir
                         image_output_path = os.path.join(public_images_dir, image_filename_from_meta)
                         
@@ -500,7 +481,7 @@ if __name__ == '__main__':
                                         "category": metadata.get("category", "学習法"),
                                         "date": metadata.get("date", current_date_str),
                                         "readTime": metadata.get("readTime", "5分"),
-                                        "imageSrc": metadata.get("imageSrc", f"/images/{article_id}.jpg"),
+                                        "imageSrc": metadata.get("imageSrc", f"/images/{article_id}.png"),
                                         "tags": metadata.get("tags", []),
                                         # featured, popular, comingSoon はオプションなので、
                                         # 必要に応じてデフォルト値や条件分岐で追加
@@ -584,17 +565,20 @@ if __name__ == '__main__':
                 print("\n全てのテーマの処理が完了しました。")
 
                 if image_generation_tasks: # img_tasks_filename の存在チェックは不要、リストで判定
-                    print(f"\n--- 画像生成タスクに基づいて画像を生成します (OpenAI DALL·E) ---")
-                    # tasks_to_process = image_generation_tasks # 直接使う
+                    if imagen_model:
+                        print(f"\n--- 画像生成タスクに基づいて画像を生成します (Vertex AI Imagen 3) ---")
+                        # tasks_to_process = image_generation_tasks # 直接使う
 
-                    generated_image_count = 0
-                    for i, task_data in enumerate(image_generation_tasks):
-                        print(f"  画像タスク {i+1}/{len(image_generation_tasks)} を処理中: {task_data.get('suggested_image_filename')}")
-                        # generate_and_save_image は target_output_path を使うので、ここでのパス修正は不要
-                        success = generate_and_save_image(task_data) 
-                        if success:
-                            generated_image_count += 1
-                    print(f"\n画像生成処理完了。{generated_image_count}/{len(image_generation_tasks)} 件の画像を生成・保存しました。")
+                        generated_image_count = 0
+                        for i, task_data in enumerate(image_generation_tasks):
+                            print(f"  画像タスク {i+1}/{len(image_generation_tasks)} を処理中: {task_data.get('suggested_image_filename')}")
+                            # generate_and_save_image は target_output_path を使うので、ここでのパス修正は不要
+                            success = generate_and_save_image(task_data, imagen_model) 
+                            if success:
+                                generated_image_count += 1
+                        print(f"\n画像生成処理完了。{generated_image_count}/{len(image_generation_tasks)} 件の画像を生成・保存しました。")
+                    else:
+                        print("\nImagenモデルが利用できないため、画像生成処理をスキップします。")
                 else:
                     print("\n画像生成タスクが存在しないため、画像生成処理をスキップします。")
 

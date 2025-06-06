@@ -4206,6 +4206,43 @@ export const articleData: Record<string, ArticleData> = {
     "異文化コミュニケーション"
     ]
   },
+  "how-to-use-university-office-hours-effectively": {
+    "id": "how-to-use-university-office-hours-effectively",
+    "title": "大学のOffice Hour活用術｜教授に好印象な英語質問フレーズ",
+    "description": "大学のオフィスアワーは成績アップやキャリア形成の絶好の機会です。この記事では、教授に好印象を与え、有意義な時間にするための具体的な活用法を解説。効果的な質問の準備、礼儀正しい英語でのアポイントの取り方、使える質問フレーズ集まで、留学生活を成功に導く秘訣を網羅します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/how-to-use-university-office-hours-effectively.jpg",
+    "tags": [
+    "大学",
+    "オフィスアワー",
+    "英語学習",
+    "留学",
+    "質問",
+    "教授",
+    "コミュニケーション",
+    "学習法",
+    "アカデミック英語"
+    ]
+  },
+  "requesting-recommendation-letter-in-english-from-professor": {
+    "id": "requesting-recommendation-letter-in-english-from-professor",
+    "title": "英語の推薦状、教授への依頼方法完全ガイド",
+    "description": "留学や大学院進学に必須の英語推薦状。この記事では、教授への依頼タイミングや準備物、失礼のない英文メールの例文、依頼後のフォローアップまで、具体的なステップを完全解説。成功への鍵となる推薦状をスムーズに手に入れるためのノウハウが満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/requesting-recommendation-letter-in-english-from-professor.png",
+    "tags": [
+    "推薦状 英語",
+    "教授 依頼",
+    "留学準備",
+    "大学院留学",
+    "英文メール",
+    "英語ライティング"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 
