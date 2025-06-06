@@ -117,10 +117,10 @@
     @apply text-3xl font-bold text-slate-900 mb-6 mt-8;
   }
   .prose-lg :where(h2):not(:where([class~="not-prose"] *)) {
-    @apply text-2xl font-semibold text-slate-900 mb-6 mt-12 pt-2 pb-2 border-l-8 border-sky-500 pl-3 border-b border-slate-300;
+    @apply text-2xl font-semibold text-slate-900 mb-6 mt-12 pt-2 pb-2 border-l-8 border-sky-500 pl-3 border-b border-sky-500;
   }
   .prose-lg :where(h3):not(:where([class~="not-prose"] *)) {
-    @apply text-xl font-semibold text-slate-800 mb-4 mt-10 pt-1 pb-1 border-l-4 border-sky-400 pl-3;
+    @apply text-xl font-semibold text-slate-800 mb-4 mt-10 pt-1 pb-1 border-l-4 border-blue-500 pl-3;
   }
   .prose-lg :where(h4):not(:where([class~="not-prose"] *)) {
     @apply text-lg font-semibold text-slate-800 mb-2 mt-6;
