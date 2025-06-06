@@ -224,23 +224,24 @@ export default function ArticlesHomePage() {
                 人気の記事
               </h2>
               
-              <div className="bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
+              {/* デスクトップ版 - 1つのボックス内に記事が縦並び */}
+              <div className="hidden md:block bg-white rounded-xl shadow-md border border-slate-200 overflow-hidden">
                 {popularArticles.map((article, index) => (
                   <Link 
                     key={article.id}
                     href={`/articles/${article.id}`}
-                    className={`flex flex-col md:flex-row hover:bg-slate-50 transition-colors ${index < popularArticles.length - 1 ? 'border-b border-slate-200' : ''}`}
+                    className={`flex flex-row hover:bg-slate-50 transition-colors ${index < popularArticles.length - 1 ? 'border-b border-slate-200' : ''}`}
                   >
-                    <div className="relative md:w-1/4 h-40 md:h-auto bg-slate-100 flex-shrink-0"> 
+                    <div className="relative w-1/4 h-auto bg-slate-100 flex-shrink-0"> 
                       <Image 
                         src={article.imageSrc || '/images/placeholder.jpg'}
                         alt={article.title}
                         fill 
                         className="object-cover" 
-                        sizes="(max-width: 768px) 100vw, 25vw"
+                        sizes="25vw"
                       />
                     </div>
-                    <div className="p-6 md:w-3/4">
+                    <div className="p-6 w-3/4">
                       <div className="flex justify-between items-start mb-2">
                         <span className="px-3 py-1 bg-slate-100 text-slate-700 text-sm font-medium rounded-full">
                           {article.category}
@@ -264,6 +265,62 @@ export default function ArticlesHomePage() {
                             #{tag}
                           </span>
                         ))}
+                      </div>
+                    </div>
+                  </Link>
+                ))}
+              </div>
+
+              {/* モバイル版 - 記事一覧と同じような独立したカード */}
+              <div className="md:hidden grid grid-cols-1 gap-6">
+                {popularArticles.map(article => (
+                  <Link
+                    key={article.id}
+                    href={`/articles/${article.id}`}
+                    className="border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white hover:bg-slate-50 block"
+                  >
+                    <div className="relative bg-slate-200 aspect-[3/2]">
+                      <Image 
+                        src={article.imageSrc || '/images/placeholder.jpg'}
+                        alt={article.title}
+                        fill 
+                        className="object-cover" 
+                        sizes="100vw"
+                      />
+                      <div className="absolute top-2 right-2 px-2 py-1 bg-red-600 text-white text-xs font-medium rounded">
+                        人気記事
+                      </div>
+                    </div>
+                    
+                    <div className="p-5 flex flex-col flex-grow">
+                      <div>
+                        <div className="flex justify-between items-center text-sm text-slate-500 mb-3">
+                          <span className="font-medium text-slate-700">{article.category}</span>
+                          <div className="flex items-center">
+                            <svg className="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20">
+                              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clipRule="evenodd" />
+                            </svg>
+                            <span>{article.readTime}</span>
+                          </div>
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-slate-800 mb-3 line-clamp-2">
+                          {article.title}
+                        </h3>
+                        
+                        <p className="text-slate-600 mb-4 line-clamp-3">
+                          {article.description}
+                        </p>
+                      </div>
+                      
+                      <div className="mt-auto">
+                        <div className="flex flex-wrap gap-2">
+                          {article.tags.map(tag => (
+                            <span key={tag} className="px-2 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">
+                              #{tag}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   </Link>
