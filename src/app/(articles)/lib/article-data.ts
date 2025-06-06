@@ -3834,6 +3834,398 @@ export const articleData: Record<string, ArticleData> = {
     "アーリーデシジョン"
     ]
   },
+  "toeic-part7-triple-passage-time-saving-tips": {
+    "id": "toeic-part7-triple-passage-time-saving-tips",
+    "title": "TOEIC Part7トリプルパッセージ、時間内に全問解く秘策",
+    "description": "TOEIC Part7最難関のトリプルパッセージ。情報量の多さと時間制限に悩むあなたへ。本記事では、読む順番、設問タイプ別攻略法、効率的な情報処理術、おすすめ教材まで、時間内に全問正解するための具体的秘策を徹底解説します。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "11分",
+    "imageSrc": "/images/toeic-part7-triple-passage-time-saving-tips.jpg",
+    "tags": [
+    "TOEIC",
+    "Part7",
+    "トリプルパッセージ",
+    "英語学習",
+    "リーディング対策",
+    "時間配分",
+    "試験対策",
+    "スコアアップ",
+    "勉強法"
+    ]
+  },
+  "toeic-test-day-morning-routine-score-boost": {
+    "id": "toeic-test-day-morning-routine-score-boost",
+    "title": "TOEIC当日朝専用！スコアを底上げする最終確認リスト",
+    "description": "TOEIC試験当日の朝、スコアアップを目指すための最終確認リストを徹底解説。持ち物、メンタルケア、直前学習、食事、会場到着までのポイントを押さえ、最高のパフォーマンスで試験に臨みましょう。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toeic-test-day-morning-routine-score-boost.jpg",
+    "tags": [
+    "TOEIC",
+    "試験対策",
+    "当日対策",
+    "朝の過ごし方",
+    "スコアアップ",
+    "英語学習",
+    "持ち物リスト",
+    "メンタルケア",
+    "直前学習"
+    ]
+  },
+  "toeic-part2-trick-questions-pattern-analysis": {
+    "id": "toeic-part2-trick-questions-pattern-analysis",
+    "title": "TOEIC Part2応答問題の罠を見抜く！頻出ひっかけパターン",
+    "description": "TOEIC Part2応答問題でスコアを落としていませんか？この記事では、頻出するひっかけ問題のパターンを徹底分析し、具体的な見抜き方と対策法を解説。類似発音、間接応答などの罠を回避し、消去法や効果的なトレーニングでPart2を得点源に変える秘訣を伝授します。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/toeic-part2-trick-questions-pattern-analysis.jpg",
+    "tags": [
+    "TOEIC Part2",
+    "応答問題",
+    "リスニング対策",
+    "ひっかけ問題",
+    "英語学習",
+    "スコアアップ",
+    "TOEIC対策",
+    "英語試験"
+    ]
+  },
+  "toeic-official-workbook-effective-review-method": {
+    "id": "toeic-official-workbook-effective-review-method",
+    "title": "TOEIC公式問題集、伸び悩む人のための爆上げ復習術",
+    "description": "TOEICスコアが伸び悩むあなたへ。この記事では、TOEIC公式問題集を最大限に活用し、スコアを爆発的に伸ばすための効果的な復習術を徹底解説します。パート別の具体的なテクニック、モチベーション維持の秘訣、NG復習法まで網羅し、あなたの目標達成をサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/toeic-official-workbook-effective-review-method.jpg",
+    "tags": [
+    "TOEIC",
+    "公式問題集",
+    "復習方法",
+    "スコアアップ",
+    "英語学習",
+    "リスニング対策",
+    "リーディング対策",
+    "勉強法",
+    "英語試験"
+    ]
+  },
+  "toeic-speaking-opinion-question-template-phrases": {
+    "id": "toeic-speaking-opinion-question-template-phrases",
+    "title": "TOEIC Speaking意見問題で高得点！万能テンプレート集",
+    "description": "TOEIC Speakingの意見問題で高得点を狙うための万能テンプレート集を徹底解説。意見表明、理由・具体例、結論のフレーズから、効果的な活用術、練習方法まで網羅。初心者でもすぐに使える実践的な内容で、スピーキング力向上をサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toeic-speaking-opinion-question-template-phrases.jpg",
+    "tags": [
+    "TOEIC Speaking",
+    "意見問題",
+    "テンプレート",
+    "高得点",
+    "英語学習",
+    "スピーキング対策",
+    "英語試験",
+    "ETS",
+    "フレーズ集"
+    ]
+  },
+  "toeic-writing-graph-description-introduction-conclusion": {
+    "id": "toeic-writing-graph-description-introduction-conclusion",
+    "title": "TOEIC Writing図表問題：高得点導入と結論の書き方",
+    "description": "TOEIC Writingの図表問題で高得点を取るための、効果的な導入と結論の書き方を徹底解説。具体的なフレーズ例や時間配分、練習方法も紹介し、スコアアップをサポートします。",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/toeic-writing-graph-description-introduction-conclusion.jpg",
+    "tags": [
+    "TOEIC Writing",
+    "図表問題",
+    "導入",
+    "結論",
+    "書き方",
+    "英語学習",
+    "試験対策",
+    "高得点",
+    "フレーズ集"
+    ]
+  },
+  "toeic-listening-british-australian-accent-practice": {
+    "id": "toeic-listening-british-australian-accent-practice",
+    "title": "TOEICリスニング：英豪アクセント攻略！聞き取り練習法",
+    "description": "TOEICリスニングでイギリス英語やオーストラリア英語のアクセントに苦戦していませんか？この記事では、各アクセントの聞き分けポイント、効果的な聞き取り練習法、おすすめ教材、本番で役立つテクニックを具体的に解説。スコアアップを目指しましょう！",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toeic-listening-british-australian-accent-practice.jpg",
+    "tags": [
+    "TOEIC",
+    "リスニング",
+    "イギリス英語",
+    "オーストラリア英語",
+    "アクセント",
+    "英語学習",
+    "試験対策",
+    "聞き取り練習",
+    "英語耳"
+    ]
+  },
+  "toefl-speaking-independent-task-idea-generation": {
+    "id": "toefl-speaking-independent-task-idea-generation",
+    "title": "TOEFL Speaking Independent Task：アイデア枯渇脱却法",
+    "description": "TOEFLスピーキングのIndependent Taskでアイデアが浮かばず悩んでいませんか？この記事では、瞬時に説得力のあるアイデアを生み出すための具体的なテクニック5選、日常でできるアイデア力強化トレーニング5選、さらに本番での心構えまで、スコアアップに直結する情報を網羅的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "15分",
+    "imageSrc": "/images/toefl-speaking-independent-task-idea-generation.jpg",
+    "tags": [
+    "TOEFL",
+    "スピーキング",
+    "Independent Task",
+    "アイデア発想",
+    "英語学習",
+    "試験対策",
+    "英語脳",
+    "意見表明"
+    ]
+  },
+  "toefl-integrated-writing-listening-summary-tips": {
+    "id": "toefl-integrated-writing-listening-summary-tips",
+    "title": "TOEFL Integrated Writing：リスニング要約と論点整理術",
+    "description": "TOEFL Integrated Writingで高得点を目指すためのリスニング要約と論点整理術を徹底解説。効果的なメモ取り、正確な要約テクニック、リーディングとリスニングの情報を統合する方法を学び、スコアアップを実現しましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "14分",
+    "imageSrc": "/images/toefl-integrated-writing-listening-summary-tips.jpg",
+    "tags": [
+    "TOEFL",
+    "Integrated Writing",
+    "リスニング",
+    "要約",
+    "論点整理",
+    "英語学習",
+    "試験対策",
+    "ライティング"
+    ]
+  },
+  "toefl-reading-academic-texts-speed-reading-vocabulary": {
+    "id": "toefl-reading-academic-texts-speed-reading-vocabulary",
+    "title": "TOEFLリーディング：学術長文速読と専門用語推測の技",
+    "description": "TOEFLリーディングで高得点を目指すあなたへ。本記事では、学術的な長文を速く正確に読むテクニックと、難解な専門用語の意味を文脈から推測する秘訣を徹底解説。実践的な学習法やおすすめ教材も紹介し、スコアアップをサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "11分",
+    "imageSrc": "/images/toefl-reading-academic-texts-speed-reading-vocabulary.jpg",
+    "tags": [
+    "TOEFL",
+    "リーディング",
+    "速読",
+    "語彙",
+    "専門用語推測",
+    "英語学習",
+    "試験対策",
+    "学術英語",
+    "ETS"
+    ]
+  },
+  "toefl-listening-lecture-note-taking-strategies": {
+    "id": "toefl-listening-lecture-note-taking-strategies",
+    "title": "TOEFLリスニング：レクチャー用ノート術！聞き逃し防止",
+    "description": "TOEFLリスニングのレクチャーで聞き逃しを防ぎ、スコアアップを目指すための効果的なノートテイキング術を徹底解説。準備段階から実践テクニック、復習方法まで、具体的なコツや記号・略語の活用法、おすすめ練習教材も紹介します。初心者でも分かりやすく、すぐに実践できる情報満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/toefl-listening-lecture-note-taking-strategies.jpg",
+    "tags": [
+    "TOEFLリスニング",
+    "ノート術",
+    "レクチャー対策",
+    "英語学習",
+    "聞き逃し防止",
+    "スコアアップ",
+    "TOEFL対策",
+    "ノートテイキング"
+    ]
+  },
+  "toefl-ibt-test-day-guide-what-to-bring-break-time": {
+    "id": "toefl-ibt-test-day-guide-what-to-bring-break-time",
+    "title": "TOEFL iBT受験当日ガイド：持ち物と休憩時間の活用法",
+    "description": "TOEFL iBT試験当日の不安を解消！必須の持ち物リストから推奨品、10分間の休憩時間の効果的な使い方まで徹底解説。スコアアップに繋がる準備で、自信を持って試験に臨みましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "11分",
+    "imageSrc": "/images/toefl-ibt-test-day-guide-what-to-bring-break-time.jpg",
+    "tags": [
+    "TOEFL iBT",
+    "試験対策",
+    "持ち物リスト",
+    "休憩時間",
+    "英語試験",
+    "留学準備",
+    "受験当日",
+    "高得点戦略",
+    "ETS"
+    ]
+  },
+  "toefl-preparation-shadowing-materials-effective-method": {
+    "id": "toefl-preparation-shadowing-materials-effective-method",
+    "title": "TOEFL対策シャドーイング：教材選定と効果最大化の秘訣",
+    "description": "TOEFLスコアアップを目指す学習者必見！シャドーイングはリスニングとスピーキング力を同時に鍛える効果的な学習法です。この記事では、最適な教材の選び方、具体的な練習ステップ、効果を最大化するコツ、おすすめの教材やアプリを徹底解説。あなたもシャドーイングをマスターして、目標スコアを達成しましょう！",
+    "category": "TOEFL",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toefl-preparation-shadowing-materials-effective-method.jpg",
+    "tags": [
+    "TOEFL",
+    "シャドーイング",
+    "英語学習",
+    "リスニング対策",
+    "スピーキング対策",
+    "教材",
+    "勉強法"
+    ]
+  },
+  "gre-vs-toefl-study-order-grad-school-prep": {
+    "id": "gre-vs-toefl-study-order-grad-school-prep",
+    "title": "GREとTOEFL、どっち優先？大学院留学の最適戦略と両立術",
+    "description": "大学院留学を目指す方必見！GREとTOEFL、どちらを優先して対策すべきか悩んでいませんか？この記事では、最適な学習順序、具体的な勉強法、おすすめ教材、そして二つの試験を両立させる秘訣を徹底解説。あなたの留学準備を強力にサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/gre-vs-toefl-study-order-grad-school-prep.jpg",
+    "tags": [
+    "大学院留学",
+    "GRE",
+    "TOEFL",
+    "試験対策",
+    "英語学習",
+    "留学準備",
+    "学習計画",
+    "アメリカ大学院",
+    "英語試験戦略"
+    ]
+  },
+  "english-reading-concentration-tips-long-passages": {
+    "id": "english-reading-concentration-tips-long-passages",
+    "title": "英語長文読解で集中力が途切れる人へ。持続させる秘訣",
+    "description": "英語長文を読むとすぐに集中力が切れてしまう…そんな悩みを抱えるあなたへ。この記事では、集中力が続かない原因を徹底分析し、具体的なトレーニング法、試験本番で役立つテクニック、集中力を高める環境作りまで、実践的な秘訣を網羅的に解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/english-reading-concentration-tips-long-passages.jpg",
+    "tags": [
+    "英語長文",
+    "集中力",
+    "読解力",
+    "英語学習",
+    "勉強法",
+    "試験対策",
+    "TOEIC対策",
+    "TOEFL対策",
+    "リーディング",
+    "アクティブリーディング",
+    "ポモドーロテクニック"
+    ]
+  },
+  "toeic-800-score-apps-for-busy-learners": {
+    "id": "toeic-800-score-apps-for-busy-learners",
+    "title": "TOEIC800点目標！スキマ時間活用おすすめ神アプリ5選",
+    "description": "TOEIC800点達成は夢じゃない！忙しいあなたのために、スキマ時間を活用して効率的に学べる神アプリを5つ厳選しました。各アプリの特徴から具体的な学習法、継続のコツまで詳しく解説。この記事を読めば、あなたにぴったりの学習パートナーが見つかります！",
+    "category": "TOEIC",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/toeic-800-score-apps-for-busy-learners.jpg",
+    "tags": [
+    "TOEIC",
+    "英語学習アプリ",
+    "スキマ時間",
+    "英語勉強法",
+    "800点目標",
+    "社会人英語",
+    "学生英語",
+    "おすすめアプリ"
+    ]
+  },
+  "english-news-sites-for-learners-reading-comprehension": {
+    "id": "english-news-sites-for-learners-reading-comprehension",
+    "title": "英語ニュースで読解力UP！学習者向けサイトと活用法",
+    "description": "英語ニュースで読解力を効果的にアップさせたい学習者必見！初心者でも無理なく続けられるおすすめニュースサイトと、具体的な学習ステップ、さらに効果を高めるコツを徹底解説。この記事を読めば、あなたも楽しく英語力向上を目指せます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-news-sites-for-learners-reading-comprehension.jpg",
+    "tags": [
+    "英語学習",
+    "リーディング",
+    "読解力",
+    "英語ニュース",
+    "学習サイト",
+    "英語勉強法",
+    "初心者向け英語",
+    "多読",
+    "時事英語"
+    ]
+  },
+  "english-podcasts-for-toeic-toefl-by-level": {
+    "id": "english-podcasts-for-toeic-toefl-by-level",
+    "title": "TOEIC/TOEFL対策に最適！レベル別英語ポッドキャスト",
+    "description": "英語のポッドキャストを活用してTOEICやTOEFLのスコアアップを目指す方法を徹底解説。初心者から上級者までレベル別におすすめのポッドキャストや、効果的な学習法、試験対策との連携まで具体的に紹介します。スキマ時間を活用してリスニング力を鍛えましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/english-podcasts-for-toeic-toefl-by-level.jpg",
+    "tags": [
+    "英語学習",
+    "ポッドキャスト",
+    "TOEIC対策",
+    "TOEFL対策",
+    "リスニング",
+    "英語勉強法",
+    "スキマ時間活用",
+    "レベル別教材"
+    ]
+  },
+  "english-job-interview-weakness-answer-examples": {
+    "id": "english-job-interview-weakness-answer-examples",
+    "title": "英語面接「あなたの短所は？」好印象を与える模範解答",
+    "description": "英語面接で『あなたの短所は？』と聞かれた時の効果的な答え方を知りたいですか？この記事では、面接官に好印象を与え、自己成長をアピールできる回答の黄金フレームワークと具体的な英語例文を徹底解説。NGな短所や追加アドバイスも紹介し、あなたの面接突破をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-job-interview-weakness-answer-examples.jpg",
+    "tags": [
+    "英語面接",
+    "短所 答え方",
+    "面接対策",
+    "外資系転職",
+    "キャリアアップ",
+    "自己PR",
+    "英語学習"
+    ]
+  },
+  "academic-english-discussion-participation-tips": {
+    "id": "academic-english-discussion-participation-tips",
+    "title": "留学先授業で活躍！英語ディスカッション発言・反論術",
+    "description": "留学先の英語ディスカッションで積極的に発言し、論理的に反論するための具体的なテクニックを解説。英語ディスカッションへの不安を解消し、自信を持って意見を述べるコツや、役立つフレーズ、おすすめの学習リソースも紹介します。アカデミックな場で活躍したいあなたへ。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/academic-english-discussion-participation-tips.jpg",
+    "tags": [
+    "英語ディスカッション",
+    "留学",
+    "アカデミック英語",
+    "発言術",
+    "反論術",
+    "英語学習法",
+    "スピーキング力向上",
+    "授業参加",
+    "異文化コミュニケーション"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 

@@ -1,0 +1,102 @@
+[
+  {
+    "id": "toeic-part7-triple-passage-time-saving-tips",
+    "title": "TOEIC Part7トリプルパッセージ、時間内に全問解く秘策",
+    "description": "TOEIC Part7の難関、トリプルパッセージで時間が足りない方へ。設問先読み、情報整理、時間配分の具体的なテクニックを解説。スコアアップに直結する時間管理術を伝授します。"
+  },
+  {
+    "id": "toeic-test-day-morning-routine-score-boost",
+    "title": "TOEIC当日朝専用！スコアを底上げする最終確認リスト",
+    "description": "TOEICテスト当日の朝、何をすればベストパフォーマンスを発揮できる？リスニング耳の準備からメンタル調整まで、スコアを数点でも上げるための具体的な行動プランを紹介します。"
+  },
+  {
+    "id": "toeic-part2-trick-questions-pattern-analysis",
+    "title": "TOEIC Part2応答問題の罠を見抜く！頻出ひっかけパターン",
+    "description": "TOEIC Part2で失点しやすい方必見！よくある「ひっかけ問題」のパターンを徹底分析し、具体的な見抜き方を伝授します。これであなたもPart2を得点源にできる！"
+  },
+  {
+    "id": "toeic-official-workbook-effective-review-method",
+    "title": "TOEIC公式問題集、伸び悩む人のための爆上げ復習術",
+    "description": "TOEIC公式問題集をただ繰り返すだけではスコアは伸びません。この記事では、間違えた問題の分析方法から、語彙・文法知識の定着まで、効果的な復習テクニックを具体的に解説します。"
+  },
+  {
+    "id": "toeic-speaking-opinion-question-template-phrases",
+    "title": "TOEIC Speaking意見問題で高得点！万能テンプレート集",
+    "description": "TOEIC Speakingの「意見を述べる問題」で高得点を狙うための万能テンプレートと、採点官に響く言い換え表現を具体例と共に紹介。スピーチ構成のコツも掴めます。"
+  },
+  {
+    "id": "toeic-writing-graph-description-introduction-conclusion",
+    "title": "TOEIC Writing図表問題：高得点導入と結論の書き方",
+    "description": "TOEIC Writingの図表描写問題で高評価を得るための、効果的な導入文と結論の書き方を徹底解説。使えるフレーズや構成のポイントを押さえ、論理的な文章作成をサポートします。"
+  },
+  {
+    "id": "toeic-listening-british-australian-accent-practice",
+    "title": "TOEICリスニング：英豪アクセント攻略！聞き取り練習法",
+    "description": "TOEICリスニングで苦手意識を持つ人が多いイギリス・オーストラリア英語のアクセント。特徴を理解し、効果的な聞き取り練習法を実践すれば克服可能！具体的な対策を伝授します。"
+  },
+  {
+    "id": "toefl-speaking-independent-task-idea-generation",
+    "title": "TOEFL Speaking Independent Task：アイデア枯渇脱却法",
+    "description": "TOEFL SpeakingのIndependent Taskで話す内容が思いつかない方へ。短時間で質の高いアイデアを生み出し、論理的に構成するテクニックを伝授。具体例も豊富に紹介します。"
+  },
+  {
+    "id": "toefl-integrated-writing-listening-summary-tips",
+    "title": "TOEFL Integrated Writing：リスニング要約と論点整理術",
+    "description": "TOEFL Integrated Writingで高得点を取るための鍵は、リスニング内容の正確な要約とリーディングとの効果的な関連付け。具体的なノートテイキング術から文章構成まで解説します。"
+  },
+  {
+    "id": "toefl-reading-academic-texts-speed-reading-vocabulary",
+    "title": "TOEFLリーディング：学術長文速読と専門用語推測の技",
+    "description": "TOEFLリーディングの長大なアカデミック文章に苦戦していませんか？この記事では、時間内に読み解くための速読術と、文脈から専門用語の意味を推測するテクニックを具体的に解説します。"
+  },
+  {
+    "id": "toefl-listening-lecture-note-taking-strategies",
+    "title": "TOEFLリスニング：レクチャー用ノート術！聞き逃し防止",
+    "description": "TOEFLリスニングのレクチャーでノートテイキングが追いつかない方へ。主要ポイントを逃さず、効率的に情報を記録するための実践的なテクニックと記号活用法を伝授します。"
+  },
+  {
+    "id": "toefl-ibt-test-day-guide-what-to-bring-break-time",
+    "title": "TOEFL iBT受験当日ガイド：持ち物と休憩時間の活用法",
+    "description": "TOEFL iBTテスト当日に最高のパフォーマンスを発揮するための完全ガイド。必須の持ち物リストから、意外と重要な休憩時間の効果的な使い方まで、経験者が具体的にアドバイスします。"
+  },
+  {
+    "id": "toefl-preparation-shadowing-materials-effective-method",
+    "title": "TOEFL対策シャドーイング：教材選定と効果最大化の秘訣",
+    "description": "TOEFLのリスニングとスピーキング力向上に効果的なシャドーイング。この記事では、最適な教材の選び方から、成果を出すための正しい実践方法、注意点までを詳しく解説します。"
+  },
+  {
+    "id": "gre-vs-toefl-study-order-grad-school-prep",
+    "title": "GREとTOEFL、どっち優先？大学院留学の最適戦略と両立術",
+    "description": "アメリカの大学院留学を目指す方へ。GREとTOEFL、どちらの試験対策を優先すべきか、効率的な学習計画の立て方、そして両立のコツを、経験に基づいて具体的にアドバイスします。"
+  },
+  {
+    "id": "english-reading-concentration-tips-long-passages",
+    "title": "英語長文読解で集中力が途切れる人へ。持続させる秘訣",
+    "description": "TOEICやTOEFLの長文読解で集中力が続かない悩みを解決！アクティブリーディングの手法や休憩の取り方など、最後まで内容をしっかり理解するための具体的なテクニックを紹介します。"
+  },
+  {
+    "id": "toeic-800-score-apps-for-busy-learners",
+    "title": "TOEIC800点目標！スキマ時間活用おすすめ神アプリ5選",
+    "description": "TOEIC800点以上を目指すあなたへ。膨大な英語学習アプリの中から、本当に効果があり、スキマ時間を最大限に活用できる神アプリを厳選。具体的な使い方や連携学習法も紹介。"
+  },
+  {
+    "id": "english-news-sites-for-learners-reading-comprehension",
+    "title": "英語ニュースで読解力UP！学習者向けサイトと活用法",
+    "description": "生きた英語に触れられる英語ニュース。この記事では、TOEIC/TOEFL学習者のレベルに合ったニュースサイトの選び方から、語彙力・読解力を効果的に高める読み方までを解説します。"
+  },
+  {
+    "id": "english-podcasts-for-toeic-toefl-by-level",
+    "title": "TOEIC/TOEFL対策に最適！レベル別英語ポッドキャスト",
+    "description": "リスニング力向上に効果的な英語ポッドキャスト。この記事では、TOEICやTOEFLのスコアアップに役立つ番組を、初級から上級までレベル別に厳選して紹介。効果的な聴き方も解説します。"
+  },
+  {
+    "id": "english-job-interview-weakness-answer-examples",
+    "title": "英語面接「あなたの短所は？」好印象を与える模範解答",
+    "description": "英語面接で聞かれる「あなたの短所」への効果的な答え方とは？ネガティブな印象を与えず、逆に自己分析力や成長意欲をアピールできる、具体的な英語の模範解答例とポイントを解説します。"
+  },
+  {
+    "id": "academic-english-discussion-participation-tips",
+    "title": "留学先授業で活躍！英語ディスカッション発言・反論術",
+    "description": "留学中の大学の授業で、英語でのディスカッションに苦労していませんか？発言の適切なタイミング、論理的な意見の述べ方、スマートな反論方法など、実践的なテクニックを伝授します。"
+  }
+]
