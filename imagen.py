@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import json
 import datetime
 import re # For className conversion
+import time # APIリクエストの待機用
 
 # --- 設定ここから --- #
 # モデルの選択
@@ -17,15 +18,16 @@ PROJECT_ID = "gen-lang-client-0577382790"
 LOCATION = "us-central1"
 
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 20
+NUM_THEMES_TO_GENERATE = 60
+
+# APIレートリミットを考慮し、最後のリクエストの後以外は待機する
+WAIT_SECONDS = 60
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-TOEICまたはTOEFLの勉強をする層の人に向けて、実践的なアドバイスや豆知識、役立つ情報を提供したい。
-ただし、直接的にこれらの英語試験の対策に関連する情報ではなく、これらの層の人が必要とする情報を選ぶこと。
-需要は一定あるが、まだそれについての記事が少ないような、ニッチなテーマを考えてください。以下の例も十分に参考にしてください。
-良い例：無料で参加できるアメリカの大学のサマースクール、海外大学で使われる学校生活に関するスラング集
-悪い例：TOEFL Writing セクションの攻略法
+生きた英語を学びたい英語学習者に向けて、様々なシチュエーションでの英語の言い回しを紹介したい。
+シチュエーションはとにかくニッチなものを選ぶこと。
+良い例：「インスタのストーリーで使われる英語の言い回し」、「BFFの意味って?」、「英語でババアって何て言うの？」
 """
 # --- 設定ここまで --- #
 
@@ -573,9 +575,14 @@ if __name__ == '__main__':
                         for i, task_data in enumerate(image_generation_tasks):
                             print(f"  画像タスク {i+1}/{len(image_generation_tasks)} を処理中: {task_data.get('suggested_image_filename')}")
                             # generate_and_save_image は target_output_path を使うので、ここでのパス修正は不要
-                            success = generate_and_save_image(task_data, imagen_model) 
+                            success = generate_and_save_image(task_data, imagen_model)
                             if success:
                                 generated_image_count += 1
+                            
+                            # 最後のリクエストの後には待機しない
+                            if i < len(image_generation_tasks) - 1:
+                                time.sleep(WAIT_SECONDS)
+
                         print(f"\n画像生成処理完了。{generated_image_count}/{len(image_generation_tasks)} 件の画像を生成・保存しました。")
                     else:
                         print("\nImagenモデルが利用できないため、画像生成処理をスキップします。")

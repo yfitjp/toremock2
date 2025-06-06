@@ -3292,7 +3292,6 @@ export const articleData: Record<string, ArticleData> = {
     "参考文献",
     "学術論文"
     ],
-    "popular": true
   },
   "english-restaurant-allergy-request-phrases-travel": {
     "id": "english-restaurant-allergy-request-phrases-travel",
@@ -4241,6 +4240,1603 @@ export const articleData: Record<string, ArticleData> = {
     "大学院留学",
     "英文メール",
     "英語ライティング"
+    ],
+    "popular": true
+  },
+  "email-to-professor-abroad-etiquette": {
+    "id": "email-to-professor-abroad-etiquette",
+    "title": "海外大学の教授に送る初メールの書き方と例文【件名・結び】",
+    "description": "海外大学の教授に初めてメールを送る際の不安を解消！本記事では、件名から自己紹介、結びの言葉まで、失礼のない英文メールの書き方を徹底解説。コピペで使える具体的な例文や、送信前に確認すべきチェックリストも紹介し、あなたの研究留学や問い合わせを成功に導きます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/email-to-professor-abroad-etiquette.png",
+    "tags": [
+    "英語メール",
+    "海外留学",
+    "大学教授",
+    "メールマナー",
+    "英文メール例文",
+    "研究留学",
+    "アカデミック英語"
+    ]
+  },
+  "american-college-note-taking-abbreviations": {
+    "id": "american-college-note-taking-abbreviations",
+    "title": "留学前に知りたい！米大学授業のノート略語50選",
+    "description": "アメリカの大学留学を控えたあなたへ。講義のスピードに追いつき、効率的に学習するためのノート略語を50個厳選して紹介します。頻出の記号から便利な省略形まで、すぐに使えるものばかり。コーネル式ノート術との組み合わせ方や、デジタルツール活用法も解説。留学生活を成功させるための必須スキルです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/american-college-note-taking-abbreviations.png",
+    "tags": [
+    "留学",
+    "アメリカ大学",
+    "ノート術",
+    "英語学習",
+    "略語",
+    "アカデミック英語",
+    "効率化"
+    ]
+  },
+  "linkedin-english-profile-writing-tips": {
+    "id": "linkedin-english-profile-writing-tips",
+    "title": "外資系転職を狙う！LinkedIn英語プロフィールの書き方",
+    "description": "外資系転職を成功させる鍵、LinkedIn英語プロフィールの書き方を徹底解説。採用担当者の目に留まるヘッドラインや自己紹介、実績をアピールする職務経歴の具体例まで、今すぐ使える実践的なコツを満載。あなたのキャリアを加速させましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/linkedin-english-profile-writing-tips.png",
+    "tags": [
+    "LinkedIn",
+    "英語プロフィール",
+    "外資系転職",
+    "キャリアアップ",
+    "英文履歴書",
+    "自己PR",
+    "ビジネス英語"
+    ]
+  },
+  "english-conference-call-phrases-cant-hear": {
+    "id": "english-conference-call-phrases-cant-hear",
+    "title": "英語電話会議で聞き取れない時の丁寧な聞き返しフレーズ集",
+    "description": "英語の電話会議で相手の発言が聞き取れず、困った経験はありませんか？この記事では、ビジネスシーンで使える丁寧な聞き返しフレーズを状況別に紹介します。音声トラブル時や早口で聞き取れない場合など、具体的な例文で解説。自信を持って会議に臨むためのコツも満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-conference-call-phrases-cant-hear.png",
+    "tags": [
+    "英語会議",
+    "ビジネス英語",
+    "リスニング",
+    "英会話フレーズ",
+    "オンライン会議",
+    "聞き返し",
+    "英語学習"
+    ]
+  },
+  "reporting-to-foreign-boss-in-english": {
+    "id": "reporting-to-foreign-boss-in-english",
+    "title": "外国人上司への英語での「報連相」を簡潔にするコツ",
+    "description": "外国人上司への英語での「報連相」に悩んでいませんか？この記事では、文化の違いを理解し、結論から伝えるフレームワークや実践的なフレーズを多数紹介。自信を持って簡潔にコミュニケーションが取れるようになります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/reporting-to-foreign-boss-in-english.png",
+    "tags": [
+    "報連相",
+    "ビジネス英語",
+    "外国人上司",
+    "英語コミュニケーション",
+    "外資系",
+    "英語フレーズ",
+    "英語学習"
+    ]
+  },
+  "academic-english-citation-phrases": {
+    "id": "academic-english-citation-phrases",
+    "title": "英語論文でそのまま使える！引用・参考文献の便利フレーズ",
+    "description": "英語論文やレポート作成で必須の「引用」。本記事では、先行研究への言及、データの引用、間接引用など、状況別にそのまま使える便利な英語フレーズを網羅的に紹介。アカデミックライティングの質を高め、盗用を避けるための正しい引用方法も解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/academic-english-citation-phrases.png",
+    "tags": [
+    "英語論文",
+    "引用",
+    "参考文献",
+    "アカデミックライティング",
+    "レポート作成",
+    "英語学習",
+    "留学準備"
+    ]
+  },
+  "business-small-talk-topics-to-avoid": {
+    "id": "business-small-talk-topics-to-avoid",
+    "title": "英語スモールトークで失敗しない！避けるべきNG話題リスト",
+    "description": "ビジネス英語や初対面でのスモールトークに自信がない方へ。この記事では、文化的な誤解を避け、円滑な人間関係を築くために絶対に避けるべきNG話題を具体的に解説します。さらに、すぐに使える安全な鉄板トピックや、会話力を磨くための実践的な学習法も紹介。これであなたもスモールトークの達人に！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/business-small-talk-topics-to-avoid.png",
+    "tags": [
+    "スモールトーク",
+    "ビジネス英語",
+    "英会話",
+    "異文化コミュニケーション",
+    "NGトピック",
+    "コミュニケーションスキル"
+    ]
+  },
+  "english-customer-complaint-reply-email": {
+    "id": "english-customer-complaint-reply-email",
+    "title": "【例文付】英語クレーム対応メールの書き方【丁寧な謝罪】",
+    "description": "海外顧客からの英語クレームにどう対応すべきかお悩みですか？本記事では、丁寧な謝罪が伝わる英語メールの書き方を、基本構成から状況別の例文付きで徹底解説。ビジネスで即使えるフレーズや避けるべきNG表現も紹介し、顧客の信頼を回復する対応方法をマスターできます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-customer-complaint-reply-email.png",
+    "tags": [
+    "クレーム対応",
+    "ビジネス英語",
+    "英語メール",
+    "謝罪",
+    "例文",
+    "カスタマーサポート",
+    "英語学習"
+    ]
+  },
+  "free-online-courses-from-us-universities": {
+    "id": "free-online-courses-from-us-universities",
+    "title": "無料で学べる！米トップ大学のオンライン公開講座（MOOCs）",
+    "description": "留学せずにアメリカのトップ大学の授業を無料で体験しませんか？本記事では、MOOCs（大規模公開オンライン講座）の魅力と、英語学習への具体的な活用法を徹底解説。CourseraやedXなどのおすすめプラットフォームや、効果的な学習ステップも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/free-online-courses-from-us-universities.png",
+    "tags": [
+    "MOOCs",
+    "オンライン講座",
+    "無料英語学習",
+    "リスニング強化",
+    "アメリカ大学",
+    "独学",
+    "キャリアアップ",
+    "Coursera",
+    "edX"
+    ]
+  },
+  "dealing-with-dorm-roommate-abroad": {
+    "id": "dealing-with-dorm-roommate-abroad",
+    "title": "留学先の寮生活！ルームメイトと良好な関係を築く英語術",
+    "description": "留学先の寮でルームメイトと良い関係を築くための、自己紹介からトラブル解決まで具体的な英語フレーズとコミュニケーション術を解説。快適な共同生活を送り、留学を成功させるための実践的ヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/dealing-with-dorm-roommate-abroad.png",
+    "tags": [
+    "留学",
+    "寮生活",
+    "ルームメイト",
+    "英会話",
+    "コミュニケーション",
+    "英語学習",
+    "異文化交流"
+    ]
+  },
+  "resume-vs-cv-english-writing-guide": {
+    "id": "resume-vs-cv-english-writing-guide",
+    "title": "英文履歴書、ResumeとCVの違いは？目的別書き分け方",
+    "description": "海外就職や外資系転職を目指すあなたへ。英文履歴書『Resume』と『CV』の決定的な違いを徹底解説。それぞれの目的、書くべき場面、効果的な書き方のポイントを具体例付きで紹介。この記事を読めば、あなたのキャリアに最適な書類を作成できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/resume-vs-cv-english-writing-guide.png",
+    "tags": [
+    "英文履歴書",
+    "Resume",
+    "CV",
+    "外資系転職",
+    "海外就職",
+    "書き方",
+    "ビジネス英語"
+    ]
+  },
+  "online-english-discussion-participation-tips": {
+    "id": "online-english-discussion-participation-tips",
+    "title": "オンライン英語ディスカッションで自然に発言するコツ",
+    "description": "オンラインの英語ディスカッションで『何を話せばいいか分からない』『発言のタイミングが掴めない』と悩んでいませんか？この記事では、事前の準備から、相槌、質問、会話への割り込み方、意見を論理的に伝えるPREP法まで、自然に発言するための具体的なコツとフレーズを初心者にも分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/online-english-discussion-participation-tips.png",
+    "tags": [
+    "英語ディスカッション",
+    "オンライン英会話",
+    "スピーキング",
+    "英語学習",
+    "ビジネス英語",
+    "発言のコツ",
+    "英会話フレーズ"
+    ]
+  },
+  "english-phrases-for-grocery-shopping-abroad": {
+    "id": "english-phrases-for-grocery-shopping-abroad",
+    "title": "海外スーパーで困らない！買い物で役立つ実践英会話集",
+    "description": "海外のスーパーマーケットでの買い物に不安を感じていませんか？この記事では、入店から商品探し、量り売り、レジでの会計まで、シーン別に使える実践的な英会話フレーズを豊富に紹介します。自信を持ってスマートに買い物ができるよう、今すぐ役立つ表現を学びましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-phrases-for-grocery-shopping-abroad.png",
+    "tags": [
+    "海外旅行",
+    "英会話",
+    "スーパーマーケット",
+    "買い物",
+    "英語フレーズ",
+    "初心者"
+    ]
+  },
+  "crafting-english-elevator-pitch": {
+    "id": "crafting-english-elevator-pitch",
+    "title": "30秒で魅了する！英語エレベーターピッチの作り方と例文",
+    "description": "ビジネスチャンスを掴むための英語エレベーターピッチ。この記事では、30秒で自分を効果的にアピールするための基本構成、作成5ステップ、シーン別例文を詳しく解説。初心者でもすぐに実践できる具体的な方法と練習法で、あなたの第一印象を劇的に変えます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/crafting-english-elevator-pitch.png",
+    "tags": [
+    "エレベーターピッチ",
+    "英語学習",
+    "ビジネス英語",
+    "自己紹介",
+    "スピーキング",
+    "例文",
+    "キャリアアップ",
+    "ネットワーキング"
+    ]
+  },
+  "attending-international-academic-conference": {
+    "id": "attending-international-academic-conference",
+    "title": "大学生・院生向け！海外の学会に個人で参加する方法",
+    "description": "海外の学会に個人で参加したい大学生・大学院生必見！本記事では、学会の探し方から参加登録、費用を抑えるコツ、英語での発表準備まで、具体的な手順をステップ・バイ・ステップで分かりやすく解説します。あなたの研究を世界に発信する第一歩をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/attending-international-academic-conference.png",
+    "tags": [
+    "海外学会",
+    "国際学会",
+    "研究発表",
+    "大学院生",
+    "大学生",
+    "英語プレゼン",
+    "ポスター発表",
+    "研究留学"
+    ]
+  },
+  "english-contract-key-phrases-checklist": {
+    "id": "english-contract-key-phrases-checklist",
+    "title": "英語契約書で確認必須！不利にならないための重要表現",
+    "description": "英語契約書で不利な契約を結ばないために、必ず確認すべき重要表現を徹底解説。Indemnification, Confidentiality, Governing Lawなど、頻出条項の意味とチェックポイントを初心者にも分かりやすく紹介します。自信を持ってグローバルなビジネスに臨むための必読ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/english-contract-key-phrases-checklist.png",
+    "tags": [
+    "英語契約書",
+    "ビジネス英語",
+    "リーガル英語",
+    "海外取引",
+    "契約書チェック",
+    "重要フレーズ"
+    ]
+  },
+  "improving-english-through-overseas-volunteering": {
+    "id": "improving-english-through-overseas-volunteering",
+    "title": "英語を実践！海外ボランティアの探し方と参加のメリット",
+    "description": "海外ボランティアで実践的な英語力を身につけませんか？この記事では、英語力向上に繋がる海外ボランティアのメリット、自分に合ったプログラムの探し方、参加前に必要な準備までを徹底解説。生きた英語を学びながら世界に貢献する、最高の体験への第一歩をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/improving-english-through-overseas-volunteering.png",
+    "tags": [
+    "海外ボランティア",
+    "英語学習",
+    "実践英語",
+    "スピーキング",
+    "留学",
+    "国際協力",
+    "語学力向上"
+    ]
+  },
+  "latest-english-internet-slang-on-social-media": {
+    "id": "latest-english-internet-slang-on-social-media",
+    "title": "【2024年版】ネイティブが使う最新英語ネットスラング集",
+    "description": "2024年最新の英語ネットスラングを徹底解説！SNSやチャットでネイティブが使う'Rizz', 'Bet', 'Delulu'などの意味や使い方を、具体的な例文付きで紹介。これであなたも海外の友達との会話がもっと楽しくなるはず。流行の英語表現をマスターして、コミュニケーションをアップデートしましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/latest-english-internet-slang-on-social-media.png",
+    "tags": [
+    "ネットスラング",
+    "英語学習",
+    "SNS英語",
+    "日常英会話",
+    "ネイティブ表現",
+    "スラング",
+    "初心者"
+    ]
+  },
+  "english-presentation-slide-design-tips": {
+    "id": "english-presentation-slide-design-tips",
+    "title": "英語プレゼンが伝わる！シンプルで見やすいスライドデザイン術",
+    "description": "英語プレゼンで聴衆を引きつける、シンプルで分かりやすいスライドデザインのコツを解説。フォント選び、配色、画像の活用法から、言語の壁を越えるビジュアル表現まで、具体的なテクニックとおすすめツールを紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/english-presentation-slide-design-tips.png",
+    "tags": [
+    "英語プレゼン",
+    "スライドデザイン",
+    "プレゼンテーション",
+    "ビジネス英語",
+    "デザイン初心者",
+    "学習法"
+    ]
+  },
+  "using-university-library-abroad-tips": {
+    "id": "using-university-library-abroad-tips",
+    "title": "留学生活を充実させる！海外の大学図書館フル活用術5選",
+    "description": "留学中の皆さん、大学図書館を最大限に活用できていますか？この記事では、膨大な学術データベースの活用法から、無料で使える専門ソフト、さらには異文化交流のハブとしての図書館の魅力まで、留学生活を何倍も豊かにする具体的な5つの活用術を徹底解説します。勉強の効率を上げ、最高の留学体験を手に入れましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/using-university-library-abroad-tips.png",
+    "tags": [
+    "留学",
+    "大学図書館",
+    "学習法",
+    "情報収集",
+    "海外生活",
+    "レポート作成"
+    ]
+  },
+  "fps-gaming-english-communication-callouts": {
+    "id": "fps-gaming-english-communication-callouts",
+    "title": "FPSで勝つための英語VC必須コールアウト集【APEX/VALORANT】",
+    "description": "APEXやVALORANTなどのFPSゲームで、ボイスチャット(VC)を使って味方とスムーズに連携するための必須英語コールアウトを徹底解説。初心者でもすぐに使える基本的な報告から、戦況を有利にする応用フレーズまで、具体的な例文と共に紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/fps-gaming-english-communication-callouts.png",
+    "tags": [
+    "FPS",
+    "英語学習",
+    "コールアウト",
+    "ボイスチャット",
+    "APEX Legends",
+    "VALORANT",
+    "ゲーム英語",
+    "初心者"
+    ]
+  },
+  "british-baking-show-english-vocabulary": {
+    "id": "british-baking-show-english-vocabulary",
+    "title": "英ベーキング番組の専門用語を解読！レシピ再現に役立つ表現",
+    "description": "イギリスのベーキング番組『ブリティッシュ・ベイクオフ』を楽しむための英語専門用語を徹底解説！調理器具から材料、調理工程、審査員の独特な表現まで網羅。この記事を読めば、番組の理解が深まり、英語のレシピ再現もスムーズになります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/british-baking-show-english-vocabulary.png",
+    "tags": [
+    "イギリス英語",
+    "ベーキング",
+    "英語学習",
+    "料理英語",
+    "レシピ英語",
+    "海外ドラマ",
+    "ブリティッシュベイクオフ"
+    ]
+  },
+  "sneakerhead-slang-english-guide": {
+    "id": "sneakerhead-slang-english-guide",
+    "title": "スニーカーヘッズ必須！海外レビューで使う英スラング20選",
+    "description": "海外のスニーカーレビューやSNSを100%楽しむための必須英スラングを20個厳選解説。'Grail'や'Cop or Drop'の意味から、実際の使い方まで徹底ガイド。これを読めば、あなたも今日から海外スニーカーコミュニティの一員です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/sneakerhead-slang-english-guide.png",
+    "tags": [
+    "スニーカー",
+    "英語学習",
+    "スラング",
+    "海外通販",
+    "ストリートファッション",
+    "英語レビュー"
+    ]
+  },
+  "dungeons-and-dragons-english-roleplaying-phrases": {
+    "id": "dungeons-and-dragons-english-roleplaying-phrases",
+    "title": "D&D英語セッションで使える！キャラ別ロールプレイフレーズ",
+    "description": "D&D（ダンジョンズ＆ドラゴンズ）の英語セッションに参加したいけど、英語でどう話せばいいか分からない…そんな悩みを解決！この記事では、ファイター、ウィザード、ローグなどキャラクターのクラス別に、すぐに使える実践的なロールプレイ英語フレーズを豊富に紹介します。初心者でも安心してセッションを楽しめるよう、状況別の表現や便利なツールも解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "10分",
+    "imageSrc": "/images/dungeons-and-dragons-english-roleplaying-phrases.png",
+    "tags": [
+    "D&D",
+    "TRPG",
+    "英語学習",
+    "ロールプレイ",
+    "英会話フレーズ",
+    "ファンタジー英語",
+    "初心者"
+    ]
+  },
+  "fitness-youtube-english-workout-terms": {
+    "id": "fitness-youtube-english-workout-terms",
+    "title": "海外フィットネス動画の英語指示を聞き取る！筋トレ用語集",
+    "description": "海外のフィットネス動画で使われる英語の指示が聞き取れない...そんな悩みを解決！この記事では、筋トレの動きや体の部位、回数指定など、ワークアウトで頻出する英単語・フレーズを徹底解説。今日から使える用語集で、楽しく効果的にトレーニングしましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "12分",
+    "imageSrc": "/images/fitness-youtube-english-workout-terms.png",
+    "tags": [
+    "英語学習",
+    "フィットネス",
+    "筋トレ",
+    "リスニング",
+    "YouTube",
+    "ワークアウト",
+    "初心者"
+    ]
+  },
+  "knitting-pattern-english-abbreviations-guide": {
+    "id": "knitting-pattern-english-abbreviations-guide",
+    "title": "海外の英文編み図を解読！必須の英語略語パターン解説",
+    "description": "海外のおしゃれな編み物デザインに挑戦したいけど、英文編み図が読めない…。そんな悩みを解決！この記事では、棒針編み・かぎ針編みで頻出する英語の編み物用語や略語を一覧表で徹底解説。初心者でもスラスラ読めるようになるコツや、便利な辞書サイトも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/knitting-pattern-english-abbreviations-guide.png",
+    "tags": [
+    "英文編み図",
+    "編み物",
+    "英語学習",
+    "海外パターン",
+    "棒針編み",
+    "かぎ針編み",
+    "英語略語",
+    "初心者"
+    ]
+  },
+  "wine-tasting-vocabulary-english-sommelier": {
+    "id": "wine-tasting-vocabulary-english-sommelier",
+    "title": "ソムリエが使うワインテイスティングの英語表現【香り・味】",
+    "description": "ワインの感想を英語で豊かに表現しませんか？この記事では、ソムリエが使うテイスティングの専門用語を『香り』と『味』に分けて徹底解説。果物やスパイスの香りから、酸味、タンニン、ボディまで、具体的で実践的な英語表現を例文付きで紹介します。初心者でもプロのようにワインを語れる語彙力が身につきます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/wine-tasting-vocabulary-english-sommelier.png",
+    "tags": [
+    "ワイン",
+    "テイスティング",
+    "英語表現",
+    "ソムリエ",
+    "英会話",
+    "グルメ",
+    "英語学習"
+    ]
+  },
+  "true-crime-podcast-english-vocabulary": {
+    "id": "true-crime-podcast-english-vocabulary",
+    "title": "True Crimeポッドキャスト頻出の警察・法医学英語用語",
+    "description": "True Crimeポッドキャストで英語学習！でも警察や法医学の専門用語が難しい…と感じていませんか？この記事では、リスニングの壁となる頻出英単語を徹底解説。捜査、証拠、裁判で使われるリアルな英語を学び、お気に入りのポッドキャストを120%楽しむための語彙力と学習法が身につきます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/true-crime-podcast-english-vocabulary.png",
+    "tags": [
+    "英語学習",
+    "True Crime",
+    "ポッドキャスト",
+    "リスニング",
+    "英単語",
+    "語彙力",
+    "警察用語",
+    "法医学"
+    ]
+  },
+  "vintage-clothing-online-shopping-english": {
+    "id": "vintage-clothing-online-shopping-english",
+    "title": "海外古着通販で失敗しない！状態表現＆値下げ交渉英語術",
+    "description": "海外の古着通販サイトで欲しいアイテムを見つけたけど、英語でのやりとりに不安を感じていませんか？この記事では、商品の状態を表す必須英単語から、サイズ確認の質問、丁寧な値下げ交渉のフレーズまで、失敗しないための英語術を徹底解説。EtsyやeBayでのお買い物を楽しみましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/vintage-clothing-online-shopping-english.png",
+    "tags": [
+    "海外通販",
+    "古着",
+    "英語学習",
+    "値下げ交渉",
+    "英会話フレーズ",
+    "Eコマース"
+    ]
+  },
+  "kpop-fandom-english-slang-communication": {
+    "id": "kpop-fandom-english-slang-communication",
+    "title": "K-POPファンダム英語！海外ファンと繋がる必須スラング",
+    "description": "K-POPがもっと楽しくなる！海外ファンとの交流に欠かせない必須英語スラングを徹底解説。Bias, Stan, Comebackなどの基本から応用略語まで、具体的な例文付きで紹介。今日からあなたもグローバルなファンダムの一員に！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/kpop-fandom-english-slang-communication.png",
+    "tags": [
+    "K-POP",
+    "英語スラング",
+    "推し活",
+    "ファン交流",
+    "英語学習",
+    "海外ファン",
+    "Weverse",
+    "SNS英語"
+    ]
+  },
+  "instagram-story-question-reply-phrases": {
+    "id": "instagram-story-question-reply-phrases",
+    "title": "インスタ質問箱で差がつく！お洒落な英語返信フレーズ",
+    "description": "インスタの質問箱、もっとお洒落に返信したいと思いませんか？この記事では、コピペで使える簡単な基本フレーズから、ネイティブのような気の利いた応用表現、質問返しテクニックまで幅広く紹介。英語でスマートに返信して、フォロワーとのコミュニケーションを楽しみ、周りと差をつけましょう！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/instagram-story-question-reply-phrases.png",
+    "tags": [
+    "インスタ英語",
+    "SNS英語",
+    "英語フレーズ",
+    "質問箱",
+    "ストーリー",
+    "英語学習",
+    "ネイティブ表現"
+    ]
+  },
+  "online-game-fps-voice-chat-phrases": {
+    "id": "online-game-fps-voice-chat-phrases",
+    "title": "Apex/Valorantで使える！報告・指示の英語フレーズ",
+    "description": "Apex LegendsやValorantで海外サーバーに挑戦したいあなたへ！ボイスチャットで必須の報告・指示・感謝の英語フレーズを網羅。初心者でもすぐ使える実践的な例文で、味方との連携を強化し、勝率アップを目指しましょう。ゲームを楽しみながら自然に英語力を鍛えるコツも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/online-game-fps-voice-chat-phrases.png",
+    "tags": [
+    "FPS",
+    "英語学習",
+    "オンラインゲーム",
+    "ボイスチャット",
+    "Apex Legends",
+    "Valorant",
+    "英語フレーズ",
+    "初心者"
+    ]
+  },
+  "tinder-bumble-first-message-english": {
+    "id": "tinder-bumble-first-message-english",
+    "title": "マッチングアプリで返信が来る！最初の英語メッセージ",
+    "description": "TinderやBumbleなどのマッチングアプリで、外国人との会話を始める最初の英語メッセージに悩んでいませんか？この記事では、返信率が格段に上がる、具体的で自然な英語フレーズを例文付きで徹底解説。プロフィールの見方から話題の選び方まで、成功のコツを掴んで素敵な出会いに繋げましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/tinder-bumble-first-message-english.png",
+    "tags": [
+    "マッチングアプリ",
+    "英語メッセージ",
+    "国際交流",
+    "英語学習",
+    "Tinder",
+    "Bumble",
+    "恋愛英語",
+    "例文"
+    ]
+  },
+  "workplace-slack-reaction-english": {
+    "id": "workplace-slack-reaction-english",
+    "title": "外資系のSlackで使える！気の利いた英語リアクション",
+    "description": "Slackでの英語コミュニケーションに悩んでいませんか？この記事では、外資系の職場でネイティブが使う、気の利いた英語の絵文字リアクションや短い返信フレーズをシーン別に徹底解説。同僚との距離が縮まり、仕事がスムーズに進むテクニックが満載です！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/workplace-slack-reaction-english.png",
+    "tags": [
+    "Slack",
+    "英語",
+    "ビジネス英語",
+    "外資系",
+    "コミュニケーション",
+    "リアクション",
+    "絵文字"
+    ]
+  },
+  "hair-salon-english-order-layered-cut": {
+    "id": "hair-salon-english-order-layered-cut",
+    "title": "美容院で失敗しない！理想の髪型を伝えるオーダー英語",
+    "description": "海外の美容院で理想の髪型を英語でオーダーする方法を徹底解説！カウンセリングから、カット、カラー、パーマ、仕上げまで、具体的な英会話フレーズを豊富に紹介。写真を使った伝え方や注意点も網羅し、あなたの『なりたい』を確実に叶えます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/hair-salon-english-order-layered-cut.png",
+    "tags": [
+    "美容院 英語",
+    "海外生活",
+    "英会話フレーズ",
+    "髪型 オーダー",
+    "レイヤーカット 英語",
+    "留学準備"
+    ]
+  },
+  "english-sarcasm-irony-phrases": {
+    "id": "english-sarcasm-irony-phrases",
+    "title": "ネイティブに学ぶ！英語での皮肉・嫌味の言い回し集",
+    "description": "英語で皮肉や嫌味をスマートに伝えたいですか？この記事では、ネイティブが使う自然な皮肉・嫌味の英語フレーズを徹底解説。状況別の使い方やニュアンスの違い、避けるべき注意点まで網羅。リアルな英会話スキルを向上させたい方に最適な学習ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/english-sarcasm-irony-phrases.png",
+    "tags": [
+    "英語学習",
+    "英会話",
+    "ネイティブ表現",
+    "スラング",
+    "皮肉",
+    "嫌味",
+    "コミュニケーション"
+    ]
+  },
+  "english-for-old-lady-old-man": {
+    "id": "english-for-old-lady-old-man",
+    "title": "英語で「ババア」「ジジイ」って？失礼な言い方講座",
+    "description": "英語で「ババア」や「ジジイ」など高齢者を侮辱する言葉を知っていますか？この記事では、old hagやold geezerといった絶対に使ってはいけないスラングから、elderly peopleやsenior citizenなど丁寧な表現まで徹底解説。文化的な背景や年齢に関するタブーも学び、失礼のない英語コミュニケーションを目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-for-old-lady-old-man.png",
+    "tags": [
+    "英語 スラング",
+    "失礼な表現",
+    "高齢者 英語",
+    "日常英会話",
+    "英語学習",
+    "言葉遣い",
+    "文化の違い"
+    ]
+  },
+  "tiktok-comment-trending-slang": {
+    "id": "tiktok-comment-trending-slang",
+    "title": "TikTokでバズるコメント！最新の英語スラング20選",
+    "description": "TikTokのコメント欄でよく見る英語スラング、意味がわからなくて困っていませんか？この記事では、2025年最新のトレンドスラング20選を例文付きで徹底解説！「slay」から「rizz」まで、これを読めばあなたもTikTokマスター。ネイティブとのコミュニケーションを楽しみましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/tiktok-comment-trending-slang.png",
+    "tags": [
+    "TikTokスラング",
+    "英語学習",
+    "SNS英語",
+    "ネイティブ表現",
+    "若者言葉",
+    "インターネットスラング",
+    "Z世代"
+    ]
+  },
+  "international-couple-fight-phrases": {
+    "id": "international-couple-fight-phrases",
+    "title": "国際恋愛のケンカで使える！気持ちを伝える英語表現",
+    "description": "国際恋愛中のカップル必見！ケンカは避けられないもの。でも、言葉の選び方一つで、二人の絆を深めるチャンスに変えられます。この記事では、感情的にならずに自分の気持ちを伝えるための具体的な英語フレーズを、状況別に詳しく解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/international-couple-fight-phrases.png",
+    "tags": [
+    "国際恋愛",
+    "ケンカ 英語",
+    "カップル英会話",
+    "感情表現",
+    "英語学習",
+    "コミュニケーション"
+    ]
+  },
+  "web-meeting-interrupt-politely-english": {
+    "id": "web-meeting-interrupt-politely-english",
+    "title": "英語会議で発言を切り出す！スマートな割り込みフレーズ",
+    "description": "英語のウェブ会議で「発言したいけど、割り込むタイミングがわからない」と悩んでいませんか？この記事では、失礼にならずにスマートに会話に参加するための具体的な英語フレーズを状況別に解説。今日から使えるテクニックで、自信を持って意見を伝えましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/web-meeting-interrupt-politely-english.png",
+    "tags": [
+    "英語会議",
+    "ビジネス英語",
+    "オンライン会議",
+    "英語フレーズ",
+    "発言",
+    "割り込み",
+    "英語学習"
+    ]
+  },
+  "restaurant-complaint-wrong-order-english": {
+    "id": "restaurant-complaint-wrong-order-english",
+    "title": "レストランで注文と違う！スマートに伝えるクレーム英語",
+    "description": "海外レストランで注文と違う料理が！そんな時、焦らずスマートに伝えるための英語フレーズを状況別に解説。丁寧な言い方から、交換やキャンセルのお願いまで、具体的な例文が満載。これでトラブルも怖くない！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/restaurant-complaint-wrong-order-english.png",
+    "tags": [
+    "クレーム英語",
+    "レストラン英会話",
+    "海外旅行",
+    "英語フレーズ",
+    "実践英会話",
+    "トラブル対応"
+    ]
+  },
+  "kpop-fan-stan-english-slang": {
+    "id": "kpop-fan-stan-english-slang",
+    "title": "K-POPファンの必須知識！「推し」を語る英語スラング",
+    "description": "K-POPが好きで海外ファンと繋がりたいあなたへ。この記事では、『推し』を語るために必須の英語スラング『stan』『bias』などを徹底解説。SNSやコメントで使える実践的な例文満載で、あなたの推し活をグローバルに広げます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/kpop-fan-stan-english-slang.png",
+    "tags": [
+    "K-POP",
+    "英語スラング",
+    "推し活",
+    "ファン用語",
+    "英語学習",
+    "SNS英語"
+    ]
+  },
+  "english-phrases-for-cringe-moments": {
+    "id": "english-phrases-for-cringe-moments",
+    "title": "英語で「ドン引き…」はどう言う？気まずさを表す表現",
+    "description": "友達の寒いジョークや他人の非常識な行動に『ドン引き…』。そんな気まずい瞬間に使える英語表現を知りたくありませんか？この記事では、基本的な \"cringe\" からシーン別の使い分け、便利なスラングまで、ネイティブが使うリアルなフレーズを例文付きで徹底解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/english-phrases-for-cringe-moments.png",
+    "tags": [
+    "ドン引き",
+    "気まずい",
+    "英語表現",
+    "日常英会話",
+    "スラング",
+    "感情表現"
+    ]
+  },
+  "discord-server-self-introduction-english": {
+    "id": "discord-server-self-introduction-english",
+    "title": "Discordサーバーでの英語自己紹介！好印象テンプレート",
+    "description": "Discordの海外サーバーで使える英語の自己紹介に悩んでいませんか？この記事では、コピペOKな好印象テンプレートから、趣味や目的を伝える応用フレーズまで徹底解説。初心者でも自信を持って英語コミュニティに参加できるコツを紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/discord-server-self-introduction-english.png",
+    "tags": [
+    "Discord",
+    "自己紹介",
+    "英語学習",
+    "英語フレーズ",
+    "初心者",
+    "国際交流",
+    "オンラインコミュニティ",
+    "テンプレート"
+    ]
+  },
+  "complimenting-in-laws-english": {
+    "id": "complimenting-in-laws-english",
+    "title": "義理の家族に気に入られる！スマートな英語の褒め言葉",
+    "description": "義理の家族と英語で良好な関係を築きたいあなたへ。食事や相手の家、人柄を褒めるためのスマートな英語フレーズをシーン別に徹底解説。文化の違いを理解し、自然な褒め言葉で好印象を与えるコツや、実践的な学習法もご紹介します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/complimenting-in-laws-english.png",
+    "tags": [
+    "英会話フレーズ",
+    "褒め言葉 英語",
+    "国際結婚",
+    "義理の家族",
+    "異文化コミュニケーション",
+    "英語学習",
+    "人間関係"
+    ]
+  },
+  "sick-leave-email-to-boss-english": {
+    "id": "sick-leave-email-to-boss-english",
+    "title": "英語で体調不良を報告！上司に送る欠勤・早退メール",
+    "description": "英語で体調不良による欠勤や早退を上司に伝える方法が分からず困っていませんか？この記事では、すぐに使える丁寧なメールテンプレートを状況別に紹介。件名の書き方から引き継ぎのポイントまで、プロフェッショナルな印象を与えるための注意点を分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/sick-leave-email-to-boss-english.png",
+    "tags": [
+    "ビジネス英語",
+    "英語メール",
+    "体調不良",
+    "欠勤連絡",
+    "早退連絡",
+    "外資系",
+    "英語フレーズ",
+    "英語学習"
+    ]
+  },
+  "nail-salon-design-request-english": {
+    "id": "nail-salon-design-request-english",
+    "title": "ネイルサロンで理想のデザインを伝える繊細ニュアンス英語",
+    "description": "海外のネイルサロンで『こんなはずじゃなかった！』を防ぐための英会話フレーズ集。予約からデザインの細かいニュアンス（形、色、アート、パーツ）の伝え方まで、写真を見せながら使える実践的な表現を豊富に解説。これであなたも理想のネイルをゲットできます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/nail-salon-design-request-english.png",
+    "tags": [
+    "ネイル英語",
+    "海外ネイルサロン",
+    "英会話フレーズ",
+    "旅行英語",
+    "デザインリクエスト",
+    "ニュアンス英語",
+    "ジェルネイル"
+    ]
+  },
+  "anime-recommendation-to-foreign-friends": {
+    "id": "anime-recommendation-to-foreign-friends",
+    "title": "好きなアニメを布教！外国人の友達に魅力を伝える英語",
+    "description": "好きなアニメの魅力を海外の友達に伝えたい！この記事では、アニメのジャンルやあらすじを説明する基本フレーズから、キャラクターや世界観の深さを語る応用表現まで、実践的な英語を例文付きで解説。あなたの『布教』を成功させるためのコツが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/anime-recommendation-to-foreign-friends.png",
+    "tags": [
+    "アニメで英語学習",
+    "英語学習",
+    "英会話フレーズ",
+    "異文化交流",
+    "趣味の英語",
+    "アニメ布教"
+    ]
+  },
+  "feeling-emotional-emo-in-english": {
+    "id": "feeling-emotional-emo-in-english",
+    "title": "日本語の「エモい」を英語で表現する絶妙フレーズ集",
+    "description": "「エモい」という日本語の絶妙なニュアンスを英語で表現する方法を徹底解説。懐かしい、感動的、切ないといった場面別のフレーズから、ネイティブが使うスラングまで網羅。この記事を読めば、あなたの豊かな感情を英語で的確に伝えられるようになります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/feeling-emotional-emo-in-english.png",
+    "tags": [
+    "エモい",
+    "英語表現",
+    "スラング",
+    "感情表現",
+    "日常英会話",
+    "英語学習",
+    "ニュアンス"
+    ]
+  },
+  "twitch-streamer-support-chat-english": {
+    "id": "twitch-streamer-support-chat-english",
+    "title": "Twitch配信で使える！推しを応援する英語コメント",
+    "description": "Twitchで海外ストリーマーを応援したいけど、英語でなんてコメントすればいいか分からない？この記事では、挨拶から応援、褒め言葉、質問まで、コピペで使える簡単な英語フレーズを場面別に紹介。これでもうチャットに迷わない！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/twitch-streamer-support-chat-english.png",
+    "tags": [
+    "Twitch",
+    "英語チャット",
+    "英語フレーズ",
+    "ゲーム実況",
+    "海外ストリーマー",
+    "英語学習",
+    "リスニング",
+    "スラング"
+    ]
+  },
+  "breaking-up-softly-english-phrases": {
+    "id": "breaking-up-softly-english-phrases",
+    "title": "相手を傷つけずに別れを切り出すための英語フレーズ",
+    "description": "恋人との別れは辛いもの。特に英語で伝えるのは難しいですよね。この記事では、相手への敬意を保ちつつ、自分の気持ちを正直に伝えるための具体的な英語フレーズを状況別に解説します。切り出し方から理由の説明まで、実践的な例文であなたの難しい会話をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/breaking-up-softly-english-phrases.png",
+    "tags": [
+    "別れ話 英語",
+    "恋愛英語",
+    "英語フレーズ",
+    "英会話",
+    "人間関係",
+    "英語学習"
+    ]
+  },
+  "job-interview-reverse-question-english": {
+    "id": "job-interview-reverse-question-english",
+    "title": "英語面接で好印象！採用担当に響く「逆質問」リスト",
+    "description": "英語面接の最後に必ず聞かれる『何か質問はありますか？』。この記事では、あなたの意欲と能力を最大限にアピールし、採用担当者に好印象を与えるための『逆質問』を徹底解説。職務内容、チーム、企業文化など、状況別の具体的な英語フレーズリストからNG例、成功のための準備方法まで網羅。これを読めば、自信を持って面接の最終関門を突破できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/job-interview-reverse-question-english.png",
+    "tags": [
+    "英語面接",
+    "逆質問",
+    "外資系転職",
+    "ビジネス英語",
+    "キャリアアップ",
+    "面接対策",
+    "英語学習"
+    ]
+  },
+  "apartment-noise-complaint-email-english": {
+    "id": "apartment-noise-complaint-email-english",
+    "title": "隣人がうるさい！大家さんへの騒音苦情・英語メール",
+    "description": "海外のアパートで隣人の騒音に悩んでいませんか？この記事では、大家さんへ英語で苦情を伝えるためのメールの書き方を、具体的な例文テンプレート付きで徹底解説。件名から結びまで、丁寧かつ効果的に問題を伝えるためのポイントとキーフレーズが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/apartment-noise-complaint-email-english.png",
+    "tags": [
+    "英語メール",
+    "騒音トラブル",
+    "海外生活",
+    "アパート",
+    "苦情",
+    "例文",
+    "大家さん"
+    ]
+  },
+  "gym-workout-english-phrases": {
+    "id": "gym-workout-english-phrases",
+    "title": "海外のジムで使える！器具の譲り合い＆質問の英語",
+    "description": "海外のジムで「これ使ってますか？」「あと何セット？」が言えなくて困った経験はありませんか？本記事では、器具の譲り合いからマシンの使い方まで、ジムで必須の英会話フレーズを徹底解説。具体的な会話例で、初心者でも自信を持ってトレーニングに集中できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/gym-workout-english-phrases.png",
+    "tags": [
+    "海外ジム",
+    "英会話フレーズ",
+    "筋トレ英語",
+    "英語学習",
+    "実践英語",
+    "旅行英語",
+    "初心者"
+    ]
+  },
+  "responding-to-hate-comments-english": {
+    "id": "responding-to-hate-comments-english",
+    "title": "SNSのアンチコメントに負けない！華麗な英語反論術",
+    "description": "SNSで海外ユーザーからのアンチコメントに困っていませんか？この記事では、冷静に対応する心構えから、ユーモアや皮肉、毅然とした態度を示す具体的な英語フレーズをレベル別に紹介。もう心無い言葉に悩まない、自信を持ってコミュニケーションするための実践的ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/responding-to-hate-comments-english.png",
+    "tags": [
+    "アンチコメント",
+    "英語フレーズ",
+    "SNS英語",
+    "オンラインコミュニケーション",
+    "英語学習",
+    "炎上対策",
+    "英語スラング"
+    ]
+  },
+  "bereal-caption-one-liner-english": {
+    "id": "bereal-caption-one-liner-english",
+    "title": "BeRealで使える！飾らない日常を表す英語キャプション",
+    "description": "BeRealの投稿にピッタリな、飾らない日常を表現する英語の一言キャプションをシーン別に紹介します。リアルな瞬間をもっと魅力的に伝える、短くておしゃれなフレーズで、あなたの投稿に彩りを加えましょう。友達との会話のきっかけにもなる、ネイティブライクな表現が満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/bereal-caption-one-liner-english.png",
+    "tags": [
+    "BeReal",
+    "SNS",
+    "英語キャプション",
+    "英語フレーズ",
+    "一言英語",
+    "日常英会話",
+    "英語学習"
+    ]
+  },
+  "long-distance-relationship-english-phrases": {
+    "id": "long-distance-relationship-english-phrases",
+    "title": "遠距離恋愛の不安を解消！愛情を伝える英語メッセージ",
+    "description": "遠距離恋愛中のカップルへ。時差や距離に負けず、英語で愛情をしっかり伝えるためのメッセージフレーズを場面別に紹介します。日常の挨拶から、深い愛情表現、寂しい気持ちの伝え方まで、具体的な例文が満載。二人の絆を深めるコミュニケーションのヒントがここにあります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/long-distance-relationship-english-phrases.png",
+    "tags": [
+    "遠距離恋愛",
+    "英語フレーズ",
+    "恋愛英語",
+    "国際恋愛",
+    "英語学習",
+    "コミュニケーション"
+    ]
+  },
+  "small-talk-starter-english": {
+    "id": "small-talk-starter-english",
+    "title": "もう会話に困らない！英語の雑談ネタと始め方フレーズ",
+    "description": "英語の雑談が苦手な方へ。天気や週末の過ごし方など、すぐに使える鉄板ネタから、会話を始める魔法のフレーズ、沈黙を乗り越え会話を続けるコツまで徹底解説。この記事を読めば、もう英語でのコミュニケーションに困りません。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/small-talk-starter-english.png",
+    "tags": [
+    "英語学習",
+    "英会話",
+    "スモールトーク",
+    "雑談",
+    "コミュニケーション",
+    "英語 初心者",
+    "ビジネス英語"
+    ]
+  },
+  "pharmacy-symptom-description-english": {
+    "id": "pharmacy-symptom-description-english",
+    "title": "海外の薬局で使える！症状を伝えて薬を買うための英語",
+    "description": "海外旅行中や留学先で体調を崩した時、薬局でどう症状を伝えたらいいか不安ではありませんか？この記事では、頭痛、腹痛、風邪などの一般的な症状を英語で正確に伝えるための具体的なフレーズや会話例を豊富に紹介。これさえ読めば、海外の薬局でも安心して薬を購入できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/pharmacy-symptom-description-english.png",
+    "tags": [
+    "海外旅行",
+    "英語フレーズ",
+    "薬局",
+    "英会話",
+    "留学",
+    "症状の伝え方",
+    "健康"
+    ]
+  },
+  "movie-fan-discussion-english-phrases": {
+    "id": "movie-fan-discussion-english-phrases",
+    "title": "海外ドラマ・映画の考察で使える！ファンのための英語",
+    "description": "海外ドラマや映画のファンコミュニティで、自分の考察や感想を英語で語りたいあなたへ。この記事では、伏線やキャラクター分析、プロットの予測など、ディスカッションで役立つ実践的な英語フレーズを豊富に紹介します。今日から使える表現を学んで、世界中のファンと語り合いましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/movie-fan-discussion-english-phrases.png",
+    "tags": [
+    "英語学習",
+    "海外ドラマ",
+    "映画",
+    "英会話フレーズ",
+    "考察",
+    "ファンコミュニティ",
+    "スラング"
+    ]
+  },
+  "goosebumps-good-bad-english": {
+    "id": "goosebumps-good-bad-english",
+    "title": "英語で「鳥肌が立った」感動と恐怖の使い分け方",
+    "description": "英語で「鳥肌が立った」と表現したい時、感動と恐怖で使うフレーズが違うことを知っていますか？この記事では 'goosebumps' 'chills' 'creeps' などの表現をネイティブのニュアンスで徹底解説。具体的な例文と実践的な学習法で、あなたの感情表現を豊かにします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/goosebumps-good-bad-english.png",
+    "tags": [
+    "英語表現",
+    "鳥肌 英語",
+    "感情表現",
+    "ニュアンスの違い",
+    "英語学習",
+    "ネイティブフレーズ",
+    "goosebumps",
+    "chills"
+    ]
+  },
+  "youtube-comment-english-phrases": {
+    "id": "youtube-comment-english-phrases",
+    "title": "海外YouTuberに届く！気の利いた英語コメント例文集",
+    "description": "海外YouTuberの動画に英語でコメントしたいけど、何を書けばいいか分からない…そんな悩みを解決！この記事では、感謝や称賛、質問などシーン別に使える気の利いた英語コメントの例文を豊富に紹介。コピペOKのフレーズから応用テクニックまで、自信を持ってコミュニケーションできるようになるヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/youtube-comment-english-phrases.png",
+    "tags": [
+    "英語学習",
+    "YouTube",
+    "英会話フレーズ",
+    "英語コメント",
+    "初心者",
+    "アウトプット"
+    ]
+  },
+  "declining-politely-business-english": {
+    "id": "declining-politely-business-english",
+    "title": "角を立てずに断る！ビジネスで使える丁寧な英語表現",
+    "description": "ビジネスで英語で断る場面、困っていませんか？この記事では、角を立てずに依頼を断るための丁寧な英語表現を徹底解説。クッション言葉、理由の伝え方、代替案の提示という3ステップで、相手との良好な関係を保つコミュニケーション術が身につきます。実践的なフレーズ集と学習法も紹介！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/declining-politely-business-english.png",
+    "tags": [
+    "ビジネス英語",
+    "断る 英語",
+    "英語フレーズ",
+    "丁寧な断り方",
+    "英語学習",
+    "コミュニケーション"
+    ]
+  },
+  "share-house-rules-negotiation-english": {
+    "id": "share-house-rules-negotiation-english",
+    "title": "シェアハウスのルール作り！同居人への提案・注意英語",
+    "description": "シェアハウスでの共同生活を円滑にするためのルール作り、英語での伝え方が分からず困っていませんか？この記事では、掃除、騒音、来客など具体的な場面で使える提案・注意・交渉の英語フレーズを豊富に紹介。円満な関係を築くためのコミュニケーション術を学びましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/share-house-rules-negotiation-english.png",
+    "tags": [
+    "シェアハウス",
+    "英語フレーズ",
+    "共同生活",
+    "異文化コミュニケーション",
+    "ルームメイト",
+    "生活ルール",
+    "英会話"
+    ]
+  },
+  "lost-and-found-inquiry-english": {
+    "id": "lost-and-found-inquiry-english",
+    "title": "「忘れ物をした！」英語での問い合わせ完全ガイド",
+    "description": "海外旅行や日常生活で忘れ物をした際の英語での問い合わせ方法を完全解説。ホテル、交通機関、店舗など状況別の会話フレーズから、忘れ物の特徴を具体的に伝える表現まで網羅。この記事を読めば、いざという時も落ち着いて対応できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/lost-and-found-inquiry-english.png",
+    "tags": [
+    "忘れ物 英語",
+    "問い合わせ 英語",
+    "海外旅行",
+    "英会話フレーズ",
+    "トラブル対応",
+    "実践英語",
+    "旅行英会話"
+    ]
+  },
+  "wine-tasting-expression-english": {
+    "id": "wine-tasting-expression-english",
+    "title": "ワインの味を表現する！テイスティングで使える英語",
+    "description": "ワインのテイスティングで、味や香りを英語で豊かに表現する方法を学びませんか？この記事では、初心者でも使える基本的な表現から、ソムリエのような専門的な単語までを網羅。実践的なフレーズと例文で、あなたのワイン体験がもっと楽しくなること間違いなしです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/wine-tasting-expression-english.png",
+    "tags": [
+    "ワイン",
+    "英語表現",
+    "テイスティング",
+    "英会話",
+    "学習法",
+    "フレーズ集",
+    "初心者"
+    ]
+  },
+  "internet-slang-lol-lmao-rofl": {
+    "id": "internet-slang-lol-lmao-rofl",
+    "title": "lol, lmao, roflの違いは？英語の「笑」ネットスラング",
+    "description": "lol, lmao, roflってどう違うの？この記事では、英語のネットスラングでよく使われる「笑」の表現を徹底解説。それぞれの意味、笑いの度合い、適切な使い方を豊富な例文付きで紹介します。ネイティブとのチャットやSNSがもっと楽しくなるコツが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/internet-slang-lol-lmao-rofl.png",
+    "tags": [
+    "ネットスラング",
+    "英語学習",
+    "lol",
+    "lmao",
+    "rofl",
+    "英会話",
+    "チャット",
+    "SNS",
+    "初心者"
+    ]
+  },
+  "complimenting-coworkers-english": {
+    "id": "complimenting-coworkers-english",
+    "title": "職場の雰囲気を良くする！同僚をさりげなく褒める英語",
+    "description": "職場の人間関係を円滑にする、同僚を自然に褒めるための英語フレーズを具体例と共に紹介。仕事の成果や人柄、スキルを褒める表現から、感謝を伝える一言まで。ネイティブが使うさりげない言い回しを学び、ポジティブなコミュニケーションでチームの雰囲気を良くしましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/complimenting-coworkers-english.png",
+    "tags": [
+    "ビジネス英語",
+    "英語フレーズ",
+    "職場コミュニケーション",
+    "褒め言葉",
+    "英会話",
+    "英語学習"
+    ]
+  },
+  "dentist-pain-description-english": {
+    "id": "dentist-pain-description-english",
+    "title": "歯医者で痛みを伝える英語「しみる」「ズキズキする」",
+    "description": "海外の歯医者で痛みを正確に伝えるための英語表現を徹底解説！『しみる』『ズキズキする』『ジンジンする』など、具体的な痛みの種類に応じたフレーズを例文付きで紹介。受付から診察まで、これさえ読めば安心して受診できます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/dentist-pain-description-english.png",
+    "tags": [
+    "歯医者 英語",
+    "医療英語",
+    "海外生活",
+    "留学",
+    "旅行英会話",
+    "痛み 表現",
+    "日常英会話"
+    ]
+  },
+  "board-game-rules-explanation-english": {
+    "id": "board-game-rules-explanation-english",
+    "title": "ボードゲームのルールを英語で説明！必須フレーズ集",
+    "description": "外国人の友人とボードゲームを楽しむ際、英語でのルール説明に困っていませんか？本記事では、ゲームの準備から進行、質疑応答まで、あらゆる場面で使える必須フレーズを網羅的に解説。これを読めば、あなたも自信を持ってゲームマスターになれます。実践的な例文と学習のコツで、言葉の壁を越えて楽しみましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/board-game-rules-explanation-english.png",
+    "tags": [
+    "英語学習",
+    "英会話フレーズ",
+    "ボードゲーム",
+    "初心者",
+    "コミュニケーション",
+    "使える英語"
+    ]
+  },
+  "nodding-alternative-english-phrases": {
+    "id": "nodding-alternative-english-phrases",
+    "title": "「なるほど」連発を防ぐ！相槌の英語バリエーション",
+    "description": "英語の会話でつい「I see」ばかり使っていませんか？この記事では、同意、驚き、共感などシーン別に使える多彩な相槌フレーズを具体例と共に紹介します。自然で豊かなコミュニケーションを目指すための実践的な練習法も解説。英会話力をワンランクアップさせましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "7分",
+    "imageSrc": "/images/nodding-alternative-english-phrases.png",
+    "tags": [
+    "英会話",
+    "相槌",
+    "英語学習",
+    "コミュニケーション",
+    "初心者",
+    "リスニング",
+    "スピーキング"
+    ]
+  },
+  "airport-missed-flight-troubleshooting-english": {
+    "id": "airport-missed-flight-troubleshooting-english",
+    "title": "飛行機に乗り遅れた！空港で使う緊急時の英語フレーズ",
+    "description": "海外旅行中の最大の悪夢、飛行機の乗り遅れ。でも大丈夫！この記事では、空港のカウンターで落ち着いて状況を説明し、次の便を手配するための必須英語フレーズを網羅。初心者でも使える簡単な表現から、具体的な会話例、覚えておきたい単語まで、いざという時にあなたを助ける情報が満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/airport-missed-flight-troubleshooting-english.png",
+    "tags": [
+    "海外旅行",
+    "空港",
+    "英会話",
+    "トラブル対応",
+    "緊急英語",
+    "フライト",
+    "初心者向け",
+    "英語学習"
+    ]
+  },
+  "pet-lover-english-phrases": {
+    "id": "pet-lover-english-phrases",
+    "title": "うちの子が一番可愛い！ペットを溺愛する親バカ英語",
+    "description": "うちの子が一番！そんなペットへの深い愛情を英語で表現しませんか？この記事では、愛犬や愛猫を褒める可愛いフレーズから、SNSで使える「親バカ」なハッシュタグ、獣医さんとの会話で役立つ表現まで幅広く紹介。ネイティブのような自然な英語で、あなたのペット愛を世界に発信しましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/pet-lover-english-phrases.png",
+    "tags": [
+    "ペット",
+    "英会話フレーズ",
+    "日常英語",
+    "英語学習",
+    "親バカ",
+    "犬",
+    "猫"
+    ]
+  },
+  "project-delay-apology-email-english": {
+    "id": "project-delay-apology-email-english",
+    "title": "プロジェクトが遅延！報告と謝罪のビジネス英語メール",
+    "description": "プロジェクトの遅延は誰にでも起こりうるピンチ。この記事では、信頼を損なわず誠実に対応するためのビジネス英語メールの書き方を、必須要素、そのまま使えるテンプレート、避けるべきNG表現まで徹底解説。状況報告と謝罪をスマートに伝えるための実践的なフレーズが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/project-delay-apology-email-english.png",
+    "tags": [
+    "ビジネス英語",
+    "英語メール",
+    "謝罪",
+    "プロジェクト管理",
+    "遅延報告",
+    "英語フレーズ"
+    ]
+  },
+  "flea-market-negotiation-english": {
+    "id": "flea-market-negotiation-english",
+    "title": "海外のフリーマーケットで使える！値切り交渉の英語術",
+    "description": "海外のフリーマーケットで値切り交渉に挑戦したいあなたへ！この記事では、初心者でも安心して使える簡単な英語フレーズから、応用テクニック、交渉のコツまでを具体的に解説。次の海外旅行で、もっとお得に、もっと楽しくショッピングするための実践ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/flea-market-negotiation-english.png",
+    "tags": [
+    "海外旅行",
+    "英語学習",
+    "英会話フレーズ",
+    "値引き交渉",
+    "フリーマーケット",
+    "ショッピング",
+    "初心者向け"
+    ]
+  },
+  "comforting-friend-after-breakup-english": {
+    "id": "comforting-friend-after-breakup-english",
+    "title": "失恋した友達を慰める、心に寄り添う英語フレーズ",
+    "description": "大切な友達が失恋した時、英語でどう慰めればいいか悩みますよね。この記事では、共感を示す基本フレーズから具体的なサポートの申し出、前向きな励ましの言葉まで、心に寄り添う英語表現を状況別に解説。NGフレーズも紹介し、あなたの思いやりが伝わるコミュニケーションをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/comforting-friend-after-breakup-english.png",
+    "tags": [
+    "英語フレーズ",
+    "失恋",
+    "人間関係",
+    "コミュニケーション",
+    "日常英会話",
+    "英語学習"
+    ]
+  },
+  "party-exit-strategy-english-excuses": {
+    "id": "party-exit-strategy-english-excuses",
+    "title": "パーティーを抜け出したい！失礼のない自然な言い訳英語",
+    "description": "英語のパーティーやイベントから、失礼なくスマートに抜け出したい…」そんな悩みを解決します。本記事では、翌日の予定、体調、家族の用事など、様々な状況で使える自然な英会話フレーズを具体例と共に徹底解説。主催者や周りへの挨拶マナーも学び、気まずさゼロで退席できるようになりましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/party-exit-strategy-english-excuses.png",
+    "tags": [
+    "英会話フレーズ",
+    "日常英会話",
+    "パーティー英語",
+    "コミュニケーション",
+    "英語学習",
+    "言い訳 英語"
+    ]
+  },
+  "subtle-hint-instagram-english": {
+    "id": "subtle-hint-instagram-english",
+    "title": "インスタで「匂わせ」したい時の英語キャプション",
+    "description": "インスタで恋愛や特別な時間を『匂わせ』たいあなたへ。さりげなくオシャレに気持ちを伝える英語のキャプションフレーズを厳選して紹介します。簡単な一言から、歌詞や引用を使った上級者向け表現、効果的なハッシュタグまで。この記事を読めば、あなたの投稿がもっと魅力的になります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/subtle-hint-instagram-english.png",
+    "tags": [
+    "匂わせ インスタ",
+    "英語 キャプション",
+    "インスタ 英語",
+    "恋愛 英語",
+    "SNS英語",
+    "英語学習",
+    "おしゃれな英語"
+    ]
+  },
+  "rejecting-solicitation-politely-english": {
+    "id": "rejecting-solicitation-politely-english",
+    "title": "道端でのしつこい勧誘を撃退！キッパリ断る英語",
+    "description": "海外の路上でしつこい勧誘やキャッチに遭遇した時、どう断ればいい？この記事では、シンプルで丁寧な断り方から、状況別の応用フレーズまでを具体的に解説。毅然とした態度で自分の意思を伝えるための英語表現と心得を学び、トラブルを未然に防ぎましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/rejecting-solicitation-politely-english.png",
+    "tags": [
+    "英会話",
+    "断る英語",
+    "海外旅行",
+    "トラブル対策",
+    "英語学習",
+    "勧誘",
+    "初心者"
+    ]
+  },
+  "live-concert-shouting-english": {
+    "id": "live-concert-shouting-english",
+    "title": "ライブで叫びたい！アーティストに届く応援英語フレーズ",
+    "description": "海外アーティストのライブで『I love you』以外に気持ちを伝えたい！この記事では、コンサートで使える応援英語フレーズを基本から応用、スラングまで網羅。発音のコツや、フレーズを覚えるための具体的な学習法も解説。あなたの声援を直接アーティストに届け、最高のライブ体験を！",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/live-concert-shouting-english.png",
+    "tags": [
+    "海外ライブ",
+    "英語 フレーズ",
+    "応援",
+    "コンサート",
+    "スラング",
+    "英語学習",
+    "リスニング",
+    "英会話"
+    ]
+  },
+  "art-gallery-discussion-english": {
+    "id": "art-gallery-discussion-english",
+    "title": "美術館で知的に見せる！アートの感想を語る英語表現",
+    "description": "美術館で英語でアートの感想を伝えるための具体的なフレーズを初心者向けから上級者向けまで幅広く紹介。色使い、構図、雰囲気など、作品の要素を褒める表現や、知的に見せる解釈の伝え方、会話を広げる質問テクニックまで網羅。この記事を読めば、あなたも自信を持ってアートについて語れるようになります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "8分",
+    "imageSrc": "/images/art-gallery-discussion-english.png",
+    "tags": [
+    "英会話フレーズ",
+    "美術館",
+    "アート鑑賞",
+    "英語学習",
+    "日常英会話",
+    "知的な英語",
+    "英語表現"
+    ]
+  },
+  "shipping-package-delay-inquiry-english": {
+    "id": "shipping-package-delay-inquiry-english",
+    "title": "「荷物が届かない！」配送業者への問い合わせ英語メール",
+    "description": "海外通販で購入した荷物が届かない時、どうすればいいか不安になりますよね。この記事では、配送業者に英語で問い合わせる際のメールの書き方を、具体的な例文や使えるフレーズを交えて分かりやすく解説します。コピペで使えるテンプレートも用意しているので、英語が苦手な方でも安心です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/shipping-package-delay-inquiry-english.png",
+    "tags": [
+    "英語メール",
+    "海外通販",
+    "問い合わせ",
+    "配送遅延",
+    "トラブル英語",
+    "ビジネス英語",
+    "英語例文"
+    ]
+  },
+  "when-you-suspect-cheating-english-phrases": {
+    "id": "when-you-suspect-cheating-english-phrases",
+    "title": "「もしかして浮気？」パートナーに切り出す英語フレーズ",
+    "description": "パートナーの浮気を疑った時、英語でどう切り出せばいいか悩んでいませんか？この記事では、穏やかに懸念を伝えるフレーズから、直接的に問いただす表現まで、状況に応じた英語フレーズを具体例と共に解説。話し合いの心構えや円滑に進めるコツも紹介し、難しい局面を乗り越える手助けをします。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/when-you-suspect-cheating-english-phrases.png",
+    "tags": [
+    "英語 フレーズ",
+    "恋愛英語",
+    "国際恋愛",
+    "パートナーシップ",
+    "浮気",
+    "英会話",
+    "人間関係"
+    ]
+  },
+  "kaeruka-gensho-in-english": {
+    "id": "kaeruka-gensho-in-english",
+    "title": "「蛙化現象」を英語で説明できる？恋愛の心理を語る",
+    "description": "日本の若者文化「蛙化現象」を英語で説明する方法を徹底解説。「The Ick」や「turn-off」など、ネイティブが使う自然な英語表現を豊富な例文付きで紹介します。恋愛心理や文化の違いを理解し、あなたの英語コミュニケーション能力を一段階引き上げるためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "9分",
+    "imageSrc": "/images/kaeruka-gensho-in-english.png",
+    "tags": [
+    "蛙化現象",
+    "英語で説明",
+    "恋愛英語",
+    "スラング",
+    "若者言葉",
+    "異文化理解",
+    "The Ick"
+    ]
+  },
+  "angry-frustrated-english-expressions": {
+    "id": "angry-frustrated-english-expressions",
+    "title": "「マジむかつく！」レベル別・怒りを表す英語フレーズ",
+    "description": "英語で『むかつく！』と伝えたいけど、\"I'm angry\"しか思いつかない...。この記事では、軽いイライラから激しい怒りまで、ネイティブが使う自然な怒りの英語表現をレベル別に解説。状況に応じたフレーズを学んで、あなたの感情を的確に伝えましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/angry-frustrated-english-expressions.png",
+    "tags": [
+    "英語 フレーズ",
+    "怒り 表現",
+    "英会話",
+    "感情表現",
+    "ネイティブ表現",
+    "スラング"
+    ]
+  },
+  "parenting-playdate-english-phrases": {
+    "id": "parenting-playdate-english-phrases",
+    "title": "海外でママ友作り！プレイデートで使える簡単英語フレーズ",
+    "description": "海外での子育て、ママ友作りはプレイデートが鍵！でも英語に自信がない…そんな悩みを解決します。この記事では、プレイデートの誘い方から当日の会話、お礼まで、すぐに使える簡単な英語フレーズをシーン別に紹介。これさえ読めば、自信を持って国際交流の輪を広げられます。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/parenting-playdate-english-phrases.png",
+    "tags": [
+    "子育て英語",
+    "プレイデート",
+    "ママ友",
+    "英会話フレーズ",
+    "親子英語",
+    "海外生活",
+    "初心者"
+    ]
+  },
+  "vintage-clothing-store-english-questions": {
+    "id": "vintage-clothing-store-english-questions",
+    "title": "古着屋で使える！商品の状態や年代を尋ねる英語",
+    "description": "海外の古着屋でショッピングする際に役立つ実践的な英語フレーズ集。商品の状態、年代、素材を尋ねる質問から、試着や価格交渉の表現まで、具体的な例文を交えて分かりやすく解説。自信を持ってコミュニケーションを取り、お気に入りの一着を見つけましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/vintage-clothing-store-english-questions.png",
+    "tags": [
+    "古着",
+    "英会話",
+    "海外旅行",
+    "ショッピング",
+    "英語フレーズ",
+    "英語学習",
+    "初心者"
+    ]
+  },
+  "asking-someone-out-casually-english": {
+    "id": "asking-someone-out-casually-english",
+    "title": "「今度ご飯でもどう？」自然にデートに誘う英語フレーズ",
+    "description": "気になる人を自然に食事やデートに誘いたい時に使える英語フレーズを厳選してご紹介。カジュアルな誘い方から、少し丁寧な表現、OK/NGの返事まで、具体的な例文付きで徹底解説。自信を持ってスマートに相手を誘えるようになります。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "6分",
+    "imageSrc": "/images/asking-someone-out-casually-english.png",
+    "tags": [
+    "英語フレーズ",
+    "デート 誘い方",
+    "恋愛英語",
+    "日常英会話",
+    "カジュアル英語",
+    "英語学習"
+    ]
+  },
+  "police-report-theft-english": {
+    "id": "police-report-theft-english",
+    "title": "海外で盗難に！警察で被害届を出すための緊急英語",
+    "description": "海外旅行中に盗難に遭った際の警察での被害届の出し方を、具体的な英語フレーズと会話例で徹底解説。落ち着いて状況を説明し、必要な手続きを進めるための必須表現を学び、万が一のトラブルに備えましょう。",
+    "category": "学習法",
+    "date": "2025-06-06",
+    "readTime": "5分",
+    "imageSrc": "/images/police-report-theft-english.png",
+    "tags": [
+    "海外旅行",
+    "英語フレーズ",
+    "盗難",
+    "警察",
+    "被害届",
+    "トラブル対策",
+    "緊急英語"
     ]
   },
   // ARTICLE_DATA_END

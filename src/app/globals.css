@@ -84,7 +84,7 @@
   /* モバイルビューポート用の調整 */
   @media (max-width: 767px) {
     html {
-      font-size: 13px; 
+      font-size: 12px; 
     }
   }
 }
