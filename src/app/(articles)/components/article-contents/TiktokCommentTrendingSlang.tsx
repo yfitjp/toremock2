@@ -59,7 +59,7 @@ const TiktokCommentTrendingSlang: React.FC = () => {
 
     <h2>コメントで差がつく！応用TikTok英語スラング10選</h2>
     <p>基本のスラングをマスターしたら、次はもう少し通好みのスラングに挑戦してみましょう。これらを使えれば、あなたのコメントがよりネイティブらしく、面白みのあるものになります。</p>
-    <ol start="11">
+    <ol start={11}>
         <li>
             <h3>it's giving...</h3>
             <p>「～な雰囲気」「～な感じがする」という意味。後に続く言葉で、その物事や人が醸し出す雰囲気を表現します。ファッションやアート、人の態度など、様々なものに対して使えます。<br /><strong>例文:</strong> <em>Her outfit is <strong style={{ color: '#2563eb' }}>it's giving</strong> 90s nostalgia.</em> (彼女の服装、90年代の懐かしい感じがする。)</p>
