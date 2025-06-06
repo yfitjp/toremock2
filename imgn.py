@@ -10,7 +10,7 @@ PROJECT_ID = "gen-lang-client-0577382790"
 LOCATION = "us-central1"
 
 # 読み込むJSONファイルのパス
-TASKS_JSON_FILE = "src/app/(articles)/lib/image_generation_tasks_20250606_220747.json"
+TASKS_JSON_FILE = "src/app/(articles)/lib/image_generation_tasks_20250606_215457.json"
 
 def generate_and_save_image(task: dict, model: ImageGenerationModel) -> bool:
     """
