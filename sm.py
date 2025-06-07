@@ -3,7 +3,7 @@ import os
 from datetime import datetime
 
 # --- 設定 ---
-SITEMAP_PATH = "sitemap.xml"
+SITEMAP_PATH = "tm-sitemap.xml"
 ARTICLE_DATA_PATH = "src/app/(articles)/lib/article-data.ts" # ユーザーの添付ファイルパスに合わせる
 DOMAIN = "https://toremock.com"
 ARTICLE_URL_PREFIX = f"{DOMAIN}/articles/"
