@@ -1,6 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'よくある質問',
+  description: 'ToreMockのよくある質問（FAQ）ページです。模試の受験時間、支払い方法、結果の確認など、お客様から多く寄せられる質問とその回答をまとめています。',
+};
 
 export default function FAQPage() {
   const faqs = [

@@ -11,14 +11,14 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | ToreMock(トレモック)",
+    template: "%s | ToreMock",
     default: "ToreMock - 1分で結果が出る英語模試",
   },
-  description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
+  description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
   // OGP設定
   openGraph: {
     title: "ToreMock - 1分で結果が出る英語模試",
-    description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。TOEIC®/TOEFL®/英検®の模試が1回無料で受験可能。",
+    description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
     url: "https://toremock.com", // サイトのURL
     siteName: "ToreMock",
     images: [
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "ToreMock - 1分で結果が出る英語模試",
-    description: "高品質な英語のオンライン模擬試験を提供するプラットフォーム。",
+    description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
     site: '@TMock', 
     images: ['/og-image.png'], 
   },

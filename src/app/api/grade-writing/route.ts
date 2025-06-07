@@ -67,7 +67,6 @@ export async function POST(request: Request) {
                   Ensure the output is a single, valid JSON object. Do not include any explanatory text before or after the JSON object.
                   Focus on clarity, organization, grammar, vocabulary, task fulfillment, and accurate use of information from the question context for the feedback and score.
                   If no specific prompt is provided for the essay, evaluate its general writing quality, considering the context if available.
-                  If a model answer is provided, it should be the primary reference for scoring, but the context should inform the understanding of the task.
                   Remember to output only JSON.`,
       },
       {

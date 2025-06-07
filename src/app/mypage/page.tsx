@@ -15,6 +15,16 @@ import LoadingSpinner from '../components/LoadingSpinner';
 import { db } from '@/app/lib/firebase'; // Firestore instance
 import { collection, query, where, orderBy, getDocs, Timestamp } from 'firebase/firestore'; // Firestore functions
 import { ExamAttempt } from '@/app/lib/firestoreTypes'; // ExamAttempt type
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'マイページ',
+  description: 'アカウント情報の確認、受験履歴の閲覧、サブスクリプションの管理などが行えます。',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 // 設定サブセクションの型定義
 type SettingSection = 'profile' | 'notifications' | 'password' | 'subscription' | 'help' | 'logout';

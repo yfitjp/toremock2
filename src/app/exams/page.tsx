@@ -12,6 +12,12 @@ import { hasActiveSubscription } from '@/app/lib/subscriptions';
 import { checkExamPurchase } from '@/app/lib/purchases';
 import PurchaseButton from '@/app/components/PurchaseButton';
 import LoadingSpinner from '../components/LoadingSpinner';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '模試一覧',
+  description: 'TOEIC®、TOEFL®、英検®など、ToreMockで受験できる模試の一覧です。あなたのレベルや目標に合った模試を見つけて、実力を試してみましょう。',
+};
 
 // 試験タイプのリスト
 const EXAM_TYPES = ['TOEIC', 'TOEFL', 'EIKEN'];

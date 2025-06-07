@@ -1,6 +1,12 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: '利用規約',
+  description: 'ToreMockの利用規約に関するページです。サービスをご利用になる前に必ずお読みください。',
+};
 
 export default function TermsPage() {
   return (

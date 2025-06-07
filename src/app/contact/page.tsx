@@ -2,6 +2,12 @@
 
 import { motion } from 'framer-motion';
 import { useState } from 'react';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'お問い合わせ',
+  description: 'ToreMockに関するご質問・ご意見・ご要望はこちらのフォームからお問い合わせください。',
+};
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({

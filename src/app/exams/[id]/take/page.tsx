@@ -44,6 +44,34 @@ import LoadingSpinner from '@/app/components/LoadingSpinner';
 import Link from 'next/link';
 import { FirebaseError } from 'firebase/app';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
+import type { Metadata, ResolvingMetadata } from 'next';
+
+type Props = {
+  params: { id: string };
+};
+
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const id = params.id;
+  const exam = await getExam(id);
+
+  if (!exam) {
+    return {
+      title: '模試が見つかりません',
+    };
+  }
+
+  // 受験ページなので、robotsタグでnoindexを指定
+  return {
+    title: `受験中: ${exam.title}`,
+    robots: {
+      index: false,
+      follow: false,
+    },
+  };
+}
 
 export default function ExamPage({ params }: { params: { id: string } }) {
   // Firebase SDKのログレベルをデバッグに設定

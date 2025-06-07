@@ -12,6 +12,19 @@ import ComparisonTable from '@/app/components/ComparisonTable';
 import { testimonials, Testimonial } from './lib/testimonial-data';
 import type { Metadata } from 'next';
 
+export const metadata: Metadata = {
+  title: "ToreMock - 1分で結果が出る英語模試",
+  description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
+  openGraph: {
+    title: "ToreMock - 1分で結果が出る英語模試",
+    description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
+  },
+  twitter: {
+    title: "ToreMock - 1分で結果が出る英語模試",
+    description: "英語模試ならトレモック。TOEIC®/TOEFL®の模試が【無料】で受験可能。AI採点/添削だから、1分で結果が出ます。",
+  },
+};
+
 export default function Home() {
   const { user } = useAuth();
   const [scrollY, setScrollY] = useState(0);

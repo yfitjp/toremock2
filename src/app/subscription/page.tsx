@@ -14,6 +14,12 @@ import { db } from '@/app/lib/firebase';
 import { auth } from '@/app/lib/firebase';
 import ComparisonTable from '@/app/components/ComparisonTable';
 import LoadingSpinner from '../components/LoadingSpinner';
+import type { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'サブスクリプション',
+  description: 'ToreMockのプレミアムプランに登録して、全ての機能に無制限アクセス。AIによる詳細分析や豊富な問題で、あなたの英語学習をさらに加速させましょう。',
+};
 
 // Stripeの公開キーを設定
 const stripePromise = loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
