@@ -12,22 +12,23 @@ import time # APIリクエストの待機用
 # --- 設定ここから --- #
 # モデルの選択
 MODEL = 'gemini-2.5-pro-preview-06-05'
+IMAGE_MODEL = 'imagen-4.0-generate-preview-05-20'
 
 # Vertex AI Imagen の設定
 PROJECT_ID = "gen-lang-client-0577382790"
 LOCATION = "us-central1"
 
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 60
+NUM_THEMES_TO_GENERATE = 20
 
 # APIレートリミットを考慮し、最後のリクエストの後以外は待機する
 WAIT_SECONDS = 60
 
 # テーマ考案の背景情報 (適宜編集してください)
 THEME_GENERATION_CONTEXT = """
-生きた英語を学びたい英語学習者に向けて、様々なシチュエーションでの英語の言い回しを紹介したい。
-シチュエーションはとにかくニッチなものを選ぶこと。
-良い例：「インスタのストーリーで使われる英語の言い回し」、「BFFの意味って?」、「英語でババアって何て言うの？」
+英語の資格試験の勉強をしている可能性がある、学生(留学予定の高校生/大学生や就職活動をしている大学生)または社会人をターゲットにした、英語学習とは直接関係しないが、役に立つ情報を提供したい。
+テーマはとにかくニッチなものを選ぶこと。
+参考にしてほしい、とても良い例：「カリフォルニア大学の出願方法」、「世界大学ランキングとは？」、「外資系企業のおすすめランキング」
 """
 # --- 設定ここまで --- #
 
@@ -328,16 +329,20 @@ def generate_and_save_image(task: dict, model: ImageGenerationModel) -> bool:
         print(f"  エラー: 画像生成プロンプトまたは出力パスが不足しています。記事ID: {article_id}")
         return False
 
-    print(f"    Vertex AI Imagen 4 画像生成開始 - 出力先: {output_path}")
+    print(f"    Vertex AI {IMAGE_MODEL} 画像生成開始 - 出力先: {output_path}")
     try:
-        # DALL-E 3 は 1792x1024 (約16:9) であったため、16:9 のアスペクト比を維持
         images = model.generate_images(
             prompt=prompt_text,
             number_of_images=1,
             # 画像内に不要なテキストが生成されるのを防ぐため、ネガティブプロンプトを強化
-            negative_prompt="text, letters, blurry, low quality, watermark, signature, words, font, typo",
+            negative_prompt="blurry, low quality, watermark, typo",
             aspect_ratio="16:9",
         )
+
+        # APIが画像を返さなかった場合（安全フィルターなど）のチェックを追加
+        if not images:
+            print(f"  エラー: Vertex AI Imagen APIから画像が返されませんでした。プロンプトが安全ポリシーに違反したか、他の理由で画像生成に失敗しました。記事ID: {article_id}")
+            return False
 
         # 画像データをバイトとして取得
         image_bytes = images[0]._image_bytes
@@ -365,8 +370,8 @@ if __name__ == '__main__':
     try:
         vertexai.init(project=PROJECT_ID, location=LOCATION)
         # 画像生成モデルのロード
-        imagen_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
-        print("  Vertex AI Imagen 3 モデルのロード完了。")
+        imagen_model = ImageGenerationModel.from_pretrained(IMAGE_MODEL)
+        print(f"  Vertex AI {IMAGE_MODEL} モデルのロード完了。")
     except Exception as e:
         print(f"  エラー: Vertex AI の初期化またはモデルのロードに失敗しました: {e}")
         print("  Google Cloudへの認証が正しく設定されているか確認してください（例: gcloud auth application-default login）。")

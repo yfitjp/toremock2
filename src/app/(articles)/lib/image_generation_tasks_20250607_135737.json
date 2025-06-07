@@ -1,0 +1,122 @@
+[
+  {
+    "article_id": "ucas-personal-statement-writing-guide",
+    "image_generation_prompt": "Create a realistic photo capturing a moment of intense focus and inspiration. A young Japanese student, female, is sitting at a clean, well-lit wooden desk. She is looking thoughtfully towards a window with soft morning light, a pen held to her chin. In front of her is a laptop (screen is slightly out of focus, showing a word processor) and an open notebook with some handwritten notes. On the desk, there are a couple of academic books related to science or literature, and a simple ceramic mug. The background is a cozy, slightly blurred room with a bookshelf, conveying an academic and aspirational atmosphere. **Crucially, ensure no text or letters are visible anywhere in the image.** The overall mood should be calm, determined, and inspiring, perfectly encapsulating the personal journey of writing for one's future.",
+    "suggested_image_filename": "ucas-personal-statement-writing-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ucas-personal-statement-writing-guide.png"
+  },
+  {
+    "article_id": "us-college-supplemental-essay-why-us",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of writing a 'Why Us?' supplemental essay for a U.S. college application. The image features a young Japanese student, focused and thoughtful, sitting at a wooden desk. The student is actively writing in a notebook, with a laptop open to a university's website beside it. Scattered on the desk are college brochures, highlighting a connection to specific research. The lighting is warm and natural, coming from a nearby window, illuminating the student's determined yet hopeful expression. In the soft-focus background, a hint of a beautiful, classic American university campus with brick buildings can be seen. The overall mood is inspiring and studious. **Crucially, there must be no text or letters visible anywhere in the image.**",
+    "suggested_image_filename": "us-college-supplemental-essay-why-us.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\us-college-supplemental-essay-why-us.png"
+  },
+  {
+    "article_id": "cover-letter-for-low-gpa-in-resume",
+    "image_generation_prompt": "A realistic photo of a young Japanese university student, sitting at a wooden desk in a bright, modern room with a large window. They are thoughtfully writing a cover letter on a laptop. Instead of looking stressed, the student has a subtle, confident smile, showing a sense of hope and determination. The focus is on their hands on the keyboard and their optimistic expression. The desk has a notebook, a pen, and a cup of coffee, creating a productive and positive atmosphere. The lighting is warm and inviting. No text or letters should be visible on the laptop screen or notebook. The overall mood is about overcoming challenges and focusing on future opportunities.",
+    "suggested_image_filename": "cover-letter-for-low-gpa-in-resume.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\cover-letter-for-low-gpa-in-resume.png"
+  },
+  {
+    "article_id": "boston-career-forum-walk-in-strategy",
+    "image_generation_prompt": "Create a realistic photo capturing the dynamic atmosphere of the Boston Career Forum. The scene should show a well-dressed young Japanese university student, looking confident and prepared, engaging in a positive conversation with a corporate recruiter at a company booth. The background should be slightly blurred but recognizable as a busy career fair, with other students and booths visible. The focus is on the handshake or the exchange of a resume, symbolizing a successful 'walk-in' interaction. The lighting should be bright and optimistic. Ensure there is no text or logos on the image. The overall mood should be professional, hopeful, and energetic.",
+    "suggested_image_filename": "boston-career-forum-walk-in-strategy.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\boston-career-forum-walk-in-strategy.png"
+  },
+  {
+    "article_id": "english-performance-review-self-evaluation",
+    "image_generation_prompt": "A realistic photo of a confident Japanese professional, a woman in her early 30s, sitting at a modern office desk. She is looking thoughtfully at her laptop screen, which is displaying a document (no visible text). She has a pen in her hand and a notebook open, suggesting she is carefully preparing for her performance review. The atmosphere is bright, focused, and optimistic, conveying a sense of career growth and success. The background is a clean, professional office environment, slightly blurred to keep the focus on the person. No text or words should be visible in the image.",
+    "suggested_image_filename": "english-performance-review-self-evaluation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\english-performance-review-self-evaluation.png"
+  },
+  {
+    "article_id": "linkedin-profile-optimization-for-recruiters",
+    "image_generation_prompt": "A realistic photo of a professional Japanese woman in her early 30s, sitting in a bright, modern co-working space with a laptop. She is smiling confidently at the camera. On the laptop screen, a social media profile interface, resembling LinkedIn, is slightly blurred but recognizable. The overall atmosphere is optimistic and career-focused, suggesting success and global opportunities. The lighting is soft and natural, highlighting her professional attire. No text or logos should be visible on the screen or anywhere in the image. Focus on a clean, inspiring, and professional aesthetic.",
+    "suggested_image_filename": "linkedin-profile-optimization-for-recruiters.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\linkedin-profile-optimization-for-recruiters.png"
+  },
+  {
+    "article_id": "visa-application-process-for-us-study-abroad",
+    "image_generation_prompt": "A realistic photo of a young Japanese university student, male, standing in front of a building that resembles a U.S. embassy. He is dressed in a smart casual outfit (a light blue button-down shirt and dark slacks). He is holding essential documents, including the I-20 form, clearly but without showing any text. His facial expression captures a subtle mix of nervousness and hopeful anticipation for his upcoming student visa interview. The scene is bathed in bright, optimistic morning sunlight, creating soft shadows. The background is slightly blurred, with a hint of an American flag, focusing attention on the student. The overall mood is positive and forward-looking. **No text or letters should appear anywhere in the image.**",
+    "suggested_image_filename": "visa-application-process-for-us-study-abroad.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\visa-application-process-for-us-study-abroad.png"
+  },
+  {
+    "article_id": "small-talk-starters-for-business-networking",
+    "image_generation_prompt": "A realistic photo capturing a professional and friendly business networking event. In the foreground, a small group of three diverse Japanese business professionals (two men, one woman) in their 30s and 40s are engaged in a pleasant conversation. They are holding coffee cups and smiling, indicating a successful small-talk interaction. The background is slightly blurred, showing other attendees mingling in a modern, well-lit conference hall. The overall atmosphere should be positive, bright, and engaging, reflecting the theme of building connections through conversation. There should be no text or logos in the image.",
+    "suggested_image_filename": "small-talk-starters-for-business-networking.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\small-talk-starters-for-business-networking.png"
+  },
+  {
+    "article_id": "how-to-write-meeting-minutes-in-english",
+    "image_generation_prompt": "A realistic photo capturing a professional yet approachable scene. A young Japanese professional is sitting at a modern, clean office desk. They are looking at a laptop screen with a calm, focused expression, suggesting efficiency and confidence. On the laptop screen, a document resembling meeting minutes is visible but blurred. Next to the laptop, there is a notepad with some handwritten notes and a cup of coffee. The background is a bright, slightly out-of-focus office environment, conveying a sense of a productive workplace. The overall lighting is natural and warm. No text should appear anywhere in the image.",
+    "suggested_image_filename": "how-to-write-meeting-minutes-in-english.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-write-meeting-minutes-in-english.png"
+  },
+  {
+    "article_id": "investment-banking-superday-technical-questions",
+    "image_generation_prompt": "A realistic photo capturing the intense atmosphere of an investment banking Superday interview in a sleek, modern Tokyo office. A young, sharp-looking Japanese candidate, dressed in a business suit, sits across from two experienced interviewers. The candidate is confidently explaining a concept, gesturing towards a digital screen or a whiteboard in the background displaying complex (but illegible) financial charts and graphs. The focus is on the candidate's intelligent and determined expression. The lighting is professional and slightly dramatic, highlighting the high-stakes nature of the meeting. The overall mood is one of professionalism, intellect, and ambition. **Crucially, ensure there is absolutely no text or readable characters on the screen or whiteboard.**",
+    "suggested_image_filename": "investment-banking-superday-technical-questions.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\investment-banking-superday-technical-questions.png"
+  },
+  {
+    "article_id": "how-to-disagree-politely-in-english-meetings",
+    "image_generation_prompt": "Create a realistic photo capturing a constructive business meeting with a diverse group of Japanese professionals in a modern, bright office with large windows. The central focus is on a young Japanese man, who is speaking articulately. He has a confident yet respectful expression, using subtle hand gestures to emphasize his point. The other team members, including a Japanese woman in her 30s, are listening intently, some nodding in understanding. The atmosphere should feel collaborative and positive, not confrontational. The lighting is soft and natural. Ensure there is no text, logos, or writing visible anywhere in the image.",
+    "suggested_image_filename": "how-to-disagree-politely-in-english-meetings.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-disagree-politely-in-english-meetings.png"
+  },
+  {
+    "article_id": "building-credit-history-in-us-for-foreigners",
+    "image_generation_prompt": "A realistic photo of a young Japanese person, either a student or a professional, sitting at a desk in a modern American apartment with a city view through the window. They are smiling confidently while looking at a laptop screen which shows a positive, upward-trending financial graph. On the desk, there is a credit card and some documents. The overall atmosphere should be bright, optimistic, and empowering, symbolizing the successful building of a credit history in the U.S. Please ensure there is no text or letters on the screen, card, or documents. The focus should be on the person's positive expression and the symbolic elements of financial stability.",
+    "suggested_image_filename": "building-credit-history-in-us-for-foreigners.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\building-credit-history-in-us-for-foreigners.png"
+  },
+  {
+    "article_id": "requesting-recommendation-letter-from-professor",
+    "image_generation_prompt": "A realistic photo capturing a moment of respectful interaction. A young Japanese female university student is sitting at a desk in a sunlit, modern university library. She is attentively composing an important email on her laptop. The screen is not visible, but her focused and slightly hopeful expression suggests she is writing something significant, like a request to a professor. In the background, bookshelves filled with academic books are softly blurred, emphasizing the academic setting. The overall mood should be optimistic, professional, and studious. No text or letters should be visible anywhere in the image.",
+    "suggested_image_filename": "requesting-recommendation-letter-from-professor.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\requesting-recommendation-letter-from-professor.png"
+  },
+  {
+    "article_id": "common-app-activities-list-examples",
+    "image_generation_prompt": "A realistic photo of a focused Japanese high school student sitting at a clean, well-lit desk. The student is thoughtfully writing in a notebook, planning their Common App activities list. On the desk, there is a laptop open to a blank document, a few textbooks about US colleges, and a cup of tea. The atmosphere is calm, determined, and hopeful. Soft, natural light comes from a nearby window, illuminating the scene. The background is slightly blurred, keeping the focus on the student and their work. No text or logos should be visible in the image.",
+    "suggested_image_filename": "common-app-activities-list-examples.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\common-app-activities-list-examples.png"
+  },
+  {
+    "article_id": "english-case-interview-preparation-guide",
+    "image_generation_prompt": "A realistic photo capturing the intensity and intelligence of a Japanese candidate during a challenging English case interview for a top consulting firm. A young Japanese man in a sharp business suit sits opposite an interviewer (partially visible) in a modern, bright office meeting room. He is actively explaining his thought process, using hand gestures to illustrate a point on a whiteboard or notepad filled with diagrams and business frameworks (no readable text). The focus is on his confident, focused expression, conveying clear communication and sharp analytical thinking. The atmosphere is professional, serious, yet forward-looking. Natural lighting from a large window enhances the clean, corporate aesthetic. There should be absolutely no text in the image.",
+    "suggested_image_filename": "english-case-interview-preparation-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\english-case-interview-preparation-guide.png"
+  },
+  {
+    "article_id": "networking-at-international-conferences",
+    "image_generation_prompt": "Create a realistic photo capturing a vibrant networking scene at an international academic conference. The central focus is a group of diverse researchers, including a friendly Japanese professional in their 30s. They are engaged in an animated conversation during a coffee break or poster session. The Japanese researcher is smiling, confidently exchanging a business card or gesturing enthusiastically while explaining their work. The setting is a modern, brightly lit conference hall with blurred posters and other attendees in the background, creating a sense of a bustling environment. Use a shallow depth of field to emphasize the main group. The overall mood should be positive, collaborative, and professional. **Crucially, do not include any text or characters on posters, name tags, or anywhere in the image.**",
+    "suggested_image_filename": "networking-at-international-conferences.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\networking-at-international-conferences.png"
+  },
+  {
+    "article_id": "overseas-business-trip-expense-report-english",
+    "image_generation_prompt": "A realistic photo of a Japanese business person, either male or female, in their 30s, sitting at a modern office desk. They are focused on filling out an expense report on their laptop. The desk is neatly organized with a laptop, a stack of receipts, a calculator, a pen, and a cup of coffee. The person has a slightly thoughtful or focused expression, representing the challenge of handling paperwork. The background is a clean, bright, and professional office environment, slightly out of focus. The lighting is natural and soft, coming from a window. The overall mood should be relatable and professional. **Crucially, there should be no visible text or letters on the laptop screen, documents, or anywhere in the image.**",
+    "suggested_image_filename": "overseas-business-trip-expense-report-english.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\overseas-business-trip-expense-report-english.png"
+  },
+  {
+    "article_id": "scholarships-for-international-students-in-japan",
+    "image_generation_prompt": "Generate a realistic photo capturing the essence of a hopeful Japanese high school student aspiring to study abroad. A young Japanese student, sitting at a well-organized desk, is looking thoughtfully at a laptop. The laptop screen shows an abstract, blurred image of a university application portal, with no visible text. Through the window behind the student, a dreamy, sunlit view of a classic Western university building is subtly visible against a bright, optimistic sky. The desk is adorned with study materials, a globe, and a pen in hand, symbolizing preparation and global dreams. The lighting is warm and natural, creating an inspiring and motivational atmosphere. The focus is on the student's determined yet hopeful expression. Ensure the image contains no text or letters whatsoever.",
+    "suggested_image_filename": "scholarships-for-international-students-in-japan.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\scholarships-for-international-students-in-japan.png"
+  },
+  {
+    "article_id": "mba-career-path-consulting-vs-tech",
+    "image_generation_prompt": "Create a realistic photo capturing a pivotal career choice moment. A confident Japanese business professional in their early 30s, dressed in smart business attire, stands at a metaphorical crossroads. One path leads towards a sleek, modern glass skyscraper, symbolizing a top-tier consulting firm. In the background, suited professionals are seen collaborating intently, evoking an atmosphere of sharp, analytical professionalism. The other path veers towards a vibrant, creative tech campus with open-plan offices, where casually dressed, diverse employees brainstorm around whiteboards. This scene should feel innovative and collaborative. The central figure looks thoughtfully towards the camera, as if asking for guidance. The lighting is bright and optimistic, suggesting a future full of possibilities, with a shallow depth of field to emphasize the person and the two distinct paths ahead. There should be no text or words in the image.",
+    "suggested_image_filename": "mba-career-path-consulting-vs-tech.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mba-career-path-consulting-vs-tech.png"
+  },
+  {
+    "article_id": "how-to-answer-weakness-in-english-interview",
+    "image_generation_prompt": "Create a realistic photo capturing a positive and professional job interview scene. A Japanese candidate, a man in his early 30s, is sitting across from a diverse panel of interviewers in a bright, modern office meeting room with large windows. The candidate is thoughtfully answering the question 'What is your weakness?'. He looks sincere and confident, not anxious. The main interviewer, a Caucasian woman in her 40s, is listening intently with a supportive and engaging expression. The focus should be on the candidate's professional and self-aware demeanor. The overall atmosphere is encouraging and bright. Please ensure there is no text in the image.",
+    "suggested_image_filename": "how-to-answer-weakness-in-english-interview.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-answer-weakness-in-english-interview.png"
+  }
+]

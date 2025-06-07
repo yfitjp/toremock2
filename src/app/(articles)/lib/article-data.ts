@@ -5839,6 +5839,740 @@ export const articleData: Record<string, ArticleData> = {
     "緊急英語"
     ]
   },
+  "academic-peer-review-response-english": {
+    "id": "academic-peer-review-response-english",
+    "title": "英語論文の査読コメントへの返信で使える丁寧フレーズ",
+    "description": "英語論文の査読コメントへの返信に悩む研究者・大学院生必見。感謝や同意、丁寧な反論まで、状況別に使える英語フレーズを具体例付きで解説。返信レターの基本構成や役立つツールも紹介し、論文アクセプトをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/academic-peer-review-response-english.png",
+    "tags": [
+    "査読コメント",
+    "返信メール",
+    "アカデミック英語",
+    "論文英語",
+    "英語フレーズ",
+    "研究者",
+    "大学院生"
+    ]
+  },
+  "essay-transition-words-academic": {
+    "id": "essay-transition-words-academic",
+    "title": "海外大学エッセイで論理を強化する接続副詞の使い方",
+    "description": "海外大学の出願エッセイやアカデミックライティングで、あなたの主張を際立たせる接続副詞の使い方を徹底解説。論理的な文章構成に不可欠な接続副詞を機能別に分類し、具体的な例文と共に紹介します。これを読めば、あなたのエッセイが一段と説得力のあるものに変わります。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/essay-transition-words-academic.png",
+    "tags": [
+    "接続副詞",
+    "アカデミックライティング",
+    "海外大学",
+    "出願エッセイ",
+    "TOEFL",
+    "英語ライティング",
+    "留学準備",
+    "論理的文章"
+    ]
+  },
+  "english-poster-session-phrases": {
+    "id": "english-poster-session-phrases",
+    "title": "学会のポスター発表で質問を引き出す英語フレーズ集",
+    "description": "学会のポスター発表で使える英語フレーズをお探しですか？本記事では、聴衆の興味を引き、活発な質疑応答を促すための具体的な声かけ、プレゼン、質疑応答フレーズを網羅的に解説。自信を持って国際学会に臨むための実践的なコツが満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/english-poster-session-phrases.png",
+    "tags": [
+    "学会",
+    "ポスター発表",
+    "英語フレーズ",
+    "研究",
+    "英語学習",
+    "プレゼンテーション",
+    "アカデミック英語",
+    "国際学会"
+    ]
+  },
+  "ielts-speaking-part3-abstract-questions": {
+    "id": "ielts-speaking-part3-abstract-questions",
+    "title": "IELTSスピーキングPart3抽象的な質問への回答戦略",
+    "description": "IELTSスピーキングPart3は抽象的で難しい質問が多く、多くの受験者が苦手とします。この記事では、高得点を狙うための具体的な回答戦略を徹底解説。意見の述べ方、具体例の挙げ方、構成の作り方まで、すぐに使えるテクニックと練習法を紹介します。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/ielts-speaking-part3-abstract-questions.png",
+    "tags": [
+    "IELTS",
+    "スピーキング",
+    "英語試験",
+    "学習法",
+    "Part3対策",
+    "抽象的質問"
+    ]
+  },
+  "toefl-writing-giving-examples": {
+    "id": "toefl-writing-giving-examples",
+    "title": "TOEFLライティングで説得力を増す具体例の示し方",
+    "description": "TOEFLライティングで高得点を狙うには、説得力のある具体例が不可欠です。本記事では、主張を裏付ける具体例を効果的に見つけ、構成し、表現するための3つのステップを徹底解説。すぐに使える便利フレーズや学習リソースも紹介し、あなたのエッセイを次のレベルへと導きます。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/toefl-writing-giving-examples.png",
+    "tags": [
+    "TOEFLライティング",
+    "具体例",
+    "エッセイ",
+    "スコアアップ",
+    "英語学習",
+    "ライティング対策",
+    "論理的思考"
+    ]
+  },
+  "performance-review-self-assessment-phrases": {
+    "id": "performance-review-self-assessment-phrases",
+    "title": "英語の自己評価で差がつく！実績をアピールする動詞集",
+    "description": "英語のパフォーマンスレビューで自己評価を書くのに苦労していませんか？この記事では、あなたの実績と貢献を効果的にアピールするための強力なアクション動詞をシーン別に紹介します。具体的な例文や、説得力を高めるための数字の使い方など、すぐに使えるテクニックが満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/performance-review-self-assessment-phrases.png",
+    "tags": [
+    "自己評価",
+    "英語",
+    "ビジネス英語",
+    "パフォーマンスレビュー",
+    "実績アピール",
+    "外資系",
+    "キャリアアップ",
+    "英語フレーズ"
+    ]
+  },
+  "project-delay-report-email-english": {
+    "id": "project-delay-report-email-english",
+    "title": "【例文付】プロジェクト遅延を報告する英語ビジネスメール",
+    "description": "プロジェクトの遅延を英語でどう報告すれば？そんな悩みを解決します。本記事では、ビジネスメールで使える丁寧な遅延報告の書き方を、基本構成から具体的な例文、便利フレーズまで徹底解説。コピペで使えるテンプレート付きで、すぐに実践できます。誠実な対応で信頼を失わないためのポイントも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/project-delay-report-email-english.png",
+    "tags": [
+    "ビジネス英語",
+    "英語メール",
+    "プロジェクト管理",
+    "遅延報告",
+    "英語例文",
+    "外資系",
+    "トラブル対応",
+    "英語学習"
+    ]
+  },
+  "disagreeing-politely-english-meeting": {
+    "id": "disagreeing-politely-english-meeting",
+    "title": "英語会議で波風を立てずに反対意見を伝えるクッション言葉",
+    "description": "英語のビジネス会議で反対意見を伝えるのは難しいと感じていませんか？この記事では、相手に敬意を払いながら、自分の意見をスマートに伝えるための便利なクッション言葉を多数紹介。具体的なフレーズや実践のコツを学び、円滑なコミュニケーションを実現しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/disagreeing-politely-english-meeting.png",
+    "tags": [
+    "ビジネス英語",
+    "英語会議",
+    "クッション言葉",
+    "反対意見",
+    "英会話フレーズ",
+    "コミュニケーション",
+    "英語学習"
+    ]
+  },
+  "replying-to-recruiter-email-english": {
+    "id": "replying-to-recruiter-email-english",
+    "title": "ヘッドハンターからの英語メールへのスマートな返信術",
+    "description": "突然の英語メールに戸惑っていませんか？この記事では、海外のヘッドハンターから届いたスカウトメールへのスマートな返信方法を、具体的な英語例文付きで徹底解説。興味がある場合、ない場合のケース別に、好印象を与えるためのポイントや注意点も紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/replying-to-recruiter-email-english.png",
+    "tags": [
+    "英語メール",
+    "ビジネス英語",
+    "ヘッドハンター",
+    "スカウトメール",
+    "返信",
+    "例文",
+    "外資系転職",
+    "キャリアアップ"
+    ]
+  },
+  "resume-action-verbs-for-achievements": {
+    "id": "resume-action-verbs-for-achievements",
+    "title": "英文履歴書で実績が光る！採用担当に響く動詞リスト",
+    "description": "英文履歴書で自分の実績を効果的に伝えたい方へ。この記事では、採用担当者の目に留まる『アクション動詞』をカテゴリ別に網羅しました。リーダーシップや課題解決能力をアピールする具体的な動詞リストと、成果を数値で示すコツを学び、あなたのキャリアを次のステージへと導く、力強い履歴書を作成しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/resume-action-verbs-for-achievements.png",
+    "tags": [
+    "英文履歴書",
+    "アクション動詞",
+    "外資系転職",
+    "職務経歴書",
+    "自己PR",
+    "ビジネス英語",
+    "レジュメ"
+    ]
+  },
+  "online-meeting-facilitator-phrases": {
+    "id": "online-meeting-facilitator-phrases",
+    "title": "英語オンライン会議を円滑に進めるファシリテーション術",
+    "description": "英語のオンライン会議で自信を持って進行役を務めたいあなたへ。会議の開始から終了まで、各場面で使える実践的なファシリテーションフレーズ集と、議論を活性化させるコツを具体例と共に解説。これで、あなたも会議を円滑に進めるプロに。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/online-meeting-facilitator-phrases.png",
+    "tags": [
+    "英語会議",
+    "ファシリテーション",
+    "ビジネス英語",
+    "オンラインミーティング",
+    "英語フレーズ",
+    "グローバルコミュニケーション"
+    ]
+  },
+  "handling-customer-complaints-english": {
+    "id": "handling-customer-complaints-english",
+    "title": "英語でのクレーム対応｜謝罪と解決策を伝える鉄板フレーズ",
+    "description": "英語でのクレーム対応に自信がない方へ。この記事では、冷静に謝罪し、解決策を提示するための鉄板フレーズを状況別に解説します。基本的な心構えから実践的な会話例、さらには効果的な学習法まで網羅。プロフェッショナルな顧客対応スキルが身につきます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/handling-customer-complaints-english.png",
+    "tags": [
+    "クレーム対応",
+    "ビジネス英語",
+    "英語フレーズ",
+    "謝罪",
+    "顧客対応",
+    "英会話",
+    "英語学習"
+    ]
+  },
+  "business-chat-acronyms-slack": {
+    "id": "business-chat-acronyms-slack",
+    "title": "Slackで使える！ネイティブ流ビジネスチャット英語略語",
+    "description": "Slackなどのビジネスチャットで頻出する英語略語に戸惑っていませんか？この記事では、FYIやASAPといった基本から、SGTMやTIAなどネイティブが使う応用表現まで、意味と使い方を例文付きで徹底解説。グローバルな環境で円滑にコミュニケーションを取るための必須知識が身につきます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/business-chat-acronyms-slack.png",
+    "tags": [
+    "ビジネス英語",
+    "英語略語",
+    "チャット英語",
+    "Slack",
+    "外資系",
+    "英語学習",
+    "コミュニケーション"
+    ]
+  },
+  "inviting-colleagues-dinner-business-trip": {
+    "id": "inviting-colleagues-dinner-business-trip",
+    "title": "海外出張で同僚を食事に誘うスマートな英語表現",
+    "description": "海外出張で同僚を食事に誘う際、スマートな英語表現に困っていませんか？この記事では、カジュアルから丁寧な誘い方、相手への配慮、断られた際のスマートな対応まで、具体的なフレーズと実践的なコツを解説。円滑なコミュニケーションで、仕事も人間関係もより良くしましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/inviting-colleagues-dinner-business-trip.png",
+    "tags": [
+    "海外出張",
+    "ビジネス英語",
+    "食事の誘い",
+    "同僚",
+    "英語フレーズ",
+    "コミュニケーション"
+    ]
+  },
+  "toeic-part2-indirect-responses-tips": {
+    "id": "toeic-part2-indirect-responses-tips",
+    "title": "TOEIC Part2で差がつく「間接的な応答」攻略法",
+    "description": "TOEIC Part2でスコアが伸び悩んでいませんか？この記事では、多くの受験者が苦手とする「間接的な応答」問題の典型的な7つのパターンを徹底解説。具体的な例題と、明日から実践できる効果的なトレーニング法を紹介し、あなたのPart2を得点源に変えるお手伝いをします。",
+    "category": "TOEIC",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/toeic-part2-indirect-responses-tips.png",
+    "tags": [
+    "TOEIC",
+    "TOEIC Part2",
+    "リスニング対策",
+    "間接応答",
+    "英語学習",
+    "スコアアップ",
+    "TOEIC対策"
+    ]
+  },
+  "eiken-grade1-writing-current-events-vocab": {
+    "id": "eiken-grade1-writing-current-events-vocab",
+    "title": "英検1級ライティングで使える時事問題の英単語・表現",
+    "description": "英検1級のライティングで高得点を狙うには、時事問題に関する高度な語彙力が不可欠です。本記事では、環境、テクノロジー、経済などの頻出テーマ別に使える英単語や表現を例文付きで徹底解説。語彙力を実践で活かすための具体的な学習法も紹介し、あなたの合格をサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/eiken-grade1-writing-current-events-vocab.png",
+    "tags": [
+    "英検1級",
+    "ライティング対策",
+    "時事問題",
+    "英単語",
+    "英語学習",
+    "エッセイ"
+    ]
+  },
+  "hair-salon-english-phrases-haircut": {
+    "id": "hair-salon-english-phrases-haircut",
+    "title": "海外の美容院で理想の髪型を伝える英語フレーズ完全版",
+    "description": "海外旅行や留学先で美容院に行くのは不安？この記事では、予約からカウンセリング、カットやカラーの細かい要望、仕上げの確認まで、あらゆる場面で使える実践的な英語フレーズを網羅的に解説。写真と合わせて使えば、理想の髪型を確実に伝えられます。もう言葉の壁で失敗しません！",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/hair-salon-english-phrases-haircut.png",
+    "tags": [
+    "海外 美容院",
+    "英語 フレーズ",
+    "ヘアカット 英語",
+    "留学",
+    "海外旅行",
+    "英会話",
+    "ヘアサロン"
+    ]
+  },
+  "english-cooking-verbs-explained": {
+    "id": "english-cooking-verbs-explained",
+    "title": "英語レシピの頻出単語！Simmer, Sauté, Diceの違いは？",
+    "description": "英語のレシピでよく見る「Simmer」「Sauté」「Dice」などの調理動詞、その正確な意味の違いを知っていますか？この記事では、切る・焼く・煮るなどの基本動詞を分かりやすく解説。海外のレシピに自信を持って挑戦できるようになるための、実践的な学習法やおすすめリソースも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/english-cooking-verbs-explained.png",
+    "tags": [
+    "料理英語",
+    "英語学習",
+    "レシピ",
+    "英単語",
+    "英語の動詞",
+    "初心者向け英語",
+    "暮らしの英語"
+    ]
+  },
+  "expressing-condolences-in-english": {
+    "id": "expressing-condolences-in-english",
+    "title": "英語で「お悔やみ申し上げます」気持ちが伝わる表現集",
+    "description": "英語でお悔やみの言葉を伝える際の、気持ちが伝わる丁寧なフレーズを場面別に解説。親しい友人からビジネスシーンまで、関係性に応じた表現や、避けるべきNG表現、メールの文例も紹介。いざという時に備え、心からの哀悼の意を示す方法を学びましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/expressing-condolences-in-english.png",
+    "tags": [
+    "お悔やみ 英語",
+    "弔意 英語",
+    "哀悼 英語",
+    "英語 フレーズ",
+    "英会話",
+    "ビジネス英語",
+    "異文化コミュニケーション"
+    ]
+  },
+  "breaking-awkward-silence-small-talk": {
+    "id": "breaking-awkward-silence-small-talk",
+    "title": "気まずい沈黙を破る！ネイティブ流スモールトーク術",
+    "description": "エレベーターや会議前、気まずい沈黙に悩んでいませんか？この記事では、ネイティブが実際に使うスモールトークの鉄板ネタ、会話を弾ませる相づちや質問の技術、シーン別実践フレーズまで徹底解説。自信を持って英語で話せるようになるための第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/breaking-awkward-silence-small-talk.png",
+    "tags": [
+    "スモールトーク",
+    "英会話",
+    "コミュニケーション",
+    "英語学習",
+    "初心者",
+    "気まずい沈黙",
+    "ビジネス英語"
+    ]
+  },
+  "ucas-personal-statement-writing-guide": {
+    "id": "ucas-personal-statement-writing-guide",
+    "title": "UCAS出願Personal Statementの書き方講座",
+    "description": "UCAS出願で必須のPersonal Statementの書き方を徹底解説。イギリス大学留学を目指す方へ、基本構成からライバルに差をつけるテクニック、避けるべき注意点、役立つリソースまで網羅。あなたの魅力を最大限に伝えるエッセイ作成をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/ucas-personal-statement-writing-guide.png",
+    "tags": [
+    "UCAS",
+    "Personal Statement",
+    "イギリス大学",
+    "海外大学出願",
+    "エッセイ",
+    "留学準備",
+    "志望理由書",
+    "英語ライティング"
+    ]
+  },
+  "us-college-supplemental-essay-why-us": {
+    "id": "us-college-supplemental-essay-why-us",
+    "title": "米大学の追加エッセイ「Why Us?」で響く回答法",
+    "description": "アメリカの大学出願で重要な追加エッセイ『Why Us?』の書き方を徹底解説。大学の意図を理解し、効果的なリサーチ方法から、ストーリー構成、具体的な表現まで、他の受験生と差がつくエッセイ作成の秘訣を具体例と共に紹介します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/us-college-supplemental-essay-why-us.png",
+    "tags": [
+    "大学出願",
+    "追加エッセイ",
+    "Why Us",
+    "アメリカ大学",
+    "海外留学",
+    "自己PR",
+    "志望理由書",
+    "エッセイ対策"
+    ]
+  },
+  "cover-letter-for-low-gpa-in-resume": {
+    "id": "cover-letter-for-low-gpa-in-resume",
+    "title": "英文レジュメで低いGPAをカバーする伝え方と例文",
+    "description": "英文レジュメで低いGPAに悩んでいませんか？この記事では、GPAが低い場合でも採用担当者に好印象を与えるための戦略的な伝え方、効果的な自己PRの方法、そして具体的なカバーレターの例文を徹底解説。あなたの強みを最大限にアピールし、選考を突破するための秘訣が満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/cover-letter-for-low-gpa-in-resume.png",
+    "tags": [
+    "英文レジュメ",
+    "GPA",
+    "カバーレター",
+    "就職活動",
+    "留学",
+    "自己PR",
+    "低い成績"
+    ]
+  },
+  "boston-career-forum-walk-in-strategy": {
+    "id": "boston-career-forum-walk-in-strategy",
+    "title": "ボスキャリでウォークインを成功させる秘策と準備",
+    "description": "ボスキャリでのウォークイン（飛び込み訪問）を成功させたい方必見！事前準備から当日の戦略、効果的な立ち回り、フォローアップまで、内定に繋がる具体的な秘策を徹底解説。この記事を読めば、自信を持って企業ブースを訪問し、最高のチャンスを掴むことができます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/boston-career-forum-walk-in-strategy.png",
+    "tags": [
+    "ボスキャリ",
+    "ボストンキャリアフォーラム",
+    "ウォークイン",
+    "就職活動",
+    "留学生",
+    "キャリアフォーラム",
+    "外資系就活"
+    ]
+  },
+  "english-performance-review-self-evaluation": {
+    "id": "english-performance-review-self-evaluation",
+    "title": "英語の評価面談で昇進に繋がる自己評価の書き方",
+    "description": "英語での評価面談（パフォーマンスレビュー）はキャリアアップの鍵。本記事では、具体的な成果をアピールするSTARメソッド、すぐに使える実践英語フレーズ集、役立つツールまで、昇進に繋がる自己評価の書き方を分かりやすく解説します。外資系やグローバルな環境で働くあなたのための完全ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/english-performance-review-self-evaluation.png",
+    "tags": [
+    "英語面談",
+    "自己評価",
+    "ビジネス英語",
+    "キャリアアップ",
+    "外資系",
+    "パフォーマンスレビュー",
+    "英語フレーズ",
+    "STARメソッド"
+    ]
+  },
+  "linkedin-profile-optimization-for-recruiters": {
+    "id": "linkedin-profile-optimization-for-recruiters",
+    "title": "海外から声がかかるLinkedInプロフィールの作り方",
+    "description": "海外のリクルーターから直接スカウトが届く、魅力的なLinkedInプロフィールの作り方を徹底解説。写真選びからヘッドライン、職務経歴、スキル欄の最適化まで、具体的なテクニックと例文を満載。あなたのキャリアを世界に広げる第一歩をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/linkedin-profile-optimization-for-recruiters.png",
+    "tags": [
+    "LinkedIn",
+    "キャリアアップ",
+    "海外転職",
+    "外資系",
+    "英文プロフィール",
+    "リクルーター",
+    "自己PR",
+    "英語学習"
+    ]
+  },
+  "visa-application-process-for-us-study-abroad": {
+    "id": "visa-application-process-for-us-study-abroad",
+    "title": "米国学生ビザ(F-1)申請、面接で聞かれる質問集",
+    "description": "アメリカ留学の最終関門、F-1ビザ面接の準備は万全ですか？この記事では、面接で頻出する質問と模範回答例、服装や持ち物、そして面接官が重視するポイントを徹底解説。これを読めば、自信を持って面接に臨めます。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/visa-application-process-for-us-study-abroad.png",
+    "tags": [
+    "米国ビザ",
+    "学生ビザ",
+    "F-1ビザ",
+    "アメリカ留学",
+    "ビザ面接",
+    "面接対策",
+    "DS-160",
+    "I-20"
+    ]
+  },
+  "small-talk-starters-for-business-networking": {
+    "id": "small-talk-starters-for-business-networking",
+    "title": "ビジネス英語で使えるスモールトークの始め方と話題",
+    "description": "「何を話せばいい？」ビジネス英語のスモールトークはもう怖くない！この記事では、ネットワーキングで使える自然な会話の始め方から、鉄板の話題、スマートな終わり方まで、具体的なフレーズを交えて徹底解説。自信を持って関係を築く第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/small-talk-starters-for-business-networking.png",
+    "tags": [
+    "ビジネス英語",
+    "スモールトーク",
+    "英会話",
+    "ネットワーキング",
+    "コミュニケーション",
+    "初心者"
+    ]
+  },
+  "how-to-write-meeting-minutes-in-english": {
+    "id": "how-to-write-meeting-minutes-in-english",
+    "title": "英文議事録(Meeting Minutes)を速く書くコツ",
+    "description": "英語での議事録作成に悩んでいませんか？この記事では、会議前の準備から、効率的なメモの取り方、すぐに使えるテンプレートと英語フレーズまで、英文議事録（Meeting Minutes）を速く、正確に書くための具体的なコツを初心者にも分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/how-to-write-meeting-minutes-in-english.png",
+    "tags": [
+    "英文議事録",
+    "ミーティング議事録",
+    "英語学習",
+    "ビジネス英語",
+    "書き方",
+    "テンプレート",
+    "英語 フレーズ",
+    "初心者"
+    ]
+  },
+  "investment-banking-superday-technical-questions": {
+    "id": "investment-banking-superday-technical-questions",
+    "title": "外資投資銀行Superdayで聞かれる技術的な質問対策",
+    "description": "外資系投資銀行の最終面接、Superday。本記事では、合否を分ける技術的な質問（会計、バリュエーション、M&A）の頻出例と、内定を勝ち取るための効果的な対策法を徹底解説。おすすめの参考書や学習サイト、面接官が見るポイントまで網羅し、あなたの就職活動を強力にサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/investment-banking-superday-technical-questions.png",
+    "tags": [
+    "外資投資銀行",
+    "IBD",
+    "Superday",
+    "面接対策",
+    "技術的質問",
+    "バリュエーション",
+    "就職活動",
+    "キャリア"
+    ]
+  },
+  "how-to-disagree-politely-in-english-meetings": {
+    "id": "how-to-disagree-politely-in-english-meetings",
+    "title": "英語会議で角を立てずに反対意見を伝える表現集",
+    "description": "英語の会議で反対意見を伝えるのは難しいと感じていませんか？この記事では、相手に敬意を払いながら自分の意見を明確に伝えるための具体的なクッション言葉やフレーズを豊富に紹介します。ビジネスシーンで円滑なコミュニケーションを実現し、自信を持って議論に参加するためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/how-to-disagree-politely-in-english-meetings.png",
+    "tags": [
+    "英語会議",
+    "ビジネス英語",
+    "反対意見",
+    "英語表現",
+    "コミュニケーション",
+    "学習法",
+    "英語フレーズ"
+    ]
+  },
+  "building-credit-history-in-us-for-foreigners": {
+    "id": "building-credit-history-in-us-for-foreigners",
+    "title": "駐在・留学時に必須！米国でのクレジットヒストリー構築法",
+    "description": "アメリカでの駐在や留学生活に不可欠なクレジットヒストリー。本記事では、SSNがない状態からでも始められるクレジットカードの作り方から、良い信用情報を維持するコツまで、具体的な手順を分かりやすく解説します。将来のローン契約やアパート賃貸をスムーズにするための第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/building-credit-history-in-us-for-foreigners.png",
+    "tags": [
+    "クレジットヒストリー",
+    "アメリカ駐在",
+    "アメリカ留学",
+    "クレジットカード",
+    "信用スコア",
+    "SSN",
+    "海外生活",
+    "ファイナンス"
+    ]
+  },
+  "requesting-recommendation-letter-from-professor": {
+    "id": "requesting-recommendation-letter-from-professor",
+    "title": "大学教授に推薦状を依頼する英文メールの書き方",
+    "description": "海外大学院への出願準備中ですか？この記事では、大学教授に推薦状を依頼するための英文メールの書き方を、準備段階からフォローアップまで徹底解説。コピペで使えるテンプレートや、教授の心を動かすポイントも紹介し、あなたの留学準備を強力にサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/requesting-recommendation-letter-from-professor.png",
+    "tags": [
+    "推薦状",
+    "英文メール",
+    "大学教授",
+    "留学準備",
+    "大学院留学",
+    "書き方",
+    "例文",
+    "TOEFL"
+    ]
+  },
+  "common-app-activities-list-examples": {
+    "id": "common-app-activities-list-examples",
+    "title": "Common App活動リストで自己PRする戦略的書き方",
+    "description": "Common Appの活動リストで他の出願者と差をつけるための戦略的な書き方を徹底解説。活動の選び方から、審査官に響く具体的な記述方法、良い例・悪い例までを網羅。あなたの魅力を最大限に伝えるためのヒントが満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/common-app-activities-list-examples.png",
+    "tags": [
+    "Common App",
+    "活動リスト",
+    "自己PR",
+    "海外大学進学",
+    "出願書類",
+    "課外活動",
+    "アメリカ大学出願"
+    ]
+  },
+  "english-case-interview-preparation-guide": {
+    "id": "english-case-interview-preparation-guide",
+    "title": "外資コンサルの英語ケース面接、思考の伝え方",
+    "description": "外資系コンサルティングファームの英語ケース面接は最難関の一つ。本記事では、単なる英語力だけでなく、思考を論理的に構造化し、クリアに伝えるための具体的なフレームワーク、頻出英語表現、効果的なトレーニング法を徹底解説。実践的な準備で自信を持って本番に臨みましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/english-case-interview-preparation-guide.png",
+    "tags": [
+    "外資コンサル",
+    "ケース面接",
+    "英語面接",
+    "ビジネス英語",
+    "思考法",
+    "フェルミ推定",
+    "就職活動",
+    "転職活動"
+    ]
+  },
+  "networking-at-international-conferences": {
+    "id": "networking-at-international-conferences",
+    "title": "海外学会・カンファレンスで人脈を広げる方法",
+    "description": "海外の学会や国際カンファレンスで、言語の壁を越えて効果的に人脈を築くための具体的な方法を解説。事前の準備、会場でのコミュニケーション術、学会後のフォローアップまで、すぐに実践できるテクニックと英語フレーズを満載。この記事を読んで、世界中の研究者との貴重な繋がりを手に入れましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/networking-at-international-conferences.png",
+    "tags": [
+    "海外学会",
+    "国際カンファレンス",
+    "ネットワーキング",
+    "英語コミュニケーション",
+    "研究者",
+    "ビジネス英語",
+    "人脈作り"
+    ]
+  },
+  "overseas-business-trip-expense-report-english": {
+    "id": "overseas-business-trip-expense-report-english",
+    "title": "海外出張の経費精算、英語での書き方テンプレート",
+    "description": "海外出張後の英語での経費精算に悩む方向けに、そのまま使えるテンプレートと項目別の書き方を徹底解説。交通費、宿泊費、食費などの頻出単語やフレーズ集も掲載し、初めての方でもスムーズに精算書を作成できるようサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/overseas-business-trip-expense-report-english.png",
+    "tags": [
+    "海外出張",
+    "経費精算",
+    "英語",
+    "ビジネス英語",
+    "テンプレート",
+    "書き方",
+    "Expense Report"
+    ]
+  },
+  "scholarships-for-international-students-in-japan": {
+    "id": "scholarships-for-international-students-in-japan",
+    "title": "日本の高校生が応募できる海外大学の返済不要奨学金",
+    "description": "海外大学進学を目指す日本の高校生必見！返済不要の給付型奨学金の探し方から、種類、獲得のための具体的なロードマップまでを徹底解説。早期準備で夢の海外留学を実現するための情報を網羅した完全ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/scholarships-for-international-students-in-japan.png",
+    "tags": [
+    "海外大学",
+    "奨学金",
+    "返済不要",
+    "給付型奨学金",
+    "高校生",
+    "留学",
+    "アメリカ大学",
+    "大学進学",
+    "教育資金"
+    ]
+  },
+  "mba-career-path-consulting-vs-tech": {
+    "id": "mba-career-path-consulting-vs-tech",
+    "title": "MBA後のキャリア、外資コンサル vs GAFA徹底比較",
+    "description": "MBA取得後の二大人気キャリア、外資系コンサルティングファームとGAFA。本記事では、年収、仕事内容、働き方、将来性など、あらゆる角度から両者を徹底比較。あなたの価値観に合った最適なキャリアパスを見つけるための具体的な情報を提供します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mba-career-path-consulting-vs-tech.png",
+    "tags": [
+    "MBA",
+    "キャリアパス",
+    "外資コンサル",
+    "GAFA",
+    "戦略コンサル",
+    "テック企業",
+    "転職",
+    "年収比較",
+    "働き方"
+    ]
+  },
+  "how-to-answer-weakness-in-english-interview": {
+    "id": "how-to-answer-weakness-in-english-interview",
+    "title": "英語面接「あなたの弱みは？」へのベストな回答例",
+    "description": "英語面接で必ず聞かれる「あなたの弱みは？」という質問。本記事では、面接官の意図を解説し、自己PRに繋げるための回答戦略、具体的な英語の例文、避けるべきNGパターンを詳しく紹介。自信を持って面接に臨むための準備方法がわかります。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/how-to-answer-weakness-in-english-interview.png",
+    "tags": [
+    "英語面接",
+    "弱み",
+    "自己分析",
+    "外資系転職",
+    "キャリアアップ",
+    "回答例",
+    "面接対策"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 

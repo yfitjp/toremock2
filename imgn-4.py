@@ -77,7 +77,7 @@ if __name__ == '__main__':
         vertexai.init(project=PROJECT_ID, location=LOCATION)
         # 画像生成モデルのロード
         imagen_model = ImageGenerationModel.from_pretrained(MODEL)
-        print("  Vertex AI Imagen 3 モデルのロード完了。")
+        print("  Vertex AI Imagen 4 モデルのロード完了。")
     except Exception as e:
         print(f"  エラー: Vertex AI の初期化またはモデルのロードに失敗しました: {e}")
         print("  Google Cloudへの認証が正しく設定されているか確認してください（例: gcloud auth application-default login）。")
