@@ -8,13 +8,14 @@ import time
 # Vertex AI Imagen の設定
 PROJECT_ID = "gen-lang-client-0577382790"
 LOCATION = "us-central1"
+MODEL = "imagen-4.0-generate-preview-05-20"
 
 # 読み込むJSONファイルのパス
-TASKS_JSON_FILE = "src/app/(articles)/lib/image_generation_tasks_20250606_215457.json"
+TASKS_JSON_FILE = "src/app/(articles)/lib/image_generation_tasks_20250606_213339.json"
 
 def generate_and_save_image(task: dict, model: ImageGenerationModel) -> bool:
     """
-    指定されたプロンプトに基づいてVertex AI Imagen 3を使用して画像を生成し、指定されたパスに保存する。
+    指定されたプロンプトに基づいてVertex AI Imagen 4を使用して画像を生成し、指定されたパスに保存する。
     Args:
         task: 画像生成タスクの情報を含む辞書。
               - image_generation_prompt (str): Imagenへのプロンプト。
@@ -42,7 +43,7 @@ def generate_and_save_image(task: dict, model: ImageGenerationModel) -> bool:
             print(f"  エラー: ディレクトリの作成に失敗しました: {output_dir} - {e}")
             return False
 
-    print(f"    Vertex AI Imagen 3 画像生成開始 - 出力先: {output_path}")
+    print(f"    Vertex AI Imagen 4 画像生成開始 - 出力先: {output_path}")
     try:
         # 16:9 のアスペクト比を維持
         images = model.generate_images(
@@ -75,7 +76,7 @@ if __name__ == '__main__':
     try:
         vertexai.init(project=PROJECT_ID, location=LOCATION)
         # 画像生成モデルのロード
-        imagen_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
+        imagen_model = ImageGenerationModel.from_pretrained(MODEL)
         print("  Vertex AI Imagen 3 モデルのロード完了。")
     except Exception as e:
         print(f"  エラー: Vertex AI の初期化またはモデルのロードに失敗しました: {e}")
