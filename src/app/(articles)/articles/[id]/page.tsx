@@ -126,7 +126,7 @@ export default async function ArticleDetail({ params }: { params: { id: string }
               <div className="flex items-center space-x-4">
                 <div className="relative h-12 w-12 rounded-full overflow-hidden">
                   <Image
-                    src="/images/toremock-member.png"
+                    src="/toremock-member.png"
                     alt="トレモック情報局 編集部"
                     fill
                     className="object-cover"

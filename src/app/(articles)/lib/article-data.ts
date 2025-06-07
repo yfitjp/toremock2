@@ -9576,6 +9576,25 @@ export const articleData: Record<string, ArticleData> = {
     "論文"
     ]
   },
+  "ucla-vs-uc-berkeley-computer-science": {
+    "id": "ucla-vs-uc-berkeley-computer-science",
+    "title": "UCLA vs UCバークレー徹底比較【CS専攻編】",
+    "description": "アメリカ西海岸の二大名門、UCLAとUCバークレー。コンピューターサイエンス（CS）を学ぶならどちらが良い？この記事では、ランキング、カリキュラム、キャンパスライフ、就職先まで、あらゆる角度から両校を徹底比較。あなたの未来の選択をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/ucla-vs-uc-berkeley-computer-science.png",
+    "tags": [
+    "UCLA",
+    "UCバークレー",
+    "コンピューターサイエンス",
+    "アメリカ大学留学",
+    "CS専攻",
+    "カリフォルニア大学",
+    "海外大学",
+    "学部留学"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 

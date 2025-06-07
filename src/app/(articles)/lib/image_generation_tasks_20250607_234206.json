@@ -1,0 +1,8 @@
+[
+  {
+    "article_id": "ucla-vs-uc-berkeley-computer-science",
+    "image_generation_prompt": "Create a realistic photo depicting a split-screen view. The left side shows the iconic Royce Hall of UCLA under a sunny, vibrant Southern California sky. The right side features the Sather Tower (Campanile) of UC Berkeley, with the backdrop of the San Francisco Bay. The image should have a clean, modern, and academic feel. At the top of the image, prominently display the text 'UCLA vs Berkeley' in a very large, clear, and easy-to-read font. The overall tone should be inspiring and prestigious, representing the excellence of both universities' computer science programs. No people in the image.",
+    "suggested_image_filename": "ucla-vs-uc-berkeley-computer-science.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ucla-vs-uc-berkeley-computer-science.png"
+  }
+]
