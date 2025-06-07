@@ -41,53 +41,53 @@ const GpaConversionForUsUniversities: React.FC = () => {
     </ul>
     <h3>Step 2: グレードポイントを使ってGPAを計算する</h3>
     <p>各科目のグレードポイントが分かったら、次の計算式を使って全体のGPAを算出します。</p>
-    <p style="text-align: center; font-weight: bold; font-size: 1.2em; padding: 1rem; background-color: #f3f4f6; border-radius: 0.5rem;">GPA = (各科目のグレードポイント × 単位数) の合計 ÷ 総履修単位数</p>
+    <p style={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.2em', padding: '1rem', backgroundColor: '#f3f4f6', borderRadius: '0.5rem' }}>GPA = (各科目のグレードポイント × 単位数) の合計 ÷ 総履修単位数</p>
     <p>言葉だけだと分かりにくいので、具体的な計算例を見てみましょう。</p>
-    <table style="width:100%; border-collapse: collapse;">
+    <table style={{ width: '100%', borderCollapse: 'collapse' }}>
         <thead>
-            <tr style="background-color:#eef2ff;">
-                <th style="border: 1px solid #ddd; padding: 8px;">科目名</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">日本の評価</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">単位数</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">グレードポイント</th>
-                <th style="border: 1px solid #ddd; padding: 8px;">GP × 単位数</th>
+            <tr style={{ backgroundColor: '#eef2ff' }}>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>科目名</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>日本の評価</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>単位数</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>グレードポイント</th>
+                <th style={{ border: '1px solid #ddd', padding: '8px' }}>GP × 単位数</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">西洋史概論</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">秀 (92点)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">3</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">4.0</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">12.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>西洋史概論</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>秀 (92点)</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>3</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>4.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>12.0</td>
             </tr>
             <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">統計学入門</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">優 (85点)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">3</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">3.0</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">9.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>統計学入門</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>優 (85点)</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>3</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>3.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>9.0</td>
             </tr>
             <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">アカデミック英語</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">優 (88点)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">2</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">3.0</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">6.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>アカデミック英語</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>優 (88点)</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>2</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>3.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>6.0</td>
             </tr>
             <tr>
-                <td style="border: 1px solid #ddd; padding: 8px;">プログラミング基礎</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">良 (75点)</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">2</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">2.0</td>
-                <td style="border: 1px solid #ddd; padding: 8px;">4.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>プログラミング基礎</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>良 (75点)</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>2</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>2.0</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}>4.0</td>
             </tr>
-            <tr style="background-color:#eef2ff;">
-                <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">合計</td>
-                <td style="border: 1px solid #ddd; padding: 8px;"></td>
-                <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">10</td>
-                <td style="border: 1px solid #ddd; padding: 8px;"></td>
-                <td style="border: 1px solid #ddd; padding: 8px; font-weight: bold;">31.0</td>
+            <tr style={{ backgroundColor: '#eef2ff' }}>
+                <td style={{ border: '1px solid #ddd', padding: '8px', fontWeight: 'bold' }}>合計</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}></td>
+                <td style={{ border: '1px solid #ddd', padding: '8px', fontWeight: 'bold' }}>10</td>
+                <td style={{ border: '1px solid #ddd', padding: '8px' }}></td>
+                <td style={{ border: '1px solid #ddd', padding: '8px', fontWeight: 'bold' }}>31.0</td>
             </tr>
         </tbody>
     </table>
