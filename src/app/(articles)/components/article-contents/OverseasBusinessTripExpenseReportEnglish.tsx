@@ -62,7 +62,7 @@ const OverseasBusinessTripExpenseReportEnglish: React.FC = () => {
             </tbody>
             <tfoot>
                 <tr style={{ fontWeight: 'bold' }}>
-                    <td colSpan="3" style={{ border: '1px solid #d1d5db', padding: '8px', textAlign: 'right' }}>Total</td>
+                    <td colSpan={3} style={{ border: '1px solid #d1d5db', padding: '8px', textAlign: 'right' }}>Total</td>
                     <td style={{ border: '1px solid #d1d5db', padding: '8px', textAlign: 'right' }}>845.50</td>
                     <td style={{ border: '1px solid #d1d5db', padding: '8px' }}></td>
                 </tr>
