@@ -9595,6 +9595,1769 @@ export const articleData: Record<string, ArticleData> = {
     "学部留学"
     ]
   },
+  "what-is-stanford-university": {
+    "id": "what-is-stanford-university",
+    "title": "スタンフォード大学はどこがすごい？世界を変える大学の魅力",
+    "description": "世界最高峰と称されるスタンフォード大学の魅力の核心に迫ります。シリコンバレーとの強固な連携、学問の壁を超える学際的な学び、起業家精神を育む文化など、世界を変えるイノベーションが生まれる理由を分かりやすく解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/what-is-stanford-university.png",
+    "tags": [
+    "スタンフォード大学",
+    "海外大学",
+    "アメリカ留学",
+    "シリコンバレー",
+    "大学ランキング",
+    "TOEFL",
+    "起業"
+    ]
+  },
+  "how-hard-is-cambridge-university": {
+    "id": "how-hard-is-cambridge-university",
+    "title": "ケンブリッジ大学の難易度は？合格に必要なGPA・IELTS",
+    "description": "世界最高峰のケンブリッジ大学への進学は夢物語ではありません。この記事では、合格に必要なGPAやIELTSの具体的なスコア、パーソナルステートメントの書き方から難関インタビューの対策まで、合格への道を徹底解説。あなたの挑戦を具体的なステップに変えるための情報が満載です。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/how-hard-is-cambridge-university.png",
+    "tags": [
+    "ケンブリッジ大学",
+    "海外大学",
+    "イギリス留学",
+    "IELTS",
+    "GPA",
+    "大学受験",
+    "難易度"
+    ]
+  },
+  "what-is-ucla": {
+    "id": "what-is-ucla",
+    "title": "UCLA（カリフォルニア大学ロサンゼルス校）を徹底解剖！",
+    "description": "世界トップクラスの公立大学、UCLA（カリフォルニア大学ロサンゼルス校）の魅力を徹底解説！歴史や学部、人気の専攻から、美しいキャンパスライフ、入学難易度、TOEFLなどの準備まで。アメリカ留学を目指す方が知りたい情報を網羅した、具体的で役立つガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/what-is-ucla.png",
+    "tags": [
+    "UCLA",
+    "カリフォルニア大学",
+    "アメリカ留学",
+    "海外大学",
+    "大学情報",
+    "ロサンゼルス",
+    "TOEFL対策"
+    ]
+  },
+  "harvard-university-admission-requirements": {
+    "id": "harvard-university-admission-requirements",
+    "title": "ハーバード大学の入学条件は？合格への全ステップを解説",
+    "description": "ハーバード大学への合格は夢じゃない！本記事では、求められる学力（GPA・SAT/ACT）、TOEFLスコア、効果的なエッセイの書き方、課外活動の重要性まで、ハーバードの入学条件を徹底解説。合格へのロードマップを具体的に示し、あなたの挑戦を全力でサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/harvard-university-admission-requirements.png",
+    "tags": [
+    "ハーバード大学",
+    "入学条件",
+    "海外大学",
+    "アメリカ留学",
+    "TOEFL",
+    "SAT",
+    "エッセイ対策",
+    "課外活動",
+    "アイビーリーグ"
+    ]
+  },
+  "oxford-university-interview-preparation": {
+    "id": "oxford-university-interview-preparation",
+    "title": "オックスフォード大学の面接対策！聞かれる質問と答え方",
+    "description": "オックスフォード大学の面接は、単なる質疑応答ではありません。この記事では、思考力を問う独特な面接形式を徹底解説。頻出の質問タイプ、具体的な回答戦略、今日からできる効果的な準備法まで、合格を掴むための秘訣を網羅的にご紹介します。未来のオックスフォード生必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/oxford-university-interview-preparation.png",
+    "tags": [
+    "オックスフォード大学",
+    "大学面接",
+    "海外大学",
+    "留学準備",
+    "英語面接",
+    "思考力トレーニング",
+    "入試対策"
+    ]
+  },
+  "mit-student-life-and-culture": {
+    "id": "mit-student-life-and-culture",
+    "title": "MIT（マサチューセッツ工科大学）の天才たちの日常とは？",
+    "description": "MITの学生生活は本当に勉強だけ？本記事では、有名な「IHTFP」や「ハックカルチャー」といった独特の文化から、過酷な課題、チームでの協業まで、天才たちのリアルな日常を徹底解説。未来の留学生必見の英語学習法も紹介します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mit-student-life-and-culture.png",
+    "tags": [
+    "MIT",
+    "マサチューセッツ工科大学",
+    "大学留学",
+    "アメリカ留学",
+    "学生生活",
+    "TOEFL",
+    "英語学習",
+    "理系留学",
+    "ハックカルチャー"
+    ]
+  },
+  "uc-berkeley-vs-ucla-comparison": {
+    "id": "uc-berkeley-vs-ucla-comparison",
+    "title": "UCバークレー vs UCLA！名門2校を7つの視点で徹底比較",
+    "description": "アメリカ留学を目指す方必見！カリフォルニア大学の二大巨頭、UCバークレーとUCLAを徹底比較。学問、学費、キャンパスライフ、合格率など7つの視点から、あなたに最適な大学選びをサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uc-berkeley-vs-ucla-comparison.png",
+    "tags": [
+    "カリフォルニア大学",
+    "UCバークレー",
+    "UCLA",
+    "大学比較",
+    "アメリカ留学",
+    "海外大学",
+    "大学ランキング",
+    "出願対策"
+    ]
+  },
+  "princeton-university-undergraduate-education": {
+    "id": "princeton-university-undergraduate-education",
+    "title": "プリンストン大学の魅力とは？学部教育重視の最高峰",
+    "description": "プリンストン大学がなぜ世界最高峰と称されるのか？その秘密は、他のアイビーリーグとは一線を画す「学部教育」への徹底的なこだわりにあります。少人数教育、卒業論文、充実した研究環境、ユニークな学生生活まで、プリンストン大学の魅力を徹底解説。海外トップ大学を目指すあなたの知的好奇心を刺激します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/princeton-university-undergraduate-education.png",
+    "tags": [
+    "プリンストン大学",
+    "アメリカ大学",
+    "アイビーリーグ",
+    "学部教育",
+    "海外留学",
+    "大学受験",
+    "リベラルアーツ",
+    "TOEFL"
+    ]
+  },
+  "yale-university-liberal-arts": {
+    "id": "yale-university-liberal-arts",
+    "title": "イェール大学のリベラルアーツ教育はなにが特別なのか？",
+    "description": "イェール大学が世界最高峰と評される理由、その核心にあるリベラルアーツ教育の秘密に迫ります。単なる知識習得ではない、批判的思考力や問題解決能力を育む独自のカリキュラム、少人数制授業の魅力、そして未来のリーダーを育てる教育哲学を分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/yale-university-liberal-arts.png",
+    "tags": [
+    "イェール大学",
+    "リベラルアーツ",
+    "海外大学",
+    "アメリカ留学",
+    "大学教育",
+    "思考力",
+    "教養",
+    "TOEFL"
+    ]
+  },
+  "columbia-university-in-nyc": {
+    "id": "columbia-university-in-nyc",
+    "title": "コロンビア大学での学生生活！ニューヨークシティがキャンパス",
+    "description": "世界都市ニューヨークの中心に位置するコロンビア大学。アイビーリーグでの刺激的な学生生活のリアルを徹底解説します。キャンパスライフ、学業、留学に必要なTOEFL対策から、ニューヨークでの暮らしのヒントまで、留学を夢見るあなたに必見の情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/columbia-university-in-nyc.png",
+    "tags": [
+    "コロンビア大学",
+    "ニューヨーク留学",
+    "アメリカ大学",
+    "学生生活",
+    "アイビーリーグ",
+    "TOEFL対策",
+    "海外大学進学"
+    ]
+  },
+  "imperial-college-london-stem": {
+    "id": "imperial-college-london-stem",
+    "title": "イギリス理系の頂点！インペリアル・カレッジ・ロンドン",
+    "description": "イギリス理系の最高峰、インペリアル・カレッジ・ロンドンの魅力に迫ります。その歴史、学部、研究、入学要件、そして留学生活まで、未来の理系エリートを目指すあなたに必要な情報を網羅的に解説。世界トップレベルの教育環境で夢を叶えましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/imperial-college-london-stem.png",
+    "tags": [
+    "インペリアルカレッジロンドン",
+    "イギリス留学",
+    "理系大学",
+    "STEM",
+    "大学ランキング",
+    "海外大学進学",
+    "TOEFL"
+    ]
+  },
+  "lse-social-science-reputation": {
+    "id": "lse-social-science-reputation",
+    "title": "LSE（ロンドン・スクール・オブ・エコノミクス）の評価と難易度",
+    "description": "世界トップクラスの社会科学系大学、LSE。その圧倒的な評価の理由と、非常に高い入学難易度を徹底解説。ランキング、卒業生、求められる学力や英語力、そして合格を掴むための具体的な準備戦略まで、LSE留学を目指すあなたに必要な情報を凝縮してお届けします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/lse-social-science-reputation.png",
+    "tags": [
+    "LSE",
+    "ロンドンスクールオブエコノミクス",
+    "大学留学",
+    "イギリス留学",
+    "大学院留学",
+    "社会科学",
+    "入学難易度",
+    "出願対策",
+    "英語力証明"
+    ]
+  },
+  "university-of-toronto-admission-guide": {
+    "id": "university-of-toronto-admission-guide",
+    "title": "カナダNo.1！トロント大学の入学条件と人気学部ガイド",
+    "description": "カナダ最高峰のトロント大学への留学を目指す方必見！この記事では、世界大学ランキングでも常に上位に位置するトロント大学の魅力、学部・大学院別の具体的な入学条件、IELTS/TOEFLの必要スコア、人気の学部までを徹底解説。出願プロセスや準備のタイムラインも紹介し、あなたの挑戦をサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/university-of-toronto-admission-guide.png",
+    "tags": [
+    "トロント大学",
+    "カナダ留学",
+    "大学留学",
+    "海外大学",
+    "入学条件",
+    "TOEFL",
+    "IELTS",
+    "出願"
+    ]
+  },
+  "what-is-caltech": {
+    "id": "what-is-caltech",
+    "title": "Caltech（カリフォルニア工科大学）とは？少数精鋭の科学大学",
+    "description": "世界最高峰の理系大学、Caltech（カリフォルニア工科大学）の全貌を徹底解説。少数精鋭の教育、ノーベル賞受賞者を多数輩出する研究力、ユニークな学風まで。アメリカ留学や理系進学を目指す方必見の情報です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/what-is-caltech.png",
+    "tags": [
+    "Caltech",
+    "カリフォルニア工科大学",
+    "アメリカ留学",
+    "海外大学",
+    "理系",
+    "科学技術",
+    "大学ランキング",
+    "TOEFL"
+    ]
+  },
+  "university-of-pennsylvania-wharton-school": {
+    "id": "university-of-pennsylvania-wharton-school",
+    "title": "ペンシルベニア大学ウォートン・スクールはなぜ最強なのか？",
+    "description": "世界最高峰のビジネススクール、ペンシルベニア大学ウォートン・スクール。なぜ『最強』と称されるのか？その理由を、140年以上の歴史、革新的なカリキュラム、世界中に広がる強力な卒業生ネットワークの3つの視点から徹底解説。ウォートンを目指すための準備や求められる資質にも触れ、あなたのキャリアの可能性を広げるヒントを提供します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/university-of-pennsylvania-wharton-school.png",
+    "tags": [
+    "ペンシルベニア大学",
+    "ウォートン",
+    "MBA",
+    "ビジネススクール",
+    "海外留学",
+    "キャリアアップ",
+    "アイビーリーグ"
+    ]
+  },
+  "brown-university-open-curriculum": {
+    "id": "brown-university-open-curriculum",
+    "title": "ブラウン大学のオープンカリキュラムとは？自由な学びの魅力",
+    "description": "ブラウン大学独自の「オープンカリキュラム」について、その仕組み、メリット・デメリットを徹底解説。必修科目なしで学問を自由に探求できるこの制度から、日本の学生が日々の学習やキャリア設計に活かせるヒントを得られます。自己主導で学ぶ楽しさを発見しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/brown-university-open-curriculum.png",
+    "tags": [
+    "ブラウン大学",
+    "オープンカリキュラム",
+    "リベラルアーツ",
+    "海外大学",
+    "留学",
+    "自己設計",
+    "学習法"
+    ]
+  },
+  "cornell-university-colleges-guide": {
+    "id": "cornell-university-colleges-guide",
+    "title": "コーネル大学の学部選びガイド！7つのカレッジを徹底比較",
+    "description": "コーネル大学への留学を目指す方必見！7つある個性豊かなカレッジ（学部）の特徴、学費、雰囲気を徹底比較。文系から理系、芸術、ビジネスまで、あなたにぴったりの学部がきっと見つかります。後悔しないカレッジ選びのための完全ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/cornell-university-colleges-guide.png",
+    "tags": [
+    "コーネル大学",
+    "アメリカ大学",
+    "海外大学",
+    "学部選び",
+    "留学",
+    "アイビーリーグ",
+    "大学比較",
+    "TOEFL"
+    ]
+  },
+  "dartmouth-college-campus-life": {
+    "id": "dartmouth-college-campus-life",
+    "title": "ダートマス大学の魅力とは？豊かな自然と強い絆の学生生活",
+    "description": "アイビーリーグの一員、ダートマス大学の魅力を徹底解説。ニューハンプシャーの雄大な自然に囲まれたキャンパス、少人数教育が育む教授や学友との強い絆、独自のDプランがもたらす柔軟な学び。ダートマスでのユニークな学生生活や入学準備のポイントまで、留学を目指すあなたに必見の情報をお届けします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/dartmouth-college-campus-life.png",
+    "tags": [
+    "ダートマス大学",
+    "アイビーリーグ",
+    "アメリカ留学",
+    "大学生活",
+    "海外大学",
+    "TOEFL対策",
+    "リベラルアーツ"
+    ]
+  },
+  "university-of-chicago-essay-prompts": {
+    "id": "university-of-chicago-essay-prompts",
+    "title": "シカゴ大学の奇妙なエッセイ課題！合格する書き方のコツ",
+    "description": "シカゴ大学のユニークなエッセイ課題に戸惑っていませんか？この記事では、大学が求める人物像から、合格を掴むための具体的な5つのステップ、ライティングスキル向上のためのリソースまで徹底解説。あなたらしいエッセイで合格を目指しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/university-of-chicago-essay-prompts.png",
+    "tags": [
+    "シカゴ大学",
+    "エッセイ",
+    "海外大学出願",
+    "ライティング",
+    "合格戦略",
+    "UChicago",
+    "Uncommon Application",
+    "英語学習"
+    ]
+  },
+  "nyu-new-york-university-campus-without-walls": {
+    "id": "nyu-new-york-university-campus-without-walls",
+    "title": "NYU（ニューヨーク大学）の壁のないキャンパスライフの魅力",
+    "description": "ニューヨーク大学（NYU）の最大の魅力である『壁のないキャンパス』。街に溶け込むユニークな環境が、学生生活や学びにどう影響するのかを徹底解説。NYUならではの刺激的な日常から、入学に必要なTOEFL対策まで、留学を目指すあなたが知りたい情報を凝縮しました。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/nyu-new-york-university-campus-without-walls.png",
+    "tags": [
+    "NYU",
+    "ニューヨーク大学",
+    "海外留学",
+    "アメリカ大学",
+    "大学留学",
+    "キャンパスライフ",
+    "TOEFL対策",
+    "グリニッジヴィレッジ"
+    ]
+  },
+  "ubc-vancouver-student-life": {
+    "id": "ubc-vancouver-student-life",
+    "title": "UBCでの学生生活！バンクーバーの自然と都会を堪能",
+    "description": "カナダの名門ブリティッシュ・コロンビア大学（UBC）での魅力的な学生生活を徹底解説！広大なキャンパスでの学びから、バンクーバーの壮大な自然と洗練された都会を満喫する方法まで。留学を成功させるための準備や英語学習のコツも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/ubc-vancouver-student-life.png",
+    "tags": [
+    "UBC",
+    "バンクーバー",
+    "カナダ留学",
+    "学生生活",
+    "海外大学",
+    "留学準備",
+    "ブリティッシュコロンビア大学",
+    "TOEFL対策"
+    ]
+  },
+  "mcgill-university-bilingual-environment": {
+    "id": "mcgill-university-bilingual-environment",
+    "title": "マギル大学で学ぶ！カナダの「北米のパリ」モントリオールで",
+    "description": "カナダの名門マギル大学の魅力を徹底解説！「カナダのハーバード」と称される理由、英語とフランス語が飛び交うバイリンガル環境でのユニークな学習体験、そして文化都市モントリオールでの学生生活まで。留学準備のポイントも紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mcgill-university-bilingual-environment.png",
+    "tags": [
+    "マギル大学",
+    "カナダ留学",
+    "モントリオール",
+    "バイリンガル教育",
+    "英語学習",
+    "フランス語学習",
+    "海外大学",
+    "留学生活"
+    ]
+  },
+  "ucl-university-college-london-guide": {
+    "id": "ucl-university-college-london-guide",
+    "title": "UCL（ユニバーシティ・カレッジ・ロンドン）完全ガイド",
+    "description": "世界トップクラスの大学、UCL（ユニバーシティ・カレッジ・ロンドン）への留学を目指すあなたへ。本記事では、UCLの基本情報から魅力、学部、難易度、英語要件（IELTS/TOEFL）、出願方法までを網羅的に解説。夢への第一歩を踏み出すための完全ガイドです。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/ucl-university-college-london-guide.png",
+    "tags": [
+    "イギリス留学",
+    "UCL",
+    "ユニバーシティカレッジロンドン",
+    "海外大学",
+    "IELTS",
+    "TOEFL",
+    "出願対策",
+    "ロンドン"
+    ]
+  },
+  "university-of-melbourne-australia": {
+    "id": "university-of-melbourne-australia",
+    "title": "豪州トップ！メルボルン大学の評判と留学の魅力とは？",
+    "description": "オーストラリアNo.1のメルボルン大学への留学を徹底解説。世界大学ランキングでの高い評判、独自の教育システム、留学のメリットから、必要なTOEFL/IELTSスコア、具体的な出願プロセスまで、あなたの夢を叶えるための情報を網羅しています。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/university-of-melbourne-australia.png",
+    "tags": [
+    "メルボルン大学",
+    "オーストラリア留学",
+    "海外大学",
+    "大学留学",
+    "TOEFL",
+    "IELTS",
+    "出願方法",
+    "大学ランキング"
+    ]
+  },
+  "australian-national-university-anu-guide": {
+    "id": "australian-national-university-anu-guide",
+    "title": "ANU（オーストラリア国立大学）とは？首都で学ぶ政治学",
+    "description": "オーストラリア国立大学(ANU)は、なぜ政治学分野で世界的に評価が高いのか？首都キャンベラというユニークな立地がもたらす学習環境、トップクラスの研究、豊富なキャリアパスを徹底解説。ANUへの入学要件や準備方法、学生生活まで、留学を考えるあなたに必要な情報を凝縮してお届けします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/australian-national-university-anu-guide.png",
+    "tags": [
+    "オーストラリア国立大学",
+    "ANU",
+    "大学留学",
+    "オーストラリア留学",
+    "政治学",
+    "国際関係学",
+    "キャンベラ",
+    "Group of Eight"
+    ]
+  },
+  "national-university-of-singapore-nus": {
+    "id": "national-university-of-singapore-nus",
+    "title": "アジア最高峰！シンガポール国立大学(NUS)の魅力と実力",
+    "description": "世界大学ランキングで常に上位に位置するシンガポール国立大学(NUS)。その魅力はどこにあるのでしょうか？本記事では、NUSの基本情報から、優れた学習環境、必要な英語力、卒業後のキャリアまでを徹底解説。アジア最高峰の大学での学びが、あなたの未来をどう変えるのか、その全貌に迫ります。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/national-university-of-singapore-nus.png",
+    "tags": [
+    "シンガポール国立大学",
+    "NUS",
+    "海外大学",
+    "アジア留学",
+    "大学ランキング",
+    "英語学習",
+    "TOEFL",
+    "留学準備"
+    ]
+  },
+  "university-of-hong-kong-hku": {
+    "id": "university-of-hong-kong-hku",
+    "title": "香港大学(HKU)に留学する！国際都市で学ぶメリットとは",
+    "description": "世界トップレベルの香港大学(HKU)への留学を考えてみませんか？本記事では、国際都市香港で学ぶことのメリット、入学に必要な英語力（TOEFL/IELTS）、具体的な準備方法まで詳しく解説。グローバルなキャリアを目指すあなたのためのガイドです。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/university-of-hong-kong-hku.png",
+    "tags": [
+    "香港大学",
+    "HKU",
+    "海外留学",
+    "アジア留学",
+    "大学進学",
+    "TOEFL対策",
+    "IELTS対策",
+    "英語学習"
+    ]
+  },
+  "eth-zurich-switzerland": {
+    "id": "eth-zurich-switzerland",
+    "title": "アインシュタインの母校！ETHチューリッヒの魅力に迫る",
+    "description": "アインシュタインを輩出した世界最高峰の理工系大学、ETHチューリッヒ。その魅力や特徴、入学に必要な英語力、スイスでの学生生活まで徹底解説。ヨーロッパ留学や海外トップ大学を目指す方は必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/eth-zurich-switzerland.png",
+    "tags": [
+    "ETHチューリッヒ",
+    "スイス留学",
+    "海外大学",
+    "理工系",
+    "アインシュタイン",
+    "ヨーロッパ留学",
+    "大学ランキング",
+    "英語学習",
+    "TOEFL"
+    ]
+  },
+  "usc-university-of-southern-california-film-school": {
+    "id": "usc-university-of-southern-california-film-school",
+    "title": "USC（南カリフォルニア大学）の映画学部はなぜ世界一？",
+    "description": "ハリウッドの中心で映画を学ぶ最高峰、USC（南カリフォルニア大学）映画学部。なぜ世界一と称されるのか？その理由を、立地、設備、伝説的な卒業生が築いた人脈、そして難関の入学試験を突破するためのTOEFL対策やポートフォリオ戦略まで、徹底的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/usc-university-of-southern-california-film-school.png",
+    "tags": [
+    "USC",
+    "南カリフォルニア大学",
+    "映画学部",
+    "映画留学",
+    "海外大学",
+    "TOEFL対策",
+    "映像制作",
+    "ハリウッド"
+    ]
+  },
+  "georgetown-university-international-relations": {
+    "id": "georgetown-university-international-relations",
+    "title": "ジョージタウン大学で国際関係を学ぶ！ワシントンDCの魅力",
+    "description": "世界トップレベルのジョージタウン大学で国際関係学を学びませんか？政治の中心ワシントンDCでの学習環境、名門SFSの魅力、TOEFL対策から卒業後のキャリアパスまで、留学を成功させるための情報を網羅的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/georgetown-university-international-relations.png",
+    "tags": [
+    "ジョージタウン大学",
+    "国際関係学",
+    "アメリカ留学",
+    "大学院留学",
+    "ワシントンDC",
+    "TOEFL対策",
+    "ウォルシュ外交学院",
+    "SFS"
+    ]
+  },
+  "carnegie-mellon-university-computer-science": {
+    "id": "carnegie-mellon-university-computer-science",
+    "title": "カーネギーメロン大学のコンピュータサイエンスは世界最高峰",
+    "description": "カーネギーメロン大学(CMU)のコンピュータサイエンスがなぜ世界最高峰と言われるのか？その歴史や特徴的なカリキュラム、超難関とされる入学条件、そして留学に必須のTOEFL対策まで、CMUを目指すあなたが知りたい情報を徹底解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/carnegie-mellon-university-computer-science.png",
+    "tags": [
+    "カーネギーメロン大学",
+    "コンピュータサイエンス",
+    "海外大学",
+    "アメリカ留学",
+    "IT留学",
+    "TOEFL対策",
+    "理系留学"
+    ]
+  },
+  "northwestern-university-journalism": {
+    "id": "northwestern-university-journalism",
+    "title": "ノースウェスタン大学でジャーナリズムを学ぶには？",
+    "description": "世界最高峰のジャーナリズム教育を提供するノースウェスタン大学。その魅力から、GPAやTOEFLといった具体的な出願要件、合格を勝ち取るための学習戦略までを徹底解説。夢のメディル・スクールへの道を具体的に描き、今日からできる準備を始めましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/northwestern-university-journalism.png",
+    "tags": [
+    "ノースウェスタン大学",
+    "ジャーナリズム",
+    "アメリカ大学留学",
+    "メディル",
+    "出願対策",
+    "TOEFL",
+    "海外大学",
+    "英語学習"
+    ]
+  },
+  "duke-university-campus-life": {
+    "id": "duke-university-campus-life",
+    "title": "デューク大学のキャンパスライフ！バスケと勉強を両立？",
+    "description": "デューク大学の魅力的なキャンパスライフを徹底解説！世界トップクラスの学業と、全米屈指の強豪バスケットボール部を両立させる秘密とは？留学生に必要なTOEFLスコアや、合格に向けた具体的な学習法も紹介。文武両道を目指すあなたのためのガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/duke-university-campus-life.png",
+    "tags": [
+    "デューク大学",
+    "アメリカ留学",
+    "キャンパスライフ",
+    "文武両道",
+    "TOEFL対策",
+    "バスケットボール",
+    "海外大学進学"
+    ]
+  },
+  "johns-hopkins-university-medical": {
+    "id": "johns-hopkins-university-medical",
+    "title": "ジョンズ・ホプキンス大学は医学部だけじゃない！学部留学の魅力",
+    "description": "ジョンズ・ホプキンス大学は医学部が有名ですが、実は学部留学にも大きな魅力があります。世界トップクラスの研究環境、多様な専攻、ユニークな学生生活など、医学部以外の学部の強みと、学部留学を実現するための具体的な準備方法（TOEFL対策含む）を徹底解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/johns-hopkins-university-medical.png",
+    "tags": [
+    "ジョンズ・ホプキンス大学",
+    "アメリカ大学留学",
+    "学部留学",
+    "海外大学",
+    "出願対策",
+    "TOEFL",
+    "大学ランキング"
+    ]
+  },
+  "uc-san-diego-ucsd-college-system": {
+    "id": "uc-san-diego-ucsd-college-system",
+    "title": "UCSD（UCサンディエゴ校）のカレッジ制を分かりやすく解説",
+    "description": "UCSD（UCサンディエゴ校）への留学を検討中の方必見！独特で複雑な「カレッジ制」について、全8カレッジの特徴、選び方のポイント、出願時の戦略まで徹底解説。自分にぴったりのカレッジを見つけ、充実した大学生活を送るための完全ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/uc-san-diego-ucsd-college-system.png",
+    "tags": [
+    "UCSD",
+    "UCサンディエゴ",
+    "カレッジ制",
+    "アメリカ大学",
+    "カリフォルニア大学",
+    "海外留学",
+    "大学出願",
+    "留学準備"
+    ]
+  },
+  "university-of-washington-seattle-cs": {
+    "id": "university-of-washington-seattle-cs",
+    "title": "ワシントン大学シアトル校のコンピュータサイエンスの実力",
+    "description": "世界トップクラスと評されるワシントン大学シアトル校のコンピュータサイエンス(CS)。その強さの秘密はどこにあるのでしょうか？本記事では、ランキング、カリキュラム、シアトルという立地がもたらす豊富なキャリア機会まで、UWのCSの魅力を徹底解説。IT留学を目指す方必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-washington-seattle-cs.png",
+    "tags": [
+    "ワシントン大学",
+    "コンピュータサイエンス",
+    "アメリカ留学",
+    "IT留学",
+    "シアトル",
+    "プログラミング",
+    "海外大学"
+    ]
+  },
+  "university-of-michigan-ann-arbor": {
+    "id": "university-of-michigan-ann-arbor",
+    "title": "ミシガン大学アナーバー校とは？全米屈指のパブリック・アイビー",
+    "description": "全米屈指の名門州立大学「ミシガン大学アナーバー校」の魅力を徹底解説！「パブリック・アイビー」と称される理由や、世界トップレベルの学部、気になる入学条件まで詳しくご紹介。アメリカ留学を考えている方は必見です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-michigan-ann-arbor.png",
+    "tags": [
+    "ミシガン大学",
+    "パブリックアイビー",
+    "アメリカ大学",
+    "アメリカ留学",
+    "海外大学",
+    "アナーバー",
+    "大学ランキング",
+    "名門大学"
+    ]
+  },
+  "harvard-vs-stanford-which-is-better": {
+    "id": "harvard-vs-stanford-which-is-better",
+    "title": "ハーバード vs スタンフォード！究極の2択、あなたに合うのは？",
+    "description": "ハーバードとスタンフォード、世界最高峰の大学で悩んでいませんか？この記事では、それぞれの大学の文化、学問、キャンパスライフ、入学準備までを徹底比較。あなたに最適な一校を見つけるための究極ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/harvard-vs-stanford-which-is-better.png",
+    "tags": [
+    "ハーバード大学",
+    "スタンフォード大学",
+    "大学留学",
+    "アメリカ留学",
+    "進路選択",
+    "大学比較",
+    "TOEFL対策",
+    "海外大学"
+    ]
+  },
+  "oxford-vs-cambridge-oxbridge-comparison": {
+    "id": "oxford-vs-cambridge-oxbridge-comparison",
+    "title": "オックスフォード vs ケンブリッジ、永遠のライバルを徹底比較",
+    "description": "世界最高峰の大学、オックスフォードとケンブリッジ。通称オックスブリッジと呼ばれる両校の歴史、学費、学部、街の雰囲気を徹底比較。ランキングや著名な卒業生、難しい出願プロセスまで解説し、あなたに最適な大学選びをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/oxford-vs-cambridge-oxbridge-comparison.png",
+    "tags": [
+    "オックスフォード大学",
+    "ケンブリッジ大学",
+    "オックスブリッジ",
+    "イギリス留学",
+    "海外大学",
+    "大学比較",
+    "大学受験",
+    "英語学習"
+    ]
+  },
+  "mit-vs-caltech-tech-giants-showdown": {
+    "id": "mit-vs-caltech-tech-giants-showdown",
+    "title": "MIT vs Caltech！米国の理工系トップ2校、違いを解説",
+    "description": "世界最高峰の理工系大学、MITとカリフォルニア工科大学（Caltech）。両校の校風、研究スタイル、学生生活、卒業後のキャリアパスの違いを徹底比較。あなたにぴったりの大学選びをサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mit-vs-caltech-tech-giants-showdown.png",
+    "tags": [
+    "MIT",
+    "Caltech",
+    "アメリカ大学",
+    "理工系大学",
+    "海外大学",
+    "大学比較",
+    "留学",
+    "マサチューセッツ工科大学",
+    "カリフォルニア工科大学"
+    ]
+  },
+  "ivy-league-schools-ranking-and-difficulty": {
+    "id": "ivy-league-schools-ranking-and-difficulty",
+    "title": "アイビーリーグ全8校！ランキングと入学難易度を一覧比較",
+    "description": "世界最高峰の大学群アイビーリーグ全8校の最新ランキング、合格率、求められる学力（GPA・SAT・TOEFLスコア）などの入学難易度を徹底比較。ハーバードやイェールなど各校の特徴から、合格に向けた具体的な準備ステップまで、海外大学進学を目指すあなたに必要な情報を網羅的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/ivy-league-schools-ranking-and-difficulty.png",
+    "tags": [
+    "アイビーリーグ",
+    "海外大学",
+    "アメリカ留学",
+    "大学ランキング",
+    "入学難易度",
+    "TOEFL",
+    "ハーバード大学",
+    "出願対策"
+    ]
+  },
+  "tufts-university-international-relations": {
+    "id": "tufts-university-international-relations",
+    "title": "タフツ大学フレッチャー法律外交大学院レベルの学部教育とは",
+    "description": "国際関係学の最高峰、タフツ大学。この記事では、世界的に名高いフレッチャー大学院レベルの教育を学部で受けられる国際関係学（IR）プログラムの全貌を解説します。カリキュラムの特徴、入学に必要な英語力（TOEFL）、そして将来のキャリアまで、海外大学進学を目指す方必見の情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/tufts-university-international-relations.png",
+    "tags": [
+    "タフツ大学",
+    "国際関係学",
+    "フレッチャー大学院",
+    "アメリカ大学留学",
+    "海外大学",
+    "学部留学",
+    "TOEFL",
+    "英語学習",
+    "政治学"
+    ]
+  },
+  "vanderbilt-university-nashville-life": {
+    "id": "vanderbilt-university-nashville-life",
+    "title": "ヴァンダービルト大学の魅力！「音楽の街」ナッシュビルで学ぶ",
+    "description": "アメリカ南部の名門、ヴァンダービルト大学の魅力に迫ります。「音楽の街」ナッシュビルでのユニークな留学生活、学術的な強み、そして入学に必要なTOEFL対策までを徹底解説。夢のキャンパスライフを実現するための情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/vanderbilt-university-nashville-life.png",
+    "tags": [
+    "ヴァンダービルト大学",
+    "ナッシュビル",
+    "アメリカ留学",
+    "海外大学",
+    "TOEFL",
+    "英語学習",
+    "カントリーミュージック",
+    "大学生活"
+    ]
+  },
+  "rice-university-houston-texas": {
+    "id": "rice-university-houston-texas",
+    "title": "ライス大学とはどんな大学？ヒューストンにある隠れた名門",
+    "description": "テキサス州ヒューストンに位置するライス大学は「南部のハーバード」とも呼ばれる隠れた名門校です。その高い教育水準、少人数制のクラス、NASAとの連携など、学術的な強みから、ユニークな学生生活まで、ライス大学の全貌を徹底解説。アメリカ留学を考える学生必見の情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/rice-university-houston-texas.png",
+    "tags": [
+    "ライス大学",
+    "アメリカ大学",
+    "海外留学",
+    "ヒューストン",
+    "名門大学",
+    "TOEFL",
+    "大学情報",
+    "南部のハーバード"
+    ]
+  },
+  "notre-dame-university-culture": {
+    "id": "notre-dame-university-culture",
+    "title": "ノートルダム大学のユニークなカトリック文化と学生生活",
+    "description": "アメリカの名門、ノートルダム大学の魅力に迫ります。本記事では、その根幹をなすカトリック文化、卒業まで続くユニークな寮生活、そして熱狂的なスポーツ文化まで、学生生活のリアルを詳しく解説。留学を目指す方必見の情報が満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/notre-dame-university-culture.png",
+    "tags": [
+    "ノートルダム大学",
+    "アメリカ留学",
+    "大学生活",
+    "カトリック文化",
+    "海外大学",
+    "留学準備",
+    "Fighting Irish"
+    ]
+  },
+  "ucla-transfer-requirements": {
+    "id": "ucla-transfer-requirements",
+    "title": "UCLAへの編入は可能？コミュニティカレッジからの道筋",
+    "description": "UCLAへの編入は夢じゃない！本記事では、特にコミュニティカレッジからの編入ルートに焦点を当て、必要なGPA、単位、英語力（TOEFL）、そして具体的な出願準備のステップを徹底解説します。合格への現実的な道筋を描き、あなたの挑戦をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/ucla-transfer-requirements.png",
+    "tags": [
+    "UCLA編入",
+    "コミュニティカレッジ",
+    "海外大学進学",
+    "カリフォルニア大学",
+    "留学準備",
+    "TOEFL対策"
+    ]
+  },
+  "king-s-college-london-kcl": {
+    "id": "king-s-college-london-kcl",
+    "title": "キングス・カレッジ・ロンドン(KCL)で学ぶ！学部と評判",
+    "description": "世界トップクラスの大学、キングス・カレッジ・ロンドン(KCL)の魅力に迫ります。ロンドンの中心で学べる環境、人気の学部、リアルな評判、そして入学に必要な英語力まで徹底解説。KCL留学を目指す方必見の情報が満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/king-s-college-london-kcl.png",
+    "tags": [
+    "キングス・カレッジ・ロンドン",
+    "KCL",
+    "イギリス留学",
+    "ロンドン大学",
+    "海外大学",
+    "大学留学",
+    "学部",
+    "評判",
+    "英語学習"
+    ]
+  },
+  "university-of-edinburgh-scotland": {
+    "id": "university-of-edinburgh-scotland",
+    "title": "エディンバラ大学の魅力とは？スコットランドの古都で学ぶ",
+    "description": "スコットランドの名門、エディンバラ大学の魅力を徹底解説。歴史あるキャンパス、世界トップレベルの教育、多様な学生生活、留学実現までのステップまで、あなたの知りたい情報を凝縮。古都で学ぶことの価値と、夢を叶えるための具体的な方法を紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-edinburgh-scotland.png",
+    "tags": [
+    "エディンバラ大学",
+    "スコットランド留学",
+    "イギリス大学",
+    "大学留学",
+    "海外留学",
+    "英語学習"
+    ]
+  },
+  "university-of-sydney-australia": {
+    "id": "university-of-sydney-australia",
+    "title": "シドニー大学留学の魅力！オーストラリア最古の大学を解説",
+    "description": "オーストラリア最古の名門、シドニー大学への留学を徹底解説。美しいキャンパスの魅力から、学部、入学条件、必要な英語力（TOEFL/IELTS）、学費、充実したキャンパスライフまで、留学を考えるあなたに必要な情報を網羅的にお届けします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-sydney-australia.png",
+    "tags": [
+    "シドニー大学",
+    "オーストラリア留学",
+    "海外大学",
+    "留学準備",
+    "大学生活",
+    "TOEFL",
+    "IELTS"
+    ]
+  },
+  "peking-university-china": {
+    "id": "peking-university-china",
+    "title": "中国の最高学府、北京大学への留学は？入学方法と魅力",
+    "description": "中国の最高学府、北京大学への留学を検討中の方へ。世界トップレベルの教育環境やグローバルな人脈といった魅力から、HSKスコアなどの具体的な入学条件、出願プロセス、学費・生活費の目安、活用できる奨学金制度まで、留学準備に必要な情報を網羅的に解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/peking-university-china.png",
+    "tags": [
+    "北京大学",
+    "中国留学",
+    "大学留学",
+    "HSK",
+    "入学条件",
+    "留学準備",
+    "奨学金",
+    "中国語学習"
+    ]
+  },
+  "seoul-national-university-snu-korea": {
+    "id": "seoul-national-university-snu-korea",
+    "title": "韓国の頂点！ソウル大学(SNU)への留学と入学の道",
+    "description": "韓国の最高学府、ソウル大学(SNU)への留学に憧れていませんか？この記事では、正規留学や交換留学の出願要件、必要なTOPIK・TOEFLスコア、自己紹介書の書き方まで、合格への道を徹底解説。夢を実現するための具体的なロードマップを提示します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/seoul-national-university-snu-korea.png",
+    "tags": [
+    "韓国留学",
+    "ソウル大学",
+    "SNU",
+    "大学留学",
+    "TOPIK",
+    "TOEFL",
+    "出願準備",
+    "韓国語学習"
+    ]
+  },
+  "tuition-fees-of-ivy-league": {
+    "id": "tuition-fees-of-ivy-league",
+    "title": "アイビーリーグの学費はいくら？8校の費用と奨学金を比較",
+    "description": "世界最高峰の大学群、アイビーリーグ。その学費は年間1,000万円超と高額ですが、充実した奨学金制度も魅力です。この記事では、ハーバード大学など8校の最新の学費・総費用を比較し、留学生も利用可能な奨学金制度（ニードブラインド等）を詳しく解説。夢の実現に向けた第一歩を踏み出しましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/tuition-fees-of-ivy-league.png",
+    "tags": [
+    "アイビーリーグ",
+    "学費",
+    "留学費用",
+    "アメリカ大学",
+    "奨学金",
+    "海外大学",
+    "TOEFL",
+    "ハーバード大学"
+    ]
+  },
+  "liberal-arts-colleges-usa-guide": {
+    "id": "liberal-arts-colleges-usa-guide",
+    "title": "ウィリアムズ大学等、米リベラルアーツカレッジの魅力",
+    "description": "ウィリアムズ大学やアマースト大学に代表されるアメリカのリベラルアーツカレッジの魅力を徹底解説。少人数教育、教授との密な関係、キャリアへの強さなど、総合大学との違いを明らかにします。留学準備に必要なTOEFL対策や出願のポイントも紹介し、あなたの海外進学をサポートします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/liberal-arts-colleges-usa-guide.png",
+    "tags": [
+    "リベラルアーツカレッジ",
+    "アメリカ大学留学",
+    "ウィリアムズ大学",
+    "海外進学",
+    "TOEFL対策",
+    "少人数教育",
+    "出願準備"
+    ]
+  },
+  "amherst-college-open-curriculum": {
+    "id": "amherst-college-open-curriculum",
+    "title": "アマースト大学のオープンカリキュラムと5大学コンソーシアム",
+    "description": "アメリカの名門リベラルアーツカレッジ、アマースト大学のユニークな『オープンカリキュラム』を徹底解説。必修科目がなく、学生が自由に学びを設計できる制度の魅力とは？さらに、5大学コンソーシアムを活用して学びの可能性を無限に広げる方法もご紹介します。海外大学進学を目指す方は必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/amherst-college-open-curriculum.png",
+    "tags": [
+    "アマースト大学",
+    "オープンカリキュラム",
+    "リベラルアーツカレッジ",
+    "5大学コンソーシアム",
+    "海外大学",
+    "アメリカ留学",
+    "大学選び",
+    "学習法"
+    ]
+  },
+  "swarthmore-college-quaker-values": {
+    "id": "swarthmore-college-quaker-values",
+    "title": "スワースモア大学の魅力とは？クエーカー精神と工学教育",
+    "description": "アメリカの名門リベラルアーツ大学、スワースモア大学の全貌に迫ります。社会貢献を重んじるクエーカー精神に基づくユニークな教育、全米トップクラスの工学プログラム、そして卒業生の活躍まで。留学を目指す方、質の高い教育に関心のある方は必見です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/swarthmore-college-quaker-values.png",
+    "tags": [
+    "スワースモア大学",
+    "アメリカ留学",
+    "リベラルアーツカレッジ",
+    "工学教育",
+    "クエーカー",
+    "大学選び",
+    "TOEFL対策"
+    ]
+  },
+  "pomona-college-claremont-colleges": {
+    "id": "pomona-college-claremont-colleges",
+    "title": "ポモナ・カレッジとクレアモント・カレッジズの強みとは？",
+    "description": "アメリカ西海岸に輝くリベラルアーツの最高峰、ポモナ・カレッジ。この記事では、少人数教育と総合大学のリソースを両立するクレアモント・カレッジズというユニークな大学システムの魅力と、その中核をなすポモナの強みを徹底解説。新しい大学選びの視点を提供します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/pomona-college-claremont-colleges.png",
+    "tags": [
+    "ポモナカレッジ",
+    "クレアモントカレッジズ",
+    "アメリカ留学",
+    "リベラルアーツカレッジ",
+    "海外大学",
+    "大学選び",
+    "TOEFL"
+    ]
+  },
+  "williams-college-tutorial-system": {
+    "id": "williams-college-tutorial-system",
+    "title": "ウィリアムズ大学のチュートリアル制度はオックスフォード式？",
+    "description": "ウィリアムズ大学のチュートリアル制度はオックスフォード式と何が違う？この記事では、アメリカのトップリベラルアーツ校が実践する超少人数教育の秘密を徹底解説。その特徴や効果、そして日本の英語学習者が日々の勉強に応用できる実践的なヒントまで、具体例を交えて分かりやすくご紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/williams-college-tutorial-system.png",
+    "tags": [
+    "ウィリアムズ大学",
+    "チュートリアル制度",
+    "オックスフォード式",
+    "リベラルアーツ",
+    "海外大学",
+    "英語学習法",
+    "少人数教育",
+    "アクティブラーニング"
+    ]
+  },
+  "harvard-famous-japanese-alumni": {
+    "id": "harvard-famous-japanese-alumni",
+    "title": "ハーバード大学出身のすごい日本人！卒業生から見る大学の価値",
+    "description": "ハーバード大学を卒業した著名な日本人を紹介し、彼らの成功の背景や大学で得られる価値を探ります。世界最高峰の教育がキャリアにどう影響するのか、そしてハーバードを目指すための英語学習法や心構えまで、具体的なステップを解説する記事です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/harvard-famous-japanese-alumni.png",
+    "tags": [
+    "ハーバード大学",
+    "日本人 卒業生",
+    "海外留学",
+    "英語学習法",
+    "キャリアパス",
+    "アイビーリーグ",
+    "大学受験",
+    "TOEFL"
+    ]
+  },
+  "stanford-dschool-design-thinking": {
+    "id": "stanford-dschool-design-thinking",
+    "title": "スタンフォードd.schoolで学ぶデザイン思考とは何か？",
+    "description": "スタンフォード大学d.schoolが提唱する『デザイン思考』について、その本質から具体的な5つのステップ、学習方法までを初心者にも分かりやすく解説。イノベーションを生み出すための思考法を身につけ、あなたのビジネスや学習に活かす第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/stanford-dschool-design-thinking.png",
+    "tags": [
+    "デザイン思考",
+    "スタンフォード大学",
+    "d.school",
+    "問題解決",
+    "イノベーション",
+    "思考法",
+    "UXデザイン"
+    ]
+  },
+  "university-of-waterloo-co-op-program": {
+    "id": "university-of-waterloo-co-op-program",
+    "title": "ウォータールー大学のCo-opプログラムが最強な理由",
+    "description": "カナダの名門、ウォータールー大学のCo-opプログラムの魅力を徹底解説。なぜ世界中の学生から選ばれるのか？高収入、最大2年の実務経験、トップ企業への就職実績など、あなたのキャリアを劇的に変える『最強』の理由を、具体的なデータと体験談を交えて紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/university-of-waterloo-co-op-program.png",
+    "tags": [
+    "ウォータールー大学",
+    "Co-opプログラム",
+    "カナダ留学",
+    "有給インターンシップ",
+    "海外就職",
+    "キャリアパス",
+    "理工系大学"
+    ]
+  },
+  "purdue-university-engineering-aviation": {
+    "id": "purdue-university-engineering-aviation",
+    "title": "パデュー大学の工学部と航空宇宙学はなぜ有名か？",
+    "description": "「宇宙飛行士の揺りかご」と称されるパデュー大学。なぜその工学部と航空宇宙学は世界的に高い評価を受けるのでしょうか？ニール・アームストロングを輩出した歴史的背景から、最先端の研究施設、実践的な教育プログラムまで、その強さの秘密を徹底解説します。理系留学を目指す方必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/purdue-university-engineering-aviation.png",
+    "tags": [
+    "パデュー大学",
+    "アメリカ留学",
+    "理系留学",
+    "工学部",
+    "航空宇宙工学",
+    "ニール・アームストロング",
+    "大学進学",
+    "TOEFL対策"
+    ]
+  },
+  "georgia-tech-engineering": {
+    "id": "georgia-tech-engineering",
+    "title": "ジョージア工科大学の魅力！アトランタで学ぶ最先端工学",
+    "description": "アメリカ南部の名門、ジョージア工科大学。全米トップクラスの工学部やコンピュータサイエンスの魅力とは？アトランタでのキャンパスライフ、入学に必要な英語力、卒業後のキャリアパスまで、理系留学を目指すあなたが知りたい情報を網羅的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/georgia-tech-engineering.png",
+    "tags": [
+    "ジョージア工科大学",
+    "アメリカ留学",
+    "理系留学",
+    "工学部",
+    "コンピュータサイエンス",
+    "アトランタ",
+    "海外大学進学"
+    ]
+  },
+  "university-of-texas-at-austin-business": {
+    "id": "university-of-texas-at-austin-business",
+    "title": "テキサス大学オースティン校、マコームズ・ビジネススクールの実力",
+    "description": "テキサス大学オースティン校の名門マコームズ・ビジネススクールの実力に迫ります。高いランキング、オースティンの立地優位性、卒業後のキャリアパス、そしてMBA留学に必要な英語力まで徹底解説。未来のビジネスリーダーを目指すあなたのためのガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/university-of-texas-at-austin-business.png",
+    "tags": [
+    "テキサス大学オースティン校",
+    "マコームズ",
+    "ビジネススクール",
+    "MBA",
+    "アメリカ留学",
+    "海外大学院",
+    "TOEFL対策",
+    "オースティン"
+    ]
+  },
+  "uc-irvine-computer-game-science": {
+    "id": "uc-irvine-computer-game-science",
+    "title": "UCアーバイン校のゲーム科学専攻！ゲーム業界への近道か？",
+    "description": "UCアーバイン校のコンピュータゲーム科学専攻は、ゲーム業界を目指す学生にとって最適な選択肢？本記事では、カリキュラムの特徴、南カリフォルニアという立地の利点、卒業後のキャリアパスまで徹底解説。夢を現実に変えるための具体的なステップを紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/uc-irvine-computer-game-science.png",
+    "tags": [
+    "UCアーバイン",
+    "ゲーム開発",
+    "海外大学",
+    "アメリカ留学",
+    "コンピュータサイエンス",
+    "ゲーム業界",
+    "プログラミング"
+    ]
+  },
+  "university-of-illinois-urbana-champaign-uiuc-cs": {
+    "id": "university-of-illinois-urbana-champaign-uiuc-cs",
+    "title": "UIUC（イリノイ大学アーバナ・シャンペーン校）のCSはなぜ凄い？",
+    "description": "UIUCのコンピュータサイエンスはなぜ世界トップクラスと評価されるのか？その理由を、圧倒的な実績、最先端の研究環境、理論と実践を融合したカリキュラム、そして強力なキャリアサポートの観点から徹底解説。シリコンバレーを目指す学生必見の記事です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-illinois-urbana-champaign-uiuc-cs.png",
+    "tags": [
+    "UIUC",
+    "イリノイ大学",
+    "コンピュータサイエンス",
+    "アメリカ大学",
+    "海外留学",
+    "CS",
+    "プログラミング",
+    "大学ランキング"
+    ]
+  },
+  "new-york-university-tisch-school-of-the-arts": {
+    "id": "new-york-university-tisch-school-of-the-arts",
+    "title": "NYUティッシュ・スクール・オブ・ジ・アーツの魅力と難易度",
+    "description": "世界最高峰の芸術大学、NYUティッシュ・スクール・オブ・ジ・アーツ。その魅力、専攻分野、著名な卒業生から、気になる入学難易度、ポートフォリオやTOEFLの準備方法までを徹底解説。夢の舞台への第一歩を踏み出すための完全ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/new-york-university-tisch-school-of-the-arts.png",
+    "tags": [
+    "NYU",
+    "ティッシュスクール",
+    "芸術大学",
+    "海外留学",
+    "アメリカ留学",
+    "映画制作",
+    "演劇",
+    "TOEFL対策",
+    "ニューヨーク大学"
+    ]
+  },
+  "what-is-a-public-ivy-university": {
+    "id": "what-is-a-public-ivy-university",
+    "title": "パブリック・アイビーとは？ミシガン大学など名門州立大学群",
+    "description": "パブリック・アイビーとは何か、ご存知ですか？アイビーリーグに匹敵する教育をより手頃な学費で受けられるアメリカの名門州立大学群です。本記事ではその魅力、代表的な大学、そして合格を目指すための英語学習法まで、留学を考えるあなたのために徹底解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/what-is-a-public-ivy-university.png",
+    "tags": [
+    "パブリック・アイビー",
+    "アメリカ大学留学",
+    "州立大学",
+    "名門大学",
+    "海外進学",
+    "リベラルアーツ",
+    "アイビーリーグ",
+    "TOEFL対策"
+    ]
+  },
+  "university-of-st-andrews-uk-royal-family": {
+    "id": "university-of-st-andrews-uk-royal-family",
+    "title": "英ウィリアム王子も学んだセント・アンドルーズ大学の魅力",
+    "description": "英国王室のウィリアム王子とキャサリン妃が出会った場所としても知られる、スコットランドの名門セント・アンドルーズ大学。その魅力と歴史、ユニークな学生生活、そして留学実現のための英語学習法までを徹底解説。未来のグローバルリーダーを目指すあなたへ、最高峰の学び舎への扉を開くための情報をお届けします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/university-of-st-andrews-uk-royal-family.png",
+    "tags": [
+    "セントアンドルーズ大学",
+    "イギリス留学",
+    "ウィリアム王子",
+    "海外大学",
+    "スコットランド",
+    "大学留学",
+    "英語学習"
+    ]
+  },
+  "hec-paris-france-business-school": {
+    "id": "hec-paris-france-business-school",
+    "title": "フランス最高峰のビジネススクールHECパリの学部課程とは？",
+    "description": "フランスの名門ビジネススクールHECパリに新設された学部課程「Bachelor in Data, Society and Organisations」を徹底解説。その革新的なカリキュラム、入学要件、TOEFLなどの英語力、そして卒業後の輝かしいキャリアパスまで、海外大学進学を目指す高校生必見の情報をお届けします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/hec-paris-france-business-school.png",
+    "tags": [
+    "HECパリ",
+    "フランス留学",
+    "海外大学進学",
+    "ビジネススクール",
+    "学部課程",
+    "データサイエンス",
+    "TOEFL"
+    ]
+  },
+  "sciences-po-paris-france-social-sciences": {
+    "id": "sciences-po-paris-france-social-sciences",
+    "title": "パリ政治学院（ Sciences Po）とは？マクロン大統領の母校",
+    "description": "フランスのマクロン大統領の母校として知られるパリ政治学院（Sciences Po）。世界トップクラスの社会科学系大学で、その歴史、国際的な教育環境、ユニークなカリキュラム、入学方法までを徹底解説。フランス留学や海外大学進学を目指す方必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/sciences-po-paris-france-social-sciences.png",
+    "tags": [
+    "パリ政治学院",
+    "Sciences Po",
+    "フランス留学",
+    "海外大学",
+    "マクロン大統領",
+    "社会科学",
+    "グランゼコール",
+    "留学準備"
+    ]
+  },
+  "delft-university-of-technology-tu-delft-netherlands": {
+    "id": "delft-university-of-technology-tu-delft-netherlands",
+    "title": "デルフト工科大学（オランダ）で学ぶデザイン＆エンジニアリング",
+    "description": "オランダの名門、デルフト工科大学（TU Delft）での学びを徹底解説。世界トップクラスのデザインとエンジニアリング教育、ユニークなカリキュラム、出願要件や必要な英語力（TOEFLなど）まで詳しく紹介。未来のイノベーターを目指すあなたのための留学ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/delft-university-of-technology-tu-delft-netherlands.png",
+    "tags": [
+    "デルフト工科大学",
+    "オランダ留学",
+    "デザイン留学",
+    "エンジニアリング",
+    "海外大学",
+    "ヨーロッパ留学",
+    "理系留学",
+    "TOEFL"
+    ]
+  },
+  "university-of-amsterdam-netherlands-media-studies": {
+    "id": "university-of-amsterdam-netherlands-media-studies",
+    "title": "アムステルダム大学はメディア学が世界一？オランダ留学の魅力",
+    "description": "アムステルダム大学のメディア学がなぜ世界トップクラスなのか、その理由を徹底解説。カリキュラムの特徴から、オランダでの魅力的な学生生活、出願準備、卒業後のキャリアまで、留学を考えるあなたに必要な情報を網羅。世界を舞台に活躍するための第一歩を踏み出しましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/university-of-amsterdam-netherlands-media-studies.png",
+    "tags": [
+    "オランダ留学",
+    "アムステルダム大学",
+    "メディア学",
+    "海外大学",
+    "大学留学",
+    "ヨーロッパ留学",
+    "TOEFL"
+    ]
+  },
+  "ludwig-maximilian-university-of-munich-lmu-germany": {
+    "id": "ludwig-maximilian-university-of-munich-lmu-germany",
+    "title": "LMUミュンヘン大学で学ぶ！学費無料のドイツ留学とは",
+    "description": "LMUミュンヘン大学への留学に興味がありますか？この記事では、ドイツの名門大学がなぜ学費無料なのか、その魅力、入学要件、必要な語学力、そして出願プロセスまでを徹底解説。経済的な負担を抑えてヨーロッパで学ぶ夢を実現するための具体的なステップを紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/ludwig-maximilian-university-of-munich-lmu-germany.png",
+    "tags": [
+    "ドイツ留学",
+    "LMUミュンヘン大学",
+    "海外大学",
+    "学費無料",
+    "ヨーロッパ留学",
+    "ドイツ語学習",
+    "TOEFL"
+    ]
+  },
+  "kth-royal-institute-of-technology-sweden": {
+    "id": "kth-royal-institute-of-technology-sweden",
+    "title": "スウェーデン王立工科大学(KTH)で学ぶ北欧のイノベーション",
+    "description": "スウェーデン王立工科大学(KTH)の魅力に迫るブログ記事です。ヨーロッパトップクラスの理系大学での学び、最先端の研究プログラム、留学に必要な英語要件や出願プロセス、そしてストックホルムでの充実した学生生活まで、KTH留学の全てを分かりやすく解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/kth-royal-institute-of-technology-sweden.png",
+    "tags": [
+    "スウェーデン留学",
+    "KTH",
+    "王立工科大学",
+    "北欧",
+    "イノベーション",
+    "大学留学",
+    "理系留学",
+    "TOEFL"
+    ]
+  },
+  "usc-vs-ucla-los-angeles-rivalry": {
+    "id": "usc-vs-ucla-los-angeles-rivalry",
+    "title": "USC vs UCLA、永遠のライバル！LAのトップ2校を徹底比較",
+    "description": "アメリカ西海岸の名門、USCとUCLA。ロサンゼルスを代表する2つの大学の学費、学部、キャンパスライフ、入学難易度を徹底比較します。あなたに最適な大学選びの参考に、それぞれの魅力と違いを詳しく解説。留学を考えるなら必見です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/usc-vs-ucla-los-angeles-rivalry.png",
+    "tags": [
+    "USC",
+    "UCLA",
+    "アメリカ留学",
+    "カリフォルニア",
+    "大学比較",
+    "ロサンゼルス",
+    "海外大学進学",
+    "TOEFL"
+    ]
+  },
+  "tuition-free-universities-in-europe": {
+    "id": "tuition-free-universities-in-europe",
+    "title": "学費無料も！ドイツ・北欧のトップ大学留学という選択肢",
+    "description": "「海外大学に興味はあるけど費用が…」と悩んでいませんか？この記事では、学費が無料または格安なドイツや北欧のトップ大学への留学という魅力的な選択肢を徹底解説。必要な英語力や準備、具体的なアクションプランまで、あなたの夢を現実にするための情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/tuition-free-universities-in-europe.png",
+    "tags": [
+    "海外留学",
+    "大学留学",
+    "学費無料",
+    "ドイツ留学",
+    "北欧留学",
+    "ヨーロッパ留学",
+    "TOEFL",
+    "英語学習"
+    ]
+  },
+  "canadian-universities-vs-us-universities": {
+    "id": "canadian-universities-vs-us-universities",
+    "title": "カナダの大学vsアメリカの大学！学費・難易度・就職を比較",
+    "description": "海外大学への進学を考える際、多くの人が悩むのがアメリカとカナダの選択。この記事では、学費や生活費、入学難易度、教育スタイル、そして卒業後の就職事情まで、両国の大学を徹底比較します。あなたの目標に最適な国を見つけるための具体的な情報が満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/canadian-universities-vs-us-universities.png",
+    "tags": [
+    "海外大学",
+    "アメリカ留学",
+    "カナダ留学",
+    "大学比較",
+    "学費",
+    "留学準備",
+    "TOEFL"
+    ]
+  },
+  "uk-universities-vs-us-universities": {
+    "id": "uk-universities-vs-us-universities",
+    "title": "イギリスの大学vsアメリカの大学！制度と文化の違いを比較",
+    "description": "イギリスとアメリカ、留学先としてどちらの大学を選ぶべきか悩んでいませんか？本記事では、学位制度、学費、キャンパス文化、出願方法など、両国の大学の特長を徹底比較。あなたに最適な留学先を見つけるための具体的な情報とヒントを提供します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uk-universities-vs-us-universities.png",
+    "tags": [
+    "大学留学",
+    "イギリス留学",
+    "アメリカ留学",
+    "海外大学",
+    "大学制度",
+    "比較文化",
+    "TOEFL",
+    "IELTS",
+    "留学準備"
+    ]
+  },
+  "community-college-to-uc-berkeley": {
+    "id": "community-college-to-uc-berkeley",
+    "title": "UCバークレーに編入する！コミカレからの最短ルート解説",
+    "description": "カリフォルニア大学バークレー校への編入は夢じゃない！本記事では、コミュニティカレッジ（コミカレ）からUCバークレーを目指すための具体的な5つのステップ、GPA維持のコツ、ASSIST.orgの活用法まで、最短ルートを徹底解説。学費を抑えつつ、世界トップクラスの大学への扉を開くための実践的ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/community-college-to-uc-berkeley.png",
+    "tags": [
+    "大学編入",
+    "UCバークレー",
+    "コミュニティカレッジ",
+    "アメリカ留学",
+    "カリフォルニア大学",
+    "学習法",
+    "海外大学",
+    "TAG",
+    "IGETC"
+    ]
+  },
+  "harvard-business-school-undergraduate-2-2-program": {
+    "id": "harvard-business-school-undergraduate-2-2-program",
+    "title": "学部生でもハーバードビジネススクール(HBS)に入れる？2+2とは",
+    "description": "ハーバードビジネススクール(HBS)に学部生でも入学できる「2+2プログラム」を徹底解説。応募資格、メリット、求められる人物像から、GMAT/GRE対策、エッセイ、推薦状、英語力向上までの具体的な準備戦略までを網羅。世界最高峰のMBAへの道を切り拓くための第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/harvard-business-school-undergraduate-2-2-program.png",
+    "tags": [
+    "ハーバードビジネススクール",
+    "HBS",
+    "2+2プログラム",
+    "MBA",
+    "海外大学院",
+    "学部生",
+    "留学準備",
+    "出願戦略",
+    "英語学習"
+    ]
+  },
+  "stanford-graduate-school-of-business-gsb-reputation": {
+    "id": "stanford-graduate-school-of-business-gsb-reputation",
+    "title": "スタンフォードGSBはなぜ世界一と言われるのか？",
+    "description": "スタンフォード大学経営大学院（GSB）がなぜ世界最高峰と称されるのか？その秘密を革新的な教育、シリコンバレーという立地、独自の協調的カルチャー、そして強力な卒業生ネットワークの4つの視点から徹底解説します。MBA留学やキャリアアップを目指す方必見の記事です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/stanford-graduate-school-of-business-gsb-reputation.png",
+    "tags": [
+    "スタンフォードGSB",
+    "MBA",
+    "ビジネススクール",
+    "海外大学院",
+    "留学",
+    "シリコンバレー",
+    "キャリアアップ",
+    "リーダーシップ"
+    ]
+  },
+  "risd-rhode-island-school-of-design-art": {
+    "id": "risd-rhode-island-school-of-design-art",
+    "title": "RISD（ロードアイランド・スクール・オブ・デザイン）のすべて",
+    "description": "世界最高峰のアートスクール、RISD（ロードアイランド・スクール・オブ・デザイン）への留学を目指す方へ。本記事では、RISDの魅力から、出願に必要なポートフォリオ、TOEFLスコア、課題、エッセイの準備方法、さらには学費や奨学金情報まで、合格への道を徹底解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/risd-rhode-island-school-of-design-art.png",
+    "tags": [
+    "RISD",
+    "ロードアイランドスクールオブデザイン",
+    "アメリカ留学",
+    "美大留学",
+    "アートスクール",
+    "ポートフォリオ",
+    "海外美大",
+    "TOEFL",
+    "デザイン留学"
+    ]
+  },
+  "what-is-the-ivy-plus": {
+    "id": "what-is-the-ivy-plus",
+    "title": "「アイビープラス」とは？MITやスタンフォードが含まれる理由",
+    "description": "「アイビープラス」という言葉を聞いたことがありますか？伝統的なアイビーリーグ8校に加え、MITやスタンフォード大学など世界トップクラスの大学群を指すこの言葉。本記事では、アイビープラスの定義や構成大学、そしてなぜこれらの大学が含まれるのかを分かりやすく解説。夢の大学を目指すための英語学習法や準備についても具体的に紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/what-is-the-ivy-plus.png",
+    "tags": [
+    "アイビープラス",
+    "アイビーリーグ",
+    "アメリカ大学",
+    "大学留学",
+    "MIT",
+    "スタンフォード大学",
+    "名門大学",
+    "TOEFL"
+    ]
+  },
+  "uc-system-9-campuses-comparison": {
+    "id": "uc-system-9-campuses-comparison",
+    "title": "カリフォルニア大学(UC)全9校を比較！あなたに合うUCは？",
+    "description": "カリフォルニア大学(UC)全9校の特徴、学費、難易度、人気学部を徹底比較。UCLAやバークレー校など、各キャンパスの魅力を詳しく解説し、あなたに最適な大学選びをサポートします。アメリカ留学を目指す高校生・大学生必見の情報満載です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uc-system-9-campuses-comparison.png",
+    "tags": [
+    "カリフォルニア大学",
+    "UC",
+    "大学比較",
+    "アメリカ留学",
+    "海外大学",
+    "UCLA",
+    "UCバークレー",
+    "出願"
+    ]
+  },
+  "scholarships-for-japanese-students-at-us-universities": {
+    "id": "scholarships-for-japanese-students-at-us-universities",
+    "title": "ハーバード等、米国大学の日本人向け奨学金まとめ",
+    "description": "ハーバード大学など、アメリカのトップ大学へ留学したい日本人学生必見！高額な学費をカバーする返済不要の奨学金情報を網羅的に解説します。大学提供の奨学金から日本の財団まで、種類や探し方、獲得のための戦略（TOEFL対策、エッセイ）を具体的に紹介。夢の米国留学を経済的な理由で諦めないための完全ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/scholarships-for-japanese-students-at-us-universities.png",
+    "tags": [
+    "奨学金",
+    "アメリカ留学",
+    "海外大学",
+    "ハーバード大学",
+    "日本人向け奨学金",
+    "返済不要",
+    "学費",
+    "TOEFL"
+    ]
+  },
+  "how-to-get-into-ucla-as-an-international-student": {
+    "id": "how-to-get-into-ucla-as-an-international-student",
+    "title": "留学生がUCLAに合格するには？GPA・SAT・エッセイ戦略",
+    "description": "世界トップクラスの大学UCLAに留学生として合格するための完全ガイド。合格に必要なGPA・SAT・TOEFLスコアの目安から、個性を輝かせるエッセイ戦略、効果的な課外活動まで、具体的な対策を徹底解説。あなたの夢を現実に変えるための第一歩をここから始めましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/how-to-get-into-ucla-as-an-international-student.png",
+    "tags": [
+    "UCLA",
+    "アメリカ留学",
+    "海外大学",
+    "出願対策",
+    "TOEFL",
+    "SAT",
+    "エッセイ",
+    "GPA",
+    "留学生"
+    ]
+  },
+  "university-of-warwick-uk-reputation": {
+    "id": "university-of-warwick-uk-reputation",
+    "title": "ウォーリック大学（イギリス）の評価と就職の強さとは？",
+    "description": "イギリスの名門、ウォーリック大学の魅力に迫ります。世界大学ランキングでの高い評価から、産業界との連携による就職の強さ、入学に必要な英語力まで徹底解説。留学を目指す方必見の情報です。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-warwick-uk-reputation.png",
+    "tags": [
+    "ウォーリック大学",
+    "イギリス留学",
+    "海外大学",
+    "大学ランキング",
+    "就職に強い大学",
+    "ラッセルグループ",
+    "IELTS対策",
+    "WMG"
+    ]
+  },
+  "university-of-manchester-uk-city-life": {
+    "id": "university-of-manchester-uk-city-life",
+    "title": "マンチェスター大学で学ぶ！活気ある街と学生生活の魅力",
+    "description": "英国マンチェスター大学への留学を考えている方へ。世界トップクラスの教育、活気あふれる街の魅力、充実した学生生活、留学準備のポイントまで徹底解説。本記事を読めば、マンチェスターでの学びと暮らしのリアルなイメージが掴めます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/university-of-manchester-uk-city-life.png",
+    "tags": [
+    "イギリス留学",
+    "マンチェスター大学",
+    "海外大学",
+    "学生生活",
+    "留学準備",
+    "マンチェスター"
+    ]
+  },
+  "how-to-get-a-full-ride-scholarship": {
+    "id": "how-to-get-a-full-ride-scholarship",
+    "title": "学費免除！米国大学でフルライド奨学金を獲得する方法",
+    "description": "アメリカ大学留学の夢を叶える「フルライド奨学金」。この記事では、学費・生活費全額免除の奨学金を獲得するための具体的な方法を徹底解説。高いGPAやTOEFLスコアの獲得法、心に響くエッセイの書き方、効果的なリサーチ術まで、あなたの挑戦を成功に導くための全知識を網羅します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/how-to-get-a-full-ride-scholarship.png",
+    "tags": [
+    "フルライド奨学金",
+    "アメリカ留学",
+    "大学留学",
+    "学費免除",
+    "奨学金制度",
+    "TOEFL対策",
+    "海外大学進学",
+    "留学準備"
+    ]
+  },
+  "safety-at-us-university-campuses": {
+    "id": "safety-at-us-university-campuses",
+    "title": "コロンビア大学は安全？アメリカの大学の治安と対策",
+    "description": "アメリカ留学、特にコロンビア大学の治安は大丈夫？この記事では、アメリカの大学キャンパスの一般的な治安状況から、大学が提供する具体的な安全対策、留学生が自分でできる防犯のコツまで詳しく解説。安心して留学準備を進めるための情報が満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/safety-at-us-university-campuses.png",
+    "tags": [
+    "アメリカ留学",
+    "大学治安",
+    "コロンビア大学",
+    "安全対策",
+    "海外生活",
+    "防犯",
+    "留学準備"
+    ]
+  },
+  "women-s-colleges-usa-barnard-wellesley": {
+    "id": "women-s-colleges-usa-barnard-wellesley",
+    "title": "バーナードやウェルズリーなど、米女子大に進学する意味",
+    "description": "アメリカの女子大学、バーナードやウェルズリーへの進学を考えていますか？本記事では、女子大ならではのメリット、リーダーシップ育成環境、強力な卒業生ネットワークについて詳しく解説。進学準備に必要なTOEFL対策や情報収集の方法も紹介し、あなたの未来の選択肢を広げます。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/women-s-colleges-usa-barnard-wellesley.png",
+    "tags": [
+    "アメリカ留学",
+    "女子大学",
+    "海外大学進学",
+    "バーナード大学",
+    "ウェルズリー大学",
+    "リベラルアーツ教育",
+    "TOEFL",
+    "進路選択",
+    "リーダーシップ"
+    ]
+  },
+  "barnard-college-columbia-university-relationship": {
+    "id": "barnard-college-columbia-university-relationship",
+    "title": "バーナード・カレッジはコロンビア大学の一部？その関係を解説",
+    "description": "「バーナード・カレッジはコロンビア大学の一部なの？それとも独立した大学？」そんな疑問に答えます。この記事では、二つの教育機関のユニークな関係性、歴史、入学難易度、そして学生生活の違いまで、わかりやすく徹底解説。アメリカの大学システムへの理解が深まります。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/barnard-college-columbia-university-relationship.png",
+    "tags": [
+    "バーナードカレッジ",
+    "コロンビア大学",
+    "アメリカ大学",
+    "リベラルアーツカレッジ",
+    "女子大学",
+    "大学留学",
+    "セブンシスターズ"
+    ]
+  },
+  "usc-dornsife-college-of-letters-arts-and-sciences": {
+    "id": "usc-dornsife-college-of-letters-arts-and-sciences",
+    "title": "USCの文理学部「ドルンサイフ」の魅力とプログラム",
+    "description": "南カリフォルニア大学（USC）の中核をなす文理学部、ドルンサイフ。そのリベラルアーツ教育の魅力、多様な学術プログラム、豊富な研究機会、卒業後のキャリアまでを徹底解説。海外大学進学を目指す方必見の記事です。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/usc-dornsife-college-of-letters-arts-and-sciences.png",
+    "tags": [
+    "USC",
+    "南カリフォルニア大学",
+    "ドルンサイフ",
+    "アメリカ大学",
+    "海外進学",
+    "リベラルアーツ",
+    "留学"
+    ]
+  },
+  "princeton-university-eating-clubs": {
+    "id": "princeton-university-eating-clubs",
+    "title": "プリンストン大学の「イーティング・クラブ」とは？社交のすべて",
+    "description": "プリンストン大学の独特な社交文化『イーティング・クラブ』について徹底解説。その歴史、種類、入会プロセス（Bicker）、そしてクラブが学生生活に与える影響とは？アイビーリーグでの社交やネットワーキングの重要性を、留学を目指す方にも分かりやすくご紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/princeton-university-eating-clubs.png",
+    "tags": [
+    "プリンストン大学",
+    "イーティングクラブ",
+    "アメリカ大学",
+    "留学",
+    "アイビーリーグ",
+    "大学生活",
+    "社交"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 

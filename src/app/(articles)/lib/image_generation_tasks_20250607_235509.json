@@ -1,0 +1,566 @@
+[
+  {
+    "article_id": "what-is-stanford-university",
+    "image_generation_prompt": "A realistic photo capturing the innovative spirit of Stanford University. In the foreground, a bright and optimistic young adult Japanese student stands on the beautiful campus, looking towards the future. The background features the iconic architecture of Stanford's Main Quad with its distinctive arches, bathed in the warm, sunny glow of California. The sky is clear and blue. Superimposed over the image is the title \"Stanford University\" in a very large, clean, and sophisticated font, designed to be highly legible and eye-catching. The overall mood is inspiring, academic, and forward-thinking, perfectly representing a world-class institution.",
+    "suggested_image_filename": "what-is-stanford-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-stanford-university.png"
+  },
+  {
+    "article_id": "how-hard-is-cambridge-university",
+    "image_generation_prompt": "A realistic photo capturing an aspirational moment. A Japanese university student in their early 20s stands on a classic stone bridge in Cambridge, gazing thoughtfully towards the magnificent King's College Chapel in the background. The scene is bathed in the warm, optimistic glow of late afternoon sun. The overall mood is academic, prestigious, and full of hope, symbolizing the student's ambitious journey. The text 'Cambridge University' should be prominently displayed on the image in a very large, clear, and elegant serif font, making it the central focus. No other text should be visible.",
+    "suggested_image_filename": "how-hard-is-cambridge-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-hard-is-cambridge-university.png"
+  },
+  {
+    "article_id": "what-is-ucla",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the essence of the University of California, Los Angeles (UCLA). Feature the iconic Royce Hall with its beautiful Romanesque Revival architecture under a sunny Southern California sky. The campus should look lively, with a few diverse university students (including Japanese students) walking in the background, out of focus. The overall atmosphere is bright, academic, and inspiring. Prominently display the text \"UCLA\" in a large, elegant, and modern sans-serif font. The text should be white with a subtle drop shadow for readability, placed tastefully in the upper part of the image. The image should be photorealistic and high-resolution.",
+    "suggested_image_filename": "what-is-ucla.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-ucla.png"
+  },
+  {
+    "article_id": "harvard-university-admission-requirements",
+    "image_generation_prompt": "Realistic photo. A hopeful young Japanese university student, looking determined and optimistic, standing in front of the iconic John Harvard Statue on the Harvard University campus. The morning sun casts a warm, golden light, symbolizing a new beginning and bright future. The background shows the historic and prestigious architecture of Harvard Yard, slightly blurred to keep the focus on the student. Overlay a large, elegant, and highly visible title 'Harvard Admission' in a sophisticated serif font. The text should be a prominent design element but not obscure the main subject. The overall image should be inspiring, clean, and professional, perfectly capturing the theme of achieving the dream of getting into Harvard. Avoid any distracting elements. The focus is on hope, ambition, and the prestige of the institution.",
+    "suggested_image_filename": "harvard-university-admission-requirements.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-university-admission-requirements.png"
+  },
+  {
+    "article_id": "oxford-university-interview-preparation",
+    "image_generation_prompt": "A realistic photo capturing the intense yet inspiring atmosphere of an Oxford University interview. A young adult Japanese student, looking determined and thoughtful, sits opposite a seasoned, friendly-looking professor in a classic, wood-paneled tutorial room filled with books. The focus is on the intellectual exchange between them. Superimposed over the image in a very large, elegant, and highly visible serif font is the title: 'Oxford Interview'. The lighting is warm and academic, highlighting the student's focused expression. The image should convey a sense of challenge, opportunity, and scholarly pursuit, without showing any text other than the main title.",
+    "suggested_image_filename": "oxford-university-interview-preparation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\oxford-university-interview-preparation.png"
+  },
+  {
+    "article_id": "mit-student-life-and-culture",
+    "image_generation_prompt": "Create a realistic photo capturing the vibrant and intellectual atmosphere of MIT's campus. In the background, feature the iconic Great Dome under a bright, sunny sky. In the foreground, a diverse group of university students, including some Japanese students, are collaboratively working on a project, laptops open, engaged in a lively discussion on the grass. They look focused yet cheerful, embodying the spirit of innovation and teamwork. Superimpose the title 'MIT Life' in a very large, clean, and sophisticated font, prominently displayed but elegantly integrated into the composition. The overall mood should be inspiring, modern, and authentic, avoiding any depiction of minors.",
+    "suggested_image_filename": "mit-student-life-and-culture.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mit-student-life-and-culture.png"
+  },
+  {
+    "article_id": "uc-berkeley-vs-ucla-comparison",
+    "image_generation_prompt": "A realistic photo with a dynamic split-screen composition. On the left side, a vibrant scene of UC Berkeley's campus showcasing the iconic Sather Tower against a clear blue sky. On the right side, a sunny, bustling scene of UCLA's campus featuring the beautiful Royce Hall. In the foreground, two Japanese university students, one male and one female, aged around 20-22, stand confidently. The student on the left wears a UC Berkeley hoodie, and the student on the right wears a UCLA hoodie. Superimposed prominently in the center of the image is the text 'UCB vs UCLA' in a very large, clean, modern, and stylish font that is easy to read. The overall mood is bright, academic, and aspirational, with cinematic lighting and high-resolution detail. No other text should appear in the image.",
+    "suggested_image_filename": "uc-berkeley-vs-ucla-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-berkeley-vs-ucla-comparison.png"
+  },
+  {
+    "article_id": "princeton-university-undergraduate-education",
+    "image_generation_prompt": "A realistic photo capturing the essence of Princeton University. In the background, the iconic Blair Arch with beautiful autumn foliage. The words 'Princeton University' are prominently displayed across the top in a large, elegant, and easily readable serif font, with a subtle white glow. In the foreground, a young Japanese male and a young Japanese female university student, both in their early 20s, are walking with books, looking inspired and hopeful. The lighting is warm and golden, evoking a sense of prestige and intellectual pursuit. The overall image should be aspirational and academic, without any other text besides the title.",
+    "suggested_image_filename": "princeton-university-undergraduate-education.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\princeton-university-undergraduate-education.png"
+  },
+  {
+    "article_id": "yale-university-liberal-arts",
+    "image_generation_prompt": "Create a realistic photo that encapsulates the prestigious and scholarly atmosphere of Yale University. The scene should feature a diverse group of university students, including a prominent young adult Japanese student, engaged in a lively academic discussion in a classic, wood-paneled library or a beautiful Gothic-style common room on campus. Sunlight streams through a large arched window. The key focus of the image must be the text 'Yale University'. This title should be overlaid in an extremely large, elegant, and highly readable serif font, making it the most dominant visual element. The overall composition should be inspiring, sophisticated, and convey a sense of profound learning and intellectual discovery. Ensure the image is a high-quality, realistic photograph.",
+    "suggested_image_filename": "yale-university-liberal-arts.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\yale-university-liberal-arts.png"
+  },
+  {
+    "article_id": "columbia-university-in-nyc",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of student life at Columbia University. The scene features a young adult Japanese female student standing on the beautiful campus, with the iconic facade of Butler Library visible in the background under a clear, sunny sky. She is smiling warmly towards the camera, conveying a sense of achievement and excitement. She is dressed in a stylish, smart-casual outfit suitable for a university student in New York. In the upper portion of the image, superimpose the text \"Columbia University\". This text should be very large, easily readable, and rendered in a sophisticated, elegant serif font, seamlessly integrated into the overall aesthetic. The image should have a bright, optimistic, and inspiring mood with a shallow depth of field. No other text should be visible.",
+    "suggested_image_filename": "columbia-university-in-nyc.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\columbia-university-in-nyc.png"
+  },
+  {
+    "article_id": "imperial-college-london-stem",
+    "image_generation_prompt": "A realistic photo of the iconic Queen's Tower of Imperial College London, bathed in the warm light of a setting sun. The sky behind it subtly blends into a futuristic digital matrix of glowing circuit board patterns and faint DNA double helix structures, symbolizing the university's focus on STEM. The overall atmosphere is prestigious, innovative, and inspiring. In the foreground, very large, elegant, and clean typography spells out \"Imperial College\". The font is sophisticated and highly visible. No other text. No people.",
+    "suggested_image_filename": "imperial-college-london-stem.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\imperial-college-london-stem.png"
+  },
+  {
+    "article_id": "lse-social-science-reputation",
+    "image_generation_prompt": "A realistic photo capturing the prestigious and challenging atmosphere of the London School of Economics (LSE). The scene is a blend of a classic LSE campus building and the iconic London skyline with Big Ben in the background at sunset. In the foreground, a diverse group of university students, including a young Japanese adult, are engaged in a lively academic discussion around a table with books. The overall tone is intellectual, ambitious, and inspiring. Superimposed over the image in a very large, clean, and elegant sans-serif font is the text \"LSE Reputation\". The text should be the main focus, highly visible and stylishly integrated. No other text should appear.",
+    "suggested_image_filename": "lse-social-science-reputation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\lse-social-science-reputation.png"
+  },
+  {
+    "article_id": "university-of-toronto-admission-guide",
+    "image_generation_prompt": "A realistic photo capturing the essence of academic ambition. The background features the iconic architecture of the University of Toronto, like University College, bathed in the warm, golden light of a crisp autumn day with vibrant fall foliage. A young Japanese student in their early 20s stands with a hopeful and determined expression, looking towards their bright future. The image should have a clean, inspiring, and slightly cinematic feel. Prominently displayed across the image is the title \"University of Toronto\" in a very large, elegant, and highly legible serif font, making it the clear focal point. The text should be seamlessly integrated into the composition. No other text should be present.",
+    "suggested_image_filename": "university-of-toronto-admission-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-toronto-admission-guide.png"
+  },
+  {
+    "article_id": "what-is-caltech",
+    "image_generation_prompt": "A realistic photo capturing the essence of the California Institute of Technology (Caltech). The image showcases a modern, sun-drenched campus building with distinctive architecture, possibly the Beckman Institute. In the foreground, a young adult Japanese student, looking focused and inspired, is working on a complex equation on a transparent glass board. The atmosphere is one of intense intellectual activity and groundbreaking discovery. The text \"Caltech\" is prominently displayed in a very large, clean, and sophisticated font, seamlessly integrated into the top half of the image, appearing as a natural part of the scene. The lighting is bright and optimistic.",
+    "suggested_image_filename": "what-is-caltech.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-caltech.png"
+  },
+  {
+    "article_id": "university-of-pennsylvania-wharton-school",
+    "image_generation_prompt": "Create a realistic photo capturing the prestige and academic excellence of the University of Pennsylvania's Wharton School. The image should feature a striking view of Huntsman Hall, its modern architecture blending with the classic Ivy League campus feel. Use dramatic, low-angle lighting, perhaps during the golden hour, to give the building a powerful and inspiring presence. The sky should be clear and vibrant. Superimposed over the image, display the title 'Wharton School' in a very large, elegant, and highly readable serif font. The typography should be sophisticated and prominent, conveying a sense of authority and tradition. No other text or people should be visible, focusing solely on the architecture and the title.",
+    "suggested_image_filename": "university-of-pennsylvania-wharton-school.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-pennsylvania-wharton-school.png"
+  },
+  {
+    "article_id": "brown-university-open-curriculum",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of intellectual freedom. The scene features a young Japanese university student, appearing thoughtful and inspired, in a beautiful, classic university library with high ceilings and sunlight streaming through large windows. The student is surrounded by a diverse collection of books from various disciplines like science, arts, and history, symbolizing interdisciplinary learning. The overall atmosphere is warm, inviting, and focused on quiet curiosity. Crucially, superimpose the text 'Open Curriculum' in a very large, clean, and elegant sans-serif font. This text should be the main focal point, highly visible, and stylishly integrated into the image composition. No other text should be visible.",
+    "suggested_image_filename": "brown-university-open-curriculum.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\brown-university-open-curriculum.png"
+  },
+  {
+    "article_id": "cornell-university-colleges-guide",
+    "image_generation_prompt": "A realistic photo capturing the inspiring atmosphere of Cornell University. A young Japanese university student stands on the Arts Quad, looking thoughtfully towards the iconic McGraw Tower in the background under a bright, clear sky. The scene conveys a sense of ambition, intellectual curiosity, and hope for the future. The lighting is warm and inviting. Superimposed over the image is the title 'Cornell University' in a very large, elegant, and highly readable serif font. The typography is sophisticated and positioned to be the main focus, yet harmonizes with the background. No other text should appear.",
+    "suggested_image_filename": "cornell-university-colleges-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\cornell-university-colleges-guide.png"
+  },
+  {
+    "article_id": "dartmouth-college-campus-life",
+    "image_generation_prompt": "A realistic photo capturing the vibrant and scenic essence of Dartmouth College. The image showcases the iconic Baker-Berry Library in the background, with the lush Dartmouth Green in the foreground during peak autumn. The foliage is a brilliant mix of red, orange, and yellow. A diverse group of university students, including some Japanese students, are seen casually on the Green, some chatting, some studying, conveying a sense of community and intellectual curiosity. Their faces are not in sharp focus. The overall atmosphere is bright, inspiring, and peaceful, with the warm, golden light of a late afternoon. In the upper part of the image, the text 'Dartmouth College' is displayed in a very large, elegant, and highly legible font with a sophisticated design, making it a prominent and eye-catching feature. No other text should be visible.",
+    "suggested_image_filename": "dartmouth-college-campus-life.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\dartmouth-college-campus-life.png"
+  },
+  {
+    "article_id": "university-of-chicago-essay-prompts",
+    "image_generation_prompt": "Realistic photo: A thoughtful Japanese university student (over 18 years old) stands before the iconic Gothic architecture of the University of Chicago. He holds a pen and a notebook, looking slightly puzzled yet inspired, with faint, stylized question marks and a lightbulb glowing above his head. The mood is academic, creative, and slightly whimsical. The image should prominently feature the title \"UChicago Essays\" in a very large, clear, and stylish font, making it the main focal point. The overall composition should be clean and visually appealing. No other text should be visible.",
+    "suggested_image_filename": "university-of-chicago-essay-prompts.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-chicago-essay-prompts.png"
+  },
+  {
+    "article_id": "nyu-new-york-university-campus-without-walls",
+    "image_generation_prompt": "A realistic photo capturing the vibrant atmosphere of New York University's 'campus without walls'. A young adult Japanese student walks confidently through a sun-drenched Washington Square Park, with the iconic Washington Square Arch visible in the background. The scene is bustling with a diverse mix of people, illustrating how the campus blends seamlessly with New York City life. The student looks optimistic and engaged with their surroundings. The overall mood is inspiring and energetic. Superimposed on the image, display the title 'NYU Life' in a very large, clean, and highly sophisticated font, making it a central visual element. Ensure no other text appears.",
+    "suggested_image_filename": "nyu-new-york-university-campus-without-walls.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\nyu-new-york-university-campus-without-walls.png"
+  },
+  {
+    "article_id": "ubc-vancouver-student-life",
+    "image_generation_prompt": "Create a realistic, cinematic photo capturing the vibrant student life at the University of British Columbia (UBC) in Vancouver. The scene features two young adult Japanese students, one male and one female, walking cheerfully on the beautiful Point Grey campus. In the background, the iconic architecture of UBC, like the Clock Tower, is visible, seamlessly blending with Vancouver's stunning natural landscape of distant snow-capped mountains and the sparkling ocean. The lighting is bright and optimistic, characteristic of a sunny afternoon. The overall mood is inspiring and full of potential. Prominently display the title 'UBC Student Life' in a very large, elegant, and highly readable font. The text should be a central design element, yet seamlessly integrated. No other text should appear in the image.",
+    "suggested_image_filename": "ubc-vancouver-student-life.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ubc-vancouver-student-life.png"
+  },
+  {
+    "article_id": "mcgill-university-bilingual-environment",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the essence of McGill University. The background features the iconic Arts Building of McGill University in Montreal, Canada, during a beautiful autumn day with golden and red leaves. In the foreground, a diverse group of university students, including some Japanese students, are walking and chatting cheerfully on the campus grounds. The atmosphere is intellectual, lively, and welcoming. Superimposed on the image is the title \"McGill University\" in a very large, elegant, and easily readable font, making it a prominent feature of the composition. The overall image should evoke a sense of aspiration and the unique bilingual academic experience. No other text should be on the image.",
+    "suggested_image_filename": "mcgill-university-bilingual-environment.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mcgill-university-bilingual-environment.png"
+  },
+  {
+    "article_id": "ucl-university-college-london-guide",
+    "image_generation_prompt": "A realistic, inspiring photo for a blog article about University College London (UCL). The image features the iconic UCL Portico building on a bright, sunny day, symbolizing opportunity and academic excellence. In the foreground, a young Japanese university student, looking hopeful and determined, gazes towards the university. The background is softly blurred, showing a diverse group of students chatting and walking, creating a vibrant campus atmosphere. Superimposed over the image in a very large, elegant, and easily readable font is the title: 'University College London'. The overall mood is aspirational, bright, and welcoming. Ensure there are no other texts in the image.",
+    "suggested_image_filename": "ucl-university-college-london-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ucl-university-college-london-guide.png"
+  },
+  {
+    "article_id": "university-of-melbourne-australia",
+    "image_generation_prompt": "Create a realistic photo capturing the prestige and academic ambition associated with the University of Melbourne. The image should feature a bright, inspiring atmosphere. In the background, display the iconic, sun-drenched Old Arts Building of the university, showcasing its grand, historic architecture. In the foreground, an adult Japanese male student, dressed in smart casual attire, stands looking thoughtfully towards the campus, conveying a sense of excitement for his future. The most crucial element is the text 'Melbourne University' displayed prominently in the upper half of the image. This title must be very large, easily readable, and rendered in a sophisticated, modern font. No other text should appear in the image. The overall mood should be aspirational and academic.",
+    "suggested_image_filename": "university-of-melbourne-australia.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-melbourne-australia.png"
+  },
+  {
+    "article_id": "australian-national-university-anu-guide",
+    "image_generation_prompt": "A realistic photo capturing the essence of studying at the Australian National University (ANU). In the foreground, a young adult Japanese student sits at a sunlit desk in a modern library, looking thoughtfully towards the future. In the background, through a large window, the iconic Australian Parliament House in Canberra is visible. The image should have a bright, scholarly, and optimistic atmosphere. Prominently display the title 'Australian National University' in a very large, clean, and sophisticated font, making it a central visual element. No other text should be on the image.",
+    "suggested_image_filename": "australian-national-university-anu-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\australian-national-university-anu-guide.png"
+  },
+  {
+    "article_id": "national-university-of-singapore-nus",
+    "image_generation_prompt": "A vibrant, realistic photo capturing the essence of the National University of Singapore (NUS) campus. The scene features a group of diverse university students, including some Japanese students, engaged in a lively discussion on a sun-drenched, modern architectural plaza surrounded by lush greenery. The atmosphere is bright, inspiring, and intellectual. Prominently display the text 'NUS Campus' in a very large, clear, and elegant font. The text should be a central design element, easily readable, and stylish. No other text should be visible.",
+    "suggested_image_filename": "national-university-of-singapore-nus.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\national-university-of-singapore-nus.png"
+  },
+  {
+    "article_id": "university-of-hong-kong-hku",
+    "image_generation_prompt": "Create a realistic photo for a blog article thumbnail. The image should feature a hopeful young Japanese university student, standing with a confident smile. The background is the iconic Main Building of the University of Hong Kong (HKU), with its beautiful colonial architecture bathed in warm, inviting sunlight. The student looks ready to take on the world. The overall mood is inspiring and aspirational. Crucially, overlay the title 'HKU Study Abroad' in a very large, clean, and sophisticated font. The text must be highly visible and stylishly integrated into the image composition, making it the primary focal point. No other text should be present.",
+    "suggested_image_filename": "university-of-hong-kong-hku.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-hong-kong-hku.png"
+  },
+  {
+    "article_id": "eth-zurich-switzerland",
+    "image_generation_prompt": "A striking, realistic photo capturing the essence of ETH Zurich, Switzerland. The scene features the iconic modern architecture of the ETH Hönggerberg campus, with clean lines and large glass windows reflecting the bright, clear Swiss sky. In the background, a subtle hint of the Swiss Alps can be seen. In the foreground, two ambitious Japanese university students, one male and one female in their early twenties, are engaged in an enthusiastic conversation, perhaps discussing a groundbreaking project. They look inspired and optimistic about their future. Prominently display the text \"ETH Zurich\" in a very large, clean, and sophisticated sans-serif font. The text should be perfectly integrated into the composition, appearing modern and impactful, and should be the only text in the image. The overall atmosphere is bright, intellectual, and forward-thinking, conveying academic excellence and innovation. No minors. High resolution, cinematic lighting.",
+    "suggested_image_filename": "eth-zurich-switzerland.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\eth-zurich-switzerland.png"
+  },
+  {
+    "article_id": "usc-university-of-southern-california-film-school",
+    "image_generation_prompt": "A dynamic and inspiring realistic photo for a blog article thumbnail. In the foreground, a young adult Japanese student, looking focused and creative, operates a professional cinema camera on a tripod. The background is the iconic University of Southern California (USC) campus with its distinctive Romanesque Revival architecture, bathed in the warm glow of a California sunset. The atmosphere is ambitious and full of potential. Prominently displayed in the upper part of the image, superimpose the text \"USC Film School\" in a very large, clean, and stylishly modern font that is easy to read.",
+    "suggested_image_filename": "usc-university-of-southern-california-film-school.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\usc-university-of-southern-california-film-school.png"
+  },
+  {
+    "article_id": "georgetown-university-international-relations",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of studying at Georgetown University. The main focus is the iconic Healy Hall with its grand architecture, bathed in warm, optimistic sunlight. In the foreground, a young adult Japanese student, looking ambitious and hopeful, gazes towards the university. The background subtly hints at the Washington D.C. skyline, perhaps with the Capitol Building or Washington Monument faintly visible, symbolizing the connection to global politics. The overall mood should be inspiring, academic, and prestigious. Superimpose the title 'Georgetown University' in a very large, clear, and elegant font, making it a prominent feature of the image. No other text should be on the image.",
+    "suggested_image_filename": "georgetown-university-international-relations.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\georgetown-university-international-relations.png"
+  },
+  {
+    "article_id": "carnegie-mellon-university-computer-science",
+    "image_generation_prompt": "A realistic photo capturing the spirit of a world-class computer science program. A diverse group of university students, including a young Japanese adult, are enthusiastically collaborating around laptops in a bright, modern, and sunlit atrium. They are in front of an iconic, futuristic university building, reminiscent of Carnegie Mellon's Gates Hillman Complex. The atmosphere is innovative, intellectual, and filled with optimistic energy. The text 'Carnegie Mellon CS' is prominently displayed in the center of the image. The font is very large, exceptionally clear, and has a sophisticated, modern design, making it the main focal point. Ensure no other text appears in the image. The overall composition should be inspiring and professional.",
+    "suggested_image_filename": "carnegie-mellon-university-computer-science.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\carnegie-mellon-university-computer-science.png"
+  },
+  {
+    "article_id": "northwestern-university-journalism",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of studying journalism at a prestigious university. In the foreground, a young Japanese university student, looking determined and inspired, is working diligently on a laptop in a modern, sunlit library. The background subtly features the beautiful, ivy-covered gothic architecture of Northwestern University. The image should evoke a sense of ambition, hard work, and intellectual pursuit. On the image, prominently display the title 'Northwestern Journalism' in a very large, clean, and sophisticated font that is easy to read and aesthetically pleasing. Ensure no other text appears on the image.",
+    "suggested_image_filename": "northwestern-university-journalism.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\northwestern-university-journalism.png"
+  },
+  {
+    "article_id": "duke-university-campus-life",
+    "image_generation_prompt": "Create a realistic photo capturing the vibrant campus life at Duke University. The image should prominently feature the iconic Duke Chapel with its beautiful Gothic architecture in the background. In the foreground, a young adult Japanese student, seen from the back to obscure facial details, is walking across the lush green quad, carrying a backpack and a basketball, symbolizing the balance between academics and athletics. The overall atmosphere should be bright, sunny, and inspiring. Superimpose the text 'Duke University' in a very large, clean, and elegant font across the image, making it a central and visually appealing element.",
+    "suggested_image_filename": "duke-university-campus-life.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\duke-university-campus-life.png"
+  },
+  {
+    "article_id": "johns-hopkins-university-medical",
+    "image_generation_prompt": "A realistic photo capturing the essence of academic ambition. A young adult Japanese student stands on the lush green lawn of the Johns Hopkins University campus, with the iconic Gilman Hall visible in the background under a clear, bright sky. The student looks inspired and optimistic. Superimposed over the image is the title \"Johns Hopkins\" in a very large, prominent, and sophisticated sans-serif font, designed to be highly legible and stylish. The overall mood is bright, welcoming, and prestigious. The focus is on the aspirational journey of studying abroad. No other text on the image.",
+    "suggested_image_filename": "johns-hopkins-university-medical.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\johns-hopkins-university-medical.png"
+  },
+  {
+    "article_id": "uc-san-diego-ucsd-college-system",
+    "image_generation_prompt": "Create a realistic, vibrant photo for a blog post thumbnail. In the foreground, prominently display the title 'UCSD College System' in a very large, clean, and stylish font that is easy to read. The background should feature the iconic Geisel Library of UC San Diego under a sunny California sky. In front of the library, depict a diverse group of university students, including some Japanese students, walking and talking in small, distinct groups, subtly hinting at the different college communities. The overall atmosphere should be bright, optimistic, and academic, capturing the essence of student life at UCSD. Avoid any other text on the image.",
+    "suggested_image_filename": "uc-san-diego-ucsd-college-system.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-san-diego-ucsd-college-system.png"
+  },
+  {
+    "article_id": "university-of-washington-seattle-cs",
+    "image_generation_prompt": "Create a realistic, high-quality photo for a blog post thumbnail about the University of Washington's computer science program. The image should blend the iconic, beautiful gothic architecture of the UW campus with futuristic elements of technology, like faint, glowing lines of code in the air. The background subtly features the Seattle skyline, including the Space Needle, under a bright, optimistic sky. Prominently display the title 'Washington CS' in the center of the image. This text must be extremely large, stylish, and in a sophisticated, modern font, making it the main focal point. The color of the text should contrast well with the background for maximum readability. No other text or distracting elements. The overall atmosphere must be inspiring and professional, representing a world-class education. Do not include any identifiable people or faces.",
+    "suggested_image_filename": "university-of-washington-seattle-cs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-washington-seattle-cs.png"
+  },
+  {
+    "article_id": "university-of-michigan-ann-arbor",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of the University of Michigan, Ann Arbor. The scene should feature the iconic Law Quad with its beautiful Gothic architecture in the background, bathed in the warm, golden light of a sunny autumn afternoon. A diverse group of university students, including a prominent Japanese adult student, are walking and chatting cheerfully, conveying a sense of vibrant campus life and academic ambition. The overall atmosphere is bright, inspiring, and welcoming. Superimposed on the image, display the title 'University of Michigan' in a very large, clear, and stylish font that is easy to read and aesthetically pleasing. Ensure no other text appears on the image.",
+    "suggested_image_filename": "university-of-michigan-ann-arbor.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-michigan-ann-arbor.png"
+  },
+  {
+    "article_id": "harvard-vs-stanford-which-is-better",
+    "image_generation_prompt": "Create a realistic photo that serves as a striking, symbolic image for an article comparing Harvard and Stanford. The image should be split vertically. The left side represents Harvard University: it features classic, ivy-covered brick architecture under a slightly overcast, scholarly sky, suggesting tradition and history. A determined-looking Japanese university student (adult) dressed in smart-casual attire gazes thoughtfully towards the viewer. The right side represents Stanford University: it showcases modern, sun-drenched architecture with palm trees and a bright blue sky, embodying innovation and optimism. Another Japanese university student (adult), with a bright and energetic expression, looks towards the future. In the center, prominently overlay the text 'Harvard vs Stanford' in a very large, elegant, and highly legible serif font. This text must be the main focal point of the image. The overall tone should be sophisticated and inspiring, and no other text should be visible.",
+    "suggested_image_filename": "harvard-vs-stanford-which-is-better.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-vs-stanford-which-is-better.png"
+  },
+  {
+    "article_id": "oxford-vs-cambridge-oxbridge-comparison",
+    "image_generation_prompt": "A visually stunning, realistic photo, split-screen style. On the left, the iconic Radcliffe Camera of Oxford University under a golden afternoon sun. On the right, the majestic King's College Chapel of Cambridge University on the River Cam. The image should evoke a sense of history, prestige, and intellectual rivalry. Prominently display the title \"Oxford vs Cambridge\" in the center, using a very large, elegant, and highly readable serif font that is sophisticated and eye-catching. The overall tone should be academic and inspiring. No people, focus on the architecture and atmosphere. Ensure the text is the main focus, perfectly centered and balanced between the two university scenes.",
+    "suggested_image_filename": "oxford-vs-cambridge-oxbridge-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\oxford-vs-cambridge-oxbridge-comparison.png"
+  },
+  {
+    "article_id": "mit-vs-caltech-tech-giants-showdown",
+    "image_generation_prompt": "Create a realistic, high-resolution photo-style image that visually contrasts MIT and Caltech. The image should be split vertically. The left side represents MIT, featuring its iconic Great Dome with the Boston skyline in the background, with a slightly cooler, more classical architectural feel. The right side represents Caltech, showing a modern, sun-drenched campus building in Pasadena with palm trees and mountains visible. Overlay the text 'MIT vs Caltech' in a very large, bold, and sophisticated sans-serif font, positioned prominently in the center for high visibility. The overall mood should be inspiring and academic, highlighting the prestige of both institutions. No people should be visible, focusing solely on the architectural and environmental differences.",
+    "suggested_image_filename": "mit-vs-caltech-tech-giants-showdown.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mit-vs-caltech-tech-giants-showdown.png"
+  },
+  {
+    "article_id": "ivy-league-schools-ranking-and-difficulty",
+    "image_generation_prompt": "Create a realistic photo capturing the prestige and challenge of the Ivy League. In the foreground, a determined adult Japanese student stands, looking towards a grand, traditional university building covered in ivy, bathed in the warm light of the golden hour. The architecture should evoke the iconic campuses of schools like Harvard or Yale. Prominently display the title 'IVY LEAGUE' in a very large, elegant, and sophisticated serif font in the upper part of the image. The overall mood should be inspiring, academic, and slightly awe-inspiring, with no other text.",
+    "suggested_image_filename": "ivy-league-schools-ranking-and-difficulty.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ivy-league-schools-ranking-and-difficulty.png"
+  },
+  {
+    "article_id": "tufts-university-international-relations",
+    "image_generation_prompt": "Create a high-quality, realistic photo for a blog article thumbnail. The image should feature a determined young Japanese university student, an adult, standing in front of a classic, ivy-covered brick building that evokes the architecture of Tufts University. The student is holding a book on international relations. The atmosphere is academic, inspiring, and slightly sunlit. Superimposed on the image, display the title 'Tufts International Relations' in a very large, clear, and elegant font. The text should be the main focus, perfectly integrated into the composition. Ensure there are no other distracting texts or elements.",
+    "suggested_image_filename": "tufts-university-international-relations.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tufts-university-international-relations.png"
+  },
+  {
+    "article_id": "vanderbilt-university-nashville-life",
+    "image_generation_prompt": "A realistic photo capturing the essence of Vanderbilt University and Nashville. In the foreground, a young Japanese university student, looking optimistic and happy, walks across a lush green lawn, carrying a guitar case. In the background, the iconic Kirkland Hall of Vanderbilt University stands tall under a warm, golden hour sky. The atmosphere is a blend of academic prestige and the vibrant musical spirit of Nashville. Superimpose the text 'Vanderbilt University' in a very large, elegant, and easily readable font, making it a prominent feature of the image. The overall mood should be inspiring and aspirational.",
+    "suggested_image_filename": "vanderbilt-university-nashville-life.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\vanderbilt-university-nashville-life.png"
+  },
+  {
+    "article_id": "rice-university-houston-texas",
+    "image_generation_prompt": "A realistic photo capturing the essence of Rice University. In the background, the iconic Lovett Hall with its distinctive Byzantine architecture stands tall under a bright, clear sky in Houston, Texas. In the foreground, a young Japanese university student, an adult, stands looking thoughtfully towards the future, embodying ambition and intellect. The overall mood is optimistic and prestigious. Prominently displayed in the upper part of the image is the text \"Rice University\" in a very large, elegant, and highly legible serif font, beautifully integrated into the scene. The text should be the main focal point besides the student and the building.",
+    "suggested_image_filename": "rice-university-houston-texas.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\rice-university-houston-texas.png"
+  },
+  {
+    "article_id": "notre-dame-university-culture",
+    "image_generation_prompt": "A realistic photo capturing the essence of the University of Notre Dame. The image features the iconic Golden Dome and the Basilica of the Sacred Heart in the background, bathed in the warm light of a late afternoon. In the foreground, a young adult Japanese student, smiling, walks across the main quad, carrying books. The atmosphere is serene yet vibrant, reflecting a blend of academic dedication and rich tradition. Prominently displayed on the image, in a very large, clear, and elegant font, is the title 'Notre Dame Culture'. The overall composition should be inspiring and welcoming.",
+    "suggested_image_filename": "notre-dame-university-culture.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\notre-dame-university-culture.png"
+  },
+  {
+    "article_id": "ucla-transfer-requirements",
+    "image_generation_prompt": "A realistic photo capturing the aspirational journey of a young Japanese university student aiming for a transfer to UCLA. The scene is set on the beautiful UCLA campus, with the iconic Royce Hall subtly blurred in the background under the bright California sun. In the foreground, a hopeful and determined Japanese student is sitting at an outdoor cafe table, focused on their laptop which has a UCLA sticker. On the image, overlay the text 'UCLA Transfer' in a very large, clean, and sophisticated font, making it the central visual element. The overall mood should be bright, optimistic, and inspiring, with a shallow depth of field to emphasize the student's dream. No other text.",
+    "suggested_image_filename": "ucla-transfer-requirements.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ucla-transfer-requirements.png"
+  },
+  {
+    "article_id": "king-s-college-london-kcl",
+    "image_generation_prompt": "A realistic photo capturing the prestige and vibrant atmosphere of King's College London. In the foreground, a young adult Japanese student stands on the campus, looking towards the future with a hopeful and inspired expression. The background features one of KCL's iconic buildings, like the Maughan Library or Bush House, bathed in soft, natural sunlight. The overall mood is academic, aspirational, and welcoming. Superimposed over the image is the title \"King's College London\" in a very large, elegant, and highly legible font, seamlessly integrated into the composition. The text should be the main focal point besides the student. No other text.",
+    "suggested_image_filename": "king-s-college-london-kcl.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\king-s-college-london-kcl.png"
+  },
+  {
+    "article_id": "university-of-edinburgh-scotland",
+    "image_generation_prompt": "Create a realistic photo capturing the inspiring atmosphere of the University of Edinburgh. The scene should feature the university's historic and grand architecture, like the Old College quadrangle, under a dramatic Scottish sky with soft, natural light. In the foreground, a young adult Japanese student, casually dressed in smart-casual attire, is walking with a look of quiet determination and intellectual curiosity, perhaps holding a book. The overall mood should be academic, hopeful, and slightly magical, reflecting the unique blend of history and modern learning. Please embed the title 'University of Edinburgh' in the image. The text should be very large, clear, and use a sophisticated, elegant font that complements the prestigious academic setting, making it a prominent feature of the composition. No other text should be visible.",
+    "suggested_image_filename": "university-of-edinburgh-scotland.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-edinburgh-scotland.png"
+  },
+  {
+    "article_id": "university-of-sydney-australia",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the iconic sandstone Gothic architecture of the University of Sydney's Quadrangle on a sunny day. The scene is bathed in warm, natural light, highlighting the intricate details of the building. In the foreground, a young adult Japanese student with a backpack looks hopefully towards the university buildings, symbolizing the start of an academic journey. The overall mood is inspiring and academic. Centered in the upper part of the image, the text 'University of Sydney' is displayed in a very large, elegant, and easily readable serif font, with a sophisticated and clean design. No other text should be present.",
+    "suggested_image_filename": "university-of-sydney-australia.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-sydney-australia.png"
+  },
+  {
+    "article_id": "peking-university-china",
+    "image_generation_prompt": "A realistic photo style image for a blog article. A hopeful young Japanese university student, an adult, stands before the iconic West Gate (Ximen) of Peking University in Beijing. The traditional Chinese architecture of the gate is prominent in the background, bathed in bright, optimistic morning light. The student is dressed in smart casual attire, looking towards the future with a slight smile. The overall atmosphere is academic, prestigious, and inspiring. At the top of the image, the text 'Peking University' is displayed prominently in a very large, clean, and sophisticated font, making it easily readable and visually appealing. No other text should be on the image.",
+    "suggested_image_filename": "peking-university-china.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\peking-university-china.png"
+  },
+  {
+    "article_id": "seoul-national-university-snu-korea",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese university student, in their early 20s, standing in front of the iconic main gate of Seoul National University (SNU) in South Korea. The atmosphere is bright and inspiring, with soft morning light. The student is looking towards the future with a subtle, confident smile. Superimposed on the image is the title 'Seoul National University' in a very large, clean, and sophisticated font, making it a prominent and eye-catching feature. The overall composition should be clean and professional, suitable for a blog article thumbnail. No other text.",
+    "suggested_image_filename": "seoul-national-university-snu-korea.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\seoul-national-university-snu-korea.png"
+  },
+  {
+    "article_id": "tuition-fees-of-ivy-league",
+    "image_generation_prompt": "A realistic photo capturing the essence of studying at an Ivy League university, with a focus on the financial aspect. In the foreground, a determined young Japanese university student, looking thoughtful and ambitious, sits at a classic wooden library desk. The desk is scattered with books about finance and economics, a laptop open to a university's tuition fee page, and a calculator. The background is a grand, historic university library with towering bookshelves, conveying a sense of prestige and academic rigor. The lighting is warm and inspiring. Prominently displayed in the upper part of the image, superimpose the title 'Ivy League Costs' in a very large, clean, and elegant serif font. The text should be easily readable and stylishly integrated into the overall composition. Ensure no other text is visible. The student's expression should be one of focused planning, not distress, embodying the idea of tackling the financial challenge of a top-tier education.",
+    "suggested_image_filename": "tuition-fees-of-ivy-league.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tuition-fees-of-ivy-league.png"
+  },
+  {
+    "article_id": "liberal-arts-colleges-usa-guide",
+    "image_generation_prompt": "A bright, realistic photo capturing the essence of an elite U.S. liberal arts college. A young adult Japanese university student is engaged in an animated, intellectual discussion with a friendly, diverse small group of students and a professor around a classic wooden seminar table. The room is bathed in warm, natural light from large windows overlooking a stunning, green campus with historic brick buildings. Bookshelves line the walls. The atmosphere is collaborative, inspiring, and focused. At the top of the image, the words 'Liberal Arts' are displayed prominently in a very large, elegant, and sophisticated serif font. The text is clear, easy to read, and aesthetically pleasing. The overall image should feel aspirational and academic. No other text should be visible.",
+    "suggested_image_filename": "liberal-arts-colleges-usa-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\liberal-arts-colleges-usa-guide.png"
+  },
+  {
+    "article_id": "amherst-college-open-curriculum",
+    "image_generation_prompt": "Create a realistic photo capturing the spirit of academic freedom at Amherst College. The scene is inside a beautiful, sun-drenched library with classic architecture, like the Frost Library. A diverse group of university-age students, including a young adult Japanese male and female, are gathered around a large wooden table. They are deeply engaged in an enthusiastic discussion, with laptops, textbooks, and notes spread before them. Their expressions radiate curiosity and intellectual joy. Through a large window, a lush, green campus is visible. Superimpose the text 'Amherst College' prominently on the image. The font must be very large, elegant, sophisticated, and easily readable, making it the central focus. The overall mood should be bright, inspiring, and intellectual, conveying opportunity and collaborative learning. Ensure there are no minors, only university-age individuals.",
+    "suggested_image_filename": "amherst-college-open-curriculum.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\amherst-college-open-curriculum.png"
+  },
+  {
+    "article_id": "swarthmore-college-quaker-values",
+    "image_generation_prompt": "Create a realistic photo capturing the serene and intellectual atmosphere of Swarthmore College. The scene features a young adult Japanese student, looking thoughtful and inspired, sitting on a bench in the beautiful Scott Arboretum on campus. In the background, the iconic Parrish Hall with its gothic architecture is visible under a soft, natural light. The overall mood is peaceful and aspirational. Superimposed over the image, display the title 'Swarthmore College' in a very large, prominent, and elegant sans-serif font. The text should be the main focal point, yet blend harmoniously with the academic setting. Ensure there are no other texts in the image.",
+    "suggested_image_filename": "swarthmore-college-quaker-values.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\swarthmore-college-quaker-values.png"
+  },
+  {
+    "article_id": "pomona-college-claremont-colleges",
+    "image_generation_prompt": "Generate a realistic photo capturing the vibrant and intellectual atmosphere of Pomona College, part of the Claremont Colleges. The scene is set on a pristine, sun-drenched green lawn on campus, under the clear blue sky of Southern California. A diverse group of university students, including a young Japanese man and woman, are engaged in a lively but relaxed academic discussion, sitting in a circle on the grass with books and laptops. All individuals must be depicted as adults. The architecture in the background should be elegant and collegiate. Superimpose the title 'Pomona College' in a very large, clean, and sophisticated font, making it a prominent and easily readable feature of the image. The overall mood should be inspiring, bright, and academic, with no other text.",
+    "suggested_image_filename": "pomona-college-claremont-colleges.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\pomona-college-claremont-colleges.png"
+  },
+  {
+    "article_id": "williams-college-tutorial-system",
+    "image_generation_prompt": "A realistic photo capturing the essence of an intense academic session. In a cozy, sunlit seminar room at a prestigious university, reminiscent of Williams College, two Japanese university students, a male and a female in their early 20s, are deeply engaged in a tutorial with their professor. They are sitting around a classic wooden table filled with books and notes. The atmosphere is intellectually stimulating yet supportive. In the foreground, prominently displayed in a very large, elegant, and sophisticated font, are the words 'Williams Tutorial'. The lighting is soft and natural, creating a warm and inviting academic scene. Ensure the text is the main focus, perfectly integrated into the image.",
+    "suggested_image_filename": "williams-college-tutorial-system.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\williams-college-tutorial-system.png"
+  },
+  {
+    "article_id": "harvard-famous-japanese-alumni",
+    "image_generation_prompt": "A vibrant, realistic photo capturing the prestige of Harvard University. The main focus is a beautifully designed, large, and elegant title 'Harvard Alumni' prominently displayed in the center. The font should be sophisticated and easily readable. In the background, subtly blurred, is the iconic Widener Library or a similar historic Harvard building, with autumn leaves creating a warm, academic atmosphere. A diverse group of young Japanese adults, male and female, dressed in smart casual attire, are seen in the background, walking and chatting, suggesting a collaborative and inspiring student life. Their faces are not the main focus but their presence adds a human element. The overall mood is aspirational, intellectual, and professional. No other text should be on the image.",
+    "suggested_image_filename": "harvard-famous-japanese-alumni.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-famous-japanese-alumni.png"
+  },
+  {
+    "article_id": "stanford-dschool-design-thinking",
+    "image_generation_prompt": "A realistic photo capturing a dynamic workshop at a modern university setting, reminiscent of Stanford's d.school. A diverse group of adult professionals, including Japanese men and women, are collaboratively engaged in a design thinking session. They are gathered around a large whiteboard covered in colorful sticky notes, diagrams, and sketches. The atmosphere is energetic, creative, and filled with focused discussion. Natural light streams through large windows, illuminating the bright, open-plan room. At the top of the image, the words 'Design Thinking' are prominently displayed in a very large, clean, and sophisticated font, making it the main focal point. The image should convey innovation, collaboration, and problem-solving without showing any faces of minors.",
+    "suggested_image_filename": "stanford-dschool-design-thinking.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\stanford-dschool-design-thinking.png"
+  },
+  {
+    "article_id": "university-of-waterloo-co-op-program",
+    "image_generation_prompt": "A realistic photo capturing the vibrant and ambitious atmosphere of the University of Waterloo's Co-op program. In the foreground, a young Japanese male and female university student, in their early 20s, are enthusiastically discussing a project over a laptop. They are dressed in smart casual attire, looking confident and future-focused. The background features the iconic, modern architecture of the University of Waterloo campus, possibly the Mathematics & Computer building, with natural light streaming in. Superimposed over the image in a very large, clean, and sophisticated font is the title \"Waterloo Co-op\". The overall mood is bright, inspiring, and professional.",
+    "suggested_image_filename": "university-of-waterloo-co-op-program.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-waterloo-co-op-program.png"
+  },
+  {
+    "article_id": "purdue-university-engineering-aviation",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of Purdue University's engineering and aerospace programs. The image should feature a young adult Japanese student, looking with ambition towards a large, glowing holographic display showing a complex rocket engine blueprint. The setting is a state-of-the-art, modern university laboratory with subtle elements of Purdue's campus architecture visible through a window. The lighting should be dramatic, highlighting the student and the hologram. In the foreground, prominently display the title 'Purdue Engineering' in a very large, clean, and sophisticated sans-serif font. The title must be easily readable and visually striking. The overall tone should be inspiring, high-tech, and academic. No other text should be visible.",
+    "suggested_image_filename": "purdue-university-engineering-aviation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\purdue-university-engineering-aviation.png"
+  },
+  {
+    "article_id": "georgia-tech-engineering",
+    "image_generation_prompt": "A realistic photo capturing the innovative spirit of Georgia Institute of Technology. In the foreground, a diverse group of university students, including a young Japanese adult student, are collaboratively working on a futuristic engineering project in a state-of-the-art laboratory. The lab is filled with advanced equipment like robotic arms and glowing holographic interfaces. Through a large window, the iconic Tech Tower is visible against a bright Atlanta sky. The atmosphere is vibrant, inspiring, and forward-thinking. Prominently displayed in the image is the text \"Georgia Tech\" in a very large, clean, and sophisticated font, seamlessly integrated into the composition. The lighting is bright and optimistic, highlighting the students' focused expressions.",
+    "suggested_image_filename": "georgia-tech-engineering.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\georgia-tech-engineering.png"
+  },
+  {
+    "article_id": "university-of-texas-at-austin-business",
+    "image_generation_prompt": "A realistic photo capturing the vibrant and professional atmosphere of the McCombs School of Business at the University of Texas at Austin. The image should feature a diverse group of graduate students, including a prominent young adult Japanese student, engaged in a collaborative discussion in a modern, sunlit atrium. In the background, the iconic UT Tower or a sleek, contemporary building with the university's logo is visible. The overall mood is ambitious, innovative, and globally connected. Prominently displayed across the image is the title \"UT Austin Business\" in a very large, clean, and sophisticated font, making it easily readable and stylish. No other text should be present.",
+    "suggested_image_filename": "university-of-texas-at-austin-business.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-texas-at-austin-business.png"
+  },
+  {
+    "article_id": "uc-irvine-computer-game-science",
+    "image_generation_prompt": "A realistic photo capturing the vibrant atmosphere of the University of California, Irvine (UCI) campus, focused on the Computer Game Science program. In the foreground, a diverse group of university students, including a young Japanese male and female, are collaboratively working on a game project on their laptops. Their faces show excitement and deep concentration. The background blends the modern architecture of UCI with futuristic, glowing lines of code and 3D game assets, symbolizing the fusion of academia and technology. The overall lighting is bright and optimistic. Superimposed over the image in a large, clean, and highly sophisticated font, display the text \"UC Irvine Game Science\". The text should be a central design element, very prominent and easy to read. Avoid any other text in the image.",
+    "suggested_image_filename": "uc-irvine-computer-game-science.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-irvine-computer-game-science.png"
+  },
+  {
+    "article_id": "university-of-illinois-urbana-champaign-uiuc-cs",
+    "image_generation_prompt": "A realistic photo capturing the essence of excellence at the University of Illinois Urbana-Champaign's Computer Science department. In the foreground, a confident young adult Japanese university student stands proudly, holding a laptop. The background features the modern, iconic architecture of the Thomas M. Siebel Center for Computer Science, with sunlight glinting off the glass facade. The overall mood is bright, optimistic, and forward-thinking. Superimposed over the image is the title 'UIUC CS' in a very large, clean, and sophisticated font, making it the main focal point. No other text should be on the image. The style should be vibrant and professional.",
+    "suggested_image_filename": "university-of-illinois-urbana-champaign-uiuc-cs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-illinois-urbana-champaign-uiuc-cs.png"
+  },
+  {
+    "article_id": "new-york-university-tisch-school-of-the-arts",
+    "image_generation_prompt": "A realistic photo capturing the vibrant and creative atmosphere of New York University's Tisch School of the Arts. In the foreground, a determined adult Japanese student is passionately working on a film project, looking through a professional camera. The background features a slightly blurred, artistic view of a classic Greenwich Village street, with the iconic NYU purple flag visible. The overall mood is inspiring, energetic, and focused on artistic creation. Prominently displayed in the upper part of the image, superimpose the title 'NYU Tisch' in a very large, bold, and stylish sans-serif font. The text should be clean, highly visible, and blend elegantly with the overall composition. Ensure no other text appears in the image.",
+    "suggested_image_filename": "new-york-university-tisch-school-of-the-arts.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\new-york-university-tisch-school-of-the-arts.png"
+  },
+  {
+    "article_id": "what-is-a-public-ivy-university",
+    "image_generation_prompt": "A realistic photo, wide-angle shot of a prestigious American university campus, symbolizing the 'Public Ivies.' The scene features majestic, ivy-covered brick buildings, a lush green lawn, and a clear blue sky, reminiscent of the University of Michigan. In the foreground, a young adult Japanese student in their early twenties is walking with a backpack, looking optimistically towards the grand architecture. The atmosphere is bright, inspiring, and academic, captured during the golden hour to create a warm, inviting glow. Superimpose the title 'Public Ivies' in a very large, elegant, and highly visible white serif font. The text must be clean, sophisticated, and positioned for immediate readability without obscuring the main subjects. No other text should be present on the image. High resolution and sharp details are essential.",
+    "suggested_image_filename": "what-is-a-public-ivy-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-a-public-ivy-university.png"
+  },
+  {
+    "article_id": "university-of-st-andrews-uk-royal-family",
+    "image_generation_prompt": "A realistic, high-resolution photo capturing the majestic beauty of the University of St Andrews in Scotland. The image showcases the historic stone architecture of the university buildings, with the iconic St Salvator's Chapel Quadrangle. In the background, the serene North Sea is visible under a bright, clear sky. The lighting is warm and inviting, evoking a sense of prestige, history, and academic excellence. Superimposed on the image in a very large, elegant, and easily readable serif font is the title \"St Andrews University\". The overall composition should be inspiring and aspirational, with no people, focusing solely on the magnificent scenery and the title.",
+    "suggested_image_filename": "university-of-st-andrews-uk-royal-family.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-st-andrews-uk-royal-family.png"
+  },
+  {
+    "article_id": "hec-paris-france-business-school",
+    "image_generation_prompt": "A realistic photo capturing the vibrant and ambitious atmosphere of HEC Paris. In the background, a modern, sunlit glass building of the HEC Paris campus. In the foreground, a diverse group of university-age students, including a young Japanese man, are engaged in a lively discussion around an outdoor table, with laptops and notebooks open. They look focused yet optimistic. The overall image should feel bright, clean, and inspiring. Centered in the upper part of the image, the text 'HEC Paris' is displayed in a very large, elegant, and highly legible sans-serif font, making it a prominent feature. The style is sharp, professional, and full of natural light.",
+    "suggested_image_filename": "hec-paris-france-business-school.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\hec-paris-france-business-school.png"
+  },
+  {
+    "article_id": "sciences-po-paris-france-social-sciences",
+    "image_generation_prompt": "A realistic photo of a young adult Japanese student, looking inspired and thoughtful, standing in front of the iconic entrance of Sciences Po in Paris (27 Rue Saint-Guillaume). The background shows the classic Parisian architecture of the university building. The lighting is bright and optimistic, suggesting a promising future. The overall mood is academic, prestigious, and international. Prominently display the title 'Sciences Po' in a very large, clear, and sophisticated serif font, making it the main visual focus. No other text should be on the image.",
+    "suggested_image_filename": "sciences-po-paris-france-social-sciences.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\sciences-po-paris-france-social-sciences.png"
+  },
+  {
+    "article_id": "delft-university-of-technology-tu-delft-netherlands",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the innovative spirit of Delft University of Technology. In the foreground, a young adult Japanese student, looking inspired, interacts with a sleek, futuristic design prototype in a bright, modern workshop. The background features the iconic, grass-covered roof of the TU Delft Library, blending nature with cutting-edge architecture. The overall mood is bright, optimistic, and forward-thinking. Prominently display the text \"TU Delft\" in a very large, clean, and sophisticated font, making it a central visual element. The image should be clutter-free, focusing on innovation and learning.",
+    "suggested_image_filename": "delft-university-of-technology-tu-delft-netherlands.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\delft-university-of-technology-tu-delft-netherlands.png"
+  },
+  {
+    "article_id": "university-of-amsterdam-netherlands-media-studies",
+    "image_generation_prompt": "A realistic photo capturing the vibrant student life at the University of Amsterdam. The scene is set against the backdrop of a picturesque Amsterdam canal with its iconic narrow houses. A diverse group of university students, including a young Japanese adult, are enthusiastically discussing a project, gathered around a laptop on a bench by the canal. The atmosphere is bright, sunny, and full of intellectual curiosity and optimism. Subtly include elements related to media studies, like a digital camera or a smartphone being used for content creation. Crucially, display the text \"University of Amsterdam\" prominently in the upper half of the image. The font should be very large, clear, and stylishly designed to be easily readable and eye-catching. The image should not contain any other text. The overall composition should be inspiring and inviting, perfect for an article about studying abroad in the Netherlands.",
+    "suggested_image_filename": "university-of-amsterdam-netherlands-media-studies.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-amsterdam-netherlands-media-studies.png"
+  },
+  {
+    "article_id": "ludwig-maximilian-university-of-munich-lmu-germany",
+    "image_generation_prompt": "realistic photo: A hopeful young Japanese university student, an adult, stands in front of the impressive main building of LMU Munich (Ludwig-Maximilians-Universität München). The architecture is classical and grand. The student is smiling, looking thoughtfully towards the future, holding a book. The atmosphere is bright, sunny, and academic. The image should convey a sense of opportunity and intellectual pursuit. Focus on the realistic texture of the building and the optimistic expression of the student. The text 'LMU Munich' should be prominently displayed in a very large, clean, and elegant font at the top of the image.",
+    "suggested_image_filename": "ludwig-maximilian-university-of-munich-lmu-germany.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ludwig-maximilian-university-of-munich-lmu-germany.png"
+  },
+  {
+    "article_id": "kth-royal-institute-of-technology-sweden",
+    "image_generation_prompt": "A realistic photo capturing the innovative and academic atmosphere of KTH Royal Institute of Technology in Sweden. In the foreground, a group of diverse university students, including a young Japanese male and female student, are engaged in a collaborative discussion outdoors on the vibrant campus. The background features the iconic red-brick architecture of KTH, bathed in the soft, natural light of a Swedish afternoon. The overall mood is inspiring, bright, and globally-minded. Prominently display the text 'KTH Sweden' on the image. This text should be very large, easily readable, and use a sophisticated, modern sans-serif font, making it a central visual element. Ensure no other text appears.",
+    "suggested_image_filename": "kth-royal-institute-of-technology-sweden.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\kth-royal-institute-of-technology-sweden.png"
+  },
+  {
+    "article_id": "usc-vs-ucla-los-angeles-rivalry",
+    "image_generation_prompt": "Generate a realistic, high-resolution photo-style image for a blog article comparing USC and UCLA. The image should be split-screen or artistically blended to show a clear contrast between the two universities. On one side, represent USC with its iconic cardinal red and gold colors, maybe featuring a glimpse of a Romanesque-style building on its vibrant, urban campus. On the other side, represent UCLA with its classic blue and gold colors, showcasing its beautiful, sprawling campus with brick buildings in the Westwood area. The overall mood should be prestigious and energetic, capturing the spirit of a friendly but intense rivalry. Prominently display the text 'USC vs UCLA' in the center of the image, using a very large, clean, and sophisticated font. The text should be the main focus and easily readable. No other text should be on the image. The image should look like a professional photograph.",
+    "suggested_image_filename": "usc-vs-ucla-los-angeles-rivalry.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\usc-vs-ucla-los-angeles-rivalry.png"
+  },
+  {
+    "article_id": "tuition-free-universities-in-europe",
+    "image_generation_prompt": "A realistic photo of a young Japanese university student, an adult male, looking thoughtfully towards the future. He is standing on a beautiful, historic European university campus, reminiscent of Heidelberg in Germany, with a mix of old architecture and modern, clean Nordic design elements in the background. Bright, optimistic sunlight filters through the scene. In the foreground, the words \"European Universities\" are displayed prominently in a very large, clear, and elegant font, making it the main focus. The overall mood is aspirational, intellectual, and full of hope. No other text should be visible.",
+    "suggested_image_filename": "tuition-free-universities-in-europe.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tuition-free-universities-in-europe.png"
+  },
+  {
+    "article_id": "canadian-universities-vs-us-universities",
+    "image_generation_prompt": "A realistic, high-quality photo capturing the concept of choosing between Canadian and US universities. The image is split-screen style. On the left, a background of a Canadian university campus with iconic maple leaves. On the right, an American university campus with a subtle hint of the US flag. In the center, a young adult Japanese student, viewed from behind to not show the face, stands at a crossroads, looking thoughtfully towards the two options. The overall tone is bright, optimistic, and inspiring. Prominently display the title 'Canada vs USA' in a very large, clean, and stylish font in the upper center of the image. This text should be the main visual focus. Ensure no other text is visible in the image.",
+    "suggested_image_filename": "canadian-universities-vs-us-universities.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\canadian-universities-vs-us-universities.png"
+  },
+  {
+    "article_id": "uk-universities-vs-us-universities",
+    "image_generation_prompt": "A realistic photo, split-screen style, comparing UK and US universities. On the left, a classic UK university scene with Gothic architecture like Oxford, with a Japanese student in the background. On the right, a vibrant US university campus like an Ivy League, with diverse students, including a Japanese student, socializing on a green lawn. In the center, prominently display the title \"UK vs US\" in a very large, stylish, and easily readable font. The overall tone should be bright and optimistic, capturing the essence of studying abroad. Ensure the characters are young adults, not minors, and their faces are not shown clearly.",
+    "suggested_image_filename": "uk-universities-vs-us-universities.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uk-universities-vs-us-universities.png"
+  },
+  {
+    "article_id": "community-college-to-uc-berkeley",
+    "image_generation_prompt": "Generate a realistic, inspiring photo for a blog article about transferring to UC Berkeley from a community college. The image should feature a hopeful Japanese young adult student (university age) looking towards the iconic Sather Tower of UC Berkeley in the background, bathed in warm, golden hour sunlight. The student could be holding a textbook, symbolizing their academic journey. The overall mood should be optimistic and motivational. Overlay the text 'UC Berkeley Transfer' in a very large, clean, and stylish font, prominently displayed but elegantly integrated into the composition. The text should be the main focal point besides the student and the tower. No other text should be visible.",
+    "suggested_image_filename": "community-college-to-uc-berkeley.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\community-college-to-uc-berkeley.png"
+  },
+  {
+    "article_id": "harvard-business-school-undergraduate-2-2-program",
+    "image_generation_prompt": "Create a realistic photo capturing an aspirational and academic mood. A young Japanese university student, male, stands looking thoughtfully towards the iconic crimson brick buildings of Harvard University. The background, featuring the classic architecture of Harvard Business School, is slightly blurred to maintain focus on the student and the text. Overlay a large, very prominent, and stylishly designed title 'HBS 2+2' on the image. The font should be elegant, modern, and easily readable, making it the central visual element. The student is dressed in smart casual attire. The lighting is bright and optimistic, suggesting a promising future. No other text should be on the image.",
+    "suggested_image_filename": "harvard-business-school-undergraduate-2-2-program.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-business-school-undergraduate-2-2-program.png"
+  },
+  {
+    "article_id": "stanford-graduate-school-of-business-gsb-reputation",
+    "image_generation_prompt": "A realistic photo capturing the essence of Stanford Graduate School of Business (GSB). The scene features the iconic, modern architecture of the Knight Management Center on a bright, sunny California day. In the foreground, prominently display the title \"Stanford GSB\" in a very large, clean, and sophisticated font that is easy to read and aesthetically pleasing. In the background, subtly depict a diverse group of ambitious graduate students, including some Japanese individuals, engaged in a lively discussion, symbolizing collaboration and global community. The overall atmosphere should be inspiring, prestigious, and forward-thinking, reflecting innovation and leadership. Avoid showing any faces of minors. The image should be high-resolution and suitable for a blog article thumbnail.",
+    "suggested_image_filename": "stanford-graduate-school-of-business-gsb-reputation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\stanford-graduate-school-of-business-gsb-reputation.png"
+  },
+  {
+    "article_id": "risd-rhode-island-school-of-design-art",
+    "image_generation_prompt": "A realistic photo capturing the essence of the Rhode Island School of Design (RISD). In the foreground, a young adult Japanese student is sketching in a notebook, looking inspired and focused. The background shows the iconic architecture of the RISD campus in Providence, with a blend of historic and modern buildings, bathed in warm, natural sunlight. The atmosphere is vibrant and creative. Prominently display the title 'RISD' in a very large, clean, and sophisticated font, making it a central visual element. The overall image should be aspirational and artistic, with no other text.",
+    "suggested_image_filename": "risd-rhode-island-school-of-design-art.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\risd-rhode-island-school-of-design-art.png"
+  },
+  {
+    "article_id": "what-is-the-ivy-plus",
+    "image_generation_prompt": "A realistic photo, sophisticated and inspiring, for an article about the \"Ivy Plus\" universities. The image should be a seamless, elegant collage of iconic architectural elements from several top universities: the classic red-brick buildings of Harvard, the modern Great Dome of MIT, and the distinct mission-style arches of Stanford. The composition should feel prestigious and academic, bathed in the warm, golden light of a late autumn afternoon. In the center, prominently display the text \"Ivy Plus\". This title must be very large, easily readable, and rendered in a sophisticated, classic serif font. The overall image should evoke a sense of aspiration and intellectual excellence, with no people or other distracting text.",
+    "suggested_image_filename": "what-is-the-ivy-plus.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-the-ivy-plus.png"
+  },
+  {
+    "article_id": "uc-system-9-campuses-comparison",
+    "image_generation_prompt": "A realistic photo capturing the essence of California's university life. The background features a bright, sunny California sky with iconic palm trees. In the center, prominently display the title 'UC Campuses' in a very large, clean, and sophisticated font. Surrounding the title is a subtle, inspiring collage of various University of California (UC) campuses, showcasing iconic architecture like UCLA's Royce Hall and UC Berkeley's Sather Tower. In the foreground, a hopeful young adult Japanese university student, looking towards the future with a positive expression. The overall mood should be bright, academic, and full of dreams. No other text.",
+    "suggested_image_filename": "uc-system-9-campuses-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-system-9-campuses-comparison.png"
+  },
+  {
+    "article_id": "scholarships-for-japanese-students-at-us-universities",
+    "image_generation_prompt": "A realistic photo capturing a moment of hope and ambition. A young Japanese university student, seen from the side, stands on a beautiful, classic American university campus reminiscent of the Ivy League, perhaps similar to Harvard's architecture. The student is looking thoughtfully towards a grand library or lecture hall, with the warm light of a late afternoon sun casting long shadows. In the foreground, subtly out of focus, are some books. The overall mood is inspiring and optimistic. Overlay the text 'US Scholarships' in a very large, clear, and elegant serif font. The text should be prominent and stylish, seamlessly integrated into the top half of the image. The image should be photorealistic and high-resolution.",
+    "suggested_image_filename": "scholarships-for-japanese-students-at-us-universities.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\scholarships-for-japanese-students-at-us-universities.png"
+  },
+  {
+    "article_id": "how-to-get-into-ucla-as-an-international-student",
+    "image_generation_prompt": "A realistic photo capturing the spirit of a successful Japanese university student, in their early 20s (not a minor), standing on the UCLA campus. The iconic Royce Hall is visible in the background under a sunny California sky. The student looks hopeful and confident, gazing towards the future. In the foreground, the text 'UCLA Admission' is prominently displayed in a very large, clean, and sophisticated bold sans-serif font, making it the main focal point. The overall atmosphere is bright, inspiring, and academic. The image should be high-resolution and visually striking, with no other text.",
+    "suggested_image_filename": "how-to-get-into-ucla-as-an-international-student.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-get-into-ucla-as-an-international-student.png"
+  },
+  {
+    "article_id": "university-of-warwick-uk-reputation",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of the University of Warwick. The image should feature a hopeful and ambitious young Japanese university student standing on the modern campus. The background showcases the university's iconic architecture, blended with lush green lawns under a bright, clear sky, symbolizing opportunity and growth. The overall mood is inspiring, professional, and academic. Prominently display the text 'Warwick University' in the image. This text must be very large, clear, and rendered in a sophisticated, elegant font, making it the central visual element. The photo should be high-resolution with cinematic lighting. No other text should be visible.",
+    "suggested_image_filename": "university-of-warwick-uk-reputation.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-warwick-uk-reputation.png"
+  },
+  {
+    "article_id": "university-of-manchester-uk-city-life",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the essence of student life at the University of Manchester. In the foreground, a young Japanese university student, looking optimistic and engaged, walks across the beautiful historic campus, with the iconic Whitworth Hall in the background under a bright, slightly cloudy sky. Other students from diverse backgrounds are seen chatting and studying in the background, creating a lively atmosphere. Superimposed on the image in a very large, clean, and stylish font is the text 'Manchester University'. The overall mood is inspiring, academic, and full of potential. No minors.",
+    "suggested_image_filename": "university-of-manchester-uk-city-life.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-manchester-uk-city-life.png"
+  },
+  {
+    "article_id": "how-to-get-a-full-ride-scholarship",
+    "image_generation_prompt": "Create a realistic, hopeful photo for an article about winning a full-ride scholarship to a US university. The scene features the back of a young Japanese university graduate, wearing a cap and gown, looking towards a beautiful, iconic American university campus with classic brick buildings under a bright, sunny sky. The overall mood is optimistic and inspiring, celebrating a dream achieved. Prominently display the large, elegant, and highly visible title 'Full-Ride Scholarship' in a sophisticated font on the image. Ensure no other text is visible. The focus is on the aspirational journey and the successful outcome.",
+    "suggested_image_filename": "how-to-get-a-full-ride-scholarship.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-get-a-full-ride-scholarship.png"
+  },
+  {
+    "article_id": "safety-at-us-university-campuses",
+    "image_generation_prompt": "A realistic, high-quality photo capturing the serene and safe atmosphere of a prestigious American university campus, reminiscent of Columbia University, at dusk. In the foreground, a young adult Japanese student is seen walking confidently on a well-lit path. The iconic architecture of a library or main hall is visible in the background, bathed in the warm glow of the setting sun and campus lights. A blue light emergency phone could be subtly visible to symbolize safety measures. The overall mood should be positive, hopeful, and reassuring. Prominently display the title \"University Safety\" in a very large, clean, and elegant font, making it a central visual element. The image should not contain any other text.",
+    "suggested_image_filename": "safety-at-us-university-campuses.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\safety-at-us-university-campuses.png"
+  },
+  {
+    "article_id": "women-s-colleges-usa-barnard-wellesley",
+    "image_generation_prompt": "Realistic photo, a bright and hopeful scene on the beautiful, historic campus of an elite American women's college like Wellesley or Barnard. Two intelligent young adult Japanese female students are sitting on a lush green lawn, engaged in a lively discussion with books open. Sunlight filters through the trees, creating a warm, inspiring atmosphere. The architecture in the background is classic ivy-league brick. The image should prominently feature the text 'Women's Colleges' in a very large, elegant, and easily readable font, seamlessly integrated into the top half of the image. No other text should be visible. The overall mood is one of ambition, friendship, and intellectual growth.",
+    "suggested_image_filename": "women-s-colleges-usa-barnard-wellesley.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\women-s-colleges-usa-barnard-wellesley.png"
+  },
+  {
+    "article_id": "barnard-college-columbia-university-relationship",
+    "image_generation_prompt": "A realistic photo capturing the unique partnership between Barnard College and Columbia University. The scene is set on Columbia's iconic campus, with the majestic Butler Library in the background under a bright, sunny sky. In the foreground, a diverse group of university students, including some Japanese students, are seen collaborating and chatting happily on the steps, symbolizing the shared academic and social life. The overall atmosphere is vibrant, intellectual, and inspiring. Feature the title \"Barnard & Columbia\" prominently in a very large, elegant, and easily readable serif font, seamlessly integrated into the top half of the image. The image should be clean, with no other text.",
+    "suggested_image_filename": "barnard-college-columbia-university-relationship.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\barnard-college-columbia-university-relationship.png"
+  },
+  {
+    "article_id": "usc-dornsife-college-of-letters-arts-and-sciences",
+    "image_generation_prompt": "A realistic, vibrant photo capturing the intellectual and sunny atmosphere of the USC Dornsife College of Letters, Arts and Sciences. The scene is set on the beautiful USC campus, with its iconic brick buildings and lush greenery under the bright California sun. In the foreground, a diverse group of university students, including a young Japanese student, are engaged in a lively academic discussion on a lawn. They look happy, inspired, and collaborative. Superimposed over the image, the words \"USC Dornsife\" are displayed in a very large, clear, and elegant font, making it the focal point. The overall image should convey a sense of opportunity, academic excellence, and a welcoming global community.",
+    "suggested_image_filename": "usc-dornsife-college-of-letters-arts-and-sciences.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\usc-dornsife-college-of-letters-arts-and-sciences.png"
+  },
+  {
+    "article_id": "princeton-university-eating-clubs",
+    "image_generation_prompt": "A realistic photo capturing the essence of Princeton University's exclusive social scene. The image showcases a magnificent, collegiate gothic-style eating club building on a sunny afternoon. The stone facade and large, mullioned windows exude history and prestige. A few diverse, young adult university students are seen near the entrance, engaged in casual conversation, suggesting a vibrant social life. The overall atmosphere is academic, aspirational, and slightly exclusive. In the foreground, the title 'Eating Clubs' is prominently displayed in a very large, elegant, and highly legible serif font, beautifully integrated into the composition. Ensure there are no other texts or logos.",
+    "suggested_image_filename": "princeton-university-eating-clubs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\princeton-university-eating-clubs.png"
+  }
+]
