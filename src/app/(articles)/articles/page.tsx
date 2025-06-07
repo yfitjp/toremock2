@@ -279,7 +279,7 @@ export default function ArticlesHomePage() {
                     href={`/articles/${article.id}`}
                     className="border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white hover:bg-slate-50 block"
                   >
-                    <div className="relative bg-slate-200 aspect-[3/2]">
+                    <div className="relative bg-slate-200 aspect-[5/3]">
                       <Image 
                         src={article.imageSrc || '/images/placeholder.jpg'}
                         alt={article.title}
@@ -384,7 +384,7 @@ export default function ArticlesHomePage() {
                 className={`border border-slate-200 rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 bg-white hover:bg-slate-50 block`}
               >
                 {/* 画像部分 - Adjust aspect ratio here: remove h-48, add aspect-[3/2] */}
-                <div className="relative bg-slate-200 aspect-[3/2]">
+                <div className="relative bg-slate-200 aspect-[5/3]">
                   <Image 
                     src={article.imageSrc || '/images/placeholder.jpg'}
                     alt={article.title}
