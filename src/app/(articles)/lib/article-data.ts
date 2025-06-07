@@ -6706,25 +6706,6 @@ export const articleData: Record<string, ArticleData> = {
     "IELTS"
     ]
   },
-  "boston-career-forum-preparation-guide": {
-    "id": "boston-career-forum-preparation-guide",
-    "title": "ボスキャリ完全攻略！内定を複数獲得する準備術",
-    "description": "ボスキャリで複数内定を獲得するための完全ガイド。自己分析からレジュメ作成、面接対策、当日の立ち回りまで、時系列に沿った具体的な準備術を徹底解説。留学生やバイリンガル学生必見の、成功へのロードマップです。",
-    "category": "学習法",
-    "date": "2025-06-07",
-    "readTime": "7分",
-    "imageSrc": "/images/boston-career-forum-preparation-guide.png",
-    "tags": [
-    "ボスキャリ",
-    "キャリアフォーラム",
-    "就職活動",
-    "留学生",
-    "外資系企業",
-    "英語面接",
-    "自己分析",
-    "レジュメ"
-    ]
-  },
   "how-to-get-recommendation-letter-from-professor": {
     "id": "how-to-get-recommendation-letter-from-professor",
     "title": "留学の鍵！教授から強力な推薦状をもらう依頼術",
@@ -7851,25 +7832,6 @@ export const articleData: Record<string, ArticleData> = {
     "海外大学院",
     "キャリアアップ",
     "留学準備"
-    ]
-  },
-  "fulbright-scholarship-application-tips": {
-    "id": "fulbright-scholarship-application-tips",
-    "title": "フルブライト奨学金の選考プロセスと面接対策のコツ",
-    "description": "世界最高峰の奨学金、フルブライト・プログラムへの挑戦を考えていますか？本記事では、複雑な選考プロセスを徹底解説。合格を掴むための効果的な書類作成術から、面接で差をつけるための具体的な質問例と回答のコツまで、詳しくご紹介します。",
-    "category": "学習法",
-    "date": "2025-06-07",
-    "readTime": "5分",
-    "imageSrc": "/images/fulbright-scholarship-application-tips.png",
-    "tags": [
-    "フルブライト奨学金",
-    "アメリカ留学",
-    "奨学金",
-    "面接対策",
-    "書類選考",
-    "研究計画書",
-    "エッセイ",
-    "TOEFL"
     ]
   },
   "ito-foundation-scholarship-interview": {
