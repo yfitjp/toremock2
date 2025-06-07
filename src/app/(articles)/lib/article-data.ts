@@ -3053,7 +3053,6 @@ export const articleData: Record<string, ArticleData> = {
     "英語学習",
     "テスト対策"
     ],
-    "popular": true
   },
   "english-drama-phrases-you-bet-for-real-nuance": {
     "id": "english-drama-phrases-you-bet-for-real-nuance",
@@ -4241,7 +4240,6 @@ export const articleData: Record<string, ArticleData> = {
     "英文メール",
     "英語ライティング"
     ],
-    "popular": true
   },
   "email-to-professor-abroad-etiquette": {
     "id": "email-to-professor-abroad-etiquette",
@@ -7925,7 +7923,8 @@ export const articleData: Record<string, ArticleData> = {
     "成績証明書",
     "留学準備",
     "海外大学"
-    ]
+    ],
+    "popular": true
   },
   "harvard-summer-school-guide": {
     "id": "harvard-summer-school-guide",
@@ -8906,7 +8905,8 @@ export const articleData: Record<string, ArticleData> = {
     "学位取得",
     "キャリアアップ",
     "英語学習"
-    ]
+    ],
+    "popular": true
   },
   "uc-berkeley-vs-ucla-engineering": {
     "id": "uc-berkeley-vs-ucla-engineering",
