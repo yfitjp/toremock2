@@ -124,8 +124,14 @@ export default async function ArticleDetail({ params }: { params: { id: string }
             <div className="bg-white p-6 rounded-lg shadow-md border border-slate-200">
               <h3 className="text-lg font-semibold text-slate-800 mb-4">この記事を書いた人</h3>
               <div className="flex items-center space-x-4">
-                <div className="relative h-12 w-12 bg-slate-300 rounded-full overflow-hidden">
-                  <svg className="absolute inset-0 text-slate-500" fill="currentColor" viewBox="0 0 20 20"><path d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" /></svg>
+                <div className="relative h-12 w-12 rounded-full overflow-hidden">
+                  <Image
+                    src="/images/toremock-member.png"
+                    alt="トレモック情報局 編集部"
+                    fill
+                    className="object-cover"
+                    sizes="48px"
+                  />
                 </div>
                 <div>
                   <h4 className="font-medium text-slate-800">トレモック情報局 編集部</h4>

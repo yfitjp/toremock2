@@ -1,0 +1,302 @@
+[
+  {
+    "article_id": "bocconi-university-reputation-admission",
+    "image_generation_prompt": "Create a realistic photo capturing the aspirational atmosphere of Bocconi University. The image should feature a confident Japanese university student in their early 20s, standing in front of the university's sleek, modern campus buildings in Milan. The student should have an ambitious and forward-looking expression, symbolizing a bright future. The lighting should be bright and natural daylight, creating a sharp and high-quality image. Crucially, the text 'Bocconi University' should be prominently and stylishly displayed across the image, large enough to be easily readable. Ensure there are no other distracting small texts. The overall mood should be inspiring and prestigious.",
+    "suggested_image_filename": "bocconi-university-reputation-admission.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\bocconi-university-reputation-admission.png"
+  },
+  {
+    "article_id": "harvard-law-school-llm-difficulty",
+    "image_generation_prompt": "A realistic photo capturing the essence of ambition and intellect. A young Japanese man and woman, both looking sharp and determined, stand before the iconic brick facade of Harvard Law School's Austin Hall. The soft morning light illuminates their faces, a mix of awe and aspiration. The man holds a thick, leather-bound law book, with the words 'Harvard Law' clearly and largely visible on the cover. The atmosphere is prestigious and inspiring, conveying the immense challenge and honor of studying at such an institution. No other text or small characters. Focus on the determined expressions of the adults.",
+    "suggested_image_filename": "harvard-law-school-llm-difficulty.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-law-school-llm-difficulty.png"
+  },
+  {
+    "article_id": "minerva-university-what-is-it",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of Minerva University's innovative global education. The image should feature a diverse group of university students, including a central Japanese student, engaged in a vibrant online discussion on their laptops. The atmosphere is collaborative and intellectually stimulating. In the background, a sleek, semi-transparent world map is overlaid with subtle, artistic collages of iconic landmarks from various world cities like San Francisco, Berlin, and Seoul, symbolizing their global campus. The lighting is bright and modern, highlighting the forward-thinking nature of the institution. Avoid any visible text or branding.",
+    "suggested_image_filename": "minerva-university-what-is-it.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\minerva-university-what-is-it.png"
+  },
+  {
+    "article_id": "low-gpa-graduate-school-admission-strategy",
+    "image_generation_prompt": "Realistic photo capturing a moment of hopeful determination. A young Japanese student is in a bright, modern university library, intensely focused on their laptop. Scattered around are books and notes about studying abroad and graduate school applications. Sunlight streams through a large window, illuminating the scene and creating a warm, optimistic atmosphere. The student's expression is a mix of concentration and a subtle, confident smile, embodying the spirit of overcoming challenges like a low GPA to pursue their dream. The overall mood is inspiring and forward-looking. No text should be visible on the laptop screen or book covers.",
+    "suggested_image_filename": "low-gpa-graduate-school-admission-strategy.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\low-gpa-graduate-school-admission-strategy.png"
+  },
+  {
+    "article_id": "statement-of-purpose-vs-personal-statement",
+    "image_generation_prompt": "Realistic photo of a determined young Japanese university student sitting at a modern wooden desk in a well-lit study room. The student is thoughtfully comparing two documents. One document on the left has 'SOP' printed in a large, bold, clear font at the top. The document on the right has 'PS' similarly printed. The student holds a pen, poised over the documents, with a laptop open in front of them showing a generic university application webpage. Bookshelves filled with books line the wall in the background, creating a scholarly atmosphere. The lighting is soft and natural, emphasizing a mood of focused contemplation.",
+    "suggested_image_filename": "statement-of-purpose-vs-personal-statement.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\statement-of-purpose-vs-personal-statement.png"
+  },
+  {
+    "article_id": "recommendation-letter-request-email-template",
+    "image_generation_prompt": "Realistic photo, capturing a respectful interaction in a professor's office. A Japanese university student (male, early 20s) is politely handing a folder of documents to a senior professor sitting at a cluttered, academic desk. The professor is looking at the student with a kind and attentive expression. The focus is on the documents being passed over. The office is filled with books, conveying a scholarly atmosphere. The scene should be professional, respectful, and hopeful. The lighting is warm and inviting. No prominent text should be visible on the documents.",
+    "suggested_image_filename": "recommendation-letter-request-email-template.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\recommendation-letter-request-email-template.png"
+  },
+  {
+    "article_id": "us-mscs-programs-no-gre-required",
+    "image_generation_prompt": "Generate a realistic, high-quality photo capturing a sense of opportunity and academic achievement. The scene features a young Japanese male student in his early 20s, sitting at an outdoor cafe on a beautiful, iconic American university campus with classic ivy-league architecture. He is looking thoughtfully towards the future with a slight, confident smile. On his laptop screen, the words 'GRE Waived' are clearly and stylishly displayed in a large, elegant font. The image should have a warm, optimistic feel, with soft morning sunlight and a shallow depth of field that blurs the background slightly to focus on the student. Avoid any other small, unreadable text. The overall mood should be inspiring and forward-looking.",
+    "suggested_image_filename": "us-mscs-programs-no-gre-required.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\us-mscs-programs-no-gre-required.png"
+  },
+  {
+    "article_id": "affordable-computer-science-masters-europe",
+    "image_generation_prompt": "A realistic photo capturing the essence of pursuing an affordable Computer Science Master's degree in Europe. In the foreground, a hopeful young adult Japanese student sits at a sunlit desk on a beautiful university campus, deeply focused on their laptop displaying lines of code. The background features a blend of classic European architecture and modern university buildings, symbolizing a rich academic tradition meeting cutting-edge technology. Subtle, semi-transparent overlays of Euro coins are artistically placed, hinting at the affordability of the education. The overall mood is bright, optimistic, and inspiring, conveying a sense of opportunity and intellectual growth. No small text should be visible, only clear, focused imagery.",
+    "suggested_image_filename": "affordable-computer-science-masters-europe.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\affordable-computer-science-masters-europe.png"
+  },
+  {
+    "article_id": "liberal-arts-college-vs-research-university",
+    "image_generation_prompt": "A realistic photo of a Japanese student, of university age, standing at a fork in the road, symbolizing a major life choice. The path on the left leads to a quaint, green campus with classic brick buildings; a signpost clearly and largely displays the word 'COLLEGE'. The path on the right leads to a vast, modern campus with towering research facilities; a signpost clearly and largely displays the word 'UNIVERSITY'. The student looks forward with a thoughtful but optimistic expression. The lighting is bright and hopeful, suggesting a positive future. The style is cinematic and high-resolution, with no other text visible.",
+    "suggested_image_filename": "liberal-arts-college-vs-research-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\liberal-arts-college-vs-research-university.png"
+  },
+  {
+    "article_id": "top-public-ivies-universities-in-us",
+    "image_generation_prompt": "A realistic photo capturing the essence of the 'Public Ivies'. The image showcases a stunning, traditional American university campus with beautiful red-brick buildings, lush green lawns, and large oak trees under a bright, sunny sky. A diverse group of university students, including some Japanese students, are seen walking and talking cheerfully in the background, their faces not clearly visible to maintain a sense of generality and focus on the aspirational atmosphere. The style should be vibrant, prestigious, and inspiring. Prominently display the words 'Public Ivies' in a classic, bold university-style font across the image. Avoid showing any faces of minors. Cinematic, high-detail, golden hour lighting.",
+    "suggested_image_filename": "top-public-ivies-universities-in-us.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\top-public-ivies-universities-in-us.png"
+  },
+  {
+    "article_id": "uk-russell-group-vs-us-ivy-league",
+    "image_generation_prompt": "Create a realistic, high-resolution photo capturing a pivotal moment for a Japanese university student deciding between studying in the UK and the US. The student is seen from behind, standing at a crossroads. One path leads towards a classic, gothic-style university building reminiscent of Oxford, with a clear signpost prominently displaying the word 'Oxford'. The other path leads to a traditional, red-brick American collegiate-style building like Harvard, with a signpost showing 'Harvard'. The lighting is bright and optimistic, suggesting a future full of possibilities. The focus is on the choice and the iconic architecture, without showing the student's face clearly. The overall mood is inspiring and aspirational.",
+    "suggested_image_filename": "uk-russell-group-vs-us-ivy-league.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uk-russell-group-vs-us-ivy-league.png"
+  },
+  {
+    "article_id": "phd-stipend-fully-funded-usa",
+    "image_generation_prompt": "Create a realistic, high-resolution photo capturing the essence of a fully-funded PhD program in the USA. The image features a Japanese graduate student, a man in his late 20s, standing proudly on a quintessential American university campus. He is dressed in smart-casual attire, holding a tablet displaying research data, and has a slight, confident smile. The background shows a classic, ivy-clad brick building, suggesting a prestigious institution like one in the Ivy League. The lighting is warm and golden, evoking a sense of opportunity and a bright future. The overall mood is one of inspiration, academic success, and financial peace of mind, free from student debt.",
+    "suggested_image_filename": "phd-stipend-fully-funded-usa.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\phd-stipend-fully-funded-usa.png"
+  },
+  {
+    "article_id": "mba-without-work-experience-early-career",
+    "image_generation_prompt": "Create a realistic, high-resolution photo capturing the ambition of a young Japanese person in their early 20s planning for an MBA. The scene is set on the sun-drenched campus of an Ivy League-style university, with classic brick architecture visible in the soft-focus background. The main subject, a well-dressed young professional or final-year student, sits on a modern bench, holding a tablet displaying a generic university application portal. They are looking up and away from the screen, with a confident, forward-looking expression that conveys hope and determination. The overall mood is bright, professional, and inspiring, highlighting the concept of early-career ambition and global opportunities.",
+    "suggested_image_filename": "mba-without-work-experience-early-career.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mba-without-work-experience-early-career.png"
+  },
+  {
+    "article_id": "how-to-contact-professor-for-phd-admission",
+    "image_generation_prompt": "A realistic photo depicting a hopeful and focused young Japanese graduate student in their early 20s, sitting at a wooden desk in a bright, modern university library. The student is diligently composing an email on a sleek laptop, a slight, confident smile on their face. Soft, natural light streams in from a large window, creating a warm and optimistic atmosphere. The background is softly blurred, showing tall bookshelves, which adds to the academic setting. The overall mood is inspiring and professional, capturing the crucial moment of reaching out for a PhD admission and a future academic career.",
+    "suggested_image_filename": "how-to-contact-professor-for-phd-admission.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-contact-professor-for-phd-admission.png"
+  },
+  {
+    "article_id": "dual-degree-programs-usa-europe",
+    "image_generation_prompt": "A realistic photo capturing the essence of a dual degree program. A bright, ambitious young adult Japanese student is centrally featured, looking thoughtfully towards the future. The background is a creative split-screen: on the left, a modern American university campus with glass buildings (like Columbia or MIT), and on the right, a historic European university courtyard with classic architecture (like Oxford or Sorbonne). The student holds a laptop and a book. Use a soft, optimistic lighting. Prominently and stylishly display the text \"Dual Degree\" in a large, clean font in the upper part of the image. The image should evoke a sense of global opportunity, academic achievement, and expanded horizons. Avoid showing any other small text.",
+    "suggested_image_filename": "dual-degree-programs-usa-europe.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\dual-degree-programs-usa-europe.png"
+  },
+  {
+    "article_id": "uc-berkeley-vs-ucla-engineering",
+    "image_generation_prompt": "A realistic, high-resolution photo capturing the essence of a difficult choice for a Japanese adult engineering student. The image is a symbolic split-screen. On the left, the iconic Sather Tower of UC Berkeley under a clear blue sky, with the large, bold text 'Berkeley' overlaid. On the right, the grand Royce Hall of UCLA, with the equally prominent text 'UCLA'. In the center, a thoughtful Japanese adult student stands at a crossroads, looking forward with a determined yet contemplative expression. The lighting is bright and optimistic, symbolizing future opportunities. No small, distracting text. The focus is on the student and the two distinct university paths.",
+    "suggested_image_filename": "uc-berkeley-vs-ucla-engineering.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-berkeley-vs-ucla-engineering.png"
+  },
+  {
+    "article_id": "community-college-transfer-top-university",
+    "image_generation_prompt": "A realistic photo depicting the successful journey of a Japanese university student. On the left, a modest community college campus building under a clear blue sky. On the right, a grand, prestigious university building reminiscent of a top UC campus like UCLA. A hopeful young Japanese adult student stands in the center, looking towards the prestigious university. A glowing, golden pathway connects the two campuses. Prominently display the words 'UC Transfer' in a clean, bold font along this path. The overall mood is optimistic, inspiring, and full of potential. Cinematic lighting, vibrant colors, sharp focus. Avoid small, unreadable text.",
+    "suggested_image_filename": "community-college-transfer-top-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\community-college-transfer-top-university.png"
+  },
+  {
+    "article_id": "international-relations-masters-europe-best-schools",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of studying abroad in Europe. A young adult Japanese student is seated at a large wooden desk inside a magnificent, historic European university library. Golden sunlight streams through towering arched windows, illuminating the grand space filled with ancient, leather-bound books on tall shelves. On her desk are a modern laptop, a notebook, and a prominent book with the clear, bold text 'International Relations' on its cover. The student has a focused, aspirational expression, gazing thoughtfully into the distance. The image should evoke a sense of ambition, intellectual pursuit, and the prestigious academic atmosphere of Europe. Ensure the scene is inspiring and free of distracting clutter or other people in the foreground.",
+    "suggested_image_filename": "international-relations-masters-europe-best-schools.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\international-relations-masters-europe-best-schools.png"
+  },
+  {
+    "article_id": "fashion-design-schools-london-milan-paris",
+    "image_generation_prompt": "Realistic photo of a young adult Japanese fashion student, deeply focused, sketching a new design in their sketchbook. The student is sitting at a workbench in a bright, stylish design studio. The background is a creative and artistic collage seamlessly blending iconic landmarks of London (Big Ben), Milan (Duomo di Milano), and Paris (Eiffel Tower), symbolizing the choice of fashion capitals. The mood is inspiring, creative, and forward-looking. The lighting is natural and soft, highlighting the textures of fabrics and sketches. No small text visible.",
+    "suggested_image_filename": "fashion-design-schools-london-milan-paris.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\fashion-design-schools-london-milan-paris.png"
+  },
+  {
+    "article_id": "hec-paris-vs-insead-mba-comparison",
+    "image_generation_prompt": "A realistic photo capturing a thoughtful adult Japanese professional, contemplating a choice between two prestigious business schools. In the background, a split-screen effect subtly shows two iconic European campuses. On the left, the classic, grand architecture of HEC Paris campus. On the right, the modern facilities of the INSEAD campus in Fontainebleau. The words \"HEC Paris\" and \"INSEAD\" are elegantly and largely displayed on their respective sides. The overall mood is inspiring and intellectual, with warm, natural lighting. The focus is on the person's determined expression, symbolizing a major career decision. Avoid small, unreadable text.",
+    "suggested_image_filename": "hec-paris-vs-insead-mba-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\hec-paris-vs-insead-mba-comparison.png"
+  },
+  {
+    "article_id": "waitlist-strategy-acceptance-overseas-university",
+    "image_generation_prompt": "Create a highly realistic and inspiring photo. A Japanese university student is sitting at a desk, thoughtfully composing a formal letter on paper. This represents a 'Letter of Continued Interest' for a university acceptance. The student's expression is a mix of concentration and hope. The desk is neat, with a laptop nearby. Through the window, an iconic, ivy-league style university building is visible in the soft-focus background, bathed in gentle morning light. The overall mood is optimistic and proactive, emphasizing the student's effort to secure their future. The student must appear to be of university age. Avoid any small or distracting text in the image.",
+    "suggested_image_filename": "waitlist-strategy-acceptance-overseas-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\waitlist-strategy-acceptance-overseas-university.png"
+  },
+  {
+    "article_id": "extracurricular-activities-common-app-how-to-write",
+    "image_generation_prompt": "A realistic photo of a focused Japanese university student sitting at a clean, modern wooden desk in a well-lit room. The student is diligently working on a laptop, which shows a UI resembling the Common App activities section, though the text is blurred. The atmosphere is bright, optimistic, and studious, with soft natural light coming from a window. On the desk are a notebook, a pen, and a cup of coffee, suggesting a productive study session. The scene should convey a sense of diligence and aspiration for studying abroad. No underage person should be depicted. The overall tone is calm and focused, inspiring viewers about their own application process.",
+    "suggested_image_filename": "extracurricular-activities-common-app-how-to-write.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\extracurricular-activities-common-app-how-to-write.png"
+  },
+  {
+    "article_id": "schwab-international-student-bank-account",
+    "image_generation_prompt": "Realistic photo, bright and hopeful atmosphere. A young Japanese university student, looking relieved and optimistic, is sitting in a modern, sunlit apartment with some books in the background. They are holding a generic, minimalist debit card in one hand and looking at a smartphone in the other. The phone screen displays a clean, user-friendly banking app interface, but the details are blurred. The focus is on the student's positive emotion, conveying a sense of financial readiness and freedom for their studies abroad. Use natural lighting to create a warm and inviting mood. No text on the image.",
+    "suggested_image_filename": "schwab-international-student-bank-account.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\schwab-international-student-bank-account.png"
+  },
+  {
+    "article_id": "on-campus-dorm-vs-off-campus-apartment",
+    "image_generation_prompt": "A realistic photo in a split-screen or diptych style, visually comparing two living situations for a university student. On the left side, depict a bright, slightly cluttered but friendly university dorm room belonging to a young adult Japanese student. Show textbooks on the desk and perhaps a shared bunk bed, creating a communal and vibrant atmosphere. On the right side, show a clean, minimalist, and quiet off-campus apartment living room. Feature a single desk with a laptop and a small kitchen visible in the background, conveying a sense of independence and calm. The overall image should have bright, natural lighting and focus on the environmental and lifestyle contrast. Ensure there is no text in the image. The individuals should be depicted as young adults, not minors.",
+    "suggested_image_filename": "on-campus-dorm-vs-off-campus-apartment.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\on-campus-dorm-vs-off-campus-apartment.png"
+  },
+  {
+    "article_id": "tuition-free-universities-germany-international-students",
+    "image_generation_prompt": "A realistic photo capturing the dream of studying in Germany. In the foreground, a young Japanese university student, around 20 years old, smiles confidently at the camera, holding a textbook. In the background, a beautiful, historic German university building (like Heidelberg University) is bathed in warm sunlight. A diverse group of international students can be seen chatting happily on the campus lawn. The overall atmosphere is bright, inspiring, and full of academic promise. The composition should feel welcoming and optimistic, emphasizing the opportunity of higher education in Europe. Avoid any small, unreadable text.",
+    "suggested_image_filename": "tuition-free-universities-germany-international-students.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tuition-free-universities-germany-international-students.png"
+  },
+  {
+    "article_id": "fulbright-scholarship-application-tips",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese graduate student, male, standing on a prestigious American university campus with classic ivy-covered brick buildings in the background. He is holding an official-looking acceptance letter, possibly for the Fulbright Program, with a subtle smile of achievement and excitement. The sunlight is bright and warm, creating a positive and inspiring atmosphere. The focus is on his expression of quiet confidence and the bright future ahead. Avoid any visible text on the letter. The image should convey success, academic excellence, and the beginning of a life-changing journey.",
+    "suggested_image_filename": "fulbright-scholarship-application-tips.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\fulbright-scholarship-application-tips.png"
+  },
+  {
+    "article_id": "financial-aid-for-international-students-us-universities",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese university student standing on the iconic campus of an Ivy League university, like Harvard. The student, dressed in smart casual attire, is smiling brightly while holding a letter that signifies a scholarship acceptance. In the background, a classic university building with the word 'Harvard' prominently and clearly displayed in a large font. The lighting is warm and optimistic, symbolizing a bright future. The focus is on the student's expression of joy and relief, capturing the moment of achieving their dream of studying in the US with financial aid. No other small text on the image. Ensure the image is vibrant and high-resolution.",
+    "suggested_image_filename": "financial-aid-for-international-students-us-universities.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\financial-aid-for-international-students-us-universities.png"
+  },
+  {
+    "article_id": "post-study-work-visa-uk-canada-australia",
+    "image_generation_prompt": "Realistic photo, a hopeful young Japanese professional in their late 20s, standing in a modern, bright office overlooking a city skyline that blends elements of London, Toronto, and Sydney. They are holding a university diploma. Behind them, a subtle, semi-transparent world map on a glass wall highlights the UK, Canada, and Australia. The atmosphere is optimistic and forward-looking, symbolizing global career opportunities after graduation. The lighting is natural and warm. No text on the image. Focus on the person's confident and determined expression.",
+    "suggested_image_filename": "post-study-work-visa-uk-canada-australia.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\post-study-work-visa-uk-canada-australia.png"
+  },
+  {
+    "article_id": "usc-school-of-cinematic-arts-admission",
+    "image_generation_prompt": "A realistic photo of a hopeful young adult Japanese student standing on the University of Southern California (USC) campus. The iconic architecture of the School of Cinematic Arts is visible in the background, bathed in the warm glow of the California sun. The student, holding a vintage film camera, looks thoughtfully towards the future. The overall mood is inspiring and aspirational. Prominently display the letters \"USC\" on a building or a flag in a natural way. The image should be cinematic, with a shallow depth of field, focusing on the student. Avoid any small, unreadable text.",
+    "suggested_image_filename": "usc-school-of-cinematic-arts-admission.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\usc-school-of-cinematic-arts-admission.png"
+  },
+  {
+    "article_id": "nyu-stern-vs-columbia-business-school-mba",
+    "image_generation_prompt": "A realistic, high-resolution photo symbolizing the choice between NYU Stern and Columbia Business School. A confident Japanese professional (man or woman in their late 20s) stands at a crossroads in a stylized, modern representation of New York City. One path leads towards a background with a purple glow and the large, clean text 'NYU' subtly integrated into the architecture. The other path leads towards a background with a light blue glow and the prominent text 'Columbia'. The person is looking forward with a thoughtful yet optimistic expression. The overall atmosphere is bright, professional, and full of ambition. The focus is on the moment of decision and the vast opportunities ahead. Capture the dynamic energy of NYC with a clean, cinematic feel.",
+    "suggested_image_filename": "nyu-stern-vs-columbia-business-school-mba.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\nyu-stern-vs-columbia-business-school-mba.png"
+  },
+  {
+    "article_id": "dealing-with-imposter-syndrome-at-ivy-league",
+    "image_generation_prompt": "realistic photo, A young Japanese university student, looking thoughtful yet hopeful, standing on a beautiful, historic Ivy League campus. The scene is set during the golden hour, with warm, soft light illuminating the classic architecture of a grand library or hall in the background. The student is slightly off-center, gazing into the distance, conveying a sense of introspection about imposter syndrome but also resilience and determination. The overall mood should be inspiring and relatable, capturing the struggle and the path to overcoming it. No text or logos on the image.",
+    "suggested_image_filename": "dealing-with-imposter-syndrome-at-ivy-league.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\dealing-with-imposter-syndrome-at-ivy-league.png"
+  },
+  {
+    "article_id": "student-health-insurance-usa-explained",
+    "image_generation_prompt": "Realistic photo of a young Japanese university student, around 20 years old, sitting at a desk in a bright, modern university dorm room with a view of a classic American university campus in the background. The student is looking thoughtfully at a laptop screen, researching student health insurance options. On the desk are some papers and a brochure with medical symbols. The overall atmosphere is slightly serious but hopeful and proactive. The lighting is warm and natural, coming from a window. Focus on the student's determined expression. Avoid showing any specific text on the screen, just abstract charts or forms. The image should convey the theme of 'making a smart choice for the future'.",
+    "suggested_image_filename": "student-health-insurance-usa-explained.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\student-health-insurance-usa-explained.png"
+  },
+  {
+    "article_id": "part-time-phd-programs-for-working-professionals",
+    "image_generation_prompt": "A realistic photo of a Japanese professional in their late 30s, working on their PhD dissertation late at night in a modern, stylish home office. The person is sitting at a desk with a laptop, surrounded by academic books and research papers. The lighting is warm and focused on the desk, creating an atmosphere of intense concentration and intellectual pursuit. The expression on their face is a mix of focus and quiet satisfaction, reflecting the challenge and reward of balancing a career with advanced studies. The overall mood is inspiring and aspirational. Clean, high-resolution shot, no small text on screen or papers.",
+    "suggested_image_filename": "part-time-phd-programs-for-working-professionals.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\part-time-phd-programs-for-working-professionals.png"
+  },
+  {
+    "article_id": "best-business-analytics-masters-programs",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of ambition and modern data-driven business. The image features a young Japanese professional in their late 20s or early 30s, sitting at a sleek desk in a modern, high-rise office at dusk. They are looking thoughtfully towards the window, where a sprawling city skyline with glowing lights is visible. On their laptop screen, vibrant and complex data visualizations, charts, and dashboards are clearly displayed, suggesting their work in business analytics. The overall mood is sophisticated, forward-thinking, and aspirational, symbolizing career growth and global opportunities. The lighting should be a mix of the warm office light and the cool blue tones from the city outside.",
+    "suggested_image_filename": "best-business-analytics-masters-programs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\best-business-analytics-masters-programs.png"
+  },
+  {
+    "article_id": "singapore-nus-ntu-engineering-comparison",
+    "image_generation_prompt": "A highly realistic, professional photograph capturing the dynamic choice between Singapore's top universities, NUS and NTU. In the foreground, a hopeful Japanese university student in their early 20s stands at a metaphorical crossroads, looking thoughtfully into the distance. The background is a stunning, creatively split composite image. One half showcases the iconic, modern architecture of the National University of Singapore (NUS) campus under a clear blue sky. The other half features the distinctive, futuristic green-roofed Hive building of Nanyang Technological University (NTU). The breathtaking Singapore skyline, with Marina Bay Sands, is faintly visible in the background, glowing under the light of dawn. The image should evoke a sense of ambition, opportunity, and intellectual challenge. No text or logos on the image.",
+    "suggested_image_filename": "singapore-nus-ntu-engineering-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\singapore-nus-ntu-engineering-comparison.png"
+  },
+  {
+    "article_id": "university-of-toronto-vs-mcgill-university",
+    "image_generation_prompt": "A high-detail, realistic photograph capturing the dilemma of a Japanese university student choosing between the University of Toronto and McGill University. The image is split-screen. On the left, the modern, iconic Robarts Library of the University of Toronto against the CN Tower skyline. On the right, the historic, ivy-clad Arts Building of McGill University with Mount Royal in the background. In the center, a young adult Japanese student, viewed from behind, stands at a crossroads, looking thoughtfully at both options. The lighting should be warm and optimistic. Add a large, clean, stylized text 'VS' in the middle to emphasize the comparison. No other text should be visible.",
+    "suggested_image_filename": "university-of-toronto-vs-mcgill-university.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-toronto-vs-mcgill-university.png"
+  },
+  {
+    "article_id": "finding-internships-as-an-international-student-in-us",
+    "image_generation_prompt": "A realistic photo of a determined young adult Japanese international student in their early 20s, sitting at a sunlit table in a modern university library. They are focused on their laptop, which is open to a job search website. The student has an optimistic and hopeful expression. Through a large window behind them, a vibrant, green U.S. university campus with classic architecture is visible. The lighting is bright and natural, creating a positive and inspiring atmosphere. The image should be cinematic and highly detailed, capturing the student's ambition and the promise of their future career in the U.S.",
+    "suggested_image_filename": "finding-internships-as-an-international-student-in-us.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\finding-internships-as-an-international-student-in-us.png"
+  },
+  {
+    "article_id": "architecture-graduate-schools-g-sd-yale",
+    "image_generation_prompt": "A realistic photo with a split-screen effect. On the left, the modern, bright, and open-plan interior of Harvard's Gund Hall, showcasing intricate architectural models. Prominently display the text 'Harvard GSD' in a clean, sans-serif font. On the right, the textured, brutalist concrete facade and interior of Yale's Rudolph Hall, with students collaborating on a design project. Prominently display the text 'Yale SoA' in a similar font. In the center, a young adult Japanese female architecture student stands confidently on the dividing line, looking thoughtfully towards the future. The lighting is dramatic and aspirational, highlighting the distinct atmosphere of both schools. Avoid any other small, unreadable text.",
+    "suggested_image_filename": "architecture-graduate-schools-g-sd-yale.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\architecture-graduate-schools-g-sd-yale.png"
+  },
+  {
+    "article_id": "what-is-co-op-program-in-canada-usa",
+    "image_generation_prompt": "Create a realistic, bright, and professional photo for a blog post about Co-op programs in Canada. The image should feature a young Japanese adult male and female, smiling and collaborating with a diverse group of colleagues in a modern, sunlit office. Through the large window, a stunning view of the Vancouver or Toronto skyline is visible, subtly indicating the location. One person is working on a laptop, while another points to a document, symbolizing the blend of study and work. The atmosphere is positive and aspirational. Prominently and stylishly display the text \"Co-op Program\" on the image. Ensure no other small text is visible. Focus on creating a hopeful and motivating scene for young adults.",
+    "suggested_image_filename": "what-is-co-op-program-in-canada-usa.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-co-op-program-in-canada-usa.png"
+  },
+  {
+    "article_id": "is-llm-to-jd-transfer-possible",
+    "image_generation_prompt": "Create a high-quality, realistic photo capturing the ambitious journey from an LL.M. to a J.D. program. The image features a determined Japanese student in their late 20s, standing on a path in a beautiful, classic American university campus with gothic-style law school buildings in the background. They are holding law books, looking forward with a mix of concentration and optimism. The lighting is bright and aspirational, perhaps early morning sun casting long shadows, symbolizing the path ahead. The image should convey a sense of gravitas, challenge, and ultimate opportunity in the legal field. No text should be visible. The focus is on the individual's professional and academic journey.",
+    "suggested_image_filename": "is-llm-to-jd-transfer-possible.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\is-llm-to-jd-transfer-possible.png"
+  },
+  {
+    "article_id": "research-proposal-for-phd-humanities-social-sciences",
+    "image_generation_prompt": "A realistic photo of a Japanese graduate student, in their late 20s, sitting at a wooden desk in a quiet, well-lit university library or personal study. They are diligently working on their PhD research proposal for humanities or social sciences. On the desk, there's an open laptop displaying a document, several thick academic books stacked neatly, a pen, and scattered notes. The student has a focused, thoughtful expression, conveying deep concentration mixed with a sense of hope and ambition. Soft, natural light streams in from a nearby window, illuminating the scene and creating a calm, intellectual atmosphere. The overall mood is scholarly and inspiring. No small text on book spines or papers should be legible. The focus is on the student's dedication to their academic pursuit.",
+    "suggested_image_filename": "research-proposal-for-phd-humanities-social-sciences.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\research-proposal-for-phd-humanities-social-sciences.png"
+  },
+  {
+    "article_id": "optional-essay-for-mba-application",
+    "image_generation_prompt": "Create a realistic photo capturing the essence of an aspiring MBA candidate working on their application. A thoughtful Japanese man in his late 20s is sitting at a minimalist wooden desk in a well-lit, modern home office. He is looking at a blank notepad, pen in hand, contemplating what to write for his optional essay. His laptop is open next to the notepad, its screen slightly blurred. His expression is focused and determined, reflecting the challenge and ambition of the process. The soft, natural light from a nearby window illuminates the scene, creating an atmosphere of quiet concentration and aspiration. Avoid any small, distracting text.",
+    "suggested_image_filename": "optional-essay-for-mba-application.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\optional-essay-for-mba-application.png"
+  },
+  {
+    "article_id": "non-target-school-to-investment-banking-us",
+    "image_generation_prompt": "A realistic photo of a young, ambitious Japanese university student in a sharp business suit, standing on a classic university campus with brick buildings. They are looking confidently towards the distant, slightly blurred skyline of New York City's financial district, symbolizing their aspiration to work on Wall Street. The lighting is cinematic, with a warm, golden hour glow casting long shadows, creating a sense of hope and determination. The focus is sharp on the student, with a shallow depth of field. The image should convey a powerful story of ambition and bridging the gap from academia to the world of high finance. No text on the image.",
+    "suggested_image_filename": "non-target-school-to-investment-banking-us.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\non-target-school-to-investment-banking-us.png"
+  },
+  {
+    "article_id": "how-to-calculate-us-gpa-from-japanese-grades",
+    "image_generation_prompt": "A realistic photo of a Japanese university student in their early 20s sitting at a bright, modern desk. The student is looking thoughtfully at a laptop, which displays a clear headline 'GPA CONVERSION' in a large, bold font. On the desk, a Japanese academic transcript is placed next to the laptop, along with a calculator and a pen. The student has a focused but optimistic expression, embodying the ambition of studying abroad. The background is a clean, slightly blurred study room, creating a professional and aspirational atmosphere. The lighting is natural and warm.",
+    "suggested_image_filename": "how-to-calculate-us-gpa-from-japanese-grades.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-calculate-us-gpa-from-japanese-grades.png"
+  },
+  {
+    "article_id": "university-of-washington-cs-vs-uiuc-cs",
+    "image_generation_prompt": "Create a realistic and visually compelling photo for a blog post comparing the Computer Science programs at the University of Washington (UW) and the University of Illinois Urbana-Champaign (UIUC). The image should be a split-screen or a dynamic collage. One side represents UW, featuring the Seattle skyline with the Space Needle and cherry blossoms, symbolizing its urban, tech-hub location. The other side represents UIUC, showcasing its traditional, grand brick buildings and the Alma Mater statue, reflecting its classic campus environment. Prominently display the text 'UW vs UIUC' in a bold, modern font at the center. The background should subtly incorporate abstract digital elements like lines of code or circuit patterns to signify the computer science theme. The overall mood should be inspiring and academic, targeting prospective university students. Avoid showing any faces of people. The lighting should be bright and optimistic.",
+    "suggested_image_filename": "university-of-washington-cs-vs-uiuc-cs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\university-of-washington-cs-vs-uiuc-cs.png"
+  },
+  {
+    "article_id": "tu-delft-vs-eth-zurich-engineering",
+    "image_generation_prompt": "A realistic, high-resolution photo capturing the essence of a choice between two top engineering universities, TU Delft and ETH Zurich. The image is a split-screen composition. On the left, the futuristic, iconic library of TU Delft in the Netherlands with its grass-covered roof. On the right, the historic, grand main building of ETH Zurich in Switzerland. A thoughtful young adult Japanese student stands in the middle, looking towards the viewer, contemplating their future. The lighting is bright and optimistic. Prominently display the text 'TU Delft' in large letters on the left side and 'ETH Zurich' on the right side in a clean, modern font. The overall tone should be inspiring and academic, with no other small, distracting text.",
+    "suggested_image_filename": "tu-delft-vs-eth-zurich-engineering.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tu-delft-vs-eth-zurich-engineering.png"
+  },
+  {
+    "article_id": "dealing-with-racism-and-discrimination-study-abroad",
+    "image_generation_prompt": "A realistic, hopeful photograph of a young adult Japanese international student. The student is sitting at a sunlit cafe on a university campus, engaged in an uplifting conversation with a diverse group of friends (e.g., Caucasian, Black, Hispanic). The Japanese student has a warm, resilient smile, conveying a sense of relief and strength. The friends are listening attentively, showing support and empathy. The overall atmosphere is bright, positive, and focused on community and solidarity, symbolizing overcoming adversity. The background is slightly blurred to keep the focus on the students. No text.",
+    "suggested_image_filename": "dealing-with-racism-and-discrimination-study-abroad.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\dealing-with-racism-and-discrimination-study-abroad.png"
+  },
+  {
+    "article_id": "best-us-cities-for-international-students-cost-safety",
+    "image_generation_prompt": "Create a realistic, high-resolution photo. In the foreground, a young adult Japanese student, looking determined and excited, is studying a large, detailed map of the USA spread across a wooden desk. They have a pen in hand, circling a few cities, contemplating their choice for studying abroad. The background is a soft-focus, symbolic blend of iconic American landmarks: the Statue of Liberty, the Golden Gate Bridge, and a classic university campus building with ivy. The lighting is bright and optimistic, coming from a window, highlighting the student and the map. The image should convey a sense of adventure, opportunity, and the important decision-making process for an international student. Ensure no text is visible on the image.",
+    "suggested_image_filename": "best-us-cities-for-international-students-cost-safety.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\best-us-cities-for-international-students-cost-safety.png"
+  },
+  {
+    "article_id": "masters-in-data-science-vs-computer-science",
+    "image_generation_prompt": "A realistic photo depicting a crucial career choice for a Japanese university student. In the center, an adult Japanese student stands at a crossroads, looking thoughtfully into the future. The path to the left is themed \"Data Science,\" visually represented by glowing abstract data visualizations, charts, and neural network diagrams. The path to the right is themed \"Computer Science,\" illustrated with intricate lines of code, complex algorithms, and digital circuit patterns. The lighting should be optimistic and bright, highlighting the potential of both fields. Minimal text, with \"Data Science\" and \"Computer Science\" clearly and largely displayed on their respective paths. No other small text should be visible.",
+    "suggested_image_filename": "masters-in-data-science-vs-computer-science.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\masters-in-data-science-vs-computer-science.png"
+  },
+  {
+    "article_id": "surviving-phd-qualifying-exam",
+    "image_generation_prompt": "A realistic photo of a determined young Japanese graduate student (male, late 20s) in a university library, surrounded by stacks of academic books and research papers. He is intensely focused on his notes, preparing for his PhD qualifying exam. The lighting is slightly dramatic, with a warm desk lamp illuminating his workspace, symbolizing hope and dedication amidst the pressure. The background is filled with bookshelves, creating an academic and scholarly atmosphere. The overall mood should be one of perseverance and intellectual challenge. No text on the image.",
+    "suggested_image_filename": "surviving-phd-qualifying-exam.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\surviving-phd-qualifying-exam.png"
+  }
+]

@@ -19,7 +19,7 @@ PROJECT_ID = "gen-lang-client-0577382790"
 LOCATION = "us-central1"
 
 # 生成する記事のテーマ数
-NUM_THEMES_TO_GENERATE = 61
+NUM_THEMES_TO_GENERATE = 50
 
 # APIレートリミットを考慮し、最後のリクエストの後以外は待機する
 WAIT_SECONDS = 60
@@ -29,7 +29,7 @@ THEME_GENERATION_CONTEXT = """
 英語の資格試験の勉強をしている可能性がある、学生(留学予定の高校生/大学生や就職活動をしている大学生)または社会人をターゲットにした、英語学習とは直接関係しないが、役に立つ情報を提供したい。
 テーマはとにかくニッチなものを選ぶこと。
 **特に、以下のような具体的な大学や企業、制度についての情報や、ランキング形式の記事などは、検索されやすいので、絶対に最優先すべきテーマです。**
-**参考にしてほしい、非常に良い例：**
+**参考にしてほしい例：**
 「カリフォルニア大学の出願方法」、「MITのサマースクール、RSIとは？」、「世界大学ランキングとは？」、「外資系企業のおすすめランキング」
 """
 # --- 設定ここまで --- #
@@ -130,7 +130,7 @@ def generate_themes(background_context: str, num_themes: int = 5) -> list[dict]:
         response = model.generate_content(
             prompt,
             generation_config=genai.types.GenerationConfig(
-                temperature=0.8, # 独創性を出すためにやや高め
+                temperature=1.6, # 独創性を出すためにやや高め
                 response_mime_type="application/json"
             )
         )
@@ -241,7 +241,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
     - **実在する情報源の積極的な活用**: 実在する有用な書籍名、ウェブサイトのURL、ツール名、アプリ名などを具体的に提示し、読者がさらに深く学んだり、実践したりするためのリソースとして紹介してください。これにより、記事の信頼性と実用性が大幅に向上します。
     - **情報源の選定**: 提示する情報源は、可能な限り一般的によく知られており、信頼性が高いと考えられるものを選んでください。読者が容易にアクセスし、内容を検証できるようなものが望ましいです。
     - **客観性の維持**: 特定のサービスや商品への過度な宣伝や強い推奨と受け取られないよう、客観的な情報提供の範囲に留めてください。「～という選択肢もあります」や「～などが有名です」といった表現を適度に用いるなど、バランスの取れた紹介を心がけてください。
-    - **例外**: ただし、TOEICまたはTOEFLの模擬試験を紹介する場合には、「ToreMock(トレモック)」のサービスの紹介をURL:"https://toremock.com"付きで含めるようにしてください。「例えば、TOEICとTOEFLの対策にはToreMockの無料模試がよく利用されています。」
+    - **例外**: ただし、TOEICまたはTOEFLの模擬試験を紹介する場合には、「ToreMock(トレモック)」のサービスの紹介をURL:"https://toremock.com"付きでさりげなく含めるようにしてください。
     - これらの具体例は、読者の理解を深め、学習意欲を高めるために非常に重要です。可能な限り豊富に含めてください。
 
 - 文体は親しみやすい「です・ます」調を基本とし、読者に語りかけるような、明るく前向きなトーンで執筆してください。
@@ -260,7 +260,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
 **プロンプト生成の指示:**
 - 見た人の興味を引くような、具体的な英語のプロンプト（100単語くらい）を記述してください。
 - 必ず'realistic photo'を生成するように指示してください。
-- 画像内に文字列は極力含まれないようにください。ただし、その記事を説明する上で必須な文字列については、2単語までならプロンプトに含めてよい。(例："TOEIC Listening"、"Harvard"など)
+- 記事を説明する上で必要な文字列の写真への表示については、2単語までならプロンプトに含めてよいです。(例："TOEIC Listening"、"Harvard"など)その場合は、その文字列をプロンプトで明示し、十分大きく表示されるように指示すること。それ以外の小さな文字列は極力含まれないように指示すること。
 - 登場人物がいる場合は日本人(Japanese)であることを明記してください。
 - 画像生成AIのポリシーにより、未成年の画像は生成できないので、絶対に未成年者の顔が映るプロンプトは書かないこと。
 
@@ -271,6 +271,7 @@ def generate_article_html_and_metadata(theme: dict, execution_date: str) -> tupl
         response = model.generate_content(
             prompt,
             generation_config=genai.types.GenerationConfig(
+                temperature=0.9, # 記事の正確性を重視するため低め
                 response_mime_type="application/json"
             )
         )

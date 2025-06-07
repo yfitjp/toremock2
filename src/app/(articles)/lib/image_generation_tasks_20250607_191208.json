@@ -1,0 +1,302 @@
+[
+  {
+    "article_id": "uc-application-guide",
+    "image_generation_prompt": "A realistic photo of a young Japanese university student, sitting at a wooden desk in a bright, sunlit room. The student is focused on a laptop screen displaying a university application portal, possibly for the University of California. They are thoughtfully writing in a notebook, planning their personal insight questions. The atmosphere is hopeful and determined. Sunlight streams through a window, hinting at a bright future in California. The scene should be inspiring and academic, without showing any specific text on the screen. The focus is on the student's thoughtful expression and the organized yet busy desk.",
+    "suggested_image_filename": "uc-application-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uc-application-guide.png"
+  },
+  {
+    "article_id": "ivy-league-need-blind-scholarship",
+    "image_generation_prompt": "A realistic photo capturing the hopeful moment of a young Japanese university student, an adult male, sitting at a desk in a sunlit, modern library. He is looking thoughtfully out a large window towards a bright sky, a gentle smile on his face. On the desk in front of him, a laptop is open, displaying a university's admissions webpage. Next to the laptop are several books, with titles subtly suggesting 'TOEFL Preparation' and 'Ivy League Guides'. The atmosphere is optimistic, serene, and inspiring, symbolizing the dream of studying abroad becoming a tangible reality through a need-blind scholarship. The focus is on his determined yet hopeful expression, with the beautifully lit, scholarly background enhancing the aspirational mood. No text on screen.",
+    "suggested_image_filename": "ivy-league-need-blind-scholarship.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ivy-league-need-blind-scholarship.png"
+  },
+  {
+    "article_id": "what-is-uwc",
+    "image_generation_prompt": "realistic photo, a bright, modern university library or common room setting, symbolizing academic challenge and global community. In the background, large windows show a beautiful, natural campus landscape. A diverse group of older students (late teens, early 20s, including a Japanese student) are seen from behind or with faces obscured, collaborating around a large table with books and laptops. The atmosphere is inspiring, focused, and full of potential. The lighting is warm and natural. No text on the image. Capture the essence of global education and intellectual pursuit.",
+    "suggested_image_filename": "what-is-uwc.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\what-is-uwc.png"
+  },
+  {
+    "article_id": "us-liberal-arts-colleges-ranking",
+    "image_generation_prompt": "realistic photo, a bright, inviting scene of a prestigious American liberal arts college campus in autumn. The architecture is classic ivy-covered red brick. In the foreground, a small, diverse group of university students, including a young Japanese man and woman, are engaged in a lively academic discussion on a lush green lawn under a large oak tree. Sunlight filters through the colorful fall leaves, creating a warm, inspiring atmosphere. The mood is intellectual, collaborative, and aspirational. No text in the image.",
+    "suggested_image_filename": "us-liberal-arts-colleges-ranking.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\us-liberal-arts-colleges-ranking.png"
+  },
+  {
+    "article_id": "community-college-transfer-to-uc",
+    "image_generation_prompt": "A realistic photo capturing a hopeful moment. A young Japanese university student, standing on a vibrant, sun-drenched university campus in California. The student is looking thoughtfully towards the future, with a slight, confident smile. In the background, a beautiful, iconic university building, reminiscent of UCLA's Royce Hall, is softly blurred, symbolizing the goal. The lighting is warm and golden, evoking a sense of opportunity and success. The focus is on the student's determined yet optimistic expression. No text in the image.",
+    "suggested_image_filename": "community-college-transfer-to-uc.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\community-college-transfer-to-uc.png"
+  },
+  {
+    "article_id": "canada-co-op-visa-programs",
+    "image_generation_prompt": "A realistic photo capturing the essence of Canada's Co-op study program. A young, hopeful Japanese university student, dressed in smart casual attire, stands on a balcony overlooking the modern cityscape of Vancouver, with glass skyscrapers and a hint of mountains in the background. They are holding a laptop, symbolizing the blend of study and work. The scene is bathed in bright, natural morning light, creating a positive and inspiring atmosphere. The focus is on the student's optimistic expression as they look towards their future. No text in the image.",
+    "suggested_image_filename": "canada-co-op-visa-programs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\canada-co-op-visa-programs.png"
+  },
+  {
+    "article_id": "uk-one-year-masters-degree",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese adult student, male, in his mid-20s, standing confidently on a beautiful, historic UK university campus. He is smiling slightly, looking towards the future. The background features classic British architecture, like old brick buildings with ivy, under a slightly overcast but bright sky. The atmosphere is academic, inspiring, and sophisticated, suggesting the successful completion of a one-year Master's degree. The focus is on the student's sense of achievement and the prestigious academic environment. No text or logos in the image.",
+    "suggested_image_filename": "uk-one-year-masters-degree.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uk-one-year-masters-degree.png"
+  },
+  {
+    "article_id": "fulbright-scholarship-application-tips",
+    "image_generation_prompt": "Realistic photo, A determined Japanese university student in their early 20s sits at a wooden desk in a bright, sunlit library. They are diligently working on their Fulbright scholarship application, with neatly arranged documents, a laptop, and reference books on the desk. Through the window, a slightly blurred background shows an iconic American university campus with classic architecture, symbolizing their dream of studying abroad. The overall mood is hopeful, focused, and academic. No text in the image.",
+    "suggested_image_filename": "fulbright-scholarship-application-tips.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\fulbright-scholarship-application-tips.png"
+  },
+  {
+    "article_id": "ito-foundation-scholarship-interview",
+    "image_generation_prompt": "A realistic photo capturing a pivotal moment of a scholarship interview. A young Japanese graduate student, dressed in a smart suit, sits at a large table, speaking earnestly and confidently. Opposite them are three distinguished-looking interviewers, listening intently in a modern, well-lit boardroom with a large window overlooking a city skyline. The atmosphere is professional and serious, yet filled with a sense of hope and ambition. The focus is on the student's expressive face, conveying intelligence and passion. No text on the image. Wide-angle shot.",
+    "suggested_image_filename": "ito-foundation-scholarship-interview.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\ito-foundation-scholarship-interview.png"
+  },
+  {
+    "article_id": "common-app-essay-mistakes",
+    "image_generation_prompt": "Realistic photo. A Japanese university student sits at a desk in their room at night, looking stressed while working on a laptop. Crumpled pieces of paper are scattered around the desk, indicating a struggle with writing a college application essay. The student has a hand on their forehead, deep in thought, with a mix of frustration and determination on their face. The room is slightly dim, but a single light source from a desk lamp illuminates the workspace, creating a focused and dramatic mood. The image captures the challenge and pressure of crafting the perfect personal statement. No text should be visible on the laptop screen or papers.",
+    "suggested_image_filename": "common-app-essay-mistakes.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\common-app-essay-mistakes.png"
+  },
+  {
+    "article_id": "requesting-recommendation-letter-for-study-abroad",
+    "image_generation_prompt": "A realistic photo capturing a heartwarming and professional moment. A young Japanese female university student, in her early 20s, is sitting opposite her respected male Japanese professor, in his 50s, inside his university office. The student is earnestly discussing her study abroad plans, holding a folder with documents. The professor is listening attentively with a supportive and kind expression. The office is filled with bookshelves, academic posters, and a globe, suggesting a scholarly environment. The lighting is bright and natural, creating a hopeful and positive atmosphere. Focus on their expressions of mutual respect and mentorship. No text on screen.",
+    "suggested_image_filename": "requesting-recommendation-letter-for-study-abroad.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\requesting-recommendation-letter-for-study-abroad.png"
+  },
+  {
+    "article_id": "f1-visa-interview-questions",
+    "image_generation_prompt": "A realistic photo capturing a pivotal moment in a U.S. F-1 visa interview. A young adult Japanese student, looking determined yet slightly nervous, is speaking confidently to a professional consular officer inside a U.S. embassy interview booth. The setting is formal but not intimidating, with a glass partition between them. The focus is on the student's expressive face, conveying honesty and aspiration. The lighting is bright and optimistic, symbolizing a successful step towards their study abroad dream. No text in the image. Cinematic, soft focus background.",
+    "suggested_image_filename": "f1-visa-interview-questions.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\f1-visa-interview-questions.png"
+  },
+  {
+    "article_id": "gpa-conversion-for-us-universities",
+    "image_generation_prompt": "A realistic photo of a Japanese university student, a young adult, sitting at a clean, modern desk in a well-lit room. The student is focused, using a laptop and a calculator to convert academic grades. On the desk, there are official-looking Japanese academic transcripts and a printout of the WES (World Education Services) GPA conversion scale. The background is slightly blurred, showing a bookshelf with academic books, suggesting a studious environment. The overall atmosphere is hopeful and determined, capturing the essence of preparing for university applications abroad. The lighting is soft and natural. No text on the image.",
+    "suggested_image_filename": "gpa-conversion-for-us-universities.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\gpa-conversion-for-us-universities.png"
+  },
+  {
+    "article_id": "harvard-summer-school-guide",
+    "image_generation_prompt": "A realistic photo capturing the vibrant atmosphere of Harvard University during a bright summer day. The iconic red-brick Widener Library stands majestically in the background under a clear blue sky. In the foreground, a diverse group of university students, including some Japanese students, are scattered across a lush green lawn. Some are engaged in lively conversation, others are reading books under the shade of a large tree. The sunlight filters through the leaves, creating a warm and inviting glow. The overall mood is aspirational, intellectual, and full of summer energy. The focus is on the environment and the academic ambiance, with students seen from a distance or from behind to keep their faces indistinct. No text in the image except for a subtle, natural-looking 'Harvard' sign if possible.",
+    "suggested_image_filename": "harvard-summer-school-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\harvard-summer-school-guide.png"
+  },
+  {
+    "article_id": "apostille-for-study-abroad-documents",
+    "image_generation_prompt": "Create a realistic photo capturing the moment a crucial step in study abroad preparation is completed. The scene is a well-lit desk, possibly in a home office or a university library. On the desk lies a Japanese university diploma or transcript. A close-up shot focuses on an official-looking document with a formal stamp and a ribbon, symbolizing the 'Apostille'. The hands of a young adult Japanese student are visible, carefully handling the documents. The background is slightly blurred but suggests a hopeful future, perhaps a sunlit window overlooking a university campus. The overall mood should be one of accomplishment, relief, and bright anticipation for studying abroad. No text on the image.",
+    "suggested_image_filename": "apostille-for-study-abroad-documents.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\apostille-for-study-abroad-documents.png"
+  },
+  {
+    "article_id": "mbb-consulting-firm-comparison",
+    "image_generation_prompt": "Realistic photo, a diverse group of three young Japanese professionals, two men and one woman, dressed in sharp business attire. They are gathered around a sleek, modern glass conference table in a high-rise office with a stunning panoramic view of the Tokyo city skyline at dusk. They are deeply engaged in a collaborative discussion, pointing at complex charts and data visualizations on a large tablet. The atmosphere is intense yet cooperative, radiating intelligence and ambition. The lighting is a mix of warm interior light and the cool tones of the city lights outside, creating a sophisticated and cinematic feel. No text on the image.",
+    "suggested_image_filename": "mbb-consulting-firm-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\mbb-consulting-firm-comparison.png"
+  },
+  {
+    "article_id": "gafa-behavioral-interview-prep",
+    "image_generation_prompt": "Create a realistic photo capturing a pivotal moment in a behavioral interview at a top tech company like GAFA. A confident young Japanese professional, dressed in smart casual attire, is articulately explaining a past experience to two interviewers in a modern, sunlit conference room with a stunning city view through a large window. The candidate is using subtle hand gestures to emphasize their points, looking engaged and competent. The interviewers, a man and a woman of diverse backgrounds, are listening intently, nodding, and taking notes. The atmosphere is professional yet positive and encouraging. No text on the image.",
+    "suggested_image_filename": "gafa-behavioral-interview-prep.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\gafa-behavioral-interview-prep.png"
+  },
+  {
+    "article_id": "pg-recruiting-process-online-assessment",
+    "image_generation_prompt": "A realistic photo capturing a tense yet focused atmosphere of a job-seeking process. A young Japanese professional, a university student in their early twenties, is sitting at a minimalist wooden desk in a modern, brightly lit room. They are intently focused on a laptop screen which displays abstract logic puzzles and shapes, symbolizing a challenging online assessment for a top global company like P&G. The background is slightly blurred, showing a clean, organized study space with some books. The lighting is soft and natural, coming from a side window, highlighting the determination on the person's face. No visible logos or text on screen. The overall mood is one of ambition and intellectual challenge.",
+    "suggested_image_filename": "pg-recruiting-process-online-assessment.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\pg-recruiting-process-online-assessment.png"
+  },
+  {
+    "article_id": "investment-banking-work-life-balance-ranking",
+    "image_generation_prompt": "A realistic photo capturing the intensity of investment banking. A young Japanese professional in their late 20s is working late in a sleek, modern office in a Tokyo skyscraper. The sprawling, illuminated cityscape is visible through a large panoramic window behind them. The professional, dressed in sharp business attire, is deeply focused on a laptop displaying complex financial data and charts. The lighting is cinematic and moody, with the cool blue light from the city contrasting with the warm, focused glow of a desk lamp on the workspace. The atmosphere should convey ambition, determination, and the high-stakes nature of the finance world. No text or logos should be visible.",
+    "suggested_image_filename": "investment-banking-work-life-balance-ranking.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\investment-banking-work-life-balance-ranking.png"
+  },
+  {
+    "article_id": "boston-career-forum-preparation-guide",
+    "image_generation_prompt": "A realistic photo capturing the essence of the Boston Career Forum. A young Japanese university student, dressed in a sharp business suit, stands confidently looking out a large window at the Boston city skyline. On a desk nearby, there are neatly arranged documents, including a resume, and a laptop open to a company research page. The lighting is bright and optimistic, suggesting a future full of opportunities. The focus is on the student's determined and hopeful expression. The image should convey professionalism, preparation, and the excitement of starting a global career. No text in the image.",
+    "suggested_image_filename": "boston-career-forum-preparation-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\boston-career-forum-preparation-guide.png"
+  },
+  {
+    "article_id": "how-to-write-english-resume-with-action-verbs",
+    "image_generation_prompt": "Realistic photo, a confident Japanese business person in their late 20s or early 30s, sitting at a modern, clean desk in a bright office with a city view. They are focused on a laptop screen, crafting a professional English resume. The atmosphere is optimistic and forward-looking, symbolizing career growth. The lighting is soft and natural. The focus is on the person's determined expression and professional posture. Avoid any visible text on the screen. The overall aesthetic should be sophisticated and motivational.",
+    "suggested_image_filename": "how-to-write-english-resume-with-action-verbs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-write-english-resume-with-action-verbs.png"
+  },
+  {
+    "article_id": "optimize-linkedin-profile-for-recruiters",
+    "image_generation_prompt": "Realistic photo, eye-level shot of a confident Japanese woman in her early 30s, sitting at a minimalist wooden desk in a bright, modern co-working space with plants in the background. She is smiling slightly as she looks at her laptop, which is open to a blurred, generic professional social network profile page. The overall atmosphere is optimistic, professional, and globally-minded. The lighting is soft and natural, emphasizing a clean and sophisticated aesthetic. The focus is on her empowered and proactive attitude towards her career. No text on the image.",
+    "suggested_image_filename": "optimize-linkedin-profile-for-recruiters.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\optimize-linkedin-profile-for-recruiters.png"
+  },
+  {
+    "article_id": "companies-with-many-expatriates-ranking",
+    "image_generation_prompt": "A realistic photo capturing the essence of a global career. In the foreground, a young Japanese male and female business professional, dressed in smart business attire, are shaking hands confidently in a modern airport lounge. Through the large window behind them, a world map is subtly overlaid on a view of a departing airplane against a backdrop of a bustling city skyline with skyscrapers representing major corporations. The lighting is bright and optimistic, symbolizing new opportunities and international business. The overall mood is professional, ambitious, and inspiring. Avoid any text in the image.",
+    "suggested_image_filename": "companies-with-many-expatriates-ranking.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\companies-with-many-expatriates-ranking.png"
+  },
+  {
+    "article_id": "usa-j1-visa-internship-programs",
+    "image_generation_prompt": "A realistic photo capturing a moment of mentorship in a bright, modern office in New York City. A young professional Japanese man, in his late 20s, is attentively listening to his American colleague, a woman in her 30s, who is pointing at a laptop screen with a friendly and supportive expression. They are both dressed in business casual attire. The background shows a large window with a slightly blurred view of the Manhattan skyline, suggesting ambition and opportunity. The overall atmosphere is positive, collaborative, and professional. The lighting is natural and warm, emphasizing a hopeful and inspiring mood.",
+    "suggested_image_filename": "usa-j1-visa-internship-programs.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\usa-j1-visa-internship-programs.png"
+  },
+  {
+    "article_id": "career-after-working-holiday-in-japan",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese woman in her late 20s, standing in a modern Tokyo business district like Marunouchi. She is dressed in smart casual attire (a stylish blouse and skirt), looking confidently towards the future with a gentle smile. The background is slightly blurred, showing a bustling city scene with sleek skyscrapers and soft morning sunlight, symbolizing a new beginning and career opportunities in Japan after returning from a working holiday. The overall mood is optimistic, professional, and empowering. The image should be clean, bright, and visually appealing, without any text.",
+    "suggested_image_filename": "career-after-working-holiday-in-japan.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\career-after-working-holiday-in-japan.png"
+  },
+  {
+    "article_id": "working-in-singapore-visa-salary",
+    "image_generation_prompt": "A realistic photo of a confident Japanese professional in their early 30s, standing on a modern office balcony overlooking the iconic Singapore skyline with Marina Bay Sands visible in the background. The person, dressed in stylish business casual, has a hopeful and determined expression, gazing into the distance. The scene is bathed in the warm light of a late afternoon sun, creating a cinematic and inspiring atmosphere. The focus is on the individual, symbolizing a successful global career and a bright future. High-resolution, shallow depth of field. The image should not contain any text.",
+    "suggested_image_filename": "working-in-singapore-visa-salary.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\working-in-singapore-visa-salary.png"
+  },
+  {
+    "article_id": "how-to-become-un-staff-jpo",
+    "image_generation_prompt": "A realistic photo of a professional Japanese woman in her early 30s, standing confidently in the modern, sunlit lobby of an international organization's headquarters, reminiscent of the United Nations. She wears a smart business suit. In the background, a large globe and subtle hints of national flags are visible through a large window overlooking a cityscape. The atmosphere is optimistic and inspiring, capturing the essence of a global career path. The lighting is bright and natural, creating a clean, high-quality image. No text on the image.",
+    "suggested_image_filename": "how-to-become-un-staff-jpo.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-become-un-staff-jpo.png"
+  },
+  {
+    "article_id": "top-mba-programs-by-career-goal",
+    "image_generation_prompt": "A realistic photo of a hopeful Japanese professional in their early 30s, standing on a university campus with classic ivy-league architecture. In the background, three distinct career paths are artistically blended as faint, symbolic overlays: the gleaming skyscrapers of a financial district, a dynamic consulting meeting room with a whiteboard, and a vibrant startup office. The person is looking forward with a confident and determined expression, contemplating their future MBA journey. The lighting is warm and optimistic, symbolizing a bright future. No text or words on the image.",
+    "suggested_image_filename": "top-mba-programs-by-career-goal.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\top-mba-programs-by-career-goal.png"
+  },
+  {
+    "article_id": "gmat-verbal-section-study-plan",
+    "image_generation_prompt": "A realistic photo of a determined young Japanese professional in their late 20s, intensely studying for the GMAT in a well-lit, modern study room. The desk is neatly organized with a laptop, official GMAT guidebooks, and handwritten notes. The person is focused, capturing the challenging yet rewarding journey of preparing for an MBA. The atmosphere is quiet and studious, with a soft, inspiring light source. No text on the image. The image should convey a sense of ambition and intellectual pursuit, targeting prospective MBA students.",
+    "suggested_image_filename": "gmat-verbal-section-study-plan.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\gmat-verbal-section-study-plan.png"
+  },
+  {
+    "article_id": "uscpa-exam-while-working-in-japan",
+    "image_generation_prompt": "A realistic photo of a Japanese professional in their 30s studying diligently at their desk in a modern Tokyo office at night. The city's illuminated skyline is visible through the large window. On the desk, there is a laptop displaying financial charts, several thick textbooks on accounting, a calculator, and a cup of coffee. The person has a determined and focused expression, embodying the challenge and ambition of studying for the USCPA exam while working. The overall atmosphere is sophisticated, professional, and inspiring. No text on the image.",
+    "suggested_image_filename": "uscpa-exam-while-working-in-japan.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\uscpa-exam-while-working-in-japan.png"
+  },
+  {
+    "article_id": "cfa-charter-difficulty-value",
+    "image_generation_prompt": "Create a realistic photo capturing the intense dedication and high value of pursuing the CFA charter. The scene is a modern, sophisticated office in Tokyo at night, with a large window showing the glittering skyline of a financial district. On a sleek desk, there is an open, thick CFA textbook, a laptop displaying complex financial charts, and a calculator. A focused 30s Japanese professional, man or woman, is diligently studying, with a look of determination. The lighting is dramatic, highlighting the subject and the study materials, creating a mood of ambition and the promise of a successful career in finance. No text on the image.",
+    "suggested_image_filename": "cfa-charter-difficulty-value.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\cfa-charter-difficulty-value.png"
+  },
+  {
+    "article_id": "english-salary-negotiation-phrases",
+    "image_generation_prompt": "Realistic photo, A confident Japanese business person in their 30s, dressed in a sharp, modern suit, is shaking hands firmly with a Western counterpart across a sleek desk in a bright, contemporary office with a large window showing a city view. The atmosphere is positive, professional, and celebratory of a successful agreement. The focus is on the handshake and the mutual respect visible in their expressions. The lighting is natural and airy, emphasizing the clean, minimalist design of the office. No text or logos should be visible. The image should convey achievement, trust, and a successful career move.",
+    "suggested_image_filename": "english-salary-negotiation-phrases.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\english-salary-negotiation-phrases.png"
+  },
+  {
+    "article_id": "international-money-transfer-service-comparison",
+    "image_generation_prompt": "A realistic photo depicting the concept of international money transfer. A Japanese adult is sitting at a clean, modern desk, smiling while using a smartphone. On the screen, a user-friendly app interface for money transfer is visible. In the background, a subtle, stylized world map with glowing arrows connecting Japan to Europe and North America. The scene is brightly lit with a professional and trustworthy feel. Focus on the ease and convenience of modern financial technology. Avoid showing any specific currency notes or coins, but use universal currency symbols like '$' or '€' abstractly if needed. No text in the image.",
+    "suggested_image_filename": "international-money-transfer-service-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\international-money-transfer-service-comparison.png"
+  },
+  {
+    "article_id": "how-to-get-job-at-international-ngo",
+    "image_generation_prompt": "A realistic photo of a young Japanese professional, deeply engaged in their work at an international NGO office. They are seated at a desk cluttered with world maps, project files, and a laptop, symbolizing global connectivity and detailed planning. The background subtly blends the office environment with artifacts and photos from the field – perhaps a vibrant textile or a framed picture of a community project, telling a story of their mission. Warm, natural light illuminates the scene, highlighting their focused and hopeful expression. The overall mood is one of dedication, passion, and the profound impact of humanitarian work. No text in the image.",
+    "suggested_image_filename": "how-to-get-job-at-international-ngo.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-get-job-at-international-ngo.png"
+  },
+  {
+    "article_id": "world-university-rankings-explained",
+    "image_generation_prompt": "A realistic photo of a hopeful young Japanese university student, around 21 years old, sitting in a bright, modern library. They are intently studying a laptop, which displays an abstract, glowing chart and list resembling a university rankings website. In the background, subtly blended as a sophisticated collage, are iconic architectural silhouettes of world-famous universities like Oxford, Harvard, and Tokyo University. The atmosphere is intellectual, global, and inspiring, with clean, natural lighting that highlights the student's focused yet optimistic expression. The image should evoke a sense of making a crucial life decision about future education. No text on the screen.",
+    "suggested_image_filename": "world-university-rankings-explained.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\world-university-rankings-explained.png"
+  },
+  {
+    "article_id": "business-email-salutations-mr-ms",
+    "image_generation_prompt": "Realistic photo of a professional Japanese person in their 30s sitting at a modern, clean office desk. They are composing an email on a laptop. The screen is slightly blurred, but we can see the beginning of an email, like \"Dear...\". The person has a thoughtful and confident expression. The overall atmosphere should be bright, positive, and professional, representing global business communication. Include elements like a sleek laptop, a notepad, and a pen. The focus is on the act of writing a respectful and correct business email. Sharp details and natural lighting should be emphasized. No text on the image.",
+    "suggested_image_filename": "business-email-salutations-mr-ms.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\business-email-salutations-mr-ms.png"
+  },
+  {
+    "article_id": "small-talk-topics-with-foreigners",
+    "image_generation_prompt": "A realistic photo of a friendly conversation. A Japanese man in his 30s and a Caucasian woman in her 30s are sitting at a small table in a bright, modern cafe. They are both smiling, looking relaxed, and enjoying a casual chat over cups of coffee. Natural light streams in through a window, creating a warm and inviting atmosphere. The focus is on their positive interaction, with the background slightly blurred. The scene should evoke a sense of comfortable and successful small talk between people from different cultures. No text on the image.",
+    "suggested_image_filename": "small-talk-topics-with-foreigners.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\small-talk-topics-with-foreigners.png"
+  },
+  {
+    "article_id": "how-to-open-bank-account-abroad",
+    "image_generation_prompt": "A realistic photo of a young adult Japanese person, looking confident and happy, successfully opening a bank account abroad. The scene is set in a bright, modern bank lobby. The Japanese person is sitting at a counter, interacting with a friendly, professional bank employee of a different ethnicity. Documents like a passport are neatly placed on the counter, and the person is holding a new debit card. The atmosphere is positive and empowering, capturing the milestone of settling into a new country. The lighting is natural and soft, with a shallow depth of field focusing on the interaction. No text in the image.",
+    "suggested_image_filename": "how-to-open-bank-account-abroad.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-open-bank-account-abroad.png"
+  },
+  {
+    "article_id": "tipping-culture-by-country",
+    "image_generation_prompt": "A realistic photo capturing a close-up shot of a Japanese traveler's hands at a cozy, international-style cafe. The focus is on the table where they are preparing to leave a tip. A credit card, a bill receipt, and a few coins from different currencies are neatly placed. The person's face is slightly out of focus in the background, showing a calm and confident expression. The lighting is warm and inviting, highlighting the texture of the wooden table. The overall atmosphere is sophisticated and conveys the idea of smart, culturally-aware traveling. No text in the image.",
+    "suggested_image_filename": "tipping-culture-by-country.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\tipping-culture-by-country.png"
+  },
+  {
+    "article_id": "political-correctness-terms-glossary",
+    "image_generation_prompt": "A realistic photo capturing a bright, modern office lounge. In the center, a young Japanese professional, both male and female, are smiling confidently, engaged in a respectful and friendly conversation with a diverse group of international colleagues of various ages and ethnicities. The atmosphere is positive, inclusive, and collaborative, symbolizing successful global communication. Natural light streams in through large windows, creating a warm and inviting ambiance. The focus is on the genuine human connection and mutual understanding, with no text or logos visible.",
+    "suggested_image_filename": "political-correctness-terms-glossary.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\political-correctness-terms-glossary.png"
+  },
+  {
+    "article_id": "how-to-watch-us-netflix-from-japan-vpn",
+    "image_generation_prompt": "A realistic photo of a young Japanese woman in her late 20s, sitting comfortably on a sofa in a modern Japanese living room at night. She is looking at a laptop screen with a happy and relaxed expression, holding a bowl of popcorn. The laptop screen displays a user interface resembling Netflix, subtly hinting at US content without showing specific titles or text. Behind the laptop, a faint, glowing holographic map of the world is visible in the air, with a bright digital light trail connecting Japan to the United States, visually symbolizing a VPN connection. The scene has cinematic, warm, and cozy lighting.",
+    "suggested_image_filename": "how-to-watch-us-netflix-from-japan-vpn.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\how-to-watch-us-netflix-from-japan-vpn.png"
+  },
+  {
+    "article_id": "international-driving-permit-guide",
+    "image_generation_prompt": "Realistic photo capturing the excitement of a road trip abroad. A happy Japanese adult couple in their late 20s are standing beside a modern rental car on a scenic coastal highway, like California's Highway 1. The man proudly holds up an international driving permit and his Japanese driver's license, smiling at the camera. The woman is looking at a physical map, pointing towards their next destination with an adventurous look. The scene is bathed in the warm, golden light of a late afternoon sun. The image should convey a sense of freedom, adventure, and preparedness. High-resolution, detailed, with a focus on their joyful expressions.",
+    "suggested_image_filename": "international-driving-permit-guide.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\international-driving-permit-guide.png"
+  },
+  {
+    "article_id": "western-table-manners-basics",
+    "image_generation_prompt": "A realistic photo capturing a moment in an upscale, elegant European restaurant. A young Japanese couple, a man and a woman in their late 20s, are seated at a beautifully set dining table. The focus is on their hands, demonstrating proper table manners. The man is holding a knife and fork correctly, about to cut a piece of steak. The woman is gracefully using her napkin. The atmosphere is sophisticated and warm, with soft ambient lighting. The background is slightly blurred, emphasizing the couple and the table setting. No text on the image. The scene should convey a sense of learning and quiet confidence.",
+    "suggested_image_filename": "western-table-manners-basics.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\western-table-manners-basics.png"
+  },
+  {
+    "article_id": "us-holidays-and-customs-thanksgiving",
+    "image_generation_prompt": "A realistic photo capturing a heartwarming Thanksgiving dinner scene. In the center of a rustic wooden dining table, a beautifully roasted golden-brown turkey is presented, surrounded by an abundance of side dishes like mashed potatoes, cranberry sauce, and pumpkin pie. A group of young adult Japanese friends, both men and women, are gathered around the table, laughing and sharing a joyful moment. The setting is a cozy, warmly lit dining room with autumn decorations. Soft, warm light from a nearby window suggests a late afternoon glow. The overall atmosphere is one of gratitude, friendship, and celebration. No text in the image.",
+    "suggested_image_filename": "us-holidays-and-customs-thanksgiving.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\us-holidays-and-customs-thanksgiving.png"
+  },
+  {
+    "article_id": "english-proofreading-tools-comparison",
+    "image_generation_prompt": "A realistic photo of a Japanese adult writer seriously comparing two different software interfaces on a laptop screen in a modern, clean home office. The left side of the screen subtly represents Grammarly with its green-themed interface, highlighting grammar corrections. The right side represents QuillBot with its blue-themed interface, showing text being rephrased. The person is focused, with a thoughtful expression, perhaps holding a pen and a notepad. The background is slightly blurred, emphasizing the laptop and the person's concentration. The lighting is natural and soft, creating a calm and productive atmosphere. No text or logos should be visible on the screen.",
+    "suggested_image_filename": "english-proofreading-tools-comparison.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\english-proofreading-tools-comparison.png"
+  },
+  {
+    "article_id": "eras-application-for-us-medical-residency",
+    "image_generation_prompt": "A realistic photo of a young Japanese male doctor in his late 20s, sitting at a modern desk in a well-lit room at night. He is intensely focused on his laptop screen, which displays a complex application form, subtly suggesting the ERAS website. His expression is a mix of determination and thoughtful concentration. On the desk are scattered documents, a coffee mug, and a medical textbook. Through the window behind him, the faint, blurred lights of a modern American city skyline, perhaps New York or Boston, are visible, symbolizing his future goal. The lighting is dramatic, with the laptop screen illuminating his face, creating a sense of a pivotal, late-night effort. The overall mood is one of ambition and the challenging journey of pursuing a medical residency in the US. No text on screen.",
+    "suggested_image_filename": "eras-application-for-us-medical-residency.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\eras-application-for-us-medical-residency.png"
+  },
+  {
+    "article_id": "daad-scholarship-germany",
+    "image_generation_prompt": "A realistic photo capturing the hopeful atmosphere of a young Japanese university student studying in the grand, historic library of a German university, like Heidelberg. The student, sitting at a wooden desk, is focused on documents related to the DAAD scholarship and Germany. Warm, natural light streams through a large arched window, illuminating the scene and symbolizing a bright future. The background is filled with towering bookshelves, creating a scholarly and inspiring ambiance. The overall mood is quiet, focused, and full of aspiration. No text on the image.",
+    "suggested_image_filename": "daad-scholarship-germany.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\daad-scholarship-germany.png"
+  },
+  {
+    "article_id": "h1b-visa-lottery-sponsorship",
+    "image_generation_prompt": "A realistic photo capturing a hopeful and optimistic mood. A young Japanese man and woman, both professionals in their late 20s, are sitting in a modern, sunlit cafe with a large window overlooking a bustling American city skyline like New York or San Francisco. They are looking at a laptop screen together, discussing their career plans with bright, determined expressions. The focus is on their faces, conveying a sense of ambition and the dream of working in the USA. The image should be sharp, with cinematic lighting and a shallow depth of field, symbolizing their focus on achieving the H-1B visa and finding a sponsor company. No text on the image.",
+    "suggested_image_filename": "h1b-visa-lottery-sponsorship.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\h1b-visa-lottery-sponsorship.png"
+  },
+  {
+    "article_id": "global-entry-application-for-japanese",
+    "image_generation_prompt": "A realistic photo capturing the seamless experience of a Japanese traveler using a Global Entry kiosk at a U.S. airport. The traveler, an adult in their 30s dressed in smart casual attire, is smiling slightly as they interact with the sleek, modern kiosk. In the background, blurred for depth of field, is a long, winding queue of other passengers at the regular immigration counters, creating a strong contrast. The lighting is bright and airy, typical of a modern airport terminal. The focus is on the efficiency and ease of the Global Entry process. No text on the image.",
+    "suggested_image_filename": "global-entry-application-for-japanese.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\global-entry-application-for-japanese.png"
+  },
+  {
+    "article_id": "cover-letter-vs-resume",
+    "image_generation_prompt": "A realistic photo of a professional Japanese person in their early 30s sitting at a clean, modern wooden desk. The desk is well-organized with a laptop, a notebook, and a cup of coffee. The person is carefully reviewing two distinct documents laid out side-by-side: a structured, bullet-pointed resume and a letter-formatted cover letter. Their expression is focused and thoughtful, suggesting deep preparation for a job application. The background is a bright, softly blurred home office with a bookshelf, creating a professional yet personal atmosphere. The lighting is natural and warm, highlighting the documents and the person's determined posture. No legible text should be visible on the documents.",
+    "suggested_image_filename": "cover-letter-vs-resume.png",
+    "target_output_path": "C:\\Users\\94yus\\OneDrive\\ドキュメント\\BUSINESS\\toremock\\public\\images\\cover-letter-vs-resume.png"
+  }
+]
