@@ -6573,6 +6573,1137 @@ export const articleData: Record<string, ArticleData> = {
     "面接対策"
     ]
   },
+  "uc-application-personal-insight-questions": {
+    "id": "uc-application-personal-insight-questions",
+    "title": "カリフォルニア大学(UC)出願エッセイ完全攻略法",
+    "description": "カリフォルニア大学(UC)出願の鍵となるPersonal Insight Questions (PIQ)の書き方を徹底解説。8つの質問選びから、STARメソッドを使ったストーリー構成、英語表現のコツまで、合格に繋がるエッセイ作成の5つのステップを具体例と共に紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uc-application-personal-insight-questions.png",
+    "tags": [
+    "UC出願",
+    "カリフォルニア大学",
+    "エッセイ",
+    "Personal Insight Questions",
+    "PIQ",
+    "海外大学進学",
+    "留学",
+    "自己分析"
+    ]
+  },
+  "mit-rsi-summer-school-application": {
+    "id": "mit-rsi-summer-school-application",
+    "title": "MITの最難関サマースクールRSIの全貌と出願対策",
+    "description": "世界中の天才高校生が集うMITのサマースクールRSI。本記事では、そのプログラム内容、選考プロセス、そして合格を勝ち取るための出願戦略を徹底解説。推薦状の依頼からエッセイの書き方まで、具体的な対策を網羅し、あなたの挑戦をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mit-rsi-summer-school-application.png",
+    "tags": [
+    "サマースクール",
+    "MIT",
+    "RSI",
+    "海外大学",
+    "出願対策",
+    "高校生",
+    "留学",
+    "理系"
+    ]
+  },
+  "world-university-rankings-qs-the-arwu": {
+    "id": "world-university-rankings-qs-the-arwu",
+    "title": "世界大学ランキング(QS/THE/ARWU)の賢い見方",
+    "description": "QS、THE、ARWUなど、数ある世界大学ランキング。どれを信じればいいか迷っていませんか？本記事では、各ランキングの特徴を徹底比較し、数字に惑わされずに自分に合った大学を見つけるための賢い活用法を解説します。留学準備の第一歩として必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/world-university-rankings-qs-the-arwu.png",
+    "tags": [
+    "世界大学ランキング",
+    "海外大学",
+    "留学準備",
+    "大学選び",
+    "QSランキング",
+    "THEランキング",
+    "ARWU"
+    ]
+  },
+  "top-us-investment-banking-firms-for-new-grads": {
+    "id": "top-us-investment-banking-firms-for-new-grads",
+    "title": "新卒で狙うべき米系投資銀行トップ5社徹底比較",
+    "description": "新卒で米系投資銀行を目指すあなたへ。業界トップのゴールドマン・サックス、モルガン・スタンレーなど5社の特徴、社風、求められるスキルを徹底比較。内定を勝ち取るための具体的な準備方法や必須の英語力についても解説します。この記事で、あなたのキャリアの第一歩を確かなものにしましょう。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/top-us-investment-banking-firms-for-new-grads.png",
+    "tags": [
+    "投資銀行",
+    "米系",
+    "就職活動",
+    "新卒",
+    "外資系金融",
+    "キャリアパス",
+    "バルジブラケット",
+    "ゴールドマンサックス",
+    "モルガンスタンレー"
+    ]
+  },
+  "common-app-extracurricular-activities-writing-guide": {
+    "id": "common-app-extracurricular-activities-writing-guide",
+    "title": "Common App課外活動欄で差がつく書き方10のコツ",
+    "description": "アメリカ大学出願のCommon Appで、あなたの魅力を最大限に伝える課外活動欄の書き方を徹底解説。活動の選び方から、インパクトのある動詞の使い方、具体的な成果の示し方まで、審査官の心に響く10個のコツを具体例と共に紹介。ライバルに差をつけ、合格を掴むための必読ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/common-app-extracurricular-activities-writing-guide.png",
+    "tags": [
+    "Common App",
+    "課外活動",
+    "アメリカ大学出願",
+    "海外大学",
+    "留学準備",
+    "自己PR",
+    "エッセイ"
+    ]
+  },
+  "fulbright-scholarship-application-strategy": {
+    "id": "fulbright-scholarship-application-strategy",
+    "title": "フルブライト奨学金獲得のための具体的戦略とは？",
+    "description": "世界最高峰のフルブライト奨学金獲得を目指すあなたへ。本記事では、応募プロセスの全体像から、説得力のあるエッセイの書き方、TOEFL高スコア戦略、強力な推薦状の依頼方法まで、具体的なステップと秘訣を徹底解説します。夢への第一歩を踏み出しましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/fulbright-scholarship-application-strategy.png",
+    "tags": [
+    "フルブライト奨学金",
+    "海外留学",
+    "アメリカ留学",
+    "TOEFL",
+    "エッセイ対策",
+    "研究計画書",
+    "大学院留学",
+    "奨学金申請"
+    ]
+  },
+  "lse-economics-master-admission-tips": {
+    "id": "lse-economics-master-admission-tips",
+    "title": "LSE(ロンドン大学)経済学修士課程に合格する方法",
+    "description": "世界最高峰のLSE経済学修士課程への合格は多くの学生の夢です。本記事では、合格者が実践したGPA・GRE対策、魂を込めたSOPの書き方、効果的な推薦状の依頼方法など、出願プロセスを5つのステップで徹底解説。夢への挑戦を具体的な行動に変えるための完全ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/lse-economics-master-admission-tips.png",
+    "tags": [
+    "LSE",
+    "ロンドン大学",
+    "経済学修士",
+    "大学院留学",
+    "イギリス留学",
+    "出願対策",
+    "SOP",
+    "GRE",
+    "IELTS"
+    ]
+  },
+  "boston-career-forum-preparation-guide": {
+    "id": "boston-career-forum-preparation-guide",
+    "title": "ボスキャリ完全攻略！内定を複数獲得する準備術",
+    "description": "ボスキャリで複数内定を獲得するための完全ガイド。自己分析からレジュメ作成、面接対策、当日の立ち回りまで、時系列に沿った具体的な準備術を徹底解説。留学生やバイリンガル学生必見の、成功へのロードマップです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/boston-career-forum-preparation-guide.png",
+    "tags": [
+    "ボスキャリ",
+    "キャリアフォーラム",
+    "就職活動",
+    "留学生",
+    "外資系企業",
+    "英語面接",
+    "自己分析",
+    "レジュメ"
+    ]
+  },
+  "how-to-get-recommendation-letter-from-professor": {
+    "id": "how-to-get-recommendation-letter-from-professor",
+    "title": "留学の鍵！教授から強力な推薦状をもらう依頼術",
+    "description": "海外大学院への留学準備で必須の推薦状。この記事では、教授に快く引き受けてもらい、あなたの強みを最大限にアピールする強力な推薦状を手に入れるための具体的なステップ、依頼メールの例文、準備すべき書類リストまで、実践的なノウハウを徹底解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/how-to-get-recommendation-letter-from-professor.png",
+    "tags": [
+    "推薦状",
+    "留学",
+    "大学院留学",
+    "教授への依頼",
+    "出願書類",
+    "海外大学",
+    "英語学習"
+    ]
+  },
+  "gafama-new-grad-hiring-process": {
+    "id": "gafama-new-grad-hiring-process",
+    "title": "GAFA+Mの新卒採用プロセスと求められる英語レベル",
+    "description": "GAFA+Mへの新卒就職を目指す方必見！本記事では、トップIT企業の採用プロセス、特に重視される英語面接で求められる具体的な英語レベルと、今日から始められる実践的な対策法を徹底解説。スコアだけではない、本当に使える英語力を身につける秘訣を紹介します。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/gafama-new-grad-hiring-process.png",
+    "tags": [
+    "GAFA",
+    "外資系",
+    "新卒採用",
+    "英語面接",
+    "ビジネス英語",
+    "IT業界",
+    "就職活動",
+    "TOEIC",
+    "TOEFL"
+    ]
+  },
+  "uk-student-visa-application-guide": {
+    "id": "uk-student-visa-application-guide",
+    "title": "イギリス学生ビザ申請の落とし穴と具体的な対策",
+    "description": "イギリス留学の夢を叶えるための最重要関門、学生ビザ申請。この記事では、多くの申請者が陥りがちな資金証明、英語力証明、書類不備といった落とし穴を徹底解説。失敗しないための具体的な対策と実践的なチェックリストで、あなたのビザ取得を強力にサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/uk-student-visa-application-guide.png",
+    "tags": [
+    "イギリス留学",
+    "学生ビザ",
+    "ビザ申請",
+    "留学準備",
+    "IELTS for UKVI",
+    "資金証明",
+    "海外大学"
+    ]
+  },
+  "ivy-league-vs-public-ivy": {
+    "id": "ivy-league-vs-public-ivy",
+    "title": "アイビーリーグ vs. パブリック・アイビー徹底比較",
+    "description": "アメリカの名門大学、アイビーリーグとパブリック・アイビー。ブランド力か、コスパか。両者の違いを学費、合格率、教育環境の観点から徹底比較し、あなたに最適な大学選びをサポートします。海外大学進学を目指すための英語学習法も解説。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/ivy-league-vs-public-ivy.png",
+    "tags": [
+    "アイビーリーグ",
+    "パブリック・アイビー",
+    "アメリカ大学",
+    "海外留学",
+    "大学選び",
+    "TOEFL対策",
+    "英語学習"
+    ]
+  },
+  "mba-application-gmat-vs-gre": {
+    "id": "mba-application-gmat-vs-gre",
+    "title": "MBA出願、GMATとGREはどちらが有利？徹底解説",
+    "description": "MBA出願に必須のGMATとGRE。どちらの試験が有利で、自分に合っているのか悩んでいませんか？この記事では、GMATとGREの試験内容、セクションごとの違い、MBAスクール側の視点を徹底比較。あなたに最適な試験を見つけ、効果的な対策を始めるための具体的な方法を解説します。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/mba-application-gmat-vs-gre.png",
+    "tags": [
+    "MBA",
+    "MBA出願",
+    "GMAT",
+    "GRE",
+    "大学院留学",
+    "テスト対策",
+    "スコアメイク",
+    "留学準備"
+    ]
+  },
+  "top-management-consulting-firms-case-interview": {
+    "id": "top-management-consulting-firms-case-interview",
+    "title": "外資コンサルBIG3(MBB)のケース面接突破法",
+    "description": "外資系コンサルティングファームの最高峰、MBB（マッキンゼー、BCG、ベイン）の選考で最大の壁となるケース面接。本記事では、ケース面接の基本から、具体的な5ステップの思考法、効果的なトレーニング方法までを徹底解説。これを読めば、あなたもトップコンサルタントへの道を切り拓けます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/top-management-consulting-firms-case-interview.png",
+    "tags": [
+    "外資コンサル",
+    "ケース面接",
+    "MBB",
+    "就職活動",
+    "転職活動",
+    "フェルミ推定",
+    "コンサルティング",
+    "マッキンゼー",
+    "BCG",
+    "ベイン"
+    ]
+  },
+  "how-to-build-credit-history-in-us": {
+    "id": "how-to-build-credit-history-in-us",
+    "title": "留学生必見！アメリカでのクレジットヒストリー構築法",
+    "description": "アメリカ留学を始めたばかりの皆さん、クレジットヒストリーの構築に悩んでいませんか？本記事では、SSNなしでも始められるクレジットカードの作り方から、賢い利用法、スコアを早く上げるテクニックまで、留学生がゼロから信用を築くための具体的なステップを分かりやすく解説します。将来のアメリカ生活を快適にするための第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/how-to-build-credit-history-in-us.png",
+    "tags": [
+    "クレジットヒストリー",
+    "アメリカ留学",
+    "留学生",
+    "クレジットカード",
+    "信用スコア",
+    "SSN",
+    "アメリカ生活"
+    ]
+  },
+  "un-jpo-programme-how-to-apply": {
+    "id": "un-jpo-programme-how-to-apply",
+    "title": "国連職員への道！JPO派遣制度の応募から合格まで",
+    "description": "国連職員を目指す方必見！JPO派遣制度の全貌を徹底解説します。応募資格や求められる英語力、難関の書類選考・面接を突破するための具体的な対策まで、合格へのロードマップをこの記事で詳しくご紹介。あなたの国際キャリアへの夢を現実に変える第一歩をサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "10分",
+    "imageSrc": "/images/un-jpo-programme-how-to-apply.png",
+    "tags": [
+    "JPO派遣制度",
+    "国連職員",
+    "国際機関",
+    "キャリアパス",
+    "外務省",
+    "英語学習",
+    "TOEFL"
+    ]
+  },
+  "linkedin-profile-optimization-for-job-seekers": {
+    "id": "linkedin-profile-optimization-for-job-seekers",
+    "title": "外資系転職に必須！LinkedInプロフィールの最適化術",
+    "description": "外資系転職を目指す方必見！リクルーターから魅力的なスカウトが届くLinkedInプロフィールの作り方を徹底解説。写真やヘッドラインの基本から、実績をアピールする職務経歴、信頼性を高める推薦文の活用法まで、具体的なテクニックを網羅。あなたのキャリアを加速させる第一歩をここから始めましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/linkedin-profile-optimization-for-job-seekers.png",
+    "tags": [
+    "LinkedIn",
+    "転職活動",
+    "外資系企業",
+    "キャリアアップ",
+    "プロフィール最適化",
+    "自己PR",
+    "リクルーター"
+    ]
+  },
+  "erasmus-mundus-scholarship-guide": {
+    "id": "erasmus-mundus-scholarship-guide",
+    "title": "欧州留学の切り札！エラスムス・ムンドゥス奨学金",
+    "description": "エラスムス・ムンドゥス奨学金で夢の欧州留学へ！この記事では、奨学金の概要、メリット、応募資格、選考対策までを徹底解説。返済不要で複数の大学院を経験できる魅力的な制度を活用し、グローバルなキャリアを築くための第一歩を踏み出しましょう。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/erasmus-mundus-scholarship-guide.png",
+    "tags": [
+    "エラスムス・ムンドゥス",
+    "大学院留学",
+    "海外留学",
+    "奨学金",
+    "ヨーロッパ留学",
+    "英語学習",
+    "修士課程"
+    ]
+  },
+  "us-cpa-exam-for-japanese": {
+    "id": "us-cpa-exam-for-japanese",
+    "title": "日本人が米国公認会計士(U.S.CPA)を取得する方法",
+    "description": "日本人がU.S.CPA（米国公認会計士）資格を取得するための全手順を解説。受験資格の確認、出願州の選び方から、効果的な学習戦略、科目別対策、合格後のキャリアパスまで。グローバルなキャリアを目指すあなたに必要な情報を網羅した完全ガイドです。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/us-cpa-exam-for-japanese.png",
+    "tags": [
+    "U.S.CPA",
+    "米国公認会計士",
+    "国際資格",
+    "会計士",
+    "英語学習",
+    "キャリアアップ",
+    "アビタス",
+    "資格試験",
+    "外資系転職"
+    ]
+  },
+  "big4-audit-firm-career-path": {
+    "id": "big4-audit-firm-career-path",
+    "title": "BIG4監査法人のキャリアパスと海外駐在のリアル",
+    "description": "BIG4監査法人でのキャリアパス、特に多くの会計士が夢見る海外駐在の実現方法を徹底解説。必要な年次や評価、選考プロセスから、TOEICスコアを含む必須の英語学習法まで、リアルな情報を凝縮。グローバルキャリアを目指すあなたのための完全ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/big4-audit-firm-career-path.png",
+    "tags": [
+    "BIG4",
+    "監査法人",
+    "キャリアパス",
+    "海外駐在",
+    "会計士",
+    "英語学習",
+    "TOEIC",
+    "公認会計士"
+    ]
+  },
+  "top-tech-companies-behavioral-interview-questions": {
+    "id": "top-tech-companies-behavioral-interview-questions",
+    "title": "GAFAのビヘイビア面接で聞かれる質問とSTAR対策",
+    "description": "GAFAをはじめとするトップテック企業のビヘイビア面接（行動面接）で頻出する質問例と、高評価を得るための『STARメソッド』を徹底解説。具体的な回答例や、面接官に響く回答を作成するコツを紹介し、あなたの転職・キャリアアップを成功に導きます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/top-tech-companies-behavioral-interview-questions.png",
+    "tags": [
+    "GAFA",
+    "ビヘイビア面接",
+    "行動面接",
+    "STARメソッド",
+    "面接対策",
+    "外資系IT",
+    "転職活動",
+    "キャリアアップ"
+    ]
+  },
+  "stanford-cs-phd-admission-requirements": {
+    "id": "stanford-cs-phd-admission-requirements",
+    "title": "スタンフォード大学CS博士課程に合格する人の特徴",
+    "description": "世界最高峰のスタンフォード大学コンピュータサイエンス博士課程。この記事では、合格を勝ち取る人々に共通する学業成績、研究実績、推薦状、英語力などの特徴を徹底解説。夢への第一歩を踏み出すための具体的な戦略と準備方法を学びましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/stanford-cs-phd-admission-requirements.png",
+    "tags": [
+    "スタンフォード大学",
+    "博士課程",
+    "コンピュータサイエンス",
+    "海外大学院",
+    "留学",
+    "出願対策",
+    "研究留学",
+    "SOP",
+    "推薦状",
+    "TOEFL"
+    ]
+  },
+  "ielts-vs-toefl-for-uk-universities": {
+    "id": "ielts-vs-toefl-for-uk-universities",
+    "title": "イギリス大学留学、IELTSとTOEFLどちらを選ぶ？",
+    "description": "イギリス大学留学を目指す方へ。IELTSとTOEFL、どちらの試験を選ぶべきか迷っていませんか？本記事では、イギリスの大学がどちらを重視するのか、試験内容の違い、スコア換算、対策法まで徹底比較。あなたに最適な試験選びをサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/ielts-vs-toefl-for-uk-universities.png",
+    "tags": [
+    "イギリス留学",
+    "大学留学",
+    "IELTS",
+    "TOEFL",
+    "英語試験",
+    "試験対策",
+    "スコア換算",
+    "出願準備"
+    ]
+  },
+  "working-holiday-visa-canada-vs-australia": {
+    "id": "working-holiday-visa-canada-vs-australia",
+    "title": "ワーホリ比較！カナダとオーストラリアどっちがいい？",
+    "description": "ワーキングホリデーで人気のカナダとオーストラリア。ビザ、仕事、費用、生活、英語環境など様々な角度から徹底比較します。あなたの目的や性格に合った国はどっち？後悔しない国選びのために、それぞれのメリット・デメリットを分かりやすく解説します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/working-holiday-visa-canada-vs-australia.png",
+    "tags": [
+    "ワーホリ",
+    "カナダ",
+    "オーストラリア",
+    "海外生活",
+    "ビザ",
+    "英語学習"
+    ]
+  },
+  "top-fashion-schools-in-the-world-ranking": {
+    "id": "top-fashion-schools-in-the-world-ranking",
+    "title": "世界のファッションスクールランキングTOP5を解説",
+    "description": "ファッションデザイナーを目指す方必見！世界トップクラスのファッションスクールをランキング形式でご紹介。パーソンズ、セントマ、FITなど名門校の特色、学費、著名な卒業生を徹底解説。あなたの夢を叶える学校選びの参考にしてください。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-fashion-schools-in-the-world-ranking.png",
+    "tags": [
+    "ファッションスクール",
+    "海外留学",
+    "デザイン留学",
+    "パーソンズ",
+    "セントラルセントマーチンズ",
+    "ファッションデザイナー",
+    "進路相談"
+    ]
+  },
+  "english-resume-vs-cv-difference": {
+    "id": "english-resume-vs-cv-difference",
+    "title": "英文レジュメとCVの違いは？正しい使い分けと書き方",
+    "description": "英文レジュメとCV、どちらを使うべきか迷っていませんか？この記事では、両者の明確な違い、応募先や地域に応じた正しい使い分け、そして採用担当者の目に留まる効果的な書き方のポイントを具体例とともに徹底解説します。海外就職や外資系転職を目指す方は必見です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/english-resume-vs-cv-difference.png",
+    "tags": [
+    "英文レジュメ",
+    "CV",
+    "履歴書",
+    "海外就職",
+    "外資系転職",
+    "英語学習",
+    "書き方"
+    ]
+  },
+  "us-community-college-transfer-to-top-university": {
+    "id": "us-community-college-transfer-to-top-university",
+    "title": "コミカレからUCバークレーへ！編入成功の秘訣",
+    "description": "アメリカのコミュニティカレッジからUCバークレーのようなトップ大学への編入は夢ではありません。本記事では、高いGPAを維持する戦略、魅力的なエッセイの書き方、効果的な課外活動、そして必要な英語力まで、編入成功の秘訣を具体的かつ網羅的に解説します。計画的な準備で憧れの大学への扉を開きましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/us-community-college-transfer-to-top-university.png",
+    "tags": [
+    "アメリカ留学",
+    "コミュニティカレッジ",
+    "大学編入",
+    "UCバークレー",
+    "海外大学",
+    "GPA",
+    "留学準備",
+    "TOEFL"
+    ]
+  },
+  "hedge-fund-analyst-career-path": {
+    "id": "hedge-fund-analyst-career-path",
+    "title": "ヘッジファンド・アナリストの仕事内容と年収の実態",
+    "description": "ヘッジファンド・アナリストという職業に興味がありますか？本記事では、そのミステリアスな仕事内容、求められるスキル、驚くべき年収の実態、そして成功へのキャリアパスを徹底解説。金融の最前線で活躍するための具体的なステップと必須の英語力についても触れます。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/hedge-fund-analyst-career-path.png",
+    "tags": [
+    "ヘッジファンド",
+    "アナリスト",
+    "キャリアパス",
+    "年収",
+    "金融",
+    "外資系金融",
+    "転職",
+    "英語力"
+    ]
+  },
+  "international-baccalaureate-ib-diploma-advantage": {
+    "id": "international-baccalaureate-ib-diploma-advantage",
+    "title": "国際バカロレア(IB)が大学受験で有利になる理由",
+    "description": "国際バカロレア(IB)が大学受験、特に総合型選抜や海外大学進学でなぜ有利なのかを徹底解説。IBのカリキュラムが育む論理的思考力や探究心が評価される理由から、国内外の大学入試での具体的な活用法、スコアを最大化する戦略まで、IB生必見の情報をお届けします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/international-baccalaureate-ib-diploma-advantage.png",
+    "tags": [
+    "国際バカロレア",
+    "IB",
+    "大学受験",
+    "総合型選抜",
+    "AO入試",
+    "海外大学進学",
+    "国内大学入試",
+    "学習法",
+    "ディプロマプログラム"
+    ]
+  },
+  "how-to-pass-us-embassy-f1-visa-interview": {
+    "id": "how-to-pass-us-embassy-f1-visa-interview",
+    "title": "米国学生ビザ(F-1)面接で聞かれる質問と合格回答例",
+    "description": "米国学生ビザ(F-1)面接は留学の大きな関門です。この記事では、面接官が本当に知りたいことから、頻出質問と説得力のある回答例、必要書類、当日の注意点までを徹底解説。これを読めば、自信を持って面接に臨み、合格を勝ち取ることができます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/how-to-pass-us-embassy-f1-visa-interview.png",
+    "tags": [
+    "F1ビザ",
+    "アメリカ留学",
+    "学生ビザ",
+    "ビザ面接",
+    "面接対策",
+    "英語面接",
+    "留学準備"
+    ]
+  },
+  "top-pharmaceutical-companies-for-global-career": {
+    "id": "top-pharmaceutical-companies-for-global-career",
+    "title": "グローバルに活躍できる外資系製薬会社ランキング",
+    "description": "グローバルな舞台で活躍したい方へ。この記事では、2025年最新の外資系製薬会社ランキングTOP5を徹底解説。各社の特徴や求められる英語力、TOEICスコアの目安、そして夢を実現するための具体的な英語学習法まで、あなたのキャリアアップを力強くサポートする情報が満載です。",
+    "category": "TOEIC",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-pharmaceutical-companies-for-global-career.png",
+    "tags": [
+    "外資系製薬",
+    "グローバルキャリア",
+    "転職",
+    "年収",
+    "英語学習",
+    "TOEIC"
+    ]
+  },
+  "uk-chevening-scholarship-guide": {
+    "id": "uk-chevening-scholarship-guide",
+    "title": "英国政府のチーヴニング奨学金、獲得のコツとは？",
+    "description": "英国政府の名誉あるチーヴニング奨学金獲得を目指す方へ。応募資格から選考プロセス、合格の鍵となるエッセイ・面接対策まで、具体的な戦略を徹底解説。この記事を読めば、夢の英国留学を実現するための具体的なステップがわかります。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uk-chevening-scholarship-guide.png",
+    "tags": [
+    "チーヴニング奨学金",
+    "イギリス留学",
+    "海外大学院",
+    "給付型奨学金",
+    "英語学習",
+    "エッセイ対策",
+    "面接対策"
+    ]
+  },
+  "writing-statement-of-purpose-for-grad-school": {
+    "id": "writing-statement-of-purpose-for-grad-school",
+    "title": "大学院留学を成功させる志望動機書(SOP)の書き方",
+    "description": "海外大学院への留学を目指す方必見！合否を左右する重要な書類、志望動機書（SOP）の書き方を徹底解説。構成の作り方から、自己PRのコツ、避けるべき間違いまで、具体的な例文を交えて分かりやすく説明します。この記事を読めば、あなたの魅力を最大限に伝えるSOPが書けるようになります。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/writing-statement-of-purpose-for-grad-school.png",
+    "tags": [
+    "志望動機書",
+    "SOP",
+    "大学院留学",
+    "海外大学院",
+    "出願書類",
+    "エッセイ",
+    "書き方",
+    "留学準備"
+    ]
+  },
+  "top-mba-programs-for-entrepreneurship": {
+    "id": "top-mba-programs-for-entrepreneurship",
+    "title": "起業家を目指すためのおすすめMBAプログラムTOP5",
+    "description": "将来起業を目指す方へ。本記事では、MBAが起業家にとってなぜ有効なのかを解説し、アントレプレナーシップ教育に定評のある世界のトップMBAプログラムを5つ厳選してご紹介します。プログラムの選び方から必要な英語力まで、あなたの夢を現実にするための第一歩をサポートします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-mba-programs-for-entrepreneurship.png",
+    "tags": [
+    "MBA",
+    "起業",
+    "アントレプレナーシップ",
+    "海外大学院",
+    "ビジネススクール",
+    "キャリアアップ",
+    "留学",
+    "TOEFL"
+    ]
+  },
+  "opt-stem-extension-guide-for-international-students": {
+    "id": "opt-stem-extension-guide-for-international-students",
+    "title": "留学生必見！米OPTとSTEM延長の申請完全ガイド",
+    "description": "アメリカで学ぶ留学生向けに、OPTおよびSTEM OPT延長の申請プロセス、必要書類、注意点を網羅的に解説。複雑な手続きをステップバイステップで分かりやすくガイドし、卒業後のキャリアをスムーズにスタートさせるための実践的な情報を提供します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/opt-stem-extension-guide-for-international-students.png",
+    "tags": [
+    "OPT",
+    "STEM OPT",
+    "アメリカ留学",
+    "留学生",
+    "就職",
+    "F-1ビザ",
+    "国際センター",
+    "キャリアプラン"
+    ]
+  },
+  "singaporean-universities-nus-ntu-comparison": {
+    "id": "singaporean-universities-nus-ntu-comparison",
+    "title": "シンガポール国立大学(NUS) vs. 南洋理工大学(NTU)",
+    "description": "アジアトップのシンガポール国立大学(NUS)と南洋理工大学(NTU)。どちらを選ぶべきか悩んでいませんか？この記事では、世界大学ランキング、学費、強みのある学部、キャンパスライフ、入学に必要な英語力などを徹底比較。あなたに最適な大学選びをサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/singaporean-universities-nus-ntu-comparison.png",
+    "tags": [
+    "シンガポール留学",
+    "NUS",
+    "NTU",
+    "海外大学",
+    "大学比較",
+    "アジア留学",
+    "TOEFL",
+    "IELTS",
+    "英語学習"
+    ]
+  },
+  "case-interview-consulting-frameworks": {
+    "id": "case-interview-consulting-frameworks",
+    "title": "コンサル面接で使えるケース問題フレームワーク7選",
+    "description": "コンサルティングファームのケース面接を突破するための必須フレームワーク7選を徹底解説。3C分析やフェルミ推定などの基本から、実践で使いこなすコツ、おすすめの対策本まで網羅。この記事を読めば、論理的思考力を武器に内定へ大きく近づけます。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/case-interview-consulting-frameworks.png",
+    "tags": [
+    "ケース面接",
+    "コンサルティング",
+    "フレームワーク",
+    "就職活動",
+    "転職活動",
+    "フェルミ推定",
+    "ロジックツリー",
+    "思考法"
+    ]
+  },
+  "top-film-schools-in-us-ranking": {
+    "id": "top-film-schools-in-us-ranking",
+    "title": "映画監督を目指す！全米トップフィルムスクール5選",
+    "description": "映画監督になる夢を叶えたい方必見！本記事では、世界最高峰のアメリカのフィルムスクールTOP5をランキング形式で徹底解説。各大学の特徴、学費、著名な卒業生、そして入学に必要なTOEFLスコアまで、留学準備に役立つ情報を網羅しています。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/top-film-schools-in-us-ranking.png",
+    "tags": [
+    "フィルムスクール",
+    "映画監督",
+    "アメリカ留学",
+    "大学ランキング",
+    "TOEFL対策",
+    "海外大学",
+    "映画制作"
+    ]
+  },
+  "how-to-get-job-at-unicef-or-world-bank": {
+    "id": "how-to-get-job-at-unicef-or-world-bank",
+    "title": "ユニセフや世界銀行など国際機関で働くための道筋",
+    "description": "ユニセフや世界銀行などの国際機関で働くという夢を実現するための具体的なキャリアパス、必須の英語力、専門性を解説。JPO派遣制度や空席公募、効果的な英語学習法まで、今から始められる準備を網羅的にガイドします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/how-to-get-job-at-unicef-or-world-bank.png",
+    "tags": [
+    "国際機関",
+    "キャリアパス",
+    "ユニセフ",
+    "世界銀行",
+    "英語学習",
+    "JPO派遣制度",
+    "国際公務員",
+    "TOEFL",
+    "キャリアプラン"
+    ]
+  },
+  "top-airlines-for-flight-attendant-career": {
+    "id": "top-airlines-for-flight-attendant-career",
+    "title": "客室乗務員(CA)になるなら？外資系航空会社5選",
+    "description": "外資系客室乗務員(CA)を目指すあなたへ。この記事では、エミレーツ航空、シンガポール航空など、キャリアを築くのにおすすめの航空会社5選を徹底解説。求められる英語力やTOEICスコアの目安、具体的な学習法、採用試験の対策まで、夢を叶えるための情報を網羅しています。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-airlines-for-flight-attendant-career.png",
+    "tags": [
+    "客室乗務員",
+    "CA",
+    "外資系航空会社",
+    "エアライン就活",
+    "航空業界",
+    "英語学習",
+    "TOEIC"
+    ]
+  },
+  "h1b-visa-lottery-process-explained": {
+    "id": "h1b-visa-lottery-process-explained",
+    "title": "アメリカ就労ビザH-1Bの抽選プロセスと当選確率",
+    "description": "アメリカでの就職を目指す方へ。H-1Bビザの抽選プロセスをステップバイステップで徹底解説。最新の当選確率や、修士号保持者が有利な理由、当選確率を上げるための準備、スポンサー企業の見つけ方まで、具体的で役立つ情報が満載です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/h1b-visa-lottery-process-explained.png",
+    "tags": [
+    "H-1Bビザ",
+    "アメリカ就労ビザ",
+    "ビザ抽選",
+    "海外就職",
+    "アメリカ移住",
+    "ITエンジニア",
+    "USCIS"
+    ]
+  },
+  "top-supply-chain-management-master-programs": {
+    "id": "top-supply-chain-management-master-programs",
+    "title": "SCMを学ぶ大学院！サプライチェーン世界ランキング",
+    "description": "グローバルなキャリアを目指すあなたへ。この記事では、サプライチェーンマネジメント（SCM）を学べる世界のトップ大学院をランキング形式で詳しく紹介します。SCMの基礎から、大学院で学ぶメリット、出願準備まで、未来を切り拓くための情報を網羅。あなたのキャリアプランに最適な一校がきっと見つかります。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-supply-chain-management-master-programs.png",
+    "tags": [
+    "サプライチェーンマネジメント",
+    "SCM",
+    "大学院留学",
+    "海外大学院",
+    "MBA",
+    "キャリアアップ",
+    "ロジスティクス",
+    "世界ランキング",
+    "出願準備"
+    ]
+  },
+  "writing-cold-email-to-professor-for-research": {
+    "id": "writing-cold-email-to-professor-for-research",
+    "title": "大学院留学、研究室訪問のための教授へのメール術",
+    "description": "大学院留学を目指す方へ。希望の研究室の教授に送る最初のメール（コールドメール）の書き方を徹底解説。件名から自己紹介、研究への関心の示し方まで、具体的な例文と注意点を交え、返信率を上げるための実践的テクニックを紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/writing-cold-email-to-professor-for-research.png",
+    "tags": [
+    "大学院留学",
+    "研究室訪問",
+    "教授へのメール",
+    "コールドメール",
+    "英語メール",
+    "出願準備",
+    "アカデミックライティング"
+    ]
+  },
+  "top-companies-for-work-life-balance-in-japan": {
+    "id": "top-companies-for-work-life-balance-in-japan",
+    "title": "ワークライフバランスが良い外資系企業ランキングTOP10",
+    "description": "プライベートも仕事も充実させたい方へ。この記事では、ワークライフバランスが良いと評判の外資系企業をランキング形式で10社紹介します。なぜ外資系が働きやすいのか、転職成功に必要な英語力やスキル、企業選びのコツまで徹底解説。理想のキャリアを築くヒントが満載です。",
+    "category": "TOEIC",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/top-companies-for-work-life-balance-in-japan.png",
+    "tags": [
+    "外資系企業",
+    "ワークライフバランス",
+    "転職",
+    "働きやすい会社",
+    "高年収",
+    "キャリアアップ",
+    "英語力",
+    "TOEIC"
+    ]
+  },
+  "canada-express-entry-permanent-residence": {
+    "id": "canada-express-entry-permanent-residence",
+    "title": "カナダ永住権取得！エクスプレスエントリー徹底解説",
+    "description": "カナダ永住権を目指す方必見！主要な移民制度「エクスプレスエントリー」の仕組み、CRSスコアを上げるための具体的な方法、必須となる英語試験対策までを完全ガイド。初心者にも分かりやすく、あなたのカナダ移住計画を強力にサポートします。",
+    "category": "英語試験",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/canada-express-entry-permanent-residence.png",
+    "tags": [
+    "カナダ永住権",
+    "エクスプレスエントリー",
+    "海外移住",
+    "カナダ移住",
+    "IELTS",
+    "英語力証明",
+    "CRSスコア"
+    ]
+  },
+  "top-computer-science-universities-in-canada": {
+    "id": "top-computer-science-universities-in-canada",
+    "title": "カナダの大学コンピュータサイエンス学部TOP5比較",
+    "description": "カナダでコンピュータサイエンスを学びたい方必見。世界的に評価の高いカナダの大学TOP5を徹底比較。各大学の特色、カリキュラム、入学要件、卒業後のキャリアパスまで詳しく解説します。あなたの未来を切り拓く最適な一校を見つけましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/top-computer-science-universities-in-canada.png",
+    "tags": [
+    "カナダ留学",
+    "コンピュータサイエンス",
+    "海外大学",
+    "大学ランキング",
+    "IT留学",
+    "プログラミング留学",
+    "ウォータールー大学",
+    "トロント大学",
+    "TOEFL"
+    ]
+  },
+  "what-is-pmp-certification-value": {
+    "id": "what-is-pmp-certification-value",
+    "title": "プロジェクトマネジメントPMP資格の価値と取得方法",
+    "description": "PMP資格の価値とは？この記事では、プロジェクトマネジメントの国際資格PMPがキャリアアップや年収向上にどう繋がるのかを徹底解説。難易度、受験資格、効率的な勉強法からおすすめの参考書まで、PMP取得に必要な情報を網羅的にご紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/what-is-pmp-certification-value.png",
+    "tags": [
+    "PMP",
+    "プロジェクトマネジメント",
+    "資格取得",
+    "キャリアアップ",
+    "PMBOK",
+    "IT資格",
+    "学習法"
+    ]
+  },
+  "top-hotel-management-schools-in-switzerland": {
+    "id": "top-hotel-management-schools-in-switzerland",
+    "title": "ホテル経営学の最高峰！スイスの学校TOP3を比較",
+    "description": "世界最高峰のホスピタリティ教育を誇るスイス。この記事では、EHL、グリオン、レ・ロッシュというトップ3のホテル経営大学を徹底比較。各校の特色、カリキュラム、学費、出願要件を詳しく解説し、あなたのキャリアに最適な一校を見つけるお手伝いをします。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/top-hotel-management-schools-in-switzerland.png",
+    "tags": [
+    "スイス留学",
+    "ホテル経営",
+    "ホスピタリティ",
+    "海外大学",
+    "EHL",
+    "グリオン大学",
+    "レ・ロッシュ大学",
+    "TOEFL対策"
+    ]
+  },
+  "law-school-in-us-llm-program-for-japanese-lawyers": {
+    "id": "law-school-in-us-llm-program-for-japanese-lawyers",
+    "title": "日本の弁護士向け米国ロースクールLL.M.ガイド",
+    "description": "日本の弁護士がキャリアアップを目指すための米国ロースクールLL.M.留学。本記事では、出願に必要な書類、TOEFL対策、学費や生活費、奨学金情報、そして留学後のキャリアパスまで、具体的に解説します。夢への第一歩をここから始めましょう。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "7分",
+    "imageSrc": "/images/law-school-in-us-llm-program-for-japanese-lawyers.png",
+    "tags": [
+    "LLM",
+    "ロースクール",
+    "アメリカ留学",
+    "弁護士",
+    "キャリアアップ",
+    "国際弁護士",
+    "TOEFL",
+    "司法試験",
+    "奨学金",
+    "出願準備"
+    ]
+  },
+  "financial-aid-for-international-students-in-us": {
+    "id": "financial-aid-for-international-students-in-us",
+    "title": "留学生でももらえる！米大学の奨学金(返済不要)",
+    "description": "アメリカ留学の夢を経済的な理由で諦めていませんか？この記事では、留学生でも利用可能な返済不要の奨学金（スカラシップ）の種類、具体的な探し方、申請成功の秘訣を徹底解説。資金計画を立て、夢への第一歩を踏み出すための実践的ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/financial-aid-for-international-students-in-us.png",
+    "tags": [
+    "アメリカ留学",
+    "大学奨学金",
+    "返済不要奨学金",
+    "留学生",
+    "資金計画",
+    "ファイナンシャルエイド",
+    "スカラシップ"
+    ]
+  },
+  "top-marketing-jobs-in-fmcg-companies": {
+    "id": "top-marketing-jobs-in-fmcg-companies",
+    "title": "外資系消費財(FMCG)メーカーのマーケティング職とは",
+    "description": "外資系FMCGメーカーのマーケティング職に興味はありませんか？この記事では、ブランドマネージャーの具体的な仕事内容から、求められるスキル、キャリアパス、そして未経験から挑戦するための方法までを徹底解説。グローバルな舞台で活躍するための第一歩を踏み出しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/top-marketing-jobs-in-fmcg-companies.png",
+    "tags": [
+    "外資系",
+    "FMCG",
+    "マーケティング",
+    "消費財メーカー",
+    "キャリアパス",
+    "転職",
+    "英語学習",
+    "ブランドマネージャー"
+    ]
+  },
+  "germany-university-tuition-free-guide": {
+    "id": "germany-university-tuition-free-guide",
+    "title": "学費無料！ドイツの大学に正規留学する方法まとめ",
+    "description": "ドイツの大学は学費が原則無料！この記事では、ドイツの大学に正規留学するための出願資格、必要な語学力（ドイツ語・英語）、出願プロセス、生活費までを徹底解説。夢の海外大学生活を、経済的な負担を抑えて実現するための完全ガイドです。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/germany-university-tuition-free-guide.png",
+    "tags": [
+    "ドイツ留学",
+    "大学留学",
+    "学費無料",
+    "海外大学",
+    "留学準備",
+    "正規留学",
+    "ドイツ語",
+    "英語コース"
+    ]
+  },
+  "waitlist-to-acceptance-strategy-for-us-colleges": {
+    "id": "waitlist-to-acceptance-strategy-for-us-colleges",
+    "title": "米大学の補欠合格(Waitlist)から繰り上がる戦略",
+    "description": "アメリカの大学から補欠合格(Waitlist)の通知を受け取りましたか？この記事では、希望を現実に変えるための具体的な戦略を徹底解説。繰り上げ合格の可能性を高めるLOCIの書き方から、やってはいけないNG行動、メンタルケアまで、あなたが今すぐ取るべきアクションを網羅しています。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/waitlist-to-acceptance-strategy-for-us-colleges.png",
+    "tags": [
+    "アメリカ大学",
+    "補欠合格",
+    "Waitlist",
+    "繰り上げ合格",
+    "海外大学",
+    "留学",
+    "出願戦略",
+    "LOCI"
+    ]
+  },
+  "top-data-science-master-programs-in-us": {
+    "id": "top-data-science-master-programs-in-us",
+    "title": "米国データサイエンス修士課程おすすめプログラムTOP5",
+    "description": "アメリカでデータサイエンティストを目指す方必見！本記事では、トップクラスの米国データサイエンス修士課程プログラムを5つ厳選してご紹介。出願準備、必要なスキル、卒業後のキャリアパスまで、留学を成功させるための情報を網羅的に解説します。",
+    "category": "TOEFL",
+    "date": "2025-06-07",
+    "readTime": "9分",
+    "imageSrc": "/images/top-data-science-master-programs-in-us.png",
+    "tags": [
+    "データサイエンス",
+    "アメリカ留学",
+    "修士課程",
+    "大学院留学",
+    "コンピュータサイエンス",
+    "キャリアアップ",
+    "TOEFL対策",
+    "プログラミング",
+    "海外就職"
+    ]
+  },
+  "uk-graduate-route-visa-guide": {
+    "id": "uk-graduate-route-visa-guide",
+    "title": "イギリスで卒業後2年間働けるGraduate Routeビザ",
+    "description": "イギリスの大学卒業後に最長2年間（博士号は3年間）滞在・就労できるGraduate Routeビザについて、申請条件、プロセス、メリット、注意点を徹底解説。スポンサー不要でキャリアの可能性を広げる方法を学び、イギリスでの就職を目指す留学生必見のガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/uk-graduate-route-visa-guide.png",
+    "tags": [
+    "イギリス留学",
+    "大学院留学",
+    "海外就職",
+    "Graduate Route",
+    "イギリス ビザ",
+    "ポストスタディワークビザ",
+    "留学生"
+    ]
+  },
+  "top-design-schools-in-europe-ranking": {
+    "id": "top-design-schools-in-europe-ranking",
+    "title": "ヨーロッパのデザインスクールランキング【分野別】",
+    "description": "ヨーロッパのデザイン留学を夢見るあなたへ。本記事では、QS世界大学ランキングを基に、ヨーロッパのトップデザインスクールを総合・分野別に徹底解説。ロイヤル・カレッジ・オブ・アートやセント・マーチンズなど名門校の特徴から、合格を掴むためのポートフォリオ作成や語学準備のコツまで、留学実現に必要な情報を凝縮してお届けします。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/top-design-schools-in-europe-ranking.png",
+    "tags": [
+    "デザイン留学",
+    "ヨーロッパ",
+    "アートスクール",
+    "ファッションデザイン",
+    "プロダクトデザイン",
+    "グラフィックデザイン",
+    "ランキング",
+    "美大",
+    "留学準備"
+    ]
+  },
+  "how-to-negotiate-salary-in-english": {
+    "id": "how-to-negotiate-salary-in-english",
+    "title": "外資系転職で必須！英語での給与交渉術【例文付】",
+    "description": "外資系企業への転職で避けて通れない英語での給与交渉。本記事では、成功の鍵となる事前準備、交渉のタイミング、そして具体的な英語フレーズを豊富に紹介します。自信を持って希望の条件を勝ち取るための実践的なテクニックを学び、キャリアアップを実現しましょう。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/how-to-negotiate-salary-in-english.png",
+    "tags": [
+    "給与交渉",
+    "英語",
+    "外資系",
+    "転職",
+    "ビジネス英語",
+    "年収アップ",
+    "キャリア"
+    ]
+  },
+  "top-aerospace-engineering-universities-ranking": {
+    "id": "top-aerospace-engineering-universities-ranking",
+    "title": "航空宇宙工学で世界をリードする大学ランキングTOP5",
+    "description": "航空宇宙工学分野での進学を目指す方へ。世界トップクラスの大学ランキングTOP5を、各校の特色、強み、入学のポイントと共に詳しく解説します。MITやスタンフォード大学など、夢の舞台で学ぶための準備や、卒業後のキャリアパスについても紹介。未来のエンジニア必見の記事です。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "6分",
+    "imageSrc": "/images/top-aerospace-engineering-universities-ranking.png",
+    "tags": [
+    "航空宇宙工学",
+    "大学ランキング",
+    "海外留学",
+    "理系留学",
+    "MIT",
+    "スタンフォード大学",
+    "TOEFL対策",
+    "エンジニア"
+    ]
+  },
+  "finding-internships-in-us-for-international-students": {
+    "id": "finding-internships-in-us-for-international-students",
+    "title": "留学生がアメリカでインターンシップを見つける方法",
+    "description": "アメリカでインターンシップを探す留学生必見！CPT・OPTの基礎知識から、大学キャリアセンターやLinkedInの活用法、効果的な履歴書作成、面接対策まで、具体的なステップを徹底解説。ビザや経験不足の壁を乗り越え、夢のキャリアを掴むための実践的ガイドです。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "5分",
+    "imageSrc": "/images/finding-internships-in-us-for-international-students.png",
+    "tags": [
+    "アメリカ留学",
+    "インターンシップ",
+    "留学生",
+    "キャリア",
+    "就職活動",
+    "CPT",
+    "OPT",
+    "英文履歴書"
+    ]
+  },
+  "top-think-tanks-in-washington-dc-career": {
+    "id": "top-think-tanks-in-washington-dc-career",
+    "title": "ワシントンD.C.のシンクタンクで働くには？",
+    "description": "ワシントンD.C.のシンクタンクでキャリアを築きたい方へ。本記事では、ブルッキングス研究所などの有名シンクタンクの役割から、求められる専門知識、英語力、分析スキルまで徹底解説。大学院留学やインターンを通じた具体的なキャリアパス、求人情報の探し方も紹介します。",
+    "category": "学習法",
+    "date": "2025-06-07",
+    "readTime": "8分",
+    "imageSrc": "/images/top-think-tanks-in-washington-dc-career.png",
+    "tags": [
+    "シンクタンク",
+    "ワシントンD.C.",
+    "キャリアパス",
+    "国際関係",
+    "政策研究",
+    "英語学習",
+    "大学院留学",
+    "海外就職"
+    ]
+  },
   // ARTICLE_DATA_END
 };
 
