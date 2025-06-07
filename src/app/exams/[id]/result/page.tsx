@@ -13,34 +13,6 @@ import Link from 'next/link';
 import { Timestamp, doc, getDoc } from 'firebase/firestore';
 import { db } from '@/app/lib/firebase';
 import LoadingSpinner from '@/app/components/LoadingSpinner';
-import type { Metadata, ResolvingMetadata } from 'next';
-
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const id = params.id;
-  const exam = await getExam(id);
-
-  if (!exam) {
-    return {
-      title: '模試の結果',
-    };
-  }
-
-  // 結果ページなので、robotsタグでnoindexを指定
-  return {
-    title: `結果: ${exam.title}`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-  };
-}
 
 export default function ExamResultPage() {
   const params = useParams();

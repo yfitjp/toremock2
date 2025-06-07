@@ -9,30 +9,6 @@ import LoadingSpinner from '@/app/components/LoadingSpinner'; // ローディン
 import { getExam } from '@/app/lib/exams'; // Exam を削除
 import { ExamData } from '@/app/lib/firestoreTypes'; // ExamData をインポート
 import { motion } from 'framer-motion'; // motion をインポート
-import type { Metadata, ResolvingMetadata } from 'next';
-
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const id = params.id;
-  const exam = await getExam(id);
-
-  if (!exam) {
-    return {
-      title: '模試が見つかりません',
-    };
-  }
-
-  return {
-    title: exam.title,
-    description: exam.description,
-  };
-}
 
 // ExamInfo 型定義は不要なので削除
 // interface ExamInfo { ... }

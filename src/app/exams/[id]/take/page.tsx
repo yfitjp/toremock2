@@ -4,11 +4,11 @@ import { useEffect, useState, useMemo, useCallback } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { initializeApp, setLogLevel } from 'firebase/app';
 import { app } from '@/app/lib/firebase';
-import ExamForm from './ExamForm';
-import InstructionsScreen from './InstructionsScreen';
-import BreakScreen from './BreakScreen';
-import AudioPlaybackScreen from './AudioPlaybackScreen';
-import ImageDisplayScreen from './ImageDisplayScreen';
+import ExamForm from '@/app/exams/[id]/take/ExamForm';
+import InstructionsScreen from '@/app/exams/[id]/take/InstructionsScreen';
+import BreakScreen from '@/app/exams/[id]/take/BreakScreen';
+import AudioPlaybackScreen from '@/app/exams/[id]/take/AudioPlaybackScreen';
+import ImageDisplayScreen from '@/app/exams/[id]/take/ImageDisplayScreen';
 import { useAuth } from '@/app/hooks/useAuth';
 import { getExam, getExamQuestions } from '@/app/lib/exams';
 import { hasActiveSubscription } from '@/app/lib/subscriptions';
@@ -44,34 +44,6 @@ import LoadingSpinner from '@/app/components/LoadingSpinner';
 import Link from 'next/link';
 import { FirebaseError } from 'firebase/app';
 import { QueryDocumentSnapshot } from 'firebase/firestore';
-import type { Metadata, ResolvingMetadata } from 'next';
-
-type Props = {
-  params: { id: string };
-};
-
-export async function generateMetadata(
-  { params }: Props,
-  parent: ResolvingMetadata
-): Promise<Metadata> {
-  const id = params.id;
-  const exam = await getExam(id);
-
-  if (!exam) {
-    return {
-      title: '模試が見つかりません',
-    };
-  }
-
-  // 受験ページなので、robotsタグでnoindexを指定
-  return {
-    title: `受験中: ${exam.title}`,
-    robots: {
-      index: false,
-      follow: false,
-    },
-  };
-}
 
 export default function ExamPage({ params }: { params: { id: string } }) {
   // Firebase SDKのログレベルをデバッグに設定

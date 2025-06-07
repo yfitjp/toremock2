@@ -384,7 +384,6 @@ export default function FreeTrialPage() {
               </p>
             </div>
 
-            #Testimonial cards with slider
             <div className="mt-12 relative">
               <div className="relative w-full overflow-hidden">
                 <div
@@ -398,11 +397,13 @@ export default function FreeTrialPage() {
                           <p className="text-gray-600 mb-6">"{testimonial.comment}"</p>
                         </div>
                         <div className="flex items-center">
-                           <div className="flex-shrink-0">
-                            <span className="inline-flex items-center justify-center h-12 w-12 rounded-full bg-blue-100 text-blue-600 font-bold">
-                              {testimonial.name.charAt(0)}
-                            </span>
-                          </div>
+                          <Image
+                            src={`/images/avatars/avatar-${(index % 16) + 1}.png`}
+                            alt={`ToreMockユーザー ${testimonial.name}さんの口コミ`}
+                            width={48}
+                            height={48}
+                            className="rounded-full"
+                          />
                           <div className="ml-4">
                             <p className="font-semibold text-gray-900">{testimonial.name}</p>
                             <p className="text-gray-500 text-sm">{testimonial.date}</p>
@@ -426,7 +427,7 @@ export default function FreeTrialPage() {
                 </div>
               </div>
             </div>
-            #Average rating
+
             <div className="mt-8 text-center">
                 <div className="inline-flex items-center justify-center p-3 bg-white rounded-lg shadow-md">
                     <p className="text-lg font-semibold text-gray-800">
@@ -438,7 +439,7 @@ export default function FreeTrialPage() {
           </motion.div>
         </div>
       </div>
-    */}
+      */}
 
       {/* プラン比較・料金セクション */}
       <div id="pricing" className="py-24 bg-white">
