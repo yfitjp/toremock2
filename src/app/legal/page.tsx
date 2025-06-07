@@ -1,12 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: '特定商取引法に基づく表記',
-  description: 'ToreMockの特定商取引法に基づく表記ページです。事業者情報、販売価格、支払方法などをご確認いただけます。',
-};
 
 export default function LegalPage() {
   return (

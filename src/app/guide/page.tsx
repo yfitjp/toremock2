@@ -1,12 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'ご利用ガイド',
-  description: 'ToreMockのご利用ガイドです。アカウント作成から模試の受験、結果確認までの流れを分かりやすく説明します。',
-};
 
 export default function GuidePage() {
   return (

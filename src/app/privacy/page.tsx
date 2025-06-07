@@ -1,12 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import type { Metadata } from 'next';
-
-export const metadata: Metadata = {
-  title: 'プライバシーポリシー',
-  description: 'ToreMockのプライバシーポリシーに関するページです。個人情報の取り扱い方針についてご確認いただけます。',
-};
 
 export default function PrivacyPolicyPage() {
   return (
