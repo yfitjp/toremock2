@@ -13,24 +13,26 @@ export async function POST(request: Request) {
     const transcribedText = body.transcribedText as string | undefined;
     const speakingPrompt = body.speakingPrompt as string | undefined; // 問題の指示文
     const modelAnswer = body.modelAnswer as string | undefined; // modelAnswer を追加
-    const questionContext = body.questionContext as string | undefined; // questionContext を追加
+    const questionContext = body.questionContext as string | undefined; // パッセージの内容データ
+    const audioContext = body.audioContext as string | undefined; // 音声の内容データ
 
     if (!transcribedText) {
       return NextResponse.json({ error: 'Transcribed text is required' }, { status: 400 });
     }
     // modelAnswer のログ追加 (任意)
     console.log(`[Grade Speaking API DEBUG] Extracted modelAnswer (type: ${typeof modelAnswer}):`, modelAnswer);
-    // questionContext のログ追加 (任意)
+    // questionContext と audioContext のログ追加
     console.log(`[Grade Speaking API DEBUG] Extracted questionContext (type: ${typeof questionContext}):`, questionContext);
+    console.log(`[Grade Speaking API DEBUG] Extracted audioContext (type: ${typeof audioContext}):`, audioContext);
 
     const messages: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       {
         role: 'system',
         content: `You are an expert English speaking evaluator for TOEFL-style exams.
-                  Please evaluate the following transcribed speech based on the provided prompt, model answer (if any), and question context (if any).
-                  The question context provides background information like a lecture transcript or a reading passage that the speaking task might be based on.
+                  Please evaluate the following transcribed speech based on the provided prompt, model answer (if any), reading passage (questionContext), and lecture/audio script (audioContext).
+                  The question context (reading passage) and audio context (lecture script) provide background information for the speaking task.
                   If a model answer is provided, use it as a benchmark for a 100% score and evaluate the user's speech in comparison.
-                  Consider aspects like fluency, pronunciation (as inferable from text), vocabulary, grammar, task fulfillment, and accurate use of information from the question context.
+                  Consider aspects like fluency, pronunciation (as inferable from text), vocabulary, grammar, task fulfillment, and accurate use of information from the provided contexts.
                   Provide a score from 0 to 100, and constructive feedback.
                   Your response MUST be in strict JSON format, like this example:
                   {
@@ -48,7 +50,8 @@ export async function POST(request: Request) {
         role: 'user',
         content: `Speaking Task Prompt: ${speakingPrompt || 'N/A (Evaluate general speaking quality based on transcription)'}
 Model Answer: ${modelAnswer || 'N/A'}
-Question Context: ${questionContext || 'N/A'}
+Reading Passage Context: ${questionContext || 'N/A'}
+Lecture/Audio Context: ${audioContext || 'N/A'}
 
 Transcribed Speech to evaluate:
 ${transcribedText}`,
@@ -58,10 +61,10 @@ ${transcribedText}`,
     console.log('[Grade Speaking API] Sending request to DeepSeek with messages:', JSON.stringify(messages, null, 2));
 
     const completion = await client.chat.completions.create({
-      model: 'deepseek-chat', // Writingと同じモデルを使用すると仮定
+      model: 'deepseek-chat', 
       messages: messages,
       response_format: { type: "json_object" },
-      temperature: 0.3, 
+      temperature: 0.5, 
       max_tokens: 3000, 
       stream: false,
     });
