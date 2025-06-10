@@ -255,6 +255,13 @@ export default React.memo(function ExamForm({
   };
 
   useEffect(() => {
+    if (isRecordingTimeUp && questionType === 'speaking' && recorder.status === 'recording') {
+      console.log('[ExamForm] Time is up, automatically stopping recording.');
+      recorder.stopRecording();
+    }
+  }, [isRecordingTimeUp, questionType, recorder.status, recorder.stopRecording]);
+
+  useEffect(() => {
     const completeSectionIfNeeded = () => {
       if (questionType === 'speaking' && isRecordingTimeUp && recorder.status === 'stopped' && !isSubmitting) {
         console.log('[ExamForm] useEffect[isRecordingTimeUp, recorder.status]: Recording time up AND recorder stopped. Calling handleSectionComplete.');
