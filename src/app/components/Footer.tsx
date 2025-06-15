@@ -1,7 +1,18 @@
 'use client';
 
 import Link from 'next/link';
-import { Instagram, Twitter } from 'lucide-react';
+import { Instagram, Twitter, Youtube, Facebook } from 'lucide-react';
+
+const TikTokIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-1.06-.6-1.92-1.58-2.4-2.71-1.02-2.31-.98-4.84.03-7.16.55-1.22 1.34-2.3 2.29-3.15 1.01-.9 2.15-1.54 3.39-1.81.01-3.34.01-6.67 0-10.01z" />
+  </svg>
+);
 
 export default function Footer() {
   return (
@@ -18,7 +29,7 @@ export default function Footer() {
             <div className="mt-5">
               <div className="flex space-x-4 mb-3">
                 <a 
-                  href="https://x.com/TMock" 
+                  href="https://x.com/toremock_info" 
                   target="_blank" 
                   rel="noopener noreferrer" 
                   className="text-gray-300 hover:text-blue-400 transition-colors duration-200"
@@ -34,6 +45,33 @@ export default function Footer() {
                   aria-label="Instagram"
                 >
                   <Instagram size={20} />
+                </a>
+                <a
+                  href="https://www.tiktok.com/@toremock"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors duration-200"
+                  aria-label="TikTok"
+                >
+                  <TikTokIcon className="h-5 w-5" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@toremock"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-red-500 transition-colors duration-200"
+                  aria-label="YouTube"
+                >
+                  <Youtube size={20} />
+                </a>
+                <a
+                  href="https://www.facebook.com/toremock"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-blue-500 transition-colors duration-200"
+                  aria-label="Facebook"
+                >
+                  <Facebook size={20} />
                 </a>
               </div>
               <a 
